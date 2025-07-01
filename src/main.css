@@ -7,14 +7,16 @@
     --acc-error-color: hsl(0 84.2% 60.2%);
     --acc-error-color-tonal: hsla(0, 85%, 68%, 0.884);
     --acc-outlined-color: hsl(204, 13%, 94%);
+    --acc-secondary-color: hsl(206, 87%, 29%);
     --acc-default-surface-bg: #EDF0F2;
     --acc-box-shadow: #e6e6e6;
     --acc-text-white: hsl(210 16% 98%);
-    --acc-text-dark: hsl(210 29% 24%);
+    --acc-text-dark: rgb(43, 61, 79);
+    --acc-text-subtitle-dark: rgb(80, 112, 145);
     --acc-subtitle-color: #F9FAFBE6;
     --acc-font-size: 1.6rem;
     --acc-font-weight: 600;
-    --acc-secondary-color: rgb( 87, 87, 87 );
+    --acc-secondary-text-color: rgb( 87, 87, 87 );
     --acc-default-font-family: "Inter", sans-serif;
     --acc-primary-text-color: #2B3D4F;
     --acc-secondary-text-color: #507091;
@@ -47,6 +49,11 @@ h1, h2, h3, h4, h5, h6, p, span {
 .account_table_chip.active {
   background-color: #03a5a0;
   color: var(--acc-text-white) !important;
+}
+
+.account_ui_component_key {
+    color: var(--acc-secondary-text-color);
+    font-size: 14px;
 }
 
 .account_navigation_list {
@@ -115,13 +122,34 @@ p.secondary_email {
   background-color: #0a538a;
   color: #ffffff !important;
 }
+
+
 /* vuetify css overwrite */
+.account .v-card-item__content .v-card-title {
+    font-size: 24px;
+    color: var(--acc-text-dark);
+    font-weight: 600;
+    line-height: 32px;
+}
+
+.account .v-card-item__content .v-card-subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--acc-text-subtitle-dark);
+    font-weight: 400;
+    margin: 6px 0px 0px;
+}
+
 .acc-bg-primary {
     background-color: var(--acc-primary-color) !important;
     background: var(--acc-primary-color)!important;
 }
 
-.account_v_card_dark .v-card-title, .account_v_card_dark .v-card-subtitle {
+.account_v_card_dark .v-card-title {
+    color: var(--acc-text-white);
+}
+
+.account_v_card_dark .v-card-subtitle {
     color: var(--acc-subtitle-color);
     opacity: 1;
 }
@@ -182,6 +210,7 @@ p.secondary_email {
 }
 
 .account_vcard_border {
+    border: 1px solid var(--acc-border-color);
     border-radius: .5rem !important;
 }
 
@@ -198,11 +227,11 @@ p.secondary_email {
 }
 
 .account_v_btn_color {
-    color: var(--acc-secondary-color);
+    color: var(--acc-secondary-text-color);
 }
 
 .account_filter_btn_color {
-    /* color: var(--acc-secondary-color); */
+    /* color: var(--acc-secondary-text-color); */
     border: 1px solid var(--acc-border-color);
 }
 
@@ -227,6 +256,8 @@ p.secondary_email {
     background: var(--acc-primary-color);
     /* border-radius: 10px !important; */
 }
+
+
 
 .account_v_btn_primary {
     background: var(--acc-primary-color);
@@ -290,6 +321,59 @@ p.secondary_email {
     font-size: 14px;
 }
 
+.account_v_btn_secondary {
+    background: var(--acc-secondary-color);
+    text-transform: capitalize;
+
+}
+
+.account_v_btn_secondary.v-btn--disabled {
+    background: var(--acc-secondary-color);
+    opacity: 0.5;
+}
+
+.account_v_btn_secondary.v-btn--disabled i.v-icon {
+    color: var(--acc-text-white) !important;
+}
+
+
+.account_v_btn_secondary .v-btn__content {
+    color: var(--acc-text-white) !important;
+    font-size: 14px;
+}
+
+.account_v_btn_ghost .v-btn__content {
+    color: var(--acc-text-dark) !important;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.account_v_btn_link .v-btn__content {
+    color: var(--acc-primary-color) !important;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.account_v_btn_link:hover .v-btn__content {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -320,6 +404,33 @@ p.secondary_email {
     justify-content: center;
     border-radius: 20px;
     max-height: 22px !important;
+}
+
+.account_v_chip {
+    min-width: 80px;
+    justify-content: center;
+    border-radius: 20px;
+    max-height: 22px !important;
+}
+
+.account_chip_primary {
+    background: var(--acc-primary-color);
+    color: var(--acc-text-white);
+}
+
+.account_chip_secondary {
+    background: var(--acc-secondary-color);
+    color: var(--acc-text-white);
+}
+
+.account_chip_outline {
+    background: var(--acc-outlined-color);
+    color: var(--acc-text-dark);
+}
+
+.account_chip_error {
+    background: var(--acc-error-color);
+    color: var(--acc-text-white);
 }
 
 .account_app_bar {
