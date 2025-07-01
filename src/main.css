@@ -6,9 +6,11 @@
     --acc-primary-color-hover: rgb(1, 157, 152, 0.38);
     --acc-error-color: hsl(0 84.2% 60.2%);
     --acc-error-color-tonal: hsla(0, 85%, 68%, 0.884);
+    --acc-outlined-color: hsl(204, 13%, 94%);
     --acc-default-surface-bg: #EDF0F2;
     --acc-box-shadow: #e6e6e6;
     --acc-text-white: hsl(210 16% 98%);
+    --acc-text-dark: hsl(210 29% 24%);
     --acc-subtitle-color: #F9FAFBE6;
     --acc-font-size: 1.6rem;
     --acc-font-weight: 600;
@@ -266,8 +268,27 @@ p.secondary_email {
     font-size: 14px;
 }
 
+.account_v_btn_outlined {
+    background: var(--acc-outlined-color);
+    border: 1px solid var(--acc-border-color);
+    box-shadow: unset !important;
+    text-transform: capitalize;
+}
+
+.account_v_btn_outlined.v-btn--disabled {
+    background: var(--acc-outlined-color);
+    opacity: 0.5;
+}
+
+.account_v_btn_outlined.v-btn--disabled i.v-icon {
+    color: var(--acc-text-dark) !important;
+}
 
 
+.account_v_btn_outlined .v-btn__content {
+    color: var(--acc-text-dark) !important;
+    font-size: 14px;
+}
 
 
 

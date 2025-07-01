@@ -12,7 +12,7 @@ import { VBtn, VIcon, VRow, VCol, VCard } from 'vuetify/components'
           <VBtn size="large" class="account_v_btn_primary">Large Button</VBtn>
           <VBtn class="account_v_btn_primary">Default Button</VBtn>
           <VBtn size="small" class="account_v_btn_primary">Small Button</VBtn>
-          <VBtn icon class="account_v_btn_primary" size="small" rounded=""><VIcon>mdi-email-outline</VIcon></VBtn>
+          <VBtn icon class="account_v_btn_primary" size="x-small" rounded=""><VIcon>mdi-email-outline</VIcon></VBtn>
           <VBtn disabled class="account_v_btn_primary" prepend-icon="mdi-refresh">Disabled</VBtn>
         </VCol>
 
@@ -22,18 +22,18 @@ import { VBtn, VIcon, VRow, VCol, VCard } from 'vuetify/components'
           <VBtn size="large" class="account_v_btn_error">Large Button</VBtn>
           <VBtn class="account_v_btn_error">Default Button</VBtn>
           <VBtn size="small" class="account_v_btn_error">Small Button</VBtn>
-          <VBtn icon class="account_v_btn_error" size="small" rounded=""><VIcon>mdi-email-outline</VIcon></VBtn>
+          <VBtn icon class="account_v_btn_error" size="x-small" rounded=""><VIcon>mdi-email-outline</VIcon></VBtn>
           <VBtn disabled class="text-capitalize account_v_btn_error" color="error" prepend-icon="mdi-refresh">Disabled</VBtn>
         </VCol>
 
         <!-- Outline -->
         <VCol cols="12" class="d-flex gap-3 align-center">
           <p class="me-4">Outline</p>
-          <VBtn variant="outlined" size="large">Large Button</VBtn>
-          <VBtn class="mx-2" variant="outlined">Default Button</VBtn>
-          <VBtn size="small" variant="outlined">Small Button</VBtn>
-          <VBtn icon class="mx-2" variant="outlined"><VIcon>mdi-email</VIcon></VBtn>
-          <VBtn disabled class="text-capitalize" variant="outlined" prepend-icon="mdi-refresh">Disabled</VBtn>
+          <VBtn class="account_v_btn_outlined" size="large">Large Button</VBtn>
+          <VBtn class="account_v_btn_outlined">Default Button</VBtn>
+          <VBtn size="small" class="account_v_btn_outlined">Small Button</VBtn>
+          <VBtn icon class="account_v_btn_outlined"><VIcon>mdi-email</VIcon></VBtn>
+          <VBtn disabled class="account_v_btn_outlined" prepend-icon="mdi-refresh">Disabled</VBtn>
         </VCol>
 
         <!-- Secondary -->
