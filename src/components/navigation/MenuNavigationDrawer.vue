@@ -33,10 +33,10 @@ const navigationItems = computed(() => {
 </script>
 
 <template>
-  <v-navigation-drawer app v-model="drawerModel" color="grey-lighten-4">
+  <v-navigation-drawer class="account_navigation_v_drawer" app v-model="drawerModel" color="grey-lighten-4">
     <div class="d-flex flex-column justify-sapce-between">
-      <div>
-        <div class="d-flex h-100 align-center justify-space-between">
+      <div class="h-100">
+        <div class="d-flex px-2 pt-2 align-center justify-space-between">
           <div class="d-flex align-center gap-2">
             <VIcon icon="mdi-alpha-a-box-outline" size="35" />
             <h5 class="mb-0">Accounting</h5>
@@ -60,7 +60,7 @@ const navigationItems = computed(() => {
       </div>
 
       <!-- Settings List -->
-      <div>
+      <div class="settings_nav_position">
         <VList class="account_navigation_list">
           <VListItem v-for="item in settingsItems" :key="item.title" :to="item.path" link
             class="px-3 account_nav_listitem d-flex align-center gap-2 py-1">

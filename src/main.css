@@ -58,8 +58,8 @@ h1, h2, h3, h4, h5, h6, p, span {
 
 .account_navigation_list {
     height: 100%;
-    max-height: 600px;
-    overflow-y: auto !important;
+    /* max-height: 600px;
+    overflow-y: auto !important; */
 }
 
 .account_navigation_list .v-list-item--active {
@@ -123,16 +123,34 @@ p.secondary_email {
   color: #ffffff !important;
 }
 
+.account_v_card_dark .account_text_color {
+    color: var(--acc-text-white);
+}
+
+.account_text_color {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--acc-text-dark);
+}
+
+
+
+
+
+
+
+
+
 
 /* vuetify css overwrite */
-.account .v-card-item__content .v-card-title {
+.account_ui_vcard .v-card-item__content .v-card-title {
     font-size: 24px;
     color: var(--acc-text-dark);
     font-weight: 600;
     line-height: 32px;
 }
 
-.account .v-card-item__content .v-card-subtitle {
+.account_ui_vcard .v-card-item__content .v-card-subtitle {
     font-size: 14px;
     line-height: 20px;
     color: var(--acc-text-subtitle-dark);
@@ -146,11 +164,11 @@ p.secondary_email {
 }
 
 .account_v_card_dark .v-card-title {
-    color: var(--acc-text-white);
+    color: var(--acc-text-white) !important;
 }
 
 .account_v_card_dark .v-card-subtitle {
-    color: var(--acc-subtitle-color);
+    color: var(--acc-subtitle-color) !important;
     opacity: 1;
 }
 
@@ -183,6 +201,10 @@ p.secondary_email {
 
 .account_swtich_btn .v-selection-control--dirty .text-primary .bg-primary {
     background: var(--acc-primary-color)!important; 
+}
+
+.account_swtich_btn.v-input {
+    flex: 1 1 50px;
 }
 
 /* button.v-btn {
@@ -224,6 +246,18 @@ p.secondary_email {
 
 .header_order_checkbox.v-input--density-default {
     --v-input-control-height: 0 !important;
+}
+
+.account_v_checkbox {
+    --v-input-control-height: 0 !important;
+}
+
+.account_v_checkbox .v-selection-control__input::before {
+        background-color: var(--acc-primary-color) !important;
+}
+
+.account_v_checkbox .v-selection-control--density-compact {
+    --v-selection-control-size: 30px;
 }
 
 .account_v_btn_color {
@@ -499,8 +533,15 @@ p.secondary_email {
     border: 1px solid rgb(208, 214, 221) !important;
 }
 
+.accouting_field .v-field__input {
+    min-height: 36px !important;
+    max-height: 36px !important;
+    height: 36px !important;
+    padding: 6px 16px;
+}
+
 .accouting_active_field .v-field--active.v-field--focused {
-    border: 2px solid var(--acc-primary-color) !important;
+    border: 1px solid var(--acc-primary-color) !important;
 }
 
 .accouting_field .v-input__control {
@@ -509,4 +550,21 @@ p.secondary_email {
 
 .accouting_field .v-field__outline {
     --v-field-border-width: 0 !IMPORTANT;
+}
+
+.settings_nav_position {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.account_navigation_v_drawer>div {
+    height: calc(100vh - 112px);
+}
+
+.account_label {
+    color: var(--acc-text-dark);
+    font-weight: 500;
+    line-height: 14px;
+    font-size: 14px;
 }

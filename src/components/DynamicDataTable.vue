@@ -226,18 +226,18 @@ const totalPages = computed(() => {
             </template>
             <VCard>
               <VCardTitle>Toggle and Reorder</VCardTitle>
-              <VDivider class="m-0" />
-              <VRow class="mt-2">
+              <VDivider class="mb-2 ma-0" />
+              <VRow class="ma-0">
                 <VCol cols="12" class="py-1 draggable-header" v-for="(header, index) in props.headers"
                   :key="header.value" draggable="true" @dragstart="onDragStart($event, index)" @dragover.prevent
                   @drop="onDrop($event, index)">
                   <div class="d-flex align-center justify-space-between">
                     <div class="d-flex align-center w-100 gap-1">
-                      <v-icon icon="mdi-drag" class="ml-2 drag-icon" @mousedown="dragIconActive = true"
+                      <v-icon icon="mdi-drag" class="drag-icon" @mousedown="dragIconActive = true"
                         @mouseup="dragIconActive = false" />
                       <p class="mb-0">{{ header.title }}</p>
                     </div>
-                    <VSwitch density="compact" color="primary" hide-details class="account_swtich_btn"
+                    <VSwitch density="compact" color="primary" hide-details class="account_swtich_btn" inset
                       v-model="props.headers[index].visible" />
                   </div>
                 </VCol>
