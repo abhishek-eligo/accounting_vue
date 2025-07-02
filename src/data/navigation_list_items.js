@@ -40,8 +40,9 @@ export default [
   {
     section: 'Accounts & Books',
     items: [
-      { title: 'My Accounts', icon: 'mdi-book-account-outline', slug: 'my-accounts' },
+      { title: 'My Accounts', icon: 'mdi-book-account-outline', slug: 'my-accounts', path: '/myaccounts', component: () => import('@/pages/myaccounts') },
       { title: 'Journal Entries', icon: 'mdi-book-open-outline', slug: 'journal-entries' },
+      { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers' },
     ],
   },
   {

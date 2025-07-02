@@ -303,7 +303,8 @@ p.secondary_email {
     opacity: 0.5;
 }
 
-.account_v_btn_primary.v-btn--disabled i.v-icon {
+.account_v_btn_primary.v-btn--disabled i.v-icon,
+.account_v_btn_primary i.v-icon {
     color: var(--acc-text-white) !important;
 }
 
@@ -551,6 +552,51 @@ p.secondary_email {
 .accouting_field .v-field__outline {
     --v-field-border-width: 0 !IMPORTANT;
 }
+
+.accounting_v_textarea .v-field {
+    border: 1px solid rgb(208, 214, 221) !important;
+    border-radius: 6px;
+}
+
+.accounting_v_textarea .v-field__outline {
+    --v-field-border-width: 0 !IMPORTANT;
+}
+
+.accounting_v_textarea .v-field--active.v-field--focused {
+    border: 1px solid var(--acc-primary-color) !important;
+}
+
+.accounting_v_textarea .v-field__input {
+    /* min-height: 90px !important; */
+    /* max-height: 90px !important; */
+    height: 90px !important;
+    padding: 16px 16px;
+}
+
+.account_v_checkbox .v-selection-control__input i {
+    color: var(--acc-primary-color);
+}
+
+.accounting_v_radio .v-selection-control__input i {
+    color: var(--acc-primary-color);
+}
+
+.account_ui_swtich_title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--acc-text-dark);
+    line-height: 24px;
+}
+
+.account_ui_swtich_subtitle {
+    font-size: 14px;
+    color: var(--acc-text-subtitle-dark);
+    font-weight: 400;
+    line-height: 20px;
+}
+
+
+
 
 .settings_nav_position {
     position: absolute;

@@ -1,10 +1,22 @@
 <script setup>
-import { VBtn, VIcon, VRow, VCol, VCard } from 'vuetify/components'
+import { ref } from "vue";
+import { VBtn, VIcon, VRow, VCol, VCard } from "vuetify/components";
+
+const dialog = ref(false);
+const newItem = ref("");
+const items = ref(["abc", "def"]); // Initial VSelect items
+
+function addItem() {
+  if (newItem.value.trim()) {
+    items.value.push(newItem.value.trim());
+    newItem.value = "";
+    dialog.value = false;
+  }
+}
 </script>
 
 <template>
   <div class="account">
-
     <!-- Buttons Card -->
     <VCard class="account_vcard_border account_ui_vcard pa-2 mb-6" title="Buttons"
       subtitle="A showcase of all button variants and sizes.">
@@ -142,7 +154,9 @@ import { VBtn, VIcon, VRow, VCol, VCard } from 'vuetify/components'
           <VCol cols="12" lg="4" md="4">
             <VCard title="Basic Card" class="pa-2 h-100 account_vcard_border shadow-none">
               <VCardText>
-                <p class="mb-0 account_text_color">This is the content of a basic card. It's simple and clean.</p>
+                <p class="mb-0 account_text_color">
+                  This is the content of a basic card. It's simple and clean.
+                </p>
               </VCardText>
             </VCard>
           </VCol>
@@ -150,8 +164,9 @@ import { VBtn, VIcon, VRow, VCol, VCard } from 'vuetify/components'
             <VCard title="Full Card" subtitle="With header, content, and footer."
               class="pa-2 h-100 account_vcard_border shadow-none">
               <VCardText class="pb-1">
-                <p class="mb-0 account_text_color">This card demonstrates all available sections for more complex
-                  content.</p>
+                <p class="mb-0 account_text_color">
+                  This card demonstrates all available sections for more complex content.
+                </p>
               </VCardText>
               <VCardActions class="d-flex justify-end py-0">
                 <VBtn class="account_v_btn_primary">Action</VBtn>
@@ -161,7 +176,9 @@ import { VBtn, VIcon, VRow, VCol, VCard } from 'vuetify/components'
           <VCol cols="12" lg="4" md="4">
             <VCard title="Primary Card" class="pa-2 h-100 account_vcard_border account_v_card_dark shadow-none">
               <VCardText>
-                <p class="mb-0 account_text_color">This card uses the primary theme color to draw attention.</p>
+                <p class="mb-0 account_text_color">
+                  This card uses the primary theme color to draw attention.
+                </p>
               </VCardText>
             </VCard>
           </VCol>
@@ -182,7 +199,7 @@ import { VBtn, VIcon, VRow, VCol, VCard } from 'vuetify/components'
           <VCol cols="12" lg="6" md="6">
             <label class="account_label mb-2">Email Input</label>
             <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-              :placeholder='`Your.email@example.com`' />
+              :placeholder="`Your.email@example.com`" />
           </VCol>
           <VCol cols="12" lg="6" md="6">
             <label class="account_label mb-2">Date Picker</label>
@@ -203,32 +220,65 @@ import { VBtn, VIcon, VRow, VCol, VCard } from 'vuetify/components'
             <label class="account_label mb-2">Group Input</label>
             <VSelect class="accouting_field accouting_active_field" variant="outlined" placeholder="Select an item">
               <template #append>
-                <VBtn class="account_v_btn_outlined" rounded="" icon="mdi-plus-circle-outline" size="x-small" />
+                <VBtn @click="dialog = true" class="account_v_btn_outlined" rounded="" icon="mdi-plus-circle-outline"
+                  size="x-small" />
               </template>
             </VSelect>
+
+            <!-- Dialog Component -->
+            <VDialog v-model="dialog" max-width="400px">
+              <VCard>
+                <VCardTitle class="account_ui_swtich_title">Add New Item</VCardTitle>
+                <VCardSubTitle class="account_ui_swtich_subtitle px-3">Quickly add a new item to the list.
+                </VCardSubTitle>
+                <VCardText>
+                  <VTextField class="accouting_field accouting_active_field" v-model="newItem" placeholder="Name"
+                    variant="outlined" autofocus />
+                </VCardText>
+                <VCardActions class="justify-end mb-2">
+                  <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click="dialog = false" />
+                  <VBtn text="Add Item" class="account_v_btn_primary" @click="addItem" />
+                </VCardActions>
+              </VCard>
+            </VDialog>
           </VCol>
-          <VCol cols="12" lg="6" md="6">
+          <VCol cols="12" lg="12" md="12">
             <label class="account_label mb-2">Textarea</label>
-            <VTextarea placeholder="Tell us about yourself" variant="outlined" />
+            <VTextarea class="accounting_v_textarea" placeholder="Tell us about yourself" variant="outlined" />
           </VCol>
-          <VCol cols="12" lg="6" md="6">
+          <VCol cols="12" lg="4" md="4">
             <label class="account_label mb-2">Checkbox</label>
             <div class="d-flex justify-start flex-column gap-2">
               <VCheckbox density="compact" class="account_v_checkbox" label="Checkbox 1" />
               <VCheckbox density="compact" class="account_v_checkbox" label="Checkbox 2" />
             </div>
           </VCol>
-          <VCol cols="12" lg="6" md="6">
+          <VCol cols="12" lg="4" md="4">
             <label class="account_label mb-2">Radio Group</label>
-            <v-radio-group>
+            <v-radio-group class="accounting_v_radio">
               <v-radio label="Radio One" value="one"></v-radio>
               <v-radio label="Radio Two" value="two"></v-radio>
             </v-radio-group>
           </VCol>
-          <VCol cols="12" lg="6" md="6"></VCol>
-          <VCol cols="12" lg="6" md="6"></VCol>
+          <VCol cols="12" lg="4" md="4">
+            <VCard class="account_vcard_border shadow-none pb-3">
+              <div class="d-flex align-center">
+                <div>
+                  <VCardTitle class="account_ui_swtich_title">Marketing emails</VCardTitle>
+                  <VCardSubTitle class="account_ui_swtich_subtitle px-3">Receive emails about new products, features,
+                    and more.
+                  </VCardSubTitle>
+                </div>
+                <VSpacer />
+                <VSwitch inset class="account_swtich_btn" color="primary" />
+              </div>
+            </VCard>
+          </VCol>
         </VRow>
       </VCardText>
+      <VCardActions class="justify-end">
+        <VBtn class="account_v_btn_primary px-3" prepend-icon="mdi-content-save-outline" text="Submit Form" />
+      </VCardActions>
     </VCard>
   </div>
 </template>
