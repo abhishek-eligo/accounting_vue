@@ -4,17 +4,15 @@ export default [
     items: [
       {
         title: 'Dashboard',
-        path: '/dashboard',
         icon: 'mdi-view-dashboard-outline',
         slug: 'dashboard',
-        component: () => import('@/pages/dashboard'),
       },
     ],
   },
     {
     section: 'Component',
     items: [
-      { title: 'Table', slug: 'table', icon: 'mdi-file-document-outline' },
+      { title: 'Table', slug: 'table', icon: 'mdi-file-document-outline', path: '/table', component: () => import('@/pages/table') },
       { title: 'Invoice Preview', slug: 'invoice-preview', icon: 'mdi-eye-outline' },
       { title: 'Invoice Preview FC', slug: 'invoice-preview-fc', icon: 'mdi-earth' },
       { title: 'Customer Portfolio', slug: 'customer-portfolio', icon: 'mdi-account-circle-outline' },
@@ -24,7 +22,7 @@ export default [
   {
     section: 'Money In',
     items: [
-      { title: 'Customers', icon: 'mdi-account-group-outline', slug: 'customers' },
+      { title: 'Customers', icon: 'mdi-account-group-outline', slug: 'customers', path: '/customers', component: () => import('@/pages/customers') },
       { title: 'Sales Invoices', icon: 'mdi-receipt-outline', slug: 'sales-invoices' },
       { title: 'Invoice Returns (Sales)', icon: 'mdi-arrow-left-bottom', slug: 'invoice-returns-sales' },
     ],
@@ -42,7 +40,7 @@ export default [
     items: [
       { title: 'My Accounts', icon: 'mdi-book-account-outline', slug: 'my-accounts', path: '/myaccounts', component: () => import('@/pages/myaccounts') },
       { title: 'Journal Entries', icon: 'mdi-book-open-outline', slug: 'journal-entries' },
-      { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers' },
+      { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers', path: '/ledgers', component: () => import('@/pages/ledgers') },
     ],
   },
   {

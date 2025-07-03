@@ -169,7 +169,7 @@ function submitForm() {
   <div class="account_ui_vcard">
     <VRow>
       <VCol cols="12" lg="8" md="8">
-        <VCard class="account_vcard_border shadow-none" title="Chart of Accounts"
+        <VCard class="account_vcard_border shadow-none" title="Chart of Ledgers"
           subtitle="Create and manage your ledger accounts and groups.">
           <template #append>
             <VBtn @click="showDialog = true" class="account_v_btn_primary" variant="tonal"
