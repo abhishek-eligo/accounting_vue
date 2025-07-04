@@ -38,9 +38,9 @@ export default [
   {
     section: 'Accounts & Books',
     items: [
-      { title: 'My Accounts', icon: 'mdi-book-account-outline', slug: 'my-accounts', path: '/myaccounts', component: () => import('@/pages/myaccounts') },
+      { title: 'Groups & Ledgers', icon: 'mdi-book-account-outline', slug: 'groups&ledgers', path: '/groups&ledgers', component: () => import('@/pages/groups&ledgers') },
       { title: 'Journal Entries', icon: 'mdi-book-open-outline', slug: 'journal-entries' },
-      { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers', path: '/ledgers', component: () => import('@/pages/ledgers') },
+      // { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers', path: '/ledgers', component: () => import('@/pages/ledgers') },
     ],
   },
   {

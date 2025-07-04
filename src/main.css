@@ -303,6 +303,10 @@ p.secondary_email {
     text-transform: capitalize;
 }
 
+.account_v_btn_primary .v-btn__underlay {
+    background: unset !important;
+}
+
 .account_v_btn_primary.v-btn--disabled {
     background: var(--acc-primary-color);
     opacity: 0.5;
@@ -322,6 +326,10 @@ p.secondary_email {
     background: var(--acc-error-color);
     color: var(--acc-text-white) !important;
     text-transform: capitalize;
+}
+
+.account_v_btn_error .v-btn__underlay {
+    background: unset !important;
 }
 
 .account_v_btn_error.v-btn--disabled {
@@ -346,6 +354,10 @@ p.secondary_email {
     text-transform: capitalize;
 }
 
+.account_v_btn_outlined .v-btn__underlay {
+    background: unset !important;
+}
+
 .account_v_btn_outlined.v-btn--disabled {
     background: var(--acc-outlined-color);
     opacity: 0.5;
@@ -365,6 +377,10 @@ p.secondary_email {
     background: var(--acc-secondary-color);
     text-transform: capitalize;
 
+}
+
+.account_v_btn_secondary .v-btn__underlay {
+    background: unset !important;
 }
 
 .account_v_btn_secondary.v-btn--disabled {
@@ -388,10 +404,21 @@ p.secondary_email {
     text-transform: capitalize;
 }
 
+.account_v_btn_ghost {
+    background: transparent;
+    /* color: var(--acc-text-dark) !important;
+    border: 1px solid var(--acc-border-color); */
+}
+
 .account_v_btn_link .v-btn__content {
     color: var(--acc-primary-color) !important;
     font-size: 14px;
     text-transform: capitalize;
+}
+
+.account_v_btn_link {
+    background: transparent;
+    /* color: var(--acc-primary-color) !important; */
 }
 
 .account_v_btn_link:hover .v-btn__content {
@@ -697,4 +724,57 @@ p.secondary_email {
 .custom_expansion_item:hover {
     background: hsl(210 16% 88%);
 } */
- 
+
+.custom_option .custom_option_field.v-input .v-input__control .v-field {
+    border-radius: 6px 0 0 6px !important;
+    border-right: unset !important;
+    width: 355px;
+}
+
+.custom_option .custom_option_select.v-input .v-input__control .v-field {
+    border-radius: 0px 6px 6px 0px !important;
+    width: 100%;
+    /* max-width: 94px !important; */
+    /* border-left: unset !important; */
+    padding-right: 0;
+}
+
+/* .custom_option .custom_option_select.v-input .v-input__control .v-field .v-field__field .v-field__input {
+    padding-left: 9px !important;
+}
+
+.custom_option .custom_option_select.v-input .v-input__control .v-field .v-field__field .v-field__input .v-select__selection .v-select__selection-text {
+    width: 59px !important;
+}
+
+.custom_option .custom_option_select.v-input {
+    width: 100% !important;
+} */
+
+.account_vcard_menu_hdng {
+    color: var(--acc-text-dark);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 10px 8px;
+}
+
+.account_vcard_menu_item:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+}
+
+.field_list_dynamic_ml {
+    margin-left: 24px;
+}
+
+.account_vcard_menu_items {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.field_list_title span {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--acc-text-dark);
+    line-height: 20px;
+}

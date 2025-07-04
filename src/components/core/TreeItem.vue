@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { VIcon, VChip } from 'vuetify/components'
 import TreeItem from './TreeItem.vue'
 
@@ -36,23 +36,31 @@ const typeClass = computed(() => {
     ? 'account_balance_chip'
     : 'account_profit_loss_chip'
 })
+
+// Determine if node is a ledger (no children)
+const isLedger = computed(() => {
+  return props.node.children === null || (props.node.children && props.node.children.length === 0 && !props.node.children);
+});
 </script>
 
 <template>
-  <!-- Apply padding here for all levels, even leaf nodes -->
-  <div class="mb-1" :style="{ paddingLeft: `${(props.level + 1) * 16}px` }" @mouseenter="isHovered = true"
+  <!-- Apply padding based on level -->
+  <div class="mb-1" :style="{ paddingLeft: `${props.level * 16}px` }" @mouseenter="isHovered = true"
     @mouseleave="isHovered = false">
     <div class="d-flex align-center justify-space-between pa-1" @click="toggle" style="cursor: pointer">
       <div class="d-flex align-center gap-2">
         <VIcon v-if="props.node.children" :icon="expanded ? 'mdi-chevron-down' : 'mdi-chevron-right'" size="16" />
-        <h6 :class="[props.level === 0 ? 'expansion_base_parent_title' : 'expansion_node_title', 'mb-0']">
-          {{ props.node.name }}
-        </h6>
+        <div class="">
+          <h6 :class="[props.level === 0 ? 'expansion_base_parent_title' : 'expansion_node_title', 'mb-0']">
+            {{ props.node.name }}
+          </h6>
+        </div>
+        <VBtn rounded="3" class="account_v_btn_outlined" size="24" variant="outlined">{{ isLedger ? 'L' : 'G' }}</VBtn>
       </div>
       <div class="d-flex align-center gap-2" @click.stop>
         <VMenu v-model="menu" :close-on-content-click="false" class="account_vmenu_border" location="bottom end">
           <template #activator="{ props: menuProps }">
-            <VIcon v-if="isHovered && props.node.children" icon="mdi-dots-horizontal" size="16" v-bind="menuProps" />
+            <VIcon v-if="isHovered" icon="mdi-dots-horizontal" size="16" v-bind="menuProps" />
           </template>
           <VList class="account_expansion_list">
             <VListItem @click="onEdit">
@@ -74,7 +82,7 @@ const typeClass = computed(() => {
       </div>
     </div>
 
-    <!-- Recursive Children -->
+    <!-- Recursive Children with incremented level -->
     <div v-if="expanded">
       <TreeItem v-for="child in props.node.children" :key="child.id" :node="child" :level="props.level + 1" />
     </div>

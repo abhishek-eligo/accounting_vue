@@ -4,6 +4,7 @@
  * Bootstraps Vuetify and other plugins then mounts the App`
  */
 
+// import '@fontsource/inter/variable.css'
 // Plugins
 import { registerPlugins } from '@/plugins'
 

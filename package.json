@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.6",
     "@fontsource/roboto": "5.2.5",
     "@mdi/font": "7.4.47",
     "@tabler/icons-vue": "^3.34.0",
