@@ -577,6 +577,10 @@ p.secondary_email {
     border: 1px solid var(--acc-primary-color) !important;
 }
 
+.accounting_active_error_field .v-field--active.v-field--focused {
+    border: 1px solid var(--acc-error-color) !important;
+}
+
 .accouting_field .v-input__control {
     height: fit-content;
 }
@@ -777,4 +781,23 @@ p.secondary_email {
     font-weight: 400;
     color: var(--acc-text-dark);
     line-height: 20px;
+}
+
+i.account_folder_icon {
+    color: rgb(245 158 11);
+}
+
+i.account_ledger_icon {
+    color: rgb(14 165 233);
+}
+
+.account_info_title {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--acc-text-subtitle-dark);
+    font-weight: 400;
+}
+
+.more_options_w {
+    width: 12px;
 }

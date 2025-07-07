@@ -8,6 +8,9 @@
 // Plugins
 import { registerPlugins } from '@/plugins'
 
+import Vue3Toastify, { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css'
+
 // Components
 import App from './App.vue'
 
@@ -38,6 +41,12 @@ app.use(router)
 for (const [key, component] of Object.entries(TablerIcons)) {
   app.component(key, component)
 }
+
+// Use Tostify
+app.use(Vue3Toastify, {
+    autoClose: 3000,
+    position: "top-right",
+});
 
 registerPlugins(app)
 
