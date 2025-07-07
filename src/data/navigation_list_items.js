@@ -30,7 +30,7 @@ export default [
   {
     section: 'Money Out',
     items: [
-      { title: 'Vendors', icon: 'mdi-store-outline', slug: 'vendors' },
+      { title: 'Vendors', icon: 'mdi-store-outline', slug: 'vendors', path: '/vendors', component: () => import('@/pages/vendors') },
       { title: 'Purchase Bills', icon: 'mdi-currency-usd', slug: 'purchase-bills' },
       { title: 'Invoice Returns (Purchase)', icon: 'mdi-rotate-left', slug: 'invoice-returns-purchase' },
     ],
@@ -42,6 +42,16 @@ export default [
       { title: 'Journal Entries', icon: 'mdi-book-open-outline', slug: 'journal-entries' },
       // { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers', path: '/ledgers', component: () => import('@/pages/ledgers') },
     ],
+  },
+  {
+    section: 'Repirts',
+    items: [
+      { title: 'Profit & Loss', icon: 'mdi-trending-up', slug: 'profit&loss', path: '/profit&loss', component: () => import('@/pages/profit&loss') },
+      { title: 'Balance Sheet', icon: 'mdi-text-box-outline', slug: 'balance-sheet'},
+      { title: 'GST Summary', icon: 'mdi-percent-outline', slug: 'gstSummary'},
+      { title: 'GST Reports', icon: 'mdi-file-chart-outline', slug: 'gstReports'},
+      { title: 'Invoice Overviews', icon: 'mdi-book-open-blank-variant-outline', slug: 'invoice-overviews'},
+    ]
   },
   {
     section: '',

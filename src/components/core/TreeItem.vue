@@ -30,6 +30,7 @@ function onEdit() {
 function onDelete() {
   console.log("Delete:", props.node);
   menu.value = false;
+  emit("delete", props.node);
 }
 
 // Dynamic class for chip
@@ -53,7 +54,7 @@ onMounted(() => {
   }
 });
 
-const emit = defineEmits(["edit"]);
+const emit = defineEmits(["edit", "delete"]);
 </script>
 
 <template>
@@ -107,7 +108,7 @@ const emit = defineEmits(["edit"]);
     <!-- Recursive Children with incremented level -->
     <div v-if="expanded">
       <TreeItem v-for="child in props.node.children" :key="child.id" :node="child" :level="props.level + 1"
-        @edit="emit('edit', $event)" />
+        @edit="emit('edit', $event)" @delete="emit('delete', $event)" />
     </div>
   </div>
 </template>

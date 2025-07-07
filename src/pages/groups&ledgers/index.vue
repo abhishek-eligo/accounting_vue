@@ -117,9 +117,11 @@ const chartData = reactive([
 const showLedgerDialog = ref(false);
 const showGroupDialog = ref(false);
 const showEditDialog = ref(false);
+const showDeleteDialog = ref(false);
 
-// === Selected Node for Editing ===
-const selectedNode = ref(null)
+// === Selected Node for Editing/Deletion ===
+const selectedNode = ref(null);
+const selectedNodeToDelete = ref(null);
 
 // === Form Refs ===
 const ledgerFormRef = ref();
@@ -261,55 +263,56 @@ async function submitGroupForm() {
 
 async function submitEditForm() {
   const { valid } = await editFormRef.value?.validate();
-  if (!valid) {
-    toast.error("Please fill all required fields for editing.");
+  if (!valid || !selectedNode.value) return;
+
+  const node = selectedNode.value;
+  const newName = editForm.name;
+  const newParentId = editForm.parentGroup;
+  const newPosition = parseInt(editForm.position);
+
+  const oldParentId = getParentId(node);
+  const oldParent = findNodeById(chartData, oldParentId);
+  const newParent = findNodeById(chartData, newParentId);
+
+  if (!newParent || (oldParentId && !oldParent)) {
+    toast.error("Parent group not found.");
     return;
   }
 
-  if (!selectedNode.value) return;
+  // Remove from old parent
+  if (oldParentId === newParentId) {
+    const siblings = oldParent.children || [];
+    const index = siblings.findIndex((child) => child.id === node.id);
+    if (index === -1) return;
 
-  // If name changed, update it
-  selectedNode.value.name = editForm.name;
+    siblings.splice(index, 1); // remove current
+    siblings.splice(newPosition - 1, 0, node); // insert at new position
+  } else {
+    if (!newParent.children) newParent.children = [];
 
-  // If parentGroup changed, move node
-  const oldParentId = getParentId(selectedNode.value);
-  const newParentId = editForm.parentGroup;
-
-  if (oldParentId !== newParentId) {
-    const oldParent = findNodeById(chartData, oldParentId);
-    const newParent = findNodeById(chartData, newParentId);
-
-    if (!newParent || !oldParent) {
-      toast.error("Invalid parent group.");
-      return;
-    }
-
-    // Remove from old parent
-    oldParent.children = oldParent.children.filter(child => child.id !== selectedNode.value.id);
-
-    // Generate new ID under new parent
-    const newIndex = newParent.children?.length
-      ? Math.max(...newParent.children.map((c) => parseInt(c.id.split(".").pop()))) + 1
-      : 1;
-    const newId = `${newParent.id}.${newIndex}`;
-
+    const newId = `${newParent.id}.${newParent.children.length + 1}`;
     const movedNode = {
-      ...selectedNode.value,
+      ...node,
       id: newId,
+      name: newName,
     };
 
-    if (!newParent.children) newParent.children = [];
-    newParent.children.push(movedNode);
+    // Remove from old parent
+    oldParent.children = oldParent.children.filter((child) => child.id !== node.id);
 
-    // Rebuild parent group options
-    parentGroups.value = buildParentGroupOptions(chartData);
+    // Insert at desired position
+    newParent.children.splice(newPosition - 1, 0, movedNode);
 
-    toast.success("Node updated and moved successfully.");
-  } else {
-    toast.success("Node updated successfully.");
+    // Update reference
+    selectedNode.value = movedNode;
   }
 
-  // Reset form & dialog
+  selectedNode.value.name = newName;
+
+  parentGroups.value = buildParentGroupOptions(chartData);
+  toast.success("Node updated successfully.");
+
+  // Reset
   showEditDialog.value = false;
   editForm.name = "";
   editForm.position = "";
@@ -317,12 +320,13 @@ async function submitEditForm() {
   editFormRef.value?.resetValidation();
 }
 
+
 // === Edit Handler ===
 function handleEdit(node) {
   selectedNode.value = node;
   editForm.name = node.name;
-  editForm.position = node.id; // Ensure position is set to node.id
-  editForm.parentGroup = node.parentId || getParentId(node); // Dynamically determine parent
+  editForm.position = getPositionInParent(node); // 🟢 Position (1-based index)
+  editForm.parentGroup = getParentId(node); // 🟢 Get current parent
   showEditDialog.value = true;
 }
 
@@ -339,6 +343,48 @@ function getParentId(node) {
     return null;
   };
   return findParent(chartData, node.id);
+}
+
+function getPositionInParent(node) {
+  const parentId = getParentId(node);
+  if (!parentId) return 1;
+  const parent = findNodeById(chartData, parentId);
+  if (!parent?.children) return 1;
+  const index = parent.children.findIndex((child) => child.id === node.id);
+  return index >= 0 ? index + 1 : 1; // 1-based
+}
+
+// === Delete Method ===
+// === Delete Method ===
+async function confirmDelete() {
+  if (!selectedNodeToDelete.value) return;
+
+  const parentId = getParentId(selectedNodeToDelete.value);
+  if (parentId) {
+    // For nested nodes
+    const parent = findNodeById(chartData, parentId);
+    if (parent && parent.children) {
+      parent.children = parent.children.filter(child => child.id !== selectedNodeToDelete.value.id);
+    }
+  } else {
+    // For base-level nodes
+    chartData.splice(
+      chartData.findIndex(node => node.id === selectedNodeToDelete.value.id),
+      1
+    );
+  }
+
+
+  parentGroups.value = buildParentGroupOptions(chartData);
+  toast.success("Node deleted successfully.");
+
+  showDeleteDialog.value = false;
+  selectedNodeToDelete.value = null;
+}
+
+function handleDelete(node) {
+  selectedNodeToDelete.value = node;
+  showDeleteDialog.value = true;
 }
 </script>
 
@@ -373,7 +419,8 @@ function getParentId(node) {
             </div>
             <VCard class="py-2 pr-2 account_vcard_border shadow-none">
               <div class="custom_expansion_item">
-                <TreeItem v-for="item in chartData" :key="item.id" :node="item" :level="0" @edit="handleEdit" />
+                <TreeItem v-for="item in chartData" :key="item.id" :node="item" :level="0" @edit="handleEdit"
+                  @delete="handleDelete" />
               </div>
             </VCard>
           </VCardText>
@@ -442,8 +489,8 @@ function getParentId(node) {
           <VForm ref="editFormRef">
             <VTextField v-model="editForm.name" :rules="nameRules" class="accouting_field accouting_active_field mb-2"
               placeholder="Name" variant="outlined" hide-details="auto" />
-            <!-- <VTextField v-model="editForm.position" class="accouting_field accouting_active_field mb-2"
-              placeholder="Position" variant="outlined" hide-details="auto" /> -->
+            <VTextField v-model="editForm.position" class="accouting_field accouting_active_field mb-2"
+              placeholder="Position" variant="outlined" hide-details="auto" />
             <VAutocomplete v-model="editForm.parentGroup" :items="parentGroups" :rules="parentGroupRules"
               class="accouting_field accouting_active_field" placeholder="Parent Group" item-title="title"
               item-value="value" variant="outlined" hide-details="auto" />
@@ -455,6 +502,22 @@ function getParentId(node) {
           editFormRef?.resetValidation();
           " />
           <VBtn text="Save Changes" class="account_v_btn_primary" @click="submitEditForm" />
+        </VCardActions>
+      </VCard>
+    </VDialog>
+
+    <!-- Delete Dialog -->
+    <VDialog v-model="showDeleteDialog" max-width="400" @click:outside="showDeleteDialog = false">
+      <VCard>
+        <VCardTitle class="account_ui_swtich_title pb-0">Are you absolutely sure?</VCardTitle>
+        <VCardSubtitle class="account_ui_swtich_subtitle text-wrap px-3">
+          This action cannot be undone. This will permanently delete the {{ selectedNodeToDelete?.name }} group and all
+          of
+          its subgroups.
+        </VCardSubtitle>
+        <VCardActions class="justify-end mr-4 mb-2">
+          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click="showDeleteDialog = false" />
+          <VBtn text="Continue" class="account_v_btn_primary" @click="confirmDelete" />
         </VCardActions>
       </VCard>
     </VDialog>

@@ -629,9 +629,8 @@ p.secondary_email {
     color: var(--acc-text-subtitle-dark);
     font-weight: 400;
     line-height: 20px;
+    opacity: unset !important;
 }
-
-
 
 
 .settings_nav_position {
@@ -772,7 +771,7 @@ p.secondary_email {
 }
 
 .account_vcard_menu_items {
-    height: 500px;
+    height: 332px;
     overflow-y: auto;
 }
 
@@ -800,4 +799,131 @@ i.account_ledger_icon {
 
 .more_options_w {
     width: 12px;
+}
+
+.account_dynamic_table tr.v-data-table__tr td.v-data-table__td .v-selection-control .v-selection-control__input i {
+    color: var(--acc-primary-color);
+}
+
+.account_dynamic_table tr th.v-data-table__td .v-selection-control .v-selection-control__input i {
+    color: var(--acc-text-white) !important;
+}
+
+.account_navigation_expansion_panel .v-expansion-panel .v-expansion-panel__shadow {
+    display: none !important;
+}
+
+.account_navigation_expansion_panel .v-expansion-panel {
+    background: #f5f5f5 !important;
+    border: unset !important;
+}
+
+.account_income_card .v-card-item {
+    background: var(--acc-primary-color);
+    padding-right: 23px;
+    padding-left: 20px;
+}
+
+.account_income_card .v-card-item .v-card-title {
+    color: var(--acc-text-white);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 600;
+}
+
+.account_expense_card .v-card-item {
+    background: var(--acc-error-color);
+}
+
+.account_expense_card .v-card-item .v-card-title {
+    color: var(--acc-text-white);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 600;
+}
+
+.amount_inc_append_item {
+    font-size: 13px;
+    color: var(--acc-text-white);
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.amount_income_item_title {
+    border-radius: 6px;
+    border-top: 1px solid hsl(210 16% 84%);
+    padding: 0 8px;
+    background: #E2E8F0;
+}
+
+.amount_income_overlay_item_title {
+    background: #e2e8f06e;
+    border-radius: 6px;
+    border-top: 1px solid hsl(210 16% 84%);
+    padding: 0 8px;
+}
+
+.amount_inc_current_item {
+    color: var(--acc-text-dark);
+    font-weight: 700;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.amount_inc_previous_item {
+    color: rgba(80, 112, 145, 0.8);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.amount_inc_change_item {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+
+}
+
+.account_income_chip .v-chip__content {
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 400;
+}
+
+.account_group_primary {
+    color: var(--acc-primary-color) !important;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.account_group_error {
+    color: var(--acc-error-color) !important;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.account_ledger_secondary {
+    color: var(--acc-secondary-text-color) !important;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.account_chip_outline {
+    color: var(--acc-text-dark) !important;
+    border: 1px solid var(--acc-border-color);
+    padding: 3px 6px;
+    background: transparent !important;
+}
+
+.account_chip_outline .v-chip__underlay {
+    display: none;
+}
+
+.account_chip_outline .v-chip__content {
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 400;
 }
