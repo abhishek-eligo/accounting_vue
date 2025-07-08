@@ -853,7 +853,7 @@ i.account_ledger_icon {
     border-radius: 6px;
     border-top: 1px solid hsl(210 16% 84%);
     padding: 0 8px;
-    background: #E2E8F0;
+    background: rgb(226 232 240);
 }
 
 .amount_income_overlay_item_title {
@@ -865,22 +865,31 @@ i.account_ledger_icon {
 
 .amount_inc_current_item {
     color: var(--acc-text-dark);
-    font-weight: 700;
     line-height: 20px;
     font-size: 14px;
+}
+
+.amount_inc_current_font_wght {
+    font-weight: 600;
 }
 
 .amount_inc_previous_item {
     color: rgba(80, 112, 145, 0.8);
     font-size: 14px;
     line-height: 20px;
-    font-weight: 700;
+}
+
+.amount_inc_previous_font_wght {
+    font-weight: 500;
+}
+
+.amount_inc_change_font_wght {
+    font-weight: 400;
 }
 
 .amount_inc_change_item {
     font-size: 12px;
     line-height: 16px;
-    font-weight: 700;
 
 }
 
@@ -927,3 +936,59 @@ i.account_ledger_icon {
     line-height: 12px;
     font-weight: 400;
 }
+
+.account_income_row {
+    padding-left: 24px;
+    display: grid !important;
+    grid-template-columns: 360px 1fr;
+}
+
+.account_income_compare_row {
+    gap: 5px;
+    display: grid;
+    grid-template-columns: 1fr 105px 60px;
+    align-items: center;
+}
+
+.account_income_table .v-data-table-footer {
+    display: none;
+}
+
+.account_expense_table table thead tr {
+    background: var(--acc-error-color) !important;
+}
+
+.account_income_table table thead tr {
+    background: var(--acc-primary-color);
+    padding-right: 23px;
+    padding-left: 20px;
+}
+
+.account_income_table table thead tr th {
+    height: 45px !important;
+}
+
+.account_income_table table thead {
+    margin-bottom: 10px;
+}
+
+.account_income_table table thead tr th:first-child .v-data-table-header__content span{
+    color: var(--acc-text-white) !important;
+    font-size: 18px !important;
+    line-height: 28px !important;
+    font-weight: 600 !important;
+}
+
+.account_income_table table thead tr th .v-data-table-header__content span {
+    font-size: 13px;
+    color: var(--acc-text-white);
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.account_income_table tbody tr.amount_income_item_title td,
+.account_income_table tbody tr.amount_income_overlay_item_title td ,
+.account_income_table tbody tr td{
+    height: 40px !important;
+}
+

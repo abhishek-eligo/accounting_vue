@@ -40,9 +40,9 @@ const chipClass = computed(() => {
 <template>
   <!-- Wrapper class is dynamic based on rules -->
   <div class="px-2 py-2 mt-2" :class="itemClass">
-    <div class="d-flex align-center" :style="{ paddingLeft }">
-      <VCol class="pa-0" cols="7">
-        <div class="d-flex align-center gap-2">
+    <div class="d-flex align-center account_income_row">
+      <div class="pa-0">
+        <div class="d-flex align-center gap-2" :style="{ paddingLeft }">
           <VIcon :icon="isGroup ? 'mdi-folder-outline' : 'mdi-file-document-outline'" size="16" />
           <p class="mb-0 amount_income_group_item" :class="nameClass">
             {{ item.name }}
@@ -51,24 +51,26 @@ const chipClass = computed(() => {
             ({{ item.percent }})
           </VChip>
         </div>
-      </VCol>
-      <VCol class="pa-0" cols="2">
-        <div class="d-flex justify-end">
-          <p class="mb-0 amount_inc_current_item">{{ item.current }}</p>
+      </div>
+      <div class="account_income_compare_row">
+        <div class="pa-0">
+          <div class="d-flex justify-end">
+            <p class="mb-0 amount_inc_current_item">{{ item.current }}</p>
+          </div>
         </div>
-      </VCol>
-      <VCol class="pa-0" cols="2">
-        <div class="d-flex justify-end">
-          <p class="mb-0 amount_inc_previous_item">{{ item.previous }}</p>
+        <div class="pa-0">
+          <div class="d-flex justify-end">
+            <p class="mb-0 amount_inc_previous_item">{{ item.previous }}</p>
+          </div>
         </div>
-      </VCol>
-      <VCol class="pa-0" cols="1">
-        <div class="d-flex justify-end align-center gap-2">
-          <p class="mb-0 amount_inc_change_item">{{ item.change }}</p>
-          <VIcon :icon="item.new ? 'mdi-star' : 'mdi-chevron-up'" size="12"
-            :class="item.new ? 'text-info' : 'text-success'" />
+        <div class="pa-0">
+          <div class="d-flex justify-end align-center gap-2">
+            <p class="mb-0 amount_inc_change_item">{{ item.change }}</p>
+            <VIcon :icon="item.new ? 'mdi-star' : 'mdi-chevron-up'" size="12"
+              :class="item.new ? 'text-info' : 'text-success'" />
+          </div>
         </div>
-      </VCol>
+      </div>
     </div>
   </div>
 

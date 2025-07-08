@@ -311,6 +311,86 @@ const expensesData = ref([
   },
 ]);
 
+const incomeHeaders = computed(() => {
+  return [
+    { title: 'Income Type', value: 'name', width: '550px', align: 'start', visible: true },
+    { title: showCompareMode.value ? 'Current' : '', value: 'current', width: '', align: 'end', visible: true },
+    { title: 'Previous', value: 'previous', width: '', align: 'end', visible: showCompareMode.value },
+    { title: 'Change', value: 'change', width: '', align: 'end', visible: showCompareMode.value },
+  ].filter(h => h.visible);
+});
+
+const expensesHeaders = computed(() => {
+  return [
+    { title: 'Expense Type', value: 'name', width: '550px', align: 'start', visible: true },
+    { title: showCompareMode.value ? 'Current' : '', value: 'current', width: '', align: 'end', visible: true },
+    { title: 'Previous', value: 'previous', width: '', align: 'end', visible: showCompareMode.value },
+    { title: 'Change', value: 'change', width: '', align: 'end', visible: showCompareMode.value },
+  ].filter(h => h.visible);
+});
+
+
+function flattenTree(data, level = 0, parentType = '') {
+  const flatList = [];
+
+  for (const item of data) {
+    flatList.push({
+      ...item,
+      level,
+      parentType,
+    });
+
+    if (item.children && item.children.length) {
+      flatList.push(...flattenTree(item.children, level + 1, item.type));
+    }
+  }
+
+  return flatList;
+}
+
+const flatIncomeData = computed(() => flattenTree([...incomeData.value]));
+const flatExpensesData = computed(() => flattenTree([...expensesData.value]));
+
+const isFullWidthView = ref(false);
+const showCompareMode = ref(false);
+const showPercent = ref(false);
+
+const getTotal = (data) => {
+  let total = {
+    current: 0,
+    previous: 0,
+    change: 0,
+  };
+
+  function accumulate(items) {
+    for (const item of items) {
+      if (item.type === 'ledger') {
+        const curr = parseFloat(item.current?.replace(/[^0-9.-]+/g, '') || 0);
+        const prev = parseFloat(item.previous?.replace(/[^0-9.-]+/g, '') || 0);
+        total.current += curr;
+        total.previous += prev;
+      }
+
+      if (item.children?.length) {
+        accumulate(item.children);
+      }
+    }
+  }
+
+  accumulate(data);
+
+  const percentChange = total.previous === 0 ? 0 : ((total.current - total.previous) / total.previous) * 100;
+
+  return {
+    currentFormatted: `₹${total.current.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`,
+    previousFormatted: `₹${total.previous.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`,
+    changeFormatted: `${percentChange.toFixed(1)}%`,
+    isIncrease: percentChange >= 0,
+  };
+};
+
+const totalIncome = computed(() => getTotal(incomeData.value));
+const totalExpenses = computed(() => getTotal(expensesData.value));
 
 
 </script>
@@ -323,7 +403,8 @@ const expensesData = ref([
           subtitle="For the period of Jan 01, 2025 to Jul 07, 2025">
           <template #append>
             <div class="d-flex align-center gap-2">
-              <VSwitch density="compact" inset class="account_swtich_btn" color="primary" hide-details />
+              <VSwitch v-model="showPercent" density="compact" inset label="Show %" class="account_swtich_btn"
+                style="min-width: 121px;" color="primary" hide-details />
               <VTextField type="date" density="compact" class="accouting_field accouting_active_field mr-2" />
               <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                 <template #activator="{ props }">
@@ -333,16 +414,19 @@ const expensesData = ref([
                 <VCard class="account_vcard_menu account_vcard_border">
                   <div class="py-1">
                     <div class="account_vcard_menu_item">
-                      <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                        <VIcon size="16" icon="mdi-check" />
-                        <span>Full Width View</span>
+                      <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                        @click="isFullWidthView = !isFullWidthView">
+                        <VIcon v-if="isFullWidthView" size="16" icon="mdi-check" />
+                        <span :class="isFullWidthView ? '' : 'ml-6'">Full Width View</span>
                       </div>
                     </div>
                     <div class="account_vcard_menu_item">
-                      <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                        <VIcon size="16" icon="mdi-check" />
-                        <span>Compare Periods</span>
+                      <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                        @click="showCompareMode = !showCompareMode">
+                        <VIcon v-if="showCompareMode" size="16" icon="mdi-check" />
+                        <span :class="showCompareMode ? '' : 'ml-6'">Compare Periods</span>
                       </div>
+
                     </div>
                     <VDivider class="my-2" />
                     <div class="account_vcard_menu_item">
@@ -364,69 +448,203 @@ const expensesData = ref([
           </template>
           <VCardText>
             <VRow>
-              <VCol cols="12" lg="6" md="6" sm="12">
-                <VCard title="Income" class="h-100 account_vcard_border account_income_card shadow-none">
-                  <template #append>
-                    <div class="d-flex align-center gap-5">
-                      <p class="mb-0 amount_inc_append_item">Current</p>
-                      <p class="mb-0 amount_inc_append_item">Previous</p>
-                      <p class="mb-0 amount_inc_append_item">Change</p>
-                    </div>
-                  </template>
-                  <VCardText>
-                    <VRow>
+              <!-- Income Data Table -->
+              <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
+                :sm="isFullWidthView ? 12 : 6">
+                <VCard class="h-100 account_vcard_border account_income_card shadow-none">
+                  <VDataTable :headers="incomeHeaders" :items="flatIncomeData" class="account_income_table"
+                    hide-default-footer item-value="name">
+                    <template #item="{ item }">
+                      <tr :class="item.type === 'group'
+                        ? (item.level === 0
+                          ? 'amount_income_item_title'
+                          : 'amount_income_overlay_item_title')
+                        : ''">
+                        <!-- Name / tree column -->
+                        <td>
+                          <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
+                            <VIcon :icon="item.type === 'group' ? 'mdi-folder-outline' : 'mdi-file-document-outline'"
+                              size="16" />
 
-                      <VCol cols="12">
-                        <!-- Recursive rendering of income data -->
-                        <div v-for="(item, index) in incomeData" :key="index">
-                          <IncomeRow :item="item" :level="0" />
-                        </div>
-                      </VCol>
-                    </VRow>
-                  </VCardText>
+                            <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
+                              ? 'account_ledger_secondary'
+                              : item.name?.toLowerCase().includes('expense')
+                                ? 'account_group_error'
+                                : 'account_group_primary'">
+                              {{ item.name }}
+                            </p>
+
+                            <VChip v-if="item.percent && showPercent" density="compact"
+                              class="account_income_chip py-1 px-1"
+                              :class="item.type === 'ledger' ? 'account_chip_outline' : 'account_chip_secondary'">
+                              ({{ item.percent }})
+                            </VChip>
+                          </div>
+                        </td>
+
+                        <!-- Current -->
+                        <td class="text-end" v-if="true">
+                          <p class="mb-0 amount_inc_current_item"
+                            :class="item.level === 0 && item.type === 'group' ? 'amount_inc_current_font_wght' : ''">
+                            {{ item.current }}
+                          </p>
+                        </td>
+
+                        <!-- Previous -->
+                        <Transition name="slide-fade">
+                          <td v-if="showCompareMode" class="text-end">
+                            <p class="mb-0 amount_inc_previous_item"
+                              :class="item.level > 0 && item.type === 'group' ? 'amount_inc_previous_font_wght' : ''">
+                              {{ item.previous }}
+                            </p>
+                          </td>
+                        </Transition>
+
+                        <!-- Change -->
+                        <Transition name="slide-fade">
+                          <td v-if="showCompareMode" class="text-end">
+                            <div class="d-flex justify-end align-center gap-2">
+                              <p class="mb-0 amount_inc_change_item" :class="[
+                                item.type === 'ledger' ? 'amount_inc_change_font_wght' : '',
+                                parseFloat(item.change) > 0 ? 'text-success' :
+                                  parseFloat(item.change) < 0 ? 'text-error' : 'text-medium-emphasis'
+                              ]">
+                                {{ item.change }}
+                              </p>
+                              <VIcon v-if="item.new" icon="mdi-star" size="12" class="text-info" />
+                              <VIcon v-else :icon="parseFloat(item.change) < 0 ? 'mdi-arrow-down' : 'mdi-arrow-up'"
+                                size="12" :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
+                            </div>
+                          </td>
+                        </Transition>
+
+
+                      </tr>
+                    </template>
+                  </VDataTable>
+                  <!-- Total Income Row -->
+                  <div class="d-flex justify-end mb-3 px-4">
+                    <table style="min-width: 100%;">
+                      <tr class="font-weight-medium">
+                        <td style="min-width: 254px;" class="text-start">Total Income</td>
+                        <td class="text-end amount_inc_current_item">{{ totalIncome.currentFormatted }}</td>
+                        <Transition name="slide-fade">
+                          <td class="text-end amount_inc_previous_item" v-if="showCompareMode">{{
+                            totalIncome.previousFormatted }}
+                          </td>
+                        </Transition>
+                        <Transition name="slide-fade">
+                          <td class="text-end d-flex align-center amount_inc_change_item justify-end gap-2"
+                            v-if="showCompareMode">
+                            {{ totalIncome.changeFormatted }}
+                            <VIcon :icon="totalIncome.isIncrease ? 'mdi-chevron-up' : 'mdi-chevron-down'" size="12"
+                              :class="totalIncome.isIncrease ? 'text-success' : 'text-error'" />
+                          </td>
+                        </Transition>
+                      </tr>
+                    </table>
+                  </div>
                 </VCard>
               </VCol>
-              <VCol cols="12" lg="6" md="6" sm="12">
-                <VCard title="Expenses" class="account_vcard_border account_expense_card shadow-none">
-                  <template #append>
-                    <div class="d-flex align-center gap-5">
-                      <p class="mb-0 amount_inc_append_item">Current</p>
-                      <p class="mb-0 amount_inc_append_item">Previous</p>
-                      <p class="mb-0 amount_inc_append_item">Change</p>
-                    </div>
-                  </template>
-                  <VCardText>
-                    <VRow>
-                      <VCol cols="12">
-                        <!-- Render expenses -->
-                        <div v-for="(item, index) in expensesData" :key="index">
-                          <IncomeRow :item="item" :level="0" />
-                        </div>
-                      </VCol>
-                    </VRow>
-                    <VDivider />
-                    <VRow>
-                      <VCol cols="7">
-                        <p class="mb-0">Total Expenses</p>
-                      </VCol>
-                      <VCol class="px-0" cols="2">
-                        <div class="d-flex justify-end flex-column">
-                          <p class="mb-0 amount_inc_current_item">₹4,16,000.00</p>
-                        </div>
-                      </VCol>
-                      <VCol class="px-0" cols="2">
-                        <div class="d-flex justify-end flex-column">
-                          <p class="mb-0 amount_inc_previous_item">₹2,91,500.00</p>
-                        </div>
-                      </VCol>
-                      <VCol class="px-0" cols="1">
-                        <div class="d-flex justify-end align-center gap-2">
-                          <p class="mb-0 amount_inc_change_item">42.7%</p>
-                          <VIcon icon="mdi-chevron-up" size="12" class="text-success" />
-                        </div>
-                      </VCol>
-                    </VRow>
-                  </VCardText>
+
+              <!-- Expenses Data Table -->
+              <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
+                :sm="isFullWidthView ? 12 : 6">
+                <VCard class="h-100 account_vcard_border account_expense_card shadow-none">
+                  <VDataTable :headers="expensesHeaders" :items="flatExpensesData"
+                    class="account_income_table account_expense_table" hide-default-footer item-value="name">
+                    <template #item="{ item }">
+                      <tr :class="item.type === 'group'
+                        ? (item.level === 0
+                          ? 'amount_income_item_title'
+                          : 'amount_income_overlay_item_title')
+                        : ''">
+                        <!-- Name / tree column -->
+                        <td>
+                          <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
+                            <VIcon :icon="item.type === 'group' ? 'mdi-folder-outline' : 'mdi-file-document-outline'"
+                              size="16" />
+
+                            <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
+                              ? 'account_ledger_secondary'
+                              : item.name?.toLowerCase().includes('income')
+                                ? 'account_group_success'
+                                : 'account_group_error'">
+                              {{ item.name }}
+                            </p>
+
+                            <VChip v-if="item.percent && showPercent" density="compact"
+                              class="account_income_chip py-1 px-1"
+                              :class="item.type === 'ledger' ? 'account_chip_outline' : 'account_chip_secondary'">
+                              ({{ item.percent }})
+                            </VChip>
+                          </div>
+                        </td>
+
+                        <!-- Current -->
+                        <td class="text-end" v-if="true">
+                          <p class="mb-0 amount_inc_current_item"
+                            :class="item.level === 0 && item.type === 'group' ? 'amount_inc_current_font_wght' : ''">
+                            {{ item.current }}
+                          </p>
+                        </td>
+
+                        <!-- Previous -->
+                        <td v-if="showCompareMode" class="text-end">
+                          <Transition name="slide-fade">
+                            <p class="mb-0 amount_inc_previous_item"
+                              :class="item.level > 0 && item.type === 'group' ? 'amount_inc_previous_font_wght' : ''">
+                              {{ item.previous }}
+                            </p>
+                          </Transition>
+                        </td>
+
+                        <!-- Change -->
+                        <Transition name="slide-fade">
+                          <td v-if="showCompareMode" class="text-end">
+                            <div class="d-flex justify-end align-center gap-2">
+                              <p class="mb-0 amount_inc_change_item" :class="[
+                                item.type === 'ledger' ? 'amount_inc_change_font_wght' : '',
+                                parseFloat(item.change) > 0 ? 'text-success' :
+                                  parseFloat(item.change) < 0 ? 'text-error' : 'text-medium-emphasis'
+                              ]">
+                                {{ item.change }}
+                              </p>
+                              <VIcon v-if="item.new" icon="mdi-star" size="12" class="text-info" />
+                              <VIcon v-else :icon="parseFloat(item.change) < 0 ? 'mdi-arrow-down' : 'mdi-arrow-up'"
+                                size="12" :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
+                            </div>
+                          </td>
+                        </Transition>
+
+
+                      </tr>
+                    </template>
+                  </VDataTable>
+
+                  <!-- Total Expenses Row -->
+                  <div class="d-flex justify-end mb-3 px-4">
+                    <table style="min-width: 100%;">
+                      <tr class="font-weight-medium">
+                        <td class="text-start">Total Expenses</td>
+                        <td class="text-end amount_inc_current_item">{{ totalExpenses.currentFormatted }}</td>
+                        <Transition name="slide-fade">
+                          <td class="text-end amount_inc_previous_item" v-if="showCompareMode">{{
+                            totalExpenses.previousFormatted
+                          }}</td>
+                        </Transition>
+                        <Transition name="slide-fade">
+                          <td class="text-end d-flex align-center justify-end amount_inc_change_item gap-2"
+                            v-if="showCompareMode">
+                            {{ totalExpenses.changeFormatted }}
+                            <VIcon :icon="totalExpenses.isIncrease ? 'mdi-chevron-up' : 'mdi-chevron-down'" size="12"
+                              :class="totalExpenses.isIncrease ? 'text-success' : 'text-error'" />
+                          </td>
+                        </Transition>
+                      </tr>
+                    </table>
+                  </div>
+
                 </VCard>
               </VCol>
             </VRow>
@@ -475,4 +693,15 @@ const expensesData = ref([
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+</style>
