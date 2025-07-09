@@ -1,359 +1,428 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import IncomeRow from '@/components/core/IncomeRow.vue';
 
-const incomeData = ref([
+const assetsData = ref([
   {
-    name: "Income (Direct)",
-    percent: "95.03%",
-    current: "₹16,25,000.00",
-    previous: "₹14,40,000.00",
-    change: "12.8%",
+    name: "Fixed Assets",
+    percent: "65.42%",
+    current: "₹8,00,000.00",
+    previous: "₹7,50,000.00",
+    change: "6.7%",
     type: "group",
     children: [
       {
-        name: "Revenue from Operations",
-        percent: "93.57%",
-        current: "₹16,00,000.00",
-        previous: "₹14,20,000.00",
-        change: "12.7%",
-        type: "group",
-        children: [
-          {
-            name: "Domestic Sales",
-            percent: "73.10%",
-            current: "₹12,50,000.00",
-            previous: "₹11,00,000.00",
-            change: "13.6%",
-            type: "ledger",
-          },
-          {
-            name: "Export Sales",
-            percent: "20.47%",
-            current: "₹3,50,000.00",
-            previous: "₹3,20,000.00",
-            change: "9.4%",
-            type: "ledger",
-          },
-        ],
+        name: "Land & Building",
+        percent: "40.85%",
+        current: "₹5,00,000.00",
+        previous: "₹4,80,000.00",
+        change: "4.2%",
+        type: "ledger",
       },
       {
-        name: "Other Direct Income",
-        percent: "1.46%",
-        current: "₹25,000.00",
-        previous: "₹20,000.00",
-        change: "25.0%",
+        name: "Plant & Machinery",
+        percent: "16.34%",
+        current: "₹2,00,000.00",
+        previous: "₹1,80,000.00",
+        change: "11.1%",
+        type: "ledger",
+      },
+      {
+        name: "Furniture & Fixtures",
+        percent: "4.89%",
+        current: "₹60,000.00",
+        previous: "₹55,000.00",
+        change: "9.1%",
+        type: "ledger",
+      },
+      {
+        name: "Computers",
+        percent: "3.26%",
+        current: "₹40,000.00",
+        previous: "₹35,000.00",
+        change: "14.3%",
         type: "ledger",
       },
     ],
   },
   {
-    name: "Income (Indirect)",
-    percent: "4.97%",
-    current: "₹85,000.00",
-    previous: "₹70,000.00",
-    change: "21.4%",
+    name: "Investments",
+    percent: "9.78%",
+    current: "₹1,20,000.00",
+    previous: "₹1,10,000.00",
+    change: "9.1%",
     type: "group",
     children: [
       {
-        name: "Interest Received",
-        percent: "0.88%",
+        name: "Shares",
+        percent: "6.52%",
+        current: "₹80,000.00",
+        previous: "₹75,000.00",
+        change: "6.7%",
+        type: "ledger",
+      },
+      {
+        name: "Mutual Funds",
+        percent: "3.26%",
+        current: "₹40,000.00",
+        previous: "₹35,000.00",
+        change: "14.3%",
+        type: "ledger",
+      },
+    ],
+  },
+  {
+    name: "Current Assets",
+    percent: "18.37%",
+    current: "₹2,25,000.00",
+    previous: "₹2,10,000.00",
+    change: "7.1%",
+    type: "group",
+    children: [
+      {
+        name: "Cash-in-Hand",
+        percent: "4.07%",
+        current: "₹50,000.00",
+        previous: "₹45,000.00",
+        change: "11.1%",
+        type: "ledger",
+      },
+      {
+        name: "Bank Accounts",
+        percent: "10.20%",
+        current: "₹1,25,000.00",
+        previous: "₹1,10,000.00",
+        change: "13.6%",
+        type: "ledger",
+      },
+      {
+        name: "Sundry Debtors",
+        percent: "4.89%",
+        current: "₹60,000.00",
+        previous: "₹55,000.00",
+        change: "9.1%",
+        type: "group",
+        children: [
+          {
+            name: "e.g., Customer A",
+            percent: "3.26%",
+            current: "₹40,000.00",
+            previous: "₹35,000.00",
+            change: "14.3%",
+            type: "ledger",
+          },
+        ],
+      },
+      {
+        name: "Advance to Supplier",
+        percent: "1.22%",
         current: "₹15,000.00",
         previous: "₹12,000.00",
         change: "25.0%",
         type: "ledger",
       },
       {
-        name: "Commission Received",
-        percent: "2.63%",
-        current: "₹45,000.00",
-        previous: "₹40,000.00",
-        change: "12.5%",
+        name: "GST Input Credit",
+        percent: "0.61%",
+        current: "₹7,500.00",
+        previous: "₹7,000.00",
+        change: "7.1%",
+        type: "ledger",
+      },
+    ],
+  },
+  {
+    name: "Loans & Advances (Asset)",
+    percent: "4.89%",
+    current: "₹60,000.00",
+    previous: "₹55,000.00",
+    change: "9.1%",
+    type: "group",
+    children: [
+      {
+        name: "Loans to Employees",
+        percent: "3.26%",
+        current: "₹40,000.00",
+        previous: "₹35,000.00",
+        change: "14.3%",
         type: "ledger",
       },
       {
-        name: "Dividend Received",
-        percent: "1.17%",
-        current: "₹20,000.00",
-        previous: "₹18,000.00",
-        change: "11.1%",
+        name: "Advance to Others",
+        percent: "1.22%",
+        current: "₹15,000.00",
+        previous: "₹15,000.00",
+        change: "0.0%",
         type: "ledger",
       },
       {
-        name: "Gain on Sale of Asset",
-        percent: "0.29%",
+        name: "Security Deposits",
+        percent: "0.41%",
         current: "₹5,000.00",
-        previous: "₹0.00",
-        change: "New",
+        previous: "₹5,000.00",
+        change: "0.0%",
         type: "ledger",
-        new: true,
+      },
+    ],
+  },
+  {
+    name: "Misc. Expenses (Asset)",
+    percent: "1.63%",
+    current: "₹20,000.00",
+    previous: "₹15,000.00",
+    change: "33.3%",
+    type: "group",
+    children: [
+      {
+        name: "Preliminary Expenses",
+        percent: "1.22%",
+        current: "₹15,000.00",
+        previous: "₹12,000.00",
+        change: "25.0%",
+        type: "ledger",
+      },
+      {
+        name: "Deferred Revenue Expenses",
+        percent: "0.41%",
+        current: "₹5,000.00",
+        previous: "₹3,000.00",
+        change: "66.7%",
+        type: "ledger",
       },
     ],
   },
 ]);
 
-const expensesData = ref([
+const liabilitiesData = ref([
   {
-    name: "Expenses (Direct)",
-    percent: "20.00%",
-    current: "₹3,42,000.00",
-    previous: "₹3,25,000.00",
-    change: "5.2%",
+    name: "Capital Account",
+    percent: "65.42%",
+    current: "₹8,00,000.00",
+    previous: "₹7,50,000.00",
+    change: "6.7%",
     type: "group",
-
     children: [
       {
-        name: "Cost of Goods Sold",
-        percent: "14.16%",
-        current: "₹2,42,000.00",
-        previous: "₹2,30,000.00",
-        change: "5.2%",
-        type: "group",
-        children: [
-          {
-            name: "Opening Stock",
-            percent: "5.31%",
-            current: "₹91,000.00",
-            previous: "₹85,000.00",
-            change: "7.1%",
-            type: "ledger",
-          },
-          {
-            name: "Purchases",
-            percent: "12.30%",
-            current: "₹2,10,000.00",
-            previous: "₹2,00,000.00",
-            change: "5.0%",
-            type: "ledger",
-          },
-          {
-            name: "Closing Stock",
-            percent: "-7.08%",
-            current: "₹1,21,000.00",
-            previous: "₹1,10,000.00",
-            change: "-9.1%",
-            type: "ledger",
-          },
-        ],
+        name: "Capital",
+        percent: "57.72%",
+        current: "₹7,06,000.00",
+        previous: "₹6,50,000.00",
+        change: "8.6%",
+        type: "ledger",
       },
       {
-        name: "Factory Overheads",
-        percent: "5.31%",
-        current: "₹91,000.00",
-        previous: "₹88,000.00",
-        change: "3.4%",
-        type: "group",
-        children: [
-          {
-            name: "Factory Rent",
-            percent: "1.76%",
-            current: "₹30,000.00",
-            previous: "₹30,000.00",
-            change: "-",
-            type: "ledger",
-          },
-          {
-            name: "Wages",
-            percent: "3.54%",
-            current: "₹60,000.00",
-            previous: "₹57,000.00",
-            change: "5.3%",
-            type: "ledger",
-          },
-          {
-            name: "Other Direct Expenses",
-            percent: "0.53%",
-            current: "₹9,000.00",
-            previous: "₹7,000.00",
-            change: "28.6%",
-            type: "ledger",
-          },
-        ],
+        name: "Partner's Capital",
+        percent: "8.15%",
+        current: "₹1,00,000.00",
+        previous: "₹1,05,000.00",
+        change: "-4.8%",
+        type: "ledger",
+      },
+      {
+        name: "Drawings",
+        percent: "-0.41%",
+        current: "₹(6,000.00)",
+        previous: "₹(5,000.00)",
+        change: "20.0%",
+        type: "ledger",
       },
     ],
   },
   {
-    name: "Expenses (Indirect)",
-    percent: "25.80%",
-    current: "₹4,41,000.00",
-    previous: "₹4,12,000.00",
-    change: "7.0%",
+    name: "Loans (Liability)",
+    percent: "16.34%",
+    current: "₹2,00,000.00",
+    previous: "₹1,90,000.00",
+    change: "5.3%",
     type: "group",
     children: [
       {
-        name: "Operating Expenses",
-        percent: "15.62%",
-        current: "₹2,67,000.00",
-        previous: "₹2,50,000.00",
-        change: "6.8%",
+        name: "Secured Loans",
+        percent: "14.70%",
+        current: "₹1,80,000.00",
+        previous: "₹1,70,000.00",
+        change: "5.9%",
         type: "group",
         children: [
           {
-            name: "Salaries & Wages",
-            percent: "8.84%",
-            current: "₹1,51,000.00",
-            previous: "₹1,40,000.00",
-            change: "7.9%",
-            type: "ledger",
-          },
-          {
-            name: "Rent & Rates",
-            percent: "4.24%",
-
-            current: "₹72,500.00",
-            previous: "₹72,500.00",
-            change: "-",
-            type: "ledger",
-          },
-          {
-
-
-            name: "Printing & Stationery",
-            percent: "1.24%",
-            current: "₹21,000.00",
-            previous: "₹18,000.00",
-            change: "16.7%",
-            type: "ledger",
-          },
-          {
-            name: "Telephone & Internet",
-            percent: "0.88%",
-            current: "₹15,000.00",
-            previous: "₹13,000.00",
-            change: "15.4%",
-            type: "ledger",
-          },
-          {
-            name: "Miscellaneous Operating Expenses",
-            percent: "0.41%",
-            current: "₹7,000.00",
-            previous: "₹6,000.00",
-            change: "16.7%",
-            type: "ledger",
-          },
-        ],
-      },
-      {
-        name: "Financial Expenses",
-        percent: "2.29%",
-        current: "₹39,000.00",
-        previous: "₹40,000.00",
-        change: "-2.5%",
-        type: "group",
-        children: [
-          {
-            name: "Bank Charges",
-            percent: "0.18%",
-            current: "₹3,000.00",
-            previous: "₹2,700.00",
-            change: "11.1%",
-            type: "ledger",
-          },
-          {
-            name: "Interest on Loans",
-            percent: "2.12%",
-            current: "₹36,000.00",
-            previous: "₹37,000.00",
-            change: "-2.7%",
-            type: "ledger",
-          },
-        ],
-      },
-      {
-        name: "Selling & Distribution",
-        percent: "5.48%",
-        current: "₹94,000.00",
-        previous: "₹87,000.00",
-        change: "8.0%",
-        type: "group",
-        children: [
-          {
-            name: "Advertising & Marketing",
-            percent: "2.65%",
-            current: "₹45,000.00",
-            previous: "₹42,000.00",
-            change: "7.1%",
-            type: "ledger",
-          },
-          {
-            name: "Freight Outward",
-            percent: "1.06%",
-            current: "₹18,000.00",
-            previous: "₹17,000.00",
+            name: "e.g., Bank Term Loan",
+            percent: "14.70%",
+            current: "₹1,80,000.00",
+            previous: "₹1,70,000.00",
             change: "5.9%",
             type: "ledger",
           },
-          {
-            name: "Sales Commission",
-            percent: "1.76%",
-            current: "₹30,000.00",
-            previous: "₹27,000.00",
-            change: "11.1%",
-            type: "ledger",
-          },
         ],
       },
       {
-        name: "Depreciation & Amortization",
-        percent: "2.12%",
-        current: "₹36,000.00",
-        previous: "₹32,000.00",
-        change: "12.5%",
+        name: "Unsecured Loans",
+        percent: "1.63%",
+        current: "₹20,000.00",
+        previous: "₹20,000.00",
+        change: "0.0%",
         type: "group",
         children: [
           {
-            name: "Depreciation on Computers",
-            percent: "1.41%",
-            current: "₹24,000.00",
-            previous: "₹21,000.00",
-            change: "14.3%",
+            name: "e.g., Loan from Director",
+            percent: "1.63%",
+            current: "₹20,000.00",
+            previous: "₹20,000.00",
+            change: "0.0%",
+            type: "ledger",
+          },
+          {
+            name: "Bank ODCC",
+            percent: "0.0%",
+            current: "₹0.00",
+            previous: "₹0.00",
+            change: "-",
             type: "ledger",
           },
         ],
       },
     ],
   },
+  {
+    name: "Current Liabilities",
+    percent: "12.24%",
+    current: "₹1,50,000.00",
+    previous: "₹1,40,000.00",
+    change: "7.1%",
+    type: "group",
+    children: [
+      {
+        name: "Sundry Creditors",
+        percent: "8.15%",
+        current: "₹1,00,000.00",
+        previous: "₹95,000.00",
+        change: "5.3%",
+        type: "group",
+        children: [
+          {
+            name: "e.g., Vendor A",
+            percent: "4.89%",
+            current: "₹60,000.00",
+            previous: "₹55,000.00",
+            change: "9.1%",
+            type: "ledger",
+          },
+        ],
+      },
+      {
+        name: "Outstanding Expenses",
+        percent: "2.44%",
+        current: "₹30,000.00",
+        previous: "₹25,000.00",
+        change: "20.0%",
+        type: "ledger",
+      },
+      {
+        name: "Advance Received",
+        percent: "1.63%",
+        current: "₹20,000.00",
+        previous: "₹20,000.00",
+        change: "0.0%",
+        type: "ledger",
+      },
+    ],
+  },
+  {
+    name: "Duties & Taxes",
+    percent: "4.89%",
+    current: "₹60,000.00",
+    previous: "₹55,000.00",
+    change: "9.1%",
+    type: "group",
+    children: [
+      {
+        name: "GST Payable",
+        percent: "3.26%",
+        current: "₹40,000.00",
+        previous: "₹35,000.00",
+        change: "14.3%",
+        type: "ledger",
+      },
+      {
+        name: "TDS Payable",
+        percent: "1.22%",
+        current: "₹15,000.00",
+        previous: "₹15,000.00",
+        change: "0.0%",
+        type: "ledger",
+      },
+      {
+        name: "Other Statutory Dues",
+        percent: "0.41%",
+        current: "₹5,000.00",
+        previous: "₹5,000.00",
+        change: "0.0%",
+        type: "ledger",
+      },
+    ],
+  },
+  {
+    name: "Provisions",
+    percent: "1.22%",
+    current: "₹15,000.00",
+    previous: "₹12,000.00",
+    change: "25.0%",
+    type: "group",
+    children: [
+      {
+        name: "Provision for Tax",
+        percent: "0.81%",
+        current: "₹10,000.00",
+        previous: "₹8,000.00",
+        change: "25.0%",
+        type: "ledger",
+      },
+      {
+        name: "Provision for Expenses",
+        percent: "0.41%",
+        current: "₹5,000.00",
+        previous: "₹4,000.00",
+        change: "25.0%",
+        type: "ledger",
+      },
+    ],
+  },
 ]);
 
-const incomeHeaders = computed(() => {
+const assetsHeaders = computed(() => {
   return [
-    { title: 'Income Type', value: 'name', width: '550px', align: 'start', visible: true },
+    { title: 'Assets', value: 'name', width: '550px', align: 'start', visible: true },
     { title: showCompareMode.value ? 'Current' : '', value: 'current', width: '', align: 'end', visible: true },
     { title: 'Previous', value: 'previous', width: '', align: 'end', visible: showCompareMode.value },
     { title: 'Change', value: 'change', width: '', align: 'end', visible: showCompareMode.value },
   ].filter(h => h.visible);
 });
 
-const expensesHeaders = computed(() => {
+const liabilitiesHeaders = computed(() => {
   return [
-    { title: 'Expense Type', value: 'name', width: '550px', align: 'start', visible: true },
+    { title: 'Liabilities', value: 'name', width: '550px', align: 'start', visible: true },
     { title: showCompareMode.value ? 'Current' : '', value: 'current', width: '', align: 'end', visible: true },
     { title: 'Previous', value: 'previous', width: '', align: 'end', visible: showCompareMode.value },
     { title: 'Change', value: 'change', width: '', align: 'end', visible: showCompareMode.value },
   ].filter(h => h.visible);
 });
-
 
 function flattenTree(data, level = 0, parentType = '') {
   const flatList = [];
-
   for (const item of data) {
     flatList.push({
       ...item,
       level,
       parentType,
     });
-
     if (item.children && item.children.length) {
       flatList.push(...flattenTree(item.children, level + 1, item.type));
     }
   }
-
   return flatList;
 }
 
-const flatIncomeData = computed(() => flattenTree([...incomeData.value]));
-const flatExpensesData = computed(() => flattenTree([...expensesData.value]));
+const flatAssetsData = computed(() => flattenTree([...assetsData.value]));
+const flatLiabilitiesData = computed(() => flattenTree([...liabilitiesData.value]));
 
 const isFullWidthView = ref(false);
 const showCompareMode = ref(false);
@@ -365,7 +434,6 @@ const getTotal = (data) => {
     previous: 0,
     change: 0,
   };
-
   function accumulate(items) {
     for (const item of items) {
       if (item.type === 'ledger') {
@@ -374,17 +442,13 @@ const getTotal = (data) => {
         total.current += curr;
         total.previous += prev;
       }
-
       if (item.children?.length) {
         accumulate(item.children);
       }
     }
   }
-
   accumulate(data);
-
   const percentChange = total.previous === 0 ? 0 : ((total.current - total.previous) / total.previous) * 100;
-
   return {
     currentFormatted: `₹${total.current.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`,
     previousFormatted: `₹${total.previous.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`,
@@ -393,28 +457,8 @@ const getTotal = (data) => {
   };
 };
 
-const totalIncome = computed(() => getTotal(incomeData.value));
-const totalExpenses = computed(() => getTotal(expensesData.value));
-
-const netProfit = computed(() => {
-  const income = getTotal(incomeData.value);
-  const expenses = getTotal(expensesData.value);
-
-  const netCurrent = parseFloat(income.currentFormatted.replace(/[^0-9.-]+/g, '')) -
-    parseFloat(expenses.currentFormatted.replace(/[^0-9.-]+/g, ''));
-
-  const netPrevious = parseFloat(income.previousFormatted.replace(/[^0-9.-]+/g, '')) -
-    parseFloat(expenses.previousFormatted.replace(/[^0-9.-]+/g, ''));
-
-  const percentChange = netPrevious === 0 ? 0 : ((netCurrent - netPrevious) / netPrevious) * 100;
-
-  return {
-    percent: `${percentChange.toFixed(1)}%`,
-    currentFormatted: `₹${netCurrent.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`,
-    previousFormatted: `₹${netPrevious.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`,
-    isIncrease: percentChange >= 0,
-  };
-});
+const totalAssets = computed(() => getTotal(assetsData.value));
+const totalLiabilities = computed(() => getTotal(liabilitiesData.value));
 
 const downloadMenu = ref(false)
 
@@ -423,17 +467,13 @@ function downloadAs(type) {
   // trigger download logic
   console.log('Download as', type)
 }
-
-
-
 </script>
 
 <template>
   <div class="account_ui_vcard">
     <VRow>
       <VCol cols="12">
-        <VCard class="account_vcard_border shadow-none" title="Profit & Loss Statement"
-          subtitle="For the period of Jan 01, 2025 to Jul 07, 2025">
+        <VCard class="account_vcard_border shadow-none" title="Balance Sheet" subtitle="As at Jul 09, 2025">
           <template #append>
             <div class="d-flex align-center gap-2">
               <VSwitch v-model="showPercent" density="compact" inset label="Show %" class="account_swtich_btn"
@@ -459,7 +499,6 @@ function downloadAs(type) {
                         <VIcon v-if="showCompareMode" size="16" icon="mdi-check" />
                         <span :class="showCompareMode ? '' : 'ml-6'">Compare Periods</span>
                       </div>
-
                     </div>
                     <VDivider class="my-2" />
                     <!-- Inside your main menu -->
@@ -475,7 +514,6 @@ function downloadAs(type) {
                             <VIcon size="14" icon="mdi-chevron-right" class="ml-auto" />
                           </div>
                         </template>
-
                         <VCard class="account_vcard_menu account_vcard_border" width="120">
                           <div class="py-1">
                             <div class="account_vcard_menu_item field_list_title cursor-pointer px-3 py-1"
@@ -503,11 +541,11 @@ function downloadAs(type) {
           </template>
           <VCardText>
             <VRow>
-              <!-- Income Data Table -->
+              <!-- Assets Data Table -->
               <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
-                :sm="isFullWidthView ? 12 : 6">
-                <VCard class="h-100 account_vcard_border account_income_card shadow-none">
-                  <VDataTable :headers="incomeHeaders" :items="flatIncomeData" class="account_income_table"
+                :sm="isFullWidthView ? 12 : 6" class="col-transition" :class="isFullWidthView ? 'col-expand' : 'col-shrink'">
+                <VCard class="h-100 account_vcard_border card-content-transition account_income_card shadow-none">
+                  <VDataTable :headers="assetsHeaders" :items="flatAssetsData" class="account_income_table"
                     hide-default-footer item-value="name">
                     <template #item="{ item }">
                       <tr :class="item.type === 'group'
@@ -520,15 +558,13 @@ function downloadAs(type) {
                           <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
                             <VIcon :icon="item.type === 'group' ? 'mdi-folder-outline' : 'mdi-file-document-outline'"
                               size="16" />
-
                             <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
                               ? 'account_ledger_secondary'
-                              : item.name?.toLowerCase().includes('expense')
+                              : item.name?.toLowerCase().includes('liability')
                                 ? 'account_group_error'
                                 : 'account_group_primary'">
                               {{ item.name }}
                             </p>
-
                             <VChip v-if="item.percent && showPercent" density="compact"
                               class="account_income_chip py-1 px-1"
                               :class="item.type === 'ledger' ? 'account_chip_outline' : 'account_chip_secondary'">
@@ -536,7 +572,6 @@ function downloadAs(type) {
                             </VChip>
                           </div>
                         </td>
-
                         <!-- Current -->
                         <td class="text-end" v-if="true">
                           <p class="mb-0 amount_inc_current_item"
@@ -544,7 +579,6 @@ function downloadAs(type) {
                             {{ item.current }}
                           </p>
                         </td>
-
                         <!-- Previous -->
                         <Transition name="slide-fade">
                           <td v-if="showCompareMode" class="text-end">
@@ -554,7 +588,6 @@ function downloadAs(type) {
                             </p>
                           </td>
                         </Transition>
-
                         <!-- Change -->
                         <Transition name="slide-fade">
                           <td v-if="showCompareMode" class="text-end">
@@ -572,28 +605,26 @@ function downloadAs(type) {
                             </div>
                           </td>
                         </Transition>
-
-
                       </tr>
                     </template>
                   </VDataTable>
-                  <!-- Total Income Row -->
+                  <!-- Total Assets Row -->
                   <div class="d-flex justify-end mb-3 px-4">
                     <table style="min-width: 100%;">
                       <tr class="font-weight-medium">
-                        <td style="min-width: 240px;" class="text-start">Total Income</td>
-                        <td class="text-end amount_inc_current_item">{{ totalIncome.currentFormatted }}</td>
+                        <td style="min-width: 240px;" class="text-start">Total Assets</td>
+                        <td class="text-end amount_inc_current_item">{{ totalAssets.currentFormatted }}</td>
                         <Transition name="slide-fade">
                           <td class="text-end amount_inc_previous_item" v-if="showCompareMode">{{
-                            totalIncome.previousFormatted }}
+                            totalAssets.previousFormatted }}
                           </td>
                         </Transition>
                         <Transition name="slide-fade">
                           <td class="text-end d-flex align-center amount_inc_change_item justify-end gap-2"
                             v-if="showCompareMode">
-                            {{ totalIncome.changeFormatted }}
-                            <VIcon :icon="totalIncome.isIncrease ? 'mdi-chevron-up' : 'mdi-chevron-down'" size="12"
-                              :class="totalIncome.isIncrease ? 'text-success' : 'text-error'" />
+                            {{ totalAssets.changeFormatted }}
+                            <VIcon :icon="totalAssets.isIncrease ? 'mdi-chevron-up' : 'mdi-chevron-down'" size="12"
+                              :class="totalAssets.isIncrease ? 'text-success' : 'text-error'" />
                           </td>
                         </Transition>
                       </tr>
@@ -601,12 +632,11 @@ function downloadAs(type) {
                   </div>
                 </VCard>
               </VCol>
-
-              <!-- Expenses Data Table -->
+              <!-- Liabilities Data Table -->
               <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
-                :sm="isFullWidthView ? 12 : 6">
-                <VCard class="h-100 account_vcard_border account_expense_card shadow-none">
-                  <VDataTable :headers="expensesHeaders" :items="flatExpensesData"
+                :sm="isFullWidthView ? 12 : 6" class="col-transition" :class="isFullWidthView ? 'col-expand' : 'col-shrink'" >
+                <VCard class="h-100 account_vcard_border card-content-transition account_expense_card shadow-none">
+                  <VDataTable :headers="liabilitiesHeaders" :items="flatLiabilitiesData"
                     class="account_income_table account_expense_table" hide-default-footer item-value="name">
                     <template #item="{ item }">
                       <tr :class="item.type === 'group'
@@ -619,15 +649,13 @@ function downloadAs(type) {
                           <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
                             <VIcon :icon="item.type === 'group' ? 'mdi-folder-outline' : 'mdi-file-document-outline'"
                               size="16" />
-
                             <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
                               ? 'account_ledger_secondary'
-                              : item.name?.toLowerCase().includes('income')
+                              : item.name?.toLowerCase().includes('asset')
                                 ? 'account_group_success'
                                 : 'account_group_error'">
                               {{ item.name }}
                             </p>
-
                             <VChip v-if="item.percent && showPercent" density="compact"
                               class="account_income_chip py-1 px-1"
                               :class="item.type === 'ledger' ? 'account_chip_outline' : 'account_chip_secondary'">
@@ -635,7 +663,6 @@ function downloadAs(type) {
                             </VChip>
                           </div>
                         </td>
-
                         <!-- Current -->
                         <td class="text-end" v-if="true">
                           <p class="mb-0 amount_inc_current_item"
@@ -643,7 +670,6 @@ function downloadAs(type) {
                             {{ item.current }}
                           </p>
                         </td>
-
                         <!-- Previous -->
                         <td v-if="showCompareMode" class="text-end">
                           <Transition name="slide-fade">
@@ -653,7 +679,6 @@ function downloadAs(type) {
                             </p>
                           </Transition>
                         </td>
-
                         <!-- Change -->
                         <Transition name="slide-fade">
                           <td v-if="showCompareMode" class="text-end">
@@ -671,115 +696,55 @@ function downloadAs(type) {
                             </div>
                           </td>
                         </Transition>
-
-
                       </tr>
                     </template>
                   </VDataTable>
-
-                  <!-- Total Expenses Row -->
+                  <!-- Total Liabilities Row -->
                   <div class="d-flex justify-end mb-3 px-4">
                     <table style="min-width: 100%;">
                       <tr class="font-weight-medium">
-                        <td style="min-width: 240px;" class="text-start">Total Expenses</td>
-                        <td class="text-end amount_inc_current_item">{{ totalExpenses.currentFormatted }}</td>
+                        <td style="min-width: 240px;" class="text-start">Total Liabilities</td>
+                        <td class="text-end amount_inc_current_item">{{ totalLiabilities.currentFormatted }}</td>
                         <Transition name="slide-fade">
                           <td class="text-end amount_inc_previous_item" v-if="showCompareMode">{{
-                            totalExpenses.previousFormatted
-                          }}</td>
+                            totalLiabilities.previousFormatted
+                            }}</td>
                         </Transition>
                         <Transition name="slide-fade">
                           <td class="text-end d-flex align-center justify-end amount_inc_change_item gap-2"
                             v-if="showCompareMode">
-                            {{ totalExpenses.changeFormatted }}
-                            <VIcon :icon="totalExpenses.isIncrease ? 'mdi-chevron-up' : 'mdi-chevron-down'" size="12"
-                              :class="totalExpenses.isIncrease ? 'text-success' : 'text-error'" />
+                            {{ totalLiabilities.changeFormatted }}
+                            <VIcon :icon="totalLiabilities.isIncrease ? 'mdi-chevron-up' : 'mdi-chevron-down'" size="12"
+                              :class="totalLiabilities.isIncrease ? 'text-success' : 'text-error'" />
                           </td>
                         </Transition>
                       </tr>
                     </table>
                   </div>
-
                 </VCard>
               </VCol>
             </VRow>
             <VDivider />
-            <VRow class="justify-end">
-              <VCol cols="12" lg="6" md="6">
-                <VCard class="account_vcard_border account_expense_card shadow-none">
-                  <VCardText class="">
-                    <VRow class="justify-content-between">
-                      <VCol cols="7">
-                        <div class="d-flex align-center gap-2">
-                          <h5 class="mb-0">Profit Before Tax</h5>
-                          <VChip v-if="showPercent" density="compact"
-                            class="account_chip account_chip_outlined py-1 px-1">
-                            12.5%
-                          </VChip>
-                        </div>
-                        <p class="mb-0 mt-2">Less: Income Tax</p>
-                      </VCol>
-                      <VCol class="px-0" cols="2">
-                        <div class="d-flex justify-end flex-column">
-                          <p class="mb-0 amount_inc_current_item">₹4,16,000.00</p>
-                          <p class="mb-0 mt-2">(₹85,000.00)</p>
-                        </div>
-                      </VCol>
-                      <Transition name="slide-fade">
-                        <VCol v-if="showCompareMode" class="px-0" cols="2">
-                          <div class="d-flex justify-end flex-column">
-                            <p class="mb-0 amount_inc_previous_item">₹2,91,500.00</p>
-                            <p class="mb-0 mt-2">(₹75,000.00)</p>
-                          </div>
-                        </VCol>
-                      </Transition>
-
-                      <Transition name="slide-fade">
-                        <VCol v-if="showCompareMode" class="px-0" cols="1">
-                          <div class="d-flex justify-end align-center gap-2">
-                            <p class="mb-0 amount_inc_change_item">42.7%</p>
-                            <VIcon icon="mdi-chevron-up" size="12" class="text-success" />
-                          </div>
-                        </VCol>
-                      </Transition>
-                    </VRow>
-                  </VCardText>
-                </VCard>
-              </VCol>
-            </VRow>
             <VRow class="justify-end mt-2">
-              <VCol cols="12">
-                <div class="d-flex justify-space-between align-center px-4 py-2 rounded"
-                  style="background-color: #e6fff0;">
-                  <!-- Left Side -->
+              <VCol cols="12" lg="6" md="6">
+                <div class="d-flex justify-space-between align-center px-4 py-3 rounded"
+                  style="background-color: #e0f7fa; border: 1px solid #4dd0e1;">
                   <div class="d-flex align-center gap-2">
-                    <h5 class="mb-0 text-success font-weight-bold">Net Profit</h5>
-                    <VChip density="compact" class="py-1 px-2 text-success" variant="outlined">
-                      {{ netProfit.percent }}
-                    </VChip>
+                    <h5 class="mb-0 account_assets_title">Total Assets</h5>
                   </div>
-
-                  <!-- Right Side -->
-                  <div class="d-flex align-center gap-4">
-                    <!-- Previous -->
-                    <div v-if="showCompareMode" class="px-2 py-1"
-                      style="background-color: #f5d6c6; border-radius: 4px;">
-                      <span class="font-weight-medium">{{ netProfit.previousFormatted }}</span>
-                    </div>
-
-                    <!-- Current -->
-                    <div>
-                      <span class="text-success font-weight-bold">{{ netProfit.currentFormatted }}</span>
-                    </div>
-
-                    <!-- Change -->
-                    <div v-if="showCompareMode" class="d-flex align-center gap-1">
-                      <span :class="netProfit.isIncrease ? 'text-success' : 'text-error'">{{
-                        netProfit.percent
-                        }}</span>
-                      <VIcon :icon="netProfit.isIncrease ? 'mdi-arrow-up' : 'mdi-arrow-down'" size="14"
-                        :class="netProfit.isIncrease ? 'text-success' : 'text-error'" />
-                    </div>
+                  <div>
+                    <span class="account_assets_title">{{ totalAssets.currentFormatted }}</span>
+                  </div>
+                </div>
+              </VCol>
+              <VCol cols="12" lg="6" md="6">
+                <div class="d-flex justify-space-between align-center px-4 py-3 rounded"
+                  style="background-color: #ffebee; border: 1px solid #ef5350;">
+                  <div class="d-flex align-center gap-2">
+                    <h5 class="mb-0 account_liabilities_title">Total Liabilities</h5>
+                  </div>
+                  <div>
+                    <span class="account_liabilities_title">{{ totalLiabilities.currentFormatted }}</span>
                   </div>
                 </div>
               </VCol>
@@ -789,9 +754,8 @@ function downloadAs(type) {
           <VCardText class="account_note_section px-4">
             <p class="mb-0">Notes:</p>
             <ul>
-              <li class="mb-1">All figures are in Indian Rupee (INR) unless otherwise stated..</li>
+              <li class="mb-1">All figures are in Indian Rupees (INR) unless otherwise stated.</li>
               <li class="mb-1">This is an unaudited statement generated for internal review purposes.</li>
-              <li class="mb-1">GST collected and paid are accounted for under Duties & Taxes and do not affect the profit calculation directly.</li>
             </ul>
           </VCardText>
         </VCard>
@@ -799,7 +763,6 @@ function downloadAs(type) {
     </VRow>
   </div>
 </template>
-
 <style scoped>
 .slide-fade-enter-active,
 .slide-fade-leave-active {
@@ -810,5 +773,52 @@ function downloadAs(type) {
 .slide-fade-leave-to {
   opacity: 0;
   transform: translateY(-10px);
+}
+
+/* Add column width transition animations */
+.col-transition {
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-origin: center;
+}
+
+.col-expand {
+  animation: expandColumn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.col-shrink {
+  animation: shrinkColumn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes expandColumn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shrinkColumn {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Card content animation */
+.card-content-transition {
+  transition: all 0.3s ease;
 }
 </style>

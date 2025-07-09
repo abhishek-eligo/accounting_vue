@@ -39,7 +39,7 @@ export default [
     section: 'Accounts & Books',
     items: [
       { title: 'Groups & Ledgers', icon: 'mdi-book-account-outline', slug: 'groups&ledgers', path: '/groups&ledgers', component: () => import('@/pages/groups&ledgers') },
-      { title: 'Journal Entries', icon: 'mdi-book-open-outline', slug: 'journal-entries' },
+      { title: 'All Entries', icon: 'mdi-book-open-outline', slug: 'all-entries', path: '/all-entries', component: () => import('@/pages/allentries') },
       // { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers', path: '/ledgers', component: () => import('@/pages/ledgers') },
     ],
   },
@@ -47,7 +47,7 @@ export default [
     section: 'Repirts',
     items: [
       { title: 'Profit & Loss', icon: 'mdi-trending-up', slug: 'profit&loss', path: '/profit&loss', component: () => import('@/pages/profit&loss') },
-      { title: 'Balance Sheet', icon: 'mdi-text-box-outline', slug: 'balance-sheet'},
+      { title: 'Balance Sheet', icon: 'mdi-text-box-outline', slug: 'balance-sheet', path: '/balance-sheet', component: () => import('@/pages/balancesheet') },
       { title: 'GST Summary', icon: 'mdi-percent-outline', slug: 'gstSummary'},
       { title: 'GST Reports', icon: 'mdi-file-chart-outline', slug: 'gstReports'},
       { title: 'Invoice Overviews', icon: 'mdi-book-open-blank-variant-outline', slug: 'invoice-overviews'},
@@ -56,7 +56,7 @@ export default [
   {
     section: '',
     items: [
-      { title: 'Company Settings', icon: 'mdi-cog-outline', slug: 'company-settings', path: '/settings/company', component: () => import('@/pages/settings/company.vue') },
+      { title: 'Company Settings', icon: 'mdi-cog-outline', slug: 'company-settings', path: '/settings', component: () => import('@/pages/settings') },
       { title: 'User Roles', icon: 'mdi-shield-account-outline', slug: 'user-roles' },
     ],
   },
