@@ -205,10 +205,19 @@ const totalPages = computed(() => {
                 </template>
               </v-tooltip>
             </template>
-            <VCard>
-              <VCardTitle class="pb-0">Add Filters</VCardTitle>
-              <VDivider class="my-1" />
-              <VList lines="three" density="compact" select-strategy="classic" class="action-item-group-list">
+            <VCard class="account_vcard_menu account_vcard_border">
+              <div class="account_vcard_menu_hdng px-4">Add Filters</div>
+              <VDivider class="my-1 mt-0" />
+              <div class="account_table_filter_menu py-1">
+                <div class="account_vcard_menu_item" v-for="filter in filters" :key="filter.title">
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                    <VCheckbox :model-value="isFilterChecked(filter.title)"
+                      @update:model-value="toggleFilter(filter.title)" class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
+                      <span>{{ filter.title  }}</span>
+                  </div>
+                </div>
+              </div>
+              <!-- <VList lines="three" density="compact" select-strategy="classic" class="action-item-group-list">
                 <VListItem v-for="filter in filters" :key="filter.title" class="ma-0 dynamicTable_listitem">
                   <template #prepend>
                     <VListItemAction>
@@ -218,7 +227,7 @@ const totalPages = computed(() => {
                   </template>
                   <VListItemTitle>{{ filter.title }}</VListItemTitle>
                 </VListItem>
-              </VList>
+              </VList> -->
             </VCard>
           </VMenu>
           <VMenu width="300px" location="bottom" :close-on-content-click="false">

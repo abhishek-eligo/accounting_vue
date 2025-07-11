@@ -1091,3 +1091,29 @@ i.account_ledger_icon {
 .trash_error_color .v-btn__content i {
     color: var(--acc-error-color) !important;
 }
+
+.v-input.account_filter_menu_checkbox {
+    flex: unset !important;
+}
+
+.account_entries_table thead tr th{
+    background: var(--acc-primary-color) !important;
+    color: var(--acc-text-white) !important;
+}
+
+.account_btn_primary_text .v-btn__content,
+.account_btn_primary_text .v-btn__prepend i {
+    color: var(--acc-primary-color) !important;
+}
+
+.account_entry_form_label {
+    width: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.v-expand-transition-leave-active,
+.v-expand-transition-enter-active {
+  transition: max-height 0.5s ease; /* slower duration */
+}
