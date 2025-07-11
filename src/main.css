@@ -26,6 +26,7 @@
     --acc-secondary-section-color: '#3F3F46B2';
     --acc-secondary-listitem-color: rgb(24, 24, 27);
     --acc-icon-dark-color: #506983;
+    --acc-input-bg-color: hsl(204 13% 94%);
 }
 
 * {
@@ -143,6 +144,12 @@ p.secondary_email {
 
 
 /* vuetify css overwrite */
+
+/* .v-field .v-field__field input {
+    background: var(--acc-input-bg-color) !important;
+    border-radius: 6px;
+} */
+
 .account_ui_vcard .v-card-item__content .v-card-title {
     font-size: 24px;
     color: var(--acc-text-dark);
@@ -155,7 +162,7 @@ p.secondary_email {
     line-height: 20px;
     color: var(--acc-text-subtitle-dark);
     font-weight: 400;
-    margin: 6px 0px 0px;
+    margin: 0px;
 }
 
 .acc-bg-primary {
@@ -236,6 +243,11 @@ p.secondary_email {
     border-radius: .5rem !important;
 }
 
+.account_vmenu_border.v-menu .v-overlay__content {
+    border: 1px solid var(--acc-border-color);
+    border-radius: .5rem !important;
+}
+
 .v-input__details {
     display: none !important;
 }
@@ -298,6 +310,10 @@ p.secondary_email {
     text-transform: capitalize;
 }
 
+.account_v_btn_primary .v-btn__underlay {
+    background: unset !important;
+}
+
 .account_v_btn_primary.v-btn--disabled {
     background: var(--acc-primary-color);
     opacity: 0.5;
@@ -317,6 +333,10 @@ p.secondary_email {
     background: var(--acc-error-color);
     color: var(--acc-text-white) !important;
     text-transform: capitalize;
+}
+
+.account_v_btn_error .v-btn__underlay {
+    background: unset !important;
 }
 
 .account_v_btn_error.v-btn--disabled {
@@ -341,6 +361,10 @@ p.secondary_email {
     text-transform: capitalize;
 }
 
+.account_v_btn_outlined .v-btn__underlay {
+    background: unset !important;
+}
+
 .account_v_btn_outlined.v-btn--disabled {
     background: var(--acc-outlined-color);
     opacity: 0.5;
@@ -360,6 +384,10 @@ p.secondary_email {
     background: var(--acc-secondary-color);
     text-transform: capitalize;
 
+}
+
+.account_v_btn_secondary .v-btn__underlay {
+    background: unset !important;
 }
 
 .account_v_btn_secondary.v-btn--disabled {
@@ -383,10 +411,21 @@ p.secondary_email {
     text-transform: capitalize;
 }
 
+.account_v_btn_ghost {
+    background: transparent;
+    /* color: var(--acc-text-dark) !important;
+    border: 1px solid var(--acc-border-color); */
+}
+
 .account_v_btn_link .v-btn__content {
     color: var(--acc-primary-color) !important;
     font-size: 14px;
     text-transform: capitalize;
+}
+
+.account_v_btn_link {
+    background: transparent;
+    /* color: var(--acc-primary-color) !important; */
 }
 
 .account_v_btn_link:hover .v-btn__content {
@@ -519,6 +558,8 @@ p.secondary_email {
 }
 
 .accouting_field .v-field {
+    background: var(--acc-input-bg-color) !important;
+    border: 1px solid rgb(208, 214, 221) !important;
     border-radius: 7px !important;
     height: 100%;
     max-height: 36px;
@@ -528,10 +569,6 @@ p.secondary_email {
 .accouting_field .v-field__field {
     height: 100%;
     max-height: 36px;
-}
-
-.accouting_field .v-field {
-    border: 1px solid rgb(208, 214, 221) !important;
 }
 
 .accouting_field .v-field__input {
@@ -545,6 +582,10 @@ p.secondary_email {
     border: 1px solid var(--acc-primary-color) !important;
 }
 
+.accounting_active_error_field .v-field--active.v-field--focused {
+    border: 1px solid var(--acc-error-color) !important;
+}
+
 .accouting_field .v-input__control {
     height: fit-content;
 }
@@ -554,6 +595,7 @@ p.secondary_email {
 }
 
 .accounting_v_textarea .v-field {
+    background: var(--acc-input-bg-color) !important;
     border: 1px solid rgb(208, 214, 221) !important;
     border-radius: 6px;
 }
@@ -566,12 +608,10 @@ p.secondary_email {
     border: 1px solid var(--acc-primary-color) !important;
 }
 
-.accounting_v_textarea .v-field__input {
-    /* min-height: 90px !important; */
-    /* max-height: 90px !important; */
+/* .accounting_v_textarea .v-field__input {
     height: 90px !important;
     padding: 16px 16px;
-}
+} */
 
 .account_v_checkbox .v-selection-control__input i {
     color: var(--acc-primary-color);
@@ -593,9 +633,8 @@ p.secondary_email {
     color: var(--acc-text-subtitle-dark);
     font-weight: 400;
     line-height: 20px;
+    opacity: unset !important;
 }
-
-
 
 
 .settings_nav_position {
@@ -613,4 +652,442 @@ p.secondary_email {
     font-weight: 500;
     line-height: 14px;
     font-size: 14px;
+}
+
+.expansion_base_parent_title {
+    color: var(--acc-text-dark);
+    font-weight: 600;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.expansion_node_title {
+    color: var(--acc-text-dark);
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.account_expansion_list .v-list-item {
+    min-height: 27px;
+}
+
+.account_expansion_list .v-list-item  .v-list-item__content .v-list-item-title p {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--acc-text-dark);
+    line-height: 20px;
+}
+
+.account_expansion_list .v-list-item  .v-list-item__content .trash i,
+.account_expansion_list .v-list-item  .v-list-item__content .trash p {
+    color: var(--acc-error-color);
+}
+
+.account_balance_chip {
+    border: 1px solid var(--acc-secondary-color);
+    color: var(--acc-secondary-color);
+    background: transparent;
+}
+
+.account_profit_loss_chip {
+    border: 1px solid hsl(178 96% 33%);
+    color: hsl(178 96% 33%);
+    background: transparent;
+}
+
+.account_add_new_btn {
+  background: var(--acc-primary-color);
+  border-radius: 30px;
+  padding: 18px 30px;
+}
+
+.account_add_new_btn.v-btn.v-btn--density-default {
+  height: unset !important;
+}
+
+.account_add_new_btn .v-btn__content,
+.account_add_new_btn .v-btn__prepend i {
+  color: var(--acc-text-white);
+}
+
+.account_add_new_btn {
+    position: fixed;
+    bottom: 70px;
+    right: 42px;
+}
+
+.account_form_info_hdng {
+  color: var(--acc-text-dark);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+/* .custom_expansion_item {
+    border-radius: 6px;
+}
+
+.custom_expansion_item:hover {
+    background: hsl(210 16% 88%);
+} */
+
+.custom_option .custom_option_field.v-input .v-input__control .v-field {
+    border-radius: 6px 0 0 6px !important;
+    border-right: unset !important;
+    width: 355px;
+}
+
+.custom_option .custom_option_select.v-input .v-input__control .v-field {
+    border-radius: 0px 6px 6px 0px !important;
+    width: 100%;
+    /* max-width: 94px !important; */
+    /* border-left: unset !important; */
+    padding-right: 0;
+}
+
+/* .custom_option .custom_option_select.v-input .v-input__control .v-field .v-field__field .v-field__input {
+    padding-left: 9px !important;
+}
+
+.custom_option .custom_option_select.v-input .v-input__control .v-field .v-field__field .v-field__input .v-select__selection .v-select__selection-text {
+    width: 59px !important;
+}
+
+.custom_option .custom_option_select.v-input {
+    width: 100% !important;
+} */
+
+.account_vcard_menu_hdng {
+    color: var(--acc-text-dark);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 10px 8px;
+}
+
+.account_vcard_menu_item:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+}
+
+.field_list_dynamic_ml {
+    margin-left: 24px;
+}
+
+.account_vcard_menu_items {
+    height: 332px;
+    overflow-y: auto;
+}
+
+.field_list_title span {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--acc-text-dark);
+    line-height: 20px;
+}
+
+i.account_folder_icon {
+    color: rgb(245 158 11);
+}
+
+i.account_ledger_icon {
+    color: rgb(14 165 233);
+}
+
+.account_info_title {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--acc-text-subtitle-dark);
+    font-weight: 400;
+}
+
+.more_options_w {
+    width: 12px;
+}
+
+.account_dynamic_table tr.v-data-table__tr td.v-data-table__td .v-selection-control .v-selection-control__input i {
+    color: var(--acc-primary-color);
+}
+
+.account_dynamic_table tr th.v-data-table__td .v-selection-control .v-selection-control__input i {
+    color: var(--acc-text-white) !important;
+}
+
+.account_navigation_expansion_panel .v-expansion-panel .v-expansion-panel__shadow {
+    display: none !important;
+}
+
+.account_navigation_expansion_panel .v-expansion-panel {
+    background: #f5f5f5 !important;
+    border: unset !important;
+}
+
+.account_income_card .v-card-item {
+    background: var(--acc-primary-color);
+    padding-right: 23px;
+    padding-left: 20px;
+}
+
+.account_income_card .v-card-item .v-card-title {
+    color: var(--acc-text-white);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 600;
+}
+
+.account_expense_card .v-card-item {
+    background: var(--acc-error-color);
+}
+
+.account_expense_card .v-card-item .v-card-title {
+    color: var(--acc-text-white);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 600;
+}
+
+.amount_inc_append_item {
+    font-size: 13px;
+    color: var(--acc-text-white);
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.amount_income_item_title {
+    border-radius: 6px;
+    border-top: 1px solid hsl(210 16% 84%);
+    padding: 0 8px;
+    background: rgb(226 232 240);
+}
+
+.amount_income_overlay_item_title {
+    background: #e2e8f06e;
+    border-radius: 6px;
+    border-top: 1px solid hsl(210 16% 84%);
+    padding: 0 8px;
+}
+
+.amount_inc_current_item {
+    color: var(--acc-text-dark);
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.amount_inc_current_font_wght {
+    font-weight: 600;
+}
+
+.amount_inc_previous_item {
+    color: rgba(80, 112, 145, 0.8);
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.amount_inc_previous_font_wght {
+    font-weight: 500;
+}
+
+.amount_inc_change_font_wght {
+    font-weight: 400;
+}
+
+.amount_inc_change_item {
+    font-size: 12px;
+    line-height: 16px;
+
+}
+
+.account_income_chip .v-chip__content {
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 400;
+}
+
+.account_group_primary {
+    color: var(--acc-primary-color) !important;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.account_group_error {
+    color: var(--acc-error-color) !important;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.account_ledger_secondary {
+    color: var(--acc-secondary-text-color) !important;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.account_chip_outline {
+    color: var(--acc-text-dark) !important;
+    border: 1px solid var(--acc-border-color);
+    padding: 3px 6px;
+    background: transparent !important;
+}
+
+.account_chip_outline .v-chip__underlay {
+    display: none;
+}
+
+.account_chip_outline .v-chip__content {
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 400;
+}
+
+.account_income_row {
+    padding-left: 24px;
+    display: grid !important;
+    grid-template-columns: 360px 1fr;
+}
+
+.account_income_compare_row {
+    gap: 5px;
+    display: grid;
+    grid-template-columns: 1fr 105px 60px;
+    align-items: center;
+}
+
+.account_income_table .v-data-table-footer {
+    display: none;
+}
+
+.account_expense_table table thead tr {
+    background: var(--acc-error-color) !important;
+}
+
+.account_income_table table thead tr {
+    background: var(--acc-primary-color);
+    padding-right: 23px;
+    padding-left: 20px;
+}
+
+.account_income_table table thead tr th {
+    height: 45px !important;
+}
+
+.account_income_table table thead {
+    margin-bottom: 10px;
+}
+
+.account_income_table table thead tr th:first-child .v-data-table-header__content span{
+    color: var(--acc-text-white) !important;
+    font-size: 18px !important;
+    line-height: 28px !important;
+    font-weight: 600 !important;
+}
+
+.account_income_table table thead tr th .v-data-table-header__content span {
+    font-size: 13px;
+    color: var(--acc-text-white);
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.account_income_table tbody tr.amount_income_item_title td,
+.account_income_table tbody tr.amount_income_overlay_item_title td ,
+.account_income_table tbody tr td{
+    height: 40px !important;
+}
+
+.account_note_section p {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--acc-text-dark);
+    font-weight: 600;
+}
+
+.account_note_section ul li {
+    color: var(--acc-text-subtitle-dark);
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.account_assets_title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--acc-primary-color);
+    line-height: 24px;
+}
+
+.account_liabilities_title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--acc-error-color);
+    line-height: 24px;
+}
+
+.company_setting_tabs .v-slide-group__container .v-slide-group__content {
+    gap: 5px;
+}
+
+.company_setting_tabs .v-slide-group__container .v-slide-group__content .v-btn {
+    height: 37px !important;
+    border-radius: 10px;
+    border: unset !important;
+}
+
+.company_setting_tabs .v-slide-group__container .v-slide-group__content .v-btn .v-btn__content {
+    color: var(--acc-text-dark) !important;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-transform: capitalize;
+}
+
+.company_setting_tabs .v-slide-group__container .v-slide-group__content .v-btn.v-tab--selected {
+    background: var(--acc-primary-color);
+}
+
+.company_setting_tabs .v-slide-group__container .v-slide-group__content .v-btn.v-tab--selected .v-btn__content {
+    color: var(--acc-text-white) !important;
+}
+
+.company-setting-heading {
+  color: var(acc-text-dark);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+} 
+
+.save_btn_height {
+    height: 36px !important;
+}
+
+.account_module_card .v-card-subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.account_module_card .v-card-title {
+    font-size: 16px !important;
+    line-height: 24px;
+    color: var(--acc-text-dark) !important;
+    font-weight: 500 !important;
+}
+
+.account_add_dialog .v-card-title {
+    font-size: 18px;
+    line-height: 18px;
+    color: var(--acc-text-dark);
+    font-weight: 600;
+}
+
+.account_add_dialog .v-card-subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--acc-text-subtitle-dark);
+    font-weight: 400;
+}
+
+.trash_error_color .v-btn__content i {
+    color: var(--acc-error-color) !important;
 }

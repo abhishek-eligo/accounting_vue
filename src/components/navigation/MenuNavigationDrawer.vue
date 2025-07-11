@@ -49,7 +49,7 @@ const navigationItems = computed(() => {
             }}</v-list-subheader>
 
             <VListItem v-for="item in section.items" :key="item.title" :to="item.path" link
-              class="px-3 account_nav_listitem d-flex align-center gap-2 py-1">
+              class="px-3 account_nav_listitem d-flex align-center mx-2 gap-2 py-1">
               <template #prepend>
                 <VIcon :icon="item.icon" size="16" />
               </template>
@@ -63,7 +63,7 @@ const navigationItems = computed(() => {
       <div class="settings_nav_position">
         <VList class="account_navigation_list">
           <VListItem v-for="item in settingsItems" :key="item.title" :to="item.path" link
-            class="px-3 account_nav_listitem d-flex align-center gap-2 py-1">
+            class="px-3 account_nav_listitem d-flex align-center gap-2 mx-2 py-1">
             <template #prepend>
               <VIcon :icon="item.icon" size="16" />
             </template>

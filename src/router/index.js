@@ -12,7 +12,7 @@ const dynamicRoutes = navigationListItems
   }))
 
 const routes = [
-  { path: '/', redirect: '/dashboard' },
+  { path: '/', redirect: '/table' },
   ...dynamicRoutes
 ]
 

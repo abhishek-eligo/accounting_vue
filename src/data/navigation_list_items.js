@@ -4,17 +4,15 @@ export default [
     items: [
       {
         title: 'Dashboard',
-        path: '/dashboard',
         icon: 'mdi-view-dashboard-outline',
         slug: 'dashboard',
-        component: () => import('@/pages/dashboard'),
       },
     ],
   },
     {
     section: 'Component',
     items: [
-      { title: 'Table', slug: 'table', icon: 'mdi-file-document-outline' },
+      { title: 'Table', slug: 'table', icon: 'mdi-file-document-outline', path: '/table', component: () => import('@/pages/table') },
       { title: 'Invoice Preview', slug: 'invoice-preview', icon: 'mdi-eye-outline' },
       { title: 'Invoice Preview FC', slug: 'invoice-preview-fc', icon: 'mdi-earth' },
       { title: 'Customer Portfolio', slug: 'customer-portfolio', icon: 'mdi-account-circle-outline' },
@@ -24,7 +22,7 @@ export default [
   {
     section: 'Money In',
     items: [
-      { title: 'Customers', icon: 'mdi-account-group-outline', slug: 'customers' },
+      { title: 'Customers', icon: 'mdi-account-group-outline', slug: 'customers', path: '/customers', component: () => import('@/pages/customers') },
       { title: 'Sales Invoices', icon: 'mdi-receipt-outline', slug: 'sales-invoices' },
       { title: 'Invoice Returns (Sales)', icon: 'mdi-arrow-left-bottom', slug: 'invoice-returns-sales' },
     ],
@@ -32,7 +30,7 @@ export default [
   {
     section: 'Money Out',
     items: [
-      { title: 'Vendors', icon: 'mdi-store-outline', slug: 'vendors' },
+      { title: 'Vendors', icon: 'mdi-store-outline', slug: 'vendors', path: '/vendors', component: () => import('@/pages/vendors') },
       { title: 'Purchase Bills', icon: 'mdi-currency-usd', slug: 'purchase-bills' },
       { title: 'Invoice Returns (Purchase)', icon: 'mdi-rotate-left', slug: 'invoice-returns-purchase' },
     ],
@@ -40,15 +38,25 @@ export default [
   {
     section: 'Accounts & Books',
     items: [
-      { title: 'My Accounts', icon: 'mdi-book-account-outline', slug: 'my-accounts', path: '/myaccounts', component: () => import('@/pages/myaccounts') },
-      { title: 'Journal Entries', icon: 'mdi-book-open-outline', slug: 'journal-entries' },
-      { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers' },
+      { title: 'Groups & Ledgers', icon: 'mdi-book-account-outline', slug: 'groups&ledgers', path: '/groups&ledgers', component: () => import('@/pages/groups&ledgers') },
+      { title: 'All Entries', icon: 'mdi-book-open-outline', slug: 'all-entries', path: '/all-entries', component: () => import('@/pages/allentries') },
+      // { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers', path: '/ledgers', component: () => import('@/pages/ledgers') },
     ],
+  },
+  {
+    section: 'Repirts',
+    items: [
+      { title: 'Profit & Loss', icon: 'mdi-trending-up', slug: 'profit&loss', path: '/profit&loss', component: () => import('@/pages/profit&loss') },
+      { title: 'Balance Sheet', icon: 'mdi-text-box-outline', slug: 'balance-sheet', path: '/balance-sheet', component: () => import('@/pages/balancesheet') },
+      { title: 'GST Summary', icon: 'mdi-percent-outline', slug: 'gstSummary'},
+      { title: 'GST Reports', icon: 'mdi-file-chart-outline', slug: 'gstReports'},
+      { title: 'Invoice Overviews', icon: 'mdi-book-open-blank-variant-outline', slug: 'invoice-overviews'},
+    ]
   },
   {
     section: '',
     items: [
-      { title: 'Company Settings', icon: 'mdi-cog-outline', slug: 'company-settings', path: '/settings/company', component: () => import('@/pages/settings/company.vue') },
+      { title: 'Company Settings', icon: 'mdi-cog-outline', slug: 'company-settings', path: '/settings', component: () => import('@/pages/settings') },
       { title: 'User Roles', icon: 'mdi-shield-account-outline', slug: 'user-roles' },
     ],
   },

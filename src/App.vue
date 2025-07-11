@@ -43,8 +43,11 @@ const drawer = ref(true);
 // Get current route
 const route = useRoute()
 
-// Find the active navigation item based on route.path
+// Flatten all items from navigationListItems
+const allNavItems = navigationListItems.flatMap(section => section.items)
+
+// Reactive computed to track current active item
 const activeItem = computed(() => {
-  return navigationListItems.find(item => item.path === route.path)
+  return allNavItems.find(item => item.path === route.path)
 })
 </script>
