@@ -1117,3 +1117,85 @@ i.account_ledger_icon {
 .v-expand-transition-enter-active {
   transition: max-height 0.5s ease; /* slower duration */
 }
+
+.account_entry_table_text {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--acc-text-dark);
+    font-weight: 400;
+    
+}
+
+.account_brdr_rght {
+    border-right: 1px solid var(--acc-border-color) !important;
+}
+
+.account_brdr_left {
+    border-left: 1px solid var(--acc-border-color) !important;
+}
+
+.account_brdr_bottom {
+    border-bottom: 1px solid var(--acc-border-color) !important;
+}
+
+.account_brdr_top {
+    border-top: 1px solid var(--acc-border-color) !important;
+}
+
+.account_entries_table_header_date {
+    min-width: 110px;
+}
+
+.account_entries_table_header_entry {
+    min-width: 130px;
+}
+
+.account_entries_table_header_voucher {
+    min-width: 119px;
+}
+
+.account_entries_table_header_particulars {
+    min-width: 200px;
+    text-align: left;
+}
+
+.account_entries_table_header_debit, 
+.account_entries_table_header_credit {
+    text-align: right;
+}
+
+/* .account_entries_table_particulars,
+.account_entries_table_debit,
+.account_entries_table_credit {
+    padding: 0 !important;
+} */
+
+.account_entries_table_particulars {
+    text-align: left;
+}
+
+.account_entries_table_credit, 
+.account_entries_table_debit {
+    text-align: right;
+}
+
+.account_entries_table_entry,
+.account_entries_table_voucher {
+    text-align: center;
+}
+
+.account_entry_desc_text {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    color: var(--acc-text-subtitle-dark);
+    font-style: italic;
+}
+
+.account_entries_table_row td {
+    vertical-align: top;
+}
+/* .account_entries_table_date,
+.account_entries_table_entry{
+    border-right: 1px solid var(--acc-border-color) !important;
+} */

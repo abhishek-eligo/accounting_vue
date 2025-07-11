@@ -2,43 +2,6 @@
 import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
 
-const desserts = [
-  {
-    dessert: 'Frozen Yogurt',
-    calories: 159,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Ice cream sandwich',
-    calories: 237,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Eclair',
-    calories: 262,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Cupcake',
-    calories: 305,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-  {
-    dessert: 'Gingerbread',
-    calories: 356,
-    fat: 6,
-    carbs: 24,
-    protein: 4,
-  },
-]
 
 const chartData = reactive([
   {
@@ -136,8 +99,184 @@ const showJournalEntryCard = ref(false);
 const showLedgerDialog = ref(false);
 
 const allEntries = ref([
-  { date: '29-Apr-25', entry: 'JRNL-2025-1001' }
-])
+  {
+    date: "29-Apr-25",
+    entry: "JRNL-2025-1001",
+    voucher_type: "Journal",
+    particulars: {
+      accounts: [
+        {
+          title: "Prepaid Insurance",
+          debit: "₹14,589.00",
+          credit: "₹10,293.00"
+        },
+        {
+          title: "Cash",
+          debit: "",
+          credit: "₹4,296.00"
+        }
+      ],
+      description: {
+        "to": "Accumulated Depreciation, Accounts Payable",
+        "narration": "Narration: Received cash from various customers on account"
+      }
+    },
+    status: "Pending"
+  },
+  {
+    date: '14-Apr-25',
+    entry: 'JRNL-2025-1002',
+    voucher_type: 'Sales',
+    particulars: {
+      accounts: [
+        {
+          title: 'Service Revenue',
+          debit: '₹2,729.00',
+          credit: '₹5,747.00'
+        },
+        {
+          title: 'Cash',
+          debit: '₹2,727.00',
+          credit: ''
+        }
+      ],
+      description: {
+        to: 'Equipment, Utilities Expense',
+        narration: 'Narration: Utility bill payments and other miscellaneous expenses'
+      }
+    },
+    status: 'Pending'
+  },
+  {
+    date: '04-May-25',
+    entry: 'JRNL-2025-1003',
+    voucher_type: 'Sales',
+    particulars: {
+      accounts: [
+        {
+          title: 'Salaries',
+          debit: '₹9,166.00',
+          credit: '₹15,341.00'
+        },
+        {
+          title: 'Advertising Expense',
+          debit: '₹6,175.00',
+          credit: ''
+        }
+      ],
+      description: {
+        to: 'Wages Payable',
+        narration: 'Narration: Utility bill payments and other miscellaneous expenses'
+      }
+    },
+    status: 'Pending'
+  },
+  {
+    date: '09-Jun-25',
+    entry: 'JRNL-2025-1004',
+    voucher_type: 'Purchase',
+    particulars: {
+      accounts: [
+        {
+          title: 'Wages Payable',
+          debit: '₹1,588.00',
+          credit: '₹8,215.00'
+        },
+        {
+          title: 'Accounts Payable',
+          debit: '₹46,627.00',
+          credit: ''
+        }
+      ],
+      description: {
+        to: 'Utilities Expense',
+        narration: 'Narration: Initial capital contribution and office setup'
+      }
+    },
+    status: 'Pending'
+  },
+  {
+    date: '08-May-25',
+    entry: 'JRNL-2025-1005',
+    voucher_type: 'Journal',
+    particulars: {
+      accounts: [
+        {
+          title: 'Unearned Revenue',
+          debit: '₹22,759.00',
+          credit: '₹22,759.00'
+        }
+      ],
+      description: {
+        to: 'Equipment',
+        narration: 'Narration: Payment of rent and utilities for the month'
+      }
+    },
+    status: 'Pending'
+  },
+  {
+    date: '29-Jun-25',
+    entry: 'JRNL-2025-1006',
+    voucher_type: 'Payment',
+    particulars: {
+      accounts: [
+        {
+          title: 'Office Supplies',
+          debit: '₹20,521.00',
+          credit: '₹20,521.00'
+        }
+      ],
+      description: {
+        to: 'Accounts Payable',
+        narration: 'Narration: Sold goods for cash and reduced COGS'
+      }
+    },
+    status: 'Approved'
+  },
+  {
+    date: '01-May-25',
+    entry: 'JRNL-2025-1007',
+    voucher_type: 'Journal',
+    particulars: {
+      accounts: [
+        {
+          title: 'Accounts Receivable',
+          debit: '₹46,386.00',
+          credit: '₹13,846.00'
+        },
+        {
+          title: 'Cash',
+          debit: '',
+          credit: '₹32,540.00'
+        }
+      ],
+      description: {
+        to: 'Wages Payable, Accounts Payable',
+        narration: 'Narration: Paid for multiple insurance policies'
+      }
+    },
+    status: 'Pending'
+  },
+  {
+    date: '27-Jun-25',
+    entry: 'JRNL-2025-1008',
+    voucher_type: 'Receipt',
+    particulars: {
+      accounts: [
+        {
+          title: 'Utilities Expense',
+          debit: '₹19,566.00',
+          credit: '₹19,566.00'
+        }
+      ],
+      description: {
+        to: 'Equipment',
+        narration: 'Narration: Received cash from various customers on account'
+      }
+    },
+    status: 'Pending'
+  }
+]);
 
 const entriesTableHeaders = ref([
   { title: 'Date', value: 'date', visible: true },
@@ -410,12 +549,21 @@ const removeCreditRow = (index) => {
       </VRow>
     </VExpandTransition>
 
-    <VCard title="All Entries" subtitle="A record of all financial transactions. Showing 50 entries."
+    <VCard title="All Entries" subtitle="A record of all financial transactions."
       class="account_vcard_border pa-2 account_ui_vcard shadow-none">
       <template #append>
-        <div style="min-width: 650px;" class="d-flex align-center gap-2">
-          <VTextField style="min-width: 175px;" prepend-inner-icon="mdi-magnify"
-            class="accouting_field accouting_active_field" placeholder="Filter entries" variant="outlined" />
+        <div class="d-flex align-center gap-2">
+          <VBtn @click="showJournalEntryCard = !showJournalEntryCard" class="account_v_btn_primary save_btn_height"
+            prepend-icon="mdi-plus-circle-outline" variant="outlined" size="default" rounded="2" color="primary">
+            New Journal Entry
+          </VBtn>
+        </div>
+      </template>
+      <div class="d-flex align-center px-3 justify-space-between">
+        <VTextField style="max-width: 265px;" prepend-inner-icon="mdi-magnify"
+          class="accouting_field accouting_active_field" placeholder="Filter entries" variant="outlined" />
+
+        <div class="d-flex align-center gap-2">
           <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details
             label="Compact" />
           <VMenu width="200px" location="start" :close-on-content-click="false">
@@ -473,30 +621,140 @@ const removeCreditRow = (index) => {
               </div>
             </VCard>
           </VMenu>
-          <VBtn @click="showJournalEntryCard = !showJournalEntryCard" class="account_v_btn_primary save_btn_height"
-            prepend-icon="mdi-plus-circle-outline" variant="outlined" size="default" rounded="2" color="primary">
-            New Journal Entry
-          </VBtn>
         </div>
-      </template>
-      <VCardText class="mt-3">
-        <VCard class="account_vcard_border shadow-none">
-          <VTable height="750" fixed-header class="account_entries_table">
+      </div>
+      <VCardText class="mt-2">
+        <VCard class=" shadow-none">
+
+          <!-- <VTable height="600" fixed-header class="account_entries_table">
             <thead>
-              <tr>
-                <th v-for="header in entriesTableHeaders" :key="header.value">
-                  {{ header.title }}
-                </th>
+              <tr class="account_entries_table_header">
+                <th class="account_entries_table_header_date">Date</th>
+                <th class="account_entries_table_header_entry">Entry #</th>
+                <th class="account_entries_table_header_voucher">Voucher Type</th>
+                <th class="account_entries_table_header_particulars">Particulars</th>
+                <th class="account_entries_table_header_debit">Debit</th>
+                <th class="account_entries_table_header_credit">Credit</th>
+                <th class="account_entries_table_header_status">Status</th>
+                <th class="account_entries_table_header_actions">Actions</th>
               </tr>
             </thead>
+
             <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+              <tr v-for="(entry, index) in allEntries" :key="index" class="account_entries_table_row">
+                <td class="account_entries_table_date account_brdr_rght">{{ entry.date }}</td>
+                <td class="account_entries_table_entry account_brdr_rght">{{ entry.entry }}</td>
+                <td class="account_entries_table_voucher">{{ entry.voucher_type }}</td>
+                <td class="account_entries_table_particulars account_brdr_left">
+                  <div class="particulars_column">
+                    <div class="d-flex flex-column justify-center">
+                      <div class="entry_account px-2 py-1 account_brdr_bottom account_brdr_rght">
+                        <p class="mb-0 account_entry_table_text">Prepaid Insurance</p>
+                      </div>
+                      <div class="py-1 px-2 account_brdr_rght account_brdr_bottom">
+                        <p class="mb-0 account_entry_table_text">Cash</p>
+                      </div>
+                      <div class="d-flex flex-column justify-center px-2 py-1">
+                        <span class="mb-0 ml-4 account_entry_desc_text">To Accumulated Depreciation, Accounts Payable</span>
+                        <span class="account_entry_desc_text">(Narration: Received cash from various customers on account)</span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="account_entries_table_debit account_brdr_rght">
+                  <div class="d-flex flex-column justify-center">
+                    <div class="py-1 px-2 account_brdr_bottom">
+                      <p class="mb-0">₹14,589.00</p>
+                    </div>
+                    <div class="py-1 px-2 account_brdr_bottom">
+                      <p class="mb-0">No data</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="account_entries_table_credit account_brdr_rght">
+                  <div class="d-flex flex-column justify-center">
+                    <div class="py-1 px-2 account_brdr_bottom">
+                      <p class="mb-0">₹10,293.00</p>
+                    </div>
+                    <div class="py-1 px-2 account_brdr_bottom">
+                      <p class="mb-0">₹4,296.00</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="account_entries_table_status">
+                  <VChip class="account_v_chip" size="small">
+                    Pending
+                  </VChip>
+                </td>
+                <td class="account_entries_table_actions">
+                  <div class="d-flex align-center gap-2">
+                    <VBtn size="small" class="account_v_btn_ghost" icon="mdi-pencil-box-multiple-outline" variant="text" />
+                    <VBtn size="small" class="account_v_btn_ghost" icon="mdi-arrow-u-left-top" variant="text" />
+                    <VBtn size="small" class="account_v_btn_ghost" icon="mdi-trash-can-outline" variant="text" />
+                  </div>
+                </td>
               </tr>
             </tbody>
-          </VTable>
+          </VTable> -->
+
+          <div class="gst_summary_table_container">
+            <table class="table account_dynamic_table table-bordered account_entries_table text-center">
+              <thead>
+                <tr>
+                  <th class="account_entries_table_header_date">Date</th>
+                  <th class="account_entries_table_header_entry">Entry #</th>
+                  <th class="account_entries_table_header_voucher">Voucher Type</th>
+                  <th class="account_entries_table_header_particulars">Particulars</th>
+                  <th class="account_entries_table_header_debit">Debit</th>
+                  <th class="account_entries_table_header_credit">Credit</th>
+                  <th class="account_entries_table_header_status">Status</th>
+                  <th class="account_entries_table_header_actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="account_entries_table_date" rowspan="3">15-Jul-24</td>
+                  <td class="account_entries_table_entry" rowspan="3">
+                    JRNL-2024-1001<br>
+                    <span style="font-size: 12px; color: #009688;">View Details</span>
+                  </td>
+                  <td class="account_entries_table_voucher" rowspan="3">Journal</td>
+                  <td class="account_entries_table_particulars">Computers</td>
+                  <td class="account_entries_table_debit" style="color: #009688;">₹1,50,000.00</td>
+                  <td class="account_entries_table_credit" style="color: #E53935;"></td>
+                  <td rowspan="3" style="vertical-align: middle;">
+                    <VChip class="account_v_chip" size="small">
+                      Pending
+                    </VChip>
+                  </td>
+                  <td rowspan="3" style="vertical-align: middle;">
+                    <div class="d-flex align-center justify-center gap-2">
+                      <VBtn size="small" class="account_v_btn_ghost" icon="mdi-pencil-box-multiple-outline"
+                        variant="text" />
+                      <VBtn size="small" class="account_v_btn_ghost" icon="mdi-arrow-u-left-top" variant="text" />
+                      <VBtn size="small" class="account_v_btn_ghost" icon="mdi-trash-can-outline" variant="text" />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="account_entries_table_particulars">dsfds</td>
+                  <td>sdf</td>
+                  <td class="account_entries_table_credit" style="color: #E53935;">₹1,00,000.00</td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="">
+                    <div class="d-flex flex-column align-start justify-center">
+                      <span class="mb-0 ml-4 account_entry_desc_text">To Accumulated Depreciation, Accounts
+                        Payable</span>
+                      <span class="account_entry_desc_text">(Narration: Received cash from various customers on
+                        account)</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
         </VCard>
       </VCardText>
     </VCard>
