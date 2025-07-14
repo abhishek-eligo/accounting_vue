@@ -1,0 +1,161 @@
+@import './main.css';
+
+.gst_summary_card_title{
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.gst_summary-amount{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    padding: 4px 12px 12px;
+}
+
+.main_card_content{
+    padding: 12px 12px 4px;
+}
+
+.gst_summary_widget_vcard {
+    border: 1px solid var(--acc-border-color);
+    border-radius: .5rem !important;
+}
+
+.gst_summary_widget_vcard:hover {
+    box-shadow: 0px 3px 5px var(--acc-primary-color-hover);
+}
+
+.account_text_white {
+    color: var(--acc-text-white);
+}
+
+.account_text_subtitle {
+    color: var(--acc-text-subtitle-dark);
+}
+
+.account_text_dark {
+    color: var(--acc-text-dark);
+}
+
+.gst_summary_table_container{
+    padding: 0px 24px 24px;
+}
+
+.gst_summary_table_header_month{
+    vertical-align: middle;
+}
+
+.gst_summary_table_header tr th{
+    background-color: var(--acc-primary-color);
+    padding: 16px;
+    color: var(--acc-text-white);
+}
+
+.gst_summary_table_body tr td{
+    padding: 16px;
+}
+
+.gst_summary_table_header_month{
+    border-right: none;
+}
+
+.gst_summary_table_header_gstr1{
+    border-left: none;
+}
+
+.gst_summary_table_header_gstr1_taxable_value{
+    border-right: none;
+    border-left: none;
+}
+
+.gst_summary_table_header_gstr1_total_tax{
+    border-right: none;
+    border-left: none;
+}
+
+.gst_summary_table_header_gstr1_status{
+    border-right: none;
+    border-left: none;
+}
+
+.gst_summary_table_header_gstr1_filing_date{
+    border-left: none;
+}
+
+.gst_summary_table_header_gstr3b_taxable_value{
+    border-right: none;
+}
+
+.gst_summary_table_header_gstr3b_total_tax{
+    border-right: none;
+    border-left: none;
+}
+
+.gst_summary_table_header_gstr3b_itc{
+    border-right: none;
+    border-left: none;
+}
+
+.gst_summary_table_header_gstr3b_status{
+    border-right: none;
+    border-left: none;
+}
+
+.gst_summary_table_header_gstr3b_filing_date{
+    border-left: none;
+}
+
+.gst_summary_table_body tr td{
+    border-bottom: 1px solid var(--acc-border-color);
+}
+
+
+/* css of gst reports */
+
+.gst_reports_vcard{
+    padding: 24px;
+}
+
+.account_icon_color{
+    color: var(--acc-primary-color);
+}
+
+.gst_reports_title{
+    color: var(--acc-text-dark);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.gst_reports_subtitle{
+    color: var(--acc-text-subtitle-dark);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.gst_reports_table_vcard .v-card-item__content .v-card-title{
+    color: var(--acc-text-dark);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+}
+
+.gst_reports_table_vcard thead tr th{
+    background-color: var(--acc-primary-color);
+    color: var(--acc-text-white);
+    padding: 16px !important;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.gst_reports_table_vcard tbody tr td{
+    padding: 16px !important;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
