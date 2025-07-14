@@ -32,6 +32,7 @@ import * as TablerIcons from '@tabler/icons-vue'
 
 // Custom Css
 import '@/main.css'
+import '@/style.css'
 
 const app = createApp(App)
 

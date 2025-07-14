@@ -44,12 +44,12 @@ export default [
     ],
   },
   {
-    section: 'Repirts',
+    section: 'Reports',
     items: [
       { title: 'Profit & Loss', icon: 'mdi-trending-up', slug: 'profit&loss', path: '/profit&loss', component: () => import('@/pages/profit&loss') },
       { title: 'Balance Sheet', icon: 'mdi-text-box-outline', slug: 'balance-sheet', path: '/balance-sheet', component: () => import('@/pages/balancesheet') },
-      { title: 'GST Summary', icon: 'mdi-percent-outline', slug: 'gstSummary'},
-      { title: 'GST Reports', icon: 'mdi-file-chart-outline', slug: 'gstReports'},
+      // { title: 'GST Summary', icon: 'mdi-percent-outline', slug: 'gstSummary', path: '/gstsummary', component: () => import('@/pages/gstsummary') },
+      { title: 'GST Reports', icon: 'mdi-file-chart-outline', slug: 'gstReports', path: '/gstreports', component: () => import('@/pages/gstreports') },
       { title: 'Invoice Overviews', icon: 'mdi-book-open-blank-variant-outline', slug: 'invoice-overviews'},
     ]
   },
