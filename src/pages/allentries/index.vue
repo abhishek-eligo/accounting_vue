@@ -109,17 +109,22 @@ const allEntries = ref([
       accounts: [
         {
           title: "Prepaid Insurance",
+          debit: "₹14,589.00",
+          credit: ""
+        },
+        {
+          title: "Accumulated Depreciation",
           debit: "",
           credit: "₹10,293.00"
         },
         {
-          title: "Cash",
+          title: "Accounts Payable",
           debit: "",
           credit: "₹4,296.00"
         }
       ],
       description: {
-        "to": "Accumulated Depreciation, Accounts Payable",
+        // "to": "Accumulated Depreciation, Accounts Payable",
         "narration": "Received cash from various customers on account"
       }
     },
@@ -133,17 +138,22 @@ const allEntries = ref([
       accounts: [
         {
           title: 'Service Revenue',
-          debit: '₹2,729.00',
-          credit: ''
+          debit: '₹12,727.00',
+          credit: '',
         },
         {
-          title: 'Cash',
-          debit: '₹2,727.00',
-          credit: ''
-        }
+          title: 'Equipment',
+          debit: '',
+          credit: '₹2,727.00',
+        },
+        {
+          title: 'Utilities Expense',
+          debit: '',
+          credit: '₹10,000.00'
+        },
       ],
       description: {
-        to: 'Equipment, Utilities Expense',
+        // to: 'Equipment, Utilities Expense',
         narration: 'Utility bill payments and other miscellaneous expenses'
       }
     },
@@ -161,9 +171,9 @@ const allEntries = ref([
           credit: '',
         },
         {
-          title: 'Advertising Expense',
-          debit: '₹6,175.00',
-          credit: ''
+          title: 'Wages Payable',
+          debit: '',
+          credit: '₹9,166.00'
         }
       ],
       description: {
@@ -185,9 +195,9 @@ const allEntries = ref([
           credit: '₹8,215.00'
         },
         {
-          title: 'Accounts Payable',
-          debit: '₹46,627.00',
-          credit: ''
+          title: 'Utilities Expense',
+          debit: '',
+          credit: '₹8,215.00'
         }
       ],
       description: {
@@ -207,6 +217,11 @@ const allEntries = ref([
           title: 'Unearned Revenue',
           debit: '₹22,759.00',
           credit: ''
+        },
+        {
+          title: 'Equipment',
+          debit: '',
+          credit: '₹22,759.00'
         }
       ],
       description: {
@@ -226,6 +241,11 @@ const allEntries = ref([
           title: 'Office Supplies',
           debit: '₹20,521.00',
           credit: ''
+        },
+        {
+          title: 'Accounts Payable',
+          debit: '',
+          credit: '₹20,521.00',
         }
       ],
       description: {
@@ -243,13 +263,18 @@ const allEntries = ref([
       accounts: [
         {
           title: 'Accounts Receivable',
+          debit: '₹32,540.00',
+          credit: ''
+        },
+        {
+          title: 'Wages Payable',
           debit: '',
           credit: '₹13,846.00'
         },
         {
-          title: 'Cash',
+          title: 'Accounts Payable',
           debit: '',
-          credit: '₹32,540.00'
+          credit: '₹18,694.00'
         }
       ],
       description: {
@@ -269,6 +294,11 @@ const allEntries = ref([
           title: 'Utilities Expense',
           debit: '₹19,566.00',
           credit: ''
+        },
+        {
+          title: 'Equipment',
+          debit: '',
+          credit: '₹19,566.00',
         }
       ],
       description: {
@@ -439,7 +469,7 @@ function getToAccounts(entry) {
   return entry.particulars.description.to.split(',').map(a => a.trim());
 }
 
-
+const hoveredRowIndex = ref(null);
 
 </script>
 
@@ -670,21 +700,26 @@ function getToAccounts(entry) {
                 <template v-for="(entry, index) in allEntries" :key="index">
                   <tr
                     v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0"
-                    :class="['account_entries_table_row', { 'even-entry': index % 2 === 0 }]">
+                    :class="['account_entries_table_row', { 'even-entry': index % 2 === 0 }]"
+                    @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
                     <!-- Date, Entry #, Voucher Type, Status, and Actions span all account rows and description -->
-                    <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1">
+                    <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
                       {{ entry.date || 'N/A' }}
                     </td>
-                    <td class="account_entries_table_entry" :rowspan="entry.particulars.accounts.length + 1">
+                    <td class="account_entries_table_entry" :rowspan="entry.particulars.accounts.length + 1"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
                       {{ entry.entry || 'N/A' }}<br>
                       <span @click="openDetailsDialog(entry)"
                         style="font-size: 12px; color: #009688; cursor: pointer;">View Details</span>
                     </td>
-                    <td class="account_entries_table_voucher" :rowspan="entry.particulars.accounts.length + 1">
+                    <td class="account_entries_table_voucher" :rowspan="entry.particulars.accounts.length + 1"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
                       {{ entry.voucher_type || 'N/A' }}
                     </td>
                     <!-- First account row -->
-                    <td class="account_entries_table_particulars">
+                    <td class="account_entries_table_particulars"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
                       {{ entry.particulars.accounts[0]?.title || 'N/A' }}
                     </td>
                     <td class="account_entries_table_debit account_primary_color">
@@ -712,14 +747,18 @@ function getToAccounts(entry) {
                   <!-- Additional account rows (if any) -->
                   <tr v-for="(account, accIndex) in entry.particulars.accounts.slice(1)" :key="`${index}-${accIndex}`"
                     v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts)"
-                    :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }]">
-                    <td class="account_entries_table_particulars">
+                    :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }]"
+                    @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
+                    <td class="account_entries_table_particulars"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
                       {{ account.title || 'N/A' }}
                     </td>
-                    <td class="account_entries_table_debit account_primary_color">
+                    <td class="account_entries_table_debit account_primary_color"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
                       {{ account.debit || '' }}
                     </td>
-                    <td class="account_entries_table_credit account_error_color">
+                    <td class="account_entries_table_credit account_error_color"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
                       {{ account.credit || '' }}
                     </td>
                   </tr>
@@ -727,10 +766,10 @@ function getToAccounts(entry) {
                   <tr
                     v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts)"
                     :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }]">
-                    <td colspan="3" class="">
+                    <td colspan="3" :class="{ 'hovered-cell': hoveredRowIndex === index }">
                       <div class="d-flex flex-column align-start justify-center">
-                        <span class="mb-0 ml-4 account_entry_desc_text">To {{ entry.particulars.description?.to || 'N/A'
-                        }}</span>
+                        <!-- <span class="mb-0 ml-4 account_entry_desc_text">To {{ entry.particulars.description?.to || 'N/A'
+                          }}</span> -->
                         <span class="account_entry_desc_text">(Narration: {{ entry.particulars.description?.narration ||
                           'N/A' }})</span>
                       </div>
@@ -800,41 +839,52 @@ function getToAccounts(entry) {
           </div>
           <VDivider />
 
-          <VCard class="account_vcard_border shadow-none account_entries_table">
+          <VCard class="account_vcard_border shadow-none account_entries_table mt-2">
             <VTable class="">
               <thead>
                 <tr>
                   <th>Particulars</th>
-                  <th style="text-align: right;">Debit</th>
-                  <th style="text-align: right;">Credit</th>
+                  <th class="text-right">Debit</th>
+                  <th class="text-right">Credit</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(title, i) in getToAccounts(selectedEntry)" :key="i">
-                  <td>{{ title }}</td>
-                  <td style="text-align: right;" class="text-success">
-                    {{ selectedEntry?.particulars?.accounts[i]?.debit || '—' }}
-                  </td>
-                  <td style="text-align: right;" class="text-error">
-                    {{ selectedEntry?.particulars?.accounts[i]?.credit || '—' }}
-                  </td>
-                </tr>
+                <template v-for="(acc, i) in selectedEntry?.particulars?.accounts" :key="i">
+                  <tr>
+                    <td :class="{ 'pl-9': i !== 0 }">{{ acc.title }}</td>
+                    <td class="text-success text-right">
+                      {{ acc.debit || '' }}
+                    </td>
+                    <td class="text-error text-right">
+                      {{ acc.credit || '' }}
+                    </td>
+                  </tr>
+                </template>
                 <tr class="font-weight-bold">
                   <td>Total</td>
-                  <td style="text-align: right;" class="text-success">
+                  <td class="text-success text-right">
                     {{ totalAmount(selectedEntry.particulars.accounts, 'debit') }}
                   </td>
-                  <td style="text-align: right;" class="text-error">
+                  <td class="text-error text-right">
                     {{ totalAmount(selectedEntry.particulars.accounts, 'credit') }}
                   </td>
                 </tr>
+                <!-- <tr>
+                  <td colspan="3">
+                    <span class="account_entry_desc_text text-caption text-grey-darken-1">
+                      (Narration: {{ selectedEntry?.particulars?.description?.narration || 'N/A' }})
+                    </span>
+                  </td>
+                </tr> -->
               </tbody>
             </VTable>
+
           </VCard>
 
-          <div class="d-flex align-center gap-1 mt-3">
+          <div class="d-flex align-center gap-1 mt-3 mb-2">
             <span class="account_label_bold abc">Narration:</span>
-            <span class="account_label_light font-italic">{{ selectedEntry?.particulars?.description?.narration || 'N/A' }}</span>
+            <span class="account_label_light font-italic">{{ selectedEntry?.particulars?.description?.narration || 'N/A'
+              }}</span>
           </div>
         </VCardText>
       </VCard>

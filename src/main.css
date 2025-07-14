@@ -1216,7 +1216,9 @@ i.account_ledger_icon {
     background: rgba(230, 230, 230, 0.473);
 }
 
-
+.hovered-cell {
+    background: rgba(230, 230, 230, 0.295) !important;
+}
 
 
 /* Apply background to the entire row for even-indexed entries */
@@ -1239,6 +1241,8 @@ i.account_ledger_icon {
 .account_entries_table_row:not(.even-entry):not(.even-entry-extension) td {
   background-color: transparent;
 }
+
+
 
 .account_entries_table thead {
     border-radius: 6px !important;
@@ -1270,4 +1274,11 @@ i.account_ledger_icon {
     font-weight: 400;
     color: var(--acc-text-dark);
     line-height: 20px;
+}
+
+.gst_report_title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--acc-text-dark);
+    line-height: 32px;
 }
