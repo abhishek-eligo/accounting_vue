@@ -97,6 +97,8 @@ const chartData = reactive([
 
 const showJournalEntryCard = ref(false);
 const showLedgerDialog = ref(false);
+const showDetailsDialog = ref(false);
+const selectedEntry = ref(null);
 
 const allEntries = ref([
   {
@@ -107,7 +109,7 @@ const allEntries = ref([
       accounts: [
         {
           title: "Prepaid Insurance",
-          debit: "₹14,589.00",
+          debit: "",
           credit: "₹10,293.00"
         },
         {
@@ -118,7 +120,7 @@ const allEntries = ref([
       ],
       description: {
         "to": "Accumulated Depreciation, Accounts Payable",
-        "narration": "Narration: Received cash from various customers on account"
+        "narration": "Received cash from various customers on account"
       }
     },
     status: "Pending"
@@ -132,7 +134,7 @@ const allEntries = ref([
         {
           title: 'Service Revenue',
           debit: '₹2,729.00',
-          credit: '₹5,747.00'
+          credit: ''
         },
         {
           title: 'Cash',
@@ -142,7 +144,7 @@ const allEntries = ref([
       ],
       description: {
         to: 'Equipment, Utilities Expense',
-        narration: 'Narration: Utility bill payments and other miscellaneous expenses'
+        narration: 'Utility bill payments and other miscellaneous expenses'
       }
     },
     status: 'Pending'
@@ -156,7 +158,7 @@ const allEntries = ref([
         {
           title: 'Salaries',
           debit: '₹9,166.00',
-          credit: '₹15,341.00'
+          credit: '',
         },
         {
           title: 'Advertising Expense',
@@ -166,7 +168,7 @@ const allEntries = ref([
       ],
       description: {
         to: 'Wages Payable',
-        narration: 'Narration: Utility bill payments and other miscellaneous expenses'
+        narration: 'Utility bill payments and other miscellaneous expenses'
       }
     },
     status: 'Pending'
@@ -179,7 +181,7 @@ const allEntries = ref([
       accounts: [
         {
           title: 'Wages Payable',
-          debit: '₹1,588.00',
+          debit: '',
           credit: '₹8,215.00'
         },
         {
@@ -190,7 +192,7 @@ const allEntries = ref([
       ],
       description: {
         to: 'Utilities Expense',
-        narration: 'Narration: Initial capital contribution and office setup'
+        narration: 'Initial capital contribution and office setup'
       }
     },
     status: 'Pending'
@@ -204,12 +206,12 @@ const allEntries = ref([
         {
           title: 'Unearned Revenue',
           debit: '₹22,759.00',
-          credit: '₹22,759.00'
+          credit: ''
         }
       ],
       description: {
         to: 'Equipment',
-        narration: 'Narration: Payment of rent and utilities for the month'
+        narration: 'Payment of rent and utilities for the month'
       }
     },
     status: 'Pending'
@@ -223,12 +225,12 @@ const allEntries = ref([
         {
           title: 'Office Supplies',
           debit: '₹20,521.00',
-          credit: '₹20,521.00'
+          credit: ''
         }
       ],
       description: {
         to: 'Accounts Payable',
-        narration: 'Narration: Sold goods for cash and reduced COGS'
+        narration: 'Sold goods for cash and reduced COGS'
       }
     },
     status: 'Approved'
@@ -241,7 +243,7 @@ const allEntries = ref([
       accounts: [
         {
           title: 'Accounts Receivable',
-          debit: '₹46,386.00',
+          debit: '',
           credit: '₹13,846.00'
         },
         {
@@ -252,7 +254,7 @@ const allEntries = ref([
       ],
       description: {
         to: 'Wages Payable, Accounts Payable',
-        narration: 'Narration: Paid for multiple insurance policies'
+        narration: 'Paid for multiple insurance policies'
       }
     },
     status: 'Pending'
@@ -266,17 +268,19 @@ const allEntries = ref([
         {
           title: 'Utilities Expense',
           debit: '₹19,566.00',
-          credit: '₹19,566.00'
+          credit: ''
         }
       ],
       description: {
         to: 'Equipment',
-        narration: 'Narration: Received cash from various customers on account'
+        narration: 'Received cash from various customers on account'
       }
     },
     status: 'Pending'
   }
 ]);
+
+
 
 const entriesTableHeaders = ref([
   { title: 'Date', value: 'date', visible: true },
@@ -412,6 +416,29 @@ const removeCreditRow = (index) => {
     creditRows.value.splice(index, 1);
   }
 };
+
+// Open details dialog for the selected entry
+function openDetailsDialog(entry) {
+  selectedEntry.value = entry;
+  showDetailsDialog.value = true;
+}
+
+function totalAmount(accounts, type) {
+  if (!accounts || !Array.isArray(accounts)) return '₹0.00';
+
+  const sum = accounts.reduce((acc, item) => {
+    const value = item[type]?.replace(/[^0-9.-]+/g, '') || '0';
+    return acc + parseFloat(value);
+  }, 0);
+
+  return `₹${sum.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+}
+
+function getToAccounts(entry) {
+  if (!entry?.particulars?.description?.to) return [];
+  return entry.particulars.description.to.split(',').map(a => a.trim());
+}
+
 
 
 </script>
@@ -625,80 +652,8 @@ const removeCreditRow = (index) => {
       </div>
       <VCardText class="mt-2">
         <VCard class=" shadow-none">
-
-          <!-- <VTable height="600" fixed-header class="account_entries_table">
-            <thead>
-              <tr class="account_entries_table_header">
-                <th class="account_entries_table_header_date">Date</th>
-                <th class="account_entries_table_header_entry">Entry #</th>
-                <th class="account_entries_table_header_voucher">Voucher Type</th>
-                <th class="account_entries_table_header_particulars">Particulars</th>
-                <th class="account_entries_table_header_debit">Debit</th>
-                <th class="account_entries_table_header_credit">Credit</th>
-                <th class="account_entries_table_header_status">Status</th>
-                <th class="account_entries_table_header_actions">Actions</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr v-for="(entry, index) in allEntries" :key="index" class="account_entries_table_row">
-                <td class="account_entries_table_date account_brdr_rght">{{ entry.date }}</td>
-                <td class="account_entries_table_entry account_brdr_rght">{{ entry.entry }}</td>
-                <td class="account_entries_table_voucher">{{ entry.voucher_type }}</td>
-                <td class="account_entries_table_particulars account_brdr_left">
-                  <div class="particulars_column">
-                    <div class="d-flex flex-column justify-center">
-                      <div class="entry_account px-2 py-1 account_brdr_bottom account_brdr_rght">
-                        <p class="mb-0 account_entry_table_text">Prepaid Insurance</p>
-                      </div>
-                      <div class="py-1 px-2 account_brdr_rght account_brdr_bottom">
-                        <p class="mb-0 account_entry_table_text">Cash</p>
-                      </div>
-                      <div class="d-flex flex-column justify-center px-2 py-1">
-                        <span class="mb-0 ml-4 account_entry_desc_text">To Accumulated Depreciation, Accounts Payable</span>
-                        <span class="account_entry_desc_text">(Narration: Received cash from various customers on account)</span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="account_entries_table_debit account_brdr_rght">
-                  <div class="d-flex flex-column justify-center">
-                    <div class="py-1 px-2 account_brdr_bottom">
-                      <p class="mb-0">₹14,589.00</p>
-                    </div>
-                    <div class="py-1 px-2 account_brdr_bottom">
-                      <p class="mb-0">No data</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="account_entries_table_credit account_brdr_rght">
-                  <div class="d-flex flex-column justify-center">
-                    <div class="py-1 px-2 account_brdr_bottom">
-                      <p class="mb-0">₹10,293.00</p>
-                    </div>
-                    <div class="py-1 px-2 account_brdr_bottom">
-                      <p class="mb-0">₹4,296.00</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="account_entries_table_status">
-                  <VChip class="account_v_chip" size="small">
-                    Pending
-                  </VChip>
-                </td>
-                <td class="account_entries_table_actions">
-                  <div class="d-flex align-center gap-2">
-                    <VBtn size="small" class="account_v_btn_ghost" icon="mdi-pencil-box-multiple-outline" variant="text" />
-                    <VBtn size="small" class="account_v_btn_ghost" icon="mdi-arrow-u-left-top" variant="text" />
-                    <VBtn size="small" class="account_v_btn_ghost" icon="mdi-trash-can-outline" variant="text" />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </VTable> -->
-
           <div class="gst_summary_table_container">
-            <table class="table account_dynamic_table table-bordered account_entries_table text-center">
+            <table class="table table-bordered account_entries_table text-center">
               <thead>
                 <tr>
                   <th class="account_entries_table_header_date">Date</th>
@@ -712,49 +667,79 @@ const removeCreditRow = (index) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="account_entries_table_date" rowspan="3">15-Jul-24</td>
-                  <td class="account_entries_table_entry" rowspan="3">
-                    JRNL-2024-1001<br>
-                    <span style="font-size: 12px; color: #009688;">View Details</span>
-                  </td>
-                  <td class="account_entries_table_voucher" rowspan="3">Journal</td>
-                  <td class="account_entries_table_particulars">Computers</td>
-                  <td class="account_entries_table_debit" style="color: #009688;">₹1,50,000.00</td>
-                  <td class="account_entries_table_credit" style="color: #E53935;"></td>
-                  <td rowspan="3" style="vertical-align: middle;">
-                    <VChip class="account_v_chip" size="small">
-                      Pending
-                    </VChip>
-                  </td>
-                  <td rowspan="3" style="vertical-align: middle;">
-                    <div class="d-flex align-center justify-center gap-2">
-                      <VBtn size="small" class="account_v_btn_ghost" icon="mdi-pencil-box-multiple-outline"
-                        variant="text" />
-                      <VBtn size="small" class="account_v_btn_ghost" icon="mdi-arrow-u-left-top" variant="text" />
-                      <VBtn size="small" class="account_v_btn_ghost" icon="mdi-trash-can-outline" variant="text" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="account_entries_table_particulars">dsfds</td>
-                  <td>sdf</td>
-                  <td class="account_entries_table_credit" style="color: #E53935;">₹1,00,000.00</td>
-                </tr>
-                <tr>
-                  <td colspan="3" class="">
-                    <div class="d-flex flex-column align-start justify-center">
-                      <span class="mb-0 ml-4 account_entry_desc_text">To Accumulated Depreciation, Accounts
-                        Payable</span>
-                      <span class="account_entry_desc_text">(Narration: Received cash from various customers on
-                        account)</span>
-                    </div>
-                  </td>
-                </tr>
+                <template v-for="(entry, index) in allEntries" :key="index">
+                  <tr
+                    v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0"
+                    :class="['account_entries_table_row', { 'even-entry': index % 2 === 0 }]">
+                    <!-- Date, Entry #, Voucher Type, Status, and Actions span all account rows and description -->
+                    <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1">
+                      {{ entry.date || 'N/A' }}
+                    </td>
+                    <td class="account_entries_table_entry" :rowspan="entry.particulars.accounts.length + 1">
+                      {{ entry.entry || 'N/A' }}<br>
+                      <span @click="openDetailsDialog(entry)"
+                        style="font-size: 12px; color: #009688; cursor: pointer;">View Details</span>
+                    </td>
+                    <td class="account_entries_table_voucher" :rowspan="entry.particulars.accounts.length + 1">
+                      {{ entry.voucher_type || 'N/A' }}
+                    </td>
+                    <!-- First account row -->
+                    <td class="account_entries_table_particulars">
+                      {{ entry.particulars.accounts[0]?.title || 'N/A' }}
+                    </td>
+                    <td class="account_entries_table_debit account_primary_color">
+                      {{ entry.particulars.accounts[0]?.debit || '' }}
+                    </td>
+                    <td class="account_entries_table_credit account_error_color ">
+                      {{ entry.particulars.accounts[0]?.credit || '' }}
+                    </td>
+                    <td class="account_entries_table_status" :rowspan="entry.particulars.accounts.length + 1">
+                      <VChip class="account_v_chip"
+                        :class="entry.status === 'Pending' ? 'account_chip_error' : 'account_chip_primary'"
+                        size="small">
+                        {{ entry.status || 'N/A' }}
+                      </VChip>
+                    </td>
+                    <td class="account_entries_table_actions" :rowspan="entry.particulars.accounts.length + 1">
+                      <div class="d-flex align-center justify-center gap-2">
+                        <VBtn size="small" class="account_v_btn_ghost" icon="mdi-pencil-box-multiple-outline"
+                          variant="text" />
+                        <VBtn size="small" class="account_v_btn_ghost" icon="mdi-arrow-u-left-top" variant="text" />
+                        <VBtn size="small" class="account_v_btn_ghost" icon="mdi-trash-can-outline" variant="text" />
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Additional account rows (if any) -->
+                  <tr v-for="(account, accIndex) in entry.particulars.accounts.slice(1)" :key="`${index}-${accIndex}`"
+                    v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts)"
+                    :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }]">
+                    <td class="account_entries_table_particulars">
+                      {{ account.title || 'N/A' }}
+                    </td>
+                    <td class="account_entries_table_debit account_primary_color">
+                      {{ account.debit || '' }}
+                    </td>
+                    <td class="account_entries_table_credit account_error_color">
+                      {{ account.credit || '' }}
+                    </td>
+                  </tr>
+                  <!-- Description and Narration row -->
+                  <tr
+                    v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts)"
+                    :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }]">
+                    <td colspan="3" class="">
+                      <div class="d-flex flex-column align-start justify-center">
+                        <span class="mb-0 ml-4 account_entry_desc_text">To {{ entry.particulars.description?.to || 'N/A'
+                        }}</span>
+                        <span class="account_entry_desc_text">(Narration: {{ entry.particulars.description?.narration ||
+                          'N/A' }})</span>
+                      </div>
+                    </td>
+                  </tr>
+                </template>
               </tbody>
             </table>
           </div>
-
         </VCard>
       </VCardText>
     </VCard>
@@ -784,5 +769,76 @@ const removeCreditRow = (index) => {
         </VCardActions>
       </VCard>
     </VDialog>
+
+    <VDialog v-model="showDetailsDialog" max-width="600" @click:outside="showDetailsDialog = false">
+      <VCard class="account_vcard_border account_details_dialog" title="Journal Voucher"
+        :subtitle="selectedEntry?.entry">
+        <template #append>
+          <VBtn icon="mdi-close" variant="text" size="x-small" rounded="" @click="showDetailsDialog = false"
+            class="account_vcard_close_btn" />
+        </template>
+        <VCardText>
+          <div class="d-flex align-center justify-space-between mb-2">
+            <div class="d-flex align-center gap-1">
+              <span class="account_label_bold">Date:</span>
+              <span class="account_label_light">{{ selectedEntry?.date }}</span>
+            </div>
+            <div class="d-flex align-center gap-1">
+              <span class="account_label_bold">Type:</span>
+              <span class="account_label_light">{{ selectedEntry?.voucher_type }}</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-center justify-space-between">
+            <div class="d-flex align-center gap-1">
+              <span class="account_label_bold">Created By:</span>
+              <span class="account_label_light">Admin</span>
+            </div>
+            <div class="">
+              <VChip class="account_chip_primary" size="small" :text="selectedEntry?.status" />
+            </div>
+          </div>
+          <VDivider />
+
+          <VCard class="account_vcard_border shadow-none account_entries_table">
+            <VTable class="">
+              <thead>
+                <tr>
+                  <th>Particulars</th>
+                  <th style="text-align: right;">Debit</th>
+                  <th style="text-align: right;">Credit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(title, i) in getToAccounts(selectedEntry)" :key="i">
+                  <td>{{ title }}</td>
+                  <td style="text-align: right;" class="text-success">
+                    {{ selectedEntry?.particulars?.accounts[i]?.debit || '—' }}
+                  </td>
+                  <td style="text-align: right;" class="text-error">
+                    {{ selectedEntry?.particulars?.accounts[i]?.credit || '—' }}
+                  </td>
+                </tr>
+                <tr class="font-weight-bold">
+                  <td>Total</td>
+                  <td style="text-align: right;" class="text-success">
+                    {{ totalAmount(selectedEntry.particulars.accounts, 'debit') }}
+                  </td>
+                  <td style="text-align: right;" class="text-error">
+                    {{ totalAmount(selectedEntry.particulars.accounts, 'credit') }}
+                  </td>
+                </tr>
+              </tbody>
+            </VTable>
+          </VCard>
+
+          <div class="d-flex align-center gap-1 mt-3">
+            <span class="account_label_bold abc">Narration:</span>
+            <span class="account_label_light font-italic">{{ selectedEntry?.particulars?.description?.narration || 'N/A' }}</span>
+          </div>
+        </VCardText>
+      </VCard>
+    </VDialog>
+
   </div>
 </template>

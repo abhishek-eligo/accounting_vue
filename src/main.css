@@ -57,6 +57,15 @@ h1, h2, h3, h4, h5, h6, p, span {
     font-size: 14px;
 }
 
+.account_primary_color {
+    color: var(--acc-primary-color) !important;
+}
+
+.account_error_color {
+    color: var(--acc-error-color) !important;
+}
+
+
 .account_navigation_list {
     height: 100%;
     /* max-height: 600px;
@@ -134,7 +143,9 @@ p.secondary_email {
     color: var(--acc-text-dark);
 }
 
-
+.v-chip .v-chip__underlay {
+    display: none;
+}
 
 
 
@@ -1099,6 +1110,7 @@ i.account_ledger_icon {
 .account_entries_table thead tr th{
     background: var(--acc-primary-color) !important;
     color: var(--acc-text-white) !important;
+    padding: 17px 8px;
 }
 
 .account_btn_primary_text .v-btn__content,
@@ -1195,7 +1207,67 @@ i.account_ledger_icon {
 .account_entries_table_row td {
     vertical-align: top;
 }
-/* .account_entries_table_date,
-.account_entries_table_entry{
-    border-right: 1px solid var(--acc-border-color) !important;
-} */
+
+.account_entries_table tbody td {
+    background: transparent;
+}
+
+.account_entries_table tbody tr.account_entries_table_row:hover {
+    background: rgba(230, 230, 230, 0.473);
+}
+
+
+
+
+/* Apply background to the entire row for even-indexed entries */
+.account_entries_table_row.even-entry,
+.account_entries_table_row.even-entry-extension {
+  background-color: rgba(230, 230, 230, 0.295) !important; /* Use !important to override any inherited styles */
+}
+
+/* Ensure all cells within the row inherit the background */
+.account_entries_table_row.even-entry td,
+.account_entries_table_row.even-entry-extension td {
+  background-color: rgba(230, 230, 230, 0.295) !important;
+}
+
+/* Reset background for odd-indexed rows to avoid spillover */
+.account_entries_table_row:not(.even-entry):not(.even-entry-extension) {
+  background-color: transparent;
+}
+
+.account_entries_table_row:not(.even-entry):not(.even-entry-extension) td {
+  background-color: transparent;
+}
+
+.account_entries_table thead {
+    border-radius: 6px !important;
+}
+
+.account_details_dialog .v-card-item__content .v-card-title {
+    color: var(--acc-text-dark);
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 600;
+}
+
+.account_details_dialog .v-card-item__content .v-card-subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: var(--acc-text-subtitle-dark);
+}
+
+.account_label_bold {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--acc-text-dark);
+    line-height: 20px;
+}
+
+.account_label_light {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--acc-text-dark);
+    line-height: 20px;
+}
