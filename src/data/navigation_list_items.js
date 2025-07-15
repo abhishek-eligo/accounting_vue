@@ -23,7 +23,7 @@ export default [
     section: 'Money In',
     items: [
       { title: 'Customers', icon: 'mdi-account-group-outline', slug: 'customers', path: '/customers', component: () => import('@/pages/customers') },
-      { title: 'Sales Invoices', icon: 'mdi-receipt-outline', slug: 'sales-invoices' },
+      { title: 'Sales Invoices', icon: 'mdi-receipt-outline', slug: 'sales-invoices', path: '/salesinvoice', component: () => import('@/pages/salesinvoice') },
       { title: 'Invoice Returns (Sales)', icon: 'mdi-arrow-left-bottom', slug: 'invoice-returns-sales' },
     ],
   },

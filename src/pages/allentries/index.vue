@@ -191,8 +191,8 @@ const allEntries = ref([
       accounts: [
         {
           title: 'Wages Payable',
-          debit: '',
-          credit: '₹8,215.00'
+          debit: '₹8,215.00',
+          credit: ''
         },
         {
           title: 'Utilities Expense',
@@ -892,3 +892,9 @@ const hoveredRowIndex = ref(null);
 
   </div>
 </template>
+
+<style scoped>
+/* .hovered-cell {
+    background: rgb(230, 230, 230) !important;
+} */
+</style>

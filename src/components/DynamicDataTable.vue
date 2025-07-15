@@ -168,8 +168,10 @@ const totalPages = computed(() => {
             <v-icon size="16" class="ml-2">mdi-trending-up</v-icon>
           </template>
           <VCardText>
-            <h5 class="account_texth5 mb-0 font-weight-bold">${{ props.widgets.top10AvgPurchase ?
-              props.widgets.top10AvgPurchase.toFixed(2) : '0.00' }}</h5>
+            <h5 class="account_texth5 mb-0 font-weight-bold">
+              ₹{{ typeof props.widgets.top10AvgPurchase === 'number' ? props.widgets.top10AvgPurchase.toFixed(2) :
+              '0.00' }}
+            </h5>
           </VCardText>
         </VCard>
       </VCol>
@@ -181,7 +183,9 @@ const totalPages = computed(() => {
             <v-icon size="16" class="ml-2">mdi-star-outline</v-icon>
           </template>
           <VCardText>
-            <h5 class="account_texth5 mb-0 font-weight-bold">{{ props.widgets.avgRating.toFixed(1) }} / 5.0</h5>
+            <h5 class="account_texth5 mb-0 font-weight-bold">
+              {{ typeof props.widgets.avgRating === 'number' ? props.widgets.avgRating.toFixed(1) + ' / 5.0' : '0.0 / 5.0' }}
+            </h5>
           </VCardText>
         </VCard>
       </VCol>
@@ -212,8 +216,9 @@ const totalPages = computed(() => {
                 <div class="account_vcard_menu_item" v-for="filter in filters" :key="filter.title">
                   <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
                     <VCheckbox :model-value="isFilterChecked(filter.title)"
-                      @update:model-value="toggleFilter(filter.title)" class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
-                      <span>{{ filter.title  }}</span>
+                      @update:model-value="toggleFilter(filter.title)"
+                      class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
+                    <span>{{ filter.title }}</span>
                   </div>
                 </div>
               </div>

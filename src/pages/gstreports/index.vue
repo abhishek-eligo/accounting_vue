@@ -1,178 +1,25 @@
-<template>
-  <div>
-    <v-row>
-      <v-col cols="12" lg="12" md="12" sm="12">
-        <VCard class="account_vcard_border shadow-none gst_reports_vcard">
-          <div class="d-flex align-center gap-3">
-            <div>
-              <v-icon size="32" class="account_icon_color">mdi-file-document-outline</v-icon>
-            </div>
-            <div>
-              <h5 class="gst_reports_title mb-0">GST Report Generator</h5>
-              <p class="account_text_subtitle mb-0">Select a report type and date range to generate your
-                GST compliance reports.</p>
-            </div>
-          </div>
-
-          <div class="mt-3">
-            <v-row>
-              <v-col cols="12" lg="6" md="6" sm="12">
-                <label class="account_label mb-2">Report Type</label>
-                <VSelect class="accouting_field accouting_active_field" variant="outlined"
-                  placeholder="Select a report to generate" :items="reportType" v-model="selectedReportType" />
-              </v-col>
-              <v-col cols="12" lg="6" md="6" sm="12">
-                <label class="account_label mb-2">Date Range</label>
-                <VMenu v-model="dateMenu" :close-on-content-click="false" max-width="600">
-                  <template v-slot:activator="{ props }">
-                    <VTextField v-bind="props" class="accouting_field accouting_active_field" variant="outlined"
-                      :model-value="dateRangeText" placeholder="Select Date range" readonly
-                      append-inner-icon="mdi-calendar" />
-                  </template>
-                  <div class="d-flex gap-2">
-                    <VDatePicker v-model="dateRange" range @update:model-value="onDateRangeChange" />
-                    <VDatePicker v-model="dateRange" range @update:model-value="onDateRangeChange" />
-                  </div>
-                </VMenu>
-              </v-col>
-              <VCol cols="12" class="d-flex justify-end">
-                <VBtn class="account_v_btn_primary" prepend-icon="mdi-tray-arrow-down" rounded="1">Generate Reports
-                </VBtn>
-              </VCol>
-            </v-row>
-          </div>
-        </VCard>
-
-        <VDivider />
-
-        <div class="pa-3">
-          <h4 class="gst_report_title mb-0">GSTR-3B</h4>
-        </div>
-
-        <VCard class="account_vcard_border shadow-none gst_reports_table_vcard mt-3" :title="selectedReportType"
-          v-if="selectedReportType">
-          <template #append>
-            <!-- <VBtn class="account_v_btn_primary"><v-icon class="mr-2"></v-icon>Generate Reports</VBtn>   -->
-
-          </template>
-          <div>
-            <!-- GSTR-1 Table -->
-            <v-table v-if="selectedReportType === 'GSTR-1'" density="compact">
-              <thead>
-                <tr>
-                  <th>Invoice No</th>
-                  <th>Date</th>
-                  <th>Customer</th>
-                  <th>GSTIN</th>
-                  <th>Taxable Value</th>
-                  <th>CGST</th>
-                  <th>SGST</th>
-                  <th>IGST</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="row in gstr1Data" :key="row.invoiceNo">
-                  <td>{{ row.invoiceNo }}</td>
-                  <td>{{ row.date }}</td>
-                  <td>{{ row.customer }}</td>
-                  <td>{{ row.gstin }}</td>
-                  <td>{{ row.taxableValue }}</td>
-                  <td>{{ row.cgst }}</td>
-                  <td>{{ row.sgst }}</td>
-                  <td>{{ row.igst }}</td>
-                </tr>
-              </tbody>
-            </v-table>
-
-            <!-- GSTR-2 Table -->
-            <v-table v-else-if="selectedReportType === 'GSTR-2'" density="compact">
-              <thead>
-                <tr>
-                  <th>Invoice No</th>
-                  <th>Date</th>
-                  <th>Supplier</th>
-                  <th>GSTIN</th>
-                  <th>Taxable Value</th>
-                  <th>CGST</th>
-                  <th>SGST</th>
-                  <th>IGST</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="row in gstr2Data" :key="row.invoiceNo">
-                  <td>{{ row.invoiceNo }}</td>
-                  <td>{{ row.date }}</td>
-                  <td>{{ row.supplier }}</td>
-                  <td>{{ row.gstin }}</td>
-                  <td>{{ row.taxableValue }}</td>
-                  <td>{{ row.cgst }}</td>
-                  <td>{{ row.sgst }}</td>
-                  <td>{{ row.igst }}</td>
-                </tr>
-              </tbody>
-            </v-table>
-
-            <!-- GSTR-3B Table -->
-            <v-table v-else-if="selectedReportType === 'GSTR-3B'" density="compact">
-              <thead>
-                <tr>
-                  <th>Description</th>
-                  <th>Taxable Value</th>
-                  <th>CGST</th>
-                  <th>SGST</th>
-                  <th>IGST</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(row, index) in gstr3bData" :key="index">
-                  <td>{{ row.description }}</td>
-                  <td>{{ row.taxableValue }}</td>
-                  <td>{{ row.cgst }}</td>
-                  <td>{{ row.sgst }}</td>
-                  <td>{{ row.igst }}</td>
-                </tr>
-              </tbody>
-            </v-table>
-          </div>
-        </VCard>
-
-      </v-col>
-    </v-row>
-  </div>
-</template>
-
-
 <script setup>
-const reportType = ref(['GSTR-1', 'GSTR-2', 'GSTR-3B']);
+import { ref, computed } from 'vue'
+import DatePicker from 'primevue/datepicker'
+
+const dates = ref()
+const reportType = ref(['GSTR-1', 'GSTR-2', 'GSTR-3B'])
+const selectedReportType = ref('')
+const showTables = ref(false)
 
 const reportsTypeList = ref([
   {
-    title: 'GSTR-1',
-    summary_report: 'GSTR-3B Report',
+    title: 'GSTR-3B',
+    summary_report: 'Monthly Summary Return',
     table: [
       {
-        title: 'Details of Outward Supplies and inward supplies liable to reverse charge',
+        title: '3.1 Details of Outward Supplies and inward supplies liable to reverse charge',
         headers: [
-          {
-            title: 'Nature of Supplies',
-            value: 'nature_of_supplies'
-          },
-          {
-            title: 'Taxable Value',
-            value: 'taxable_value'
-          },
-          {
-            title: 'IGST',
-            value: 'igst'
-          },
-          {
-            title: 'CGST',
-            value: 'cgst'
-          },
-          {
-            title: 'SGST',
-            value: 'sgst'
-          },
+          { title: 'Nature of Supplies', value: 'nature_of_supplies', type: 'string' },
+          { title: 'Taxable Value', value: 'taxable_value', type: 'string' },
+          { title: 'IGST', value: 'igst', type: 'string' },
+          { title: 'CGST', value: 'cgst', type: 'string' },
+          { title: 'SGST', value: 'sgst', type: 'string' },
         ],
         tableData: [
           {
@@ -183,60 +30,217 @@ const reportsTypeList = ref([
             sgst: '₹25,425.05',
           },
           {
-            nature_of_supplies: '(d) Inward supplies (liable to reverse charge))',
+            nature_of_supplies: '(d) Inward supplies (liable to reverse charge)',
             taxable_value: '₹75,000.00',
             igst: '₹0.00',
             cgst: '₹6,750.00',
             sgst: '₹6,750.00',
           }
         ]
+      },
+      {
+        title: '4. Eligible ITC',
+        headers: [
+          { title: 'Details', value: 'details', type: 'string' },
+          { title: 'Amount (INR)', value: 'amount_ind', type: 'string', align: 'end' },
+        ],
+        tableData: [
+          {
+            group: '(A) ITC Available (whether in full or part)',
+            rows: [
+              { details: '(1) Import of goods', amount_ind: '₹12,000.00' },
+              { details: '(2) Import of services', amount_ind: '₹5,000.00' },
+              { details: '(3) Inward supplies liable to reverse charge', amount_ind: '₹13,500.00' },
+              { details: '(4) Inward supplies from ISD', amount_ind: '₹2,500.00' },
+              { details: '(5) All other ITC', amount_ind: '₹45,000.00' }
+            ]
+          }
+        ],
+        totalRow: {
+          details: 'Total ITC Available',
+          amount_ind: '₹78,000.00',
+          is_total: true
+        }
       }
     ]
-
+  },
+  {
+    title: 'GSTR-1',
+    summary_report: 'Outward Supplies Summary',
+    table: [
+      {
+        title: 'B2B Invoices',
+        headers: [
+          { title: 'Invoice Number', value: 'invoice_number', type: 'string' },
+          { title: 'Customer GSTIN', value: 'gstin', type: 'string' },
+          { title: 'Invoice Amount', value: 'amount', type: 'string' },
+        ],
+        tableData: [
+          {
+            invoice_number: 'INV-001',
+            gstin: '29ABCDE1234F2Z5',
+            amount: '₹1,50,000.00',
+          },
+          {
+            invoice_number: 'INV-002',
+            gstin: '27ABCDE4567H9Z6',
+            amount: '₹2,20,000.00',
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: 'GSTR-2',
+    summary_report: 'Inward Supplies Summary',
+    table: [
+      {
+        title: 'Purchases from Registered Dealers',
+        headers: [
+          { title: 'Vendor Name', value: 'vendor', type: 'string' },
+          { title: 'Invoice Amount', value: 'amount', type: 'string' },
+          { title: 'GST Paid', value: 'gst', type: 'string' },
+        ],
+        tableData: [
+          {
+            vendor: 'ABC Traders',
+            amount: '₹55,000.00',
+            gst: '₹9,900.00',
+          },
+          {
+            vendor: 'XYZ Distributors',
+            amount: '₹75,000.00',
+            gst: '₹13,500.00',
+          }
+        ]
+      }
+    ]
   }
 ])
-const selectedReportType = ref("");
-const dateMenu = ref(false);
-const dateRange = ref([]);
 
-const dateRangeText = computed(() => {
-  if (!dateRange.value || dateRange.value.length === 0) {
-    return '';
+const selectedReportData = computed(() => {
+  return reportsTypeList.value.find(r => r.title === selectedReportType.value)
+})
+
+function handleGenerate() {
+  if (selectedReportType.value && dates.value?.[0] && dates.value?.[1]) {
+    showTables.value = true
+  } else {
+    showTables.value = false
+    alert("Please select report type and date range.")
   }
-  if (dateRange.value.length === 1) {
-    return formatDate(dateRange.value[0]);
-  }
-  if (dateRange.value.length === 2) {
-    return `${formatDate(dateRange.value[0])} - ${formatDate(dateRange.value[1])}`;
-  }
-  return '';
-});
-
-const formatDate = (date) => {
-  if (!date) return '';
-  return new Date(date).toLocaleDateString('en-GB');
-};
-
-const onDateRangeChange = (newRange) => {
-  if (newRange && newRange.length === 2) {
-    dateMenu.value = false;
-  }
-};
-
-
-const gstr1Data = ref([
-  { invoiceNo: 'INV001', date: '01/07/2025', customer: 'ABC Ltd', gstin: '27XXX1234X1Z', taxableValue: 10000, cgst: 900, sgst: 900, igst: 0 },
-  { invoiceNo: 'INV002', date: '02/07/2025', customer: 'XYZ Pvt', gstin: '29XXX5678Z2Y', taxableValue: 5000, cgst: 0, sgst: 0, igst: 900 },
-]);
-
-const gstr2Data = ref([
-  { invoiceNo: 'PINV001', date: '01/07/2025', supplier: 'MNO Ltd', gstin: '07ABC1234D1Z', taxableValue: 8000, cgst: 720, sgst: 720, igst: 0 },
-]);
-
-const gstr3bData = ref([
-  { description: 'Outward Supplies', taxableValue: 30000, cgst: 2700, sgst: 2700, igst: 0 },
-  { description: 'ITC Claimed', taxableValue: '-', cgst: 1500, sgst: 1500, igst: 0 },
-]);
-
-
+}
 </script>
+
+<template>
+  <div>
+    <v-row>
+      <v-col cols="12">
+        <VCard class="account_vcard_border shadow-none gst_reports_vcard">
+          <div class="d-flex align-center gap-3">
+            <v-icon size="32" class="account_icon_color">mdi-file-document-outline</v-icon>
+            <div>
+              <h5 class="gst_reports_title mb-0">GST Report Generator</h5>
+              <p class="account_text_subtitle mb-0">Select a report type and date range to generate your GST compliance
+                reports.</p>
+            </div>
+          </div>
+
+          <v-row class="mt-3">
+            <v-col cols="12" md="6">
+              <label class="account_label mb-2">Report Type</label>
+              <VSelect class="accouting_field accouting_active_field" variant="outlined"
+                placeholder="Select a report to generate" :items="reportType" v-model="selectedReportType" />
+            </v-col>
+            <v-col cols="12" md="6">
+              <label class="account_label mb-2 w-100">Date Range</label>
+              <DatePicker class="account_date_range" v-model="dates" selectionMode="range" :manualInput="false" />
+            </v-col>
+            <v-col cols="12" class="d-flex justify-end">
+              <VBtn class="account_v_btn_primary" prepend-icon="mdi-tray-arrow-down" rounded="1"
+                @click="handleGenerate">
+                Generate Reports
+              </VBtn>
+            </v-col>
+          </v-row>
+        </VCard>
+
+        <VDivider class="my-5" />
+
+        <!-- Render tables only when generate is clicked -->
+        <div v-if="showTables && selectedReportData">
+          <div v-for="(section, index) in selectedReportData.table" :key="index" class="mb-6">
+            <h4 class="gst_report_title mb-2">{{ section.title }}</h4>
+            <VCard class="account_vcard_border shadow-none gst_reports_table_vcard mt-3">
+              <VDataTable :headers="section.headers" :items="[]" class="account_dynamic_table" hide-default-footer>
+                <template #body>
+                  <!-- GROUP + ROWS -->
+                  <template v-if="section.tableData?.[0]?.group">
+                    <template v-for="(group, gi) in section.tableData" :key="gi">
+                      <!-- Group Header Row -->
+                      <tr class="group-header-row">
+                        <td :colspan="section.headers.length" class="text-medium-emphasis font-weight-bold">
+                          {{ group.group }}
+                        </td>
+                      </tr>
+
+                      <!-- Group Rows -->
+                      <tr v-for="(row, ri) in group.rows" :key="`${gi}-${ri}`">
+                        <td v-for="header in section.headers" :key="header.value"
+                          >
+                          <p :class="header.align === 'end' ? 'text-end pr-4' : 'pl-6'" class="mb-0">{{ row[header.value] || '-' }}</p>
+                        </td>
+                      </tr>
+                    </template>
+                  </template>
+
+                  <!-- SIMPLE TABLE -->
+                  <template v-else>
+                    <tr v-for="(row, i) in section.tableData" :key="i">
+                      <td v-for="header in section.headers" :key="header.value"
+                        :class="header.align === 'end' ? 'text-end pr-4' : 'pl-4'">
+                        {{ row[header.value] || '-' }}
+                      </td>
+                    </tr>
+                  </template>
+
+                  <!-- TOTAL ROW -->
+                  <tr v-if="section.totalRow" class="font-weight-bold bg-grey-lighten-3">
+                    <td v-for="header in section.headers" :key="header.value"
+                      :class="header.align === 'end' ? 'text-end pr-4' : 'pl-4'">
+                      {{ section.totalRow[header.value] || '' }}
+                    </td>
+                  </tr>
+                </template>
+
+
+              </VDataTable>
+            </VCard>
+          </div>
+        </div>
+      </v-col>
+    </v-row>
+  </div>
+</template>
+
+<style scoped>
+.group-header-row td {
+  background-color: #f1f1f1;
+  font-weight: 600;
+  padding-left: 12px;
+}
+.v-data-table .pl-4 {
+  padding-left: 16px;
+}
+.v-data-table .pl-6 {
+  padding-left: 32px;
+}
+.v-data-table .pr-4 {
+  padding-right: 16px;
+}
+.v-data-table td {
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+</style>

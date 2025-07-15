@@ -275,6 +275,13 @@ p.secondary_email {
     --v-input-control-height: 0 !important;
 }
 
+.account_v_checkbox .v-input__control .v-label {
+    color: var(--acc-text-dark) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    opacity: unset !important;
+}
+
 .account_v_checkbox .v-selection-control__input::before {
         background-color: var(--acc-primary-color) !important;
 }
@@ -1216,9 +1223,9 @@ i.account_ledger_icon {
     background: rgba(230, 230, 230, 0.473);
 }
 
-.hovered-cell {
-    background: rgba(230, 230, 230, 0.295) !important;
-}
+/* .hovered-cell {
+    background: rgb(230, 230, 230) !important;
+} */
 
 
 /* Apply background to the entire row for even-indexed entries */
@@ -1281,4 +1288,61 @@ i.account_ledger_icon {
     font-weight: 700;
     color: var(--acc-text-dark);
     line-height: 32px;
+}
+
+.account_date_range {
+    height: 36px !important;
+}
+
+.account_date_range input {
+    background: var(--acc-input-bg-color) !important;
+    width: 800px !important;
+}
+
+.account_invoice_table hr.v-divider {
+    display: none !important;
+}
+
+.account_invoice_table tbody tr td {
+    padding-top:12px !important;
+    padding-bottom:12px !important;
+}
+
+i.table_row_icon {
+    color: var(--acc-error-color);
+}
+
+.account_gst_title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--acc-text-dark);
+    line-height: 24px;
+}
+
+.account_gst_subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--acc-secondary-text-color);
+}
+
+.account_gst_subtitle_val {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--acc-text-dark);
+}
+
+.base_currency_label {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--acc-secondary-text-color);
+}
+
+.account_invoice_balance_due {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 36px;
+    color: var(--acc-error-color);
 }
