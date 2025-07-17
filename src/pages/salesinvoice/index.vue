@@ -234,6 +234,174 @@ onMounted(() => {
   serviceInvoiceData.value[0].lockedRate = false;
 });
 
+const formFields = ref([
+  // Core Information
+  { label: 'Name', key: 'name', visible: true },
+  { label: 'Mobile', key: 'mobile', visible: true },
+  { label: 'Opening Balance', key: 'openingBalance', visible: true },
+
+  // Contact Details
+  { label: 'Mailing Name', key: 'mailingName', visible: true },
+  { label: 'Email', key: 'email', visible: true },
+  { label: 'Address', key: 'address', visible: true },
+  { label: 'State', key: 'state', visible: true },
+  { label: 'Pincode', key: 'pincode', visible: true },
+  { label: 'Country', key: 'country', visible: true },
+
+  // Tax & Compliance
+  { label: 'GSTIN/UIN', key: 'gstin', visible: true },
+  { label: 'PAN', key: 'pan', visible: true },
+  { label: 'Tax Registration Number', key: 'taxReg', visible: true },
+  { label: 'TDS Applicable', key: 'tds', visible: true },
+
+  // Financial Controls
+  { label: 'Credit Limit', key: 'creditLimit', visible: true },
+  { label: 'Credit Period (Days)', key: 'creditPeriod', visible: true },
+  { label: 'Maintain Bill-wise Details', key: 'billWise', visible: true },
+
+  // Banking Details
+  { label: 'Bank Name', key: 'bankName', visible: true },
+  { label: 'Account Number', key: 'accountNumber', visible: true },
+  { label: 'IFSC Code', key: 'ifscCode', visible: true },
+
+  // Additional Fields
+  { label: 'Additional Country 1', key: 'addCountry1', visible: true },
+  { label: 'Place of Supply', key: 'state', visible: true },
+  { label: 'Ship-to Address', key: 'shipToAddress', visible: true },
+]);
+
+const isVisible = (key) => formFields.value.find(f => f.key === key)?.visible;
+
+const customersList = ref([
+  {
+    title: 'Innovative Inc.',
+    value: 'innovative_inc',
+    data: {
+      name: 'Innovative Inc.',
+      mobile: '9876543210',
+      openingBalance: '0',
+      mailingName: 'Innovative Incorporated',
+      email: 'contact@innovativeinc.com',
+      address: '123 Innovation Drive, Tech City',
+      state: 'Karnataka',
+      pincode: '560001',
+      country: 'India',
+      gstin: '29AABC1234D1Z5',
+      pan: 'AABC1234D',
+      taxReg: 'TRN123456',
+      tds: false,
+      creditLimit: '500000',
+      creditPeriod: '30',
+      billWise: true,
+      bankName: 'HDFC Bank',
+      accountNumber: '123456789012',
+      ifscCode: 'HDFC0001234',
+      addCountry1: 'India',
+      shipToAddress: '123 Innovation Drive, Tech City, Karnataka, 560001'
+    }
+  },
+  {
+    title: 'Solution Corp.',
+    value: 'solution_corp',
+    data: {
+      name: 'Solution Corp.',
+      mobile: '9123456789',
+      openingBalance: '10000',
+      mailingName: 'Solution Corporation',
+      email: 'info@solutioncorp.com',
+      address: '456 Business Avenue, Mumbai',
+      state: 'Maharashtra',
+      pincode: '400001',
+      country: 'India',
+      gstin: '27ADEF5678G1Z3',
+      pan: 'ADEF5678G',
+      taxReg: 'TRN789012',
+      tds: true,
+      creditLimit: '750000',
+      creditPeriod: '45',
+      billWise: false,
+      bankName: 'ICICI Bank',
+      accountNumber: '987654321098',
+      ifscCode: 'ICIC0005678',
+      addCountry1: 'India',
+      shipToAddress: '456 Business Avenue, Mumbai, Maharashtra, 400001'
+    }
+  },
+  {
+    title: 'Quantum Tech',
+    value: 'quantum_tech',
+    data: {
+      name: 'Quantum Tech',
+      mobile: '9988776655',
+      openingBalance: '5000',
+      mailingName: 'Quantum Technologies',
+      email: 'support@quantumtech.com',
+      address: '789 Tech Park, Chennai',
+      state: 'Tamil Nadu',
+      pincode: '600001',
+      country: 'India',
+      gstin: '33AGHI9012J1Z1',
+      pan: 'AGHI9012J',
+      taxReg: 'TRN345678',
+      tds: false,
+      creditLimit: '300000',
+      creditPeriod: '15',
+      billWise: true,
+      bankName: 'Axis Bank',
+      accountNumber: '456789123456',
+      ifscCode: 'UTIB0009012',
+      addCountry1: 'India',
+      shipToAddress: '789 Tech Park, Chennai, Tamil Nadu, 600001'
+    }
+  }
+])
+
+const addNewCustomerVisible = ref(false);
+const showAddCustomerForm = () => {
+  addNewCustomerVisible.value = !addNewCustomerVisible.value;
+}
+
+// Reactive variables for form fields
+const selectedCustomer = ref(null);
+const customerGSTIN = ref('');
+const billingAddress = ref('');
+const currency = ref('INR');
+const invoiceNumber = ref('');
+const invoiceDate = ref('');
+const dueDate = ref('');
+const placeOfSupply = ref('');
+const shippingSameAsBilling = ref(true);
+
+// Computed property for customer GSTIN display
+const customerGSTINDisplay = computed(() => {
+  if (!selectedCustomer.value) return '';
+  const customer = customersList.value.find(c => c.value === selectedCustomer.value);
+  if (!customer) return '';
+  return `GSTIN: ${customer.data.gstin}\nBilling Address: ${customer.data.address}, ${customer.data.state}, ${customer.data.pincode}\nCurrency: ${currency.value}`;
+});
+
+// Watch for customer selection changes
+watchEffect(() => {
+  if (selectedCustomer.value) {
+    const customer = customersList.value.find(c => c.value === selectedCustomer.value);
+    if (customer) {
+      customerGSTIN.value = customer.data.gstin;
+      billingAddress.value = `${customer.data.address}, ${customer.data.state}, ${customer.data.pincode}`;
+      currency.value = customer.data.currency || 'INR'; // Default to INR if not specified
+      placeOfSupply.value = customer.data.state;
+      // Note: invoiceNumber, invoiceDate, and dueDate can be set based on your business logic
+      // For example, you might want to auto-generate invoiceNumber or set dates
+    }
+  } else {
+    customerGSTIN.value = '';
+    billingAddress.value = '';
+    currency.value = 'INR';
+    placeOfSupply.value = '';
+  }
+});
+
+const isInvoiceSettingsVisible = ref(false);
+
 </script>
 
 <template>
@@ -243,50 +411,56 @@ onMounted(() => {
         <VCard class="account_vcard_border" title="New Invoice"
           subtitle="Fill out the details below to create a new sales invoice.">
           <template #append>
-            <VBtn icon="mdi-cog-outline" variant="text" size="x-small" rounded="" />
+            <VBtn @click="isInvoiceSettingsVisible = true" icon="mdi-cog-outline" variant="text" size="x-small"
+              rounded="" />
           </template>
           <VCardText>
             <VRow>
               <VCol cols="12" lg="6" md="6">
                 <label class="account_label mb-2">Bill To</label>
-                <VAutocomplete placeholder="Select a customer" class="accouting_field accouting_active_field"
-                  variant="outlined">
+                <VAutocomplete v-model="selectedCustomer" placeholder="Select a customer"
+                  class="accouting_field accouting_active_field" :items="customersList" variant="outlined">
                   <template #append>
-                    <VBtn class="account_v_btn_outlined" rounded="" icon="mdi-plus-circle-outline" size="x-small" />
+                    <VBtn class="account_v_btn_outlined" @click="addNewCustomerVisible = true" rounded=""
+                      icon="mdi-plus-circle-outline" size="x-small" />
                   </template>
                 </VAutocomplete>
               </VCol>
               <VCol cols="12" lg="6" md="6">
-                <label class="account_label mb-2">Invoice Number</label>
-                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact" />
+                <VRow>
+                  <VCol cols="12" lg="6" md="6">
+                    <label class="account_label mb-2">Invoice Number</label>
+                    <VTextField v-model="invoiceNumber" class="accouting_field accouting_active_field"
+                      variant="outlined" density="compact" />
+                  </VCol>
+                  <VCol cols="12" lg="6" md="6">
+                    <label class="account_label mb-2">Invoice Date</label>
+                    <VTextField v-model="invoiceDate" class="accouting_field accouting_active_field" variant="outlined"
+                      density="compact" />
+                  </VCol>
+                </VRow>
               </VCol>
               <VCol cols="12" lg="6" md="6">
-                <label class="account_label mb-2">Customer GSTIN</label>
-                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact" />
+                <VTextarea :value="customerGSTINDisplay" class="accounting_v_textarea" variant="outlined" readonly
+                  density="compact" />
               </VCol>
               <VCol cols="12" lg="6" md="6">
-                <label class="account_label mb-2">Invoice Date</label>
-                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact" />
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <label class="account_label mb-2">Currency</label>
-                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact" />
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <label class="account_label mb-2">Due Date</label>
-                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact" />
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <label class="account_label mb-2">Place of Supply</label>
-                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact" />
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <label class="account_label mb-2">Billing Address</label>
-                <VTextarea class="accounting_v_textarea" variant="outlined" />
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <VCheckbox density="compact" class="account_v_checkbox"
-                  label="Shipping address is the same as billing address" />
+                <VRow>
+                  <VCol cols="12" lg="6" md="6" sm="12">
+                    <label class="account_label mb-2">Currency</label>
+                    <VTextField v-model="currency" class="accouting_field accouting_active_field" variant="outlined"
+                      density="compact" />
+                  </VCol>
+                  <VCol cols="12" lg="6" md="6" sm="12">
+                    <label class="account_label mb-2">Place of Supply</label>
+                    <VTextField v-model="placeOfSupply" class="accouting_field accouting_active_field"
+                      variant="outlined" density="compact" />
+                  </VCol>
+                  <VCol cols="12" lg="6" md="6">
+                    <VCheckbox v-model="shippingSameAsBilling" density="compact" class="account_v_checkbox"
+                      label="Shipping address is the same as billing address" />
+                  </VCol>
+                </VRow>
               </VCol>
             </VRow>
             <VDivider />
@@ -468,7 +642,8 @@ onMounted(() => {
             <VRow>
               <VCol cols="12">
                 <label class="account_label mb-2">Notes / Terms & Conditions</label>
-                <VTextarea class="accounting_v_textarea" placeholder="Thank you for your business. All payments are due within 30 days." variant="outlined" />
+                <VTextarea class="accounting_v_textarea"
+                  placeholder="Thank you for your business. All payments are due within 30 days." variant="outlined" />
                 <div class="d-flex align-center gap-2 justify-end mt-3">
                   <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save as Default</VBtn>
                   <VBtn class="account_v_btn_outlined" prepend-icon="mdi-send-outline">Save & Send Invoice</VBtn>
@@ -487,5 +662,265 @@ onMounted(() => {
         :status-items="paymentStatusItems" :account-type-items="[]" :currency-items="currencyItems"
         :widgets="invoiceWidgets" />
     </div>
+    <v-dialog max-width="900" v-model="addNewCustomerVisible">
+      <div v-if="addNewCustomerVisible" class="account_ui_vcard">
+        <VCard title="Create a New Customer" class="pa-2 account_vcard_border"
+          subtitle="Fill in the details below to add a new customer to your records.">
+          <template #append>
+            <div class="d-flex align-center gap-2">
+              <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
+                <template #activator="{ props }">
+                  <VBtn v-bind="props" icon="mdi-cog-outline" variant="text" size="x-small" rounded="" />
+                </template>
+                <VCard class="account_vcard_menu account_vcard_border">
+                  <div class="account_vcard_menu_hdng">Show/Hide Optional Fields</div>
+                  <VDivider class="my-1 mt-0" />
+                  <div class="account_vcard_menu_items py-1">
+                    <div v-for="field in formFields" :key="field.key" class="account_vcard_menu_item"
+                      @click="field.visible = !field.visible">
+                      <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                        <VIcon v-if="field.visible" size="16" icon="mdi-check" />
+                        <span :class="field.visible ? '' : 'field_list_dynamic_ml'">{{ field.label }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </VCard>
+              </VMenu>
+              <VBtn @click="showAddCustomerForm" icon="mdi-close" variant="text" size="x-small" rounded=""
+                class="account_vcard_close_btn" />
+            </div>
+          </template>
+          <VCardText class="add_customer_dialog">
+            <VRow>
+              <VCol cols="12" class="pb-0">
+                <h5 class="account_form_info_hdng">Core Information</h5>
+                <VDivider class="mb-2 mt-1" />
+              </VCol>
+              <VCol v-if="isVisible('name')" cols="12" lg="12" md="12">
+                <label class="account_label mb-2">Name (Mandatory)</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="Customer's Full Name or Company Name" />
+              </VCol>
+              <VCol v-if="isVisible('mobile')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Mobile</label>
+                <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
+                  density="compact" placeholder="9876543210" />
+              </VCol>
+              <VCol v-if="isVisible('openingBalance')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Opening Balance</label>
+                <div class="custom_option d-flex align-center">
+                  <VTextField class="custom_option_field accouting_field accouting_active_field" type="number"
+                    variant="outlined" density="compact" placeholder="0" />
+                  <VSelect class="custom_option_select accouting_field accouting_active_field"
+                    v-model="selectedBalanceType" :items="balanceTypeList" variant="outlined" density="comapct" />
+                </div>
+              </VCol>
+
+              <VCol cols="12" class="pb-0">
+                <h5 class="account_form_info_hdng">Contact Details</h5>
+                <VDivider class="mb-2 mt-1" />
+              </VCol>
+
+              <VCol v-if="isVisible('mailingName')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Mailing Name</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="Name for correspondence" />
+              </VCol>
+              <VCol v-if="isVisible('email')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Email</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="customer@example.com" />
+              </VCol>
+
+              <VCol v-if="isVisible('address')" cols="12" lg="12" md="12">
+                <label class="account_label mb-2">Address</label>
+                <VTextarea class="accounting_v_textarea" placeholder="Full address" variant="outlined" />
+              </VCol>
+              <VCol v-if="isVisible('state')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">State</label>
+                <VSelect class="accouting_field accouting_active_field" variant="outlined"
+                  placeholder="Select an item" />
+              </VCol>
+              <VCol v-if="isVisible('pincode')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Pincode</label>
+                <VSelect class="accouting_field accouting_active_field" variant="outlined" placeholder="e.g. 400001" />
+              </VCol>
+              <VCol v-if="isVisible('country')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Country</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="India" />
+              </VCol>
+
+              <VCol cols="12" class="pb-0">
+                <h5 class="account_form_info_hdng">Tax & Compliance</h5>
+                <VDivider class="mb-2 mt-1" />
+              </VCol>
+
+              <VCol v-if="isVisible('gstin')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">GSTIN/UIN</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="15-digit GSTIN" />
+              </VCol>
+              <VCol v-if="isVisible('pan')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">PAN</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="15-digit PAN" />
+              </VCol>
+              <VCol v-if="isVisible('taxReg')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Tax Registration Number</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="If applicable" />
+              </VCol>
+              <VCol v-if="isVisible('tds')" class="d-flex align-center" cols="12" lg="6" md="6">
+                <VCheckbox density="compact" class="account_v_checkbox" label="TDS Applicable" />
+              </VCol>
+
+              <VCol cols="12" class="pb-0">
+                <h5 class="account_form_info_hdng">Financial Controls</h5>
+                <VDivider class="mb-2 mt-1" />
+              </VCol>
+
+              <VCol v-if="isVisible('creditLimit')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Credit Limit</label>
+                <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
+                  density="compact" placeholder="0" />
+              </VCol>
+              <VCol v-if="isVisible('creditPeriod')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Credit Period (Days)</label>
+                <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
+                  density="compact" placeholder="0" />
+              </VCol>
+              <VCol v-if="isVisible('billWise')" class="d-flex align-center" cols="12" lg="6" md="6">
+                <VCheckbox density="compact" class="account_v_checkbox" label="Maintain Bill-wise Details" />
+              </VCol>
+
+              <VCol cols="12" class="pb-0">
+                <h5 class="account_form_info_hdng">Banking Details</h5>
+                <VDivider class="mb-2 mt-1" />
+              </VCol>
+
+              <VCol v-if="isVisible('bankName')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Bank Name</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="e.g. HDFC Bank" />
+              </VCol>
+              <VCol v-if="isVisible('accountNumber')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Account Number</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="Bank Account Number" />
+              </VCol>
+              <VCol v-if="isVisible('ifscCode')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">IFSC Code</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="e.g. HDFC0000001" />
+              </VCol>
+
+              <VCol cols="12" class="pb-0">
+                <h5 class="account_form_info_hdng">Additional Fields</h5>
+                <VDivider class="mb-2 mt-1" />
+              </VCol>
+
+              <VCol v-if="isVisible('addCountry1')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Country</label>
+                <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="India" />
+              </VCol>
+
+              <VCol v-if="isVisible('state')" cols="12" lg="6" md="6">
+                <label class="account_label mb-2">Place of Supply</label>
+                <VSelect class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                  placeholder="State" />
+              </VCol>
+
+              <VCol v-if="isVisible('shipToAddress')" cols="12" lg="12" md="12">
+                <label class="account_label mb-2">Ship-to Address</label>
+                <VTextarea class="accounting_v_textarea" placeholder="Optional delivery address" variant="outlined" />
+
+                <div class="d-flex align-center justify-end mt-4">
+                  <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save Customer</VBtn>
+                </div>
+              </VCol>
+            </VRow>
+          </VCardText>
+        </VCard>
+      </div>
+    </v-dialog>
+
+    <v-dialog max-width="600" v-model="isInvoiceSettingsVisible">
+      <div v-if="isInvoiceSettingsVisible" class="account_ui_vcard">
+        <VCard title="Invoice Settings" class="pa-2 account_vcard_border"
+          subtitle="Customize your invoice creation experience.">
+          <template #append>
+            <VBtn @click="isInvoiceSettingsVisible = false" icon="mdi-close" variant="text" size="x-small" rounded=""
+              class="account_vcard_close_btn" />
+          </template>
+          <VCardText>
+            <VRow class="acc_invoice_settings_row">
+              <VCol class="py-2" cols="3">
+                <VBtn size="small" class="account_v_btn_light">Numbering</VBtn>
+              </VCol>
+              <VCol class="py-2" cols="3">
+                <VBtn size="small" class="account_v_btn_ghost" variant="text">Columns</VBtn>
+              </VCol>
+              <VCol class="py-2" cols="3">
+                <VBtn size="small" class="account_v_btn_ghost" variant="text">Fields</VBtn>
+              </VCol>
+              <VCol class="py-2" cols="3">
+                <VBtn size="small" class="account_v_btn_ghost" variant="text">Mode</VBtn>
+              </VCol>
+            </VRow>
+
+            <VRow>
+              <VCol cols="12">
+                <VCard class="account_vcard_border shadow-none pa-4">
+                  <h6 class="mb-4">Invoice Numbering</h6>
+                  <VRow>
+                    <VCol cols="12">
+                      <VCard class="account_vcard_border shadow-none">
+                        <VCardText class="py-1 px-2">
+                          <div class="d-flex align-center justify-space-between">
+                            <p class="mb-0">Change Every FY</p>
+                            <VSwitch density="compact" color="primary" hide-details
+                              class="account_swtich_btn invoice_stng_fy_switch" inset />
+                          </div>
+                        </VCardText>
+                      </VCard>
+                    </VCol>
+
+                    <VCol cols="12">
+                      <label class="account_label mb-2">Prefix Type</label>
+                      <VRow>
+                        <VCol cols="6">
+                          <VBtn class="account_v_btn_outlined w-100" size="large">Text</VBtn>
+                        </VCol>
+                        <VCol cols="6">
+                          <VBtn class="account_v_btn_outlined w-100" size="large">Financial Year</VBtn>
+                        </VCol>
+                      </VRow>
+                    </VCol>
+
+                    <VCol cols="12" lg="8" md="8">
+                      <label class="account_label mb-2">Prefix Type</label>
+                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact" />
+                    </VCol>
+                    <VCol cols="12" lg="4" md="4">
+                      <label class="account_label mb-2">Starting Number</label>
+                      <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
+                        density="compact" />
+                    </VCol>
+
+                    <VCol cols="12">
+                      <label class="account_label mb-2">Preview</label>
+                      <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
+                        density="compact" />
+                    </VCol>
+                  </VRow>
+                </VCard>
+              </VCol>
+            </VRow>
+          </VCardText>
+        </VCard>
+      </div>
+    </v-dialog>
   </div>
 </template>

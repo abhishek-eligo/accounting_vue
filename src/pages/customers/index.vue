@@ -300,6 +300,9 @@ onMounted(() => {
                     <label class="account_label mb-2">Ship-to Address</label>
                     <VTextarea class="accounting_v_textarea" placeholder="Optional delivery address"
                       variant="outlined" />
+                    <div class="d-flex align-center justify-end mt-4">
+                      <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save Customer</VBtn>
+                    </div>
                   </VCol>
 
                 </VRow>
@@ -316,28 +319,60 @@ onMounted(() => {
           :widgets="customerWidgetData" />
       </VCol>
     </VRow>
-    <VBtn @click="showAddCustomerForm" :key="vibrateKey" class="account_add_new_btn vibrate" prepend-icon="mdi-plus-circle-outline">Add Customer
+    <VBtn @click="showAddCustomerForm" :key="vibrateKey" class="account_add_new_btn vibrate"
+      prepend-icon="mdi-plus-circle-outline">Add Customer
     </VBtn>
   </div>
 </template>
 
 <style scoped>
 @keyframes vibrate {
-  0%   { transform: translate(0, 0); }
-  10%  { transform: translate(-2px, 2px); }
-  20%  { transform: translate(-2px, -2px); }
-  30%  { transform: translate(2px, 2px); }
-  40%  { transform: translate(2px, -2px); }
-  50%  { transform: translate(-3px, 3px); }
-  60%  { transform: translate(3px, -3px); }
-  70%  { transform: translate(-2px, 2px); }
-  80%  { transform: translate(2px, -2px); }
-  90%  { transform: translate(-1px, 1px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-2px, 2px);
+  }
+
+  20% {
+    transform: translate(-2px, -2px);
+  }
+
+  30% {
+    transform: translate(2px, 2px);
+  }
+
+  40% {
+    transform: translate(2px, -2px);
+  }
+
+  50% {
+    transform: translate(-3px, 3px);
+  }
+
+  60% {
+    transform: translate(3px, -3px);
+  }
+
+  70% {
+    transform: translate(-2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  90% {
+    transform: translate(-1px, 1px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 .vibrate {
   animation: vibrate 0.3s linear;
 }
-
 </style>
