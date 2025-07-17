@@ -158,4 +158,73 @@
     font-weight: 500;
     line-height: 20px;
 }
+.amountInWords{
+    color: var(--acc-error-color) !important;
+}
 
+/* Global Form Validation Styles */
+.required-field {
+  color: #d32f2f !important;
+}
+
+.required-field::after {
+  content: " *";
+  color: #d32f2f;
+}
+
+.error-field {
+  border-color: #d32f2f !important;
+}
+
+.error-field .v-field__outline {
+  border-color: #d32f2f !important;
+}
+
+.error-field .v-field__outline__start {
+  border-color: #d32f2f !important;
+}
+
+.error-field .v-field__outline__end {
+  border-color: #d32f2f !important;
+}
+
+.error-field .v-field__outline__notch {
+  border-color: #d32f2f !important;
+}
+
+/* Amount in words styling */
+.amountInWords {
+  color: #666 !important;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Error message styling */
+.error-message {
+  color: #d32f2f;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Form validation feedback */
+.v-form .v-field--error {
+  border-color: #d32f2f !important;
+}
+
+.v-form .v-field--error .v-field__outline {
+  border-color: #d32f2f !important;
+}
+
+.v-form .v-field--error .v-field__outline__start {
+  border-color: #d32f2f !important;
+}
+
+.v-form .v-field--error .v-field__outline__end {
+  border-color: #d32f2f !important;
+}
+
+.v-form .v-field--error .v-field__outline__notch {
+  border-color: #d32f2f !important;
+}

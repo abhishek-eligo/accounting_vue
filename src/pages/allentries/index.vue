@@ -1,7 +1,132 @@
 <script setup>
-import { ref } from 'vue';
-import { toast } from 'vue3-toastify';
+import { numberToWords } from "@/helpers";
+import {
+  journalEntryValidations,
+  ledgerValidations,
+  validateField,
+} from "@/validations";
+import { ref } from "vue";
+import { toast } from "vue3-toastify";
 
+// Function to handle amount input and show words
+function handleAmountInput(event, rowIndex, type) {
+  const amount = event.target.value;
+  const numValue = parseFloat(amount) || 0;
+  const words = numberToWords(numValue);
+
+  // Update the row with both numeric value and words
+  if (type === "debit") {
+    debitRows.value[rowIndex].amount = numValue;
+    debitRows.value[rowIndex].amountInWords = words;
+  } else {
+    creditRows.value[rowIndex].amount = numValue;
+    creditRows.value[rowIndex].amountInWords = words;
+  }
+}
+
+// Journal entry form data
+const journalEntryForm = ref({
+  entryDate: "",
+  description: "",
+  voucherType: "",
+});
+
+// Validation rules for journal entry form
+const journalEntryRules = {
+  entryDate: (value) => validateField(value, journalEntryValidations.entryDate),
+  description: (value) =>
+    validateField(value, journalEntryValidations.description),
+  voucherType: (value) =>
+    validateField(value, journalEntryValidations.voucherType),
+};
+
+// Form reference
+const journalEntryFormRef = ref();
+
+// Validate journal entry form
+async function validateJournalEntryForm() {
+  const { valid } = await journalEntryFormRef.value?.validate();
+  if (!valid) {
+    return false;
+  }
+
+  // Additional validation for debit and credit rows
+  const debitErrors = [];
+  const creditErrors = [];
+
+  // Validate debit rows
+  debitRows.value.forEach((row, index) => {
+    if (!row.account) {
+      debitErrors.push(`Debit row ${index + 1}: Account is required`);
+    }
+    if (!row.amount || row.amount <= 0) {
+      debitErrors.push(`Debit row ${index + 1}: Amount must be greater than 0`);
+    }
+  });
+
+  // Validate credit rows
+  creditRows.value.forEach((row, index) => {
+    if (!row.account) {
+      creditErrors.push(`Credit row ${index + 1}: Account is required`);
+    }
+    if (!row.amount || row.amount <= 0) {
+      creditErrors.push(
+        `Credit row ${index + 1}: Amount must be greater than 0`
+      );
+    }
+  });
+
+  // Check if total debit equals total credit
+  const totalDebit = debitRows.value.reduce(
+    (sum, row) => sum + (row.amount || 0),
+    0
+  );
+  const totalCredit = creditRows.value.reduce(
+    (sum, row) => sum + (row.amount || 0),
+    0
+  );
+
+  if (Math.abs(totalDebit - totalCredit) > 0.01) {
+    toast.error("Total debit and credit amounts must be equal.");
+    return false;
+  }
+
+  if (debitErrors.length > 0 || creditErrors.length > 0) {
+    const allErrors = [...debitErrors, ...creditErrors];
+    toast.error(allErrors.join("\n"));
+    return false;
+  }
+
+  return true;
+}
+
+// Submit journal entry form
+async function submitJournalEntryForm() {
+  const isValid = await validateJournalEntryForm();
+  if (!isValid) {
+    return;
+  }
+
+  // Form is valid, proceed with submission
+  toast.success("Journal entry saved successfully!");
+
+  // Reset form
+  journalEntryForm.value = {
+    entryDate: "",
+    description: "",
+    voucherType: "",
+  };
+
+  // Reset debit and credit rows
+  debitRows.value = [{ account: null, amount: 0, amountInWords: "" }];
+  creditRows.value = [{ account: null, amount: 0, amountInWords: "" }];
+
+  // Hide the form
+  showJournalEntryCard.value = false;
+
+  // Reset validation
+  journalEntryFormRef.value?.resetValidation();
+}
 
 const chartData = reactive([
   {
@@ -110,241 +235,239 @@ const allEntries = ref([
         {
           title: "Prepaid Insurance",
           debit: "₹14,589.00",
-          credit: ""
+          credit: "",
         },
         {
           title: "Accumulated Depreciation",
           debit: "",
-          credit: "₹10,293.00"
+          credit: "₹10,293.00",
         },
         {
           title: "Accounts Payable",
           debit: "",
-          credit: "₹4,296.00"
-        }
+          credit: "₹4,296.00",
+        },
       ],
       description: {
         // "to": "Accumulated Depreciation, Accounts Payable",
-        "narration": "Received cash from various customers on account"
-      }
+        narration: "Received cash from various customers on account",
+      },
     },
-    status: "Pending"
+    status: "Pending",
   },
   {
-    date: '14-Apr-25',
-    entry: 'JRNL-2025-1002',
-    voucher_type: 'Sales',
+    date: "14-Apr-25",
+    entry: "JRNL-2025-1002",
+    voucher_type: "Sales",
     particulars: {
       accounts: [
         {
-          title: 'Service Revenue',
-          debit: '₹12,727.00',
-          credit: '',
+          title: "Service Revenue",
+          debit: "₹12,727.00",
+          credit: "",
         },
         {
-          title: 'Equipment',
-          debit: '',
-          credit: '₹2,727.00',
+          title: "Equipment",
+          debit: "",
+          credit: "₹2,727.00",
         },
         {
-          title: 'Utilities Expense',
-          debit: '',
-          credit: '₹10,000.00'
+          title: "Utilities Expense",
+          debit: "",
+          credit: "₹10,000.00",
         },
       ],
       description: {
         // to: 'Equipment, Utilities Expense',
-        narration: 'Utility bill payments and other miscellaneous expenses'
-      }
+        narration: "Utility bill payments and other miscellaneous expenses",
+      },
     },
-    status: 'Pending'
+    status: "Pending",
   },
   {
-    date: '04-May-25',
-    entry: 'JRNL-2025-1003',
-    voucher_type: 'Sales',
+    date: "04-May-25",
+    entry: "JRNL-2025-1003",
+    voucher_type: "Sales",
     particulars: {
       accounts: [
         {
-          title: 'Salaries',
-          debit: '₹9,166.00',
-          credit: '',
+          title: "Salaries",
+          debit: "₹9,166.00",
+          credit: "",
         },
         {
-          title: 'Wages Payable',
-          debit: '',
-          credit: '₹9,166.00'
-        }
+          title: "Wages Payable",
+          debit: "",
+          credit: "₹9,166.00",
+        },
       ],
       description: {
-        to: 'Wages Payable',
-        narration: 'Utility bill payments and other miscellaneous expenses'
-      }
+        to: "Wages Payable",
+        narration: "Utility bill payments and other miscellaneous expenses",
+      },
     },
-    status: 'Pending'
+    status: "Pending",
   },
   {
-    date: '09-Jun-25',
-    entry: 'JRNL-2025-1004',
-    voucher_type: 'Purchase',
+    date: "09-Jun-25",
+    entry: "JRNL-2025-1004",
+    voucher_type: "Purchase",
     particulars: {
       accounts: [
         {
-          title: 'Wages Payable',
-          debit: '₹8,215.00',
-          credit: ''
+          title: "Wages Payable",
+          debit: "₹8,215.00",
+          credit: "",
         },
         {
-          title: 'Utilities Expense',
-          debit: '',
-          credit: '₹8,215.00'
-        }
+          title: "Utilities Expense",
+          debit: "",
+          credit: "₹8,215.00",
+        },
       ],
       description: {
-        to: 'Utilities Expense',
-        narration: 'Initial capital contribution and office setup'
-      }
+        to: "Utilities Expense",
+        narration: "Initial capital contribution and office setup",
+      },
     },
-    status: 'Pending'
+    status: "Pending",
   },
   {
-    date: '08-May-25',
-    entry: 'JRNL-2025-1005',
-    voucher_type: 'Journal',
+    date: "08-May-25",
+    entry: "JRNL-2025-1005",
+    voucher_type: "Journal",
     particulars: {
       accounts: [
         {
-          title: 'Unearned Revenue',
-          debit: '₹22,759.00',
-          credit: ''
+          title: "Unearned Revenue",
+          debit: "₹22,759.00",
+          credit: "",
         },
         {
-          title: 'Equipment',
-          debit: '',
-          credit: '₹22,759.00'
-        }
+          title: "Equipment",
+          debit: "",
+          credit: "₹22,759.00",
+        },
       ],
       description: {
-        to: 'Equipment',
-        narration: 'Payment of rent and utilities for the month'
-      }
+        to: "Equipment",
+        narration: "Payment of rent and utilities for the month",
+      },
     },
-    status: 'Pending'
+    status: "Pending",
   },
   {
-    date: '29-Jun-25',
-    entry: 'JRNL-2025-1006',
-    voucher_type: 'Payment',
+    date: "29-Jun-25",
+    entry: "JRNL-2025-1006",
+    voucher_type: "Payment",
     particulars: {
       accounts: [
         {
-          title: 'Office Supplies',
-          debit: '₹20,521.00',
-          credit: ''
+          title: "Office Supplies",
+          debit: "₹20,521.00",
+          credit: "",
         },
         {
-          title: 'Accounts Payable',
-          debit: '',
-          credit: '₹20,521.00',
-        }
+          title: "Accounts Payable",
+          debit: "",
+          credit: "₹20,521.00",
+        },
       ],
       description: {
-        to: 'Accounts Payable',
-        narration: 'Sold goods for cash and reduced COGS'
-      }
+        to: "Accounts Payable",
+        narration: "Sold goods for cash and reduced COGS",
+      },
     },
-    status: 'Approved'
+    status: "Approved",
   },
   {
-    date: '01-May-25',
-    entry: 'JRNL-2025-1007',
-    voucher_type: 'Journal',
+    date: "01-May-25",
+    entry: "JRNL-2025-1007",
+    voucher_type: "Journal",
     particulars: {
       accounts: [
         {
-          title: 'Accounts Receivable',
-          debit: '₹32,540.00',
-          credit: ''
+          title: "Accounts Receivable",
+          debit: "₹32,540.00",
+          credit: "",
         },
         {
-          title: 'Wages Payable',
-          debit: '',
-          credit: '₹13,846.00'
+          title: "Wages Payable",
+          debit: "",
+          credit: "₹13,846.00",
         },
         {
-          title: 'Accounts Payable',
-          debit: '',
-          credit: '₹18,694.00'
-        }
+          title: "Accounts Payable",
+          debit: "",
+          credit: "₹18,694.00",
+        },
       ],
       description: {
-        to: 'Wages Payable, Accounts Payable',
-        narration: 'Paid for multiple insurance policies'
-      }
+        to: "Wages Payable, Accounts Payable",
+        narration: "Paid for multiple insurance policies",
+      },
     },
-    status: 'Pending'
+    status: "Pending",
   },
   {
-    date: '27-Jun-25',
-    entry: 'JRNL-2025-1008',
-    voucher_type: 'Receipt',
+    date: "27-Jun-25",
+    entry: "JRNL-2025-1008",
+    voucher_type: "Receipt",
     particulars: {
       accounts: [
         {
-          title: 'Utilities Expense',
-          debit: '₹19,566.00',
-          credit: ''
+          title: "Utilities Expense",
+          debit: "₹19,566.00",
+          credit: "",
         },
         {
-          title: 'Equipment',
-          debit: '',
-          credit: '₹19,566.00',
-        }
+          title: "Equipment",
+          debit: "",
+          credit: "₹19,566.00",
+        },
       ],
       description: {
-        to: 'Equipment',
-        narration: 'Received cash from various customers on account'
-      }
+        to: "Equipment",
+        narration: "Received cash from various customers on account",
+      },
     },
-    status: 'Pending'
-  }
+    status: "Pending",
+  },
 ]);
 
-
-
 const entriesTableHeaders = ref([
-  { title: 'Date', value: 'date', visible: true },
-  { title: 'Entry #', value: 'entry', visible: true },
-  { title: 'Voucher Type', value: 'voucher_type', visible: true },
-  { title: 'Particulars', value: 'particulars', visible: true },
-  { title: 'Debit', value: 'debit', visible: true },
-  { title: 'Credit', value: 'credit', visible: true },
-  { title: 'Status', value: 'status', visible: true },
-  { title: 'Actions', value: 'actions', visible: true },
-])
+  { title: "Date", value: "date", visible: true },
+  { title: "Entry #", value: "entry", visible: true },
+  { title: "Voucher Type", value: "voucher_type", visible: true },
+  { title: "Particulars", value: "particulars", visible: true },
+  { title: "Debit", value: "debit", visible: true },
+  { title: "Credit", value: "credit", visible: true },
+  { title: "Status", value: "status", visible: true },
+  { title: "Actions", value: "actions", visible: true },
+]);
 
 const allLedgers = ref([
-  { title: 'HDFC Bank', value: '1.1.2.1', groupId: '1.1.2' },
-  { title: 'ICICI Bank', value: '1.1.2.2', groupId: '1.1.2' },
-  { title: 'Cash', value: '1.1.1.1', groupId: '1.1.1' },
-  { title: 'Innovate Inc.', value: '1.1.3.1', groupId: '1.1.3' },
-  { title: 'Solutions Corp.', value: '1.1.3.2', groupId: '1.1.3' },
-  { title: 'Furniture & Fixtures', value: '1.2.1.1', groupId: '1.2.1' },
-  { title: 'Computers', value: '1.2.1.2', groupId: '1.2.1' },
-  { title: 'GST Payable', value: '2.1.1.1', groupId: '2.1' },
-  { title: 'Cloud Services LLC', value: '1.1.3.3', groupId: '1.1.3' },
+  { title: "HDFC Bank", value: "1.1.2.1", groupId: "1.1.2" },
+  { title: "ICICI Bank", value: "1.1.2.2", groupId: "1.1.2" },
+  { title: "Cash", value: "1.1.1.1", groupId: "1.1.1" },
+  { title: "Innovate Inc.", value: "1.1.3.1", groupId: "1.1.3" },
+  { title: "Solutions Corp.", value: "1.1.3.2", groupId: "1.1.3" },
+  { title: "Furniture & Fixtures", value: "1.2.1.1", groupId: "1.2.1" },
+  { title: "Computers", value: "1.2.1.2", groupId: "1.2.1" },
+  { title: "GST Payable", value: "2.1.1.1", groupId: "2.1" },
+  { title: "Cloud Services LLC", value: "1.1.3.3", groupId: "1.1.3" },
 ]);
 
 const voucherTypes = ref([
-  { title: 'Sales Voucher', value: 'sales_voucher' },
-  { title: 'Purchase Voucher', value: 'purchase_voucher' },
-  { title: 'Journal Voucher', value: 'journal_voucher' },
-  { title: 'Payment Voucher', value: 'payment_voucher' },
-  { title: 'Reciept Voucher', value: 'reciept_voucher' },
-])
+  { title: "Sales Voucher", value: "sales_voucher" },
+  { title: "Purchase Voucher", value: "purchase_voucher" },
+  { title: "Journal Voucher", value: "journal_voucher" },
+  { title: "Payment Voucher", value: "payment_voucher" },
+  { title: "Reciept Voucher", value: "reciept_voucher" },
+]);
 
-const debitRows = ref([{ account: null, amount: 0 }]);
-const creditRows = ref([{ account: null, amount: 0 }]);
+const debitRows = ref([{ account: null, amount: 0, amountInWords: "" }]);
+const creditRows = ref([{ account: null, amount: 0, amountInWords: "" }]);
 
 // Ledger form
 const ledgerForm = reactive({
@@ -353,8 +476,13 @@ const ledgerForm = reactive({
 });
 
 const ledgerFormRef = ref();
-const nameRules = [(v) => !!v || "This field is required"];
-const parentGroupRules = [(v) => !!v || "This field is required"];
+
+// Import ledger validations
+
+const nameRules = [(v) => validateField(v, ledgerValidations.ledgerName)];
+const parentGroupRules = [
+  (v) => validateField(v, ledgerValidations.parentGroup),
+];
 
 // Build parent group options
 function buildParentGroupOptions(data, level = 0) {
@@ -405,7 +533,9 @@ async function submitLedgerForm() {
 
   const parentParts = ledgerForm.parentGroup.split(".");
   const newIndex = parentNode.children.length
-    ? Math.max(...parentNode.children.map((c) => parseInt(c.id.split(".").pop()))) + 1
+    ? Math.max(
+        ...parentNode.children.map((c) => parseInt(c.id.split(".").pop()))
+      ) + 1
     : 1;
   const newId = `${ledgerForm.parentGroup}.${newIndex}`;
 
@@ -428,7 +558,7 @@ async function submitLedgerForm() {
 }
 
 const addDebitRow = () => {
-  debitRows.value.push({ account: null, amount: 0 });
+  debitRows.value.push({ account: null, amount: 0, amountInWords: "" });
 };
 
 const removeDebitRow = (index) => {
@@ -438,7 +568,7 @@ const removeDebitRow = (index) => {
 };
 
 const addCreditRow = () => {
-  creditRows.value.push({ account: null, amount: 0 });
+  creditRows.value.push({ account: null, amount: 0, amountInWords: "" });
 };
 
 const removeCreditRow = (index) => {
@@ -454,23 +584,22 @@ function openDetailsDialog(entry) {
 }
 
 function totalAmount(accounts, type) {
-  if (!accounts || !Array.isArray(accounts)) return '₹0.00';
+  if (!accounts || !Array.isArray(accounts)) return "₹0.00";
 
   const sum = accounts.reduce((acc, item) => {
-    const value = item[type]?.replace(/[^0-9.-]+/g, '') || '0';
+    const value = item[type]?.replace(/[^0-9.-]+/g, "") || "0";
     return acc + parseFloat(value);
   }, 0);
 
-  return `₹${sum.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+  return `₹${sum.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
 }
 
 function getToAccounts(entry) {
   if (!entry?.particulars?.description?.to) return [];
-  return entry.particulars.description.to.split(',').map(a => a.trim());
+  return entry.particulars.description.to.split(",").map((a) => a.trim());
 }
 
 const hoveredRowIndex = ref(null);
-
 </script>
 
 <template>
@@ -478,157 +607,336 @@ const hoveredRowIndex = ref(null);
     <VExpandTransition>
       <VRow v-show="showJournalEntryCard" class="justify-center">
         <VCol cols="8" class="">
-          <VCard title="New Journal Entry" class="account_vcard_border account_ui_vcard pa-2 shadow-none mb-6">
+          <VCard
+            title="New Journal Entry"
+            class="account_vcard_border account_ui_vcard pa-2 shadow-none mb-6"
+          >
             <template #append>
-              <VBtn @click="showLedgerDialog = true" class="account_v_btn_outlined save_btn_height"
-                prepend-icon="mdi-plus-circle-outline" variant="outlined" size="default" rounded="2" color="primary">
+              <VBtn
+                @click="showLedgerDialog = true"
+                class="account_v_btn_outlined save_btn_height"
+                prepend-icon="mdi-plus-circle-outline"
+                variant="outlined"
+                size="default"
+                rounded="2"
+                color="primary"
+              >
                 Add Ledger
               </VBtn>
             </template>
             <VCardText class="mt-4">
-              <VRow>
-                <VCol cols="12" lg="6" md="6">
-                  <div class="d-flex align-center gap-3">
-                    <div class="account_entry_form_label">
-                      <label class="account_label">Date *</label>
+              <VForm ref="journalEntryFormRef">
+                <VRow>
+                  <VCol cols="12" lg="6" md="6">
+                    <div class="d-flex align-center gap-3">
+                      <div class="account_entry_form_label">
+                        <label class="account_label">Date *</label>
+                      </div>
+                      <VTextField
+                        v-model="journalEntryForm.entryDate"
+                        :rules="[journalEntryRules.entryDate]"
+                        class="accouting_field accouting_active_field"
+                        type="date"
+                        variant="outlined"
+                        placeholder="Select Date"
+                        density="compact"
+                        prepend-inner-icon="mdi-calendar"
+                      />
                     </div>
-                    <VTextField class="accouting_field accouting_active_field" type="date" variant="outlined"
-                      placeholder="Select Date" density="compact" prepend-inner-icon="mdi-calendar" />
-                  </div>
-                </VCol>
-              </VRow>
+                  </VCol>
+                </VRow>
 
-              <!-- Debit -->
-              <VRow v-for="(debit, index) in debitRows" :key="index" class="mb-1">
-                <VCol cols="12" lg="8" md="8">
-                  <div class="d-flex align-center gap-3">
-                    <div class="account_entry_form_label">
-                      <label v-if="index === 0" class="account_label">Debit *</label>
+                <!-- Debit -->
+                <VRow
+                  v-for="(debit, index) in debitRows"
+                  :key="index"
+                  class="mb-1"
+                >
+                  <!-- Account -->
+                  <VCol cols="12" lg="8" md="8">
+                    <div class="d-flex align-center gap-3">
+                      <div class="account_entry_form_label">
+                        <label v-if="index === 0" class="account_label"
+                          >Debit*</label
+                        >
+                      </div>
+                      <VAutocomplete
+                        class="accouting_field accouting_active_field"
+                        variant="outlined"
+                        placeholder="Select Account"
+                        density="compact"
+                        :items="allLedgers"
+                        item-title="title"
+                        item-value="value"
+                        v-model="debit.account"
+                        :rules="[
+                          (v) =>
+                            validateField(v, journalEntryValidations.account),
+                        ]"
+                      />
                     </div>
-                    <!-- <div v-else style="width: 48px"></div> -->
-                    <VAutocomplete class="accouting_field accouting_active_field" variant="outlined"
-                      placeholder="Select Account" density="compact" :items="allLedgers" item-title="title"
-                      item-value="value" v-model="debit.account" />
-                  </div>
-                </VCol>
-                <VCol cols="12" lg="4" md="4">
-                  <VTextField type="number" class="accouting_field accouting_active_field" placeholder="0"
-                    variant="outlined" density="compact" v-model="debit.amount">
-                    <template #append>
-                      <VBtn class="account_v_btn_ghost account_btn_primary_text" icon="mdi-close" variant="text"
-                        size="x-small" rounded="1" @click="removeDebitRow(index)" />
-                    </template>
-                  </VTextField>
-                </VCol>
-              </VRow>
-
-              <!-- Add Button -->
-              <div class="d-flex align-center pr-9 mb-4 justify-end">
-                <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="small" rounded=""
-                  prepend-icon="mdi-plus" @click="addDebitRow">
-                  Add Debit Amount
-                </VBtn>
-              </div>
-
-              <!-- Credit -->
-              <VRow v-for="(credit, index) in creditRows" :key="index" class="mb-1">
-                <VCol cols="12" lg="8" md="8">
-                  <div class="d-flex align-center gap-3">
-                    <div class="account_entry_form_label">
-                      <label v-if="index === 0" class="account_label">Credit *</label>
+                  </VCol>
+                  <!-- Amount -->
+                  <VCol cols="12" lg="4" md="4">
+                    <VTextField
+                      type="number"
+                      class="accouting_field accouting_active_field"
+                      placeholder="0"
+                      variant="outlined"
+                      density="compact"
+                      v-model="debit.amount"
+                      :rules="[
+                        (v) =>
+                          validateField(v, journalEntryValidations.entryAmount),
+                      ]"
+                      @input="
+                        (event) => handleAmountInput(event, index, 'debit')
+                      "
+                    >
+                      <template #append>
+                        <VBtn
+                          class="account_v_btn_ghost account_btn_primary_text"
+                          icon="mdi-close"
+                          variant="text"
+                          size="x-small"
+                          rounded="1"
+                          @click="removeDebitRow(index)"
+                        />
+                      </template>
+                    </VTextField>
+                    <!-- Amount in words display -->
+                    <div v-if="debit.amountInWords" class="mt-1">
+                      <small class="font-italic amountInWords">
+                        {{ debit.amountInWords }} rupees only
+                      </small>
                     </div>
-                    <!-- <div v-else style="width: 48px"></div> -->
-                    <VAutocomplete class="accouting_field accouting_active_field" variant="outlined"
-                      placeholder="Select Account" density="compact" :items="allLedgers" item-title="title"
-                      item-value="value" v-model="credit.account" />
-                  </div>
-                </VCol>
-                <VCol cols="12" lg="4" md="4">
-                  <VTextField type="number" class="accouting_field accouting_active_field" placeholder="0"
-                    variant="outlined" density="compact" v-model="credit.amount">
-                    <template #append>
-                      <VBtn @click="removeCreditRow(index)" class="account_v_btn_ghost account_btn_primary_text"
-                        icon="mdi-close" variant="text" size="x-small" rounded="1" />
-                    </template>
-                  </VTextField>
-                </VCol>
-              </VRow>
+                  </VCol>
+                </VRow>
 
-              <div class="d-flex align-center pr-9 mb-4 justify-end">
-                <VBtn @click="addCreditRow" class="account_v_btn_ghost account_btn_primary_text" variant="text"
-                  size="small" rounded="" prepend-icon="mdi-plus">Add
-                  Credit
-                  Amount</VBtn>
-              </div>
+                <!-- Add Button -->
+                <div class="d-flex align-center pr-9 mb-4 justify-end">
+                  <VBtn
+                    class="account_v_btn_ghost account_btn_primary_text"
+                    variant="text"
+                    size="small"
+                    rounded=""
+                    prepend-icon="mdi-plus"
+                    @click="addDebitRow"
+                  >
+                    Add Debit Amount
+                  </VBtn>
+                </div>
 
-              <VRow>
-                <VCol cols="12" lg="7" md="7">
-                  <div class="d-flex align-start gap-3">
-                    <div class="account_entry_form_label">
-                      <label class="account_label mt-3">Description *</label>
+                <!-- Credit -->
+                <VRow
+                  v-for="(credit, index) in creditRows"
+                  :key="index"
+                  class="mb-1"
+                >
+                  <VCol cols="12" lg="8" md="8">
+                    <div class="d-flex align-center gap-3">
+                      <div class="account_entry_form_label">
+                        <label v-if="index === 0" class="account_label"
+                          >Credit *</label
+                        >
+                      </div>
+                      <!-- <div v-else style="width: 48px"></div> -->
+                      <VAutocomplete
+                        class="accouting_field accouting_active_field"
+                        variant="outlined"
+                        placeholder="Select Account"
+                        density="compact"
+                        :items="allLedgers"
+                        item-title="title"
+                        item-value="value"
+                        v-model="credit.account"
+                        :rules="[
+                          (v) =>
+                            validateField(v, journalEntryValidations.account),
+                        ]"
+                      />
                     </div>
-                    <VTextarea class="accounting_v_textarea"
-                      placeholder="e.g. Inventory purchased on credit. XYZ Capital Introduce. Max length 254 characters"
-                      variant="outlined" />
-                  </div>
-                </VCol>
-                <VCol cols="12" lg="5" md="5">
-                  <label class="account_label">Voucher Type *</label>
-                  <VAutocomplete class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                    :items="voucherTypes" item-title="title" item-value="value" placeholder="Select Voucher Type" />
-                </VCol>
-              </VRow>
+                  </VCol>
+                  <VCol cols="12" lg="4" md="4">
+                    <VTextField
+                      type="number"
+                      class="accouting_field accouting_active_field"
+                      placeholder="0"
+                      variant="outlined"
+                      density="compact"
+                      v-model="credit.amount"
+                      :rules="[
+                        (v) =>
+                          validateField(v, journalEntryValidations.entryAmount),
+                      ]"
+                      @input="
+                        (event) => handleAmountInput(event, index, 'credit')
+                      "
+                    >
+                      <template #append>
+                        <VBtn
+                          @click="removeCreditRow(index)"
+                          class="account_v_btn_ghost account_btn_primary_text"
+                          icon="mdi-close"
+                          variant="text"
+                          size="x-small"
+                          rounded="1"
+                        />
+                      </template>
+                    </VTextField>
+                    <!-- Amount in words display -->
+                    <div v-if="credit.amountInWords" class="mt-1">
+                      <small class="font-italic amountInWords">
+                        {{ credit.amountInWords }} rupees only
+                      </small>
+                    </div>
+                  </VCol>
+                </VRow>
 
-              <VRow>
-                <VCol cols="12" lg="12" md="12">
-                  <VCard class="account_vcard_border mt-2 account_module_card shadow-none" title="Auto-Approve Entry"
-                    subtitle="This entry will be approved automatically and will immediately affect your books.">
-                    <template #append>
-                      <VSwitch density="compact" inset class="account_swtich_btn" color="primary" hide-details />
-                    </template>
-                  </VCard>
-                </VCol>
-              </VRow>
+                <div class="d-flex align-center pr-9 mb-4 justify-end">
+                  <VBtn
+                    @click="addCreditRow"
+                    class="account_v_btn_ghost account_btn_primary_text"
+                    variant="text"
+                    size="small"
+                    rounded=""
+                    prepend-icon="mdi-plus"
+                    >Add Credit Amount</VBtn
+                  >
+                </div>
 
-              <VRow>
-                <VCol cols="12">
-                  <div class="d-flex align-center justify-end gap-2">
-                    <VBtn @click="showJournalEntryCard = false" class="account_v_btn_outlined" variant="outlined"
-                      rounded="2" size="default">Cancel</VBtn>
-                    <VBtn class="account_v_btn_primary save_btn_height" prepend-icon="mdi-content-save-outline"
-                      variant="outlined" size="default" rounded="2" color="primary">Save Voucher</VBtn>
-                  </div>
-                </VCol>
-              </VRow>
+                <VRow>
+                  <VCol cols="12" lg="7" md="7">
+                    <div class="d-flex align-start gap-3">
+                      <div class="account_entry_form_label">
+                        <label class="account_label mt-3">Description *</label>
+                      </div>
+                      <VTextarea
+                        v-model="journalEntryForm.description"
+                        :rules="[journalEntryRules.description]"
+                        class="accounting_v_textarea"
+                        placeholder="e.g. Inventory purchased on credit. XYZ Capital Introduce. Max length 254 characters"
+                        variant="outlined"
+                      />
+                    </div>
+                  </VCol>
+                  <VCol cols="12" lg="5" md="5">
+                    <label class="account_label">Voucher Type *</label>
+                    <VAutocomplete
+                      v-model="journalEntryForm.voucherType"
+                      :rules="[journalEntryRules.voucherType]"
+                      class="accouting_field accouting_active_field"
+                      variant="outlined"
+                      density="compact"
+                      :items="voucherTypes"
+                      item-title="title"
+                      item-value="value"
+                      placeholder="Select Voucher Type"
+                    />
+                  </VCol>
+                </VRow>
+
+                <VRow>
+                  <VCol cols="12" lg="12" md="12">
+                    <VCard
+                      class="account_vcard_border mt-2 account_module_card shadow-none"
+                      title="Auto-Approve Entry"
+                      subtitle="This entry will be approved automatically and will immediately affect your books."
+                    >
+                      <template #append>
+                        <VSwitch
+                          density="compact"
+                          inset
+                          class="account_swtich_btn"
+                          color="primary"
+                          hide-details
+                        />
+                      </template>
+                    </VCard>
+                  </VCol>
+                </VRow>
+
+                <VRow>
+                  <VCol cols="12">
+                    <div class="d-flex align-center justify-end gap-2">
+                      <VBtn
+                        @click="showJournalEntryCard = false"
+                        class="account_v_btn_outlined"
+                        variant="outlined"
+                        rounded="2"
+                        size="default"
+                        >Cancel</VBtn
+                      >
+                      <VBtn
+                        @click="submitJournalEntryForm"
+                        class="account_v_btn_primary save_btn_height"
+                        prepend-icon="mdi-content-save-outline"
+                        variant="outlined"
+                        size="default"
+                        rounded="2"
+                        color="primary"
+                        >Save Voucher</VBtn
+                      >
+                    </div>
+                  </VCol>
+                </VRow>
+              </VForm>
             </VCardText>
           </VCard>
         </VCol>
       </VRow>
     </VExpandTransition>
 
-    <VCard title="All Entries" subtitle="A record of all financial transactions."
-      class="account_vcard_border pa-2 account_ui_vcard shadow-none">
+    <VCard
+      title="All Entries"
+      subtitle="A record of all financial transactions."
+      class="account_vcard_border pa-2 account_ui_vcard shadow-none"
+    >
       <template #append>
         <div class="d-flex align-center gap-2">
-          <VBtn @click="showJournalEntryCard = !showJournalEntryCard" class="account_v_btn_primary save_btn_height"
-            prepend-icon="mdi-plus-circle-outline" variant="outlined" size="default" rounded="2" color="primary">
+          <VBtn
+            @click="showJournalEntryCard = !showJournalEntryCard"
+            class="account_v_btn_primary save_btn_height"
+            prepend-icon="mdi-plus-circle-outline"
+            variant="outlined"
+            size="default"
+            rounded="2"
+            color="primary"
+          >
             New Journal Entry
           </VBtn>
         </div>
       </template>
       <div class="d-flex align-center px-3 justify-space-between">
-        <VTextField style="max-width: 265px;" prepend-inner-icon="mdi-magnify"
-          class="accouting_field accouting_active_field" placeholder="Filter entries" variant="outlined" />
+        <VTextField
+          style="max-width: 265px"
+          prepend-inner-icon="mdi-magnify"
+          class="accouting_field accouting_active_field"
+          placeholder="Filter entries"
+          variant="outlined"
+        />
 
         <div class="d-flex align-center gap-2">
-          <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details
-            label="Compact" />
+          <VSwitch
+            density="compact"
+            inset
+            class="account_swtich_btn mr-3"
+            color="primary"
+            hide-details
+            label="Compact"
+          />
           <VMenu width="200px" location="start" :close-on-content-click="false">
             <template #activator="{ props }">
               <v-tooltip text="Filters" location="top">
                 <template #activator="{ props: tooltipProps }">
-                  <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color"
-                    icon="mdi-filter-cog-outline" rounded size="36" />
+                  <VBtn
+                    v-bind="{ ...props, ...tooltipProps }"
+                    variant="text"
+                    class="account_filter_btn_color"
+                    icon="mdi-filter-cog-outline"
+                    rounded
+                    size="36"
+                  />
                 </template>
               </v-tooltip>
             </template>
@@ -637,20 +945,35 @@ const hoveredRowIndex = ref(null);
               <VDivider class="my-1 mt-0" />
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
+                  <div
+                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                  >
+                    <VCheckbox
+                      class="account_v_checkbox account_filter_menu_checkbox"
+                      density="compact"
+                    />
                     <span>Date</span>
                   </div>
                 </div>
                 <div class="account_vcard_menu_item">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
+                  <div
+                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                  >
+                    <VCheckbox
+                      class="account_v_checkbox account_filter_menu_checkbox"
+                      density="compact"
+                    />
                     <span>Created By</span>
                   </div>
                 </div>
                 <div class="account_vcard_menu_item">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
+                  <div
+                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                  >
+                    <VCheckbox
+                      class="account_v_checkbox account_filter_menu_checkbox"
+                      density="compact"
+                    />
                     <span>Account</span>
                   </div>
                 </div>
@@ -658,20 +981,34 @@ const hoveredRowIndex = ref(null);
             </VCard>
           </VMenu>
 
-          <VMenu width="110px" location="bottom" :close-on-content-click="false">
+          <VMenu
+            width="110px"
+            location="bottom"
+            :close-on-content-click="false"
+          >
             <template v-slot:activator="{ props }">
-              <VBtn v-bind="props" icon="mdi-tray-arrow-down" class="account_filter_btn_color " variant="text"
-                rounded="" size="36" />
+              <VBtn
+                v-bind="props"
+                icon="mdi-tray-arrow-down"
+                class="account_filter_btn_color"
+                variant="text"
+                rounded=""
+                size="36"
+              />
             </template>
             <VCard class="account_vcard_border">
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                  <div
+                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                  >
                     <span>PDF</span>
                   </div>
                 </div>
                 <div class="account_vcard_menu_item">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                  <div
+                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                  >
                     <span>CSV</span>
                   </div>
                 </div>
@@ -681,15 +1018,21 @@ const hoveredRowIndex = ref(null);
         </div>
       </div>
       <VCardText class="mt-2">
-        <VCard class=" shadow-none">
+        <VCard class="shadow-none">
           <div class="gst_summary_table_container">
-            <table class="table table-bordered account_entries_table text-center">
+            <table
+              class="table table-bordered account_entries_table text-center"
+            >
               <thead>
                 <tr>
                   <th class="account_entries_table_header_date">Date</th>
                   <th class="account_entries_table_header_entry">Entry #</th>
-                  <th class="account_entries_table_header_voucher">Voucher Type</th>
-                  <th class="account_entries_table_header_particulars">Particulars</th>
+                  <th class="account_entries_table_header_voucher">
+                    Voucher Type
+                  </th>
+                  <th class="account_entries_table_header_particulars">
+                    Particulars
+                  </th>
                   <th class="account_entries_table_header_debit">Debit</th>
                   <th class="account_entries_table_header_credit">Credit</th>
                   <th class="account_entries_table_header_status">Status</th>
@@ -699,79 +1042,172 @@ const hoveredRowIndex = ref(null);
               <tbody>
                 <template v-for="(entry, index) in allEntries" :key="index">
                   <tr
-                    v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0"
-                    :class="['account_entries_table_row', { 'even-entry': index % 2 === 0 }]"
-                    @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
+                    v-if="
+                      entry &&
+                      entry.particulars &&
+                      entry.particulars.accounts &&
+                      Array.isArray(entry.particulars.accounts) &&
+                      entry.particulars.accounts.length > 0
+                    "
+                    :class="[
+                      'account_entries_table_row',
+                      { 'even-entry': index % 2 === 0 },
+                    ]"
+                    @mouseover="hoveredRowIndex = index"
+                    @mouseleave="hoveredRowIndex = null"
+                  >
                     <!-- Date, Entry #, Voucher Type, Status, and Actions span all account rows and description -->
-                    <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                      {{ entry.date || 'N/A' }}
+                    <td
+                      class="account_entries_table_date"
+                      :rowspan="entry.particulars.accounts.length + 1"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
+                    >
+                      {{ entry.date || "N/A" }}
                     </td>
-                    <td class="account_entries_table_entry" :rowspan="entry.particulars.accounts.length + 1"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                      {{ entry.entry || 'N/A' }}<br>
-                      <span @click="openDetailsDialog(entry)"
-                        style="font-size: 12px; color: #009688; cursor: pointer;">View Details</span>
+                    <td
+                      class="account_entries_table_entry"
+                      :rowspan="entry.particulars.accounts.length + 1"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
+                    >
+                      {{ entry.entry || "N/A" }}<br />
+                      <span
+                        @click="openDetailsDialog(entry)"
+                        style="font-size: 12px; color: #009688; cursor: pointer"
+                        >View Details</span
+                      >
                     </td>
-                    <td class="account_entries_table_voucher" :rowspan="entry.particulars.accounts.length + 1"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                      {{ entry.voucher_type || 'N/A' }}
+                    <td
+                      class="account_entries_table_voucher"
+                      :rowspan="entry.particulars.accounts.length + 1"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
+                    >
+                      {{ entry.voucher_type || "N/A" }}
                     </td>
                     <!-- First account row -->
-                    <td class="account_entries_table_particulars"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                      {{ entry.particulars.accounts[0]?.title || 'N/A' }}
+                    <td
+                      class="account_entries_table_particulars"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
+                    >
+                      {{ entry.particulars.accounts[0]?.title || "N/A" }}
                     </td>
-                    <td class="account_entries_table_debit account_primary_color">
-                      {{ entry.particulars.accounts[0]?.debit || '' }}
+                    <td
+                      class="account_entries_table_debit account_primary_color"
+                    >
+                      {{ entry.particulars.accounts[0]?.debit || "" }}
                     </td>
-                    <td class="account_entries_table_credit account_error_color ">
-                      {{ entry.particulars.accounts[0]?.credit || '' }}
+                    <td
+                      class="account_entries_table_credit account_error_color"
+                    >
+                      {{ entry.particulars.accounts[0]?.credit || "" }}
                     </td>
-                    <td class="account_entries_table_status" :rowspan="entry.particulars.accounts.length + 1">
-                      <VChip class="account_v_chip"
-                        :class="entry.status === 'Pending' ? 'account_chip_error' : 'account_chip_primary'"
-                        size="small">
-                        {{ entry.status || 'N/A' }}
+                    <td
+                      class="account_entries_table_status"
+                      :rowspan="entry.particulars.accounts.length + 1"
+                    >
+                      <VChip
+                        class="account_v_chip"
+                        :class="
+                          entry.status === 'Pending'
+                            ? 'account_chip_error'
+                            : 'account_chip_primary'
+                        "
+                        size="small"
+                      >
+                        {{ entry.status || "N/A" }}
                       </VChip>
                     </td>
-                    <td class="account_entries_table_actions" :rowspan="entry.particulars.accounts.length + 1">
+                    <td
+                      class="account_entries_table_actions"
+                      :rowspan="entry.particulars.accounts.length + 1"
+                    >
                       <div class="d-flex align-center justify-center gap-2">
-                        <VBtn size="small" class="account_v_btn_ghost" icon="mdi-pencil-box-multiple-outline"
-                          variant="text" />
-                        <VBtn size="small" class="account_v_btn_ghost" icon="mdi-arrow-u-left-top" variant="text" />
-                        <VBtn size="small" class="account_v_btn_ghost" icon="mdi-trash-can-outline" variant="text" />
+                        <VBtn
+                          size="small"
+                          class="account_v_btn_ghost"
+                          icon="mdi-pencil-box-multiple-outline"
+                          variant="text"
+                        />
+                        <VBtn
+                          size="small"
+                          class="account_v_btn_ghost"
+                          icon="mdi-arrow-u-left-top"
+                          variant="text"
+                        />
+                        <VBtn
+                          size="small"
+                          class="account_v_btn_ghost"
+                          icon="mdi-trash-can-outline"
+                          variant="text"
+                        />
                       </div>
                     </td>
                   </tr>
                   <!-- Additional account rows (if any) -->
-                  <tr v-for="(account, accIndex) in entry.particulars.accounts.slice(1)" :key="`${index}-${accIndex}`"
-                    v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts)"
-                    :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }]"
-                    @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
-                    <td class="account_entries_table_particulars"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                      {{ account.title || 'N/A' }}
+                  <tr
+                    v-for="(
+                      account, accIndex
+                    ) in entry.particulars.accounts.slice(1)"
+                    :key="`${index}-${accIndex}`"
+                    v-if="
+                      entry &&
+                      entry.particulars &&
+                      entry.particulars.accounts &&
+                      Array.isArray(entry.particulars.accounts)
+                    "
+                    :class="[
+                      'account_entries_table_row',
+                      { 'even-entry-extension': index % 2 === 0 },
+                    ]"
+                    @mouseover="hoveredRowIndex = index"
+                    @mouseleave="hoveredRowIndex = null"
+                  >
+                    <td
+                      class="account_entries_table_particulars"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
+                    >
+                      {{ account.title || "N/A" }}
                     </td>
-                    <td class="account_entries_table_debit account_primary_color"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                      {{ account.debit || '' }}
+                    <td
+                      class="account_entries_table_debit account_primary_color"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
+                    >
+                      {{ account.debit || "" }}
                     </td>
-                    <td class="account_entries_table_credit account_error_color"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                      {{ account.credit || '' }}
+                    <td
+                      class="account_entries_table_credit account_error_color"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
+                    >
+                      {{ account.credit || "" }}
                     </td>
                   </tr>
                   <!-- Description and Narration row -->
                   <tr
-                    v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts)"
-                    :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }]">
-                    <td colspan="3" :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                      <div class="d-flex flex-column align-start justify-center">
+                    v-if="
+                      entry &&
+                      entry.particulars &&
+                      entry.particulars.accounts &&
+                      Array.isArray(entry.particulars.accounts)
+                    "
+                    :class="[
+                      'account_entries_table_row',
+                      { 'even-entry-extension': index % 2 === 0 },
+                    ]"
+                  >
+                    <td
+                      colspan="3"
+                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
+                    >
+                      <div
+                        class="d-flex flex-column align-start justify-center"
+                      >
                         <!-- <span class="mb-0 ml-4 account_entry_desc_text">To {{ entry.particulars.description?.to || 'N/A'
                           }}</span> -->
-                        <span class="account_entry_desc_text">(Narration: {{ entry.particulars.description?.narration ||
-                          'N/A' }})</span>
+                        <span class="account_entry_desc_text"
+                          >(Narration:
+                          {{
+                            entry.particulars.description?.narration || "N/A"
+                          }})</span
+                        >
                       </div>
                     </td>
                   </tr>
@@ -784,37 +1220,85 @@ const hoveredRowIndex = ref(null);
     </VCard>
 
     <!-- Add Ledger Dialog -->
-    <VDialog v-model="showLedgerDialog" max-width="400" @click:outside="ledgerFormRef?.resetValidation()">
+    <VDialog
+      v-model="showLedgerDialog"
+      max-width="400"
+      @click:outside="ledgerFormRef?.resetValidation()"
+    >
       <VCard>
-        <VCardTitle class="account_ui_swtich_title pb-0">Add New Ledger</VCardTitle>
+        <VCardTitle class="account_ui_swtich_title pb-0"
+          >Add New Ledger</VCardTitle
+        >
         <VCardSubtitle class="account_ui_swtich_subtitle text-wrap px-3">
           Create a new ledger account under a specified group.
         </VCardSubtitle>
         <VCardText>
           <VForm ref="ledgerFormRef">
-            <VTextField v-model="ledgerForm.name" :rules="nameRules" class="accouting_field accouting_active_field mb-2"
-              placeholder="Name" variant="outlined" hide-details="auto" />
-            <VAutocomplete v-model="ledgerForm.parentGroup" :items="parentGroups" :rules="parentGroupRules"
-              class="accouting_field accouting_active_field" placeholder="Parent Group" item-title="title"
-              item-value="value" variant="outlined" hide-details="auto" />
+            <div class="mb-3">
+              <label class="account_label">Ledger Name</label>
+              <VTextField
+                v-model="ledgerForm.name"
+                :rules="nameRules"
+                class="accouting_field accouting_active_field"
+                placeholder="Enter ledger name"
+                variant="outlined"
+                hide-details="auto"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="account_label">Parent Group</label>
+              <VAutocomplete
+                v-model="ledgerForm.parentGroup"
+                :items="parentGroups"
+                :rules="parentGroupRules"
+                class="accouting_field accouting_active_field"
+                placeholder="Select parent group"
+                item-title="title"
+                item-value="value"
+                variant="outlined"
+                hide-details="auto"
+              />
+            </div>
           </VForm>
         </VCardText>
         <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click="
-            showLedgerDialog = false;
-          ledgerFormRef?.resetValidation();
-          " />
-          <VBtn text="Add Ledger" class="account_v_btn_primary" @click="submitLedgerForm" />
+          <VBtn
+            text="Cancel"
+            class="account_v_btn_outlined"
+            variant="outlined"
+            @click="
+              showLedgerDialog = false;
+              ledgerFormRef?.resetValidation();
+            "
+          />
+          <VBtn
+            text="Add Ledger"
+            class="account_v_btn_primary"
+            @click="submitLedgerForm"
+          />
         </VCardActions>
       </VCard>
     </VDialog>
 
-    <VDialog v-model="showDetailsDialog" max-width="600" @click:outside="showDetailsDialog = false">
-      <VCard class="account_vcard_border account_details_dialog" title="Journal Voucher"
-        :subtitle="selectedEntry?.entry">
+    <VDialog
+      v-model="showDetailsDialog"
+      max-width="600"
+      @click:outside="showDetailsDialog = false"
+    >
+      <VCard
+        class="account_vcard_border account_details_dialog"
+        title="Journal Voucher"
+        :subtitle="selectedEntry?.entry"
+      >
         <template #append>
-          <VBtn icon="mdi-close" variant="text" size="x-small" rounded="" @click="showDetailsDialog = false"
-            class="account_vcard_close_btn" />
+          <VBtn
+            icon="mdi-close"
+            variant="text"
+            size="x-small"
+            rounded=""
+            @click="showDetailsDialog = false"
+            class="account_vcard_close_btn"
+          />
         </template>
         <VCardText>
           <div class="d-flex align-center justify-space-between mb-2">
@@ -824,7 +1308,9 @@ const hoveredRowIndex = ref(null);
             </div>
             <div class="d-flex align-center gap-1">
               <span class="account_label_bold">Type:</span>
-              <span class="account_label_light">{{ selectedEntry?.voucher_type }}</span>
+              <span class="account_label_light">{{
+                selectedEntry?.voucher_type
+              }}</span>
             </div>
           </div>
 
@@ -834,12 +1320,18 @@ const hoveredRowIndex = ref(null);
               <span class="account_label_light">Admin</span>
             </div>
             <div class="">
-              <VChip class="account_chip_primary" size="small" :text="selectedEntry?.status" />
+              <VChip
+                class="account_chip_primary"
+                size="small"
+                :text="selectedEntry?.status"
+              />
             </div>
           </div>
           <VDivider />
 
-          <VCard class="account_vcard_border shadow-none account_entries_table mt-2">
+          <VCard
+            class="account_vcard_border shadow-none account_entries_table mt-2"
+          >
             <VTable class="">
               <thead>
                 <tr>
@@ -849,24 +1341,31 @@ const hoveredRowIndex = ref(null);
                 </tr>
               </thead>
               <tbody>
-                <template v-for="(acc, i) in selectedEntry?.particulars?.accounts" :key="i">
+                <template
+                  v-for="(acc, i) in selectedEntry?.particulars?.accounts"
+                  :key="i"
+                >
                   <tr>
                     <td :class="{ 'pl-9': i !== 0 }">{{ acc.title }}</td>
                     <td class="text-success text-right">
-                      {{ acc.debit || '' }}
+                      {{ acc.debit || "" }}
                     </td>
                     <td class="text-error text-right">
-                      {{ acc.credit || '' }}
+                      {{ acc.credit || "" }}
                     </td>
                   </tr>
                 </template>
                 <tr class="font-weight-bold">
                   <td>Total</td>
                   <td class="text-success text-right">
-                    {{ totalAmount(selectedEntry.particulars.accounts, 'debit') }}
+                    {{
+                      totalAmount(selectedEntry.particulars.accounts, "debit")
+                    }}
                   </td>
                   <td class="text-error text-right">
-                    {{ totalAmount(selectedEntry.particulars.accounts, 'credit') }}
+                    {{
+                      totalAmount(selectedEntry.particulars.accounts, "credit")
+                    }}
                   </td>
                 </tr>
                 <!-- <tr>
@@ -878,18 +1377,17 @@ const hoveredRowIndex = ref(null);
                 </tr> -->
               </tbody>
             </VTable>
-
           </VCard>
 
           <div class="d-flex align-center gap-1 mt-3 mb-2">
             <span class="account_label_bold abc">Narration:</span>
-            <span class="account_label_light font-italic">{{ selectedEntry?.particulars?.description?.narration || 'N/A'
-              }}</span>
+            <span class="account_label_light font-italic">{{
+              selectedEntry?.particulars?.description?.narration || "N/A"
+            }}</span>
           </div>
         </VCardText>
       </VCard>
     </VDialog>
-
   </div>
 </template>
 
