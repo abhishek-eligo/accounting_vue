@@ -15,7 +15,7 @@ export default [
       { title: 'Table', slug: 'table', icon: 'mdi-file-document-outline', path: '/table', component: () => import('@/pages/table') },
       { title: 'Invoice Preview', slug: 'invoice-preview', icon: 'mdi-eye-outline' },
       { title: 'Invoice Preview FC', slug: 'invoice-preview-fc', icon: 'mdi-earth' },
-      { title: 'Customer Portfolio', slug: 'customer-portfolio', icon: 'mdi-account-circle-outline' },
+      { title: 'Customer Portfolio', slug: 'customer-portfolio', icon: 'mdi-account-circle-outline', path: '/customers/view/:id', component: () => import('@/pages/customers/view/[id].vue') },
       { title: 'UI', slug: 'user-interface', icon: 'mdi-palette-outline', path: '/ui', component: () => import('@/pages/ui') },
     ],
   },

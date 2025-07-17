@@ -25,67 +25,309 @@ const invoiceHeaders = ref([
   { title: 'Actions', value: 'actions', visible: true },
 ]);
 
-// Invoice Items from screenshots (sample)
-const invoiceItems = ref([
-  {
-    invoiceNumber: 'INV-1000',
-    customerName: 'Synergy LLC',
-    invoiceDate: 'Jun 9, 2025',
-    dueDate: 'Jul 9, 2025',
-    currency: 'USD',
-    exchangeRate: '83.50',
-    amountFcy: '$400.00',
-    amountBcy: '₹33,400.00',
-    amountPaid: '₹0.00',
-    returnAmount: '-',
-    amountDue: '₹33,400.00',
-    taxableValue: '₹30,000.00',
-    gstAmount: '₹3,400.00',
-    gstType: 'UTGST',
-    placeOfSupply: 'Tamil Nadu',
-    status: 'Overdue',
-    createdBy: 'John Doe'
-  },
-  {
-    invoiceNumber: 'INV-1001',
-    customerName: 'Starlight Co.',
-    invoiceDate: 'Jul 14, 2025',
-    dueDate: 'Aug 13, 2025',
-    currency: 'EUR',
-    exchangeRate: '90.75',
-    amountFcy: '€4,450.00',
-    amountBcy: '₹4,03,837.50',
-    amountPaid: '₹0.00',
-    returnAmount: '-',
-    amountDue: '₹4,03,837.50',
-    taxableValue: '₹3,63,450.00',
-    gstAmount: '₹40,387.50',
-    gstType: 'UTGST',
-    placeOfSupply: 'Maharashtra',
-    status: 'Overdue',
-    createdBy: 'John Doe'
-  },
-  {
-    invoiceNumber: 'INV-1002',
-    customerName: 'Synergy LLC',
-    invoiceDate: 'Jun 20, 2025',
-    dueDate: 'Jul 20, 2025',
-    currency: 'INR',
-    exchangeRate: '1.00',
-    amountFcy: '₹4,800.00',
-    amountBcy: '₹4,800.00',
-    amountPaid: '₹0.00',
-    returnAmount: '-',
-    amountDue: '₹4,800.00',
-    taxableValue: '₹4,320.00',
-    gstAmount: '₹480.00',
-    gstType: 'CGST&SGST',
-    placeOfSupply: 'Uttar Pradesh',
-    status: 'Paid',
-    createdBy: 'Jane Smith'
-  }
-])
+const isCreatingNewInvoice = ref(false);
 
+// Invoice Items from screenshots (sample)
+// Updated invoiceItems array with 15 dynamically generated items
+const invoiceItems = ref([]);
+
+// Method to fetch invoice data (simulated API call)
+async function fetchInvoiceData() {
+  try {
+    // Simulating API response with the existing invoiceItems data
+    const response = [
+      {
+        invoiceNumber: 'INV-1000',
+        customerName: 'Synergy LLC',
+        invoiceDate: 'Jun 9, 2025',
+        dueDate: 'Jul 9, 2025',
+        currency: 'USD',
+        exchangeRate: '83.50',
+        amountFcy: '$400.00',
+        amountBcy: '₹33,400.00',
+        amountPaid: '₹0.00',
+        returnAmount: '-',
+        amountDue: '₹33,400.00',
+        taxableValue: '₹30,000.00',
+        gstAmount: '₹3,400.00',
+        gstType: 'UTGST',
+        placeOfSupply: 'Tamil Nadu',
+        status: 'Overdue',
+        createdBy: 'John Doe'
+      },
+      {
+        invoiceNumber: 'INV-1001',
+        customerName: 'Starlight Co.',
+        invoiceDate: 'Jul 14, 2025',
+        dueDate: 'Aug 13, 2025',
+        currency: 'EUR',
+        exchangeRate: '90.75',
+        amountFcy: '€4,450.00',
+        amountBcy: '₹4,03,837.50',
+        amountPaid: '₹0.00',
+        returnAmount: '-',
+        amountDue: '₹4,03,837.50',
+        taxableValue: '₹3,63,450.00',
+        gstAmount: '₹40,387.50',
+        gstType: 'UTGST',
+        placeOfSupply: 'Maharashtra',
+        status: 'Overdue',
+        createdBy: 'John Doe'
+      },
+      {
+        invoiceNumber: 'INV-1002',
+        customerName: 'Quantum Tech',
+        invoiceDate: 'Jun 20, 2025',
+        dueDate: 'Jul 20, 2025',
+        currency: 'INR',
+        exchangeRate: '1.00',
+        amountFcy: '₹4,800.00',
+        amountBcy: '₹4,800.00',
+        amountPaid: '₹0.00',
+        returnAmount: '-',
+        amountDue: '₹4,800.00',
+        taxableValue: '₹4,320.00',
+        gstAmount: '₹480.00',
+        gstType: 'CGST&SGST',
+        placeOfSupply: 'Uttar Pradesh',
+        status: 'Paid',
+        createdBy: 'Jane Smith'
+      },
+      {
+        invoiceNumber: 'INV-1003',
+        customerName: 'Innovative Inc.',
+        invoiceDate: 'May 15, 2025',
+        dueDate: 'Jun 14, 2025',
+        currency: 'USD',
+        exchangeRate: '82.90',
+        amountFcy: '$750.00',
+        amountBcy: '₹62,175.00',
+        amountPaid: '₹30,000.00',
+        returnAmount: '-',
+        amountDue: '₹32,175.00',
+        taxableValue: '₹55,500.00',
+        gstAmount: '₹6,675.00',
+        gstType: 'IGST',
+        placeOfSupply: 'Karnataka',
+        status: 'Outstanding',
+        createdBy: 'Alice Brown'
+      },
+      {
+        invoiceNumber: 'INV-1004',
+        customerName: 'Solution Corp.',
+        invoiceDate: 'Jul 1, 2025',
+        dueDate: 'Jul 31, 2025',
+        currency: 'INR',
+        exchangeRate: '1.00',
+        amountFcy: '₹12,500.00',
+        amountBcy: '₹12,500.00',
+        amountPaid: '₹12,500.00',
+        returnAmount: '-',
+        amountDue: '₹0.00',
+        taxableValue: '₹11,250.00',
+        gstAmount: '₹1,250.00',
+        gstType: 'CGST&SGST',
+        placeOfSupply: 'Delhi',
+        status: 'Paid',
+        createdBy: 'John Doe'
+      },
+      {
+        invoiceNumber: 'INV-1005',
+        customerName: 'Tech Innovators',
+        invoiceDate: 'Jun 25, 2025',
+        dueDate: 'Jul 25, 2025',
+        currency: 'EUR',
+        exchangeRate: '91.20',
+        amountFcy: '€2,000.00',
+        amountBcy: '₹1,82,400.00',
+        amountPaid: '₹0.00',
+        returnAmount: '-',
+        amountDue: '₹1,82,400.00',
+        taxableValue: '₹1, 64, 160.00',
+        gstAmount: '₹18,240.00',
+        gstType: 'UTGST',
+        placeOfSupply: 'Gujarat',
+        status: 'Overdue',
+        createdBy: 'Jane Smith'
+      },
+      {
+        invoiceNumber: 'INV-1006',
+        customerName: 'Global Solutions',
+        invoiceDate: 'Jul 5, 2025',
+        dueDate: 'Aug 4, 2025',
+        currency: 'USD',
+        exchangeRate: '83.10',
+        amountFcy: '$1,200.00',
+        amountBcy: '₹99,720.00',
+        amountPaid: '₹50,000.00',
+        returnAmount: '-',
+        amountDue: '₹49,720.00',
+        taxableValue: '₹89,750.00',
+        gstAmount: '₹9,970.00',
+        gstType: 'IGST',
+        placeOfSupply: 'Rajasthan',
+        status: 'Outstanding',
+        createdBy: 'Alice Brown'
+      },
+      {
+        invoiceNumber: 'INV-1007',
+        customerName: 'Bright Future Ltd.',
+        invoiceDate: 'Jun 10, 2025',
+        dueDate: 'Jul 10, 2025',
+        currency: 'INR',
+        exchangeRate: '1.00',
+        amountFcy: '₹8,000.00',
+        amountBcy: '₹8,000.00',
+        amountPaid: '₹8,000.00',
+        returnAmount: '-',
+        amountDue: '₹0.00',
+        taxableValue: '₹7,200.00',
+        gstAmount: '₹800.00',
+        gstType: 'CGST&SGST',
+        placeOfSupply: 'Punjab',
+        status: 'Paid',
+        createdBy: 'John Doe'
+
+      },
+      {
+        invoiceNumber: 'INV-1008',
+        customerName: 'Synergy LLC',
+        invoiceDate: 'Jul 8, 2025',
+        dueDate: 'Aug 7, 2025',
+        currency: 'USD',
+        exchangeRate: '83.75',
+        amountFcy: '$900.00',
+        amountBcy: '₹75,375.00',
+        amountPaid: '₹0.00',
+        returnAmount: '-',
+        amountDue: '₹75,375.00',
+        taxableValue: '₹67,837.50',
+        gstAmount: '₹7,537.50',
+        gstType: 'UTGST',
+        placeOfSupply: 'Tamil Nadu',
+        status: 'Overdue',
+        createdBy: 'Jane Smith'
+      },
+      {
+        invoiceNumber: 'INV-1009',
+        customerName: 'Starlight Co.',
+        invoiceDate: 'Jun 30, 2025',
+        dueDate: 'Jul 30, 2025',
+        currency: 'EUR',
+        exchangeRate: '90.50',
+        amountFcy: '€3,000.00',
+        amountBcy: '₹2,71,500.00',
+        amountPaid: '₹1,00,000.00',
+        returnAmount: '-',
+        amountDue: '₹1,71,500.00',
+        taxableValue: '₹2,44,350.00',
+        gstAmount: '₹27,150.00',
+        gstType: 'IGST',
+        placeOfSupply: 'Maharashtra',
+        status: 'Outstanding',
+        createdBy: 'Alice Brown'
+      },
+      {
+        invoiceNumber: 'INV-1010',
+        customerName: 'Quantum Tech',
+        invoiceDate: 'Jul 12, 2025',
+        dueDate: 'Aug 11, 2025',
+        currency: 'INR',
+        exchangeRate: '1.00',
+        amountFcy: '₹15,000.00',
+        amountBcy: '₹15,000.00',
+        amountPaid: '₹0.00',
+        returnAmount: '-',
+        amountDue: '₹15,000.00',
+        taxableValue: '₹13,500.00',
+        gstAmount: '₹1,500.00',
+        gstType: 'CGST&SGST',
+        placeOfSupply: 'Kerala',
+        status: 'Overdue',
+        createdBy: 'John Doe'
+      },
+      {
+        invoiceNumber: 'INV-1011',
+        customerName: 'Innovative Inc.',
+        invoiceDate: 'Jun 15, 2025',
+        dueDate: 'Jul 15, 2025',
+        currency: 'USD',
+        exchangeRate: '83.20',
+        amountFcy: '$600.00',
+        amountBcy: '₹49,920.00',
+        amountPaid: '₹49,920.00',
+        returnAmount: '-',
+        amountDue: '₹0.00',
+        taxableValue: '₹44,928.00',
+        gstAmount: '₹4,992.00',
+        gstType: 'IGST',
+        placeOfSupply: 'Karnataka',
+        status: 'Paid',
+        createdBy: 'Jane Smith'
+      },
+      {
+        invoiceNumber: 'INV-1012',
+        customerName: 'Solution Corp.',
+        invoiceDate: 'Jul 3, 2025',
+        dueDate: 'Aug 2, 2025',
+        currency: 'EUR',
+        exchangeRate: '91.00',
+        amountFcy: '€1,500.00',
+        amountBcy: '₹1,36,500.00',
+        amountPaid: '₹0.00',
+        returnAmount: '-',
+        amountDue: '₹1,36,500.00',
+        taxableValue: '₹1,22,850.00',
+        gstAmount: '₹13,650.00',
+        gstType: 'UTGST',
+        placeOfSupply: 'Delhi',
+        status: 'Overdue',
+        createdBy: 'Alice Brown'
+      },
+      {
+        invoiceNumber: 'INV-1013',
+        customerName: 'Tech Innovators',
+        invoiceDate: 'Jun 28, 2025',
+        dueDate: 'Jul 28, 2025',
+        currency: 'INR',
+        exchangeRate: '1.00',
+        amountFcy: '₹10,000.00',
+        amountBcy: '₹10,000.00',
+        amountPaid: '₹5,000.00',
+        returnAmount: '-',
+        amountDue: '₹5,000.00',
+        taxableValue: '₹9,000.00',
+        gstAmount: '₹1,000.00',
+        gstType: 'CGST&SGST',
+        placeOfSupply: 'Gujarat',
+        status: 'Outstanding',
+        createdBy: 'John Doe'
+      },
+      {
+        invoiceNumber: 'INV-1014',
+        customerName: 'Global Solutions',
+        invoiceDate: 'Jul 10, 2025',
+        dueDate: 'Aug 9, 2025',
+        currency: 'USD',
+        exchangeRate: '83.60',
+        amountFcy: '$1,000.00',
+        amountBcy: '₹83,600.00',
+        amountPaid: '₹0.00',
+        returnAmount: '-',
+        amountDue: '₹83,600.00',
+        taxableValue: '₹75,240.00',
+        gstAmount: '₹8,360.00',
+        gstType: 'IGST',
+        placeOfSupply: 'Rajasthan',
+        status: 'Overdue',
+        createdBy: 'Jane Smith'
+      }
+    ]; // Replace with actual API call in real implementation
+    invoiceItems.value = response; // Set the fetched data to invoiceItems
+  } catch (error) {
+    console.error('Error fetching invoice data:', error);
+  }
+}
 // Filters
 const invoiceFilters = ref([
   { title: 'Payment Status', checked: true },
@@ -173,6 +415,64 @@ const serviceInvoiceHeaders = ref([
   { title: '', value: 'actions' },
 ]);
 
+// Reactive states list for Place of Supply
+const statesList = ref([]);
+
+// Method to fetch states data from a public REST API
+async function fetchStatesData() {
+  try {
+    // Simulated API response with Indian states and union territories
+    const response = [
+      { title: 'Andhra Pradesh', value: 'Andhra Pradesh' },
+      { title: 'Arunachal Pradesh', value: 'Arunachal Pradesh' },
+      { title: 'Assam', value: 'Assam' },
+      { title: 'Bihar', value: 'Bihar' },
+      { title: 'Chhattisgarh', value: 'Chhattisgarh' },
+      { title: 'Goa', value: 'Goa' },
+      { title: 'Gujarat', value: 'Gujarat' },
+      { title: 'Haryana', value: 'Haryana' },
+      { title: 'Himachal Pradesh', value: 'Himachal Pradesh' },
+      { title: 'Jharkhand', value: 'Jharkhand' },
+      { title: 'Karnataka', value: 'Karnataka' },
+      { title: 'Kerala', value: 'Kerala' },
+      { title: 'Madhya Pradesh', value: 'Madhya Pradesh' },
+      { title: 'Maharashtra', value: 'Maharashtra' },
+      { title: 'Manipur', value: 'Manipur' },
+      { title: 'Meghalaya', value: 'Meghalaya' },
+      { title: 'Mizoram', value: 'Mizoram' },
+      { title: 'Nagaland', value: 'Nagaland' },
+      { title: 'Odisha', value: 'Odisha' },
+      { title: 'Punjab', value: 'Punjab' },
+      { title: 'Rajasthan', value: 'Rajasthan' },
+      { title: 'Sikkim', value: 'Sikkim' },
+      { title: 'Tamil Nadu', value: 'Tamil Nadu' },
+      { title: 'Telangana', value: 'Telangana' },
+      { title: 'Tripura', value: 'Tripura' },
+      { title: 'Uttar Pradesh', value: 'Uttar Pradesh' },
+      { title: 'Uttarakhand', value: 'Uttarakhand' },
+      { title: 'West Bengal', value: 'West Bengal' },
+      { title: 'Andaman and Nicobar Islands', value: 'Andaman and Nicobar Islands' },
+      { title: 'Chandigarh', value: 'Chandigarh' },
+      { title: 'Dadra and Nagar Haveli and Daman and Diu', value: 'Dadra and Nagar Haveli and Daman and Diu' },
+      { title: 'Delhi', value: 'Delhi' },
+      { title: 'Jammu and Kashmir', value: 'Jammu and Kashmir' },
+      { title: 'Ladakh', value: 'Ladakh' },
+      { title: 'Lakshadweep', value: 'Lakshadweep' },
+      { title: 'Puducherry', value: 'Puducherry' }
+    ];
+    statesList.value = response;
+  } catch (error) {
+    console.error('Error fetching states data:', error);
+  }
+}
+
+const balanceTypeList = ref([
+  { title: 'Credit', value: 'credit' },
+  { title: 'Debit', value: 'debit' },
+]);
+
+const selectedBalanceType = ref('credit');
+
 function defaultRow(isService = false) {
   return {
     item: '',
@@ -230,6 +530,8 @@ setupInvoiceWatch(itemInvoiceData);
 setupInvoiceWatch(serviceInvoiceData);
 
 onMounted(() => {
+  fetchInvoiceData();
+  fetchStatesData();
   itemInvoiceData.value[0].lockedRate = false;
   serviceInvoiceData.value[0].lockedRate = false;
 });
@@ -402,260 +704,304 @@ watchEffect(() => {
 
 const isInvoiceSettingsVisible = ref(false);
 
+const activeSettingsTab = ref('Numbering');
+
+const settingsTabs = ['Numbering', 'Columns', 'Fields', 'Mode'];
+
+const activePrefixMode = ref('Text');
+const prefixType = ref('');
+const startingNumber = ref(1);
+
+const financialYear = computed(() => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const nextYear = (today.getMonth() >= 3) ? year + 1 : year;
+  const prevYear = nextYear - 1;
+  return `${prevYear}-${nextYear.toString().slice(-2)}`;
+});
+
+watchEffect(() => {
+  if (activePrefixMode.value === 'Financial Year') {
+    prefixType.value = financialYear.value;
+  } else {
+    prefixType.value = '';
+  }
+});
+
+const previewValue = computed(() => {
+  if (!prefixType.value || !startingNumber.value) return '';
+  return `${prefixType.value}/${startingNumber.value}`;
+});
+
 </script>
 
 <template>
   <div class="account_ui_vcard">
-    <VRow class="mb-3">
-      <VCol cols="12">
-        <VCard class="account_vcard_border" title="New Invoice"
-          subtitle="Fill out the details below to create a new sales invoice.">
-          <template #append>
-            <VBtn @click="isInvoiceSettingsVisible = true" icon="mdi-cog-outline" variant="text" size="x-small"
-              rounded="" />
-          </template>
-          <VCardText>
-            <VRow>
-              <VCol cols="12" lg="6" md="6">
-                <label class="account_label mb-2">Bill To</label>
-                <VAutocomplete v-model="selectedCustomer" placeholder="Select a customer"
-                  class="accouting_field accouting_active_field" :items="customersList" variant="outlined">
-                  <template #append>
-                    <VBtn class="account_v_btn_outlined" @click="addNewCustomerVisible = true" rounded=""
-                      icon="mdi-plus-circle-outline" size="x-small" />
-                  </template>
-                </VAutocomplete>
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <VRow>
-                  <VCol cols="12" lg="6" md="6">
-                    <label class="account_label mb-2">Invoice Number</label>
-                    <VTextField v-model="invoiceNumber" class="accouting_field accouting_active_field"
-                      variant="outlined" density="compact" />
-                  </VCol>
-                  <VCol cols="12" lg="6" md="6">
-                    <label class="account_label mb-2">Invoice Date</label>
-                    <VTextField v-model="invoiceDate" class="accouting_field accouting_active_field" variant="outlined"
-                      density="compact" />
-                  </VCol>
-                </VRow>
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <VTextarea :value="customerGSTINDisplay" class="accounting_v_textarea" variant="outlined" readonly
-                  density="compact" />
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <VRow>
-                  <VCol cols="12" lg="6" md="6" sm="12">
-                    <label class="account_label mb-2">Currency</label>
-                    <VTextField v-model="currency" class="accouting_field accouting_active_field" variant="outlined"
-                      density="compact" />
-                  </VCol>
-                  <VCol cols="12" lg="6" md="6" sm="12">
-                    <label class="account_label mb-2">Place of Supply</label>
-                    <VTextField v-model="placeOfSupply" class="accouting_field accouting_active_field"
-                      variant="outlined" density="compact" />
-                  </VCol>
-                  <VCol cols="12" lg="6" md="6">
-                    <VCheckbox v-model="shippingSameAsBilling" density="compact" class="account_v_checkbox"
-                      label="Shipping address is the same as billing address" />
-                  </VCol>
-                </VRow>
-              </VCol>
-            </VRow>
-            <VDivider />
-            <VRow>
-              <VCol cols="12" lg="12" md="12">
-                <div class="d-flex align-center gap-2 mb-3">
-                  <VBtn :class="activeInvoiceType === 'item' ? 'account_v_btn_primary' : 'account_v_btn_outlined'"
-                    @click="activeInvoiceType = 'item'">
-                    Item Invoice
-                  </VBtn>
-                  <VBtn :class="activeInvoiceType === 'service' ? 'account_v_btn_primary' : 'account_v_btn_outlined'"
-                    @click="activeInvoiceType = 'service'">
-                    Service Invoice
-                  </VBtn>
-                </div>
-
-                <VDataTable :headers="activeInvoiceType === 'item' ? itemInvoiceHeaders : serviceInvoiceHeaders"
-                  :items="activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData"
-                  class="account_dynamic_table account_invoice_table">
-                  <template #item.item="{ item, index }">
-                    <VTextField
-                      v-model="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].item"
-                      placeholder="Item/Service description" class="accouting_field accouting_active_field"
-                      variant="outlined" />
-                  </template>
-
-                  <template v-if="activeInvoiceType === 'item'" #item.quantity="{ item, index }">
-                    <VTextField v-model="itemInvoiceData[index].quantity" class="accouting_field accouting_active_field"
-                      variant="outlined" placeholder="0" density="compact" />
-                  </template>
-
-                  <template v-if="activeInvoiceType === 'item'" #item.unit="{ item, index }">
-                    <VTextField v-model="itemInvoiceData[index].unit" class="accouting_field accouting_active_field"
-                      suffix="pcs" variant="outlined" placeholder="0" density="compact" />
-                  </template>
-
-                  <template #item.rate="{ item, index }">
-                    <VTextField
-                      v-model="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].rate"
-                      :readonly="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].lockedRate"
-                      class="accouting_field accouting_active_field" variant="outlined" placeholder="0"
-                      density="compact" />
-                  </template>
-
-                  <template #item.discount="{ item, index }">
-                    <VTextField
-                      v-model="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].discount"
-                      class="accouting_field accouting_active_field" variant="outlined" placeholder="0"
-                      density="compact" />
-                  </template>
-
-                  <template #item.taxableAmount="{ item, index }">
-                    <p class="mb-0">₹{{ (activeInvoiceType === 'item' ? itemInvoiceData :
-                      serviceInvoiceData)[index].taxableAmnt }}</p>
-                  </template>
-
-                  <template #item.gst="{ item, index }">
-                    <VSelect v-model="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].gst"
-                      class="accouting_field accouting_active_field" variant="outlined" :items="gstList" />
-                  </template>
-
-                  <template #item.total="{ item, index }">
-                    <p class="mb-0">₹{{ (activeInvoiceType === 'item' ? itemInvoiceData :
-                      serviceInvoiceData)[index].total }}</p>
-                  </template>
-
-                  <template #item.actions="{ index }">
-                    <VIcon icon="mdi-trash-can-outline" class="cursor-pointer table_row_icon" :class="{
-                      'opacity-50': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1,
-                      'cursor-not-allowed': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1
-                    }" :disabled="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1"
-                      @click="removeInvoiceRow(index, activeInvoiceType)" />
-                  </template>
-                </VDataTable>
-              </VCol>
-              <VCol cols="12">
-                <VBtn class="account_v_btn_outlined mt-3" prepend-icon="mdi-plus-circle-outline" variant="text"
-                  @click="addInvoiceRow(activeInvoiceType)">
-                  Add Another Line
-                </VBtn>
-              </VCol>
-            </VRow>
-            <VDivider />
-            <VRow>
-              <VCol cols="12" lg="6" sm="6"></VCol>
-              <VCol cols="12" lg="6" sm="6">
-                <VRow>
-                  <VCol cols="6">
-                    <VCard class="account_vcard_border shadow-none w-100">
-                      <div class="pa-3">
-                        <h6 class="account_gst_title mb-0">GST Breakdown</h6>
-                        <div class="d-flex align-center justify-space-between py-2">
-                          <span class="account_gst_subtitle">CGST</span>
-                          <span class="account_gst_subtitle_val">₹0.00</span>
-                        </div>
-                        <div class="d-flex align-center justify-space-between pb-2">
-                          <span class="account_gst_subtitle">SGST</span>
-                          <span class="account_gst_subtitle_val">₹0.00</span>
-                        </div>
-                        <div class="d-flex align-center justify-space-between">
-                          <span class="account_gst_subtitle">IGST</span>
-                          <span class="account_gst_subtitle_val">₹0.00</span>
-                        </div>
-                      </div>
-                    </VCard>
-                  </VCol>
-                  <VCol cols="6">
-                    <VCard class="account_vcard_border shadow-none w-100">
-                      <div class="pa-3">
-                        <h6 class="account_gst_title mb-0">Totals</h6>
-                        <div class="d-flex align-center justify-space-between py-2">
-                          <span class="account_gst_subtitle">Subtotal</span>
-                          <span class="account_gst_subtitle_val">₹50.00</span>
-                        </div>
-                        <div class="d-flex align-center justify-space-between">
-                          <span class="account_gst_subtitle">Total Discount</span>
-                          <span class="account_gst_subtitle_val">- ₹0.00</span>
-                        </div>
-                        <VDivider class="my-2" />
-                        <div class="d-flex align-center justify-space-between mb-2">
-                          <span class="account_gst_subtitle">Taxable Value</span>
-                          <span class="account_gst_subtitle_val">₹50.00</span>
-                        </div>
-                        <div class="d-flex align-center justify-space-between">
-                          <span class="account_gst_subtitle">GST (18%)</span>
-                          <span class="account_gst_subtitle_val">₹9.00</span>
-                        </div>
-                        <div class="d-flex align-center justify-space-between">
-                          <div style="min-width: 200px;" class="d-flex align-center gap-1">
-                            <span class="account_gst_subtitle">Round Off</span>
-                            <VSwitch density="compact" inset class="account_swtich_btn" color="primary" hide-details />
-                          </div>
-                          <VTextField style="max-width: 100px;" class="accouting_field accouting_active_field"
-                            type="number" variant="outlined" placeholder="0.00" density="compact" />
-                        </div>
-                        <VDivider class="my-2" />
-                        <div class="d-flex align-center justify-space-between">
-                          <h6 class="account_gst_title mb-0">Grand Total</h6>
-                          <h6 class="account_gst_title mb-0">₹59.00</h6>
-                        </div>
-                        <div class="d-flex mt-1 justify-end">
-                          <small class="base_currency_label">Base Currency (INR) ₹59.00</small>
-                        </div>
-                      </div>
-                    </VCard>
-                  </VCol>
-                </VRow>
-              </VCol>
-            </VRow>
-            <VDivider />
-            <VRow>
-              <VCol cols="12">
-                <h6 class="account_gst_title mb-0">Receive Payment</h6>
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <div class="mb-2">
-                  <label class="account_label mb-2">Amount Received</label>
-                  <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                    type="number" />
-                </div>
-                <div>
-                  <label class="account_label mb-2">Amount Received</label>
-                  <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                    type="number" />
-                </div>
-              </VCol>
-              <VCol cols="12" lg="6" md="6">
-                <VCard class="account_vcard_border shadow-none pa-4">
-                  <div class="">
-                    <h6 class="account_gst_title mb-1">Balance Due</h6>
-                    <h4 class="mb-0 account_invoice_balance_due mb-1">₹236.00</h4>
-                    <small class="base_currency_label mb-2">Base Currency (INR) ₹59.00</small>
+    <VExpandTransition>
+      <VRow v-if="isCreatingNewInvoice" class="mb-3">
+        <VCol cols="12">
+          <VCard class="account_vcard_border" title="New Invoice"
+            subtitle="Fill out the details below to create a new sales invoice.">
+            <template #append>
+              <div class="d-flex align-center gap-2">
+                <VBtn @click="isInvoiceSettingsVisible = true" icon="mdi-cog-outline" variant="text" size="x-small"
+                  rounded="" />
+                <VBtn @click="isCreatingNewInvoice = false" icon="mdi-close" variant="text" size="x-small" rounded=""
+                  class="account_vcard_close_btn" />
+              </div>
+            </template>
+            <VCardText>
+              <VRow>
+                <VCol cols="12" lg="6" md="6">
+                  <label class="account_label mb-2">Bill To</label>
+                  <VAutocomplete v-model="selectedCustomer" placeholder="Select a customer"
+                    class="accouting_field accouting_active_field" :items="customersList" variant="outlined">
+                    <template #append>
+                      <VBtn class="account_v_btn_outlined" @click="addNewCustomerVisible = true" rounded=""
+                        icon="mdi-plus-circle-outline" size="x-small" />
+                    </template>
+                  </VAutocomplete>
+                </VCol>
+                <VCol cols="12" lg="6" md="6">
+                  <VRow>
+                    <VCol cols="12" lg="6" md="6">
+                      <label class="account_label mb-2">Invoice Number</label>
+                      <VTextField v-model="invoiceNumber" class="accouting_field accouting_active_field"
+                        variant="outlined" density="compact" />
+                    </VCol>
+                    <VCol cols="12" lg="6" md="6">
+                      <label class="account_label mb-2">Invoice Date</label>
+                      <VTextField v-model="invoiceDate" type="date" class="accouting_field accouting_active_field"
+                        variant="outlined" density="compact" />
+                    </VCol>
+                  </VRow>
+                </VCol>
+                <VCol cols="12" lg="6" md="6">
+                  <VTextarea :value="customerGSTINDisplay" class="accounting_v_textarea" variant="outlined" readonly
+                    density="compact" />
+                </VCol>
+                <VCol cols="12" lg="6" md="6">
+                  <VRow>
+                    <VCol cols="12" lg="6" md="6" sm="12">
+                      <label class="account_label mb-2">Currency</label>
+                      <VTextField v-model="currency" class="accouting_field accouting_active_field" variant="outlined"
+                        density="compact" />
+                    </VCol>
+                    <VCol cols="12" lg="6" md="6" sm="12">
+                      <label class="account_label mb-2">Place of Supply</label>
+                      <!-- <VTextField v-model="placeOfSupply" class="accouting_field accouting_active_field"
+                        variant="outlined" density="compact" /> -->
+                      <VAutocomplete v-model="placeOfSupply" class="accouting_field accouting_active_field" variant="outlined"
+                        :items="statesList" />
+                    </VCol>
+                    <VCol cols="12" lg="12" md="12">
+                      <VCheckbox v-model="shippingSameAsBilling" density="compact" class="account_v_checkbox"
+                        label="Shipping address is the same as billing address" />
+                    </VCol>
+                  </VRow>
+                </VCol>
+              </VRow>
+              <VDivider />
+              <VRow>
+                <VCol cols="12" lg="12" md="12">
+                  <div class="d-flex align-center gap-2 mb-3">
+                    <VBtn :class="activeInvoiceType === 'item' ? 'account_v_btn_primary' : 'account_v_btn_outlined'"
+                      @click="activeInvoiceType = 'item'">
+                      Item Invoice
+                    </VBtn>
+                    <VBtn :class="activeInvoiceType === 'service' ? 'account_v_btn_primary' : 'account_v_btn_outlined'"
+                      @click="activeInvoiceType = 'service'">
+                      Service Invoice
+                    </VBtn>
                   </div>
-                </VCard>
-              </VCol>
-            </VRow>
-            <VDivider />
 
-            <VRow>
-              <VCol cols="12">
-                <label class="account_label mb-2">Notes / Terms & Conditions</label>
-                <VTextarea class="accounting_v_textarea"
-                  placeholder="Thank you for your business. All payments are due within 30 days." variant="outlined" />
-                <div class="d-flex align-center gap-2 justify-end mt-3">
-                  <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save as Default</VBtn>
-                  <VBtn class="account_v_btn_outlined" prepend-icon="mdi-send-outline">Save & Send Invoice</VBtn>
-                </div>
-              </VCol>
-            </VRow>
-          </VCardText>
-        </VCard>
-      </VCol>
-    </VRow>
+                  <VDataTable :headers="activeInvoiceType === 'item' ? itemInvoiceHeaders : serviceInvoiceHeaders"
+                    :items="activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData"
+                    class="account_dynamic_table account_invoice_table">
+                    <template #item.item="{ item, index }">
+                      <VTextField
+                        v-model="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].item"
+                        placeholder="Item/Service description" class="accouting_field accouting_active_field"
+                        variant="outlined" />
+                    </template>
+
+                    <template v-if="activeInvoiceType === 'item'" #item.quantity="{ item, index }">
+                      <VTextField v-model="itemInvoiceData[index].quantity"
+                        class="accouting_field accouting_active_field" variant="outlined" placeholder="0"
+                        density="compact" />
+                    </template>
+
+                    <template v-if="activeInvoiceType === 'item'" #item.unit="{ item, index }">
+                      <VTextField v-model="itemInvoiceData[index].unit" class="accouting_field accouting_active_field"
+                        suffix="pcs" variant="outlined" placeholder="0" density="compact" />
+                    </template>
+
+                    <template #item.rate="{ item, index }">
+                      <VTextField
+                        v-model="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].rate"
+                        :readonly="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].lockedRate"
+                        class="accouting_field accouting_active_field" variant="outlined" placeholder="0"
+                        density="compact" />
+                    </template>
+
+                    <template #item.discount="{ item, index }">
+                      <VTextField
+                        v-model="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].discount"
+                        class="accouting_field accouting_active_field" variant="outlined" placeholder="0"
+                        density="compact" />
+                    </template>
+
+                    <template #item.taxableAmount="{ item, index }">
+                      <p class="mb-0">₹{{ (activeInvoiceType === 'item' ? itemInvoiceData :
+                        serviceInvoiceData)[index].taxableAmnt }}</p>
+                    </template>
+
+                    <template #item.gst="{ item, index }">
+                      <VSelect
+                        v-model="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData)[index].gst"
+                        class="accouting_field accouting_active_field" variant="outlined" :items="gstList" />
+                    </template>
+
+                    <template #item.total="{ item, index }">
+                      <p class="mb-0">₹{{ (activeInvoiceType === 'item' ? itemInvoiceData :
+                        serviceInvoiceData)[index].total }}</p>
+                    </template>
+
+                    <template #item.actions="{ index }">
+                      <VIcon icon="mdi-trash-can-outline" class="cursor-pointer table_row_icon" :class="{
+                        'opacity-50': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1,
+                        'cursor-not-allowed': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1
+                      }" :disabled="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1"
+                        @click="removeInvoiceRow(index, activeInvoiceType)" />
+                    </template>
+                  </VDataTable>
+                </VCol>
+                <VCol cols="12">
+                  <VBtn class="account_v_btn_outlined mt-3" prepend-icon="mdi-plus-circle-outline" variant="text"
+                    @click="addInvoiceRow(activeInvoiceType)">
+                    Add Another Line
+                  </VBtn>
+                </VCol>
+              </VRow>
+              <VDivider />
+              <VRow>
+                <VCol cols="12" lg="6" sm="6"></VCol>
+                <VCol cols="12" lg="6" sm="6">
+                  <VRow>
+                    <VCol cols="6">
+                      <VCard class="account_vcard_border shadow-none w-100">
+                        <div class="pa-3">
+                          <h6 class="account_gst_title mb-0">GST Breakdown</h6>
+                          <div class="d-flex align-center justify-space-between py-2">
+                            <span class="account_gst_subtitle">CGST</span>
+                            <span class="account_gst_subtitle_val">₹0.00</span>
+                          </div>
+                          <div class="d-flex align-center justify-space-between pb-2">
+                            <span class="account_gst_subtitle">SGST</span>
+                            <span class="account_gst_subtitle_val">₹0.00</span>
+                          </div>
+                          <div class="d-flex align-center justify-space-between">
+                            <span class="account_gst_subtitle">IGST</span>
+                            <span class="account_gst_subtitle_val">₹0.00</span>
+                          </div>
+                        </div>
+                      </VCard>
+                    </VCol>
+                    <VCol cols="6">
+                      <VCard class="account_vcard_border shadow-none w-100">
+                        <div class="pa-3">
+                          <h6 class="account_gst_title mb-0">Totals</h6>
+                          <div class="d-flex align-center justify-space-between py-2">
+                            <span class="account_gst_subtitle">Subtotal</span>
+                            <span class="account_gst_subtitle_val">₹50.00</span>
+                          </div>
+                          <div class="d-flex align-center justify-space-between">
+                            <span class="account_gst_subtitle">Total Discount</span>
+                            <span class="account_gst_subtitle_val">- ₹0.00</span>
+                          </div>
+                          <VDivider class="my-2" />
+                          <div class="d-flex align-center justify-space-between mb-2">
+                            <span class="account_gst_subtitle">Taxable Value</span>
+                            <span class="account_gst_subtitle_val">₹50.00</span>
+                          </div>
+                          <div class="d-flex align-center justify-space-between">
+                            <span class="account_gst_subtitle">GST (18%)</span>
+                            <span class="account_gst_subtitle_val">₹9.00</span>
+                          </div>
+                          <div class="d-flex align-center justify-space-between">
+                            <div style="min-width: 200px;" class="d-flex align-center gap-1">
+                              <span class="account_gst_subtitle">Round Off</span>
+                              <VSwitch density="compact" inset class="account_swtich_btn" color="primary"
+                                hide-details />
+                            </div>
+                            <VTextField style="max-width: 100px;" class="accouting_field accouting_active_field"
+                              type="number" variant="outlined" placeholder="0.00" density="compact" />
+                          </div>
+                          <VDivider class="my-2" />
+                          <div class="d-flex align-center justify-space-between">
+                            <h6 class="account_gst_title mb-0">Grand Total</h6>
+                            <h6 class="account_gst_title mb-0">₹59.00</h6>
+                          </div>
+                          <div class="d-flex mt-1 justify-end">
+                            <small class="base_currency_label">Base Currency (INR) ₹59.00</small>
+                          </div>
+                        </div>
+                      </VCard>
+                    </VCol>
+                  </VRow>
+                </VCol>
+              </VRow>
+              <VDivider />
+              <VRow>
+                <VCol cols="12">
+                  <h6 class="account_gst_title mb-0">Receive Payment</h6>
+                </VCol>
+                <VCol cols="12" lg="6" md="6">
+                  <div class="mb-2">
+                    <label class="account_label mb-2">Amount Received</label>
+                    <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                      type="number" />
+                  </div>
+                  <div>
+                    <label class="account_label mb-2">Payment Mode</label>
+                    <VSelect class="accouting_field accouting_active_field" variant="outlined" placeholder="Select mode"
+                      :items="['Cash', 'HDFC Bank', 'SBI Bank', 'ICICI Bank', 'Online/UPI']" />
+                  </div>
+                </VCol>
+                <VCol cols="12" lg="6" md="6">
+                  <VCard class="account_vcard_border shadow-none pa-4">
+                    <div class="">
+                      <h6 class="account_gst_title mb-1">Balance Due</h6>
+                      <h4 class="mb-0 account_invoice_balance_due mb-1">₹236.00</h4>
+                      <small class="base_currency_label mb-2">Base Currency (INR) ₹59.00</small>
+                    </div>
+                  </VCard>
+                </VCol>
+              </VRow>
+              <VDivider />
+
+              <VRow>
+                <VCol cols="12">
+                  <label class="account_label mb-2">Notes / Terms & Conditions</label>
+                  <VTextarea class="accounting_v_textarea"
+                    placeholder="Thank you for your business. All payments are due within 30 days."
+                    variant="outlined" />
+                  <div class="d-flex align-center gap-2 justify-end mt-3">
+                    <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save as Default</VBtn>
+                    <VBtn class="account_v_btn_outlined" prepend-icon="mdi-send-outline">Save & Send Invoice</VBtn>
+                  </div>
+                </VCol>
+              </VRow>
+            </VCardText>
+          </VCard>
+        </VCol>
+      </VRow>
+    </VExpandTransition>
+
     <div class="pb-4 d-flex align-center justify-end">
-      <VBtn class="account_v_btn_primary" prepend-icon="mdi-plus-circle-outline">Create Invoice</VBtn>
+      <VBtn @click="isCreatingNewInvoice = true" class="account_v_btn_primary" prepend-icon="mdi-plus-circle-outline">
+        Create
+        Invoice</VBtn>
     </div>
     <div class="account_invoice_list">
       <DynamicDataTable title="Invoices" :headers="invoiceHeaders" :items="invoiceItems" :filters="invoiceFilters"
@@ -664,7 +1010,7 @@ const isInvoiceSettingsVisible = ref(false);
     </div>
     <v-dialog max-width="900" v-model="addNewCustomerVisible">
       <div v-if="addNewCustomerVisible" class="account_ui_vcard">
-        <VCard title="Create a New Customer" class="pa-2 account_vcard_border"
+        <VCard title="Create a New Customer" class="pa-2 account_vcard_border shadow-none"
           subtitle="Fill in the details below to add a new customer to your records.">
           <template #append>
             <div class="d-flex align-center gap-2">
@@ -701,12 +1047,12 @@ const isInvoiceSettingsVisible = ref(false);
                 <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                   placeholder="Customer's Full Name or Company Name" />
               </VCol>
-              <VCol v-if="isVisible('mobile')" cols="12" lg="6" md="6">
+              <VCol v-if="isVisible('mobile')" cols="12" lg="5" md="5">
                 <label class="account_label mb-2">Mobile</label>
                 <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
                   density="compact" placeholder="9876543210" />
               </VCol>
-              <VCol v-if="isVisible('openingBalance')" cols="12" lg="6" md="6">
+              <VCol v-if="isVisible('openingBalance')" cols="12" lg="7" md="7">
                 <label class="account_label mb-2">Opening Balance</label>
                 <div class="custom_option d-flex align-center">
                   <VTextField class="custom_option_field accouting_field accouting_active_field" type="number"
@@ -848,77 +1194,156 @@ const isInvoiceSettingsVisible = ref(false);
 
     <v-dialog max-width="600" v-model="isInvoiceSettingsVisible">
       <div v-if="isInvoiceSettingsVisible" class="account_ui_vcard">
-        <VCard title="Invoice Settings" class="pa-2 account_vcard_border"
+        <VCard title="Invoice Settings" class="pa-2 account_vcard_border shadow-none"
           subtitle="Customize your invoice creation experience.">
           <template #append>
             <VBtn @click="isInvoiceSettingsVisible = false" icon="mdi-close" variant="text" size="x-small" rounded=""
               class="account_vcard_close_btn" />
           </template>
           <VCardText>
-            <VRow class="acc_invoice_settings_row">
-              <VCol class="py-2" cols="3">
-                <VBtn size="small" class="account_v_btn_light">Numbering</VBtn>
-              </VCol>
-              <VCol class="py-2" cols="3">
-                <VBtn size="small" class="account_v_btn_ghost" variant="text">Columns</VBtn>
-              </VCol>
-              <VCol class="py-2" cols="3">
-                <VBtn size="small" class="account_v_btn_ghost" variant="text">Fields</VBtn>
-              </VCol>
-              <VCol class="py-2" cols="3">
-                <VBtn size="small" class="account_v_btn_ghost" variant="text">Mode</VBtn>
+            <VRow class="acc_invoice_settings_row mx-1">
+              <VCol class="pa-1" cols="3" v-for="tab in settingsTabs" :key="tab">
+                <VBtn size="small" class="w-100"
+                  :class="activeSettingsTab === tab ? 'account_v_btn_light' : 'account_v_btn_ghost'" variant="text"
+                  @click="activeSettingsTab = tab">
+                  {{ tab }}
+                </VBtn>
               </VCol>
             </VRow>
 
             <VRow>
               <VCol cols="12">
-                <VCard class="account_vcard_border shadow-none pa-4">
+                <VCard class="account_vcard_border shadow-none pa-4" v-if="activeSettingsTab === 'Numbering'">
                   <h6 class="mb-4">Invoice Numbering</h6>
+
                   <VRow>
                     <VCol cols="12">
                       <VCard class="account_vcard_border shadow-none">
                         <VCardText class="py-1 px-2">
                           <div class="d-flex align-center justify-space-between">
                             <p class="mb-0">Change Every FY</p>
-                            <VSwitch density="compact" color="primary" hide-details
-                              class="account_swtich_btn invoice_stng_fy_switch" inset />
+                            <VSwitch density="compact" color="primary" hide-details class="account_swtich_btn" inset />
                           </div>
                         </VCardText>
                       </VCard>
                     </VCol>
 
                     <VCol cols="12">
-                      <label class="account_label mb-2">Prefix Type</label>
+                      <label class="account_label mb-2">Prefix Mode</label>
                       <VRow>
                         <VCol cols="6">
-                          <VBtn class="account_v_btn_outlined w-100" size="large">Text</VBtn>
+                          <VBtn class="w-100 account_v_btn_outlined" size="large"
+                            :class="activePrefixMode === 'Text' ? 'active_border' : ''"
+                            @click="activePrefixMode = 'Text'">
+                            Text
+                          </VBtn>
                         </VCol>
                         <VCol cols="6">
-                          <VBtn class="account_v_btn_outlined w-100" size="large">Financial Year</VBtn>
+                          <VBtn class="w-100 account_v_btn_outlined" size="large"
+                            :class="activePrefixMode === 'Financial Year' ? 'active_border' : ''"
+                            @click="activePrefixMode = 'Financial Year'">
+                            Financial Year
+                          </VBtn>
                         </VCol>
                       </VRow>
                     </VCol>
 
                     <VCol cols="12" lg="8" md="8">
                       <label class="account_label mb-2">Prefix Type</label>
-                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact" />
+                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                        v-model="prefixType" :readonly="activePrefixMode === 'Financial Year'" />
                     </VCol>
+
                     <VCol cols="12" lg="4" md="4">
                       <label class="account_label mb-2">Starting Number</label>
                       <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
-                        density="compact" />
+                        density="compact" v-model="startingNumber" />
                     </VCol>
 
                     <VCol cols="12">
                       <label class="account_label mb-2">Preview</label>
-                      <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
-                        density="compact" />
+                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                        readonly :model-value="previewValue" />
                     </VCol>
                   </VRow>
+                </VCard>
+
+                <!-- Dummy Cards -->
+                <VCard v-if="activeSettingsTab === 'Columns'" class="account_vcard_border shadow-none pa-4">
+                  <h6 class="mb-4">Column Visibility</h6>
+                  <VRow>
+                    <VCol cols="12">
+                      <VCard class="account_vcard_border shadow-none">
+                        <VCardText class="py-1 px-2">
+                          <div class="d-flex align-center justify-space-between">
+                            <p class="mb-0">Unit</p>
+                            <VSwitch density="compact" color="primary" hide-details class="account_swtich_btn" inset />
+                          </div>
+                        </VCardText>
+                      </VCard>
+                    </VCol>
+
+                    <VCol cols="12">
+                      <VCard class="account_vcard_border shadow-none">
+                        <VCardText class="py-1 px-2">
+                          <div class="d-flex align-center justify-space-between">
+                            <p class="mb-0">HSN/SAC Code</p>
+                            <VSwitch density="compact" color="primary" hide-details class="account_swtich_btn" inset />
+                          </div>
+                        </VCardText>
+                      </VCard>
+                    </VCol>
+                    <VCol cols="12">
+                      <VCard class="account_vcard_border shadow-none">
+                        <VCardText class="py-1 px-2">
+                          <div class="d-flex align-center justify-space-between">
+                            <p class="mb-0">Discount (%)</p>
+                            <VSwitch density="compact" color="primary" hide-details class="account_swtich_btn" inset />
+                          </div>
+                        </VCardText>
+                      </VCard>
+                    </VCol>
+                  </VRow>
+                </VCard>
+
+                <VCard v-if="activeSettingsTab === 'Fields'" class="account_vcard_border shadow-none pa-4">
+                  <h6 class="mb-4">Field Visibility</h6>
+                  <VRow>
+                    <VCol cols="12">
+                      <VCard class="account_vcard_border shadow-none">
+                        <VCardText class="py-1 px-2">
+                          <div class="d-flex align-center justify-space-between">
+                            <p class="mb-0">Due Date</p>
+                            <VSwitch density="compact" color="primary" hide-details class="account_swtich_btn" inset />
+                          </div>
+                        </VCardText>
+                      </VCard>
+                    </VCol>
+                    <VCol cols="12">
+                      <VCard class="account_vcard_border shadow-none">
+                        <VCardText class="py-1 px-2">
+                          <div class="d-flex align-center justify-space-between">
+                            <p class="mb-0">Currency & Exchange Rate</p>
+                            <VSwitch density="compact" color="primary" hide-details class="account_swtich_btn" inset />
+                          </div>
+                        </VCardText>
+                      </VCard>
+                    </VCol>
+                  </VRow>
+                </VCard>
+
+                <VCard v-if="activeSettingsTab === 'Mode'" class="account_vcard_border shadow-none pa-4">
+                  <h6 class="mb-4">Invoice Mode</h6>
+                  <v-radio-group class="accounting_v_radio">
+                    <v-radio label="Items and Services" value="item_service"></v-radio>
+                    <v-radio label="Items Only" value="items"></v-radio>
+                    <v-radio label="Services Only" value="services"></v-radio>
+                  </v-radio-group>
                 </VCard>
               </VCol>
             </VRow>
           </VCardText>
+
         </VCard>
       </div>
     </v-dialog>

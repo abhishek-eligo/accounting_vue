@@ -303,6 +303,31 @@ p.secondary_email {
     color: var(--acc-icon-dark-color);
 }
 
+.account_info_icon .v-btn__content i.v-icon {
+    color: hsl(210 29% 44%) !important;
+}
+
+.account_info_text {
+    color: var(--acc-secondary-text-color) !important;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.account_info_label {
+    color: var(--acc-text-dark);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.account_info_subLabel {
+    color: var(--acc-text-subtitle-dark);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
 .account_vcard {
     border: 1px solid #bfc1c4 !important;
 }
@@ -322,7 +347,7 @@ p.secondary_email {
 }
 
 .account_v_btn_light {
-    background: hsl(204 13% 94%);
+    background: hsl(0, 0%, 100%) !important;
     text-transform: capitalize; 
 }
 
@@ -339,6 +364,7 @@ p.secondary_email {
 .account_v_btn_primary {
     background: var(--acc-primary-color);
     text-transform: capitalize;
+    box-shadow: unset;
 }
 
 
@@ -352,7 +378,9 @@ p.secondary_email {
 }
 
 .account_v_btn_primary.v-btn--disabled i.v-icon,
-.account_v_btn_primary i.v-icon {
+.account_v_btn_primary i.v-icon,
+.account_v_btn_error.v-btn--disabled i.v-icon,
+.account_v_btn_error i.v-icon {
     color: var(--acc-text-white) !important;
 }
 
@@ -365,6 +393,7 @@ p.secondary_email {
     background: var(--acc-error-color);
     color: var(--acc-text-white) !important;
     text-transform: capitalize;
+    box-shadow: unset;
 }
 
 .account_v_btn_error .v-btn__underlay {
@@ -1373,6 +1402,10 @@ i.table_row_icon {
     border-radius: 8px;
 }
 
-.invoice_stng_fy_switch .v-input__control .v-selection-control {
+.account_swtich_btn .v-input__control .v-selection-control {
     justify-content: end;
+}
+
+.active_border {
+    border: 1px solid var(--acc-primary-color) !important;
 }

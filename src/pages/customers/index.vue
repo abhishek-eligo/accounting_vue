@@ -116,7 +116,7 @@ onMounted(() => {
 
 <template>
   <div class="account_customers_list">
-    <VSlideYTransition mode="in-out">
+    <VExpandTransition>
       <VRow v-if="addNewCustomerVisible" class="justify-center">
         <VCol cols="8">
           <div class="account_ui_vcard">
@@ -311,7 +311,7 @@ onMounted(() => {
           </div>
         </VCol>
       </VRow>
-    </VSlideYTransition>
+    </VExpandTransition>
     <VRow>
       <VCol cols="12">
         <DynamicDataTable :headers="customerHeaders" :items="customerItems" :filters="customerFilters" title="Customer"
