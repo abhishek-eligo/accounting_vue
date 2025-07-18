@@ -32,79 +32,36 @@ const journalEntryForm = ref({
 });
 
 // Validation rules for journal entry form
-const journalEntryRules = {
-  entryDate: (value) => validateField(value, journalEntryValidations.entryDate),
-  description: (value) =>
-    validateField(value, journalEntryValidations.description),
-  voucherType: (value) =>
-    validateField(value, journalEntryValidations.voucherType),
+// const journalEntryRules = {
+// entryDate: (value) => validateField(value, journalEntryValidations.entryDate),
+// description: (value) =>
+//   validateField(value, journalEntryValidations.description),
+
+// voucherType: (value) =>
+// validateField(value, journalEntryValidations.voucherType),
+// };
+// console.log(journalEntryRules.description);
+
+const descriptionError = ref("");
+const checkValidation = (value) => {
+  descriptionError.value = validateField(
+    value,
+    journalEntryValidations.description
+  );
+  console.log(descriptionError.value);
+  // return result === true ? true : result;
 };
 
 // Form reference
 const journalEntryFormRef = ref();
 
-// Validate journal entry form
-async function validateJournalEntryForm() {
+// Submit journal entry form
+async function submitJournalEntryForm() {
+  checkValidation(journalEntryForm.value.description);
+  // checkValidation(journalEntryForm.value.description);
   const { valid } = await journalEntryFormRef.value?.validate();
   if (!valid) {
     return false;
-  }
-
-  // Additional validation for debit and credit rows
-  const debitErrors = [];
-  const creditErrors = [];
-
-  // Validate debit rows
-  debitRows.value.forEach((row, index) => {
-    if (!row.account) {
-      debitErrors.push(`Debit row ${index + 1}: Account is required`);
-    }
-    if (!row.amount || row.amount <= 0) {
-      debitErrors.push(`Debit row ${index + 1}: Amount must be greater than 0`);
-    }
-  });
-
-  // Validate credit rows
-  creditRows.value.forEach((row, index) => {
-    if (!row.account) {
-      creditErrors.push(`Credit row ${index + 1}: Account is required`);
-    }
-    if (!row.amount || row.amount <= 0) {
-      creditErrors.push(
-        `Credit row ${index + 1}: Amount must be greater than 0`
-      );
-    }
-  });
-
-  // Check if total debit equals total credit
-  const totalDebit = debitRows.value.reduce(
-    (sum, row) => sum + (row.amount || 0),
-    0
-  );
-  const totalCredit = creditRows.value.reduce(
-    (sum, row) => sum + (row.amount || 0),
-    0
-  );
-
-  if (Math.abs(totalDebit - totalCredit) > 0.01) {
-    toast.error("Total debit and credit amounts must be equal.");
-    return false;
-  }
-
-  if (debitErrors.length > 0 || creditErrors.length > 0) {
-    const allErrors = [...debitErrors, ...creditErrors];
-    toast.error(allErrors.join("\n"));
-    return false;
-  }
-
-  return true;
-}
-
-// Submit journal entry form
-async function submitJournalEntryForm() {
-  const isValid = await validateJournalEntryForm();
-  if (!isValid) {
-    return;
   }
 
   // Form is valid, proceed with submission
@@ -632,9 +589,9 @@ const hoveredRowIndex = ref(null);
                       <div class="account_entry_form_label">
                         <label class="account_label">Date *</label>
                       </div>
+                      <!-- :rules="[journalEntryRules.entryDate]" -->
                       <VTextField
                         v-model="journalEntryForm.entryDate"
-                        :rules="[journalEntryRules.entryDate]"
                         class="accouting_field accouting_active_field"
                         type="date"
                         variant="outlined"
@@ -669,11 +626,11 @@ const hoveredRowIndex = ref(null);
                         item-title="title"
                         item-value="value"
                         v-model="debit.account"
-                        :rules="[
+                      />
+                      <!-- :rules="[
                           (v) =>
                             validateField(v, journalEntryValidations.account),
-                        ]"
-                      />
+                        ]" -->
                     </div>
                   </VCol>
                   <!-- Amount -->
@@ -685,14 +642,14 @@ const hoveredRowIndex = ref(null);
                       variant="outlined"
                       density="compact"
                       v-model="debit.amount"
-                      :rules="[
-                        (v) =>
-                          validateField(v, journalEntryValidations.entryAmount),
-                      ]"
                       @input="
                         (event) => handleAmountInput(event, index, 'debit')
                       "
                     >
+                      <!-- :rules="[
+                        (v) =>
+                          validateField(v, journalEntryValidations.entryAmount),
+                      ]" -->
                       <template #append>
                         <VBtn
                           class="account_v_btn_ghost account_btn_primary_text"
@@ -750,11 +707,11 @@ const hoveredRowIndex = ref(null);
                         item-title="title"
                         item-value="value"
                         v-model="credit.account"
-                        :rules="[
+                      />
+                      <!-- :rules="[
                           (v) =>
                             validateField(v, journalEntryValidations.account),
-                        ]"
-                      />
+                        ]" -->
                     </div>
                   </VCol>
                   <VCol cols="12" lg="4" md="4">
@@ -765,14 +722,14 @@ const hoveredRowIndex = ref(null);
                       variant="outlined"
                       density="compact"
                       v-model="credit.amount"
-                      :rules="[
-                        (v) =>
-                          validateField(v, journalEntryValidations.entryAmount),
-                      ]"
                       @input="
                         (event) => handleAmountInput(event, index, 'credit')
                       "
                     >
+                      <!-- :rules="[
+                        (v) =>
+                          validateField(v, journalEntryValidations.entryAmount),
+                      ]" -->
                       <template #append>
                         <VBtn
                           @click="removeCreditRow(index)"
@@ -813,18 +770,19 @@ const hoveredRowIndex = ref(null);
                       </div>
                       <VTextarea
                         v-model="journalEntryForm.description"
-                        :rules="[journalEntryRules.description]"
                         class="accounting_v_textarea"
                         placeholder="e.g. Inventory purchased on credit. XYZ Capital Introduce. Max length 254 characters"
                         variant="outlined"
                       />
+                      <small class="text-error" v-if="descriptionError">
+                        {{ descriptionError }}
+                      </small>
                     </div>
                   </VCol>
                   <VCol cols="12" lg="5" md="5">
                     <label class="account_label">Voucher Type *</label>
                     <VAutocomplete
                       v-model="journalEntryForm.voucherType"
-                      :rules="[journalEntryRules.voucherType]"
                       class="accouting_field accouting_active_field"
                       variant="outlined"
                       density="compact"
@@ -833,6 +791,7 @@ const hoveredRowIndex = ref(null);
                       item-value="value"
                       placeholder="Select Voucher Type"
                     />
+                    <!-- :rules="[journalEntryRules.voucherType]" -->
                   </VCol>
                 </VRow>
 
