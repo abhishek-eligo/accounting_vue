@@ -102,6 +102,10 @@ h1, h2, h3, h4, h5, h6, p, span {
     color: var(--acc-text-white);
 }
 
+.account_text_dark {
+    color: var(--acc-text-dark);
+}
+
 .account_texth5 {
     font-size: var(--acc-text-h5-font);
 }
@@ -535,7 +539,7 @@ p.secondary_email {
 }
 
 .account_table_chip {
-    min-width: 80px;
+    min-width: 89px;
     justify-content: center;
     border-radius: 20px;
     max-height: 22px !important;
