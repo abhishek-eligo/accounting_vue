@@ -192,7 +192,7 @@ onMounted(() => {
                 </VRow>
               </VCardText>
               <VCardActions class="justify-end">
-                <VBtn color="success" class="account_save_btn" prepend-icon="mdi-content-save">Save Vendor</VBtn>
+                <VBtn color="success" class="account_v_btn_primary" prepend-icon="mdi-content-save">Save Vendor</VBtn>
               </VCardActions>
             </VCard>
           </div>

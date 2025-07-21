@@ -562,6 +562,14 @@ p.secondary_email {
     color: var(--acc-text-white);
 }
 
+.account_chip_preview {
+    height: 30px !;
+}
+
+.account_chip_preview .v-chip__content {
+    font-size: 15px;
+}
+
 .account_chip_outline {
     background: var(--acc-outlined-color);
     color: var(--acc-text-dark);
