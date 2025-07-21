@@ -697,8 +697,7 @@ const previewValue = computed(() => {
                                 </VCol>
                                 <VCol cols="12" lg="6" md="6">
                                     <label class="account_label mb-2">Reason for Return</label>
-                                    <VTextField class="accounting_v_textarea"
-                                        variant="outlined" readonly density="compact" />
+                                    <VTextField class="accounting_v_textarea" variant="outlined" density="compact" />
                                 </VCol>
                                 <VCol cols="12" lg="6" md="6">
                                     <VRow>
