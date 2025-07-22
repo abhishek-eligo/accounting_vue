@@ -57,7 +57,7 @@ export default [
     section: '',
     items: [
       { title: 'Company Settings', icon: 'mdi-cog-outline', slug: 'company-settings', path: '/settings', component: () => import('@/pages/settings') },
-      { title: 'User Roles', icon: 'mdi-shield-account-outline', slug: 'user-roles' },
+      { title: 'User Roles', icon: 'mdi-shield-account-outline', slug: 'user-roles' ,path: '/role&permission', component: () => import('@/pages/role&permission')},
     ],
   },
 ]

@@ -242,3 +242,25 @@
     font-weight: 600;
 }
 
+
+/* User Role and permission css */
+
+.user-title{
+    font-size: 24px;
+    line-height: 2rem;
+    color: var(--acc-text-dark);
+    font-weight: 700;
+}
+
+.account_v_btn_active {
+  color: #000 !important;
+}
+
+.toggle-btn-section.v-btn-group--density-default.v-btn-group {
+    height: 31px;
+}
+
+.toggle-btn-section.v-btn-group--density-default.v-btn-group .v-btn{
+    border-radius: 6px !important;
+}
+
