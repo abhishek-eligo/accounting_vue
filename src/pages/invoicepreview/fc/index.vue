@@ -110,8 +110,7 @@
             <td class="text-right">$100.00</td>
             <td class="text-right">$4,000.00</td>
           </tr>
-        </tbody>
-        <tr>
+          <tr>
           <td class="invoice-fc-table-background summary-cell"></td>
           <td class="invoice-fc-table-background summary-cell"></td>
           <td class="invoice-fc-table-background summary-cell"></td>
@@ -143,6 +142,7 @@
           <td class="invoice-fc-table-background summary-cell grand-total text-right">Grand Total (INR)</td>
           <td class="invoice-fc-table-background summary-cell grand-total text-right">₹12,80,890.00</td>
         </tr>
+        </tbody>
       </table>
     </div>
 
