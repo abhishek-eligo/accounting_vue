@@ -429,9 +429,6 @@ tr.summary-cell-grand-total td {
   border-bottom: none !important;
 }
 
-.summary-cell-grand-total td{
-
-}
 
 .text-right {
   text-align: right;
