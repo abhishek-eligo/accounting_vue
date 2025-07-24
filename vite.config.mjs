@@ -1,13 +1,13 @@
 // Plugins
-import Components from 'unplugin-vue-components/vite'
-import Vue from '@vitejs/plugin-vue'
-import AutoImport from 'unplugin-auto-import/vite'
-import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import Fonts from 'unplugin-fonts/vite'
+import Components from "unplugin-vue-components/vite";
+import Vue from "@vitejs/plugin-vue";
+import AutoImport from "unplugin-auto-import/vite";
+import Vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+import Fonts from "unplugin-fonts/vite";
 
 // Utilities
-import { defineConfig } from 'vite'
-import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from "vite";
+import { fileURLToPath, URL } from "node:url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,42 +15,43 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
-        AutoImport({
-      imports: ['vue'], // Auto import `ref`, `reactive`, `defineProps`, etc.
-      dts: 'src/auto-imports.d.ts', // optional: generates TS typings
+    AutoImport({
+      imports: ["vue"], // Auto import `ref`, `reactive`, `defineProps`, etc.
+      dts: "src/auto-imports.d.ts", // optional: generates TS typings
+      dirs: [
+        "src/helpers", // Auto import from helpers
+        "src/validations", // Auto import from validations
+      ],
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify(),
-    Components(),
+    Components({
+      dirs: ["src/components"], // Scan this directory
+      deep: true,               // Scan subfolders recursively
+      extensions: ["vue"],      // Only .vue files
+      dts: "src/components.d.ts", // (optional) generate TS typings for auto-imported components
+    }),
     Fonts({
       fontsource: {
         families: [
           {
-            name: 'Roboto',
+            name: "Roboto",
             weights: [100, 300, 400, 500, 700, 900],
-            styles: ['normal', 'italic'],
+            styles: ["normal", "italic"],
           },
         ],
       },
     }),
   ],
   optimizeDeps: {
-    exclude: ['vuetify'],
+    exclude: ["vuetify"],
   },
-  define: { 'process.env': {} },
+  define: { "process.env": {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('src', import.meta.url)),
+      "@": fileURLToPath(new URL("src", import.meta.url)),
     },
-    extensions: [
-      '.js',
-      '.json',
-      '.jsx',
-      '.mjs',
-      '.ts',
-      '.tsx',
-      '.vue',
-    ],
+    extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },
   server: {
     port: 3000,
@@ -58,11 +59,27 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       sass: {
-        api: 'modern-compiler',
+        api: "modern-compiler",
       },
       scss: {
-        api: 'modern-compiler',
+        api: "modern-compiler",
       },
     },
   },
-})
+  build: {
+    lib: {
+      entry: "src/index.js",
+      name: "VuetifyAccountingDummy",
+      fileName: (format) => `vuetify-accounting-dummy.${format}.js`,
+    },
+    rollupOptions: {
+      external: ["vue", "vuetify"],
+      output: {
+        globals: {
+          vue: "Vue",
+          vuetify: "Vuetify",
+        },
+      },
+    },
+  },
+});

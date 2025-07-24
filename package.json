@@ -1,8 +1,29 @@
 {
-  "name": "accounting_ecs",
-  "private": true,
+  "name": "@abhishek_eligo/accounting_ecs",
+  "main": "dist/vuetify-accounting-dummy.umd.js",
+  "module": "dist/vuetify-accounting-dummy.es.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/vuetify-accounting-dummy.es.js",
+      "require": "./dist/vuetify-accounting-dummy.umd.js"
+    },
+    "./dist/accounting_ecs.css": {
+      "default": "./dist/accounting_ecs.css"
+    },
+    "./dist/main.css": {
+      "default": "./dist/main.css"
+    }
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0",
+    "vuetify": "^3.0.0"
+  },
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.6",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

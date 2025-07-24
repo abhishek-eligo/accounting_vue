@@ -31,8 +31,13 @@ import "bootstrap";
 import PrimeVue from "primevue/config";
 import Aura from "@primeuix/themes/aura";
 
-// Import all Tabler icons
-import * as TablerIcons from "@tabler/icons-vue";
+// Tabler icons helper
+import { tablerIconSet } from "@/icons/tabler";
+// If you want to register specific Tabler icons globally, do it here:
+// import { IconPlus, IconUser } from '@tabler/icons-vue';
+// app.component('IconPlus', IconPlus);
+// app.component('IconUser', IconUser);
+// For dynamic usage, use tablerIconSet as a render function or provide/inject.
 
 // Custom Css
 import "@/main.css";
@@ -41,11 +46,6 @@ import "@/style.css";
 const app = createApp(App);
 
 app.use(router);
-
-// Register Tabler icons globally
-for (const [key, component] of Object.entries(TablerIcons)) {
-  app.component(key, component);
-}
 
 // Use Primevue
 app.use(PrimeVue, {
