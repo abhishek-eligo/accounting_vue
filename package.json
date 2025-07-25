@@ -33,6 +33,7 @@
     "@fontsource/inter": "^5.2.6",
     "@fontsource/roboto": "5.2.5",
     "@iconify-json/tabler": "^1.2.20",
+    "@iconify/vue": "^5.0.0",
     "@mdi/font": "7.4.47",
     "@popperjs/core": "^2.11.8",
     "@primeuix/themes": "^1.2.1",
