@@ -769,7 +769,7 @@ p.secondary_email {
     background: transparent;
 }
 
-.account_add_new_btn {
+.account_add_new_btn.v-btn {
   background: var(--acc-primary-color) !important;
   border-radius: 30px !important;
   padding: 18px 30px !important;
@@ -779,12 +779,12 @@ p.secondary_email {
   height: unset !important;
 }
 
-.account_add_new_btn .v-btn__content,
-.account_add_new_btn .v-btn__prepend i {
+.account_add_new_btn.v-btn .v-btn__content,
+.account_add_new_btn.v-btn .v-btn__prepend i {
   color: var(--acc-text-white);
 }
 
-.account_add_new_btn {
+.account_add_new_btn.v-btn {
     position: fixed;
     bottom: 70px;
     right: 42px;
