@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import DynamicDataTable from '@/components/DynamicDataTable.vue'
-
+import '../../main.css';
 
 const formFields = ref([
   // Core Information
