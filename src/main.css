@@ -365,14 +365,14 @@ p.secondary_email {
 }
 
 
-.account_v_btn_primary {
+.account_v_btn_primary.v-btn {
     background: var(--acc-primary-color);
     text-transform: capitalize;
     box-shadow: unset;
 }
 
 
-.account_v_btn_primary .v-btn__underlay {
+.account_v_btn_primary.v-btn .v-btn__underlay {
     background: unset !important;
 }
 
@@ -382,25 +382,25 @@ p.secondary_email {
 }
 
 .account_v_btn_primary.v-btn--disabled i.v-icon,
-.account_v_btn_primary i.v-icon,
+.account_v_btn_primary.v-btn i.v-icon,
 .account_v_btn_error.v-btn--disabled i.v-icon,
-.account_v_btn_error i.v-icon {
+.account_v_btn_error.v-btn i.v-icon {
     color: var(--acc-text-white) !important;
 }
 
-.account_v_btn_primary .v-btn__content {
+.account_v_btn_primary.v-btn .v-btn__content {
     color: var(--acc-text-white) !important;
     font-size: 14px;
 }
 
-.account_v_btn_error {
+.account_v_btn_error.v-btn {
     background: var(--acc-error-color);
     color: var(--acc-text-white) !important;
     text-transform: capitalize;
     box-shadow: unset;
 }
 
-.account_v_btn_error .v-btn__underlay {
+.account_v_btn_error.v-btn .v-btn__underlay {
     background: unset !important;
 }
 
@@ -414,19 +414,19 @@ p.secondary_email {
 }
 
 
-.account_v_btn_error .v-btn__content {
+.account_v_btn_error.v-btn .v-btn__content {
     color: var(--acc-text-white) !important;
     font-size: 14px;
 }
 
-.account_v_btn_outlined {
+.account_v_btn_outlined.v-btn {
     background: var(--acc-outlined-color);
     border: 1px solid var(--acc-border-color);
     box-shadow: unset !important;
     text-transform: capitalize;
 }
 
-.account_v_btn_outlined .v-btn__underlay {
+.account_v_btn_outlined.v-btn .v-btn__underlay {
     background: unset !important;
 }
 
@@ -440,18 +440,18 @@ p.secondary_email {
 }
 
 
-.account_v_btn_outlined .v-btn__content {
+.account_v_btn_outlined.v-btn .v-btn__content {
     color: var(--acc-text-dark) !important;
     font-size: 14px;
 }
 
-.account_v_btn_secondary {
+.account_v_btn_secondary.v-btn {
     background: var(--acc-secondary-color);
     text-transform: capitalize;
 
 }
 
-.account_v_btn_secondary .v-btn__underlay {
+.account_v_btn_secondary.v-btn .v-btn__underlay {
     background: unset !important;
 }
 
@@ -465,30 +465,30 @@ p.secondary_email {
 }
 
 
-.account_v_btn_secondary .v-btn__content {
+.account_v_btn_secondary.v-btn .v-btn__content {
     color: var(--acc-text-white) !important;
     font-size: 14px;
 }
 
-.account_v_btn_ghost .v-btn__content {
+.account_v_btn_ghost.v-btn .v-btn__content {
     color: var(--acc-text-dark) !important;
     font-size: 14px;
     text-transform: capitalize;
 }
 
-.account_v_btn_ghost {
+.account_v_btn_ghost.v-btn {
     background: transparent;
     /* color: var(--acc-text-dark) !important;
     border: 1px solid var(--acc-border-color); */
 }
 
-.account_v_btn_link .v-btn__content {
+.account_v_btn_link.v-btn .v-btn__content {
     color: var(--acc-primary-color) !important;
     font-size: 14px;
     text-transform: capitalize;
 }
 
-.account_v_btn_link {
+.account_v_btn_link.v-btn {
     background: transparent;
     /* color: var(--acc-primary-color) !important; */
 }
@@ -520,11 +520,11 @@ p.secondary_email {
 
 
 
-.account_v_btn_tonal .v-btn__content {
+.account_v_btn_tonal.v-btn .v-btn__content {
     color: var(--acc-text-white) !important;
 }
 
-.account_v_btn_tonal {
+.account_v_btn_tonal.v-btn {
     background: var(--acc-primary-color-tonal);
     color: var(--acc-text-white) !important;
 }
