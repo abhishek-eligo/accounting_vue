@@ -801,7 +801,7 @@ const previewValue = computed(() => {
                   </VRow>
                 </VCol>
               </VRow>
-              <VDivider />
+              <VDivider class="my-3" />
               <VRow>
                 <VCol cols="12" lg="12" md="12">
                   <div class="d-flex align-center gap-2 mb-3">

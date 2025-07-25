@@ -29269,7 +29269,7 @@ Currency: ${Q.value}` : "";
                             ]),
                             _: 1
                           }),
-                          i(ye),
+                          i(ye, { class: "my-3" }),
                           i(be, null, {
                             default: d(() => [
                               i(I, {
