@@ -14,8 +14,7 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
-// Tabler icon set
-import { tablerIconSet } from '@/icons/tabler'
+// Removed Tabler icon set import
 
 export default createVuetify({
   components,
@@ -27,7 +26,7 @@ export default createVuetify({
     },
     sets: {
       mdi,         // built-in
-      tabler: tablerIconSet,  // custom
+      // tabler: tablerIconSet,  // custom (removed)
     },
   },
   theme: {

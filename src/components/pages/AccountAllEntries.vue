@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { toast } from "vue3-toastify";
-import { IconPlus } from '@tabler/icons-vue'; // Example Tabler icon import
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 // Function to handle amount input and show words
 function handleAmountInput(event, rowIndex, type) {
@@ -567,12 +567,18 @@ const hoveredRowIndex = ref(null);
               <VBtn
                 @click="showLedgerDialog = true"
                 class="account_v_btn_outlined save_btn_height"
-                prepend-icon="mdi-plus-circle-outline"
                 variant="outlined"
                 size="default"
                 rounded="2"
                 color="primary"
               >
+                <template #prepend>
+                  <!-- Use Tabler plus icon -->
+                  <span style="display: flex; align-items: center;">
+                    <!-- Use the helper to render the icon -->
+                    <component :is="renderTablerIcon('plus')" style="font-size: 22px; margin-right: 6px;" />
+                  </span>
+                </template>
                 Add Ledger
               </VBtn>
             </template>
@@ -995,176 +1001,72 @@ const hoveredRowIndex = ref(null);
               </thead>
               <tbody>
                 <template v-for="(entry, index) in allEntries" :key="index">
-                  <tr
-                    v-if="
-                      entry &&
-                      entry.particulars &&
-                      entry.particulars.accounts &&
-                      Array.isArray(entry.particulars.accounts) &&
-                      entry.particulars.accounts.length > 0
-                    "
-                    :class="[
-                      'account_entries_table_row',
-                      { 'even-entry': index % 2 === 0 },
-                    ]"
-                    @mouseover="hoveredRowIndex = index"
-                    @mouseleave="hoveredRowIndex = null"
-                  >
-                    <!-- Date, Entry #, Voucher Type, Status, and Actions span all account rows and description -->
-                    <td
-                      class="account_entries_table_date"
-                      :rowspan="entry.particulars.accounts.length + 1"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
+                  <template v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0">
+                    <tr
+                      :class="[
+                        'account_entries_table_row',
+                        { 'even-entry': index % 2 === 0 },
+                      ]"
+                      @mouseover="hoveredRowIndex = index"
+                      @mouseleave="hoveredRowIndex = null"
                     >
-                      {{ entry.date || "N/A" }}
-                    </td>
-                    <td
-                      class="account_entries_table_entry"
-                      :rowspan="entry.particulars.accounts.length + 1"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
-                    >
-                      {{ entry.entry || "N/A" }}<br />
-                      <span
-                        @click="openDetailsDialog(entry)"
-                        style="font-size: 12px; color: #009688; cursor: pointer"
-                        >View Details</span
-                      >
-                    </td>
-                    <td
-                      class="account_entries_table_voucher"
-                      :rowspan="entry.particulars.accounts.length + 1"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
-                    >
-                      {{ entry.voucher_type || "N/A" }}
-                    </td>
-                    <!-- First account row -->
-                    <td
-                      class="account_entries_table_particulars"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
-                    >
-                      {{ entry.particulars.accounts[0]?.title || "N/A" }}
-                    </td>
-                    <td
-                      class="account_entries_table_debit account_primary_color"
-                    >
-                      {{ entry.particulars.accounts[0]?.debit || "" }}
-                    </td>
-                    <td
-                      class="account_entries_table_credit account_error_color"
-                    >
-                      {{ entry.particulars.accounts[0]?.credit || "" }}
-                    </td>
-                    <td
-                      class="account_entries_table_status"
-                      :rowspan="entry.particulars.accounts.length + 1"
-                    >
-                      <VChip
-                        class="account_v_chip"
-                        :class="
-                          entry.status === 'Pending'
-                            ? 'account_chip_error'
-                            : 'account_chip_primary'
-                        "
-                        size="small"
-                      >
-                        {{ entry.status || "N/A" }}
-                      </VChip>
-                    </td>
-                    <td
-                      class="account_entries_table_actions"
-                      :rowspan="entry.particulars.accounts.length + 1"
-                    >
-                      <div class="d-flex align-center justify-center gap-2">
-                        <VBtn
-                          size="small"
-                          class="account_v_btn_ghost"
-                          icon="mdi-pencil-box-multiple-outline"
-                          variant="text"
-                        />
-                        <VBtn
-                          size="small"
-                          class="account_v_btn_ghost"
-                          icon="mdi-arrow-u-left-top"
-                          variant="text"
-                        />
-                        <VBtn
-                          size="small"
-                          class="account_v_btn_ghost"
-                          icon="mdi-trash-can-outline"
-                          variant="text"
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <!-- Additional account rows (if any) -->
-                  <tr
-                    v-for="(
-                      account, accIndex
-                    ) in entry.particulars.accounts.slice(1)"
-                    :key="`${index}-${accIndex}`"
-                    v-if="
-                      entry &&
-                      entry.particulars &&
-                      entry.particulars.accounts &&
-                      Array.isArray(entry.particulars.accounts)
-                    "
-                    :class="[
-                      'account_entries_table_row',
-                      { 'even-entry-extension': index % 2 === 0 },
-                    ]"
-                    @mouseover="hoveredRowIndex = index"
-                    @mouseleave="hoveredRowIndex = null"
-                  >
-                    <td
-                      class="account_entries_table_particulars"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
-                    >
-                      {{ account.title || "N/A" }}
-                    </td>
-                    <td
-                      class="account_entries_table_debit account_primary_color"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
-                    >
-                      {{ account.debit || "" }}
-                    </td>
-                    <td
-                      class="account_entries_table_credit account_error_color"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
-                    >
-                      {{ account.credit || "" }}
-                    </td>
-                  </tr>
-                  <!-- Description and Narration row -->
-                  <tr
-                    v-if="
-                      entry &&
-                      entry.particulars &&
-                      entry.particulars.accounts &&
-                      Array.isArray(entry.particulars.accounts)
-                    "
-                    :class="[
-                      'account_entries_table_row',
-                      { 'even-entry-extension': index % 2 === 0 },
-                    ]"
-                  >
-                    <td
-                      colspan="3"
-                      :class="{ 'hovered-cell': hoveredRowIndex === index }"
-                    >
-                      <div
-                        class="d-flex flex-column align-start justify-center"
-                      >
-                        <!-- <span class="mb-0 ml-4 account_entry_desc_text">To {{ entry.particulars.description?.to || 'N/A'
-                          }}</span> -->
-                        <span class="account_entry_desc_text"
-                          >(Narration:
-                          {{
-                            entry.particulars.description?.narration || "N/A"
-                          }})</span
-                        >
-                      </div>
-                    </td>
-                  </tr>
+                      <!-- Date, Entry #, Voucher Type, Status, and Actions span all account rows and description -->
+                      <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                        {{ entry.date || "N/A" }}
+                      </td>
+                      <td class="account_entries_table_entry" :rowspan="entry.particulars.accounts.length + 1" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                        {{ entry.entry || "N/A" }}<br />
+                        <span @click="openDetailsDialog(entry)" style="font-size: 12px; color: #009688; cursor: pointer">View Details</span>
+                      </td>
+                      <td class="account_entries_table_voucher" :rowspan="entry.particulars.accounts.length + 1" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                        {{ entry.voucher_type || "N/A" }}
+                      </td>
+                      <!-- First account row -->
+                      <td class="account_entries_table_particulars" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                        {{ entry.particulars.accounts[0]?.title || "N/A" }}
+                      </td>
+                      <td class="account_entries_table_debit account_primary_color">
+                        {{ entry.particulars.accounts[0]?.debit || "" }}
+                      </td>
+                      <td class="account_entries_table_credit account_error_color">
+                        {{ entry.particulars.accounts[0]?.credit || "" }}
+                      </td>
+                      <td class="account_entries_table_status" :rowspan="entry.particulars.accounts.length + 1">
+                        <VChip class="account_v_chip" :class="entry.status === 'Pending' ? 'account_chip_error' : 'account_chip_primary'" size="small">
+                          {{ entry.status || "N/A" }}
+                        </VChip>
+                      </td>
+                      <td class="account_entries_table_actions" :rowspan="entry.particulars.accounts.length + 1">
+                        <div class="d-flex align-center justify-center gap-2">
+                          <VBtn size="small" class="account_v_btn_ghost" variant="text">
+                            <VIcon icon="mdi-pencil-box-multiple-outline" size="small" />
+                          </VBtn>
+                          <VBtn size="small" class="account_v_btn_ghost" icon="mdi-arrow-u-left-top" variant="text" />
+                          <VBtn size="small" class="account_v_btn_ghost" icon="mdi-trash-can-outline" variant="text" />
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- Additional account rows (if any) -->
+                    <tr v-for="(account, accIndex) in entry.particulars.accounts.slice(1)" :key="`${index}-${accIndex}`" :class="[ 'account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }, ]" @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
+                      <td class="account_entries_table_particulars" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                        {{ account.title || "N/A" }}
+                      </td>
+                      <td class="account_entries_table_debit account_primary_color" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                        {{ account.debit || "" }}
+                      </td>
+                      <td class="account_entries_table_credit account_error_color" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                        {{ account.credit || "" }}
+                      </td>
+                    </tr>
+                    <!-- Description and Narration row -->
+                    <tr :class="[ 'account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }, ]">
+                      <td colspan="3" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                        <div class="d-flex flex-column align-start justify-center">
+                          <span class="account_entry_desc_text">(Narration: {{ entry.particulars.description?.narration || "N/A" }})</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </template>
                 </template>
               </tbody>
             </table>
