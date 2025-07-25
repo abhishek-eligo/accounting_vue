@@ -16715,7 +16715,7 @@ const mh = le({
       (w(), j(ne, {
         onClick: c,
         key: g.value,
-        class: "account_add_new_btn vibrate",
+        class: "account_add_new_btn",
         "prepend-icon": "mdi-plus-circle-outline"
       }, {
         default: d(() => _[29] || (_[29] = [
@@ -16726,7 +16726,7 @@ const mh = le({
       }))
     ]));
   }
-}, Gh = /* @__PURE__ */ zt(Uh, [["__scopeId", "data-v-355ef445"]]);
+}, Gh = /* @__PURE__ */ zt(Uh, [["__scopeId", "data-v-3c6173d1"]]);
 function Rt(...e) {
   if (e) {
     let t = [];

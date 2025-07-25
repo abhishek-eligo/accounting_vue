@@ -319,7 +319,7 @@ onMounted(() => {
           :widgets="customerWidgetData" />
       </VCol>
     </VRow>
-    <VBtn @click="showAddCustomerForm" :key="vibrateKey" class="account_add_new_btn vibrate"
+    <VBtn @click="showAddCustomerForm" :key="vibrateKey" class="account_add_new_btn"
       prepend-icon="mdi-plus-circle-outline">Add Customer
     </VBtn>
   </div>
