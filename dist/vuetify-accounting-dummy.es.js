@@ -16712,9 +16712,8 @@ const mh = le({
         ]),
         _: 1
       }),
-      (w(), j(ne, {
+      i(ne, {
         onClick: c,
-        key: g.value,
         class: "account_add_new_btn",
         "prepend-icon": "mdi-plus-circle-outline"
       }, {
@@ -16723,10 +16722,10 @@ const mh = le({
         ])),
         _: 1,
         __: [29]
-      }))
+      })
     ]));
   }
-}, Gh = /* @__PURE__ */ zt(Uh, [["__scopeId", "data-v-3c6173d1"]]);
+}, Gh = /* @__PURE__ */ zt(Uh, [["__scopeId", "data-v-b2d2bbb2"]]);
 function Rt(...e) {
   if (e) {
     let t = [];

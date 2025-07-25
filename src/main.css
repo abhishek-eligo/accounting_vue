@@ -770,9 +770,9 @@ p.secondary_email {
 }
 
 .account_add_new_btn {
-  background: var(--acc-primary-color);
-  border-radius: 30px;
-  padding: 18px 30px;
+  background: var(--acc-primary-color) !important;
+  border-radius: 30px !important;
+  padding: 18px 30px !important;
 }
 
 .account_add_new_btn.v-btn.v-btn--density-default {
