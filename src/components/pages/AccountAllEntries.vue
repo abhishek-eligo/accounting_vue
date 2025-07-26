@@ -486,8 +486,8 @@ async function submitLedgerForm() {
   const parentParts = ledgerForm.parentGroup.split(".");
   const newIndex = parentNode.children.length
     ? Math.max(
-        ...parentNode.children.map((c) => parseInt(c.id.split(".").pop()))
-      ) + 1
+      ...parentNode.children.map((c) => parseInt(c.id.split(".").pop()))
+    ) + 1
     : 1;
   const newId = `${ledgerForm.parentGroup}.${newIndex}`;
 
@@ -559,19 +559,10 @@ const hoveredRowIndex = ref(null);
     <VExpandTransition>
       <VRow v-show="showJournalEntryCard" class="justify-center">
         <VCol cols="8" class="">
-          <VCard
-            title="New Journal Entry"
-            class="account_vcard_border account_ui_vcard pa-2 shadow-none mb-6"
-          >
+          <VCard title="New Journal Entry" class="account_vcard_border account_ui_vcard pa-2 shadow-none mb-6">
             <template #append>
-              <VBtn
-                @click="showLedgerDialog = true"
-                class="account_v_btn_outlined save_btn_height"
-                variant="outlined"
-                size="default"
-                rounded="2"
-                color="primary"
-              >
+              <VBtn @click="showLedgerDialog = true" class="account_v_btn_outlined save_btn_height" variant="outlined"
+                size="default" rounded="2" color="primary">
                 <template #prepend>
                   <!-- Use Tabler plus icon -->
                   <span style="display: flex; align-items: center;">
@@ -591,43 +582,24 @@ const hoveredRowIndex = ref(null);
                         <label class="account_label">Date *</label>
                       </div>
                       <!-- :rules="[journalEntryRules.entryDate]" -->
-                      <VTextField
-                        v-model="journalEntryForm.entryDate"
-                        class="accouting_field accouting_active_field"
-                        type="date"
-                        variant="outlined"
-                        placeholder="Select Date"
-                        density="compact"
-                        prepend-inner-icon="mdi-calendar"
-                      />
+                      <VTextField v-model="journalEntryForm.entryDate" class="accouting_field accouting_active_field"
+                        type="date" variant="outlined" placeholder="Select Date" density="compact"
+                        prepend-inner-icon="mdi-calendar" />
                     </div>
                   </VCol>
                 </VRow>
 
                 <!-- Debit -->
-                <VRow
-                  v-for="(debit, index) in debitRows"
-                  :key="index"
-                  class="mb-1"
-                >
+                <VRow v-for="(debit, index) in debitRows" :key="index" class="mb-1">
                   <!-- Account -->
                   <VCol cols="12" lg="8" md="8">
                     <div class="d-flex align-center gap-3">
                       <div class="account_entry_form_label">
-                        <label v-if="index === 0" class="account_label"
-                          >Debit*</label
-                        >
+                        <label v-if="index === 0" class="account_label">Debit*</label>
                       </div>
-                      <VAutocomplete
-                        class="accouting_field accouting_active_field"
-                        variant="outlined"
-                        placeholder="Select Account"
-                        density="compact"
-                        :items="allLedgers"
-                        item-title="title"
-                        item-value="value"
-                        v-model="debit.account"
-                      />
+                      <VAutocomplete class="accouting_field accouting_active_field" variant="outlined"
+                        placeholder="Select Account" density="compact" :items="allLedgers" item-title="title"
+                        item-value="value" v-model="debit.account" />
                       <!-- :rules="[
                           (v) =>
                             validateField(v, journalEntryValidations.account),
@@ -636,30 +608,19 @@ const hoveredRowIndex = ref(null);
                   </VCol>
                   <!-- Amount -->
                   <VCol cols="12" lg="4" md="4">
-                    <VTextField
-                      type="number"
-                      class="accouting_field accouting_active_field"
-                      placeholder="0"
-                      variant="outlined"
-                      density="compact"
-                      v-model="debit.amount"
-                      @input="
+                    <VTextField type="number" class="accouting_field accouting_active_field" placeholder="0"
+                      variant="outlined" density="compact" v-model="debit.amount" @input="
                         (event) => handleAmountInput(event, index, 'debit')
-                      "
-                    >
+                      ">
                       <!-- :rules="[
                         (v) =>
                           validateField(v, journalEntryValidations.entryAmount),
                       ]" -->
                       <template #append>
-                        <VBtn
-                          class="account_v_btn_ghost account_btn_primary_text"
-                          icon="mdi-close"
-                          variant="text"
-                          size="x-small"
-                          rounded="1"
-                          @click="removeDebitRow(index)"
-                        />
+                        <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="small"
+                          rounded="3" @click="removeDebitRow(index)">
+                          <component :is="renderTablerIcon('x')" style="font-size: 18px;" />
+                        </VBtn>
                       </template>
                     </VTextField>
                     <!-- Amount in words display -->
@@ -673,42 +634,26 @@ const hoveredRowIndex = ref(null);
 
                 <!-- Add Button -->
                 <div class="d-flex align-center pr-9 mb-4 justify-end">
-                  <VBtn
-                    class="account_v_btn_ghost account_btn_primary_text"
-                    variant="text"
-                    size="small"
-                    rounded=""
-                    prepend-icon="mdi-plus"
-                    @click="addDebitRow"
-                  >
+                  <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="small" rounded=""
+                    @click="addDebitRow">
+                    <template #prepend>
+                      <component :is="renderTablerIcon('plus')" style="font-size: 18px;" />
+                    </template>
                     Add Debit Amount
                   </VBtn>
                 </div>
 
                 <!-- Credit -->
-                <VRow
-                  v-for="(credit, index) in creditRows"
-                  :key="index"
-                  class="mb-1"
-                >
+                <VRow v-for="(credit, index) in creditRows" :key="index" class="mb-1">
                   <VCol cols="12" lg="8" md="8">
                     <div class="d-flex align-center gap-3">
                       <div class="account_entry_form_label">
-                        <label v-if="index === 0" class="account_label"
-                          >Credit *</label
-                        >
+                        <label v-if="index === 0" class="account_label">Credit *</label>
                       </div>
                       <!-- <div v-else style="width: 48px"></div> -->
-                      <VAutocomplete
-                        class="accouting_field accouting_active_field"
-                        variant="outlined"
-                        placeholder="Select Account"
-                        density="compact"
-                        :items="allLedgers"
-                        item-title="title"
-                        item-value="value"
-                        v-model="credit.account"
-                      />
+                      <VAutocomplete class="accouting_field accouting_active_field" variant="outlined"
+                        placeholder="Select Account" density="compact" :items="allLedgers" item-title="title"
+                        item-value="value" v-model="credit.account" />
                       <!-- :rules="[
                           (v) =>
                             validateField(v, journalEntryValidations.account),
@@ -716,30 +661,19 @@ const hoveredRowIndex = ref(null);
                     </div>
                   </VCol>
                   <VCol cols="12" lg="4" md="4">
-                    <VTextField
-                      type="number"
-                      class="accouting_field accouting_active_field"
-                      placeholder="0"
-                      variant="outlined"
-                      density="compact"
-                      v-model="credit.amount"
-                      @input="
+                    <VTextField type="number" class="accouting_field accouting_active_field" placeholder="0"
+                      variant="outlined" density="compact" v-model="credit.amount" @input="
                         (event) => handleAmountInput(event, index, 'credit')
-                      "
-                    >
+                      ">
                       <!-- :rules="[
                         (v) =>
                           validateField(v, journalEntryValidations.entryAmount),
                       ]" -->
                       <template #append>
-                        <VBtn
-                          @click="removeCreditRow(index)"
-                          class="account_v_btn_ghost account_btn_primary_text"
-                          icon="mdi-close"
-                          variant="text"
-                          size="x-small"
-                          rounded="1"
-                        />
+                        <VBtn @click="removeCreditRow(index)" class="account_v_btn_ghost account_btn_primary_text"
+                          icon="mdi-close" variant="text" size="x-small" rounded="1">
+                          <component :is="renderTablerIcon('x')" style="font-size: 18px;" />
+                        </VBtn>
                       </template>
                     </VTextField>
                     <!-- Amount in words display -->
@@ -752,15 +686,13 @@ const hoveredRowIndex = ref(null);
                 </VRow>
 
                 <div class="d-flex align-center pr-9 mb-4 justify-end">
-                  <VBtn
-                    @click="addCreditRow"
-                    class="account_v_btn_ghost account_btn_primary_text"
-                    variant="text"
-                    size="small"
-                    rounded=""
-                    prepend-icon="mdi-plus"
-                    >Add Credit Amount</VBtn
-                  >
+                  <VBtn @click="addCreditRow" class="account_v_btn_ghost account_btn_primary_text" variant="text"
+                    size="small" rounded="" prepend-icon="mdi-plus">
+                    <template #prepend>
+                      <component :is="renderTablerIcon('plus')" style="font-size: 18px;" />
+                    </template>
+                    Add Credit Amount
+                  </VBtn>
                 </div>
 
                 <VRow>
@@ -769,12 +701,9 @@ const hoveredRowIndex = ref(null);
                       <div class="account_entry_form_label">
                         <label class="account_label mt-3">Description *</label>
                       </div>
-                      <VTextarea
-                        v-model="journalEntryForm.description"
-                        class="accounting_v_textarea"
+                      <VTextarea v-model="journalEntryForm.description" class="accounting_v_textarea"
                         placeholder="e.g. Inventory purchased on credit. XYZ Capital Introduce. Max length 254 characters"
-                        variant="outlined"
-                      />
+                        variant="outlined" />
                       <small class="text-error" v-if="descriptionError">
                         {{ descriptionError }}
                       </small>
@@ -782,35 +711,19 @@ const hoveredRowIndex = ref(null);
                   </VCol>
                   <VCol cols="12" lg="5" md="5">
                     <label class="account_label">Voucher Type *</label>
-                    <VAutocomplete
-                      v-model="journalEntryForm.voucherType"
-                      class="accouting_field accouting_active_field"
-                      variant="outlined"
-                      density="compact"
-                      :items="voucherTypes"
-                      item-title="title"
-                      item-value="value"
-                      placeholder="Select Voucher Type"
-                    />
+                    <VAutocomplete v-model="journalEntryForm.voucherType" class="accouting_field accouting_active_field"
+                      variant="outlined" density="compact" :items="voucherTypes" item-title="title" item-value="value"
+                      placeholder="Select Voucher Type" />
                     <!-- :rules="[journalEntryRules.voucherType]" -->
                   </VCol>
                 </VRow>
 
                 <VRow>
                   <VCol cols="12" lg="12" md="12">
-                    <VCard
-                      class="account_vcard_border mt-2 account_module_card shadow-none"
-                      title="Auto-Approve Entry"
-                      subtitle="This entry will be approved automatically and will immediately affect your books."
-                    >
+                    <VCard class="account_vcard_border mt-2 account_module_card shadow-none" title="Auto-Approve Entry"
+                      subtitle="This entry will be approved automatically and will immediately affect your books.">
                       <template #append>
-                        <VSwitch
-                          density="compact"
-                          inset
-                          class="account_swtich_btn"
-                          color="primary"
-                          hide-details
-                        />
+                        <VSwitch density="compact" inset class="account_swtich_btn" color="primary" hide-details />
                       </template>
                     </VCard>
                   </VCol>
@@ -819,24 +732,17 @@ const hoveredRowIndex = ref(null);
                 <VRow>
                   <VCol cols="12">
                     <div class="d-flex align-center justify-end gap-2">
-                      <VBtn
-                        @click="showJournalEntryCard = false"
-                        class="account_v_btn_outlined"
-                        variant="outlined"
-                        rounded="2"
-                        size="default"
-                        >Cancel</VBtn
-                      >
-                      <VBtn
-                        @click="submitJournalEntryForm"
-                        class="account_v_btn_primary save_btn_height"
-                        prepend-icon="mdi-content-save-outline"
-                        variant="outlined"
-                        size="default"
-                        rounded="2"
-                        color="primary"
-                        >Save Voucher</VBtn
-                      >
+                      <VBtn @click="showJournalEntryCard = false" class="account_v_btn_outlined" variant="outlined"
+                        rounded="2" size="default">Cancel</VBtn>
+                      <VBtn @click="submitJournalEntryForm" class="account_v_btn_primary save_btn_height"
+                        variant="outlined" size="default" rounded="2" color="primary">
+                        <template #prepend>
+                          <component :is="renderTablerIcon('device-floppy')" style="font-size: 18px;" />
+                        </template>
+
+                        Save
+                        Voucher
+                      </VBtn>
                     </div>
                   </VCol>
                 </VRow>
@@ -847,56 +753,32 @@ const hoveredRowIndex = ref(null);
       </VRow>
     </VExpandTransition>
 
-    <VCard
-      title="All Entries"
-      subtitle="A record of all financial transactions."
-      class="account_vcard_border pa-2 account_ui_vcard shadow-none"
-    >
+    <VCard title="All Entries" subtitle="A record of all financial transactions."
+      class="account_vcard_border pa-2 account_ui_vcard shadow-none">
       <template #append>
         <div class="d-flex align-center gap-2">
-          <VBtn
-            @click="showJournalEntryCard = !showJournalEntryCard"
-            class="account_v_btn_primary save_btn_height"
-            prepend-icon="mdi-plus-circle-outline"
-            variant="outlined"
-            size="default"
-            rounded="2"
-            color="primary"
-          >
+          <VBtn @click="showJournalEntryCard = !showJournalEntryCard" class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="2" color="primary">
+            <template #prepend>
+              <component :is="renderTablerIcon('plus')" style="font-size: 18px;" />
+            </template>
             New Journal Entry
           </VBtn>
         </div>
       </template>
       <div class="d-flex align-center px-3 justify-space-between">
-        <VTextField
-          style="max-width: 265px"
-          prepend-inner-icon="mdi-magnify"
-          class="accouting_field accouting_active_field"
-          placeholder="Filter entries"
-          variant="outlined"
-        />
+        <VTextField style="max-width: 265px" prepend-inner-icon="mdi-magnify"
+          class="accouting_field accouting_active_field" placeholder="Filter entries" variant="outlined" />
 
         <div class="d-flex align-center gap-2">
-          <VSwitch
-            density="compact"
-            inset
-            class="account_swtich_btn mr-3"
-            color="primary"
-            hide-details
-            label="Compact"
-          />
+          <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details
+            label="Compact" />
           <VMenu width="200px" location="start" :close-on-content-click="false">
             <template #activator="{ props }">
               <v-tooltip text="Filters" location="top">
                 <template #activator="{ props: tooltipProps }">
-                  <VBtn
-                    v-bind="{ ...props, ...tooltipProps }"
-                    variant="text"
-                    class="account_filter_btn_color"
-                    icon="mdi-filter-cog-outline"
-                    rounded
-                    size="36"
-                  />
+                  <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color" rounded="1" size="36">
+                    <component :is="renderTablerIcon('filter')" style="font-size: 24px;" />
+                    </VBtn>
                 </template>
               </v-tooltip>
             </template>
@@ -905,35 +787,20 @@ const hoveredRowIndex = ref(null);
               <VDivider class="my-1 mt-0" />
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item">
-                  <div
-                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                  >
-                    <VCheckbox
-                      class="account_v_checkbox account_filter_menu_checkbox"
-                      density="compact"
-                    />
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
                     <span>Date</span>
                   </div>
                 </div>
                 <div class="account_vcard_menu_item">
-                  <div
-                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                  >
-                    <VCheckbox
-                      class="account_v_checkbox account_filter_menu_checkbox"
-                      density="compact"
-                    />
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
                     <span>Created By</span>
                   </div>
                 </div>
                 <div class="account_vcard_menu_item">
-                  <div
-                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                  >
-                    <VCheckbox
-                      class="account_v_checkbox account_filter_menu_checkbox"
-                      density="compact"
-                    />
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
                     <span>Account</span>
                   </div>
                 </div>
@@ -941,34 +808,22 @@ const hoveredRowIndex = ref(null);
             </VCard>
           </VMenu>
 
-          <VMenu
-            width="110px"
-            location="bottom"
-            :close-on-content-click="false"
-          >
+          <VMenu width="110px" location="bottom" :close-on-content-click="false">
             <template v-slot:activator="{ props }">
-              <VBtn
-                v-bind="props"
-                icon="mdi-tray-arrow-down"
-                class="account_filter_btn_color"
-                variant="text"
-                rounded=""
-                size="36"
-              />
+              <VBtn v-bind="props" class="account_filter_btn_color" variant="text" rounded="1"
+                size="36">
+                <component :is="renderTablerIcon('download')" style="font-size: 24px;" />
+                </VBtn>
             </template>
             <VCard class="account_vcard_border">
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item">
-                  <div
-                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                  >
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
                     <span>PDF</span>
                   </div>
                 </div>
                 <div class="account_vcard_menu_item">
-                  <div
-                    class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                  >
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
                     <span>CSV</span>
                   </div>
                 </div>
@@ -980,9 +835,7 @@ const hoveredRowIndex = ref(null);
       <VCardText class="mt-2">
         <VCard class="shadow-none">
           <div class="gst_summary_table_container">
-            <table
-              class="table table-bordered account_entries_table text-center w-100"
-            >
+            <table class="table table-bordered account_entries_table text-center w-100">
               <thead>
                 <tr>
                   <th class="account_entries_table_header_date">Date</th>
@@ -1001,28 +854,30 @@ const hoveredRowIndex = ref(null);
               </thead>
               <tbody>
                 <template v-for="(entry, index) in allEntries" :key="index">
-                  <template v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0">
-                    <tr
-                      :class="[
-                        'account_entries_table_row',
-                        { 'even-entry': index % 2 === 0 },
-                      ]"
-                      @mouseover="hoveredRowIndex = index"
-                      @mouseleave="hoveredRowIndex = null"
-                    >
+                  <template
+                    v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0">
+                    <tr :class="[
+                      'account_entries_table_row',
+                      { 'even-entry': index % 2 === 0 },
+                    ]" @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
                       <!-- Date, Entry #, Voucher Type, Status, and Actions span all account rows and description -->
-                      <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                      <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1"
+                        :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ entry.date || "N/A" }}
                       </td>
-                      <td class="account_entries_table_entry" :rowspan="entry.particulars.accounts.length + 1" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                      <td class="account_entries_table_entry" :rowspan="entry.particulars.accounts.length + 1"
+                        :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ entry.entry || "N/A" }}<br />
-                        <span @click="openDetailsDialog(entry)" style="font-size: 12px; color: #009688; cursor: pointer">View Details</span>
+                        <span @click="openDetailsDialog(entry)"
+                          style="font-size: 12px; color: #009688; cursor: pointer">View Details</span>
                       </td>
-                      <td class="account_entries_table_voucher" :rowspan="entry.particulars.accounts.length + 1" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                      <td class="account_entries_table_voucher" :rowspan="entry.particulars.accounts.length + 1"
+                        :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ entry.voucher_type || "N/A" }}
                       </td>
                       <!-- First account row -->
-                      <td class="account_entries_table_particulars" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                      <td class="account_entries_table_particulars"
+                        :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ entry.particulars.accounts[0]?.title || "N/A" }}
                       </td>
                       <td class="account_entries_table_debit account_primary_color">
@@ -1032,37 +887,49 @@ const hoveredRowIndex = ref(null);
                         {{ entry.particulars.accounts[0]?.credit || "" }}
                       </td>
                       <td class="account_entries_table_status" :rowspan="entry.particulars.accounts.length + 1">
-                        <VChip class="account_v_chip" :class="entry.status === 'Pending' ? 'account_chip_error' : 'account_chip_primary'" size="small">
+                        <VChip class="account_v_chip"
+                          :class="entry.status === 'Pending' ? 'account_chip_error' : 'account_chip_primary'"
+                          size="small">
                           {{ entry.status || "N/A" }}
                         </VChip>
                       </td>
                       <td class="account_entries_table_actions" :rowspan="entry.particulars.accounts.length + 1">
                         <div class="d-flex align-center justify-center gap-2">
                           <VBtn size="small" class="account_v_btn_ghost" variant="text">
-                            <VIcon icon="mdi-pencil-box-multiple-outline" size="small" />
+                            <component :is="renderTablerIcon('pencil')" style="font-size: 20px;" />
                           </VBtn>
-                          <VBtn size="small" class="account_v_btn_ghost" icon="mdi-arrow-u-left-top" variant="text" />
-                          <VBtn size="small" class="account_v_btn_ghost" icon="mdi-trash-can-outline" variant="text" />
+                          <VBtn size="small" class="account_v_btn_ghost" variant="text">
+                            <component :is="renderTablerIcon('arrow-back-up')" style="font-size: 20px;" />
+                          </VBtn>
+                          <VBtn size="small" class="account_v_btn_ghost" variant="text">
+                            <component :is="renderTablerIcon('trash')" style="font-size: 20px;" />
+                          </VBtn>
                         </div>
                       </td>
                     </tr>
                     <!-- Additional account rows (if any) -->
-                    <tr v-for="(account, accIndex) in entry.particulars.accounts.slice(1)" :key="`${index}-${accIndex}`" :class="[ 'account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }, ]" @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
-                      <td class="account_entries_table_particulars" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                    <tr v-for="(account, accIndex) in entry.particulars.accounts.slice(1)" :key="`${index}-${accIndex}`"
+                      :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 },]"
+                      @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
+                      <td class="account_entries_table_particulars"
+                        :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ account.title || "N/A" }}
                       </td>
-                      <td class="account_entries_table_debit account_primary_color" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                      <td class="account_entries_table_debit account_primary_color"
+                        :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ account.debit || "" }}
                       </td>
-                      <td class="account_entries_table_credit account_error_color" :class="{ 'hovered-cell': hoveredRowIndex === index }">
+                      <td class="account_entries_table_credit account_error_color"
+                        :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ account.credit || "" }}
                       </td>
                     </tr>
                     <!-- Description and Narration row -->
-                    <tr :class="[ 'account_entries_table_row', { 'even-entry-extension': index % 2 === 0 }, ]">
+                    <tr :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 },]">
                       <td colspan="3" :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         <div class="d-flex flex-column align-start justify-center">
-                          <span class="account_entry_desc_text">(Narration: {{ entry.particulars.description?.narration || "N/A" }})</span>
+                          <span class="account_entry_desc_text">(Narration: {{ entry.particulars.description?.narration
+                            || "N/A" }})</span>
                         </div>
                       </td>
                     </tr>
@@ -1076,15 +943,9 @@ const hoveredRowIndex = ref(null);
     </VCard>
 
     <!-- Add Ledger Dialog -->
-    <VDialog
-      v-model="showLedgerDialog"
-      max-width="400"
-      @click:outside="ledgerFormRef?.resetValidation()"
-    >
+    <VDialog v-model="showLedgerDialog" max-width="400" @click:outside="ledgerFormRef?.resetValidation()">
       <VCard>
-        <VCardTitle class="account_ui_swtich_title pb-0"
-          >Add New Ledger</VCardTitle
-        >
+        <VCardTitle class="account_ui_swtich_title pb-0">Add New Ledger</VCardTitle>
         <VCardSubtitle class="account_ui_swtich_subtitle text-wrap px-3">
           Create a new ledger account under a specified group.
         </VCardSubtitle>
@@ -1092,69 +953,33 @@ const hoveredRowIndex = ref(null);
           <VForm ref="ledgerFormRef">
             <div class="mb-3">
               <label class="account_label">Ledger Name</label>
-              <VTextField
-                v-model="ledgerForm.name"
-                :rules="nameRules"
-                class="accouting_field accouting_active_field"
-                placeholder="Enter ledger name"
-                variant="outlined"
-                hide-details="auto"
-              />
+              <VTextField v-model="ledgerForm.name" :rules="nameRules" class="accouting_field accouting_active_field"
+                placeholder="Enter ledger name" variant="outlined" hide-details="auto" />
             </div>
             <div class="mb-3">
               <label class="account_label">Parent Group</label>
-              <VAutocomplete
-                v-model="ledgerForm.parentGroup"
-                :items="parentGroups"
-                :rules="parentGroupRules"
-                class="accouting_field accouting_active_field"
-                placeholder="Select parent group"
-                item-title="title"
-                item-value="value"
-                variant="outlined"
-                hide-details="auto"
-              />
+              <VAutocomplete v-model="ledgerForm.parentGroup" :items="parentGroups" :rules="parentGroupRules"
+                class="accouting_field accouting_active_field" placeholder="Select parent group" item-title="title"
+                item-value="value" variant="outlined" hide-details="auto" />
             </div>
           </VForm>
         </VCardText>
         <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn
-            text="Cancel"
-            class="account_v_btn_outlined"
-            variant="outlined"
-            @click="
-              showLedgerDialog = false;
-              ledgerFormRef?.resetValidation();
-            "
-          />
-          <VBtn
-            text="Add Ledger"
-            class="account_v_btn_primary"
-            @click="submitLedgerForm"
-          />
+          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click="
+            showLedgerDialog = false;
+          ledgerFormRef?.resetValidation();
+          " />
+          <VBtn text="Add Ledger" class="account_v_btn_primary" @click="submitLedgerForm" />
         </VCardActions>
       </VCard>
     </VDialog>
 
-    <VDialog
-      v-model="showDetailsDialog"
-      max-width="600"
-      @click:outside="showDetailsDialog = false"
-    >
-      <VCard
-        class="account_vcard_border account_details_dialog"
-        title="Journal Voucher"
-        :subtitle="selectedEntry?.entry"
-      >
+    <VDialog v-model="showDetailsDialog" max-width="600" @click:outside="showDetailsDialog = false">
+      <VCard class="account_vcard_border account_details_dialog" title="Journal Voucher"
+        :subtitle="selectedEntry?.entry">
         <template #append>
-          <VBtn
-            icon="mdi-close"
-            variant="text"
-            size="x-small"
-            rounded=""
-            @click="showDetailsDialog = false"
-            class="account_vcard_close_btn"
-          />
+          <VBtn icon="mdi-close" variant="text" size="x-small" rounded="" @click="showDetailsDialog = false"
+            class="account_vcard_close_btn" />
         </template>
         <VCardText>
           <div class="d-flex align-center justify-space-between mb-2">
@@ -1166,7 +991,7 @@ const hoveredRowIndex = ref(null);
               <span class="account_label_bold">Type:</span>
               <span class="account_label_light">{{
                 selectedEntry?.voucher_type
-              }}</span>
+                }}</span>
             </div>
           </div>
 
@@ -1176,18 +1001,12 @@ const hoveredRowIndex = ref(null);
               <span class="account_label_light">Admin</span>
             </div>
             <div class="">
-              <VChip
-                class="account_chip_primary"
-                size="small"
-                :text="selectedEntry?.status"
-              />
+              <VChip class="account_chip_primary" size="small" :text="selectedEntry?.status" />
             </div>
           </div>
           <VDivider />
 
-          <VCard
-            class="account_vcard_border shadow-none account_entries_table mt-2"
-          >
+          <VCard class="account_vcard_border shadow-none account_entries_table mt-2">
             <VTable class="">
               <thead>
                 <tr>
@@ -1197,10 +1016,7 @@ const hoveredRowIndex = ref(null);
                 </tr>
               </thead>
               <tbody>
-                <template
-                  v-for="(acc, i) in selectedEntry?.particulars?.accounts"
-                  :key="i"
-                >
+                <template v-for="(acc, i) in selectedEntry?.particulars?.accounts" :key="i">
                   <tr>
                     <td :class="{ 'pl-9': i !== 0 }">{{ acc.title }}</td>
                     <td class="text-success text-right">
@@ -1239,7 +1055,7 @@ const hoveredRowIndex = ref(null);
             <span class="account_label_bold abc">Narration:</span>
             <span class="account_label_light font-italic">{{
               selectedEntry?.particulars?.description?.narration || "N/A"
-            }}</span>
+              }}</span>
           </div>
         </VCardText>
       </VCard>
