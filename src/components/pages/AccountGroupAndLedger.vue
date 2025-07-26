@@ -18,6 +18,7 @@ import {
 } from "vuetify/components";
 import TreeItem from "@/components/core/TreeItem.vue";
 import { toast } from "vue3-toastify";
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 // === Data Structure ===
 const expanded = ref(false);
@@ -396,11 +397,17 @@ function handleDelete(node) {
           subtitle="Create and manage your ledger accounts and groups.">
           <template #append>
             <div class="d-flex align-center gap-2">
-              <VBtn @click="showGroupDialog = true" class="account_v_btn_outlined" variant="outlined"
-                prepend-icon="mdi-plus-circle-outline">Add Group
+              <VBtn @click="showGroupDialog = true" class="account_v_btn_outlined" variant="outlined">
+                <template #prepend>
+                  <component :is="renderTablerIcon('plus')" style="font-size: 18px;" />
+                </template>
+                Add Group
               </VBtn>
-              <VBtn @click="showLedgerDialog = true" class="account_v_btn_primary" variant="tonal"
-                prepend-icon="mdi-plus-circle-outline">Add Ledger
+              <VBtn @click="showLedgerDialog = true" class="account_v_btn_primary" variant="tonal">
+                <template #prepend>
+                  <component :is="renderTablerIcon('plus')" style="font-size: 18px;" />
+                </template>
+                Add Ledger
               </VBtn>
             </div>
           </template>
@@ -409,11 +416,13 @@ function handleDelete(node) {
             <!-- Parent -->
             <div class="d-flex align-center gap-2 mb-2">
               <div class="d-flex align-center gap-1">
-                <VIcon icon="mdi-folder-outline" class="account_folder_icon" size="16" />
+                <component class="account_folder_icon" :is="renderTablerIcon('folder')" style="font-size: 16px;" />
+                <!-- <VIcon icon="mdi-folder-outline" class="account_folder_icon" size="16" /> -->
                 <p class="mb-0 account_info_title">Group</p>
               </div>
               <div class="d-flex align-center gap-1">
-                <VIcon icon="mdi-file-document-outline" class="account_ledger_icon" size="16" />
+                <component class="account_ledger_icon" :is="renderTablerIcon('file-text')" style="font-size: 16px;" />
+                <!-- <VIcon icon="mdi-file-document-outline" class="account_ledger_icon" size="16" /> -->
                 <p class="mb-0 account_info_title">Ledger</p>
               </div>
             </div>

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { VAutocomplete, VTextField, VSpacer } from 'vuetify/lib/components/index.mjs';
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const props = defineProps({
   title: {
@@ -139,7 +140,7 @@ const totalPages = computed(() => {
       <VCol cols="12" md="3">
         <VCard subtitle="Total Records" class="account_v_card_dark account_widget_vcard account_vcard_border">
           <template #append>
-            <v-icon color="white" size="16" class="ml-2">mdi-account-group</v-icon>
+            <component :is="renderTablerIcon('users')" style="color: white; font-size: 16px;" />
           </template>
           <VCardText>
             <!-- <div class="text-h5 font-weight-bold">{{ props.widgets.totalRecords.toLocaleString() }}</div> -->
@@ -152,7 +153,7 @@ const totalPages = computed(() => {
       <VCol cols="12" md="3">
         <VCard subtitle="Average Purchase" class="account_vcard_border account_widget_vcard">
           <template #append>
-            <v-icon size="16" class="ml-2">mdi-currency-rupee</v-icon>
+            <component :is="renderTablerIcon('currency-rupee')" style="font-size: 16px;" />
           </template>
           <VCardText>
             <h5 class="account_texth5 mb-0 font-weight-bold">${{ props.widgets.avgPurchase ?
@@ -165,12 +166,12 @@ const totalPages = computed(() => {
       <VCol cols="12" md="3">
         <VCard subtitle="Top 10% Avg. Purchase" class="account_vcard_border account_widget_vcard">
           <template #append>
-            <v-icon size="16" class="ml-2">mdi-trending-up</v-icon>
+            <component :is="renderTablerIcon('trending-up')" style="font-size: 16px;" />
           </template>
           <VCardText>
             <h5 class="account_texth5 mb-0 font-weight-bold">
               ₹{{ typeof props.widgets.top10AvgPurchase === 'number' ? props.widgets.top10AvgPurchase.toFixed(2) :
-              '0.00' }}
+                '0.00' }}
             </h5>
           </VCardText>
         </VCard>
@@ -180,7 +181,7 @@ const totalPages = computed(() => {
       <VCol cols="12" md="3">
         <VCard subtitle="Average Rating" class="account_vcard_border account_widget_vcard">
           <template #append>
-            <v-icon size="16" class="ml-2">mdi-star-outline</v-icon>
+            <component :is="renderTablerIcon('star')" style="font-size: 16px;" />
           </template>
           <VCardText>
             <h5 class="account_texth5 mb-0 font-weight-bold">
@@ -194,8 +195,12 @@ const totalPages = computed(() => {
     <VRow class="">
       <VCol cols="12" class="d-flex align-center">
         <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-          style="max-inline-size: 377px;" prepend-inner-icon="mdi-magnify"
-          :placeholder="title === 'Accounting' ? 'Search by Name' : 'Search by Customer Name'" />
+          style="max-inline-size: 377px;"
+          :placeholder="title === 'Accounting' ? 'Search by Name' : 'Search by Customer Name'">
+          <template #prepend-inner>
+            <component :is="renderTablerIcon('search')" style="font-size: 20px;" />
+          </template>
+        </VTextField>
         <VSpacer />
         <div class="d-flex align-center gap-2">
           <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details
@@ -204,8 +209,10 @@ const totalPages = computed(() => {
             <template #activator="{ props }">
               <v-tooltip text="Filters list" location="top">
                 <template #activator="{ props: tooltipProps }">
-                  <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color"
-                    icon="mdi-filter-cog-outline" rounded size="36" />
+                  <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color" rounded="1"
+                    size="36">
+                    <component :is="renderTablerIcon('filter')" style="font-size: 22px;" />
+                  </VBtn>
                 </template>
               </v-tooltip>
             </template>
@@ -237,8 +244,9 @@ const totalPages = computed(() => {
           </VMenu>
           <VMenu width="300px" location="bottom" :close-on-content-click="false">
             <template v-slot:activator="{ props }">
-              <VBtn v-bind="props" class="account_filter_btn_color" variant="text" icon="mdi-view-column-outline"
-                rounded="" size="36" />
+              <VBtn v-bind="props" class="account_filter_btn_color" variant="text" rounded="1" size="36">
+                <component :is="renderTablerIcon('columns-3')" style="font-size: 22px;" />
+              </VBtn>
             </template>
             <VCard>
               <VCardTitle>Toggle and Reorder</VCardTitle>
@@ -263,8 +271,9 @@ const totalPages = computed(() => {
 
           <VMenu width="110px" location="bottom" :close-on-content-click="false">
             <template v-slot:activator="{ props }">
-              <VBtn v-bind="props" icon="mdi-tray-arrow-down" class="account_filter_btn_color " variant="text"
-                rounded="" size="36" />
+              <VBtn v-bind="props" class="account_filter_btn_color" variant="text" rounded="1" size="36">
+                <component :is="renderTablerIcon('download')" style="font-size: 22px;" />
+              </VBtn>
             </template>
             <VCard class="account_vcard_border">
               <VList>
@@ -358,9 +367,9 @@ const totalPages = computed(() => {
         :density="isTableCompact ? 'compact' : 'default'" class="elevation-1 border rounded account_dynamic_table">
         <template #item.actions="{ item }">
           <div class="d-flex align-center gap-2">
-            <VIcon style="cursor: pointer;" icon="mdi-eye-outline" class="account_v_btn_color" size="small" />
-            <VIcon style="cursor: pointer;" icon="mdi-square-edit-outline" class="account_v_btn_color" size="small" />
-            <VIcon style="cursor: pointer;" icon="mdi-trash-can-outline" color="error" size="small" />
+            <component :is="renderTablerIcon('eye')" class="account_v_btn_color" style="font-size: 20px; cursor: pointer;" />
+            <component :is="renderTablerIcon('edit')" class="account_v_btn_color" style="font-size: 20px; cursor: pointer;" />
+            <component :is="renderTablerIcon('trash')" class="account_v_btn_color" style="font-size: 20px; cursor: pointer; color: red;" />
           </div>
         </template>
         <template #item.status="{ item }">

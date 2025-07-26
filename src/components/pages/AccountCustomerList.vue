@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import DynamicDataTable from '@/components/DynamicDataTable.vue'
 import '../../main.css';
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const formFields = ref([
   // Core Information
@@ -126,7 +127,9 @@ onMounted(() => {
                 <div class="d-flex align-center gap-2">
                   <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                     <template #activator="{ props }">
-                      <VBtn v-bind="props" icon="mdi-cog-outline" variant="text" size="x-small" rounded="" />
+                      <VBtn v-bind="props" variant="text" size="x-small" rounded="">
+                        <component :is="renderTablerIcon('settings')" style="font-size: 20px;" />
+                      </VBtn>
                     </template>
                     <VCard class="account_vcard_menu account_vcard_border">
                       <div class="account_vcard_menu_hdng">Show/Hide Optional Fields</div>
@@ -142,8 +145,10 @@ onMounted(() => {
                       </div>
                     </VCard>
                   </VMenu>
-                  <VBtn @click="showAddCustomerForm" icon="mdi-close" variant="text" size="x-small" rounded=""
-                    class="account_vcard_close_btn" />
+                  <VBtn @click="showAddCustomerForm" variant="text" size="x-small" rounded=""
+                    class="account_vcard_close_btn">
+                    <component :is="renderTablerIcon('x')" style="font-size: 20px;" />
+                  </VBtn>
                 </div>
               </template>
               <VCardText>
@@ -301,7 +306,13 @@ onMounted(() => {
                     <VTextarea class="accounting_v_textarea" placeholder="Optional delivery address"
                       variant="outlined" />
                     <div class="d-flex align-center justify-end mt-4">
-                      <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save Customer</VBtn>
+                      <VBtn class="account_v_btn_primary">
+                        <template #prepend>
+                          <component :is="renderTablerIcon('device-floppy')"
+                            style="font-size: 20px; margin-right: 6px;" />
+                        </template>
+                        Save Customer
+                      </VBtn>
                     </div>
                   </VCol>
 
@@ -319,8 +330,11 @@ onMounted(() => {
           :widgets="customerWidgetData" />
       </VCol>
     </VRow>
-    <VBtn @click="showAddCustomerForm" class="account_add_new_btn"
-      prepend-icon="mdi-plus-circle-outline">Add Customer
+    <VBtn @click="showAddCustomerForm" class="account_add_new_btn">
+      <template #prepend>
+        <component :is="renderTablerIcon('plus')" style="font-size: 20px; margin-right: 6px;" />
+      </template>
+      Add Customer
     </VBtn>
   </div>
 </template>

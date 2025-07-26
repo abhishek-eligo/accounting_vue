@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, watchEffect } from 'vue'
 import DynamicDataTable from '@/components/DynamicDataTable.vue'
 import { title } from '@primeuix/themes/aura/card';
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 // Headers from screenshots
 const invoiceHeaders = ref([
@@ -744,10 +745,13 @@ const previewValue = computed(() => {
             subtitle="Fill out the details below to create a new sales invoice.">
             <template #append>
               <div class="d-flex align-center gap-2">
-                <VBtn @click="isInvoiceSettingsVisible = true" icon="mdi-cog-outline" variant="text" size="x-small"
-                  rounded="" />
-                <VBtn @click="isCreatingNewInvoice = false" icon="mdi-close" variant="text" size="x-small" rounded=""
-                  class="account_vcard_close_btn" />
+                <VBtn @click="isInvoiceSettingsVisible = true" variant="text" size="x-small" rounded="">
+                  <component :is="renderTablerIcon('settings')" style="font-size: 20px;" />
+                </VBtn>
+                <VBtn @click="isCreatingNewInvoice = false" variant="text" size="x-small" rounded=""
+                  class="account_vcard_close_btn">
+                  <component :is="renderTablerIcon('x')" style="font-size: 20px;" />
+                </VBtn>
               </div>
             </template>
             <VCardText>
@@ -757,8 +761,10 @@ const previewValue = computed(() => {
                   <VAutocomplete v-model="selectedCustomer" placeholder="Select a customer"
                     class="accouting_field accouting_active_field" :items="customersList" variant="outlined">
                     <template #append>
-                      <VBtn class="account_v_btn_outlined" @click="addNewCustomerVisible = true" rounded=""
-                        icon="mdi-plus-circle-outline" size="x-small" />
+                      <VBtn class="account_v_btn_outlined" @click="addNewCustomerVisible = true" rounded="1"
+                        size="default">
+                        <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px;" />
+                      </VBtn>
                     </template>
                   </VAutocomplete>
                 </VCol>
@@ -791,8 +797,8 @@ const previewValue = computed(() => {
                       <label class="account_label mb-2">Place of Supply</label>
                       <!-- <VTextField v-model="placeOfSupply" class="accouting_field accouting_active_field"
                         variant="outlined" density="compact" /> -->
-                      <VAutocomplete v-model="placeOfSupply" class="accouting_field accouting_active_field" variant="outlined"
-                        :items="statesList" />
+                      <VAutocomplete v-model="placeOfSupply" class="accouting_field accouting_active_field"
+                        variant="outlined" :items="statesList" />
                     </VCol>
                     <VCol cols="12" lg="12" md="12">
                       <VCheckbox v-model="shippingSameAsBilling" density="compact" class="account_v_checkbox"
@@ -868,17 +874,19 @@ const previewValue = computed(() => {
                     </template>
 
                     <template #item.actions="{ index }">
-                      <VIcon icon="mdi-trash-can-outline" class="cursor-pointer table_row_icon" :class="{
+                      <component :is="renderTablerIcon('trash')" class="cursor-pointer table_row_icon" :class="{
                         'opacity-50': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1,
                         'cursor-not-allowed': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1
                       }" :disabled="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1"
-                        @click="removeInvoiceRow(index, activeInvoiceType)" />
+                        @click="removeInvoiceRow(index, activeInvoiceType)" style="font-size: 20px;" />
                     </template>
                   </VDataTable>
                 </VCol>
                 <VCol cols="12">
-                  <VBtn class="account_v_btn_outlined mt-3" prepend-icon="mdi-plus-circle-outline" variant="text"
-                    @click="addInvoiceRow(activeInvoiceType)">
+                  <VBtn class="account_v_btn_outlined mt-3" variant="text" @click="addInvoiceRow(activeInvoiceType)">
+                    <template #prepend>
+                      <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+                    </template>
                     Add Another Line
                   </VBtn>
                 </VCol>
@@ -987,8 +995,19 @@ const previewValue = computed(() => {
                     placeholder="Thank you for your business. All payments are due within 30 days."
                     variant="outlined" />
                   <div class="d-flex align-center gap-2 justify-end mt-3">
-                    <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save as Default</VBtn>
-                    <VBtn class="account_v_btn_outlined" prepend-icon="mdi-send-outline">Save & Send Invoice</VBtn>
+                    <VBtn class="account_v_btn_primary">
+                      <template #prepend>
+                        <component :is="renderTablerIcon('device-floppy')"
+                          style="font-size: 20px; margin-right: 6px;" />
+                      </template>
+                      Save as Default
+                    </VBtn>
+                    <VBtn class="account_v_btn_outlined">
+                      <template #prepend>
+                        <component :is="renderTablerIcon('send')" style="font-size: 20px; margin-right: 6px;" />
+                      </template>
+                      Save & Send Invoice
+                    </VBtn>
                   </div>
                 </VCol>
               </VRow>
@@ -999,9 +1018,12 @@ const previewValue = computed(() => {
     </VExpandTransition>
 
     <div class="pb-4 d-flex align-center justify-end">
-      <VBtn @click="isCreatingNewInvoice = true" class="account_v_btn_primary" prepend-icon="mdi-plus-circle-outline">
-        Create
-        Invoice</VBtn>
+      <VBtn @click="isCreatingNewInvoice = true" class="account_v_btn_primary">
+        <template #prepend>
+          <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+        </template>
+        Create Invoice
+      </VBtn>
     </div>
     <div class="account_invoice_list">
       <DynamicDataTable title="Invoices" :headers="invoiceHeaders" :items="invoiceItems" :filters="invoiceFilters"

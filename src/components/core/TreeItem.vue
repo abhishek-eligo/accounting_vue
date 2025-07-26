@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from "vue";
 import { VIcon, VChip } from "vuetify/components";
 import TreeItem from "./TreeItem.vue";
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const props = defineProps({
   node: Object,
@@ -64,10 +65,11 @@ const emit = defineEmits(["edit", "delete"]);
     <div class="d-flex align-center justify-space-between pa-1" @click="toggle" style="cursor: pointer">
       <div class="d-flex align-center gap-2">
         <div v-if="!isLedger" style="width: 16px; height: 16px;" class="">
-          <VIcon v-if="props.node.children" :icon="expanded ? 'mdi-chevron-down' : 'mdi-chevron-right'" size="16" />
+          <component v-if="props.node.children" :is="renderTablerIcon(expanded ? 'chevron-down' : 'chevron-right')"
+            style="font-size: 16px;" />
         </div>
-        <VIcon :icon="isLedger ? 'mdi-file-document-outline' : 'mdi-folder-outline'" size="16"
-          :class="isLedger ? 'account_ledger_icon' : 'account_folder_icon'" />
+        <component :is="renderTablerIcon(isLedger ? 'file-text' : 'folder')"
+          :class="isLedger ? 'account_ledger_icon' : 'account_folder_icon'" style="font-size: 16px;" />
         <div class="">
           <h6 :class="[
             props.level === 0 ? 'expansion_base_parent_title' : 'expansion_node_title',
@@ -84,18 +86,18 @@ const emit = defineEmits(["edit", "delete"]);
         <div class="more_options_w">
           <VMenu v-model="menu" :close-on-content-click="false" class="account_vmenu_border" location="bottom end">
             <template #activator="{ props: menuProps }">
-              <VIcon v-if="isHovered || menu" open-on-hover icon="mdi-dots-horizontal" size="16" v-bind="menuProps" />
+              <component v-if="isHovered || menu" :is="renderTablerIcon('dots')" style="font-size: 16px;" v-bind="menuProps" />
             </template>
             <VList class="account_expansion_list">
               <VListItem @click="onEdit">
                 <VListItemTitle class="d-flex align-center gap-3">
-                  <VIcon icon="mdi-pencil-outline" size="small" />
+                  <component :is="renderTablerIcon('pencil')" style="font-size: 18px;" />
                   <p class="mb-0">Edit</p>
                 </VListItemTitle>
               </VListItem>
               <VListItem @click="onDelete">
                 <VListItemTitle class="d-flex trash align-center gap-3">
-                  <VIcon icon="mdi-trash-can-outline" size="small" />
+                  <component :is="renderTablerIcon('trash')" style="font-size: 18px;" />
                   <p class="mb-0">Delete</p>
                 </VListItemTitle>
               </VListItem>

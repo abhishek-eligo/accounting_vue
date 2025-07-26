@@ -567,7 +567,7 @@ const hoveredRowIndex = ref(null);
                   <!-- Use Tabler plus icon -->
                   <span style="display: flex; align-items: center;">
                     <!-- Use the helper to render the icon -->
-                    <component :is="renderTablerIcon('plus')" style="font-size: 22px; margin-right: 6px;" />
+                    <component :is="renderTablerIcon('plus')" style="font-size: 22px;" />
                   </span>
                 </template>
                 Add Ledger
