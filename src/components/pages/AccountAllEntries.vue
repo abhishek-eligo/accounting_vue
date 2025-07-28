@@ -617,7 +617,7 @@ const hoveredRowIndex = ref(null);
                           validateField(v, journalEntryValidations.entryAmount),
                       ]" -->
                       <template #append>
-                        <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="small"
+                        <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="x-small"
                           rounded="3" @click="removeDebitRow(index)">
                           <component :is="renderTablerIcon('x')" style="font-size: 18px;" />
                         </VBtn>
@@ -671,7 +671,7 @@ const hoveredRowIndex = ref(null);
                       ]" -->
                       <template #append>
                         <VBtn @click="removeCreditRow(index)" class="account_v_btn_ghost account_btn_primary_text"
-                          icon="mdi-close" variant="text" size="x-small" rounded="1">
+                          variant="text" size="x-small" rounded="1">
                           <component :is="renderTablerIcon('x')" style="font-size: 18px;" />
                         </VBtn>
                       </template>
@@ -687,7 +687,7 @@ const hoveredRowIndex = ref(null);
 
                 <div class="d-flex align-center pr-9 mb-4 justify-end">
                   <VBtn @click="addCreditRow" class="account_v_btn_ghost account_btn_primary_text" variant="text"
-                    size="small" rounded="" prepend-icon="mdi-plus">
+                    size="small" rounded="">
                     <template #prepend>
                       <component :is="renderTablerIcon('plus')" style="font-size: 18px;" />
                     </template>
@@ -757,7 +757,8 @@ const hoveredRowIndex = ref(null);
       class="account_vcard_border pa-2 account_ui_vcard shadow-none">
       <template #append>
         <div class="d-flex align-center gap-2">
-          <VBtn @click="showJournalEntryCard = !showJournalEntryCard" class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="2" color="primary">
+          <VBtn @click="showJournalEntryCard = !showJournalEntryCard" class="account_v_btn_primary save_btn_height"
+            variant="outlined" size="default" rounded="2" color="primary">
             <template #prepend>
               <component :is="renderTablerIcon('plus')" style="font-size: 18px;" />
             </template>
@@ -776,9 +777,10 @@ const hoveredRowIndex = ref(null);
             <template #activator="{ props }">
               <v-tooltip text="Filters" location="top">
                 <template #activator="{ props: tooltipProps }">
-                  <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color" rounded="1" size="36">
+                  <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color"
+                    rounded="1" size="36">
                     <component :is="renderTablerIcon('filter')" style="font-size: 24px;" />
-                    </VBtn>
+                  </VBtn>
                 </template>
               </v-tooltip>
             </template>
@@ -810,10 +812,9 @@ const hoveredRowIndex = ref(null);
 
           <VMenu width="110px" location="bottom" :close-on-content-click="false">
             <template v-slot:activator="{ props }">
-              <VBtn v-bind="props" class="account_filter_btn_color" variant="text" rounded="1"
-                size="36">
+              <VBtn v-bind="props" class="account_filter_btn_color" variant="text" rounded="1" size="36">
                 <component :is="renderTablerIcon('download')" style="font-size: 24px;" />
-                </VBtn>
+              </VBtn>
             </template>
             <VCard class="account_vcard_border">
               <div class="account_table_filter_menu py-1">
@@ -978,8 +979,10 @@ const hoveredRowIndex = ref(null);
       <VCard class="account_vcard_border account_details_dialog" title="Journal Voucher"
         :subtitle="selectedEntry?.entry">
         <template #append>
-          <VBtn icon="mdi-close" variant="text" size="x-small" rounded="" @click="showDetailsDialog = false"
-            class="account_vcard_close_btn" />
+          <VBtn variant="text" size="x-small" rounded="" @click="showDetailsDialog = false"
+            class="account_vcard_close_btn">
+            <component :is="renderTablerIcon('x')" style="font-size: 20px;" />
+          </VBtn>
         </template>
         <VCardText>
           <div class="d-flex align-center justify-space-between mb-2">
@@ -991,7 +994,7 @@ const hoveredRowIndex = ref(null);
               <span class="account_label_bold">Type:</span>
               <span class="account_label_light">{{
                 selectedEntry?.voucher_type
-                }}</span>
+              }}</span>
             </div>
           </div>
 
@@ -1055,7 +1058,7 @@ const hoveredRowIndex = ref(null);
             <span class="account_label_bold abc">Narration:</span>
             <span class="account_label_light font-italic">{{
               selectedEntry?.particulars?.description?.narration || "N/A"
-              }}</span>
+            }}</span>
           </div>
         </VCardText>
       </VCard>

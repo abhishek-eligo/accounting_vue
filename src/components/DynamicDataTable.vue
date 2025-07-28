@@ -201,6 +201,11 @@ const totalPages = computed(() => {
             <component :is="renderTablerIcon('search')" style="font-size: 20px;" />
           </template>
         </VTextField>
+        <!-- <v-date-input class="accounting_date_input" placeholder="Select range" max-width="368" multiple="range">
+          <template #prepend-inner>
+            <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+          </template>
+        </v-date-input> -->
         <VSpacer />
         <div class="d-flex align-center gap-2">
           <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details
@@ -335,37 +340,52 @@ const totalPages = computed(() => {
           </VAutocomplete>
         </VCol>
         <VCol v-if="isFilterChecked('Last Transaction From')" cols="12" lg="3" md="3">
-          <VTextField class="accouting_field accouting_active_field" variant="outlined"
-            placeholder="Last Transaction From" type="date" density="compact">
-            <template #append>
-              <VBtn variant="text" size="small"
-                @click="cancelFilter('Last Transaction From')">
-                <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
-                </VBtn>
-            </template>
-          </VTextField>
+          <div class="d-flex align-center gap-2">
+            <v-date-input class="accounting_date_input" placeholder="Last Transaction From" max-width="368"
+              multiple="range">
+              <template #prepend-inner>
+                <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+              </template>
+            </v-date-input>
+            <VBtn variant="text" size="small" @click="cancelFilter('Last Transaction From')">
+              <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+            </VBtn>
+          </div>
         </VCol>
-        <VCol v-if="isFilterChecked('Last Transaction To')" cols="12" lg="3" md="3">
-          <VTextField class="accouting_field accouting_active_field" variant="outlined"
-            placeholder="Last Transaction To" type="date" density="compact">
-            <template #append>
-              <VBtn variant="text" size="small" @click="cancelFilter('Last Transaction To')">
+        <!-- <VCol v-if="isFilterChecked('Last Transaction To')" cols="12" lg="3" md="3">
+          <div class="d-flex align-center gap-2">
+            <v-date-input class="accounting_date_input" placeholder="Last Transaction To" max-width="368" multiple="range">
+            <template #prepend-inner>
+              <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+            </template>
+          </v-date-input>
+          <VBtn variant="text" size="small" @click="cancelFilter('Last Transaction To')">
                 <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
               </VBtn>
-            </template>
-          </VTextField>
-        </VCol>
+          </div>
+        </VCol> -->
         <VCol v-if="isFilterChecked('Last Order From')" cols="12" lg="3" md="3">
-          <VTextField class="accouting_field accouting_active_field" variant="outlined" placeholder="Last Order From"
+          <div class="d-flex align-center gap-2">
+            <v-date-input class="accounting_date_input" placeholder="Last Order From" max-width="368"
+              multiple="range">
+              <template #prepend-inner>
+                <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+              </template>
+            </v-date-input>
+            <VBtn variant="text" size="small" @click="cancelFilter('Last Order From')">
+              <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+            </VBtn>
+          </div>
+          <!-- <VTextField class="accouting_field accouting_active_field" variant="outlined" placeholder="Last Order From"
             type="date" density="compact">
             <template #append>
               <VBtn variant="text" size="small" @click="cancelFilter('Last Order From')">
                 <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
               </VBtn>
             </template>
-          </VTextField>
+          </VTextField> -->
         </VCol>
-        <VCol v-if="isFilterChecked('Last Order To')" cols="12" lg="3" md="3">
+        <!-- <VCol v-if="isFilterChecked('Last Order To')" cols="12" lg="3" md="3">
           <VTextField class="accouting_field accouting_active_field" variant="outlined" placeholder="Last Order To"
             type="date" density="compact">
             <template #append>
@@ -374,7 +394,7 @@ const totalPages = computed(() => {
               </VBtn>
             </template>
           </VTextField>
-        </VCol>
+        </VCol> -->
       </VRow>
     </VSlideYTransition>
 

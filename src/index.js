@@ -13,6 +13,7 @@ import AccountUserRolePermission from "./components/pages/AccountUserRolePermiss
 import AccountVendorsList from "./components/pages/AccountVendorsList.vue";
 import InvoicePreview from "./components/pages/InvoicePreview.vue";
 import ProductsPage from "./components/pages/ProductsPage.vue";
+import vuetify from './plugins/vuetify.js';
 
 // Helpers
 export * from "./helpers/index.js";
@@ -21,6 +22,7 @@ export * from "./validations/index.js";
 
 // Export components individually
 export { InvoicePreview }
+export { vuetify };
 
 // Export a plugin installer for global registration
 export default {

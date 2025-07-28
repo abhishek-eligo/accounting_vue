@@ -7,6 +7,7 @@
 // Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
+import * as labs from 'vuetify/labs/components'
 
 // Vuetify core
 import { createVuetify } from 'vuetify'
@@ -17,7 +18,9 @@ import * as directives from 'vuetify/directives'
 // Removed Tabler icon set import
 
 export default createVuetify({
-  components,
+  components: {
+    ...labs
+  },
   directives,
   icons: {
     defaultSet: 'mdi', // keep mdi as default

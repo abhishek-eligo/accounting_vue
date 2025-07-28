@@ -497,29 +497,6 @@ p.secondary_email {
     text-decoration: underline;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .account_v_btn_tonal.v-btn .v-btn__content {
     color: var(--acc-text-white) !important;
 }
@@ -653,6 +630,36 @@ p.secondary_email {
 
 .accouting_active_field .v-field--active.v-field--focused {
     border: 1px solid var(--acc-primary-color) !important;
+}
+
+.accounting_date_input.v-input {
+    height: 100%;
+    max-height: 36px;
+    background: var(--acc-input-bg-color) !important;
+    border: 1px solid rgb(208, 214, 221) !important;
+    border-radius: 7px !important;
+    max-width: 368px;
+}
+
+.accounting_date_input.v-input .v-input__prepend {
+    margin-right: 8px;
+    margin-left: 10px;
+}
+
+.accounting_date_input.v-input .v-field .v-field__field {
+    max-height: 36px;
+}
+
+.accounting_date_input.v-input .v-field .v-field__overlay,
+.accounting_date_input.v-input .v-field .v-field__outline {
+    display: none !important;
+}
+
+.accounting_date_input.v-input .v-field .v-field__field .v-field__input {
+    padding-top: 0;
+    max-height: 36px;
+    min-height: 36px;
+    padding-bottom: 0;
 }
 
 .accounting_active_error_field .v-field--active.v-field--focused {

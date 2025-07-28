@@ -199,7 +199,7 @@ const statesList = ref([
 <template>
   <div>
     <VRow class="justify-center">
-      <VCol cols="10">
+      <VCol cols="12">
         <VCard class="account_ui_vcard account_vcard_border" title="New Purchase Bill"
           subtitle="Enter the details from your vendor's bill.">
           <template #append>
