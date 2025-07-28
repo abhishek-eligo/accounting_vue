@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import DynamicDataTable from '@/components/DynamicDataTable.vue'
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const formFields = ref([
   { label: 'First Name', key: 'firstName', visible: true },
@@ -103,7 +104,9 @@ onMounted(() => {
                 <div class="d-flex align-center gap-2">
                   <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                     <template #activator="{ props }">
-                      <VBtn v-bind="props" icon="mdi-cog-outline" variant="text" size="x-small" rounded="" />
+                      <VBtn v-bind="props" variant="text" size="x-small" rounded="">
+                        <component :is="renderTablerIcon('settings')" style="font-size: 20px;" />
+                      </VBtn>
                     </template>
                     <VCard class="account_vcard_menu account_vcard_border">
                       <div class="account_vcard_menu_hdng">Show/Hide Optional Fields</div>
@@ -112,15 +115,17 @@ onMounted(() => {
                         <div v-for="field in formFields" :key="field.key" class="account_vcard_menu_item"
                           @click="field.visible = !field.visible">
                           <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                            <VIcon v-if="field.visible" size="16" icon="mdi-check" />
+                            <component v-if="field.visible" :is="renderTablerIcon('check')" style="font-size: 16px;" />
                             <span :class="field.visible ? '' : 'field_list_dynamic_ml'">{{ field.label }}</span>
                           </div>
                         </div>
                       </div>
                     </VCard>
                   </VMenu>
-                  <VBtn @click="showAddVendorForm" icon="mdi-close" variant="text" size="x-small" rounded=""
-                    class="account_vcard_close_btn" />
+                  <VBtn @click="showAddVendorForm" variant="text" size="x-small" rounded=""
+                    class="account_vcard_close_btn">
+                    <component :is="renderTablerIcon('x')" style="font-size: 20px;" />
+                  </VBtn>
                 </div>
               </template>
               <VCardText>
@@ -192,7 +197,12 @@ onMounted(() => {
                 </VRow>
               </VCardText>
               <VCardActions class="justify-end">
-                <VBtn color="success" class="account_v_btn_primary" prepend-icon="mdi-content-save">Save Vendor</VBtn>
+                <VBtn color="success" class="account_v_btn_primary">
+                  <template #prepend>
+                    <component :is="renderTablerIcon('device-floppy')" style="font-size: 20px; margin-right: 6px;" />
+                  </template>
+                  Save Vendor
+                </VBtn>
               </VCardActions>
             </VCard>
           </div>
@@ -206,8 +216,11 @@ onMounted(() => {
           :widgets="vendorWidgetData" />
       </VCol>
     </VRow>
-    <VBtn @click="showAddVendorForm" :key="vibrateKey" class="account_add_new_btn vibrate"
-      prepend-icon="mdi-plus-circle-outline">Add Vendor
+    <VBtn @click="showAddVendorForm" :key="vibrateKey" class="account_add_new_btn vibrate">
+      <template #prepend>
+        <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+      </template>
+      Add Vendor
     </VBtn>
   </div>
 </template>

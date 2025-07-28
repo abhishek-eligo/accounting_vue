@@ -426,7 +426,7 @@ function handleDelete(node) {
                 <p class="mb-0 account_info_title">Ledger</p>
               </div>
             </div>
-            <VCard class="py-2 pr-2 account_vcard_border shadow-none">
+            <VCard class="py-2 pr-2 account_vcard_border shadow-none" variant="text">
               <div class="custom_expansion_item">
                 <TreeItem v-for="item in chartData" :key="item.id" :node="item" :level="0" @edit="handleEdit"
                   @delete="handleDelete" />

@@ -2,6 +2,7 @@
 import { ref, computed, watchEffect } from 'vue'
 import { onMounted } from 'vue'
 import DynamicDataTable from '@/components/DynamicDataTable.vue'
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 // Vendor select and Add Vendor dialog
 const vendorsList = ref([
@@ -205,7 +206,9 @@ const statesList = ref([
             <VMenu v-model="purchaseModeMenu" location="bottom end" offset-y transition="slide-y-transition"
               :close-on-content-click="false">
               <template #activator="{ props }">
-                <VBtn v-bind="props" icon="mdi-cog-outline" variant="text" size="x-small" rounded="" />
+                <VBtn v-bind="props" variant="text" size="x-small" rounded="">
+                  <component :is="renderTablerIcon('settings')" style="font-size: 20px;" />
+                </VBtn>
               </template>
               <VCard class="account_vcard_menu account_vcard_border">
                 <div class="account_vcard_menu_hdng">Purchase Mode</div>
@@ -214,9 +217,10 @@ const statesList = ref([
                   <div v-for="mode in purchaseModes" :key="mode.value" class="account_vcard_menu_item"
                     @click="selectedPurchaseMode = mode.value">
                     <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                      <VIcon v-if="selectedPurchaseMode === mode.value" size="16" icon="mdi-check" />
+                      <component v-if="selectedPurchaseMode === mode.value" :is="renderTablerIcon('check')"
+                        style="font-size: 16px;" />
                       <span :class="selectedPurchaseMode === mode.value ? '' : 'field_list_dynamic_ml'">{{ mode.label
-                        }}</span>
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -230,8 +234,9 @@ const statesList = ref([
                 <VAutocomplete v-model="selectedVendor" :items="vendorsList" placeholder="Select a vendor"
                   variant="outlined" class="accouting_field accouting_active_field">
                   <template #append>
-                    <VBtn class="account_v_btn_outlined" @click="addVendorDialog = true" rounded=""
-                      icon="mdi-plus-circle-outline" size="x-small" />
+                    <VBtn class="account_v_btn_outlined" @click="addVendorDialog = true" rounded="2">
+                      <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px;" />
+                    </VBtn>
                   </template>
                 </VAutocomplete>
               </VCol>
@@ -252,7 +257,7 @@ const statesList = ref([
               <VCol cols="12" md="6">
                 <label class="account_label mb-2">Place of Supply (Vendor's State)</label>
                 <VAutocomplete :items="statesList" v-model="placeOfSupply" variant="outlined" placeholder="Select state"
-                  readonly class="accouting_field accouting_active_field" />
+                 class="accouting_field accouting_active_field" />
               </VCol>
               <VCol cols="12" md="6">
                 <label class="account_label mb-2">Due Date</label>
@@ -300,15 +305,19 @@ const statesList = ref([
                 <span>₹{{ (activeTab === 'inventory' ? inventoryRows : assetRows)[index].amount }}</span>
               </template>
               <template v-slot:[`item.actions`]="{ index }">
-                <VIcon icon="mdi-trash-can-outline" class="cursor-pointer table_row_icon"
-                  :class="{ 'opacity-50': (activeTab === 'inventory' ? inventoryRows : assetRows).length === 1, 'cursor-not-allowed': (activeTab === 'inventory' ? inventoryRows : assetRows).length === 1 }"
-                  :disabled="(activeTab === 'inventory' ? inventoryRows : assetRows).length === 1"
-                  @click="removeRow(index)" />
+                <component :is="renderTablerIcon('trash')" class="text-error cursor-pointer table_row_icon" :class="{
+                  'opacity-50': (activeTab === 'inventory' ? inventoryRows : assetRows).length === 1,
+                  'cursor-not-allowed': (activeTab === 'inventory' ? inventoryRows : assetRows).length === 1
+                }" :disabled="(activeTab === 'inventory' ? inventoryRows : assetRows).length === 1" @click="removeRow(index)"
+                  style="font-size: 20px;" />
               </template>
             </VDataTable>
-            <VBtn class="account_v_btn_outlined mt-3" prepend-icon="mdi-plus-circle-outline" variant="text"
-              @click="addRow">Add
-              Item</VBtn>
+            <VBtn class="account_v_btn_outlined mt-3" variant="text" @click="addRow">
+              <template #prepend>
+                <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+              </template>
+              Add Item
+            </VBtn>
             <VDivider class="my-4" />
             <VRow>
               <VCol cols="12">
@@ -321,18 +330,18 @@ const statesList = ref([
               <VCol cols="12" md="6">
                 <div class="d-flex flex-column align-end">
                   <div class="d-flex justify-space-between w-100 mb-1"><span>Subtotal</span><span>₹{{
-                      subtotal.toFixed(2)
+                    subtotal.toFixed(2)
                       }}</span></div>
                   <div class="d-flex justify-space-between w-100 mb-1"><span>CGST</span><span>₹{{ cgst.toFixed(2)
-                      }}</span></div>
+                  }}</span></div>
                   <div class="d-flex justify-space-between w-100 mb-1"><span>SGST</span><span>₹{{ sgst.toFixed(2)
-                      }}</span></div>
+                  }}</span></div>
                   <div class="d-flex justify-space-between w-100 mb-1"><span>IGST</span><span>₹{{ igst.toFixed(2)
-                      }}</span></div>
+                  }}</span></div>
                 </div>
                 <VDivider class="my-2" />
                 <div class="d-flex justify-space-between w-100 font-weight-bold"><span>Total Amount</span><span>₹{{
-                    totalAmount.toFixed(2) }}</span></div>
+                  totalAmount.toFixed(2) }}</span></div>
               </VCol>
             </VRow>
             <VDivider />
@@ -343,7 +352,12 @@ const statesList = ref([
                   variant="outlined" />
               </VCol>
               <VCol cols="12" class="d-flex align-center justify-end">
-                <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save Purchase Bill</VBtn>
+                <VBtn class="account_v_btn_primary">
+                  <template #prepend>
+                    <component :is="renderTablerIcon('device-floppy')" style="font-size: 20px; margin-right: 6px;" />
+                  </template>
+                  Save Purchase Bill
+                </VBtn>
               </VCol>
             </VRow>
           </VCardText>

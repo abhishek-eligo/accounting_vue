@@ -209,8 +209,8 @@ const totalPages = computed(() => {
             <template #activator="{ props }">
               <v-tooltip text="Filters list" location="top">
                 <template #activator="{ props: tooltipProps }">
-                  <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color" rounded="1"
-                    size="36">
+                  <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color"
+                    rounded="1" size="36">
                     <component :is="renderTablerIcon('filter')" style="font-size: 22px;" />
                   </VBtn>
                 </template>
@@ -298,7 +298,9 @@ const totalPages = computed(() => {
           <VAutocomplete class="accouting_field accouting_active_field" variant="outlined" placeholder="Status"
             :items="statusItems" item-title="title" density="compact" item-value="value">
             <template #append>
-              <VBtn variant="text" icon="mdi-window-close" size="small" @click="cancelFilter('Status')" />
+              <VBtn variant="text" size="small" @click="cancelFilter('Status')">
+                <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+              </VBtn>
             </template>
           </VAutocomplete>
         </VCol>
@@ -306,7 +308,9 @@ const totalPages = computed(() => {
           <VAutocomplete class="accouting_field accouting_active_field" variant="outlined" placeholder="Account Type"
             :items="accountTypeItems" item-title="title" density="compact" item-value="value">
             <template #append>
-              <VBtn variant="text" icon="mdi-window-close" size="small" @click="cancelFilter('Account Type')" />
+              <VBtn variant="text" size="small" @click="cancelFilter('Account Type')">
+                <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+              </VBtn>
             </template>
           </VAutocomplete>
         </VCol>
@@ -314,7 +318,9 @@ const totalPages = computed(() => {
           <VAutocomplete class="accouting_field accouting_active_field" variant="outlined" placeholder="Customer Type"
             :items="accountTypeItems" item-title="title" density="compact" item-value="value">
             <template #append>
-              <VBtn variant="text" icon="mdi-window-close" size="small" @click="cancelFilter('Customer Type')" />
+              <VBtn variant="text" size="small" @click="cancelFilter('Customer Type')">
+                <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+              </VBtn>
             </template>
           </VAutocomplete>
         </VCol>
@@ -322,7 +328,9 @@ const totalPages = computed(() => {
           <VAutocomplete class="accouting_field accouting_active_field" variant="outlined" placeholder="Currency"
             :items="currencyItems" item-title="title" density="compact" item-value="value">
             <template #append>
-              <VBtn variant="text" icon="mdi-window-close" size="small" @click="cancelFilter('Currency')" />
+              <VBtn variant="text" size="small" @click="cancelFilter('Currency')">
+                <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+              </VBtn>
             </template>
           </VAutocomplete>
         </VCol>
@@ -330,8 +338,10 @@ const totalPages = computed(() => {
           <VTextField class="accouting_field accouting_active_field" variant="outlined"
             placeholder="Last Transaction From" type="date" density="compact">
             <template #append>
-              <VBtn variant="text" icon="mdi-window-close" size="small"
-                @click="cancelFilter('Last Transaction From')" />
+              <VBtn variant="text" size="small"
+                @click="cancelFilter('Last Transaction From')">
+                <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+                </VBtn>
             </template>
           </VTextField>
         </VCol>
@@ -339,7 +349,9 @@ const totalPages = computed(() => {
           <VTextField class="accouting_field accouting_active_field" variant="outlined"
             placeholder="Last Transaction To" type="date" density="compact">
             <template #append>
-              <VBtn variant="text" icon="mdi-window-close" size="small" @click="cancelFilter('Last Transaction To')" />
+              <VBtn variant="text" size="small" @click="cancelFilter('Last Transaction To')">
+                <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+              </VBtn>
             </template>
           </VTextField>
         </VCol>
@@ -347,7 +359,9 @@ const totalPages = computed(() => {
           <VTextField class="accouting_field accouting_active_field" variant="outlined" placeholder="Last Order From"
             type="date" density="compact">
             <template #append>
-              <VBtn variant="text" icon="mdi-window-close" size="small" @click="cancelFilter('Last Order From')" />
+              <VBtn variant="text" size="small" @click="cancelFilter('Last Order From')">
+                <component :is="renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+              </VBtn>
             </template>
           </VTextField>
         </VCol>
@@ -355,7 +369,9 @@ const totalPages = computed(() => {
           <VTextField class="accouting_field accouting_active_field" variant="outlined" placeholder="Last Order To"
             type="date" density="compact">
             <template #append>
-              <VBtn variant="text" icon="mdi-window-close" size="small" @click="cancelFilter('Last Order To')" />
+              <VBtn variant="text" size="small" @click="cancelFilter('Last Order To')">
+                <component :is="renderTablerIcon('x-circle')" style="font-size: 20px;" />
+              </VBtn>
             </template>
           </VTextField>
         </VCol>
@@ -367,9 +383,12 @@ const totalPages = computed(() => {
         :density="isTableCompact ? 'compact' : 'default'" class="elevation-1 border rounded account_dynamic_table">
         <template #item.actions="{ item }">
           <div class="d-flex align-center gap-2">
-            <component :is="renderTablerIcon('eye')" class="account_v_btn_color" style="font-size: 20px; cursor: pointer;" />
-            <component :is="renderTablerIcon('edit')" class="account_v_btn_color" style="font-size: 20px; cursor: pointer;" />
-            <component :is="renderTablerIcon('trash')" class="account_v_btn_color" style="font-size: 20px; cursor: pointer; color: red;" />
+            <component :is="renderTablerIcon('eye')" class="account_v_btn_color"
+              style="font-size: 20px; cursor: pointer;" />
+            <component :is="renderTablerIcon('edit')" class="account_v_btn_color"
+              style="font-size: 20px; cursor: pointer;" />
+            <component :is="renderTablerIcon('trash')" class="account_v_btn_color"
+              style="font-size: 20px; cursor: pointer; color: red;" />
           </div>
         </template>
         <template #item.status="{ item }">
