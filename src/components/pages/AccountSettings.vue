@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 import { VWindow, VWindowItem } from 'vuetify/components'
 
 const currentTab = ref("")
@@ -168,7 +168,9 @@ const insertTemplateText = (key) => {
                   <div>
                     <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                       <template #activator="{ props }">
-                        <VBtn v-bind="props" icon="mdi-cog-outline" variant="text" size="x-small" rounded="" />
+                        <VBtn v-bind="props" variant="text" size="x-small" rounded="">
+                          <component :is="renderTablerIcon('settings')" style="font-size: 20px;" />
+                        </VBtn>
                       </template>
                       <VCard class="account_vcard_menu account_vcard_border">
                         <div class="account_vcard_menu_hdng">Show/Hide Optional Fields</div>
@@ -176,7 +178,8 @@ const insertTemplateText = (key) => {
                         <div class="account_vcard_menu_items py-1">
                           <div v-for="(label, key) in fieldLabels" :key="key" @click="toggleField(key)">
                             <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                              <VIcon v-if="fieldVisibility[key]" size="16" icon="mdi-check" />
+                              <component v-if="fieldVisibility[key]" :is="renderTablerIcon('check')"
+                                style="font-size: 16px;" />
                               <span :class="fieldVisibility[key] ? '' : 'field_list_dynamic_ml'">{{ label }}</span>
                             </div>
                           </div>
@@ -316,8 +319,9 @@ const insertTemplateText = (key) => {
                       <v-file-input class="accouting_field align-center accouting_active_field" variant="outlined"
                         density="compact" prepend-icon="" placeholder="Upload PAN card file">
                         <template #prepend>
-                          <VBtn class="account_v_btn_outlined" variant="outlined" size="64" rounded="" disabled
-                            icon="mdi-tray-arrow-up" />
+                          <VBtn class="account_v_btn_outlined" variant="outlined" size="64" rounded="" disabled>
+                            <component :is="renderTablerIcon('upload')" style="font-size: 32px;" />
+                          </VBtn>
                           <!-- <v-avatar size="64" class="me-2" color="secondary" rounded="">
                           <v-icon icon="mdi-tray-arrow-up" color="white" size="18" />
                         </v-avatar> -->
@@ -326,8 +330,12 @@ const insertTemplateText = (key) => {
                     </v-col>
 
                     <VCol cols="12" class="d-flex justify-end">
-                      <VBtn class="account_v_btn_primary save_btn_height" prepend-icon="mdi-content-save-outline"
-                        variant="outlined" size="large" rounded="3" color="primary">
+                      <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="large" rounded="3"
+                        color="primary">
+                        <template #prepend>
+                          <component :is="renderTablerIcon('device-floppy')"
+                            style="font-size: 22px; margin-right: 6px;" />
+                        </template>
                         Save Changes
                       </VBtn>
                     </VCol>
@@ -353,8 +361,12 @@ const insertTemplateText = (key) => {
                     </VCardText>
                   </VCard>
                   <div class="pa-4 d-flex align-center justify-end">
-                    <VBtn class="account_v_btn_primary save_btn_height" prepend-icon="mdi-content-save-outline"
-                      variant="outlined" size="default" rounded="3" color="primary">
+                    <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="3"
+                      color="primary">
+                      <template #prepend>
+                        <component :is="renderTablerIcon('device-floppy')"
+                          style="font-size: 22px; margin-right: 6px;" />
+                      </template>
                       Save Software Settings
                     </VBtn>
                   </div>
@@ -363,8 +375,11 @@ const insertTemplateText = (key) => {
               <VWindowItem :value="2">
                 <div class="d-flex align-center justify-space-between">
                   <h3 class="company-setting-heading m-0">GST Settings</h3>
-                  <VBtn class="account_v_btn_primary save_btn_height" prepend-icon="mdi-plus-circle-outline"
-                    variant="outlined" color="primary" @click="gstDialog = true">
+                  <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" color="primary"
+                    @click="gstDialog = true">
+                    <template #prepend>
+                      <component :is="renderTablerIcon('circle-plus')" style="font-size: 22px; margin-right: 6px;" />
+                    </template>
                     Add New GST Rate
                   </VBtn>
                 </div>
@@ -375,8 +390,9 @@ const insertTemplateText = (key) => {
                     <div class="account_vcard_border">
                       <VDataTable :headers="gstRateHeaders" :items="gstRates" class="account_dynamic_table shadow-none">
                         <template #item.actions="{ item }">
-                          <VBtn icon="mdi-trash-can-outline" variant="text" size="x-small" color="error"
-                            class="trash_error_color" />
+                          <VBtn variant="text" size="x-small" color="error" class="trash_error_color">
+                            <component :is="renderTablerIcon('trash')" style="font-size: 16px;" />
+                          </VBtn>
                         </template>
                       </VDataTable>
                     </div>
@@ -395,8 +411,13 @@ const insertTemplateText = (key) => {
 
                       <VCardActions class="justify-end">
                         <VBtn class="account_v_btn_outlined" variant="outlined" @click="gstDialog = false">Cancel</VBtn>
-                        <VBtn color="primary" variant="outlined" class="account_v_btn_primary" @click="addGstRate">Add
-                          Rate</VBtn>
+                        <VBtn color="primary" variant="outlined" class="account_v_btn_primary" @click="addGstRate">
+                          <template #prepend>
+                            <component :is="renderTablerIcon('circle-plus')"
+                              style="font-size: 20px; margin-right: 6px;" />
+                          </template>
+                          Add Rate
+                        </VBtn>
                       </VCardActions>
                     </VCard>
                   </VDialog>
@@ -434,8 +455,11 @@ const insertTemplateText = (key) => {
                   </VCardText>
                 </VCard>
                 <div class="pa-4 d-flex align-center justify-end">
-                  <VBtn class="account_v_btn_primary save_btn_height" prepend-icon="mdi-content-save-outline"
-                    variant="outlined" size="default" rounded="3" color="primary">
+                  <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="3"
+                    color="primary">
+                    <template #prepend>
+                      <component :is="renderTablerIcon('device-floppy')" style="font-size: 22px; margin-right: 6px;" />
+                    </template>
                     Save Terms
                   </VBtn>
                 </div>
