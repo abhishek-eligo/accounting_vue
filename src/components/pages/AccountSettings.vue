@@ -347,7 +347,7 @@ const insertTemplateText = (key) => {
                   <h3 class="company-setting-heading m-0">Software Settings</h3>
                 </div>
                 <div class="mt-8">
-                  <VCard class="account_vcard_border shadow-none pa-2" title="Module Management"
+                  <VCard class="account_vcard_border shadow-none pa-2" variant="text" title="Module Management"
                     subtitle="Enable or disable major features of the application.">
                     <VCardText>
                       <VCard v-for="card in softwareModules" :key="card.title"
@@ -384,7 +384,7 @@ const insertTemplateText = (key) => {
                   </VBtn>
                 </div>
 
-                <VCard class="account_vcard_border shadow-none mt-3 pa-2" title="Available GST Rates"
+                <VCard class="account_vcard_border shadow-none mt-3 pa-2" variant="text" title="Available GST Rates"
                   subtitle="Manage the GST rates used across your invoices.">
                   <div class="px-3">
                     <div class="account_vcard_border">
@@ -427,7 +427,7 @@ const insertTemplateText = (key) => {
                 <div>
                   <h3 class="company-setting-heading m-0">Payment Terms</h3>
                 </div>
-                <VCard class="account_vcard_border shadow-none mt-3 pa-2" title="Default Payment Terms"
+                <VCard class="account_vcard_border shadow-none mt-3 pa-2" title="Default Payment Terms" variant="text"
                   subtitle="Set the default terms and conditions that will appear on your invoices. You can use one of the templates or write your own.">
                   <VCardText class="mt-2">
                     <label class="account_label mb-1">Terms & Conditions</label>

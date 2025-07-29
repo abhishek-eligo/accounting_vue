@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const assetsData = ref([
   {
@@ -529,116 +530,57 @@ function downloadAs(type) {
   <div class="account_ui_vcard">
     <VRow>
       <VCol cols="12">
-        <VCard
-          class="account_vcard_border shadow-none"
-          title="Balance Sheet"
-          subtitle="As at Jul 09, 2025"
-        >
+        <VCard class="account_vcard_border shadow-none" title="Balance Sheet" subtitle="As at Jul 09, 2025">
           <template #append>
             <div class="d-flex align-center gap-2">
-              <VSwitch
-                v-model="showPercent"
-                density="compact"
-                inset
-                label="Show %"
-                class="account_swtich_btn"
-                style="min-width: 121px"
-                color="primary"
-                hide-details
-              />
-              <VTextField
-                type="date"
-                density="compact"
-                class="accouting_field accouting_active_field mr-2"
-              />
-              <VMenu
-                location="start"
-                transition="slide-y-transition"
-                offset-y
-                :close-on-content-click="false"
-              >
+              <VSwitch v-model="showPercent" density="compact" inset label="Show %" class="account_swtich_btn mr-4"
+                style="min-width: 121px" color="primary" hide-details />
+              <VTextField type="date" density="compact" class="accouting_field accouting_active_field mr-2" />
+              <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                 <template #activator="{ props }">
-                  <VBtn
-                    v-bind="props"
-                    class="account_v_btn_outlined"
-                    variant="outlined"
-                    icon="mdi-cog-outline"
-                    size="34"
-                    rounded=""
-                  />
+                  <VBtn v-bind="props" class="account_v_btn_outlined" variant="outlined" size="34" rounded="2">
+                    <component :is="renderTablerIcon('settings')" style="font-size: 22px;" />
+                  </VBtn>
                 </template>
                 <VCard class="account_vcard_menu account_vcard_border">
                   <div class="py-1">
                     <div class="account_vcard_menu_item">
-                      <div
-                        class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                        @click="isFullWidthView = !isFullWidthView"
-                      >
-                        <VIcon
-                          v-if="isFullWidthView"
-                          size="16"
-                          icon="mdi-check"
-                        />
-                        <span :class="isFullWidthView ? '' : 'ml-6'"
-                          >Full Width View</span
-                        >
+                      <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                        @click="isFullWidthView = !isFullWidthView">
+                        <component v-if="isFullWidthView" :is="renderTablerIcon('check')" style="font-size: 16px;" />
+                        <span :class="isFullWidthView ? '' : 'ml-6'">Full Width View</span>
                       </div>
                     </div>
                     <div class="account_vcard_menu_item">
-                      <div
-                        class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                        @click="showCompareMode = !showCompareMode"
-                      >
-                        <VIcon
-                          v-if="showCompareMode"
-                          size="16"
-                          icon="mdi-check"
-                        />
-                        <span :class="showCompareMode ? '' : 'ml-6'"
-                          >Compare Periods</span
-                        >
+                      <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                        @click="showCompareMode = !showCompareMode">
+                        <component v-if="showCompareMode" :is="renderTablerIcon('check')" style="font-size: 16px;" />
+                        <span :class="showCompareMode ? '' : 'ml-6'">Compare Periods</span>
                       </div>
                     </div>
                     <VDivider class="my-2" />
                     <!-- Inside your main menu -->
                     <div class="account_vcard_menu_item">
                       <!-- Nested VMenu for Download -->
-                      <VMenu
-                        v-model="downloadMenu"
-                        location="end"
-                        offset="10"
-                        transition="slide-y-transition"
-                        :close-on-content-click="false"
-                      >
+                      <VMenu v-model="downloadMenu" location="end" offset="10" transition="slide-y-transition"
+                        :close-on-content-click="false">
                         <template #activator="{ props: downloadProps }">
-                          <div
-                            v-bind="downloadProps"
-                            class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                          >
-                            <VIcon size="16" icon="mdi-tray-arrow-down" />
+                          <div v-bind="downloadProps"
+                            class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                            <component :is="renderTablerIcon('download')" style="font-size: 16px;" />
                             <span>Download</span>
-                            <VIcon
-                              size="14"
-                              icon="mdi-chevron-right"
-                              class="ml-auto"
-                            />
+                            <component :is="renderTablerIcon('chevron-right')" style="font-size: 14px;"
+                              class="ml-auto" />
                           </div>
                         </template>
-                        <VCard
-                          class="account_vcard_menu account_vcard_border"
-                          width="120"
-                        >
+                        <VCard class="account_vcard_menu account_vcard_border" width="120">
                           <div class="py-1">
-                            <div
-                              class="account_vcard_menu_item field_list_title cursor-pointer px-3 py-1"
-                              @click="downloadAs('pdf')"
-                            >
+                            <div class="account_vcard_menu_item field_list_title cursor-pointer px-3 py-1"
+                              @click="downloadAs('pdf')">
                               <span>PDF</span>
                             </div>
-                            <div
-                              class="account_vcard_menu_item field_list_title cursor-pointer px-3 py-1"
-                              @click="downloadAs('xls')"
-                            >
+                            <div class="account_vcard_menu_item field_list_title cursor-pointer px-3 py-1"
+                              @click="downloadAs('xls')">
                               <span>XLS</span>
                             </div>
                           </div>
@@ -646,10 +588,8 @@ function downloadAs(type) {
                       </VMenu>
                     </div>
                     <div class="account_vcard_menu_item">
-                      <div
-                        class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                      >
-                        <VIcon size="16" icon="mdi-printer-outline" />
+                      <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                        <component :is="renderTablerIcon('printer')" style="font-size: 16px;" />
                         <span>Print</span>
                       </div>
                     </div>
@@ -661,100 +601,60 @@ function downloadAs(type) {
           <VCardText>
             <VRow>
               <!-- Assets Data Table -->
-              <VCol
-                :cols="12"
-                :lg="isFullWidthView ? 12 : 6"
-                :md="isFullWidthView ? 12 : 6"
-                :sm="isFullWidthView ? 12 : 6"
-                class="col-transition"
-                :class="isFullWidthView ? 'col-expand' : 'col-shrink'"
-              >
-                <VCard
-                  class="h-100 account_vcard_border card-content-transition account_income_card shadow-none"
-                >
-                  <VDataTable
-                    :headers="assetsHeaders"
-                    :items="flatAssetsData"
-                    class="account_income_table"
-                    hide-default-footer
-                    item-value="name"
-                  >
+              <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
+                :sm="isFullWidthView ? 12 : 6" class="col-transition"
+                :class="isFullWidthView ? 'col-expand' : 'col-shrink'">
+                <VCard variant="text" class="h-100 account_vcard_border card-content-transition account_income_card shadow-none">
+                  <VDataTable :headers="assetsHeaders" :items="flatAssetsData" class="account_income_table"
+                    hide-default-footer item-value="name">
                     <template #item="{ item }">
-                      <tr
-                        :class="
-                          item.type === 'group'
-                            ? item.level === 0
-                              ? 'amount_income_item_title'
-                              : 'amount_income_overlay_item_title'
-                            : ''
-                        "
-                      >
+                      <tr :class="item.type === 'group'
+                        ? item.level === 0
+                          ? 'amount_income_item_title'
+                          : 'amount_income_overlay_item_title'
+                        : ''
+                        ">
                         <!-- Name / tree column -->
                         <td>
-                          <div
-                            class="d-flex align-center gap-2"
-                            :style="{ paddingLeft: `${item.level * 24}px` }"
-                          >
-                            <VIcon
-                              :icon="
-                                item.type === 'group'
-                                  ? 'mdi-folder-outline'
-                                  : 'mdi-file-document-outline'
-                              "
-                              size="16"
-                            />
-                            <p
-                              class="mb-0 amount_income_group_item"
-                              :class="
-                                item.type === 'ledger'
-                                  ? 'account_ledger_secondary'
-                                  : item.name
-                                      ?.toLowerCase()
-                                      .includes('liability')
-                                  ? 'account_group_error'
-                                  : 'account_group_primary'
-                              "
-                            >
+                          <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
+                            <component v-if="item.type === 'group'" :is="renderTablerIcon('folder')"
+                              style="font-size: 16px;" />
+                            <component v-else :is="renderTablerIcon('file-text')" style="font-size: 16px;" />
+                            <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
+                              ? 'account_ledger_secondary'
+                              : item.name
+                                ?.toLowerCase()
+                                .includes('liability')
+                                ? 'account_group_error'
+                                : 'account_group_primary'
+                              ">
                               {{ item.name }}
                             </p>
-                            <VChip
-                              v-if="item.percent && showPercent"
-                              density="compact"
-                              class="account_income_chip py-1 px-1"
-                              :class="
-                                item.type === 'ledger'
-                                  ? 'account_chip_outline'
-                                  : 'account_chip_secondary'
-                              "
-                            >
+                            <VChip v-if="item.percent && showPercent" density="compact"
+                              class="account_income_chip py-1 px-1" :class="item.type === 'ledger'
+                                ? 'account_chip_outline'
+                                : 'account_chip_secondary'
+                                ">
                               ({{ item.percent }})
                             </VChip>
                           </div>
                         </td>
                         <!-- Current -->
                         <td class="text-end" v-if="true">
-                          <p
-                            class="mb-0 amount_inc_current_item"
-                            :class="
-                              item.level === 0 && item.type === 'group'
-                                ? 'amount_inc_current_font_wght'
-                                : ''
-                            "
-                          >
+                          <p class="mb-0 amount_inc_current_item" :class="item.level === 0 && item.type === 'group'
+                            ? 'amount_inc_current_font_wght'
+                            : ''
+                            ">
                             {{ item.current }}
                           </p>
                         </td>
                         <!-- Previous -->
                         <Transition name="slide-fade">
                           <td v-if="showCompareMode" class="text-end">
-                            <p
-                              class="mb-0 amount_inc_previous_item"
-                              :class="
-                                item.level > 0 && item.type === 'group'
-                                  ? 'amount_inc_previous_font_wght'
-                                  : ''
-                              "
-                            >
+                            <p class="mb-0 amount_inc_previous_item" :class="item.level > 0 && item.type === 'group'
+                              ? 'amount_inc_previous_font_wght'
+                              : ''
+                              ">
                               {{ item.previous }}
                             </p>
                           </td>
@@ -763,47 +663,31 @@ function downloadAs(type) {
                         <Transition name="slide-fade">
                           <td v-if="showCompareMode" class="text-end">
                             <div class="d-flex justify-end align-center gap-2">
-                              <p
-                                class="mb-0 amount_inc_change_item"
-                                :class="[
-                                  item.type === 'ledger'
-                                    ? 'amount_inc_change_font_wght'
-                                    : '',
-                                  parseFloat(item.change) > 0
-                                    ? 'text-success'
-                                    : parseFloat(item.change) < 0
+                              <p class="mb-0 amount_inc_change_item" :class="[
+                                item.type === 'ledger'
+                                  ? 'amount_inc_change_font_wght'
+                                  : '',
+                                parseFloat(item.change) > 0
+                                  ? 'text-success'
+                                  : parseFloat(item.change) < 0
                                     ? 'text-error'
                                     : 'text-medium-emphasis',
-                                ]"
-                              >
+                              ]">
                                 {{ item.change }}
                               </p>
-                              <VIcon
-                                v-if="item.new"
-                                icon="mdi-star"
-                                size="12"
-                                class="text-info"
-                              />
-                              <VIcon
-                                v-else
-                                :icon="
-                                  parseFloat(item.change) < 0
-                                    ? 'mdi-arrow-down'
-                                    : 'mdi-arrow-up'
-                                "
-                                size="12"
-                                :class="
-                                  parseFloat(item.change) < 0
-                                    ? 'text-error'
-                                    : 'text-success'
-                                "
-                              />
+                              <component v-if="item.new" :is="renderTablerIcon('star')" style="font-size: 12px;"
+                                class="text-info" />
+                              <component v-else
+                                :is="renderTablerIcon(parseFloat(item.change) < 0 ? 'arrow-down' : 'arrow-up')"
+                                style="font-size: 12px;"
+                                :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
                             </div>
                           </td>
                         </Transition>
                       </tr>
                     </template>
                   </VDataTable>
+                  <VDivider class="my-2" />
                   <!-- Total Assets Row -->
                   <div class="d-flex justify-end mb-3 px-4">
                     <table style="min-width: 100%">
@@ -815,32 +699,24 @@ function downloadAs(type) {
                           {{ totalAssets.currentFormatted }}
                         </td>
                         <Transition name="slide-fade">
-                          <td
-                            class="text-end amount_inc_previous_item"
-                            v-if="showCompareMode"
-                          >
+                          <td class="text-end amount_inc_previous_item" v-if="showCompareMode">
                             {{ totalAssets.previousFormatted }}
                           </td>
                         </Transition>
                         <Transition name="slide-fade">
-                          <td
-                            class="text-end d-flex align-center amount_inc_change_item justify-end gap-2"
-                            v-if="showCompareMode"
-                          >
+                          <td class="text-end d-flex align-center amount_inc_change_item justify-end gap-2"
+                            v-if="showCompareMode">
                             {{ totalAssets.changeFormatted }}
-                            <VIcon
-                              :icon="
-                                totalAssets.isIncrease
-                                  ? 'mdi-chevron-up'
-                                  : 'mdi-chevron-down'
-                              "
-                              size="12"
-                              :class="
-                                totalAssets.isIncrease
-                                  ? 'text-success'
-                                  : 'text-error'
-                              "
-                            />
+                            <component :is="renderTablerIcon(totalAssets.isIncrease ? 'arrow-up' : 'arrow-down')"
+                              style="font-size: 12px;"
+                              :class="totalAssets.isIncrease ? 'text-success' : 'text-error'" />
+                            <!-- <VIcon :icon="totalAssets.isIncrease
+                              ? 'mdi-chevron-up'
+                              : 'mdi-chevron-down'
+                              " size="12" :class="totalAssets.isIncrease
+                                ? 'text-success'
+                                : 'text-error'
+                                " /> -->
                           </td>
                         </Transition>
                       </tr>
@@ -848,99 +724,60 @@ function downloadAs(type) {
                   </div>
                 </VCard>
               </VCol>
+
               <!-- Liabilities Data Table -->
-              <VCol
-                :cols="12"
-                :lg="isFullWidthView ? 12 : 6"
-                :md="isFullWidthView ? 12 : 6"
-                :sm="isFullWidthView ? 12 : 6"
-                class="col-transition"
-                :class="isFullWidthView ? 'col-expand' : 'col-shrink'"
-              >
-                <VCard
-                  class="h-100 account_vcard_border card-content-transition account_expense_card shadow-none"
-                >
-                  <VDataTable
-                    :headers="liabilitiesHeaders"
-                    :items="flatLiabilitiesData"
-                    class="account_income_table account_expense_table"
-                    hide-default-footer
-                    item-value="name"
-                  >
+              <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
+                :sm="isFullWidthView ? 12 : 6" class="col-transition"
+                :class="isFullWidthView ? 'col-expand' : 'col-shrink'">
+                <VCard variant="text" class="h-100 account_vcard_border card-content-transition account_expense_card shadow-none">
+                  <VDataTable :headers="liabilitiesHeaders" :items="flatLiabilitiesData"
+                    class="account_income_table account_expense_table" hide-default-footer item-value="name">
                     <template #item="{ item }">
-                      <tr
-                        :class="
-                          item.type === 'group'
-                            ? item.level === 0
-                              ? 'amount_income_item_title'
-                              : 'amount_income_overlay_item_title'
-                            : ''
-                        "
-                      >
+                      <tr :class="item.type === 'group'
+                        ? item.level === 0
+                          ? 'amount_income_item_title'
+                          : 'amount_income_overlay_item_title'
+                        : ''
+                        ">
                         <!-- Name / tree column -->
                         <td>
-                          <div
-                            class="d-flex align-center gap-2"
-                            :style="{ paddingLeft: `${item.level * 24}px` }"
-                          >
-                            <VIcon
-                              :icon="
-                                item.type === 'group'
-                                  ? 'mdi-folder-outline'
-                                  : 'mdi-file-document-outline'
-                              "
-                              size="16"
-                            />
-                            <p
-                              class="mb-0 amount_income_group_item"
-                              :class="
-                                item.type === 'ledger'
-                                  ? 'account_ledger_secondary'
-                                  : item.name?.toLowerCase().includes('asset')
-                                  ? 'account_group_success'
-                                  : 'account_group_error'
-                              "
-                            >
+                          <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
+                            <component v-if="item.type === 'group'" :is="renderTablerIcon('folder')"
+                              style="font-size: 16px;" />
+                            <component v-else :is="renderTablerIcon('file-text')" style="font-size: 16px;" />
+                            <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
+                              ? 'account_ledger_secondary'
+                              : item.name?.toLowerCase().includes('asset')
+                                ? 'account_group_success'
+                                : 'account_group_error'
+                              ">
                               {{ item.name }}
                             </p>
-                            <VChip
-                              v-if="item.percent && showPercent"
-                              density="compact"
-                              class="account_income_chip py-1 px-1"
-                              :class="
-                                item.type === 'ledger'
-                                  ? 'account_chip_outline'
-                                  : 'account_chip_secondary'
-                              "
-                            >
+                            <VChip v-if="item.percent && showPercent" density="compact"
+                              class="account_income_chip py-1 px-1" :class="item.type === 'ledger'
+                                ? 'account_chip_outline'
+                                : 'account_chip_secondary'
+                                ">
                               ({{ item.percent }})
                             </VChip>
                           </div>
                         </td>
                         <!-- Current -->
                         <td class="text-end" v-if="true">
-                          <p
-                            class="mb-0 amount_inc_current_item"
-                            :class="
-                              item.level === 0 && item.type === 'group'
-                                ? 'amount_inc_current_font_wght'
-                                : ''
-                            "
-                          >
+                          <p class="mb-0 amount_inc_current_item" :class="item.level === 0 && item.type === 'group'
+                            ? 'amount_inc_current_font_wght'
+                            : ''
+                            ">
                             {{ item.current }}
                           </p>
                         </td>
                         <!-- Previous -->
                         <td v-if="showCompareMode" class="text-end">
                           <Transition name="slide-fade">
-                            <p
-                              class="mb-0 amount_inc_previous_item"
-                              :class="
-                                item.level > 0 && item.type === 'group'
-                                  ? 'amount_inc_previous_font_wght'
-                                  : ''
-                              "
-                            >
+                            <p class="mb-0 amount_inc_previous_item" :class="item.level > 0 && item.type === 'group'
+                              ? 'amount_inc_previous_font_wght'
+                              : ''
+                              ">
                               {{ item.previous }}
                             </p>
                           </Transition>
@@ -949,47 +786,32 @@ function downloadAs(type) {
                         <Transition name="slide-fade">
                           <td v-if="showCompareMode" class="text-end">
                             <div class="d-flex justify-end align-center gap-2">
-                              <p
-                                class="mb-0 amount_inc_change_item"
-                                :class="[
-                                  item.type === 'ledger'
-                                    ? 'amount_inc_change_font_wght'
-                                    : '',
-                                  parseFloat(item.change) > 0
-                                    ? 'text-success'
-                                    : parseFloat(item.change) < 0
+                              <p class="mb-0 amount_inc_change_item" :class="[
+                                item.type === 'ledger'
+                                  ? 'amount_inc_change_font_wght'
+                                  : '',
+                                parseFloat(item.change) > 0
+                                  ? 'text-success'
+                                  : parseFloat(item.change) < 0
                                     ? 'text-error'
                                     : 'text-medium-emphasis',
-                                ]"
-                              >
+                              ]">
                                 {{ item.change }}
                               </p>
-                              <VIcon
-                                v-if="item.new"
-                                icon="mdi-star"
-                                size="12"
-                                class="text-info"
-                              />
-                              <VIcon
-                                v-else
-                                :icon="
-                                  parseFloat(item.change) < 0
-                                    ? 'mdi-arrow-down'
-                                    : 'mdi-arrow-up'
-                                "
-                                size="12"
-                                :class="
-                                  parseFloat(item.change) < 0
-                                    ? 'text-error'
-                                    : 'text-success'
-                                "
-                              />
+                              <!-- <VIcon v-if="item.new" icon="mdi-star" size="12" class="text-info" /> -->
+                              <component v-if="item.new" :is="renderTablerIcon('star')" style="font-size: 12px;"
+                                class="text-info" />
+                              <component v-else
+                                :is="renderTablerIcon(parseFloat(item.change) < 0 ? 'arrow-down' : 'arrow-up')"
+                                style="font-size: 12px;"
+                                :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
                             </div>
                           </td>
                         </Transition>
                       </tr>
                     </template>
                   </VDataTable>
+                  <VDivider class="my-2" />
                   <!-- Total Liabilities Row -->
                   <div class="d-flex justify-end mb-3 px-4">
                     <table style="min-width: 100%">
@@ -1001,32 +823,17 @@ function downloadAs(type) {
                           {{ totalLiabilities.currentFormatted }}
                         </td>
                         <Transition name="slide-fade">
-                          <td
-                            class="text-end amount_inc_previous_item"
-                            v-if="showCompareMode"
-                          >
+                          <td class="text-end amount_inc_previous_item" v-if="showCompareMode">
                             {{ totalLiabilities.previousFormatted }}
                           </td>
                         </Transition>
                         <Transition name="slide-fade">
-                          <td
-                            class="text-end d-flex align-center justify-end amount_inc_change_item gap-2"
-                            v-if="showCompareMode"
-                          >
+                          <td class="text-end d-flex align-center justify-end amount_inc_change_item gap-2"
+                            v-if="showCompareMode">
                             {{ totalLiabilities.changeFormatted }}
-                            <VIcon
-                              :icon="
-                                totalLiabilities.isIncrease
-                                  ? 'mdi-chevron-up'
-                                  : 'mdi-chevron-down'
-                              "
-                              size="12"
-                              :class="
-                                totalLiabilities.isIncrease
-                                  ? 'text-success'
-                                  : 'text-error'
-                              "
-                            />
+                            <component :is="renderTablerIcon(totalLiabilities.isIncrease ? 'arrow-up' : 'arrow-down')"
+                              style="font-size: 12px;"
+                              :class="totalLiabilities.isIncrease ? 'text-success' : 'text-error'" />
                           </td>
                         </Transition>
                       </tr>
@@ -1038,25 +845,21 @@ function downloadAs(type) {
             <VDivider />
             <VRow class="justify-end mt-2">
               <VCol cols="12" lg="6" md="6">
-                <div
-                  class="d-flex justify-space-between align-center px-4 py-3 rounded"
-                  style="background-color: #e0f7fa; border: 1px solid #4dd0e1"
-                >
+                <div class="d-flex justify-space-between align-center px-4 py-3 rounded"
+                  style="background-color: #e0f7fa; border: 1px solid #4dd0e1">
                   <div class="d-flex align-center gap-2">
                     <h5 class="mb-0 account_assets_title">Total Assets</h5>
                   </div>
                   <div>
                     <span class="account_assets_title">{{
                       totalAssets.currentFormatted
-                    }}</span>
+                      }}</span>
                   </div>
                 </div>
               </VCol>
               <VCol cols="12" lg="6" md="6">
-                <div
-                  class="d-flex justify-space-between align-center px-4 py-3 rounded"
-                  style="background-color: #ffebee; border: 1px solid #ef5350"
-                >
+                <div class="d-flex justify-space-between align-center px-4 py-3 rounded"
+                  style="background-color: #ffebee; border: 1px solid #ef5350">
                   <div class="d-flex align-center gap-2">
                     <h5 class="mb-0 account_liabilities_title">
                       Total Liabilities
@@ -1065,16 +868,16 @@ function downloadAs(type) {
                   <div>
                     <span class="account_liabilities_title">{{
                       totalLiabilities.currentFormatted
-                    }}</span>
+                      }}</span>
                   </div>
                 </div>
               </VCol>
             </VRow>
           </VCardText>
           <VDivider />
-          <VCardText class="account_note_section px-4">
+          <VCardText class="account_note_section pt-1 px-4">
             <p class="mb-0">Notes:</p>
-            <ul>
+            <ul class="px-5">
               <li class="mb-1">
                 All figures are in Indian Rupees (INR) unless otherwise stated.
               </li>
@@ -1120,9 +923,11 @@ function downloadAs(type) {
     transform: scale(0.95);
     opacity: 0.8;
   }
+
   50% {
     transform: scale(1.02);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -1134,9 +939,11 @@ function downloadAs(type) {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(0.98);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;

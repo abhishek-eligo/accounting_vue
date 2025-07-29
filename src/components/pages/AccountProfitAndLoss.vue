@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import IncomeRow from '@/components/core/IncomeRow.vue';
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const incomeData = ref([
   {
@@ -441,22 +442,23 @@ function downloadAs(type) {
               <VTextField type="date" density="compact" class="accouting_field accouting_active_field mr-2" />
               <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                 <template #activator="{ props }">
-                  <VBtn v-bind="props" class="account_v_btn_outlined" variant="outlined" icon="mdi-cog-outline"
-                    size="34" rounded="" />
+                  <VBtn v-bind="props" class="account_v_btn_outlined" variant="outlined" size="34" rounded="2">
+                    <component :is="renderTablerIcon('settings')" style="font-size: 22px;" />
+                  </VBtn>
                 </template>
                 <VCard class="account_vcard_menu account_vcard_border">
                   <div class="py-1">
                     <div class="account_vcard_menu_item">
                       <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
                         @click="isFullWidthView = !isFullWidthView">
-                        <VIcon v-if="isFullWidthView" size="16" icon="mdi-check" />
+                        <component v-if="isFullWidthView" :is="renderTablerIcon('check')" style="font-size: 16px;" />
                         <span :class="isFullWidthView ? '' : 'ml-6'">Full Width View</span>
                       </div>
                     </div>
                     <div class="account_vcard_menu_item">
                       <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
                         @click="showCompareMode = !showCompareMode">
-                        <VIcon v-if="showCompareMode" size="16" icon="mdi-check" />
+                        <component v-if="showCompareMode" :is="renderTablerIcon('check')" style="font-size: 16px;" />
                         <span :class="showCompareMode ? '' : 'ml-6'">Compare Periods</span>
                       </div>
 
@@ -470,9 +472,10 @@ function downloadAs(type) {
                         <template #activator="{ props: downloadProps }">
                           <div v-bind="downloadProps"
                             class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                            <VIcon size="16" icon="mdi-tray-arrow-down" />
+                            <component :is="renderTablerIcon('download')" style="font-size: 16px;" />
                             <span>Download</span>
-                            <VIcon size="14" icon="mdi-chevron-right" class="ml-auto" />
+                            <component :is="renderTablerIcon('chevron-right')" style="font-size: 14px;"
+                              class="ml-auto" />
                           </div>
                         </template>
 
@@ -492,7 +495,7 @@ function downloadAs(type) {
                     </div>
                     <div class="account_vcard_menu_item">
                       <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                        <VIcon size="16" icon="mdi-printer-outline" />
+                        <component :is="renderTablerIcon('printer')" style="font-size: 16px;" />
                         <span>Print</span>
                       </div>
                     </div>
@@ -506,7 +509,7 @@ function downloadAs(type) {
               <!-- Income Data Table -->
               <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
                 :sm="isFullWidthView ? 12 : 6">
-                <VCard class="h-100 account_vcard_border account_income_card shadow-none">
+                <VCard variant="text" class="h-100 account_vcard_border account_income_card shadow-none">
                   <VDataTable :headers="incomeHeaders" :items="flatIncomeData" class="account_income_table"
                     hide-default-footer item-value="name">
                     <template #item="{ item }">
@@ -518,8 +521,9 @@ function downloadAs(type) {
                         <!-- Name / tree column -->
                         <td>
                           <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
-                            <VIcon :icon="item.type === 'group' ? 'mdi-folder-outline' : 'mdi-file-document-outline'"
-                              size="16" />
+                            <component v-if="item.type === 'group'" :is="renderTablerIcon('folder')"
+                              style="font-size: 16px;" />
+                            <component v-else :is="renderTablerIcon('file-text')" style="font-size: 16px;" />
 
                             <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
                               ? 'account_ledger_secondary'
@@ -566,14 +570,15 @@ function downloadAs(type) {
                               ]">
                                 {{ item.change }}
                               </p>
-                              <VIcon v-if="item.new" icon="mdi-star" size="12" class="text-info" />
-                              <VIcon v-else :icon="parseFloat(item.change) < 0 ? 'mdi-arrow-down' : 'mdi-arrow-up'"
-                                size="12" :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
+                              <component v-if="item.new" :is="renderTablerIcon('star')" style="font-size: 12px;"
+                                class="text-info" />
+                              <component v-else
+                                :is="renderTablerIcon(parseFloat(item.change) < 0 ? 'arrow-down' : 'arrow-up')"
+                                style="font-size: 12px;"
+                                :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
                             </div>
                           </td>
                         </Transition>
-
-
                       </tr>
                     </template>
                   </VDataTable>
@@ -592,7 +597,8 @@ function downloadAs(type) {
                           <td class="text-end d-flex align-center amount_inc_change_item justify-end gap-2"
                             v-if="showCompareMode">
                             {{ totalIncome.changeFormatted }}
-                            <VIcon :icon="totalIncome.isIncrease ? 'mdi-chevron-up' : 'mdi-chevron-down'" size="12"
+                            <component :is="renderTablerIcon(totalIncome.isIncrease ? 'arrow-up' : 'arrow-down')"
+                              style="font-size: 12px;"
                               :class="totalIncome.isIncrease ? 'text-success' : 'text-error'" />
                           </td>
                         </Transition>
@@ -605,7 +611,7 @@ function downloadAs(type) {
               <!-- Expenses Data Table -->
               <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
                 :sm="isFullWidthView ? 12 : 6">
-                <VCard class="h-100 account_vcard_border account_expense_card shadow-none">
+                <VCard variant="text" class="h-100 account_vcard_border account_expense_card shadow-none">
                   <VDataTable :headers="expensesHeaders" :items="flatExpensesData"
                     class="account_income_table account_expense_table" hide-default-footer item-value="name">
                     <template #item="{ item }">
@@ -617,8 +623,9 @@ function downloadAs(type) {
                         <!-- Name / tree column -->
                         <td>
                           <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
-                            <VIcon :icon="item.type === 'group' ? 'mdi-folder-outline' : 'mdi-file-document-outline'"
-                              size="16" />
+                            <component v-if="item.type === 'group'" :is="renderTablerIcon('folder')"
+                              style="font-size: 16px;" />
+                            <component v-else :is="renderTablerIcon('file-text')" style="font-size: 16px;" />
 
                             <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
                               ? 'account_ledger_secondary'
@@ -665,9 +672,12 @@ function downloadAs(type) {
                               ]">
                                 {{ item.change }}
                               </p>
-                              <VIcon v-if="item.new" icon="mdi-star" size="12" class="text-info" />
-                              <VIcon v-else :icon="parseFloat(item.change) < 0 ? 'mdi-arrow-down' : 'mdi-arrow-up'"
-                                size="12" :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
+                              <component v-if="item.new" :is="renderTablerIcon('star')" style="font-size: 12px;"
+                                class="text-info" />
+                              <component v-else
+                                :is="renderTablerIcon(parseFloat(item.change) < 0 ? 'arrow-down' : 'arrow-up')"
+                                style="font-size: 12px;"
+                                :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
                             </div>
                           </td>
                         </Transition>
@@ -686,24 +696,24 @@ function downloadAs(type) {
                         <Transition name="slide-fade">
                           <td class="text-end amount_inc_previous_item" v-if="showCompareMode">{{
                             totalExpenses.previousFormatted
-                          }}</td>
+                            }}</td>
                         </Transition>
                         <Transition name="slide-fade">
                           <td class="text-end d-flex align-center justify-end amount_inc_change_item gap-2"
                             v-if="showCompareMode">
                             {{ totalExpenses.changeFormatted }}
-                            <VIcon :icon="totalExpenses.isIncrease ? 'mdi-chevron-up' : 'mdi-chevron-down'" size="12"
+                            <component :is="renderTablerIcon(totalExpenses.isIncrease ? 'arrow-up' : 'arrow-down')"
+                              style="font-size: 12px;"
                               :class="totalExpenses.isIncrease ? 'text-success' : 'text-error'" />
                           </td>
                         </Transition>
                       </tr>
                     </table>
                   </div>
-
                 </VCard>
               </VCol>
             </VRow>
-            <VDivider />
+            <VDivider class="my-3" />
             <VRow class="justify-end">
               <VCol cols="12" lg="6" md="6">
                 <VCard class="account_vcard_border account_expense_card shadow-none">
@@ -738,7 +748,8 @@ function downloadAs(type) {
                         <VCol v-if="showCompareMode" class="px-0" cols="1">
                           <div class="d-flex justify-end align-center gap-2">
                             <p class="mb-0 amount_inc_change_item">42.7%</p>
-                            <VIcon icon="mdi-chevron-up" size="12" class="text-success" />
+                            <component :is="renderTablerIcon('arrow-up')" style="font-size: 12px;"
+                              class="text-success" />
                           </div>
                         </VCol>
                       </Transition>
@@ -776,8 +787,9 @@ function downloadAs(type) {
                     <div v-if="showCompareMode" class="d-flex align-center gap-1">
                       <span :class="netProfit.isIncrease ? 'text-success' : 'text-error'">{{
                         netProfit.percent
-                        }}</span>
-                      <VIcon :icon="netProfit.isIncrease ? 'mdi-arrow-up' : 'mdi-arrow-down'" size="14"
+                      }}</span>
+                      <component :is="renderTablerIcon(netProfit.isIncrease ? 'arrow-up' : 'arrow-down')"
+                        style="font-size: 14px;"
                         :class="netProfit.isIncrease ? 'text-success' : 'text-error'" />
                     </div>
                   </div>
@@ -785,13 +797,15 @@ function downloadAs(type) {
               </VCol>
             </VRow>
           </VCardText>
-          <VDivider />
-          <VCardText class="account_note_section px-4">
+          <VDivider class="my-2" />
+          <VCardText class="account_note_section pt-1 px-4">
             <p class="mb-0">Notes:</p>
-            <ul>
+            <ul class="px-5">
               <li class="mb-1">All figures are in Indian Rupee (INR) unless otherwise stated..</li>
               <li class="mb-1">This is an unaudited statement generated for internal review purposes.</li>
-              <li class="mb-1">GST collected and paid are accounted for under Duties & Taxes and do not affect the profit calculation directly.</li>
+              <li class="mb-1">GST collected and paid are accounted for under Duties & Taxes and do not affect the
+                profit
+                calculation directly.</li>
             </ul>
           </VCardText>
         </VCard>

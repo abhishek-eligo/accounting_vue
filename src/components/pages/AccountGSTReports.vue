@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import DatePicker from 'primevue/datepicker'
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
+import { toast } from 'vue3-toastify';
 
 const dates = ref()
 const reportType = ref(['GSTR-1', 'GSTR-2', 'GSTR-3B'])
@@ -127,7 +129,7 @@ function handleGenerate() {
     showTables.value = true
   } else {
     showTables.value = false
-    alert("Please select report type and date range.")
+    toast.error("Please select report type and date range.");
   }
 }
 </script>
@@ -136,9 +138,11 @@ function handleGenerate() {
   <div>
     <v-row>
       <v-col cols="12">
-        <VCard class="account_vcard_border shadow-none gst_reports_vcard">
+        <VCard class="account_vcard_border shadow-none gst_reports_vcard pa-6">
           <div class="d-flex align-center gap-3">
-            <v-icon size="32" class="account_icon_color">mdi-file-document-outline</v-icon>
+            <!-- <v-icon size="32" class="account_icon_color">mdi-file-document-outline</v-icon> -->
+            <component class="account_icon_color" :is="renderTablerIcon('file-analytics')"
+              style="font-size: 38px; margin-right: 6px;" />
             <div>
               <h5 class="gst_reports_title mb-0">GST Report Generator</h5>
               <p class="account_text_subtitle mb-0">Select a report type and date range to generate your GST compliance
@@ -154,7 +158,13 @@ function handleGenerate() {
             </v-col>
             <v-col cols="12" md="6">
               <label class="account_label mb-2 w-100">Date Range</label>
-              <DatePicker class="account_date_range" v-model="dates" selectionMode="range" :manualInput="false" />
+              <v-date-input class="accounting_date_input w-100" placeholder="Pick a date range" v-model="dates"
+                multiple="range">
+                <template #prepend-inner>
+                  <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                </template>
+              </v-date-input>
+              <!-- <DatePicker class="account_date_range" v-model="dates" selectionMode="range" :manualInput="false" /> -->
             </v-col>
             <v-col cols="12" class="d-flex justify-end">
               <VBtn class="account_v_btn_primary" prepend-icon="mdi-tray-arrow-down" rounded="1"
@@ -186,9 +196,9 @@ function handleGenerate() {
 
                       <!-- Group Rows -->
                       <tr v-for="(row, ri) in group.rows" :key="`${gi}-${ri}`">
-                        <td v-for="header in section.headers" :key="header.value"
-                          >
-                          <p :class="header.align === 'end' ? 'text-end pr-4' : 'pl-6'" class="mb-0">{{ row[header.value] || '-' }}</p>
+                        <td v-for="header in section.headers" :key="header.value">
+                          <p :class="header.align === 'end' ? 'text-end pr-4' : 'pl-6'" class="mb-0">{{
+                            row[header.value] || '-' }}</p>
                         </td>
                       </tr>
                     </template>
@@ -212,8 +222,6 @@ function handleGenerate() {
                     </td>
                   </tr>
                 </template>
-
-
               </VDataTable>
             </VCard>
           </div>
@@ -229,18 +237,21 @@ function handleGenerate() {
   font-weight: 600;
   padding-left: 12px;
 }
+
 .v-data-table .pl-4 {
   padding-left: 16px;
 }
+
 .v-data-table .pl-6 {
   padding-left: 32px;
 }
+
 .v-data-table .pr-4 {
   padding-right: 16px;
 }
+
 .v-data-table td {
   font-size: 14px;
   vertical-align: middle;
 }
-
 </style>

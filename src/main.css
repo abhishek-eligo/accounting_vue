@@ -638,7 +638,7 @@ p.secondary_email {
     background: var(--acc-input-bg-color) !important;
     border: 1px solid rgb(208, 214, 221) !important;
     border-radius: 7px !important;
-    max-width: 368px;
+    /* max-width: 368px; */
 }
 
 .accounting_date_input.v-input .v-input__prepend {
@@ -811,6 +811,10 @@ p.secondary_email {
 .custom_expansion_item:hover {
     background: hsl(210 16% 88%);
 } */
+
+.account_swtich_btn .v-input__control .v-selection-control label.v-label {
+    padding-inline-start: 5px !important;
+}
 
 .custom_option .custom_option_field.v-input .v-input__control .v-field {
     border-radius: 6px 0 0 6px !important;
@@ -1542,6 +1546,9 @@ i.table_row_icon {
     border-bottom: 1px solid var(--acc-border-color);
 }
 
+.company_setting_tabs.v-tabs.v-tabs--vertical:not(.v-tabs-pill) {
+    border-inline-end: unset !important;
+}
 
 /* css of gst reports */
 
