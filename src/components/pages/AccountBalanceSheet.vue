@@ -842,7 +842,7 @@ function downloadAs(type) {
                 </VCard>
               </VCol>
             </VRow>
-            <VDivider />
+            <VDivider class="mt-3 mb-0" />
             <VRow class="justify-end mt-2">
               <VCol cols="12" lg="6" md="6">
                 <div class="d-flex justify-space-between align-center px-4 py-3 rounded"

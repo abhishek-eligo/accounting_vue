@@ -254,7 +254,7 @@ p.secondary_email {
 }
 
 .account_vcard_border {
-    border: 1px solid var(--acc-border-color);
+    border: 1px solid var(--acc-border-color) !important;
     border-radius: .5rem !important;
 }
 

@@ -16371,7 +16371,7 @@ const mc = K({
                         ]),
                         _: 1
                       }),
-                      l(ke),
+                      l(ke, { class: "mt-3 mb-0" }),
                       l(xe, { class: "justify-end mt-2" }, {
                         default: c(() => [
                           l(B, {
@@ -16437,7 +16437,7 @@ const mc = K({
       })
     ]));
   }
-}, bp = /* @__PURE__ */ Et(pp, [["__scopeId", "data-v-f4d877a1"]]), _p = Ma("v-alert-title"), hp = ["success", "info", "warning", "error"], xp = K({
+}, bp = /* @__PURE__ */ Et(pp, [["__scopeId", "data-v-9ee98344"]]), _p = Ma("v-alert-title"), hp = ["success", "info", "warning", "error"], xp = K({
   border: {
     type: [Boolean, String],
     validator: (e) => typeof e == "boolean" || ["top", "end", "bottom", "start"].includes(e)
@@ -24350,7 +24350,10 @@ Currency: ${Y.value}` : "";
                             md: "6"
                           }, {
                             default: c(() => [
-                              l(me, { class: "account_vcard_border account_expense_card shadow-none" }, {
+                              l(me, {
+                                variant: "text",
+                                class: "account_vcard_border account_expense_card shadow-none"
+                              }, {
                                 default: c(() => [
                                   l(Ae, { class: "" }, {
                                     default: c(() => [
@@ -24514,7 +24517,7 @@ Currency: ${Y.value}` : "";
       })
     ]));
   }
-}, ih = /* @__PURE__ */ Et(lh, [["__scopeId", "data-v-97468a2c"]]), oh = { class: "account_vcard_menu_items py-1" }, sh = ["onClick"], uh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, rh = {
+}, ih = /* @__PURE__ */ Et(lh, [["__scopeId", "data-v-8c6a91e8"]]), oh = { class: "account_vcard_menu_items py-1" }, sh = ["onClick"], uh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, rh = {
   key: 0,
   class: "d-flex gap-2 mb-2"
 }, ch = { class: "d-flex flex-column align-end" }, dh = { class: "d-flex justify-space-between w-100 mb-1" }, vh = { class: "d-flex justify-space-between w-100 mb-1" }, fh = { class: "d-flex justify-space-between w-100 mb-1" }, mh = { class: "d-flex justify-space-between w-100 mb-1" }, gh = { class: "d-flex justify-space-between w-100 font-weight-bold" }, yh = {

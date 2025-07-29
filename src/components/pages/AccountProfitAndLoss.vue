@@ -716,7 +716,7 @@ function downloadAs(type) {
             <VDivider class="my-3" />
             <VRow class="justify-end">
               <VCol cols="12" lg="6" md="6">
-                <VCard class="account_vcard_border account_expense_card shadow-none">
+                <VCard variant="text" class="account_vcard_border account_expense_card shadow-none">
                   <VCardText class="">
                     <VRow class="justify-content-between">
                       <VCol cols="7">
