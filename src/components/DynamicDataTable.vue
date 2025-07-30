@@ -261,9 +261,11 @@ const totalPages = computed(() => {
                   :key="header.value" draggable="true" @dragstart="onDragStart($event, index)" @dragover.prevent
                   @drop="onDrop($event, index)">
                   <div class="d-flex align-center justify-space-between">
-                    <div class="d-flex align-center w-100 gap-1">
-                      <v-icon icon="mdi-drag" class="drag-icon" @mousedown="dragIconActive = true"
-                        @mouseup="dragIconActive = false" />
+                    <div class="d-flex align-center w-100 gap-1 cursor-grab" @mousedown="dragIconActive = true" @mouseup="dragIconActive = false">
+                      <component  :is="renderTablerIcon('grip-vertical')" style="font-size: 18px;"
+                      class="drag-icon" />
+                      <!-- <v-icon icon="mdi-drag" class="drag-icon" @mousedown="dragIconActive = true"
+                        @mouseup="dragIconActive = false" /> -->
                       <p class="mb-0">{{ header.title }}</p>
                     </div>
                     <VSwitch density="compact" color="primary" hide-details class="account_swtich_btn" inset

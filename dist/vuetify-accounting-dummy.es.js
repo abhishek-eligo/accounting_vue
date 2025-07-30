@@ -1,4 +1,4 @@
-import { reactive as it, mergeProps as X, toRaw as Ue, createApp as qc, defineComponent as La, nextTick as Ee, computed as k, createVNode as l, onMounted as st, onUnmounted as Ci, Fragment as ve, ref as A, h as mt, isVNode as Vi, cloneVNode as Bs, watchEffect as Re, shallowRef as _e, watch as we, capitalize as Ra, toRefs as Oa, Comment as Yc, unref as F, getCurrentInstance as Jc, provide as Ke, inject as Be, warn as dl, camelize as Es, isRef as Na, toRef as oe, Text as Kc, TransitionGroup as Ii, Transition as Ge, onBeforeMount as Fs, onBeforeUnmount as Ut, withDirectives as Ye, resolveDirective as Bt, vShow as Gt, onScopeDispose as bt, effectScope as Pi, markRaw as Xc, onUpdated as Qc, readonly as Ai, resolveDynamicComponent as ne, Teleport as Zc, createTextVNode as de, vModelText as ed, createElementBlock as re, openBlock as w, withCtx as c, createElementVNode as v, renderList as ze, createBlock as D, createCommentVNode as q, toDisplayString as ue, normalizeClass as ye, onBeforeUpdate as td, withModifiers as en, normalizeStyle as la, resolveComponent as Ti, createSlots as Ls, createStaticVNode as Wa, render as Rs } from "vue";
+import { reactive as it, mergeProps as X, toRaw as Ue, createApp as qc, defineComponent as La, nextTick as Ee, computed as k, createVNode as l, onMounted as st, onUnmounted as Ci, Fragment as ve, ref as A, h as mt, isVNode as Vi, cloneVNode as Bs, watchEffect as Re, shallowRef as _e, watch as we, capitalize as Ra, toRefs as Oa, Comment as Yc, unref as F, getCurrentInstance as Jc, provide as Ke, inject as Be, warn as dl, camelize as Es, isRef as Na, toRef as oe, Text as Kc, TransitionGroup as Ii, Transition as Ge, onBeforeMount as Fs, onBeforeUnmount as Ut, withDirectives as Ye, resolveDirective as Bt, vShow as Gt, onScopeDispose as bt, effectScope as Pi, markRaw as Xc, onUpdated as Qc, readonly as Ai, resolveDynamicComponent as ae, Teleport as Zc, createTextVNode as de, vModelText as ed, createElementBlock as re, openBlock as w, withCtx as c, createElementVNode as v, renderList as ze, createBlock as D, createCommentVNode as q, toDisplayString as ue, normalizeClass as ye, onBeforeUpdate as td, withModifiers as en, normalizeStyle as la, resolveComponent as Ti, createSlots as Ls, createStaticVNode as Wa, render as Rs } from "vue";
 import { createVuetify as ad } from "vuetify";
 const hn = {
   TOP_LEFT: "top-left",
@@ -2314,7 +2314,7 @@ function iu(e) {
   let d = o(u);
   return r > 0 && (d += " and " + o(r) + " paise"), d.charAt(0).toUpperCase() + d.slice(1);
 }
-function D2(e, a = "₹") {
+function N2(e, a = "₹") {
   const t = parseFloat(e) || 0, n = iu(t);
   return {
     amount: t,
@@ -2421,7 +2421,7 @@ const at = {
     const a = at.required(e);
     return a !== !0 ? a : !0;
   }
-}, $2 = {
+}, D2 = {
   // Customer name validation
   customerName: (e) => {
     const a = at.required(e);
@@ -2439,7 +2439,7 @@ const at = {
   customerPAN: (e) => e ? at.pan(e) : !0,
   // Opening balance validation
   openingBalance: (e) => e ? at.amount(e) : !0
-}, B2 = (e, a) => {
+}, $2 = (e, a) => {
   const t = {};
   for (const [n, i] of Object.entries(e))
     if (a[n]) {
@@ -6049,7 +6049,7 @@ function km() {
 }
 function In(e, a) {
   var d, y;
-  const t = ne("RouterLink"), n = k(() => !!(e.href || e.to)), i = k(() => (n == null ? void 0 : n.value) || Mo(a, "click") || Mo(e, "click"));
+  const t = ae("RouterLink"), n = k(() => !!(e.href || e.to)), i = k(() => (n == null ? void 0 : n.value) || Mo(a, "click") || Mo(e, "click"));
   if (typeof t == "string" || !("useLink" in t))
     return {
       isLink: n,
@@ -10023,7 +10023,7 @@ const _r = K({
                 items: I.value
               }, {
                 default: (pe) => {
-                  var ae;
+                  var ne;
                   let {
                     item: ce,
                     index: z,
@@ -10034,7 +10034,7 @@ const _r = K({
                     key: z,
                     onClick: () => L(ce, null)
                   });
-                  return ((ae = t.item) == null ? void 0 : ae.call(t, {
+                  return ((ne = t.item) == null ? void 0 : ne.call(t, {
                     item: ce,
                     index: z,
                     props: P
@@ -10245,8 +10245,8 @@ const Pg = K({
     } = Qe(), i = A(), o = _e(!1), s = _e(!0), u = _e(!1), r = A(), d = A(), y = Ve(e, "menu"), b = k({
       get: () => y.value,
       set: (P) => {
-        var ae;
-        y.value && !P && ((ae = r.value) != null && ae.ΨopenChildren) || (y.value = P);
+        var ne;
+        y.value && !P && ((ne = r.value) != null && ne.ΨopenChildren) || (y.value = P);
       }
     }), m = _e(-1), f = k(() => {
       var P;
@@ -10259,14 +10259,14 @@ const Pg = K({
       textColorClasses: g,
       textColorStyles: S
     } = kt(f), I = Ve(e, "search", ""), $ = Ve(e, "modelValue", [], (P) => h(P === null ? [null] : We(P)), (P) => {
-      const ae = _(P);
-      return e.multiple ? ae : ae[0] ?? null;
+      const ne = _(P);
+      return e.multiple ? ne : ne[0] ?? null;
     }), O = k(() => typeof e.counterValue == "function" ? e.counterValue($.value) : typeof e.counterValue == "number" ? e.counterValue : $.value.length), E = kl(), {
       filteredItems: R,
       getMatches: T
-    } = Tl(e, p, () => s.value ? "" : I.value), U = k(() => e.hideSelected ? R.value.filter((P) => !$.value.some((ae) => ae.value === P.value)) : R.value), G = k(() => !!(e.chips || t.chip)), C = k(() => G.value || !!t.selection), L = k(() => $.value.map((P) => P.props.value)), W = k(() => {
-      var ae;
-      return (e.autoSelectFirst === !0 || e.autoSelectFirst === "exact" && I.value === ((ae = U.value[0]) == null ? void 0 : ae.title)) && U.value.length > 0 && !s.value && !u.value;
+    } = Tl(e, p, () => s.value ? "" : I.value), U = k(() => e.hideSelected ? R.value.filter((P) => !$.value.some((ne) => ne.value === P.value)) : R.value), G = k(() => !!(e.chips || t.chip)), C = k(() => G.value || !!t.selection), L = k(() => $.value.map((P) => P.props.value)), W = k(() => {
+      var ne;
+      return (e.autoSelectFirst === !0 || e.autoSelectFirst === "exact" && I.value === ((ne = U.value[0]) == null ? void 0 : ne.title)) && U.value.length > 0 && !s.value && !u.value;
     }), Y = k(() => e.hideNoData && !U.value.length || e.readonly || (E == null ? void 0 : E.isReadonly.value)), J = A(), {
       onListScroll: H,
       onListKeydown: N
@@ -10283,7 +10283,7 @@ const Pg = K({
     function te(P) {
       var Ce, Ne, He;
       if (e.readonly || E != null && E.isReadonly.value) return;
-      const ae = i.value.selectionStart, he = $.value.length;
+      const ne = i.value.selectionStart, he = $.value.length;
       if ((m.value > -1 || ["Enter", "ArrowDown", "ArrowUp"].includes(P.key)) && P.preventDefault(), ["Enter", "ArrowDown"].includes(P.key) && (b.value = !0), ["Escape"].includes(P.key) && (b.value = !1), W.value && ["Enter", "Tab"].includes(P.key) && !$.value.some((Fe) => {
         let {
           value: qe
@@ -10298,7 +10298,7 @@ const Pg = K({
       }
       if (e.multiple) {
         if (P.key === "ArrowLeft") {
-          if (m.value < 0 && ae > 0) return;
+          if (m.value < 0 && ne > 0) return;
           const Fe = m.value > -1 ? m.value - 1 : he - 1;
           $.value[Fe] ? m.value = Fe : (m.value = -1, i.value.setSelectionRange((Ne = I.value) == null ? void 0 : Ne.length, (He = I.value) == null ? void 0 : He.length));
         }
@@ -10311,8 +10311,8 @@ const Pg = K({
     }
     function ge(P) {
       if (Ea(i.value, ":autofill") || Ea(i.value, ":-webkit-autofill")) {
-        const ae = p.value.find((he) => he.title === P.target.value);
-        ae && Q(ae);
+        const ne = p.value.find((he) => he.title === P.target.value);
+        ne && Q(ne);
       }
     }
     function be() {
@@ -10332,25 +10332,25 @@ const Pg = K({
     }
     const z = _e(!1);
     function Q(P) {
-      let ae = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : !0;
+      let ne = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : !0;
       if (!(!P || P.props.disabled))
         if (e.multiple) {
-          const he = $.value.findIndex((Ne) => e.valueComparator(Ne.value, P.value)), Ce = ae ?? !~he;
+          const he = $.value.findIndex((Ne) => e.valueComparator(Ne.value, P.value)), Ce = ne ?? !~he;
           if (~he) {
             const Ne = Ce ? [...$.value, P] : [...$.value];
             Ne.splice(he, 1), $.value = Ne;
           } else Ce && ($.value = [...$.value, P]);
           e.clearOnSelect && (I.value = "");
         } else {
-          const he = ae !== !1;
+          const he = ne !== !1;
           $.value = he ? [P] : [], I.value = he && !C.value ? P.title : "", Ee(() => {
             b.value = !1, s.value = !0;
           });
         }
     }
-    return we(o, (P, ae) => {
+    return we(o, (P, ne) => {
       var he;
-      P !== ae && (P ? (z.value = !0, I.value = e.multiple || C.value ? "" : String(((he = $.value.at(-1)) == null ? void 0 : he.props.title) ?? ""), s.value = !0, Ee(() => z.value = !1)) : (!e.multiple && I.value == null && ($.value = []), b.value = !1, $.value.some((Ce) => {
+      P !== ne && (P ? (z.value = !0, I.value = e.multiple || C.value ? "" : String(((he = $.value.at(-1)) == null ? void 0 : he.props.title) ?? ""), s.value = !0, Ee(() => z.value = !1)) : (!e.multiple && I.value == null && ($.value = []), b.value = !1, $.value.some((Ce) => {
         let {
           title: Ne
         } = Ce;
@@ -10360,16 +10360,16 @@ const Pg = K({
       !o.value || z.value || (P && (b.value = !0), s.value = !P);
     }), we(b, () => {
       if (!e.hideSelected && b.value && $.value.length) {
-        const P = U.value.findIndex((ae) => $.value.some((he) => ae.value === he.value));
+        const P = U.value.findIndex((ne) => $.value.some((he) => ne.value === he.value));
         et && window.requestAnimationFrame(() => {
-          var ae;
-          P >= 0 && ((ae = d.value) == null || ae.scrollToIndex(P));
+          var ne;
+          P >= 0 && ((ne = d.value) == null || ne.scrollToIndex(P));
         });
       }
-    }), we(() => e.items, (P, ae) => {
-      b.value || o.value && !ae.length && P.length && (b.value = !0);
+    }), we(() => e.items, (P, ne) => {
+      b.value || o.value && !ne.length && P.length && (b.value = !0);
     }), se(() => {
-      const P = !!(!e.hideNoData || U.value.length || t["prepend-item"] || t["append-item"] || t["no-data"]), ae = $.value.length > 0, he = ee.filterProps(e);
+      const P = !!(!e.hideNoData || U.value.length || t["prepend-item"] || t["append-item"] || t["no-data"]), ne = $.value.length > 0, he = ee.filterProps(e);
       return l(ee, X({
         ref: i
       }, he, {
@@ -10379,7 +10379,7 @@ const Pg = K({
         "onUpdate:focused": (Ce) => o.value = Ce,
         validationValue: $.externalValue,
         counterValue: O.value,
-        dirty: ae,
+        dirty: ne,
         onChange: ge,
         class: ["v-autocomplete", `v-autocomplete--${e.multiple ? "multiple" : "single"}`, {
           "v-autocomplete--active-menu": b.value,
@@ -10389,7 +10389,7 @@ const Pg = K({
         }, e.class],
         style: e.style,
         readonly: e.readonly,
-        placeholder: ae ? void 0 : e.placeholder,
+        placeholder: ne ? void 0 : e.placeholder,
         "onClick:clear": j,
         "onMousedown:control": V,
         onKeydown: te
@@ -12463,7 +12463,7 @@ const Jg = K({
                       }, {
                         prepend: c(() => [
                           v("span", ey, [
-                            (w(), D(ne(F(le)("plus")), { style: { "font-size": "22px" } }))
+                            (w(), D(ae(F(le)("plus")), { style: { "font-size": "22px" } }))
                           ])
                         ]),
                         default: c(() => [
@@ -12565,7 +12565,7 @@ const Jg = K({
                                             onClick: (V) => U(j)
                                           }, {
                                             default: c(() => [
-                                              (w(), D(ne(F(le)("x")), { style: { "font-size": "18px" } }))
+                                              (w(), D(ae(F(le)("x")), { style: { "font-size": "18px" } }))
                                             ]),
                                             _: 2
                                           }, 1032, ["onClick"])
@@ -12590,7 +12590,7 @@ const Jg = K({
                                   onClick: T
                                 }, {
                                   prepend: c(() => [
-                                    (w(), D(ne(F(le)("plus")), { style: { "font-size": "18px" } }))
+                                    (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
                                   ]),
                                   default: c(() => [
                                     H[18] || (H[18] = de(" Add Debit Amount ", -1))
@@ -12654,7 +12654,7 @@ const Jg = K({
                                             rounded: "1"
                                           }, {
                                             default: c(() => [
-                                              (w(), D(ne(F(le)("x")), { style: { "font-size": "18px" } }))
+                                              (w(), D(ae(F(le)("x")), { style: { "font-size": "18px" } }))
                                             ]),
                                             _: 2
                                           }, 1032, ["onClick"])
@@ -12679,7 +12679,7 @@ const Jg = K({
                                   rounded: ""
                                 }, {
                                   prepend: c(() => [
-                                    (w(), D(ne(F(le)("plus")), { style: { "font-size": "18px" } }))
+                                    (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
                                   ]),
                                   default: c(() => [
                                     H[19] || (H[19] = de(" Add Credit Amount ", -1))
@@ -12794,7 +12794,7 @@ const Jg = K({
                                           color: "primary"
                                         }, {
                                           prepend: c(() => [
-                                            (w(), D(ne(F(le)("device-floppy")), { style: { "font-size": "18px" } }))
+                                            (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "18px" } }))
                                           ]),
                                           default: c(() => [
                                             H[23] || (H[23] = de(" Save Voucher ", -1))
@@ -12845,7 +12845,7 @@ const Jg = K({
               color: "primary"
             }, {
               prepend: c(() => [
-                (w(), D(ne(F(le)("plus")), { style: { "font-size": "18px" } }))
+                (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
               ]),
               default: c(() => [
                 H[24] || (H[24] = de(" New Journal Entry ", -1))
@@ -12891,7 +12891,7 @@ const Jg = K({
                         size: "36"
                       }), {
                         default: c(() => [
-                          (w(), D(ne(F(le)("filter")), { style: { "font-size": "24px" } }))
+                          (w(), D(ae(F(le)("filter")), { style: { "font-size": "24px" } }))
                         ]),
                         _: 2
                       }, 1040)
@@ -12953,7 +12953,7 @@ const Jg = K({
                     size: "36"
                   }), {
                     default: c(() => [
-                      (w(), D(ne(F(le)("download")), { style: { "font-size": "24px" } }))
+                      (w(), D(ae(F(le)("download")), { style: { "font-size": "24px" } }))
                     ]),
                     _: 2
                   }, 1040)
@@ -12984,7 +12984,10 @@ const Jg = K({
           ]),
           l(Ae, { class: "mt-2" }, {
             default: c(() => [
-              l(me, { class: "shadow-none" }, {
+              l(me, {
+                variant: "text",
+                class: "shadow-none"
+              }, {
                 default: c(() => [
                   v("div", Iy, [
                     v("table", Py, [
@@ -13062,7 +13065,7 @@ const Jg = K({
                                       variant: "text"
                                     }, {
                                       default: c(() => [
-                                        (w(), D(ne(F(le)("pencil")), { style: { "font-size": "20px" } }))
+                                        (w(), D(ae(F(le)("pencil")), { style: { "font-size": "20px" } }))
                                       ]),
                                       _: 1
                                     }),
@@ -13072,7 +13075,7 @@ const Jg = K({
                                       variant: "text"
                                     }, {
                                       default: c(() => [
-                                        (w(), D(ne(F(le)("arrow-back-up")), { style: { "font-size": "20px" } }))
+                                        (w(), D(ae(F(le)("arrow-back-up")), { style: { "font-size": "20px" } }))
                                       ]),
                                       _: 1
                                     }),
@@ -13082,7 +13085,7 @@ const Jg = K({
                                       variant: "text"
                                     }, {
                                       default: c(() => [
-                                        (w(), D(ne(F(le)("trash")), { style: { "font-size": "20px" } }))
+                                        (w(), D(ae(F(le)("trash")), { style: { "font-size": "20px" } }))
                                       ]),
                                       _: 1
                                     })
@@ -13246,7 +13249,7 @@ const Jg = K({
                   class: "account_vcard_close_btn"
                 }, {
                   default: c(() => [
-                    (w(), D(ne(F(le)("x")), { style: { "font-size": "20px" } }))
+                    (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
                   ]),
                   _: 1
                 })
@@ -13332,7 +13335,7 @@ const Jg = K({
       }, 8, ["modelValue"])
     ]));
   }
-}, i0 = /* @__PURE__ */ Et(l0, [["__scopeId", "data-v-c0efd8aa"]]), o0 = Symbol.for("vuetify:date-options");
+}, i0 = /* @__PURE__ */ Et(l0, [["__scopeId", "data-v-f2451208"]]), o0 = Symbol.for("vuetify:date-options");
 function s0(e, a) {
   const t = it(typeof e.adapter == "function" ? new e.adapter({
     locale: e.locale[a.current.value] ?? a.current.value,
@@ -15178,12 +15181,12 @@ const mc = K({
         style: e.style
       }, P), {
         top: () => {
-          var ae;
-          return (ae = n.top) == null ? void 0 : ae.call(n, pe.value);
+          var ne;
+          return (ne = n.top) == null ? void 0 : ne.call(n, pe.value);
         },
         default: () => {
-          var ae, he, Ce, Ne, He, Fe;
-          return n.default ? n.default(pe.value) : l(ve, null, [(ae = n.colgroup) == null ? void 0 : ae.call(n, pe.value), !e.hideDefaultHeader && l("thead", {
+          var ne, he, Ce, Ne, He, Fe;
+          return n.default ? n.default(pe.value) : l(ve, null, [(ne = n.colgroup) == null ? void 0 : ne.call(n, pe.value), !e.hideDefaultHeader && l("thead", {
             key: "thead"
           }, [l(ul, z, n)]), (he = n.thead) == null ? void 0 : he.call(n, pe.value), !e.hideDefaultBody && l("tbody", null, [(Ce = n["body.prepend"]) == null ? void 0 : Ce.call(n, pe.value), n.body ? n.body(pe.value) : l(rl, X(t, Q, {
             items: J.value
@@ -15332,11 +15335,11 @@ const mc = K({
         style: e.style
       }, P), {
         top: () => {
-          var ae;
-          return (ae = n.top) == null ? void 0 : ae.call(n, ce.value);
+          var ne;
+          return (ne = n.top) == null ? void 0 : ne.call(n, ce.value);
         },
         wrapper: () => {
-          var ae, he, Ce;
+          var ne, he, Ce;
           return l("div", {
             ref: N,
             onScrollPassive: be,
@@ -15345,7 +15348,7 @@ const mc = K({
             style: {
               height: Se(e.height)
             }
-          }, [l("table", null, [(ae = n.colgroup) == null ? void 0 : ae.call(n, ce.value), !e.hideDefaultHeader && l("thead", {
+          }, [l("table", null, [(ne = n.colgroup) == null ? void 0 : ne.call(n, ce.value), !e.hideDefaultHeader && l("thead", {
             key: "thead"
           }, [l(ul, X(z, {
             sticky: e.fixedHeader
@@ -15399,8 +15402,8 @@ const mc = K({
           }, null)])])])]);
         },
         bottom: () => {
-          var ae;
-          return (ae = n.bottom) == null ? void 0 : ae.call(n, ce.value);
+          var ne;
+          return (ne = n.bottom) == null ? void 0 : ne.call(n, ce.value);
         }
       });
     });
@@ -15970,7 +15973,7 @@ const mc = K({
                           rounded: "2"
                         }), {
                           default: c(() => [
-                            (w(), D(ne(F(le)("settings")), { style: { "font-size": "22px" } }))
+                            (w(), D(ae(F(le)("settings")), { style: { "font-size": "22px" } }))
                           ]),
                           _: 2
                         }, 1040)
@@ -15984,7 +15987,7 @@ const mc = K({
                                   class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
                                   onClick: _[1] || (_[1] = (g) => r.value = !r.value)
                                 }, [
-                                  r.value ? (w(), D(ne(F(le)("check")), {
+                                  r.value ? (w(), D(ae(F(le)("check")), {
                                     key: 0,
                                     style: { "font-size": "16px" }
                                   })) : q("", !0),
@@ -15998,7 +16001,7 @@ const mc = K({
                                   class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
                                   onClick: _[2] || (_[2] = (g) => d.value = !d.value)
                                 }, [
-                                  d.value ? (w(), D(ne(F(le)("check")), {
+                                  d.value ? (w(), D(ae(F(le)("check")), {
                                     key: 0,
                                     style: { "font-size": "16px" }
                                   })) : q("", !0),
@@ -16019,9 +16022,9 @@ const mc = K({
                                 }, {
                                   activator: c(({ props: g }) => [
                                     v("div", X(g, { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }), [
-                                      (w(), D(ne(F(le)("download")), { style: { "font-size": "16px" } })),
+                                      (w(), D(ae(F(le)("download")), { style: { "font-size": "16px" } })),
                                       _[6] || (_[6] = v("span", null, "Download", -1)),
-                                      (w(), D(ne(F(le)("chevron-right")), {
+                                      (w(), D(ae(F(le)("chevron-right")), {
                                         style: { "font-size": "14px" },
                                         class: "ml-auto"
                                       }))
@@ -16056,7 +16059,7 @@ const mc = K({
                               ]),
                               v("div", H0, [
                                 v("div", W0, [
-                                  (w(), D(ne(F(le)("printer")), { style: { "font-size": "16px" } })),
+                                  (w(), D(ae(F(le)("printer")), { style: { "font-size": "16px" } })),
                                   _[9] || (_[9] = v("span", null, "Print", -1))
                                 ])
                               ])
@@ -16107,10 +16110,10 @@ const mc = K({
                                               class: "d-flex align-center gap-2",
                                               style: la({ paddingLeft: `${g.level * 24}px` })
                                             }, [
-                                              g.type === "group" ? (w(), D(ne(F(le)("folder")), {
+                                              g.type === "group" ? (w(), D(ae(F(le)("folder")), {
                                                 key: 0,
                                                 style: { "font-size": "16px" }
-                                              })) : (w(), D(ne(F(le)("file-text")), {
+                                              })) : (w(), D(ae(F(le)("file-text")), {
                                                 key: 1,
                                                 style: { "font-size": "16px" }
                                               })),
@@ -16166,11 +16169,11 @@ const mc = K({
                                                       parseFloat(g.change) > 0 ? "text-success" : parseFloat(g.change) < 0 ? "text-error" : "text-medium-emphasis"
                                                     ]])
                                                   }, ue(g.change), 3),
-                                                  g.new ? (w(), D(ne(F(le)("star")), {
+                                                  g.new ? (w(), D(ae(F(le)("star")), {
                                                     key: 0,
                                                     style: { "font-size": "12px" },
                                                     class: "text-info"
-                                                  })) : (w(), D(ne(F(le)(parseFloat(g.change) < 0 ? "arrow-down" : "arrow-up")), {
+                                                  })) : (w(), D(ae(F(le)(parseFloat(g.change) < 0 ? "arrow-down" : "arrow-up")), {
                                                     key: 1,
                                                     style: { "font-size": "12px" },
                                                     class: ye(parseFloat(g.change) < 0 ? "text-error" : "text-success")
@@ -16204,7 +16207,7 @@ const mc = K({
                                           default: c(() => [
                                             d.value ? (w(), re("td", ap, [
                                               de(ue(m.value.changeFormatted) + " ", 1),
-                                              (w(), D(ne(F(le)(m.value.isIncrease ? "arrow-up" : "arrow-down")), {
+                                              (w(), D(ae(F(le)(m.value.isIncrease ? "arrow-up" : "arrow-down")), {
                                                 style: { "font-size": "12px" },
                                                 class: ye(m.value.isIncrease ? "text-success" : "text-error")
                                               }, null, 8, ["class"]))
@@ -16254,10 +16257,10 @@ const mc = K({
                                               class: "d-flex align-center gap-2",
                                               style: la({ paddingLeft: `${g.level * 24}px` })
                                             }, [
-                                              g.type === "group" ? (w(), D(ne(F(le)("folder")), {
+                                              g.type === "group" ? (w(), D(ae(F(le)("folder")), {
                                                 key: 0,
                                                 style: { "font-size": "16px" }
-                                              })) : (w(), D(ne(F(le)("file-text")), {
+                                              })) : (w(), D(ae(F(le)("file-text")), {
                                                 key: 1,
                                                 style: { "font-size": "16px" }
                                               })),
@@ -16313,11 +16316,11 @@ const mc = K({
                                                       parseFloat(g.change) > 0 ? "text-success" : parseFloat(g.change) < 0 ? "text-error" : "text-medium-emphasis"
                                                     ]])
                                                   }, ue(g.change), 3),
-                                                  g.new ? (w(), D(ne(F(le)("star")), {
+                                                  g.new ? (w(), D(ae(F(le)("star")), {
                                                     key: 0,
                                                     style: { "font-size": "12px" },
                                                     class: "text-info"
-                                                  })) : (w(), D(ne(F(le)(parseFloat(g.change) < 0 ? "arrow-down" : "arrow-up")), {
+                                                  })) : (w(), D(ae(F(le)(parseFloat(g.change) < 0 ? "arrow-down" : "arrow-up")), {
                                                     key: 1,
                                                     style: { "font-size": "12px" },
                                                     class: ye(parseFloat(g.change) < 0 ? "text-error" : "text-success")
@@ -16351,7 +16354,7 @@ const mc = K({
                                           default: c(() => [
                                             d.value ? (w(), re("td", vp, [
                                               de(ue(f.value.changeFormatted) + " ", 1),
-                                              (w(), D(ne(F(le)(f.value.isIncrease ? "arrow-up" : "arrow-down")), {
+                                              (w(), D(ae(F(le)(f.value.isIncrease ? "arrow-up" : "arrow-down")), {
                                                 style: { "font-size": "12px" },
                                                 class: ye(f.value.isIncrease ? "text-success" : "text-error")
                                               }, null, 8, ["class"]))
@@ -19163,7 +19166,7 @@ const Zp = K({
       })]);
     }), {};
   }
-}), tb = { class: "account" }, ab = { class: "account_texth5 mb-0 font-weight-bold" }, nb = { class: "account_texth5 mb-0 font-weight-bold" }, lb = { class: "account_texth5 mb-0 font-weight-bold" }, ib = { class: "d-flex align-center gap-2" }, ob = { class: "account_table_filter_menu py-1" }, sb = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, ub = { class: "d-flex align-center justify-space-between" }, rb = { class: "d-flex align-center w-100 gap-1" }, cb = { class: "mb-0" }, db = { class: "d-flex align-center gap-2" }, vb = { class: "d-flex align-center gap-2" }, fb = { class: "d-flex align-center gap-2" }, mb = { class: "d-flex flex-column gap-1" }, gb = { class: "mb-0" }, yb = { class: "mb-0 secondary_email" }, pb = { class: "d-flex align-center justify-space-between" }, bb = { class: "d-flex align-center gap-2" }, _b = { class: "account_table_pagination_text mb-0" }, hb = { class: "d-flex align-center gap-1" }, xb = {
+}), tb = { class: "account" }, ab = { class: "account_texth5 mb-0 font-weight-bold" }, nb = { class: "account_texth5 mb-0 font-weight-bold" }, lb = { class: "account_texth5 mb-0 font-weight-bold" }, ib = { class: "d-flex align-center gap-2" }, ob = { class: "account_table_filter_menu py-1" }, sb = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, ub = { class: "d-flex align-center justify-space-between" }, rb = { class: "mb-0" }, cb = { class: "d-flex align-center gap-2" }, db = { class: "d-flex align-center gap-2" }, vb = { class: "d-flex align-center gap-2" }, fb = { class: "d-flex flex-column gap-1" }, mb = { class: "mb-0" }, gb = { class: "mb-0 secondary_email" }, yb = { class: "d-flex align-center justify-space-between" }, pb = { class: "d-flex align-center gap-2" }, bb = { class: "account_table_pagination_text mb-0" }, _b = { class: "d-flex align-center gap-1" }, hb = {
   __name: "DynamicDataTable",
   props: {
     title: {
@@ -19253,7 +19256,7 @@ const Zp = K({
                   class: "account_v_card_dark account_widget_vcard account_vcard_border"
                 }, {
                   append: c(() => [
-                    (w(), D(ne(F(le)("users")), { style: { color: "white", "font-size": "16px" } }))
+                    (w(), D(ae(F(le)("users")), { style: { color: "white", "font-size": "16px" } }))
                   ]),
                   default: c(() => [
                     l(Ae, null, {
@@ -19279,7 +19282,7 @@ const Zp = K({
                   class: "account_vcard_border account_widget_vcard"
                 }, {
                   append: c(() => [
-                    (w(), D(ne(F(le)("currency-rupee")), { style: { "font-size": "16px" } }))
+                    (w(), D(ae(F(le)("currency-rupee")), { style: { "font-size": "16px" } }))
                   ]),
                   default: c(() => [
                     l(Ae, null, {
@@ -19304,7 +19307,7 @@ const Zp = K({
                   class: "account_vcard_border account_widget_vcard"
                 }, {
                   append: c(() => [
-                    (w(), D(ne(F(le)("trending-up")), { style: { "font-size": "16px" } }))
+                    (w(), D(ae(F(le)("trending-up")), { style: { "font-size": "16px" } }))
                   ]),
                   default: c(() => [
                     l(Ae, null, {
@@ -19329,7 +19332,7 @@ const Zp = K({
                   class: "account_vcard_border account_widget_vcard"
                 }, {
                   append: c(() => [
-                    (w(), D(ne(F(le)("star")), { style: { "font-size": "16px" } }))
+                    (w(), D(ae(F(le)("star")), { style: { "font-size": "16px" } }))
                   ]),
                   default: c(() => [
                     l(Ae, null, {
@@ -19362,7 +19365,7 @@ const Zp = K({
                   placeholder: e.title === "Accounting" ? "Search by Name" : "Search by Customer Name"
                 }, {
                   "prepend-inner": c(() => [
-                    (w(), D(ne(F(le)("search")), { style: { "font-size": "20px" } }))
+                    (w(), D(ae(F(le)("search")), { style: { "font-size": "20px" } }))
                   ]),
                   _: 1
                 }, 8, ["placeholder"]),
@@ -19395,7 +19398,7 @@ const Zp = K({
                             size: "36"
                           }), {
                             default: c(() => [
-                              (w(), D(ne(F(le)("filter")), { style: { "font-size": "22px" } }))
+                              (w(), D(ae(F(le)("filter")), { style: { "font-size": "22px" } }))
                             ]),
                             _: 2
                           }, 1040)
@@ -19444,7 +19447,7 @@ const Zp = K({
                         size: "36"
                       }), {
                         default: c(() => [
-                          (w(), D(ne(F(le)("columns-3")), { style: { "font-size": "22px" } }))
+                          (w(), D(ae(F(le)("columns-3")), { style: { "font-size": "22px" } }))
                         ]),
                         _: 2
                       }, 1040)
@@ -19474,15 +19477,17 @@ const Zp = K({
                               }, {
                                 default: c(() => [
                                   v("div", ub, [
-                                    v("div", rb, [
-                                      l($e, {
-                                        icon: "mdi-drag",
-                                        class: "drag-icon",
-                                        onMousedown: g[1] || (g[1] = (O) => y.value = !0),
-                                        onMouseup: g[2] || (g[2] = (O) => y.value = !1)
-                                      }),
-                                      v("p", cb, ue(I.title), 1)
-                                    ]),
+                                    v("div", {
+                                      class: "d-flex align-center w-100 gap-1 cursor-grab",
+                                      onMousedown: g[1] || (g[1] = (O) => y.value = !0),
+                                      onMouseup: g[2] || (g[2] = (O) => y.value = !1)
+                                    }, [
+                                      (w(), D(ae(F(le)("grip-vertical")), {
+                                        style: { "font-size": "18px" },
+                                        class: "drag-icon"
+                                      })),
+                                      v("p", rb, ue(I.title), 1)
+                                    ], 32),
                                     l(nt, {
                                       density: "compact",
                                       color: "primary",
@@ -19518,7 +19523,7 @@ const Zp = K({
                         size: "36"
                       }), {
                         default: c(() => [
-                          (w(), D(ne(F(le)("download")), { style: { "font-size": "22px" } }))
+                          (w(), D(ae(F(le)("download")), { style: { "font-size": "22px" } }))
                         ]),
                         _: 2
                       }, 1040)
@@ -19601,7 +19606,7 @@ const Zp = K({
                           onClick: g[4] || (g[4] = (I) => r("Status"))
                         }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                            (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -19634,7 +19639,7 @@ const Zp = K({
                           onClick: g[5] || (g[5] = (I) => r("Account Type"))
                         }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                            (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -19667,7 +19672,7 @@ const Zp = K({
                           onClick: g[6] || (g[6] = (I) => r("Customer Type"))
                         }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                            (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -19700,7 +19705,7 @@ const Zp = K({
                           onClick: g[7] || (g[7] = (I) => r("Currency"))
                         }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                            (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -19717,7 +19722,7 @@ const Zp = K({
                   md: "3"
                 }, {
                   default: c(() => [
-                    v("div", db, [
+                    v("div", cb, [
                       l(S, {
                         class: "accounting_date_input",
                         placeholder: "Last Transaction From",
@@ -19725,7 +19730,7 @@ const Zp = K({
                         multiple: "range"
                       }, {
                         "prepend-inner": c(() => [
-                          (w(), D(ne(F(le)("calendar")), { style: { "font-size": "20px" } }))
+                          (w(), D(ae(F(le)("calendar")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 1
                       }),
@@ -19735,7 +19740,7 @@ const Zp = K({
                         onClick: g[8] || (g[8] = (I) => r("Last Transaction From"))
                       }, {
                         default: c(() => [
-                          (w(), D(ne(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                          (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 1
                       })
@@ -19750,7 +19755,7 @@ const Zp = K({
                   md: "3"
                 }, {
                   default: c(() => [
-                    v("div", vb, [
+                    v("div", db, [
                       l(S, {
                         class: "accounting_date_input",
                         placeholder: "Last Order From",
@@ -19758,7 +19763,7 @@ const Zp = K({
                         multiple: "range"
                       }, {
                         "prepend-inner": c(() => [
-                          (w(), D(ne(F(le)("calendar")), { style: { "font-size": "20px" } }))
+                          (w(), D(ae(F(le)("calendar")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 1
                       }),
@@ -19768,7 +19773,7 @@ const Zp = K({
                         onClick: g[9] || (g[9] = (I) => r("Last Order From"))
                       }, {
                         default: c(() => [
-                          (w(), D(ne(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                          (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 1
                       })
@@ -19793,16 +19798,16 @@ const Zp = K({
               class: "elevation-1 border rounded account_dynamic_table"
             }, {
               "item.actions": c(({ item: I }) => [
-                v("div", fb, [
-                  (w(), D(ne(F(le)("eye")), {
+                v("div", vb, [
+                  (w(), D(ae(F(le)("eye")), {
                     class: "account_v_btn_color",
                     style: { "font-size": "20px", cursor: "pointer" }
                   })),
-                  (w(), D(ne(F(le)("edit")), {
+                  (w(), D(ae(F(le)("edit")), {
                     class: "account_v_btn_color",
                     style: { "font-size": "20px", cursor: "pointer" }
                   })),
-                  (w(), D(ne(F(le)("trash")), {
+                  (w(), D(ae(F(le)("trash")), {
                     class: "account_v_btn_color",
                     style: { "font-size": "20px", cursor: "pointer", color: "red" }
                   }))
@@ -19820,9 +19825,9 @@ const Zp = K({
                 }, 1032, ["class"])
               ]),
               "item.customerName": c(({ item: I }) => [
-                v("div", mb, [
-                  v("p", gb, ue(I.customerName), 1),
-                  v("p", yb, ue(I.customerEmail), 1)
+                v("div", fb, [
+                  v("p", mb, ue(I.customerName), 1),
+                  v("p", gb, ue(I.customerEmail), 1)
                 ])
               ]),
               _: 1
@@ -19837,10 +19842,10 @@ const Zp = K({
               cols: "12"
             }, {
               default: c(() => [
-                v("div", pb, [
-                  v("div", bb, [
-                    v("p", _b, "Page " + ue(t.value) + " of " + ue(h.value), 1),
-                    v("div", hb, [
+                v("div", yb, [
+                  v("div", pb, [
+                    v("p", bb, "Page " + ue(t.value) + " of " + ue(h.value), 1),
+                    v("div", _b, [
                       g[16] || (g[16] = v("p", { class: "mb-0 account_table_pagination_text" }, "Rows per page:", -1)),
                       l(Ze, {
                         class: "accouting_field accouting_active_field",
@@ -19871,7 +19876,7 @@ const Zp = K({
       ]);
     };
   }
-}, $l = /* @__PURE__ */ Et(xb, [["__scopeId", "data-v-f4c2f749"]]), kb = { class: "account_customers_list" }, Sb = { class: "account_ui_vcard" }, wb = { class: "d-flex align-center gap-2" }, Cb = { class: "account_vcard_menu_items py-1" }, Vb = ["onClick"], Ib = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Pb = { class: "custom_option d-flex align-center" }, Ab = { class: "d-flex align-center justify-end mt-4" }, Tb = {
+}, $l = /* @__PURE__ */ Et(hb, [["__scopeId", "data-v-99b015f6"]]), xb = { class: "account_customers_list" }, kb = { class: "account_ui_vcard" }, Sb = { class: "d-flex align-center gap-2" }, wb = { class: "account_vcard_menu_items py-1" }, Cb = ["onClick"], Vb = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Ib = { class: "custom_option d-flex align-center" }, Pb = { class: "d-flex align-center justify-end mt-4" }, Ab = {
   __name: "AccountCustomerList",
   setup(e) {
     const a = A([
@@ -19947,7 +19952,7 @@ const Zp = K({
       setInterval(() => {
         f.value++;
       }, 3e3);
-    }), (x, p) => (w(), re("div", kb, [
+    }), (x, p) => (w(), re("div", xb, [
       l(Ua, null, {
         default: c(() => [
           d.value ? (w(), D(xe, {
@@ -19957,14 +19962,14 @@ const Zp = K({
             default: c(() => [
               l(B, { cols: "8" }, {
                 default: c(() => [
-                  v("div", Sb, [
+                  v("div", kb, [
                     l(me, {
                       title: "Create a New Customer",
                       class: "pa-2 account_vcard_border",
                       subtitle: "Fill in the details below to add a new customer to your records."
                     }, {
                       append: c(() => [
-                        v("div", wb, [
+                        v("div", Sb, [
                           l(ot, {
                             location: "start",
                             transition: "slide-y-transition",
@@ -19978,7 +19983,7 @@ const Zp = K({
                                 rounded: ""
                               }), {
                                 default: c(() => [
-                                  (w(), D(ne(F(le)("settings")), { style: { "font-size": "20px" } }))
+                                  (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
                                 ]),
                                 _: 2
                               }, 1040)
@@ -19988,13 +19993,13 @@ const Zp = K({
                                 default: c(() => [
                                   p[1] || (p[1] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                                   l(ke, { class: "my-1 mt-0" }),
-                                  v("div", Cb, [
+                                  v("div", wb, [
                                     (w(!0), re(ve, null, ze(a.value, (h) => (w(), re("div", {
                                       key: h.key,
                                       class: "account_vcard_menu_item",
                                       onClick: (_) => h.visible = !h.visible
                                     }, [
-                                      v("div", Ib, [
+                                      v("div", Vb, [
                                         h.visible ? (w(), D($e, {
                                           key: 0,
                                           size: "16",
@@ -20004,7 +20009,7 @@ const Zp = K({
                                           class: ye(h.visible ? "" : "field_list_dynamic_ml")
                                         }, ue(h.label), 3)
                                       ])
-                                    ], 8, Vb))), 128))
+                                    ], 8, Cb))), 128))
                                   ])
                                 ]),
                                 _: 1,
@@ -20021,7 +20026,7 @@ const Zp = K({
                             class: "account_vcard_close_btn"
                           }, {
                             default: c(() => [
-                              (w(), D(ne(F(le)("x")), { style: { "font-size": "20px" } }))
+                              (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
                             ]),
                             _: 1
                           })
@@ -20088,7 +20093,7 @@ const Zp = K({
                                 }, {
                                   default: c(() => [
                                     p[5] || (p[5] = v("label", { class: "account_label mb-2" }, "Opening Balance", -1)),
-                                    v("div", Pb, [
+                                    v("div", Ib, [
                                       l(ee, {
                                         class: "custom_option_field accouting_field accouting_active_field",
                                         type: "number",
@@ -20496,10 +20501,10 @@ const Zp = K({
                                       placeholder: "Optional delivery address",
                                       variant: "outlined"
                                     }),
-                                    v("div", Ab, [
+                                    v("div", Pb, [
                                       l(Z, { class: "account_v_btn_primary" }, {
                                         prepend: c(() => [
-                                          (w(), D(ne(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                          (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                         ]),
                                         default: c(() => [
                                           p[27] || (p[27] = de(" Save Customer ", -1))
@@ -20556,7 +20561,7 @@ const Zp = K({
         class: "account_add_new_btn"
       }, {
         prepend: c(() => [
-          (w(), D(ne(F(le)("plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+          (w(), D(ae(F(le)("plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
         ]),
         default: c(() => [
           p[29] || (p[29] = de(" Add Customer ", -1))
@@ -20566,10 +20571,10 @@ const Zp = K({
       })
     ]));
   }
-}, Nb = /* @__PURE__ */ Et(Tb, [["__scopeId", "data-v-fe9d844b"]]), Db = { class: "d-flex align-center gap-3" }, $b = { key: 0 }, Bb = { class: "gst_report_title mb-2" }, Eb = { class: "group-header-row" }, Fb = ["colspan"], Lb = {
+}, Tb = /* @__PURE__ */ Et(Ab, [["__scopeId", "data-v-fe9d844b"]]), Nb = { class: "d-flex align-center gap-3" }, Db = { key: 0 }, $b = { class: "gst_report_title mb-2" }, Bb = { class: "group-header-row" }, Eb = ["colspan"], Fb = {
   key: 2,
   class: "font-weight-bold bg-grey-lighten-3"
-}, Rb = {
+}, Lb = {
   __name: "AccountGSTReports",
   setup(e) {
     const a = A(), t = A(["GSTR-1", "GSTR-2", "GSTR-3B"]), n = A(""), i = A(!1), o = A([
@@ -20695,8 +20700,8 @@ const Zp = K({
               default: c(() => [
                 l(me, { class: "account_vcard_border shadow-none gst_reports_vcard pa-6" }, {
                   default: c(() => [
-                    v("div", Db, [
-                      (w(), D(ne(F(le)("file-analytics")), {
+                    v("div", Nb, [
+                      (w(), D(ae(F(le)("file-analytics")), {
                         class: "account_icon_color",
                         style: { "font-size": "38px", "margin-right": "6px" }
                       })),
@@ -20739,7 +20744,7 @@ const Zp = K({
                               multiple: "range"
                             }, {
                               "prepend-inner": c(() => [
-                                (w(), D(ne(F(le)("calendar")), { style: { "font-size": "20px" } }))
+                                (w(), D(ae(F(le)("calendar")), { style: { "font-size": "20px" } }))
                               ]),
                               _: 1
                             }, 8, ["modelValue"])
@@ -20774,12 +20779,12 @@ const Zp = K({
                   _: 1
                 }),
                 l(ke, { class: "my-5" }),
-                i.value && s.value ? (w(), re("div", $b, [
+                i.value && s.value ? (w(), re("div", Db, [
                   (w(!0), re(ve, null, ze(s.value.table, (b, m) => (w(), re("div", {
                     key: m,
                     class: "mb-6"
                   }, [
-                    v("h4", Bb, ue(b.title), 1),
+                    v("h4", $b, ue(b.title), 1),
                     l(me, { class: "account_vcard_border shadow-none gst_reports_table_vcard mt-3" }, {
                       default: c(() => [
                         l(zt, {
@@ -20792,11 +20797,11 @@ const Zp = K({
                             var f, x;
                             return [
                               (x = (f = b.tableData) == null ? void 0 : f[0]) != null && x.group ? (w(!0), re(ve, { key: 0 }, ze(b.tableData, (p, h) => (w(), re(ve, { key: h }, [
-                                v("tr", Eb, [
+                                v("tr", Bb, [
                                   v("td", {
                                     colspan: b.headers.length,
                                     class: "text-medium-emphasis font-weight-bold"
-                                  }, ue(p.group), 9, Fb)
+                                  }, ue(p.group), 9, Eb)
                                 ]),
                                 (w(!0), re(ve, null, ze(p.rows, (_, g) => (w(), re("tr", {
                                   key: `${h}-${g}`
@@ -20815,7 +20820,7 @@ const Zp = K({
                                   class: ye(_.align === "end" ? "text-end pr-4" : "pl-4")
                                 }, ue(p[_.value] || "-"), 3))), 128))
                               ]))), 128)),
-                              b.totalRow ? (w(), re("tr", Lb, [
+                              b.totalRow ? (w(), re("tr", Fb, [
                                 (w(!0), re(ve, null, ze(b.headers, (p) => (w(), re("td", {
                                   key: p.value,
                                   class: ye(p.align === "end" ? "text-end pr-4" : "pl-4")
@@ -20839,11 +20844,11 @@ const Zp = K({
       ]);
     };
   }
-}, Ob = /* @__PURE__ */ Et(Rb, [["__scopeId", "data-v-43d96d6f"]]), Mb = { class: "d-flex align-center gap-2" }, zb = {
+}, Rb = /* @__PURE__ */ Et(Lb, [["__scopeId", "data-v-43d96d6f"]]), Ob = { class: "d-flex align-center gap-2" }, Mb = {
   key: 0,
   style: { width: "16px", height: "16px" },
   class: ""
-}, Ub = { class: "" }, Gb = { class: "more_options_w" }, jb = { key: 0 }, $c = {
+}, zb = { class: "" }, Ub = { class: "more_options_w" }, Gb = { key: 0 }, $c = {
   __name: "TreeItem",
   props: {
     node: Object,
@@ -20880,18 +20885,18 @@ const Zp = K({
         onClick: s,
         style: { cursor: "pointer" }
       }, [
-        v("div", Mb, [
-          y.value ? q("", !0) : (w(), re("div", zb, [
-            t.node.children ? (w(), D(ne(F(le)(n.value ? "chevron-down" : "chevron-right")), {
+        v("div", Ob, [
+          y.value ? q("", !0) : (w(), re("div", Mb, [
+            t.node.children ? (w(), D(ae(F(le)(n.value ? "chevron-down" : "chevron-right")), {
               key: 0,
               style: { "font-size": "16px" }
             })) : q("", !0)
           ])),
-          (w(), D(ne(F(le)(y.value ? "file-text" : "folder")), {
+          (w(), D(ae(F(le)(y.value ? "file-text" : "folder")), {
             class: ye(y.value ? "account_ledger_icon" : "account_folder_icon"),
             style: { "font-size": "16px" }
           }, null, 8, ["class"])),
-          v("div", Ub, [
+          v("div", zb, [
             v("h6", {
               class: ye([
                 t.level === 0 ? "expansion_base_parent_title" : "expansion_node_title",
@@ -20915,7 +20920,7 @@ const Zp = K({
             ]),
             _: 1
           }, 8, ["class"])),
-          v("div", Gb, [
+          v("div", Ub, [
             l(ot, {
               modelValue: i.value,
               "onUpdate:modelValue": f[0] || (f[0] = (x) => i.value = x),
@@ -20924,7 +20929,7 @@ const Zp = K({
               location: "bottom end"
             }, {
               activator: c(({ props: x }) => [
-                o.value || i.value ? (w(), D(ne(F(le)("dots")), X({
+                o.value || i.value ? (w(), D(ae(F(le)("dots")), X({
                   key: 0,
                   style: { "font-size": "16px" }
                 }, x), null, 16)) : q("", !0)
@@ -20936,7 +20941,7 @@ const Zp = K({
                       default: c(() => [
                         l(il, { class: "d-flex align-center gap-3" }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("pencil")), { style: { "font-size": "18px" } })),
+                            (w(), D(ae(F(le)("pencil")), { style: { "font-size": "18px" } })),
                             f[6] || (f[6] = v("p", { class: "mb-0" }, "Edit", -1))
                           ]),
                           _: 1,
@@ -20949,7 +20954,7 @@ const Zp = K({
                       default: c(() => [
                         l(il, { class: "d-flex trash align-center gap-3" }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("trash")), { style: { "font-size": "18px" } })),
+                            (w(), D(ae(F(le)("trash")), { style: { "font-size": "18px" } })),
                             f[7] || (f[7] = v("p", { class: "mb-0" }, "Delete", -1))
                           ]),
                           _: 1,
@@ -20967,7 +20972,7 @@ const Zp = K({
           ])
         ])
       ]),
-      n.value ? (w(), re("div", jb, [
+      n.value ? (w(), re("div", Gb, [
         (w(!0), re(ve, null, ze(t.node.children, (x) => (w(), D($c, {
           key: x.id,
           node: x,
@@ -20978,7 +20983,7 @@ const Zp = K({
       ])) : q("", !0)
     ], 36));
   }
-}, Hb = { class: "account_ui_vcard" }, Wb = { class: "d-flex align-center gap-2" }, qb = { class: "d-flex align-center gap-2 mb-2" }, Yb = { class: "d-flex align-center gap-1" }, Jb = { class: "d-flex align-center gap-1" }, Kb = { class: "custom_expansion_item" }, Xb = {
+}, jb = { class: "account_ui_vcard" }, Hb = { class: "d-flex align-center gap-2" }, Wb = { class: "d-flex align-center gap-2 mb-2" }, qb = { class: "d-flex align-center gap-1" }, Yb = { class: "d-flex align-center gap-1" }, Jb = { class: "custom_expansion_item" }, Kb = {
   __name: "AccountGroupAndLedger",
   setup(e) {
     A(!1);
@@ -21209,7 +21214,7 @@ const Zp = K({
     function U(G) {
       u.value = G, o.value = !0;
     }
-    return (G, C) => (w(), re("div", Hb, [
+    return (G, C) => (w(), re("div", jb, [
       l(F(xe), null, {
         default: c(() => [
           l(F(B), {
@@ -21224,14 +21229,14 @@ const Zp = K({
                 subtitle: "Create and manage your ledger accounts and groups."
               }, {
                 append: c(() => [
-                  v("div", Wb, [
+                  v("div", Hb, [
                     l(F(Z), {
                       onClick: C[0] || (C[0] = (L) => n.value = !0),
                       class: "account_v_btn_outlined",
                       variant: "outlined"
                     }, {
                       prepend: c(() => [
-                        (w(), D(ne(F(le)("plus")), { style: { "font-size": "18px" } }))
+                        (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
                       ]),
                       default: c(() => [
                         C[21] || (C[21] = de(" Add Group ", -1))
@@ -21245,7 +21250,7 @@ const Zp = K({
                       variant: "tonal"
                     }, {
                       prepend: c(() => [
-                        (w(), D(ne(F(le)("plus")), { style: { "font-size": "18px" } }))
+                        (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
                       ]),
                       default: c(() => [
                         C[22] || (C[22] = de(" Add Ledger ", -1))
@@ -21258,16 +21263,16 @@ const Zp = K({
                 default: c(() => [
                   l(F(Ae), null, {
                     default: c(() => [
-                      v("div", qb, [
-                        v("div", Yb, [
-                          (w(), D(ne(F(le)("folder")), {
+                      v("div", Wb, [
+                        v("div", qb, [
+                          (w(), D(ae(F(le)("folder")), {
                             class: "account_folder_icon",
                             style: { "font-size": "16px" }
                           })),
                           C[23] || (C[23] = v("p", { class: "mb-0 account_info_title" }, "Group", -1))
                         ]),
-                        v("div", Jb, [
-                          (w(), D(ne(F(le)("file-text")), {
+                        v("div", Yb, [
+                          (w(), D(ae(F(le)("file-text")), {
                             class: "account_ledger_icon",
                             style: { "font-size": "16px" }
                           })),
@@ -21279,7 +21284,7 @@ const Zp = K({
                         variant: "text"
                       }, {
                         default: c(() => [
-                          v("div", Kb, [
+                          v("div", Jb, [
                             (w(!0), re(ve, null, ze(a, (L) => (w(), D($c, {
                               key: L.id,
                               node: L,
@@ -21618,13 +21623,13 @@ const Zp = K({
       }, 8, ["modelValue"])
     ]));
   }
-}, Qb = { class: "account_ui_vcard" }, Zb = { class: "d-flex align-center gap-2" }, e_ = { class: "mb-0" }, t_ = { class: "pa-3" }, a_ = { class: "d-flex align-center gap-2 justify-end mt-3" }, n_ = { class: "pb-4 d-flex align-center justify-end" }, l_ = { class: "account_invoice_list" }, i_ = {
+}, Xb = { class: "account_ui_vcard" }, Qb = { class: "d-flex align-center gap-2" }, Zb = { class: "mb-0" }, e_ = { class: "pa-3" }, t_ = { class: "d-flex align-center gap-2 justify-end mt-3" }, a_ = { class: "pb-4 d-flex align-center justify-end" }, n_ = { class: "account_invoice_list" }, l_ = {
   key: 0,
   class: "account_ui_vcard"
-}, o_ = { class: "d-flex align-center gap-2" }, s_ = { class: "account_vcard_menu_items py-1" }, u_ = ["onClick"], r_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, c_ = { class: "custom_option d-flex align-center" }, d_ = { class: "d-flex align-center justify-end mt-4" }, v_ = {
+}, i_ = { class: "d-flex align-center gap-2" }, o_ = { class: "account_vcard_menu_items py-1" }, s_ = ["onClick"], u_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, r_ = { class: "custom_option d-flex align-center" }, c_ = { class: "d-flex align-center justify-end mt-4" }, d_ = {
   key: 0,
   class: "account_ui_vcard"
-}, f_ = { class: "d-flex align-center justify-space-between" }, m_ = { class: "d-flex align-center justify-space-between" }, g_ = { class: "d-flex align-center justify-space-between" }, y_ = { class: "d-flex align-center justify-space-between" }, p_ = { class: "d-flex align-center justify-space-between" }, b_ = { class: "d-flex align-center justify-space-between" }, __ = {
+}, v_ = { class: "d-flex align-center justify-space-between" }, f_ = { class: "d-flex align-center justify-space-between" }, m_ = { class: "d-flex align-center justify-space-between" }, g_ = { class: "d-flex align-center justify-space-between" }, y_ = { class: "d-flex align-center justify-space-between" }, p_ = { class: "d-flex align-center justify-space-between" }, b_ = {
   __name: "AccountInvoiceReturn",
   setup(e) {
     const a = A([
@@ -21996,12 +22001,12 @@ const Zp = K({
     }
     function $(ce, z) {
       const Q = z === "service" ? S : g;
-      Q.value.length > 1 && (Q.value.splice(ce, 1), Q.value.forEach((P, ae) => P.lockedRate = ae !== 0));
+      Q.value.length > 1 && (Q.value.splice(ce, 1), Q.value.forEach((P, ne) => P.lockedRate = ne !== 0));
     }
     function O(ce) {
       Re(() => {
         ce.value.forEach((z) => {
-          const Q = parseFloat(z.quantity) || 1, P = parseFloat(z.rate) || 0, ae = parseFloat(z.discount) || 0, he = (z.quantity !== void 0 ? Q : 1) * P, Ce = he * (ae / 100), Ne = he - Ce, He = parseFloat(z.gst) || 0, Fe = Ne * (He / 100), qe = Ne + Fe;
+          const Q = parseFloat(z.quantity) || 1, P = parseFloat(z.rate) || 0, ne = parseFloat(z.discount) || 0, he = (z.quantity !== void 0 ? Q : 1) * P, Ce = he * (ne / 100), Ne = he - Ce, He = parseFloat(z.gst) || 0, Fe = Ne * (He / 100), qe = Ne + Fe;
           z.taxableAmnt = Ne.toFixed(2), z.total = qe.toFixed(2);
         });
       });
@@ -22147,7 +22152,7 @@ Currency: ${Y.value}` : "";
       te.value === "Financial Year" ? ge.value = fe.value : ge.value = "";
     });
     const pe = k(() => !ge.value || !be.value ? "" : `${ge.value}/${be.value}`);
-    return (ce, z) => (w(), re("div", Qb, [
+    return (ce, z) => (w(), re("div", Xb, [
       l(Ua, null, {
         default: c(() => [
           t.value ? (w(), D(xe, {
@@ -22163,7 +22168,7 @@ Currency: ${Y.value}` : "";
                     subtitle: "Fill out the details below to create a new sales invoice."
                   }, {
                     append: c(() => [
-                      v("div", Zb, [
+                      v("div", Qb, [
                         l(Z, {
                           onClick: z[0] || (z[0] = (Q) => j.value = !0),
                           variant: "text",
@@ -22171,7 +22176,7 @@ Currency: ${Y.value}` : "";
                           rounded: ""
                         }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("settings")), { style: { "font-size": "20px" } }))
+                            (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         }),
@@ -22183,7 +22188,7 @@ Currency: ${Y.value}` : "";
                           class: "account_vcard_close_btn"
                         }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("x")), { style: { "font-size": "20px" } }))
+                            (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -22216,7 +22221,7 @@ Currency: ${Y.value}` : "";
                                         rounded: "2"
                                       }, {
                                         default: c(() => [
-                                          (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px" } }))
+                                          (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px" } }))
                                         ]),
                                         _: 1
                                       })
@@ -22417,7 +22422,7 @@ Currency: ${Y.value}` : "";
                                       }, null, 8, ["modelValue", "onUpdate:modelValue", "items"])
                                     ]),
                                     "item.amount": c(({ index: Q }) => [
-                                      v("p", e_, "₹" + ue((d.value === "item" ? g.value : S.value)[Q].total), 1)
+                                      v("p", Zb, "₹" + ue((d.value === "item" ? g.value : S.value)[Q].total), 1)
                                     ]),
                                     "item.actions": c(({ index: Q }) => [
                                       l($e, {
@@ -22443,7 +22448,7 @@ Currency: ${Y.value}` : "";
                                     onClick: z[7] || (z[7] = (Q) => I(d.value))
                                   }, {
                                     prepend: c(() => [
-                                      (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                      (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                     ]),
                                     default: c(() => [
                                       z[24] || (z[24] = de(" Add Another Line ", -1))
@@ -22478,7 +22483,7 @@ Currency: ${Y.value}` : "";
                                         default: c(() => [
                                           l(me, { class: "shadow-none w-100" }, {
                                             default: c(() => [
-                                              v("div", t_, [
+                                              v("div", e_, [
                                                 z[25] || (z[25] = v("div", { class: "d-flex align-center justify-space-between" }, [
                                                   v("span", { class: "account_gst_invoice_subtitle" }, "Subtotal"),
                                                   v("span", { class: "account_gst_invoice_subtitle_val" }, "₹0.00")
@@ -22516,10 +22521,10 @@ Currency: ${Y.value}` : "";
                             ]),
                             _: 1
                           }),
-                          v("div", a_, [
+                          v("div", t_, [
                             l(Z, { class: "account_v_btn_primary" }, {
                               prepend: c(() => [
-                                (w(), D(ne(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                               ]),
                               default: c(() => [
                                 z[30] || (z[30] = de(" Save Credit Note ", -1))
@@ -22543,13 +22548,13 @@ Currency: ${Y.value}` : "";
         ]),
         _: 1
       }),
-      v("div", n_, [
+      v("div", a_, [
         l(Z, {
           onClick: z[8] || (z[8] = (Q) => t.value = !0),
           class: "account_v_btn_primary"
         }, {
           prepend: c(() => [
-            (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+            (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
           ]),
           default: c(() => [
             z[31] || (z[31] = de(" Create Invoice ", -1))
@@ -22558,7 +22563,7 @@ Currency: ${Y.value}` : "";
           __: [31]
         })
       ]),
-      v("div", l_, [
+      v("div", n_, [
         l($l, {
           title: "Invoices",
           headers: a.value,
@@ -22576,14 +22581,14 @@ Currency: ${Y.value}` : "";
         "onUpdate:modelValue": z[10] || (z[10] = (Q) => U.value = Q)
       }, {
         default: c(() => [
-          U.value ? (w(), re("div", i_, [
+          U.value ? (w(), re("div", l_, [
             l(me, {
               title: "Create a New Customer",
               class: "pa-2 account_vcard_border shadow-none",
               subtitle: "Fill in the details below to add a new customer to your records."
             }, {
               append: c(() => [
-                v("div", o_, [
+                v("div", i_, [
                   l(ot, {
                     location: "start",
                     transition: "slide-y-transition",
@@ -22603,13 +22608,13 @@ Currency: ${Y.value}` : "";
                         default: c(() => [
                           z[32] || (z[32] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                           l(ke, { class: "my-1 mt-0" }),
-                          v("div", s_, [
+                          v("div", o_, [
                             (w(!0), re(ve, null, ze(E.value, (Q) => (w(), re("div", {
                               key: Q.key,
                               class: "account_vcard_menu_item",
                               onClick: (P) => Q.visible = !Q.visible
                             }, [
-                              v("div", r_, [
+                              v("div", u_, [
                                 Q.visible ? (w(), D($e, {
                                   key: 0,
                                   size: "16",
@@ -22619,7 +22624,7 @@ Currency: ${Y.value}` : "";
                                   class: ye(Q.visible ? "" : "field_list_dynamic_ml")
                                 }, ue(Q.label), 3)
                               ])
-                            ], 8, u_))), 128))
+                            ], 8, s_))), 128))
                           ])
                         ]),
                         _: 1,
@@ -22699,7 +22704,7 @@ Currency: ${Y.value}` : "";
                         }, {
                           default: c(() => [
                             z[36] || (z[36] = v("label", { class: "account_label mb-2" }, "Opening Balance", -1)),
-                            v("div", c_, [
+                            v("div", r_, [
                               l(ee, {
                                 class: "custom_option_field accouting_field accouting_active_field",
                                 type: "number",
@@ -23107,7 +23112,7 @@ Currency: ${Y.value}` : "";
                               placeholder: "Optional delivery address",
                               variant: "outlined"
                             }),
-                            v("div", d_, [
+                            v("div", c_, [
                               l(Z, {
                                 class: "account_v_btn_primary",
                                 "prepend-icon": "mdi-content-save-outline"
@@ -23142,7 +23147,7 @@ Currency: ${Y.value}` : "";
         "onUpdate:modelValue": z[16] || (z[16] = (Q) => j.value = Q)
       }, {
         default: c(() => [
-          j.value ? (w(), re("div", v_, [
+          j.value ? (w(), re("div", d_, [
             l(me, {
               title: "Invoice Settings",
               class: "pa-2 account_vcard_border shadow-none",
@@ -23204,7 +23209,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", f_, [
+                                                v("div", v_, [
                                                   z[60] || (z[60] = v("p", { class: "mb-0" }, "Change Every FY", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23340,7 +23345,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", m_, [
+                                                v("div", f_, [
                                                   z[68] || (z[68] = v("p", { class: "mb-0" }, "Unit", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23365,7 +23370,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", g_, [
+                                                v("div", m_, [
                                                   z[69] || (z[69] = v("p", { class: "mb-0" }, "HSN/SAC Code", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23390,7 +23395,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", y_, [
+                                                v("div", g_, [
                                                   z[70] || (z[70] = v("p", { class: "mb-0" }, "Discount (%)", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23430,7 +23435,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", p_, [
+                                                v("div", y_, [
                                                   z[72] || (z[72] = v("p", { class: "mb-0" }, "Due Date", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23455,7 +23460,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", b_, [
+                                                v("div", p_, [
                                                   z[73] || (z[73] = v("p", { class: "mb-0" }, "Currency & Exchange Rate", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23526,47 +23531,47 @@ Currency: ${Y.value}` : "";
       }, 8, ["modelValue"])
     ]));
   }
-}, h_ = { class: "account_ui_vcard" }, x_ = { class: "d-flex align-center gap-2" }, k_ = { class: "py-1" }, S_ = { class: "account_vcard_menu_item" }, w_ = { class: "account_vcard_menu_item" }, C_ = { class: "account_vcard_menu_item" }, V_ = { class: "py-1" }, I_ = { class: "account_vcard_menu_item" }, P_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, A_ = {
+}, __ = { class: "account_ui_vcard" }, h_ = { class: "d-flex align-center gap-2" }, x_ = { class: "py-1" }, k_ = { class: "account_vcard_menu_item" }, S_ = { class: "account_vcard_menu_item" }, w_ = { class: "account_vcard_menu_item" }, C_ = { class: "py-1" }, V_ = { class: "account_vcard_menu_item" }, I_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, P_ = {
+  key: 0,
+  class: "text-end"
+}, A_ = {
   key: 0,
   class: "text-end"
 }, T_ = {
   key: 0,
   class: "text-end"
-}, N_ = {
-  key: 0,
-  class: "text-end"
-}, D_ = { class: "d-flex justify-end align-center gap-2" }, $_ = { class: "d-flex justify-end mb-3 px-4" }, B_ = { style: { "min-width": "100%" } }, E_ = { class: "font-weight-medium" }, F_ = { class: "text-end amount_inc_current_item" }, L_ = {
+}, N_ = { class: "d-flex justify-end align-center gap-2" }, D_ = { class: "d-flex justify-end mb-3 px-4" }, $_ = { style: { "min-width": "100%" } }, B_ = { class: "font-weight-medium" }, E_ = { class: "text-end amount_inc_current_item" }, F_ = {
   key: 0,
   class: "text-end amount_inc_previous_item"
-}, R_ = {
+}, L_ = {
   key: 0,
   class: "text-end d-flex align-center amount_inc_change_item justify-end gap-2"
-}, O_ = {
+}, R_ = {
   key: 0,
   class: "text-end"
-}, M_ = {
+}, O_ = {
   key: 1,
   class: "text-end"
-}, z_ = {
+}, M_ = {
   key: 0,
   class: "text-end"
-}, U_ = { class: "d-flex justify-end align-center gap-2" }, G_ = { class: "d-flex justify-end mb-3 px-4" }, j_ = { style: { "min-width": "100%" } }, H_ = { class: "font-weight-medium" }, W_ = { class: "text-end amount_inc_current_item" }, q_ = {
+}, z_ = { class: "d-flex justify-end align-center gap-2" }, U_ = { class: "d-flex justify-end mb-3 px-4" }, G_ = { style: { "min-width": "100%" } }, j_ = { class: "font-weight-medium" }, H_ = { class: "text-end amount_inc_current_item" }, W_ = {
   key: 0,
   class: "text-end amount_inc_previous_item"
-}, Y_ = {
+}, q_ = {
   key: 0,
   class: "text-end d-flex align-center justify-end amount_inc_change_item gap-2"
-}, J_ = { class: "d-flex align-center gap-2" }, K_ = { class: "d-flex justify-end align-center gap-2" }, X_ = {
+}, Y_ = { class: "d-flex align-center gap-2" }, J_ = { class: "d-flex justify-end align-center gap-2" }, K_ = {
   class: "d-flex justify-space-between align-center px-4 py-2 rounded",
   style: { "background-color": "#e6fff0" }
-}, Q_ = { class: "d-flex align-center gap-2" }, Z_ = { class: "d-flex align-center gap-4" }, eh = {
+}, X_ = { class: "d-flex align-center gap-2" }, Q_ = { class: "d-flex align-center gap-4" }, Z_ = {
   key: 0,
   class: "px-2 py-1",
   style: { "background-color": "#f5d6c6", "border-radius": "4px" }
-}, th = { class: "font-weight-medium" }, ah = { class: "text-success font-weight-bold" }, nh = {
+}, eh = { class: "font-weight-medium" }, th = { class: "text-success font-weight-bold" }, ah = {
   key: 1,
   class: "d-flex align-center gap-1"
-}, lh = {
+}, nh = {
   __name: "AccountProfitAndLoss",
   setup(e) {
     const a = A([
@@ -23930,7 +23935,7 @@ Currency: ${Y.value}` : "";
     function h(_) {
       p.value = !1, console.log("Download as", _);
     }
-    return (_, g) => (w(), re("div", h_, [
+    return (_, g) => (w(), re("div", __, [
       l(xe, null, {
         default: c(() => [
           l(B, { cols: "12" }, {
@@ -23941,7 +23946,7 @@ Currency: ${Y.value}` : "";
                 subtitle: "For the period of Jan 01, 2025 to Jul 07, 2025"
               }, {
                 append: c(() => [
-                  v("div", x_, [
+                  v("div", h_, [
                     l(nt, {
                       modelValue: y.value,
                       "onUpdate:modelValue": g[0] || (g[0] = (S) => y.value = S),
@@ -23972,7 +23977,7 @@ Currency: ${Y.value}` : "";
                           rounded: "2"
                         }), {
                           default: c(() => [
-                            (w(), D(ne(F(le)("settings")), { style: { "font-size": "22px" } }))
+                            (w(), D(ae(F(le)("settings")), { style: { "font-size": "22px" } }))
                           ]),
                           _: 2
                         }, 1040)
@@ -23980,13 +23985,13 @@ Currency: ${Y.value}` : "";
                       default: c(() => [
                         l(me, { class: "account_vcard_menu account_vcard_border" }, {
                           default: c(() => [
-                            v("div", k_, [
-                              v("div", S_, [
+                            v("div", x_, [
+                              v("div", k_, [
                                 v("div", {
                                   class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
                                   onClick: g[1] || (g[1] = (S) => r.value = !r.value)
                                 }, [
-                                  r.value ? (w(), D(ne(F(le)("check")), {
+                                  r.value ? (w(), D(ae(F(le)("check")), {
                                     key: 0,
                                     style: { "font-size": "16px" }
                                   })) : q("", !0),
@@ -23995,12 +24000,12 @@ Currency: ${Y.value}` : "";
                                   }, "Full Width View", 2)
                                 ])
                               ]),
-                              v("div", w_, [
+                              v("div", S_, [
                                 v("div", {
                                   class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
                                   onClick: g[2] || (g[2] = (S) => d.value = !d.value)
                                 }, [
-                                  d.value ? (w(), D(ne(F(le)("check")), {
+                                  d.value ? (w(), D(ae(F(le)("check")), {
                                     key: 0,
                                     style: { "font-size": "16px" }
                                   })) : q("", !0),
@@ -24010,7 +24015,7 @@ Currency: ${Y.value}` : "";
                                 ])
                               ]),
                               l(ke, { class: "my-2" }),
-                              v("div", C_, [
+                              v("div", w_, [
                                 l(ot, {
                                   modelValue: p.value,
                                   "onUpdate:modelValue": g[5] || (g[5] = (S) => p.value = S),
@@ -24021,9 +24026,9 @@ Currency: ${Y.value}` : "";
                                 }, {
                                   activator: c(({ props: S }) => [
                                     v("div", X(S, { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }), [
-                                      (w(), D(ne(F(le)("download")), { style: { "font-size": "16px" } })),
+                                      (w(), D(ae(F(le)("download")), { style: { "font-size": "16px" } })),
                                       g[6] || (g[6] = v("span", null, "Download", -1)),
-                                      (w(), D(ne(F(le)("chevron-right")), {
+                                      (w(), D(ae(F(le)("chevron-right")), {
                                         style: { "font-size": "14px" },
                                         class: "ml-auto"
                                       }))
@@ -24035,7 +24040,7 @@ Currency: ${Y.value}` : "";
                                       width: "120"
                                     }, {
                                       default: c(() => [
-                                        v("div", V_, [
+                                        v("div", C_, [
                                           v("div", {
                                             class: "account_vcard_menu_item field_list_title cursor-pointer px-3 py-1",
                                             onClick: g[3] || (g[3] = (S) => h("pdf"))
@@ -24056,9 +24061,9 @@ Currency: ${Y.value}` : "";
                                   _: 1
                                 }, 8, ["modelValue"])
                               ]),
-                              v("div", I_, [
-                                v("div", P_, [
-                                  (w(), D(ne(F(le)("printer")), { style: { "font-size": "16px" } })),
+                              v("div", V_, [
+                                v("div", I_, [
+                                  (w(), D(ae(F(le)("printer")), { style: { "font-size": "16px" } })),
                                   g[9] || (g[9] = v("span", null, "Print", -1))
                                 ])
                               ])
@@ -24106,10 +24111,10 @@ Currency: ${Y.value}` : "";
                                               class: "d-flex align-center gap-2",
                                               style: la({ paddingLeft: `${S.level * 24}px` })
                                             }, [
-                                              S.type === "group" ? (w(), D(ne(F(le)("folder")), {
+                                              S.type === "group" ? (w(), D(ae(F(le)("folder")), {
                                                 key: 0,
                                                 style: { "font-size": "16px" }
-                                              })) : (w(), D(ne(F(le)("file-text")), {
+                                              })) : (w(), D(ae(F(le)("file-text")), {
                                                 key: 1,
                                                 style: { "font-size": "16px" }
                                               })),
@@ -24128,14 +24133,14 @@ Currency: ${Y.value}` : "";
                                               }, 1032, ["class"])) : q("", !0)
                                             ], 4)
                                           ]),
-                                          (w(), re("td", A_, [
+                                          (w(), re("td", P_, [
                                             v("p", {
                                               class: ye(["mb-0 amount_inc_current_item", S.level === 0 && S.type === "group" ? "amount_inc_current_font_wght" : ""])
                                             }, ue(S.current), 3)
                                           ])),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
-                                              d.value ? (w(), re("td", T_, [
+                                              d.value ? (w(), re("td", A_, [
                                                 v("p", {
                                                   class: ye(["mb-0 amount_inc_previous_item", S.level > 0 && S.type === "group" ? "amount_inc_previous_font_wght" : ""])
                                                 }, ue(S.previous), 3)
@@ -24145,19 +24150,19 @@ Currency: ${Y.value}` : "";
                                           }, 1024),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
-                                              d.value ? (w(), re("td", N_, [
-                                                v("div", D_, [
+                                              d.value ? (w(), re("td", T_, [
+                                                v("div", N_, [
                                                   v("p", {
                                                     class: ye(["mb-0 amount_inc_change_item", [
                                                       S.type === "ledger" ? "amount_inc_change_font_wght" : "",
                                                       parseFloat(S.change) > 0 ? "text-success" : parseFloat(S.change) < 0 ? "text-error" : "text-medium-emphasis"
                                                     ]])
                                                   }, ue(S.change), 3),
-                                                  S.new ? (w(), D(ne(F(le)("star")), {
+                                                  S.new ? (w(), D(ae(F(le)("star")), {
                                                     key: 0,
                                                     style: { "font-size": "12px" },
                                                     class: "text-info"
-                                                  })) : (w(), D(ne(F(le)(parseFloat(S.change) < 0 ? "arrow-down" : "arrow-up")), {
+                                                  })) : (w(), D(ae(F(le)(parseFloat(S.change) < 0 ? "arrow-down" : "arrow-up")), {
                                                     key: 1,
                                                     style: { "font-size": "12px" },
                                                     class: ye(parseFloat(S.change) < 0 ? "text-error" : "text-success")
@@ -24172,25 +24177,25 @@ Currency: ${Y.value}` : "";
                                     }),
                                     _: 1
                                   }, 8, ["headers", "items"]),
-                                  v("div", $_, [
-                                    v("table", B_, [
-                                      v("tr", E_, [
+                                  v("div", D_, [
+                                    v("table", $_, [
+                                      v("tr", B_, [
                                         g[10] || (g[10] = v("td", {
                                           style: { "min-width": "240px" },
                                           class: "text-start"
                                         }, "Total Income", -1)),
-                                        v("td", F_, ue(F(m).currentFormatted), 1),
+                                        v("td", E_, ue(F(m).currentFormatted), 1),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", L_, ue(F(m).previousFormatted), 1)) : q("", !0)
+                                            d.value ? (w(), re("td", F_, ue(F(m).previousFormatted), 1)) : q("", !0)
                                           ]),
                                           _: 1
                                         }),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", R_, [
+                                            d.value ? (w(), re("td", L_, [
                                               de(ue(F(m).changeFormatted) + " ", 1),
-                                              (w(), D(ne(F(le)(F(m).isIncrease ? "arrow-up" : "arrow-down")), {
+                                              (w(), D(ae(F(le)(F(m).isIncrease ? "arrow-up" : "arrow-down")), {
                                                 style: { "font-size": "12px" },
                                                 class: ye(F(m).isIncrease ? "text-success" : "text-error")
                                               }, null, 8, ["class"]))
@@ -24237,10 +24242,10 @@ Currency: ${Y.value}` : "";
                                               class: "d-flex align-center gap-2",
                                               style: la({ paddingLeft: `${S.level * 24}px` })
                                             }, [
-                                              S.type === "group" ? (w(), D(ne(F(le)("folder")), {
+                                              S.type === "group" ? (w(), D(ae(F(le)("folder")), {
                                                 key: 0,
                                                 style: { "font-size": "16px" }
-                                              })) : (w(), D(ne(F(le)("file-text")), {
+                                              })) : (w(), D(ae(F(le)("file-text")), {
                                                 key: 1,
                                                 style: { "font-size": "16px" }
                                               })),
@@ -24259,12 +24264,12 @@ Currency: ${Y.value}` : "";
                                               }, 1032, ["class"])) : q("", !0)
                                             ], 4)
                                           ]),
-                                          (w(), re("td", O_, [
+                                          (w(), re("td", R_, [
                                             v("p", {
                                               class: ye(["mb-0 amount_inc_current_item", S.level === 0 && S.type === "group" ? "amount_inc_current_font_wght" : ""])
                                             }, ue(S.current), 3)
                                           ])),
-                                          d.value ? (w(), re("td", M_, [
+                                          d.value ? (w(), re("td", O_, [
                                             l(Ge, { name: "slide-fade" }, {
                                               default: c(() => [
                                                 v("p", {
@@ -24276,19 +24281,19 @@ Currency: ${Y.value}` : "";
                                           ])) : q("", !0),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
-                                              d.value ? (w(), re("td", z_, [
-                                                v("div", U_, [
+                                              d.value ? (w(), re("td", M_, [
+                                                v("div", z_, [
                                                   v("p", {
                                                     class: ye(["mb-0 amount_inc_change_item", [
                                                       S.type === "ledger" ? "amount_inc_change_font_wght" : "",
                                                       parseFloat(S.change) > 0 ? "text-success" : parseFloat(S.change) < 0 ? "text-error" : "text-medium-emphasis"
                                                     ]])
                                                   }, ue(S.change), 3),
-                                                  S.new ? (w(), D(ne(F(le)("star")), {
+                                                  S.new ? (w(), D(ae(F(le)("star")), {
                                                     key: 0,
                                                     style: { "font-size": "12px" },
                                                     class: "text-info"
-                                                  })) : (w(), D(ne(F(le)(parseFloat(S.change) < 0 ? "arrow-down" : "arrow-up")), {
+                                                  })) : (w(), D(ae(F(le)(parseFloat(S.change) < 0 ? "arrow-down" : "arrow-up")), {
                                                     key: 1,
                                                     style: { "font-size": "12px" },
                                                     class: ye(parseFloat(S.change) < 0 ? "text-error" : "text-success")
@@ -24303,25 +24308,25 @@ Currency: ${Y.value}` : "";
                                     }),
                                     _: 1
                                   }, 8, ["headers", "items"]),
-                                  v("div", G_, [
-                                    v("table", j_, [
-                                      v("tr", H_, [
+                                  v("div", U_, [
+                                    v("table", G_, [
+                                      v("tr", j_, [
                                         g[11] || (g[11] = v("td", {
                                           style: { "min-width": "240px" },
                                           class: "text-start"
                                         }, "Total Expenses", -1)),
-                                        v("td", W_, ue(F(f).currentFormatted), 1),
+                                        v("td", H_, ue(F(f).currentFormatted), 1),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", q_, ue(F(f).previousFormatted), 1)) : q("", !0)
+                                            d.value ? (w(), re("td", W_, ue(F(f).previousFormatted), 1)) : q("", !0)
                                           ]),
                                           _: 1
                                         }),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", Y_, [
+                                            d.value ? (w(), re("td", q_, [
                                               de(ue(F(f).changeFormatted) + " ", 1),
-                                              (w(), D(ne(F(le)(F(f).isIncrease ? "arrow-up" : "arrow-down")), {
+                                              (w(), D(ae(F(le)(F(f).isIncrease ? "arrow-up" : "arrow-down")), {
                                                 style: { "font-size": "12px" },
                                                 class: ye(F(f).isIncrease ? "text-success" : "text-error")
                                               }, null, 8, ["class"]))
@@ -24361,7 +24366,7 @@ Currency: ${Y.value}` : "";
                                         default: c(() => [
                                           l(B, { cols: "7" }, {
                                             default: c(() => [
-                                              v("div", J_, [
+                                              v("div", Y_, [
                                                 g[13] || (g[13] = v("h5", { class: "mb-0" }, "Profit Before Tax", -1)),
                                                 y.value ? (w(), D(gt, {
                                                   key: 0,
@@ -24420,9 +24425,9 @@ Currency: ${Y.value}` : "";
                                                 cols: "1"
                                               }, {
                                                 default: c(() => [
-                                                  v("div", K_, [
+                                                  v("div", J_, [
                                                     g[17] || (g[17] = v("p", { class: "mb-0 amount_inc_change_item" }, "42.7%", -1)),
-                                                    (w(), D(ne(F(le)("arrow-up")), {
+                                                    (w(), D(ae(F(le)("arrow-up")), {
                                                       style: { "font-size": "12px" },
                                                       class: "text-success"
                                                     }))
@@ -24452,8 +24457,8 @@ Currency: ${Y.value}` : "";
                         default: c(() => [
                           l(B, { cols: "12" }, {
                             default: c(() => [
-                              v("div", X_, [
-                                v("div", Q_, [
+                              v("div", K_, [
+                                v("div", X_, [
                                   g[18] || (g[18] = v("h5", { class: "mb-0 text-success font-weight-bold" }, "Net Profit", -1)),
                                   l(gt, {
                                     density: "compact",
@@ -24466,18 +24471,18 @@ Currency: ${Y.value}` : "";
                                     _: 1
                                   })
                                 ]),
-                                v("div", Z_, [
-                                  d.value ? (w(), re("div", eh, [
-                                    v("span", th, ue(F(x).previousFormatted), 1)
+                                v("div", Q_, [
+                                  d.value ? (w(), re("div", Z_, [
+                                    v("span", eh, ue(F(x).previousFormatted), 1)
                                   ])) : q("", !0),
                                   v("div", null, [
-                                    v("span", ah, ue(F(x).currentFormatted), 1)
+                                    v("span", th, ue(F(x).currentFormatted), 1)
                                   ]),
-                                  d.value ? (w(), re("div", nh, [
+                                  d.value ? (w(), re("div", ah, [
                                     v("span", {
                                       class: ye(F(x).isIncrease ? "text-success" : "text-error")
                                     }, ue(F(x).percent), 3),
-                                    (w(), D(ne(F(le)(F(x).isIncrease ? "arrow-up" : "arrow-down")), {
+                                    (w(), D(ae(F(le)(F(x).isIncrease ? "arrow-up" : "arrow-down")), {
                                       style: { "font-size": "14px" },
                                       class: ye(F(x).isIncrease ? "text-success" : "text-error")
                                     }, null, 8, ["class"]))
@@ -24517,13 +24522,13 @@ Currency: ${Y.value}` : "";
       })
     ]));
   }
-}, ih = /* @__PURE__ */ Et(lh, [["__scopeId", "data-v-8c6a91e8"]]), oh = { class: "account_vcard_menu_items py-1" }, sh = ["onClick"], uh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, rh = {
+}, lh = /* @__PURE__ */ Et(nh, [["__scopeId", "data-v-8c6a91e8"]]), ih = { class: "account_vcard_menu_items py-1" }, oh = ["onClick"], sh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, uh = {
   key: 0,
   class: "d-flex gap-2 mb-2"
-}, ch = { class: "d-flex flex-column align-end" }, dh = { class: "d-flex justify-space-between w-100 mb-1" }, vh = { class: "d-flex justify-space-between w-100 mb-1" }, fh = { class: "d-flex justify-space-between w-100 mb-1" }, mh = { class: "d-flex justify-space-between w-100 mb-1" }, gh = { class: "d-flex justify-space-between w-100 font-weight-bold" }, yh = {
+}, rh = { class: "d-flex flex-column align-end" }, ch = { class: "d-flex justify-space-between w-100 mb-1" }, dh = { class: "d-flex justify-space-between w-100 mb-1" }, vh = { class: "d-flex justify-space-between w-100 mb-1" }, fh = { class: "d-flex justify-space-between w-100 mb-1" }, mh = { class: "d-flex justify-space-between w-100 font-weight-bold" }, gh = {
   key: 0,
   class: "account_ui_vcard"
-}, ph = {
+}, yh = {
   __name: "AccountPurchaseBill",
   setup(e) {
     const a = A([
@@ -24671,7 +24676,7 @@ Currency: ${Y.value}` : "";
                         rounded: ""
                       }), {
                         default: c(() => [
-                          (w(), D(ne(F(le)("settings")), { style: { "font-size": "20px" } }))
+                          (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 2
                       }, 1040)
@@ -24681,14 +24686,14 @@ Currency: ${Y.value}` : "";
                         default: c(() => [
                           V[23] || (V[23] = v("div", { class: "account_vcard_menu_hdng" }, "Purchase Mode", -1)),
                           l(ke, { class: "my-1 mt-0" }),
-                          v("div", oh, [
+                          v("div", ih, [
                             (w(), re(ve, null, ze(d, (M) => v("div", {
                               key: M.value,
                               class: "account_vcard_menu_item",
                               onClick: (te) => y.value = M.value
                             }, [
-                              v("div", uh, [
-                                y.value === M.value ? (w(), D(ne(F(le)("check")), {
+                              v("div", sh, [
+                                y.value === M.value ? (w(), D(ae(F(le)("check")), {
                                   key: 0,
                                   style: { "font-size": "16px" }
                                 })) : q("", !0),
@@ -24696,7 +24701,7 @@ Currency: ${Y.value}` : "";
                                   class: ye(y.value === M.value ? "" : "field_list_dynamic_ml")
                                 }, ue(M.label), 3)
                               ])
-                            ], 8, sh)), 64))
+                            ], 8, oh)), 64))
                           ])
                         ]),
                         _: 1,
@@ -24732,7 +24737,7 @@ Currency: ${Y.value}` : "";
                                     rounded: "2"
                                   }, {
                                     default: c(() => [
-                                      (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px" } }))
+                                      (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px" } }))
                                     ]),
                                     _: 1
                                   })
@@ -24833,7 +24838,7 @@ Currency: ${Y.value}` : "";
                         _: 1
                       }),
                       l(ke, { class: "my-4" }),
-                      y.value === "both" ? (w(), re("div", rh, [
+                      y.value === "both" ? (w(), re("div", uh, [
                         l(Z, {
                           class: ye(m.value === "inventory" ? "account_v_btn_primary" : "account_v_btn_outlined"),
                           onClick: V[8] || (V[8] = (M) => m.value = "inventory")
@@ -24911,7 +24916,7 @@ Currency: ${Y.value}` : "";
                           v("span", null, "₹" + ue((m.value === "inventory" ? _.value : g.value)[M].amount), 1)
                         ]),
                         "item.actions": c(({ index: M }) => [
-                          (w(), D(ne(F(le)("trash")), {
+                          (w(), D(ae(F(le)("trash")), {
                             class: ye(["text-error cursor-pointer table_row_icon", {
                               "opacity-50": (m.value === "inventory" ? _.value : g.value).length === 1,
                               "cursor-not-allowed": (m.value === "inventory" ? _.value : g.value).length === 1
@@ -24944,7 +24949,7 @@ Currency: ${Y.value}` : "";
                         onClick: S
                       }, {
                         prepend: c(() => [
-                          (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                          (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                         ]),
                         default: c(() => [
                           V[32] || (V[32] = de(" Add Item ", -1))
@@ -24982,26 +24987,26 @@ Currency: ${Y.value}` : "";
                             md: "6"
                           }, {
                             default: c(() => [
-                              v("div", ch, [
-                                v("div", dh, [
+                              v("div", rh, [
+                                v("div", ch, [
                                   V[33] || (V[33] = v("span", null, "Subtotal", -1)),
                                   v("span", null, "₹" + ue(O.value.toFixed(2)), 1)
                                 ]),
-                                v("div", vh, [
+                                v("div", dh, [
                                   V[34] || (V[34] = v("span", null, "CGST", -1)),
                                   v("span", null, "₹" + ue(R.value.toFixed(2)), 1)
                                 ]),
-                                v("div", fh, [
+                                v("div", vh, [
                                   V[35] || (V[35] = v("span", null, "SGST", -1)),
                                   v("span", null, "₹" + ue(T.value.toFixed(2)), 1)
                                 ]),
-                                v("div", mh, [
+                                v("div", fh, [
                                   V[36] || (V[36] = v("span", null, "IGST", -1)),
                                   v("span", null, "₹" + ue(U.value.toFixed(2)), 1)
                                 ])
                               ]),
                               l(ke, { class: "my-2" }),
-                              v("div", gh, [
+                              v("div", mh, [
                                 V[37] || (V[37] = v("span", null, "Total Amount", -1)),
                                 v("span", null, "₹" + ue(G.value.toFixed(2)), 1)
                               ])
@@ -25033,7 +25038,7 @@ Currency: ${Y.value}` : "";
                             default: c(() => [
                               l(Z, { class: "account_v_btn_primary" }, {
                                 prepend: c(() => [
-                                  (w(), D(ne(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                  (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                 ]),
                                 default: c(() => [
                                   V[39] || (V[39] = de(" Save Purchase Bill ", -1))
@@ -25065,7 +25070,7 @@ Currency: ${Y.value}` : "";
         "onUpdate:modelValue": V[22] || (V[22] = (M) => r.value = M)
       }, {
         default: c(() => [
-          r.value ? (w(), re("div", yh, [
+          r.value ? (w(), re("div", gh, [
             l(me, {
               title: "Create a New Vendor",
               class: "pa-2 account_vcard_border shadow-none",
@@ -25318,16 +25323,16 @@ Currency: ${Y.value}` : "";
       }, 8, ["modelValue"])
     ]));
   }
-}, bh = { class: "account_ui_vcard" }, _h = { class: "d-flex align-center gap-2" }, hh = { class: "d-flex align-center gap-2 mb-3" }, xh = { class: "mb-0" }, kh = { class: "mb-0" }, Sh = { class: "pa-3" }, wh = { class: "d-flex align-center justify-space-between" }, Ch = {
+}, ph = { class: "account_ui_vcard" }, bh = { class: "d-flex align-center gap-2" }, _h = { class: "d-flex align-center gap-2 mb-3" }, hh = { class: "mb-0" }, xh = { class: "mb-0" }, kh = { class: "pa-3" }, Sh = { class: "d-flex align-center justify-space-between" }, wh = {
   style: { "min-width": "200px" },
   class: "d-flex align-center gap-1"
-}, Vh = { class: "mb-2" }, Ih = { class: "d-flex align-center gap-2 justify-end mt-3" }, Ph = { class: "pb-4 d-flex align-center justify-end" }, Ah = { class: "account_invoice_list" }, Th = {
+}, Ch = { class: "mb-2" }, Vh = { class: "d-flex align-center gap-2 justify-end mt-3" }, Ih = { class: "pb-4 d-flex align-center justify-end" }, Ph = { class: "account_invoice_list" }, Ah = {
   key: 0,
   class: "account_ui_vcard"
-}, Nh = { class: "d-flex align-center gap-2" }, Dh = { class: "account_vcard_menu_items py-1" }, $h = ["onClick"], Bh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Eh = { class: "custom_option d-flex align-center" }, Fh = { class: "d-flex align-center justify-end mt-4" }, Lh = {
+}, Th = { class: "d-flex align-center gap-2" }, Nh = { class: "account_vcard_menu_items py-1" }, Dh = ["onClick"], $h = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Bh = { class: "custom_option d-flex align-center" }, Eh = { class: "d-flex align-center justify-end mt-4" }, Fh = {
   key: 0,
   class: "account_ui_vcard"
-}, Rh = { class: "d-flex align-center justify-space-between" }, Oh = { class: "d-flex align-center justify-space-between" }, Mh = { class: "d-flex align-center justify-space-between" }, zh = { class: "d-flex align-center justify-space-between" }, Uh = { class: "d-flex align-center justify-space-between" }, Gh = { class: "d-flex align-center justify-space-between" }, jh = {
+}, Lh = { class: "d-flex align-center justify-space-between" }, Rh = { class: "d-flex align-center justify-space-between" }, Oh = { class: "d-flex align-center justify-space-between" }, Mh = { class: "d-flex align-center justify-space-between" }, zh = { class: "d-flex align-center justify-space-between" }, Uh = { class: "d-flex align-center justify-space-between" }, Gh = {
   __name: "AccountSalesInvoice",
   setup(e) {
     const a = A([
@@ -25778,16 +25783,16 @@ Currency: ${Y.value}` : "";
     const g = A([_()]), S = A([_(!0)]);
     function I(Q) {
       const P = Q === "service" ? S : g;
-      P.value.push({ ..._(Q === "service"), lockedRate: P.value.length > 0 }), P.value.forEach((ae, he) => ae.lockedRate = he !== 0);
+      P.value.push({ ..._(Q === "service"), lockedRate: P.value.length > 0 }), P.value.forEach((ne, he) => ne.lockedRate = he !== 0);
     }
     function $(Q, P) {
-      const ae = P === "service" ? S : g;
-      ae.value.length > 1 && (ae.value.splice(Q, 1), ae.value.forEach((he, Ce) => he.lockedRate = Ce !== 0));
+      const ne = P === "service" ? S : g;
+      ne.value.length > 1 && (ne.value.splice(Q, 1), ne.value.forEach((he, Ce) => he.lockedRate = Ce !== 0));
     }
     function O(Q) {
       Re(() => {
         Q.value.forEach((P) => {
-          const ae = parseFloat(P.quantity) || 1, he = parseFloat(P.rate) || 0, Ce = parseFloat(P.discount) || 0, Ne = (P.quantity !== void 0 ? ae : 1) * he, He = Ne * (Ce / 100), Fe = Ne - He, qe = parseFloat(P.gst) || 0, Jt = Fe * (qe / 100), ft = Fe + Jt;
+          const ne = parseFloat(P.quantity) || 1, he = parseFloat(P.rate) || 0, Ce = parseFloat(P.discount) || 0, Ne = (P.quantity !== void 0 ? ne : 1) * he, He = Ne * (Ce / 100), Fe = Ne - He, qe = parseFloat(P.gst) || 0, Jt = Fe * (qe / 100), ft = Fe + Jt;
           P.taxableAmnt = Fe.toFixed(2), P.total = ft.toFixed(2);
         });
       });
@@ -25826,7 +25831,7 @@ Currency: ${Y.value}` : "";
       { label: "Ship-to Address", key: "shipToAddress", visible: !0 }
     ]), R = (Q) => {
       var P;
-      return (P = E.value.find((ae) => ae.key === Q)) == null ? void 0 : P.visible;
+      return (P = E.value.find((ne) => ne.key === Q)) == null ? void 0 : P.visible;
     }, T = A([
       {
         title: "Innovative Inc.",
@@ -25928,14 +25933,14 @@ Currency: ${Y.value}` : "";
         L.value = "", W.value = "", Y.value = "INR", N.value = "";
     });
     const M = A(!1), te = A("Numbering"), ge = ["Numbering", "Columns", "Fields", "Mode"], be = A("Text"), fe = A(""), pe = A(1), ce = k(() => {
-      const Q = /* @__PURE__ */ new Date(), P = Q.getFullYear(), ae = Q.getMonth() >= 3 ? P + 1 : P;
-      return `${ae - 1}-${ae.toString().slice(-2)}`;
+      const Q = /* @__PURE__ */ new Date(), P = Q.getFullYear(), ne = Q.getMonth() >= 3 ? P + 1 : P;
+      return `${ne - 1}-${ne.toString().slice(-2)}`;
     });
     Re(() => {
       be.value === "Financial Year" ? fe.value = ce.value : fe.value = "";
     });
     const z = k(() => !fe.value || !pe.value ? "" : `${fe.value}/${pe.value}`);
-    return (Q, P) => (w(), re("div", bh, [
+    return (Q, P) => (w(), re("div", ph, [
       l(Ua, null, {
         default: c(() => [
           t.value ? (w(), D(xe, {
@@ -25951,27 +25956,27 @@ Currency: ${Y.value}` : "";
                     subtitle: "Fill out the details below to create a new sales invoice."
                   }, {
                     append: c(() => [
-                      v("div", _h, [
+                      v("div", bh, [
                         l(Z, {
-                          onClick: P[0] || (P[0] = (ae) => M.value = !0),
+                          onClick: P[0] || (P[0] = (ne) => M.value = !0),
                           variant: "text",
                           size: "x-small",
                           rounded: ""
                         }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("settings")), { style: { "font-size": "20px" } }))
+                            (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         }),
                         l(Z, {
-                          onClick: P[1] || (P[1] = (ae) => t.value = !1),
+                          onClick: P[1] || (P[1] = (ne) => t.value = !1),
                           variant: "text",
                           size: "x-small",
                           rounded: "",
                           class: "account_vcard_close_btn"
                         }, {
                           default: c(() => [
-                            (w(), D(ne(F(le)("x")), { style: { "font-size": "20px" } }))
+                            (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -25991,7 +25996,7 @@ Currency: ${Y.value}` : "";
                                   P[21] || (P[21] = v("label", { class: "account_label mb-2" }, "Bill To", -1)),
                                   l(lt, {
                                     modelValue: C.value,
-                                    "onUpdate:modelValue": P[3] || (P[3] = (ae) => C.value = ae),
+                                    "onUpdate:modelValue": P[3] || (P[3] = (ne) => C.value = ne),
                                     placeholder: "Select a customer",
                                     class: "accouting_field accouting_active_field",
                                     items: T.value,
@@ -26000,12 +26005,12 @@ Currency: ${Y.value}` : "";
                                     append: c(() => [
                                       l(Z, {
                                         class: "account_v_btn_outlined",
-                                        onClick: P[2] || (P[2] = (ae) => U.value = !0),
+                                        onClick: P[2] || (P[2] = (ne) => U.value = !0),
                                         rounded: "1",
                                         size: "default"
                                       }, {
                                         default: c(() => [
-                                          (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px" } }))
+                                          (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px" } }))
                                         ]),
                                         _: 1
                                       })
@@ -26033,7 +26038,7 @@ Currency: ${Y.value}` : "";
                                           P[22] || (P[22] = v("label", { class: "account_label mb-2" }, "Invoice Number", -1)),
                                           l(ee, {
                                             modelValue: J.value,
-                                            "onUpdate:modelValue": P[4] || (P[4] = (ae) => J.value = ae),
+                                            "onUpdate:modelValue": P[4] || (P[4] = (ne) => J.value = ne),
                                             class: "accouting_field accouting_active_field",
                                             variant: "outlined",
                                             density: "compact"
@@ -26051,7 +26056,7 @@ Currency: ${Y.value}` : "";
                                           P[23] || (P[23] = v("label", { class: "account_label mb-2" }, "Invoice Date", -1)),
                                           l(ee, {
                                             modelValue: H.value,
-                                            "onUpdate:modelValue": P[5] || (P[5] = (ae) => H.value = ae),
+                                            "onUpdate:modelValue": P[5] || (P[5] = (ne) => H.value = ne),
                                             type: "date",
                                             class: "accouting_field accouting_active_field",
                                             variant: "outlined",
@@ -26101,7 +26106,7 @@ Currency: ${Y.value}` : "";
                                           P[24] || (P[24] = v("label", { class: "account_label mb-2" }, "Currency", -1)),
                                           l(ee, {
                                             modelValue: Y.value,
-                                            "onUpdate:modelValue": P[6] || (P[6] = (ae) => Y.value = ae),
+                                            "onUpdate:modelValue": P[6] || (P[6] = (ne) => Y.value = ne),
                                             class: "accouting_field accouting_active_field",
                                             variant: "outlined",
                                             density: "compact"
@@ -26120,7 +26125,7 @@ Currency: ${Y.value}` : "";
                                           P[25] || (P[25] = v("label", { class: "account_label mb-2" }, "Place of Supply", -1)),
                                           l(lt, {
                                             modelValue: N.value,
-                                            "onUpdate:modelValue": P[7] || (P[7] = (ae) => N.value = ae),
+                                            "onUpdate:modelValue": P[7] || (P[7] = (ne) => N.value = ne),
                                             class: "accouting_field accouting_active_field",
                                             variant: "outlined",
                                             items: f.value
@@ -26137,7 +26142,7 @@ Currency: ${Y.value}` : "";
                                         default: c(() => [
                                           l(Dt, {
                                             modelValue: j.value,
-                                            "onUpdate:modelValue": P[8] || (P[8] = (ae) => j.value = ae),
+                                            "onUpdate:modelValue": P[8] || (P[8] = (ne) => j.value = ne),
                                             density: "compact",
                                             class: "account_v_checkbox",
                                             label: "Shipping address is the same as billing address"
@@ -26163,10 +26168,10 @@ Currency: ${Y.value}` : "";
                                 md: "12"
                               }, {
                                 default: c(() => [
-                                  v("div", hh, [
+                                  v("div", _h, [
                                     l(Z, {
                                       class: ye(d.value === "item" ? "account_v_btn_primary" : "account_v_btn_outlined"),
-                                      onClick: P[9] || (P[9] = (ae) => d.value = "item")
+                                      onClick: P[9] || (P[9] = (ne) => d.value = "item")
                                     }, {
                                       default: c(() => P[26] || (P[26] = [
                                         de(" Item Invoice ", -1)
@@ -26176,7 +26181,7 @@ Currency: ${Y.value}` : "";
                                     }, 8, ["class"]),
                                     l(Z, {
                                       class: ye(d.value === "service" ? "account_v_btn_primary" : "account_v_btn_outlined"),
-                                      onClick: P[10] || (P[10] = (ae) => d.value = "service")
+                                      onClick: P[10] || (P[10] = (ne) => d.value = "service")
                                     }, {
                                       default: c(() => P[27] || (P[27] = [
                                         de(" Service Invoice ", -1)
@@ -26190,7 +26195,7 @@ Currency: ${Y.value}` : "";
                                     items: d.value === "item" ? g.value : S.value,
                                     class: "account_dynamic_table account_invoice_table"
                                   }, Ls({
-                                    "item.item": c(({ item: ae, index: he }) => [
+                                    "item.item": c(({ item: ne, index: he }) => [
                                       l(ee, {
                                         modelValue: (d.value === "item" ? g.value : S.value)[he].item,
                                         "onUpdate:modelValue": (Ce) => (d.value === "item" ? g.value : S.value)[he].item = Ce,
@@ -26199,7 +26204,7 @@ Currency: ${Y.value}` : "";
                                         variant: "outlined"
                                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                                     ]),
-                                    "item.rate": c(({ item: ae, index: he }) => [
+                                    "item.rate": c(({ item: ne, index: he }) => [
                                       l(ee, {
                                         modelValue: (d.value === "item" ? g.value : S.value)[he].rate,
                                         "onUpdate:modelValue": (Ce) => (d.value === "item" ? g.value : S.value)[he].rate = Ce,
@@ -26210,7 +26215,7 @@ Currency: ${Y.value}` : "";
                                         density: "compact"
                                       }, null, 8, ["modelValue", "onUpdate:modelValue", "readonly"])
                                     ]),
-                                    "item.discount": c(({ item: ae, index: he }) => [
+                                    "item.discount": c(({ item: ne, index: he }) => [
                                       l(ee, {
                                         modelValue: (d.value === "item" ? g.value : S.value)[he].discount,
                                         "onUpdate:modelValue": (Ce) => (d.value === "item" ? g.value : S.value)[he].discount = Ce,
@@ -26220,10 +26225,10 @@ Currency: ${Y.value}` : "";
                                         density: "compact"
                                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                                     ]),
-                                    "item.taxableAmount": c(({ item: ae, index: he }) => [
-                                      v("p", xh, "₹" + ue((d.value === "item" ? g.value : S.value)[he].taxableAmnt), 1)
+                                    "item.taxableAmount": c(({ item: ne, index: he }) => [
+                                      v("p", hh, "₹" + ue((d.value === "item" ? g.value : S.value)[he].taxableAmnt), 1)
                                     ]),
-                                    "item.gst": c(({ item: ae, index: he }) => [
+                                    "item.gst": c(({ item: ne, index: he }) => [
                                       l(Ze, {
                                         modelValue: (d.value === "item" ? g.value : S.value)[he].gst,
                                         "onUpdate:modelValue": (Ce) => (d.value === "item" ? g.value : S.value)[he].gst = Ce,
@@ -26232,17 +26237,17 @@ Currency: ${Y.value}` : "";
                                         items: b.value
                                       }, null, 8, ["modelValue", "onUpdate:modelValue", "items"])
                                     ]),
-                                    "item.total": c(({ item: ae, index: he }) => [
-                                      v("p", kh, "₹" + ue((d.value === "item" ? g.value : S.value)[he].total), 1)
+                                    "item.total": c(({ item: ne, index: he }) => [
+                                      v("p", xh, "₹" + ue((d.value === "item" ? g.value : S.value)[he].total), 1)
                                     ]),
-                                    "item.actions": c(({ index: ae }) => [
-                                      (w(), D(ne(F(le)("trash")), {
+                                    "item.actions": c(({ index: ne }) => [
+                                      (w(), D(ae(F(le)("trash")), {
                                         class: ye(["cursor-pointer table_row_icon", {
                                           "opacity-50": (d.value === "item" ? g.value : S.value).length === 1,
                                           "cursor-not-allowed": (d.value === "item" ? g.value : S.value).length === 1
                                         }]),
                                         disabled: (d.value === "item" ? g.value : S.value).length === 1,
-                                        onClick: (he) => $(ae, d.value),
+                                        onClick: (he) => $(ne, d.value),
                                         style: { "font-size": "20px" }
                                       }, null, 8, ["class", "disabled", "onClick"]))
                                     ]),
@@ -26250,7 +26255,7 @@ Currency: ${Y.value}` : "";
                                   }, [
                                     d.value === "item" ? {
                                       name: "item.quantity",
-                                      fn: c(({ item: ae, index: he }) => [
+                                      fn: c(({ item: ne, index: he }) => [
                                         l(ee, {
                                           modelValue: g.value[he].quantity,
                                           "onUpdate:modelValue": (Ce) => g.value[he].quantity = Ce,
@@ -26264,7 +26269,7 @@ Currency: ${Y.value}` : "";
                                     } : void 0,
                                     d.value === "item" ? {
                                       name: "item.unit",
-                                      fn: c(({ item: ae, index: he }) => [
+                                      fn: c(({ item: ne, index: he }) => [
                                         l(ee, {
                                           modelValue: g.value[he].unit,
                                           "onUpdate:modelValue": (Ce) => g.value[he].unit = Ce,
@@ -26286,10 +26291,10 @@ Currency: ${Y.value}` : "";
                                   l(Z, {
                                     class: "account_v_btn_outlined mt-3",
                                     variant: "text",
-                                    onClick: P[11] || (P[11] = (ae) => I(d.value))
+                                    onClick: P[11] || (P[11] = (ne) => I(d.value))
                                   }, {
                                     prepend: c(() => [
-                                      (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                      (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                     ]),
                                     default: c(() => [
                                       P[28] || (P[28] = de(" Add Another Line ", -1))
@@ -26349,7 +26354,7 @@ Currency: ${Y.value}` : "";
                                         default: c(() => [
                                           l(me, { class: "account_vcard_border shadow-none w-100" }, {
                                             default: c(() => [
-                                              v("div", Sh, [
+                                              v("div", kh, [
                                                 P[31] || (P[31] = v("h6", { class: "account_gst_title mb-0" }, "Totals", -1)),
                                                 P[32] || (P[32] = v("div", { class: "d-flex align-center justify-space-between py-2" }, [
                                                   v("span", { class: "account_gst_subtitle" }, "Subtotal"),
@@ -26368,8 +26373,8 @@ Currency: ${Y.value}` : "";
                                                   v("span", { class: "account_gst_subtitle" }, "GST (18%)"),
                                                   v("span", { class: "account_gst_subtitle_val" }, "₹9.00")
                                                 ], -1)),
-                                                v("div", wh, [
-                                                  v("div", Ch, [
+                                                v("div", Sh, [
+                                                  v("div", wh, [
                                                     P[30] || (P[30] = v("span", { class: "account_gst_subtitle" }, "Round Off", -1)),
                                                     l(nt, {
                                                       density: "compact",
@@ -26428,7 +26433,7 @@ Currency: ${Y.value}` : "";
                                 md: "6"
                               }, {
                                 default: c(() => [
-                                  v("div", Vh, [
+                                  v("div", Ch, [
                                     P[39] || (P[39] = v("label", { class: "account_label mb-2" }, "Amount Received", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
@@ -26483,10 +26488,10 @@ Currency: ${Y.value}` : "";
                                     placeholder: "Thank you for your business. All payments are due within 30 days.",
                                     variant: "outlined"
                                   }),
-                                  v("div", Ih, [
+                                  v("div", Vh, [
                                     l(Z, { class: "account_v_btn_primary" }, {
                                       prepend: c(() => [
-                                        (w(), D(ne(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                        (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                       ]),
                                       default: c(() => [
                                         P[42] || (P[42] = de(" Save as Default ", -1))
@@ -26496,7 +26501,7 @@ Currency: ${Y.value}` : "";
                                     }),
                                     l(Z, { class: "account_v_btn_outlined" }, {
                                       prepend: c(() => [
-                                        (w(), D(ne(F(le)("send")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                        (w(), D(ae(F(le)("send")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                       ]),
                                       default: c(() => [
                                         P[43] || (P[43] = de(" Save & Send Invoice ", -1))
@@ -26527,13 +26532,13 @@ Currency: ${Y.value}` : "";
         ]),
         _: 1
       }),
-      v("div", Ph, [
+      v("div", Ih, [
         l(Z, {
-          onClick: P[12] || (P[12] = (ae) => t.value = !0),
+          onClick: P[12] || (P[12] = (ne) => t.value = !0),
           class: "account_v_btn_primary"
         }, {
           prepend: c(() => [
-            (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+            (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
           ]),
           default: c(() => [
             P[45] || (P[45] = de(" Create Invoice ", -1))
@@ -26542,7 +26547,7 @@ Currency: ${Y.value}` : "";
           __: [45]
         })
       ]),
-      v("div", Ah, [
+      v("div", Ph, [
         l($l, {
           title: "Invoices",
           headers: a.value,
@@ -26557,25 +26562,25 @@ Currency: ${Y.value}` : "";
       l(Vt, {
         "max-width": "900",
         modelValue: U.value,
-        "onUpdate:modelValue": P[14] || (P[14] = (ae) => U.value = ae)
+        "onUpdate:modelValue": P[14] || (P[14] = (ne) => U.value = ne)
       }, {
         default: c(() => [
-          U.value ? (w(), re("div", Th, [
+          U.value ? (w(), re("div", Ah, [
             l(me, {
               title: "Create a New Customer",
               class: "pa-2 account_vcard_border shadow-none",
               subtitle: "Fill in the details below to add a new customer to your records."
             }, {
               append: c(() => [
-                v("div", Nh, [
+                v("div", Th, [
                   l(ot, {
                     location: "start",
                     transition: "slide-y-transition",
                     "offset-y": "",
                     "close-on-content-click": !1
                   }, {
-                    activator: c(({ props: ae }) => [
-                      l(Z, X(ae, {
+                    activator: c(({ props: ne }) => [
+                      l(Z, X(ne, {
                         icon: "mdi-cog-outline",
                         variant: "text",
                         size: "x-small",
@@ -26587,23 +26592,23 @@ Currency: ${Y.value}` : "";
                         default: c(() => [
                           P[46] || (P[46] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                           l(ke, { class: "my-1 mt-0" }),
-                          v("div", Dh, [
-                            (w(!0), re(ve, null, ze(E.value, (ae) => (w(), re("div", {
-                              key: ae.key,
+                          v("div", Nh, [
+                            (w(!0), re(ve, null, ze(E.value, (ne) => (w(), re("div", {
+                              key: ne.key,
                               class: "account_vcard_menu_item",
-                              onClick: (he) => ae.visible = !ae.visible
+                              onClick: (he) => ne.visible = !ne.visible
                             }, [
-                              v("div", Bh, [
-                                ae.visible ? (w(), D($e, {
+                              v("div", $h, [
+                                ne.visible ? (w(), D($e, {
                                   key: 0,
                                   size: "16",
                                   icon: "mdi-check"
                                 })) : q("", !0),
                                 v("span", {
-                                  class: ye(ae.visible ? "" : "field_list_dynamic_ml")
-                                }, ue(ae.label), 3)
+                                  class: ye(ne.visible ? "" : "field_list_dynamic_ml")
+                                }, ue(ne.label), 3)
                               ])
-                            ], 8, $h))), 128))
+                            ], 8, Dh))), 128))
                           ])
                         ]),
                         _: 1,
@@ -26683,7 +26688,7 @@ Currency: ${Y.value}` : "";
                         }, {
                           default: c(() => [
                             P[50] || (P[50] = v("label", { class: "account_label mb-2" }, "Opening Balance", -1)),
-                            v("div", Eh, [
+                            v("div", Bh, [
                               l(ee, {
                                 class: "custom_option_field accouting_field accouting_active_field",
                                 type: "number",
@@ -26694,7 +26699,7 @@ Currency: ${Y.value}` : "";
                               l(Ze, {
                                 class: "custom_option_select accouting_field accouting_active_field",
                                 modelValue: h.value,
-                                "onUpdate:modelValue": P[13] || (P[13] = (ae) => h.value = ae),
+                                "onUpdate:modelValue": P[13] || (P[13] = (ne) => h.value = ne),
                                 items: p.value,
                                 variant: "outlined",
                                 density: "comapct"
@@ -27091,7 +27096,7 @@ Currency: ${Y.value}` : "";
                               placeholder: "Optional delivery address",
                               variant: "outlined"
                             }),
-                            v("div", Fh, [
+                            v("div", Eh, [
                               l(Z, {
                                 class: "account_v_btn_primary",
                                 "prepend-icon": "mdi-content-save-outline"
@@ -27123,10 +27128,10 @@ Currency: ${Y.value}` : "";
       l(Vt, {
         "max-width": "600",
         modelValue: M.value,
-        "onUpdate:modelValue": P[20] || (P[20] = (ae) => M.value = ae)
+        "onUpdate:modelValue": P[20] || (P[20] = (ne) => M.value = ne)
       }, {
         default: c(() => [
-          M.value ? (w(), re("div", Lh, [
+          M.value ? (w(), re("div", Fh, [
             l(me, {
               title: "Invoice Settings",
               class: "pa-2 account_vcard_border shadow-none",
@@ -27134,7 +27139,7 @@ Currency: ${Y.value}` : "";
             }, {
               append: c(() => [
                 l(Z, {
-                  onClick: P[15] || (P[15] = (ae) => M.value = !1),
+                  onClick: P[15] || (P[15] = (ne) => M.value = !1),
                   icon: "mdi-close",
                   variant: "text",
                   size: "x-small",
@@ -27147,20 +27152,20 @@ Currency: ${Y.value}` : "";
                   default: c(() => [
                     l(xe, { class: "acc_invoice_settings_row mx-1" }, {
                       default: c(() => [
-                        (w(), re(ve, null, ze(ge, (ae) => l(B, {
+                        (w(), re(ve, null, ze(ge, (ne) => l(B, {
                           class: "pa-1",
                           cols: "3",
-                          key: ae
+                          key: ne
                         }, {
                           default: c(() => [
                             l(Z, {
                               size: "small",
-                              class: ye(["w-100", te.value === ae ? "account_v_btn_light" : "account_v_btn_ghost"]),
+                              class: ye(["w-100", te.value === ne ? "account_v_btn_light" : "account_v_btn_ghost"]),
                               variant: "text",
-                              onClick: (he) => te.value = ae
+                              onClick: (he) => te.value = ne
                             }, {
                               default: c(() => [
-                                de(ue(ae), 1)
+                                de(ue(ne), 1)
                               ]),
                               _: 2
                             }, 1032, ["class", "onClick"])
@@ -27188,7 +27193,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Rh, [
+                                                v("div", Lh, [
                                                   P[74] || (P[74] = v("p", { class: "mb-0" }, "Change Every FY", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27217,7 +27222,7 @@ Currency: ${Y.value}` : "";
                                                 l(Z, {
                                                   class: ye(["w-100 account_v_btn_outlined", be.value === "Text" ? "active_border" : ""]),
                                                   size: "large",
-                                                  onClick: P[16] || (P[16] = (ae) => be.value = "Text")
+                                                  onClick: P[16] || (P[16] = (ne) => be.value = "Text")
                                                 }, {
                                                   default: c(() => P[75] || (P[75] = [
                                                     de(" Text ", -1)
@@ -27233,7 +27238,7 @@ Currency: ${Y.value}` : "";
                                                 l(Z, {
                                                   class: ye(["w-100 account_v_btn_outlined", be.value === "Financial Year" ? "active_border" : ""]),
                                                   size: "large",
-                                                  onClick: P[17] || (P[17] = (ae) => be.value = "Financial Year")
+                                                  onClick: P[17] || (P[17] = (ne) => be.value = "Financial Year")
                                                 }, {
                                                   default: c(() => P[76] || (P[76] = [
                                                     de(" Financial Year ", -1)
@@ -27263,7 +27268,7 @@ Currency: ${Y.value}` : "";
                                           variant: "outlined",
                                           density: "compact",
                                           modelValue: fe.value,
-                                          "onUpdate:modelValue": P[18] || (P[18] = (ae) => fe.value = ae),
+                                          "onUpdate:modelValue": P[18] || (P[18] = (ne) => fe.value = ne),
                                           readonly: be.value === "Financial Year"
                                         }, null, 8, ["modelValue", "readonly"])
                                       ]),
@@ -27283,7 +27288,7 @@ Currency: ${Y.value}` : "";
                                           variant: "outlined",
                                           density: "compact",
                                           modelValue: pe.value,
-                                          "onUpdate:modelValue": P[19] || (P[19] = (ae) => pe.value = ae)
+                                          "onUpdate:modelValue": P[19] || (P[19] = (ne) => pe.value = ne)
                                         }, null, 8, ["modelValue"])
                                       ]),
                                       _: 1,
@@ -27324,7 +27329,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Oh, [
+                                                v("div", Rh, [
                                                   P[82] || (P[82] = v("p", { class: "mb-0" }, "Unit", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27349,7 +27354,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Mh, [
+                                                v("div", Oh, [
                                                   P[83] || (P[83] = v("p", { class: "mb-0" }, "HSN/SAC Code", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27374,7 +27379,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", zh, [
+                                                v("div", Mh, [
                                                   P[84] || (P[84] = v("p", { class: "mb-0" }, "Discount (%)", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27414,7 +27419,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Uh, [
+                                                v("div", zh, [
                                                   P[86] || (P[86] = v("p", { class: "mb-0" }, "Due Date", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27439,7 +27444,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Gh, [
+                                                v("div", Uh, [
                                                   P[87] || (P[87] = v("p", { class: "mb-0" }, "Currency & Exchange Rate", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27510,7 +27515,7 @@ Currency: ${Y.value}` : "";
       }, 8, ["modelValue"])
     ]));
   }
-}, Hh = { class: "account_ui_vcard" }, Wh = { class: "d-flex align-center justify-space-between" }, qh = { class: "account_vcard_menu_items py-1" }, Yh = ["onClick"], Jh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Kh = { class: "mt-8" }, Xh = { class: "mt-8" }, Qh = { class: "pa-4 d-flex align-center justify-end" }, Zh = { class: "d-flex align-center justify-space-between" }, e1 = { class: "px-3" }, t1 = { class: "account_vcard_border" }, a1 = { class: "mt-3" }, n1 = { class: "d-flex align-center gap-2" }, l1 = { class: "pa-4 d-flex align-center justify-end" }, i1 = "net30", o1 = {
+}, jh = { class: "account_ui_vcard" }, Hh = { class: "d-flex align-center justify-space-between" }, Wh = { class: "account_vcard_menu_items py-1" }, qh = ["onClick"], Yh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Jh = { class: "mt-8" }, Kh = { class: "mt-8" }, Xh = { class: "pa-4 d-flex align-center justify-end" }, Qh = { class: "d-flex align-center justify-space-between" }, Zh = { class: "px-3" }, e1 = { class: "account_vcard_border" }, t1 = { class: "mt-3" }, a1 = { class: "d-flex align-center gap-2" }, n1 = { class: "pa-4 d-flex align-center justify-end" }, l1 = "net30", i1 = {
   __name: "AccountSettings",
   setup(e) {
     const a = A(""), t = A([]), n = it({
@@ -27603,13 +27608,13 @@ Currency: ${Y.value}` : "";
 Please include the invoice number on your payment.`,
       dueOnReceipt: "Payment is due immediately upon receipt of this invoice.",
       upfront50: "50% of the total amount is due upon signing the contract. The remaining 50% is due upon project completion."
-    }, f = A(m[i1]), x = (h) => m[h] || "", p = (h) => {
+    }, f = A(m[l1]), x = (h) => m[h] || "", p = (h) => {
       const _ = x(h), g = f.value.trim();
       f.value = g ? `${g}
 
 ${_}` : _;
     };
-    return (h, _) => (w(), re("div", Hh, [
+    return (h, _) => (w(), re("div", jh, [
       l(me, {
         title: "Settings",
         subtitle: "Manage your company settings and preferences.",
@@ -27691,7 +27696,7 @@ ${_}` : _;
                         default: c(() => [
                           l(F(Kt), { value: 0 }, {
                             default: c(() => [
-                              v("div", Wh, [
+                              v("div", Hh, [
                                 _[16] || (_[16] = v("div", null, [
                                   v("h3", { class: "company-setting-heading m-0" }, "Company Settings")
                                 ], -1)),
@@ -27709,7 +27714,7 @@ ${_}` : _;
                                         rounded: ""
                                       }), {
                                         default: c(() => [
-                                          (w(), D(ne(F(le)("settings")), { style: { "font-size": "20px" } }))
+                                          (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
                                         ]),
                                         _: 2
                                       }, 1040)
@@ -27719,13 +27724,13 @@ ${_}` : _;
                                         default: c(() => [
                                           _[15] || (_[15] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                                           l(ke, { class: "my-1 mt-0" }),
-                                          v("div", qh, [
+                                          v("div", Wh, [
                                             (w(), re(ve, null, ze(i, (g, S) => v("div", {
                                               key: S,
                                               onClick: (I) => o(S)
                                             }, [
-                                              v("div", Jh, [
-                                                F(n)[S] ? (w(), D(ne(F(le)("check")), {
+                                              v("div", Yh, [
+                                                F(n)[S] ? (w(), D(ae(F(le)("check")), {
                                                   key: 0,
                                                   style: { "font-size": "16px" }
                                                 })) : q("", !0),
@@ -27733,7 +27738,7 @@ ${_}` : _;
                                                   class: ye(F(n)[S] ? "" : "field_list_dynamic_ml")
                                                 }, ue(g), 3)
                                               ])
-                                            ], 8, Yh)), 64))
+                                            ], 8, qh)), 64))
                                           ])
                                         ]),
                                         _: 1,
@@ -27744,7 +27749,7 @@ ${_}` : _;
                                   })
                                 ])
                               ]),
-                              v("div", Kh, [
+                              v("div", Jh, [
                                 l(xe, null, {
                                   default: c(() => [
                                     F(n).gstin ? (w(), D(B, {
@@ -28107,7 +28112,7 @@ ${_}` : _;
                                               disabled: ""
                                             }, {
                                               default: c(() => [
-                                                (w(), D(ne(F(le)("upload")), { style: { "font-size": "32px" } }))
+                                                (w(), D(ae(F(le)("upload")), { style: { "font-size": "32px" } }))
                                               ]),
                                               _: 1
                                             })
@@ -28131,7 +28136,7 @@ ${_}` : _;
                                           color: "primary"
                                         }, {
                                           prepend: c(() => [
-                                            (w(), D(ne(F(le)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
+                                            (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
                                           ]),
                                           default: c(() => [
                                             _[36] || (_[36] = de(" Save Changes ", -1))
@@ -28154,7 +28159,7 @@ ${_}` : _;
                               _[38] || (_[38] = v("div", null, [
                                 v("h3", { class: "company-setting-heading m-0" }, "Software Settings")
                               ], -1)),
-                              v("div", Xh, [
+                              v("div", Kh, [
                                 l(me, {
                                   class: "account_vcard_border shadow-none pa-2",
                                   variant: "text",
@@ -28189,7 +28194,7 @@ ${_}` : _;
                                   ]),
                                   _: 1
                                 }),
-                                v("div", Qh, [
+                                v("div", Xh, [
                                   l(Z, {
                                     class: "account_v_btn_primary save_btn_height",
                                     variant: "outlined",
@@ -28198,7 +28203,7 @@ ${_}` : _;
                                     color: "primary"
                                   }, {
                                     prepend: c(() => [
-                                      (w(), D(ne(F(le)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
+                                      (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
                                     ]),
                                     default: c(() => [
                                       _[37] || (_[37] = de(" Save Software Settings ", -1))
@@ -28214,7 +28219,7 @@ ${_}` : _;
                           }),
                           l(F(Kt), { value: 2 }, {
                             default: c(() => [
-                              v("div", Zh, [
+                              v("div", Qh, [
                                 _[40] || (_[40] = v("h3", { class: "company-setting-heading m-0" }, "GST Settings", -1)),
                                 l(Z, {
                                   class: "account_v_btn_primary save_btn_height",
@@ -28223,7 +28228,7 @@ ${_}` : _;
                                   onClick: _[1] || (_[1] = (g) => d.value = !0)
                                 }, {
                                   prepend: c(() => [
-                                    (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "22px", "margin-right": "6px" } }))
+                                    (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "22px", "margin-right": "6px" } }))
                                   ]),
                                   default: c(() => [
                                     _[39] || (_[39] = de(" Add New GST Rate ", -1))
@@ -28239,8 +28244,8 @@ ${_}` : _;
                                 subtitle: "Manage the GST rates used across your invoices."
                               }, {
                                 default: c(() => [
-                                  v("div", e1, [
-                                    v("div", t1, [
+                                  v("div", Zh, [
+                                    v("div", e1, [
                                       l(zt, {
                                         headers: u.value,
                                         items: r.value,
@@ -28254,7 +28259,7 @@ ${_}` : _;
                                             class: "trash_error_color"
                                           }, {
                                             default: c(() => [
-                                              (w(), D(ne(F(le)("trash")), { style: { "font-size": "16px" } }))
+                                              (w(), D(ae(F(le)("trash")), { style: { "font-size": "16px" } }))
                                             ]),
                                             _: 1
                                           })
@@ -28322,7 +28327,7 @@ ${_}` : _;
                                                 onClick: b
                                               }, {
                                                 prepend: c(() => [
-                                                  (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                                  (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                                 ]),
                                                 default: c(() => [
                                                   _[45] || (_[45] = de(" Add Rate ", -1))
@@ -28366,9 +28371,9 @@ ${_}` : _;
                                         class: "accounting_v_textarea",
                                         variant: "outlined"
                                       }, null, 8, ["modelValue"]),
-                                      v("div", a1, [
+                                      v("div", t1, [
                                         _[49] || (_[49] = v("label", { class: "account_label mb-1" }, "Insert Template", -1)),
-                                        v("div", n1, [
+                                        v("div", a1, [
                                           l(Z, {
                                             class: "account_v_btn_outlined",
                                             variant: "outlined",
@@ -28417,7 +28422,7 @@ ${_}` : _;
                                 ]),
                                 _: 1
                               }),
-                              v("div", l1, [
+                              v("div", n1, [
                                 l(Z, {
                                   class: "account_v_btn_primary save_btn_height",
                                   variant: "outlined",
@@ -28426,7 +28431,7 @@ ${_}` : _;
                                   color: "primary"
                                 }, {
                                   prepend: c(() => [
-                                    (w(), D(ne(F(le)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
+                                    (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
                                   ]),
                                   default: c(() => [
                                     _[51] || (_[51] = de(" Save Terms ", -1))
@@ -28463,7 +28468,7 @@ ${_}` : _;
       })
     ]));
   }
-}, s1 = /* @__PURE__ */ Et(o1, [["__scopeId", "data-v-905ffa59"]]), u1 = { class: "d-flex align-center justify-space-between mb-4" }, r1 = { class: "pa-2" }, c1 = { class: "custom-header-cell text-center" }, d1 = { class: "header-col-flex" }, v1 = { class: "header-icon-row mt-2" }, f1 = { class: "custom-header-cell text-center" }, m1 = { class: "header-col-flex" }, g1 = { class: "header-icon-row mt-2" }, y1 = { class: "custom-header-cell text-center" }, p1 = { class: "header-col-flex" }, b1 = { class: "header-icon-row mt-2" }, _1 = { class: "text-center" }, h1 = { class: "text-center" }, x1 = { class: "text-center" }, k1 = { class: "mb-4" }, S1 = { class: "d-flex" }, w1 = {
+}, o1 = /* @__PURE__ */ Et(i1, [["__scopeId", "data-v-905ffa59"]]), s1 = { class: "d-flex align-center justify-space-between mb-4" }, u1 = { class: "pa-2" }, r1 = { class: "custom-header-cell text-center" }, c1 = { class: "header-col-flex" }, d1 = { class: "header-icon-row mt-2" }, v1 = { class: "custom-header-cell text-center" }, f1 = { class: "header-col-flex" }, m1 = { class: "header-icon-row mt-2" }, g1 = { class: "custom-header-cell text-center" }, y1 = { class: "header-col-flex" }, p1 = { class: "header-icon-row mt-2" }, b1 = { class: "text-center" }, _1 = { class: "text-center" }, h1 = { class: "text-center" }, x1 = { class: "mb-4" }, k1 = { class: "d-flex" }, S1 = {
   __name: "AccountUserRolePermission",
   setup(e) {
     const a = [
@@ -28503,7 +28508,7 @@ ${_}` : _;
       n.value = !1;
     }
     return (b, m) => (w(), re(ve, null, [
-      v("div", u1, [
+      v("div", s1, [
         m[4] || (m[4] = v("h1", { class: "user-title" }, "User Role and Permission", -1)),
         l(Z, {
           class: "account_v_btn_primary",
@@ -28523,7 +28528,7 @@ ${_}` : _;
         class: "pa-2 mb-6 account_ui_vcard account_vcard_border"
       }, {
         default: c(() => [
-          v("div", r1, [
+          v("div", u1, [
             l(L0, {
               headers: a,
               items: t.value,
@@ -28533,45 +28538,45 @@ ${_}` : _;
               headers: c(() => [
                 v("tr", null, [
                   m[8] || (m[8] = v("th", { class: "custom-header-cell" }, "Feature / Permission", -1)),
-                  v("th", c1, [
-                    v("div", d1, [
+                  v("th", r1, [
+                    v("div", c1, [
                       m[5] || (m[5] = v("span", { class: "role-label" }, "Admin", -1)),
-                      v("div", v1, [
-                        (w(), D(ne(F(le)("edit")), {
+                      v("div", d1, [
+                        (w(), D(ae(F(le)("edit")), {
                           size: "20",
                           class: "header-action-icon"
                         })),
-                        (w(), D(ne(F(le)("trash")), {
+                        (w(), D(ae(F(le)("trash")), {
                           size: "20",
                           class: "header-action-icon ml-1"
                         }))
                       ])
                     ])
                   ]),
-                  v("th", f1, [
-                    v("div", m1, [
+                  v("th", v1, [
+                    v("div", f1, [
                       m[6] || (m[6] = v("span", { class: "role-label" }, "Accountant", -1)),
-                      v("div", g1, [
-                        (w(), D(ne(F(le)("edit")), {
+                      v("div", m1, [
+                        (w(), D(ae(F(le)("edit")), {
                           size: "20",
                           class: "header-action-icon"
                         })),
-                        (w(), D(ne(F(le)("trash")), {
+                        (w(), D(ae(F(le)("trash")), {
                           size: "20",
                           class: "header-action-icon ml-1"
                         }))
                       ])
                     ])
                   ]),
-                  v("th", y1, [
-                    v("div", p1, [
+                  v("th", g1, [
+                    v("div", y1, [
                       m[7] || (m[7] = v("span", { class: "role-label" }, "Auditor", -1)),
-                      v("div", b1, [
-                        (w(), D(ne(F(le)("edit")), {
+                      v("div", p1, [
+                        (w(), D(ae(F(le)("edit")), {
                           size: "20",
                           class: "header-action-icon"
                         })),
-                        (w(), D(ne(F(le)("trash")), {
+                        (w(), D(ae(F(le)("trash")), {
                           size: "20",
                           class: "header-action-icon ml-1"
                         }))
@@ -28583,18 +28588,18 @@ ${_}` : _;
               item: c(({ item: f }) => [
                 v("tr", null, [
                   v("td", null, ue(f.feature), 1),
-                  v("td", _1, [
-                    (w(), D(ne(F(le)(f.admin ? "check" : "x")), {
+                  v("td", b1, [
+                    (w(), D(ae(F(le)(f.admin ? "check" : "x")), {
                       style: la(`font-size: 22px; color: ${f.admin ? "#16a34a" : "#ef4444"};`)
                     }, null, 8, ["style"]))
                   ]),
-                  v("td", h1, [
-                    (w(), D(ne(F(le)(f.accountant ? "check" : "x")), {
+                  v("td", _1, [
+                    (w(), D(ae(F(le)(f.accountant ? "check" : "x")), {
                       style: la(`font-size: 22px; color: ${f.accountant ? "#16a34a" : "#ef4444"};`)
                     }, null, 8, ["style"]))
                   ]),
-                  v("td", x1, [
-                    (w(), D(ne(F(le)(f.auditor ? "check" : "x")), {
+                  v("td", h1, [
+                    (w(), D(ae(F(le)(f.auditor ? "check" : "x")), {
                       style: la(`font-size: 22px; color: ${f.auditor ? "#16a34a" : "#ef4444"};`)
                     }, null, 8, ["style"]))
                   ])
@@ -28620,7 +28625,7 @@ ${_}` : _;
             default: c(() => [
               l(Ae, null, {
                 default: c(() => [
-                  v("div", k1, [
+                  v("div", x1, [
                     m[9] || (m[9] = v("label", { class: "account_label mb-2" }, "Role Name", -1)),
                     l(ee, {
                       class: "accouting_field accouting_active_field",
@@ -28656,7 +28661,7 @@ ${_}` : _;
                     }, 8, ["modelValue"]),
                     l(_a, { class: "pa-0 border rounded-lg" }, {
                       default: c(() => [
-                        v("div", S1, [
+                        v("div", k1, [
                           (w(!0), re(ve, null, ze(u[s.value], (f) => (w(), D(xt, {
                             key: f.value,
                             class: "pa-0 me-3 ms-2"
@@ -28719,7 +28724,7 @@ ${_}` : _;
       }, 8, ["modelValue"])
     ], 64));
   }
-}, C1 = /* @__PURE__ */ Et(w1, [["__scopeId", "data-v-d502ab6d"]]), V1 = { class: "account_vendors_list" }, I1 = { class: "account_ui_vcard" }, P1 = { class: "d-flex align-center gap-2" }, A1 = { class: "account_vcard_menu_items py-1" }, T1 = ["onClick"], N1 = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, D1 = {
+}, w1 = /* @__PURE__ */ Et(S1, [["__scopeId", "data-v-d502ab6d"]]), C1 = { class: "account_vendors_list" }, V1 = { class: "account_ui_vcard" }, I1 = { class: "d-flex align-center gap-2" }, P1 = { class: "account_vcard_menu_items py-1" }, A1 = ["onClick"], T1 = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, N1 = {
   __name: "AccountVendorsList",
   setup(e) {
     const a = A([
@@ -28779,7 +28784,7 @@ ${_}` : _;
       setInterval(() => {
         b.value++;
       }, 3e3);
-    }), (m, f) => (w(), re("div", V1, [
+    }), (m, f) => (w(), re("div", C1, [
       l(xl, { mode: "in-out" }, {
         default: c(() => [
           d.value ? (w(), D(xe, {
@@ -28789,14 +28794,14 @@ ${_}` : _;
             default: c(() => [
               l(B, { cols: "8" }, {
                 default: c(() => [
-                  v("div", I1, [
+                  v("div", V1, [
                     l(me, {
                       title: "Create a New Vendor",
                       class: "pa-2 account_vcard_border",
                       subtitle: "Fill in the details below to add a new vendor to your records."
                     }, {
                       append: c(() => [
-                        v("div", P1, [
+                        v("div", I1, [
                           l(ot, {
                             location: "start",
                             transition: "slide-y-transition",
@@ -28810,7 +28815,7 @@ ${_}` : _;
                                 rounded: ""
                               }), {
                                 default: c(() => [
-                                  (w(), D(ne(F(le)("settings")), { style: { "font-size": "20px" } }))
+                                  (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
                                 ]),
                                 _: 2
                               }, 1040)
@@ -28820,14 +28825,14 @@ ${_}` : _;
                                 default: c(() => [
                                   f[0] || (f[0] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                                   l(ke, { class: "my-1 mt-0" }),
-                                  v("div", A1, [
+                                  v("div", P1, [
                                     (w(!0), re(ve, null, ze(a.value, (x) => (w(), re("div", {
                                       key: x.key,
                                       class: "account_vcard_menu_item",
                                       onClick: (p) => x.visible = !x.visible
                                     }, [
-                                      v("div", N1, [
-                                        x.visible ? (w(), D(ne(F(le)("check")), {
+                                      v("div", T1, [
+                                        x.visible ? (w(), D(ae(F(le)("check")), {
                                           key: 0,
                                           style: { "font-size": "16px" }
                                         })) : q("", !0),
@@ -28835,7 +28840,7 @@ ${_}` : _;
                                           class: ye(x.visible ? "" : "field_list_dynamic_ml")
                                         }, ue(x.label), 3)
                                       ])
-                                    ], 8, T1))), 128))
+                                    ], 8, A1))), 128))
                                   ])
                                 ]),
                                 _: 1,
@@ -28852,7 +28857,7 @@ ${_}` : _;
                             class: "account_vcard_close_btn"
                           }, {
                             default: c(() => [
-                              (w(), D(ne(F(le)("x")), { style: { "font-size": "20px" } }))
+                              (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
                             ]),
                             _: 1
                           })
@@ -29089,7 +29094,7 @@ ${_}` : _;
                               class: "account_v_btn_primary"
                             }, {
                               prepend: c(() => [
-                                (w(), D(ne(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                               ]),
                               default: c(() => [
                                 f[14] || (f[14] = de(" Save Vendor ", -1))
@@ -29139,7 +29144,7 @@ ${_}` : _;
         class: "account_add_new_btn vibrate"
       }, {
         prepend: c(() => [
-          (w(), D(ne(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+          (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
         ]),
         default: c(() => [
           f[15] || (f[15] = de(" Add Vendor ", -1))
@@ -29149,13 +29154,13 @@ ${_}` : _;
       }))
     ]));
   }
-}, $1 = /* @__PURE__ */ Et(D1, [["__scopeId", "data-v-098cf079"]]), B1 = { class: "invoice-preview-container" }, E1 = { class: "invoice-header d-flex justify-space-between align-center" }, F1 = { class: "d-flex align-center mb-1" }, L1 = { class: "invoice-summary" }, R1 = {
+}, D1 = /* @__PURE__ */ Et(N1, [["__scopeId", "data-v-098cf079"]]), $1 = { class: "invoice-preview-container" }, B1 = { class: "invoice-header d-flex justify-space-between align-center" }, E1 = { class: "d-flex align-center mb-1" }, F1 = { class: "invoice-summary" }, L1 = {
   __name: "InvoicePreview",
   setup(e) {
-    return (a, t) => (w(), re("div", B1, [
-      v("div", E1, [
+    return (a, t) => (w(), re("div", $1, [
+      v("div", B1, [
         v("div", null, [
-          v("div", F1, [
+          v("div", E1, [
             l($e, {
               class: "mr-2",
               size: "36"
@@ -29199,7 +29204,7 @@ ${_}` : _;
             md: "6"
           }, {
             default: c(() => [
-              v("div", L1, [
+              v("div", F1, [
                 t[4] || (t[4] = v("div", { class: "d-flex justify-space-between amount-in-words-b align-center mb-2" }, [
                   v("p", { class: "mb-0" }, "Subtotal:"),
                   v("p", { class: "mb-0" }, "₹1,72,500.00")
@@ -29239,14 +29244,14 @@ ${_}` : _;
       t[13] || (t[13] = Wa('<div class="" data-v-05aaab29><div class="invoice-footer text-right mt-4" data-v-05aaab29> For Hicks Inc. </div><div style="min-height:80px;" data-v-05aaab29></div><div class="invoice-footer text-right" data-v-05aaab29><p class="account_invoice_signature" data-v-05aaab29>(Authorized Signatory)</p></div></div>', 1))
     ]));
   }
-}, O1 = /* @__PURE__ */ Et(R1, [["__scopeId", "data-v-05aaab29"]]), M1 = {};
-function z1(e, a) {
+}, R1 = /* @__PURE__ */ Et(L1, [["__scopeId", "data-v-05aaab29"]]), O1 = {};
+function M1(e, a) {
   return w(), re("div", null, a[0] || (a[0] = [
     v("h2", null, "Products", -1),
     v("p", null, "This is the products page.", -1)
   ]));
 }
-const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
+const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
   allDay: Boolean,
   interval: Object,
   intervalDivisions: {
@@ -29264,7 +29269,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
   event: Object
 }, "VCalendarIntervalEvent"), bi = ie()({
   name: "VCalendarIntervalEvent",
-  props: G1(),
+  props: U1(),
   setup(e) {
     const a = Yt(), t = () => {
       var n, i, o, s;
@@ -29508,13 +29513,13 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       class: "v-calendar-header__title"
     }, [e.title])])), {};
   }
-}), j1 = K({
+}), G1 = K({
   allDay: Boolean,
   day: Object,
   event: Object
 }, "VCalendarEvent"), $s = ie()({
   name: "VCalendarEvent",
-  props: j1(),
+  props: G1(),
   setup(e) {
     return se(() => l(gt, {
       color: e.allDay ? "primary" : void 0,
@@ -29532,7 +29537,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       }
     })), {};
   }
-}), H1 = K({
+}), j1 = K({
   active: Boolean,
   color: String,
   day: Object,
@@ -29541,7 +29546,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
   title: [Number, String]
 }, "VCalendarMonthDay"), Lc = ie()({
   name: "VCalendarMonthDay",
-  props: H1(),
+  props: j1(),
   setup(e, a) {
     let {
       emit: t,
@@ -29593,15 +29598,15 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       }, null))])])]), !((x = e.day) != null && x.isHidden) && ((p = n.default) == null ? void 0 : p.call(n))]);
     }), {};
   }
-}), W1 = K({
+}), H1 = K({
   hideHeader: Boolean,
   hideWeekNumber: Boolean,
   ..._c(),
   ...Ec(),
   ...Fc()
-}, "VCalender"), q1 = ie()({
+}, "VCalender"), W1 = ie()({
   name: "VCalendar",
-  props: W1(),
+  props: H1(),
   emits: {
     next: null,
     prev: null,
@@ -29692,7 +29697,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       genDays: u
     };
   }
-}), Y1 = K({
+}), q1 = K({
   hideActions: Boolean,
   ...Yi(),
   ...pc(),
@@ -29704,9 +29709,9 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
     weeksInMonth: "dynamic",
     hideHeader: !0
   }), ["active"])
-}, "VDateInput"), J1 = ie()({
+}, "VDateInput"), Y1 = ie()({
   name: "VDateInput",
-  props: Y1(),
+  props: q1(),
   emits: {
     "update:modelValue": (e) => !0
   },
@@ -29795,7 +29800,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       });
     });
   }
-}), K1 = K({
+}), J1 = K({
   controlVariant: {
     type: String,
     default: "default"
@@ -29815,10 +29820,10 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
     default: 1
   },
   ...Me(Tn(), ["appendInnerIcon", "prependInnerIcon"])
-}, "VNumberInput"), X1 = ie()({
+}, "VNumberInput"), K1 = ie()({
   name: "VNumberInput",
   props: {
-    ...K1()
+    ...J1()
   },
   emits: {
     "update:modelValue": (e) => !0
@@ -29985,11 +29990,11 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       });
     });
   }
-}), Q1 = K({
+}), X1 = K({
   ...yo()
 }, "VStepperActions"), Rc = ie()({
   name: "VStepperVerticalActions",
-  props: Q1(),
+  props: X1(),
   emits: {
     "click:prev": () => !0,
     "click:next": () => !0
@@ -30015,7 +30020,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       }), n);
     }), {};
   }
-}), Z1 = K({
+}), Q1 = K({
   hideActions: Boolean,
   ...Nc(),
   ...Me(mo({
@@ -30024,7 +30029,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
   }), ["hideActions"])
 }, "VStepperVerticalItem"), Oc = ie()({
   name: "VStepperVerticalItem",
-  props: Z1(),
+  props: Q1(),
   emits: {
     "click:next": () => !0,
     "click:prev": () => !0,
@@ -30138,7 +30143,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       });
     }), {};
   }
-}), e2 = K({
+}), Z1 = K({
   prevText: {
     type: String,
     default: "$vuetify.stepper.prev"
@@ -30152,9 +30157,9 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
     mandatory: "force",
     variant: "accordion"
   }), ["static"])
-}, "VStepperVertical"), t2 = ie()({
+}, "VStepperVertical"), e2 = ie()({
   name: "VStepperVertical",
-  props: e2(),
+  props: Z1(),
   emits: {
     "update:modelValue": (e) => !0
   },
@@ -30229,7 +30234,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       });
     }), {};
   }
-}), a2 = ie()({
+}), t2 = ie()({
   name: "VPullToRefresh",
   props: {
     pullDownThreshold: {
@@ -30311,7 +30316,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       }, [(h = t.default) == null ? void 0 : h.call(t)])]);
     });
   }
-}), n2 = K({
+}), a2 = K({
   // TODO: Port this to Snackbar on dev
   closable: [Boolean, String],
   closeText: {
@@ -30323,9 +30328,9 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
     default: () => []
   },
   ...Me(Tc(), ["modelValue"])
-}, "VSnackbarQueue"), l2 = ie()({
+}, "VSnackbarQueue"), n2 = ie()({
   name: "VSnackbarQueue",
-  props: n2(),
+  props: a2(),
   emits: {
     "update:modelValue": (e) => !0
   },
@@ -30401,7 +30406,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       }))]);
     });
   }
-}), i2 = K({
+}), l2 = K({
   allowedValues: Function,
   ampm: Boolean,
   color: String,
@@ -30435,7 +30440,7 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
   }
 }, "VTimePickerClock"), xi = ie()({
   name: "VTimePickerClock",
-  props: i2(),
+  props: l2(),
   emits: {
     change: (e) => !0,
     input: (e) => !0
@@ -30514,13 +30519,13 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       u.value === null && (u.value = N), r.value = N, I(N);
     }
     function Y(N) {
-      var ae, he;
+      var ne, he;
       if (N.preventDefault(), !s.value && N.type !== "click" || !n.value) return;
       const {
         width: j,
         top: V,
         left: M
-      } = (ae = n.value) == null ? void 0 : ae.getBoundingClientRect(), {
+      } = (ne = n.value) == null ? void 0 : ne.getBoundingClientRect(), {
         width: te
       } = ((he = i.value) == null ? void 0 : he.getBoundingClientRect()) ?? {
         width: 0
@@ -30577,14 +30582,14 @@ const U1 = /* @__PURE__ */ Et(M1, [["render", z1]]), G1 = K({
       }, [l("span", null, [e.format(N)])]);
     })])]));
   }
-}), o2 = (e, a, t) => (a = a >> 0, e = String(e), t = String(t), e.length > a ? String(e) : (a = a - e.length, a > t.length && (t += t.repeat(a / t.length)), t.slice(0, a) + String(e))), ga = function(e) {
+}), i2 = (e, a, t) => (a = a >> 0, e = String(e), t = String(t), e.length > a ? String(e) : (a = a - e.length, a > t.length && (t += t.repeat(a / t.length)), t.slice(0, a) + String(e))), ga = function(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 2;
-  return o2(e, a, "0");
+  return i2(e, a, "0");
 };
 var Je = /* @__PURE__ */ function(e) {
   return e[e.Hour = 1] = "Hour", e[e.Minute = 2] = "Minute", e[e.Second = 3] = "Second", e;
 }(Je || {});
-const s2 = K({
+const o2 = K({
   ampm: Boolean,
   ampmInTitle: Boolean,
   ampmReadonly: Boolean,
@@ -30600,7 +30605,7 @@ const s2 = K({
   value: Number
 }, "VTimePickerControls"), ki = ie()({
   name: "VTimePickerControls",
-  props: s2(),
+  props: o2(),
   emits: {
     "update:period": (e) => !0,
     "update:selecting": (e) => !0
@@ -30698,13 +30703,13 @@ const s2 = K({
       }, null)])])]);
     }), {};
   }
-}), u2 = Xt(24), Mc = Xt(12), r2 = Mc.map((e) => e + 12);
+}), s2 = Xt(24), Mc = Xt(12), u2 = Mc.map((e) => e + 12);
 Xt(60);
-const c2 = {
+const r2 = {
   1: "hour",
   2: "minute",
   3: "second"
-}, d2 = K({
+}, c2 = K({
   allowedHours: [Function, Array],
   allowedMinutes: [Function, Array],
   allowedSeconds: [Function, Array],
@@ -30723,9 +30728,9 @@ const c2 = {
   ...Me(fo({
     title: "$vuetify.timePicker.title"
   }), ["landscape"])
-}, "VTimePicker"), v2 = ie()({
+}, "VTimePicker"), d2 = ie()({
   name: "VTimePicker",
-  props: d2(),
+  props: c2(),
   emits: {
     "update:hour": (e) => !0,
     "update:minute": (e) => !0,
@@ -30796,7 +30801,7 @@ const c2 = {
     function R(C, L) {
       const W = p.value;
       if (!W) return L;
-      const Y = g.value ? L < 12 ? Mc : r2 : u2;
+      const Y = g.value ? L < 12 ? Mc : u2 : s2;
       return ((Y.find((H) => W((H + L) % Y.length + Y[0])) || 0) + L) % Y.length + Y[0];
     }
     function T(C) {
@@ -30810,7 +30815,7 @@ const c2 = {
       m.value === Je.Hour ? o.value = g.value ? O(C, b.value) : C : m.value === Je.Minute ? s.value = C : u.value = C;
     }
     function G(C) {
-      switch (c2[m.value]) {
+      switch (r2[m.value]) {
         case "hour":
           t("update:hour", C);
           break;
@@ -30866,14 +30871,14 @@ const c2 = {
       });
     });
   }
-}), f2 = K({
+}), v2 = K({
   ...Me(Ku({
     collapseIcon: "$treeviewCollapse",
     expandIcon: "$treeviewExpand"
   }), ["subgroup"])
 }, "VTreeviewGroup"), Si = ie()({
   name: "VTreeviewGroup",
-  props: f2(),
+  props: v2(),
   setup(e, a) {
     let {
       slots: t
@@ -30911,7 +30916,7 @@ const c2 = {
       });
     }), {};
   }
-}), zc = Symbol.for("vuetify:v-treeview"), m2 = K({
+}), zc = Symbol.for("vuetify:v-treeview"), f2 = K({
   loading: Boolean,
   toggleIcon: Ie,
   ...Qu({
@@ -30919,7 +30924,7 @@ const c2 = {
   })
 }, "VTreeviewItem"), wi = ie()({
   name: "VTreeviewItem",
-  props: m2(),
+  props: f2(),
   setup(e, a) {
     let {
       attrs: t,
@@ -31147,7 +31152,7 @@ function Gc(e) {
     a.push(t), t.children && Gc(t.children, a);
   return a;
 }
-const g2 = K({
+const m2 = K({
   openAll: Boolean,
   search: String,
   ...Al({
@@ -31159,9 +31164,9 @@ const g2 = K({
     expandIcon: "$treeviewExpand",
     slim: !0
   }), ["nav"])
-}, "VTreeview"), y2 = ie()({
+}, "VTreeview"), g2 = ie()({
   name: "VTreeview",
-  props: g2(),
+  props: m2(),
   emits: {
     "update:opened": (e) => !0,
     "update:activated": (e) => !0,
@@ -31242,31 +31247,31 @@ const g2 = K({
       open
     };
   }
-}), p2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+}), y2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  VCalendar: q1,
+  VCalendar: W1,
   VCalendarDay: Jn,
   VCalendarHeader: hi,
   VCalendarInterval: _i,
   VCalendarIntervalEvent: bi,
   VCalendarMonthDay: Lc,
-  VDateInput: J1,
-  VNumberInput: X1,
+  VDateInput: Y1,
+  VNumberInput: K1,
   VPicker: bn,
   VPickerTitle: wc,
-  VPullToRefresh: a2,
-  VSnackbarQueue: l2,
-  VStepperVertical: t2,
+  VPullToRefresh: t2,
+  VSnackbarQueue: n2,
+  VStepperVertical: e2,
   VStepperVerticalActions: Rc,
   VStepperVerticalItem: Oc,
-  VTimePicker: v2,
+  VTimePicker: d2,
   VTimePickerClock: xi,
   VTimePickerControls: ki,
-  VTreeview: y2,
+  VTreeview: g2,
   VTreeviewGroup: Si,
   VTreeviewItem: wi
 }, Symbol.toStringTag, { value: "Module" }));
-function b2(e, a) {
+function p2(e, a) {
   const t = a.modifiers || {}, n = a.value, {
     once: i,
     immediate: o,
@@ -31294,11 +31299,11 @@ function jc(e, a) {
   var t;
   (t = e._mutate) != null && t[a.instance.$.uid] && (e._mutate[a.instance.$.uid].observer.disconnect(), delete e._mutate[a.instance.$.uid]);
 }
-const _2 = {
-  mounted: b2,
+const b2 = {
+  mounted: p2,
   unmounted: jc
 };
-function h2(e, a) {
+function _2(e, a) {
   var i, o;
   const t = a.value, n = {
     passive: !((i = a.modifiers) != null && i.active)
@@ -31308,7 +31313,7 @@ function h2(e, a) {
     options: n
   }, (o = a.modifiers) != null && o.quiet || t();
 }
-function x2(e, a) {
+function h2(e, a) {
   var i;
   if (!((i = e._onResize) != null && i[a.instance.$.uid])) return;
   const {
@@ -31317,9 +31322,9 @@ function x2(e, a) {
   } = e._onResize[a.instance.$.uid];
   window.removeEventListener("resize", t, n), delete e._onResize[a.instance.$.uid];
 }
-const k2 = {
-  mounted: h2,
-  unmounted: x2
+const x2 = {
+  mounted: _2,
+  unmounted: h2
 };
 function Hc(e, a) {
   const {
@@ -31344,16 +31349,16 @@ function Wc(e, a) {
   } = e._onScroll[a.instance.$.uid];
   i.removeEventListener("scroll", t, n), delete e._onScroll[a.instance.$.uid];
 }
-function S2(e, a) {
+function k2(e, a) {
   a.value !== a.oldValue && (Wc(e, a), Hc(e, a));
 }
-const w2 = {
+const S2 = {
   mounted: Hc,
   unmounted: Wc,
-  updated: S2
+  updated: k2
 };
-function C2(e, a) {
-  const t = typeof e == "string" ? Ti(e) : e, n = V2(t, a);
+function w2(e, a) {
+  const t = typeof e == "string" ? Ti(e) : e, n = C2(t, a);
   return {
     mounted: n,
     updated: n,
@@ -31362,16 +31367,16 @@ function C2(e, a) {
     }
   };
 }
-function V2(e, a) {
+function C2(e, a) {
   return function(t, n, i) {
     var b, m, f;
-    const o = typeof a == "function" ? a(n) : a, s = ((b = n.value) == null ? void 0 : b.text) ?? n.value ?? (o == null ? void 0 : o.text), u = ln(n.value) ? n.value : {}, r = () => s ?? t.innerHTML, d = (i.ctx === n.instance.$ ? (m = I2(i, n.instance.$)) == null ? void 0 : m.provides : (f = i.ctx) == null ? void 0 : f.provides) ?? n.instance.$.provides, y = mt(e, X(o, u), r);
+    const o = typeof a == "function" ? a(n) : a, s = ((b = n.value) == null ? void 0 : b.text) ?? n.value ?? (o == null ? void 0 : o.text), u = ln(n.value) ? n.value : {}, r = () => s ?? t.innerHTML, d = (i.ctx === n.instance.$ ? (m = V2(i, n.instance.$)) == null ? void 0 : m.provides : (f = i.ctx) == null ? void 0 : f.provides) ?? n.instance.$.provides, y = mt(e, X(o, u), r);
     y.appContext = Object.assign(/* @__PURE__ */ Object.create(null), n.instance.$.appContext, {
       provides: d
     }), Rs(y, t);
   };
 }
-function I2(e, a) {
+function V2(e, a) {
   const t = /* @__PURE__ */ new Set(), n = (o) => {
     var s, u;
     for (const r of o) {
@@ -31394,28 +31399,28 @@ function I2(e, a) {
       return o.component;
   return a;
 }
-const P2 = C2(oo, (e) => {
+const I2 = w2(oo, (e) => {
   var a;
   return {
     activator: "parent",
     location: ((a = e.arg) == null ? void 0 : a.replace("-", " ")) ?? "top",
     text: typeof e.value == "boolean" ? void 0 : e.value
   };
-}), A2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+}), P2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   ClickOutside: dr,
   Intersect: _l,
-  Mutate: _2,
-  Resize: k2,
+  Mutate: b2,
+  Resize: x2,
   Ripple: ca,
-  Scroll: w2,
-  Tooltip: P2,
+  Scroll: S2,
+  Tooltip: I2,
   Touch: uo
-}, Symbol.toStringTag, { value: "Module" })), E2 = ad({
+}, Symbol.toStringTag, { value: "Module" })), B2 = ad({
   components: {
-    ...p2
+    ...y2
   },
-  directives: A2,
+  directives: P2,
   icons: {
     defaultSet: "mdi",
     // keep mdi as default
@@ -31441,21 +31446,21 @@ const P2 = C2(oo, (e) => {
       }
     }
   }
-}), F2 = {
+}), E2 = {
   install(e) {
-    e.component("AccountAllEntries", i0), e.component("AccountBalanceSheet", bp), e.component("AccountCustomerList", Nb), e.component("AccountGSTReports", Ob), e.component("AccountGroupAndLedger", Xb), e.component("AccountInvoiceReturn", __), e.component("AccountProfitAndLoss", ih), e.component("AccountPurchaseBill", ph), e.component("AccountSalesInvoice", jh), e.component("AccountSettings", s1), e.component("AccountUserRolePermission", C1), e.component("AccountVendorsList", $1), e.component("InvoicePreview", O1), e.component("ProductsPage", U1);
+    e.component("AccountAllEntries", i0), e.component("AccountBalanceSheet", bp), e.component("AccountCustomerList", Tb), e.component("AccountGSTReports", Rb), e.component("AccountGroupAndLedger", Kb), e.component("AccountInvoiceReturn", b_), e.component("AccountProfitAndLoss", lh), e.component("AccountPurchaseBill", yh), e.component("AccountSalesInvoice", Gh), e.component("AccountSettings", o1), e.component("AccountUserRolePermission", w1), e.component("AccountVendorsList", D1), e.component("InvoicePreview", R1), e.component("ProductsPage", z1);
   }
 };
 export {
-  O1 as InvoicePreview,
+  R1 as InvoicePreview,
   at as commonValidations,
-  $2 as customerValidations,
-  F2 as default,
-  D2 as formatAmountWithWords,
+  D2 as customerValidations,
+  E2 as default,
+  N2 as formatAmountWithWords,
   Yv as journalEntryValidations,
   Bo as ledgerValidations,
   iu as numberToWords,
   Ll as validateField,
-  B2 as validateForm,
-  E2 as vuetify
+  $2 as validateForm,
+  B2 as vuetify
 };

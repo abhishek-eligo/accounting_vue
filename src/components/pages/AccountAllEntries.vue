@@ -834,7 +834,7 @@ const hoveredRowIndex = ref(null);
         </div>
       </div>
       <VCardText class="mt-2">
-        <VCard class="shadow-none">
+        <VCard variant="text" class="shadow-none">
           <div class="gst_summary_table_container">
             <table class="table table-bordered account_entries_table text-center w-100">
               <thead>
@@ -994,7 +994,7 @@ const hoveredRowIndex = ref(null);
               <span class="account_label_bold">Type:</span>
               <span class="account_label_light">{{
                 selectedEntry?.voucher_type
-              }}</span>
+                }}</span>
             </div>
           </div>
 
@@ -1058,7 +1058,7 @@ const hoveredRowIndex = ref(null);
             <span class="account_label_bold abc">Narration:</span>
             <span class="account_label_light font-italic">{{
               selectedEntry?.particulars?.description?.narration || "N/A"
-            }}</span>
+              }}</span>
           </div>
         </VCardText>
       </VCard>
