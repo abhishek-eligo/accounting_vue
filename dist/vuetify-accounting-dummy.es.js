@@ -26308,7 +26308,7 @@ Currency: ${Y.value}` : "";
                             ]),
                             _: 1
                           }),
-                          l(ke),
+                          l(ke, { class: "my-3" }),
                           l(xe, null, {
                             default: c(() => [
                               l(B, {

@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, h6, p, span {
 }
 
 .account_table_chip.active {
-  background-color: #03a5a0;
+  background-color: var(--acc-primary-color);
   color: var(--acc-text-white) !important;
 }
 
@@ -474,7 +474,7 @@ p.secondary_email {
 }
 
 .account_v_btn_outlined.v-btn {
-    background: var(--acc-outlined-color);
+    background: var(--acc-outlined-color) !important;
     border: 1px solid var(--acc-border-color);
     box-shadow: unset !important;
     text-transform: capitalize;

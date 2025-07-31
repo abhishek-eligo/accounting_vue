@@ -891,7 +891,7 @@ const previewValue = computed(() => {
                   </VBtn>
                 </VCol>
               </VRow>
-              <VDivider />
+              <VDivider class="my-3"/>
               <VRow>
                 <VCol cols="12" lg="6" sm="6"></VCol>
                 <VCol cols="12" lg="6" sm="6">
