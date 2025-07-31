@@ -7,7 +7,7 @@
     --acc-error-color: hsl(0 84.2% 60.2%);
     --acc-error-color-tonal: hsla(0, 85%, 68%, 0.884);
     --acc-outlined-color: hsl(204, 13%, 94%);
-    --acc-secondary-color: hsl(206, 87%, 29%);
+    --acc-secondary-color: #0a538a;
     --acc-default-surface-bg: #EDF0F2;
     --acc-box-shadow: #e6e6e6;
     --acc-text-white: hsl(210 16% 98%);
@@ -168,12 +168,12 @@ p.secondary_email {
 }
 
 .account_table_chip.inactive {
-  background-color: #ef4444;
+  background-color: var(--acc-error-color);
   color: #ffffff !important;
 }
 
 .account_table_chip.pending {
-  background-color: #0a538a;
+  background-color: var(--acc-secondary-color);
   color: #ffffff !important;
 }
 
@@ -435,10 +435,11 @@ p.secondary_email {
     opacity: 0.5;
 }
 
-.account_v_btn_primary.v-btn--disabled i.v-icon,
-.account_v_btn_primary.v-btn i.v-icon,
-.account_v_btn_error.v-btn--disabled i.v-icon,
-.account_v_btn_error.v-btn i.v-icon {
+.account_v_btn_primary.v-btn--disabled svg,
+.account_v_btn_primary.v-btn svg,
+.account_v_btn_error.v-btn--disabled svg,
+.account_v_btn_error.v-btn svg,
+.account_v_btn_secondary.v-btn--disabled svg {
     color: var(--acc-text-white) !important;
 }
 
@@ -463,11 +464,6 @@ p.secondary_email {
     opacity: 0.5;
 }
 
-.account_v_btn_error.v-btn--disabled i.v-icon {
-    color: var(--acc-text-white) !important;
-}
-
-
 .account_v_btn_error.v-btn .v-btn__content {
     color: var(--acc-text-white) !important;
     font-size: 14px;
@@ -489,11 +485,6 @@ p.secondary_email {
     opacity: 0.5;
 }
 
-.account_v_btn_outlined.v-btn--disabled i.v-icon {
-    color: var(--acc-text-dark) !important;
-}
-
-
 .account_v_btn_outlined.v-btn .v-btn__content {
     color: var(--acc-text-dark) !important;
     font-size: 14px;
@@ -514,7 +505,7 @@ p.secondary_email {
     opacity: 0.5;
 }
 
-.account_v_btn_secondary.v-btn--disabled i.v-icon {
+.account_v_btn_secondary.v-btn--disabled svg {
     color: var(--acc-text-white) !important;
 }
 
@@ -570,8 +561,8 @@ p.secondary_email {
 }
 
 .account_table_chip {
-    min-width: 89px;
-    justify-content: center;
+    min-width: 89px !important;
+    justify-content: center !important;
     border-radius: 20px;
     max-height: 22px !important;
 }
@@ -584,13 +575,13 @@ p.secondary_email {
 }
 
 .account_chip_primary {
-    background: var(--acc-primary-color);
-    color: var(--acc-text-white);
+    background: var(--acc-primary-color) !important;
+    color: var(--acc-text-white) !important;
 }
 
 .account_chip_secondary {
-    background: var(--acc-secondary-color);
-    color: var(--acc-text-white);
+    background: var(--acc-secondary-color) !important;
+    color: var(--acc-text-white) !important;
 }
 
 .account_chip_preview {
@@ -602,13 +593,13 @@ p.secondary_email {
 }
 
 .account_chip_outline {
-    background: var(--acc-outlined-color);
-    color: var(--acc-text-dark);
+    background: var(--acc-outlined-color) !important;
+    color: var(--acc-text-dark) !important;
 }
 
 .account_chip_error {
-    background: var(--acc-error-color);
-    color: var(--acc-text-white);
+    background: var(--acc-error-color) !important;
+    color: var(--acc-text-white) !important;
 }
 
 .account_app_bar {
@@ -679,7 +670,7 @@ p.secondary_email {
     min-height: 36px !important;
     max-height: 36px !important;
     height: 36px !important;
-    padding: 6px 16px;
+    padding: 6px 0px 6px 16px;
 }
 
 .accouting_active_field .v-field--active.v-field--focused {
@@ -819,21 +810,25 @@ p.secondary_email {
 }
 
 .account_balance_chip {
-    border: 1px solid var(--acc-secondary-color);
-    color: var(--acc-secondary-color);
-    background: transparent;
+    border: 1px solid var(--acc-secondary-color) !important;
+    color: var(--acc-secondary-color) !important;
+    background: transparent !important;
+    min-width: 111px !important;
+    justify-content: center;
 }
 
 .account_profit_loss_chip {
-    border: 1px solid hsl(178 96% 33%);
-    color: hsl(178 96% 33%);
-    background: transparent;
+    border: 1px solid hsl(178 96% 33%) !important;
+    color: var(--acc-primary-color) !important;
+    background: transparent !important;
+    min-width: 111px !important;
+    justify-content: center;
 }
 
 .account_add_new_btn.v-btn {
   background: var(--acc-primary-color) !important;
   border-radius: 30px !important;
-  padding: 18px 30px !important;
+  padding: 14px 25px !important;
 }
 
 .account_add_new_btn.v-btn.v-btn--density-default {
@@ -841,7 +836,7 @@ p.secondary_email {
 }
 
 .account_add_new_btn.v-btn .v-btn__content,
-.account_add_new_btn.v-btn .v-btn__prepend i {
+.account_add_new_btn.v-btn .v-btn__prepend svg {
   color: var(--acc-text-white);
 }
 
@@ -868,6 +863,11 @@ p.secondary_email {
 
 .account_swtich_btn .v-input__control .v-selection-control label.v-label {
     padding-inline-start: 5px !important;
+}
+
+.custom_option {
+    display: grid;
+    grid-template-columns: 1fr 95px;
 }
 
 .custom_option .custom_option_field.v-input .v-input__control .v-field {

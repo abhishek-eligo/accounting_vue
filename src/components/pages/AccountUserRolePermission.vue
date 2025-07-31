@@ -56,13 +56,19 @@ function saveRole() {
   // Save logic here
   dialog.value = false
 }
+
+const bounceKey = ref(0)
+
+onMounted(() => {
+  setInterval(() => {
+    bounceKey.value++ // force key change to retrigger animation
+  }, 3000)
+})
 </script>
 
 <template>
   <div class="d-flex align-center justify-space-between mb-4">
     <h1 class="user-title">User Role and Permission</h1>
-    <VBtn class="account_v_btn_primary" prepend-icon="mdi-plus-circle-outline" @click="openAddRoleDialog">Add New
-      Role</VBtn>
   </div>
 
   <VCard title="Permission Matrix" subtitle="Manage what users can see and do in your organization."
@@ -160,6 +166,13 @@ function saveRole() {
     </v-card>
   </v-dialog>
 
+  <VBtn @click="openAddRoleDialog" :key="bounceKey" class="account_add_new_btn bounce">
+    <template #prepend>
+      <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+    </template>
+    Add New Role
+  </VBtn>
+
 </template>
 
 
@@ -239,5 +252,33 @@ function saveRole() {
   background: var(--acc-primary-color) !important;
   color: var(--acc-text-white) !important;
   border-color: var(--acc-primary-color) !important;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  20% {
+    transform: translateY(-12px);
+  }
+
+  40% {
+    transform: translateY(0);
+  }
+
+  60% {
+    transform: translateY(-6px);
+  }
+
+  80% {
+    transform: translateY(0);
+  }
+}
+
+.bounce {
+  animation: bounce 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>

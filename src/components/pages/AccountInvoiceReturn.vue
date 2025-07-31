@@ -444,6 +444,8 @@ function setupInvoiceWatch(dataList) {
   });
 }
 
+const bounceKey = ref(0)
+
 setupInvoiceWatch(itemInvoiceData);
 setupInvoiceWatch(serviceInvoiceData);
 
@@ -452,6 +454,9 @@ onMounted(() => {
   fetchStatesData();
   itemInvoiceData.value[0].lockedRate = false;
   serviceInvoiceData.value[0].lockedRate = false;
+  setInterval(() => {
+    bounceKey.value++ // force key change to retrigger animation
+  }, 3000)
 });
 
 const formFields = ref([
@@ -837,15 +842,6 @@ const previewValue = computed(() => {
       </VRow>
     </VExpandTransition>
 
-    <div class="pb-4 d-flex align-center justify-end">
-      <VBtn @click="isCreatingNewInvoice = true" class="account_v_btn_primary">
-        <template #prepend>
-          <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
-        </template>
-        Create Invoice
-      </VBtn>
-    </div>
-
     <div class="account_invoice_list">
       <DynamicDataTable title="Invoices" :headers="invoiceHeaders" :items="invoiceItems" :filters="invoiceFilters"
         :status-items="paymentStatusItems" :account-type-items="[]" :currency-items="currencyItems"
@@ -1194,5 +1190,41 @@ const previewValue = computed(() => {
       </div>
     </v-dialog>
 
+    <VBtn @click="isCreatingNewInvoice = !isCreatingNewInvoice" :key="bounceKey" class="account_add_new_btn bounce">
+      <template #prepend>
+        <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+      </template>
+      Create Invoice
+    </VBtn>
   </div>
 </template>
+
+<style scoped>
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  20% {
+    transform: translateY(-12px);
+  }
+
+  40% {
+    transform: translateY(0);
+  }
+
+  60% {
+    transform: translateY(-6px);
+  }
+
+  80% {
+    transform: translateY(0);
+  }
+}
+
+.bounce {
+  animation: bounce 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+</style>

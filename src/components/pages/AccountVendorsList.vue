@@ -109,11 +109,11 @@ const balanceTypeList = ref([
 
 const selectedBalanceType = ref('credit');
 
-const vibrateKey = ref(0)
+const bounceKey = ref(0)
 
 onMounted(() => {
   setInterval(() => {
-    vibrateKey.value++ // force key change to retrigger animation
+    bounceKey.value++ // force key change to retrigger animation
   }, 3000)
 })
 </script>
@@ -122,7 +122,7 @@ onMounted(() => {
   <div class="account_vendors_list">
     <VSlideYTransition mode="in-out">
       <VRow v-if="addNewVendorVisible" class="justify-center">
-        <VCol cols="8">
+        <VCol cols="12">
           <div class="account_ui_vcard">
             <VCard title="Create a New Vendor" class="pa-2 account_vcard_border"
               subtitle="Fill in the details below to add a new vendor to your records.">
@@ -167,17 +167,17 @@ onMounted(() => {
                     <h5 class="account_form_info_hdng">Basic Information</h5>
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
-                  <VCol v-if="isVisible('firstName')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('firstName')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">First Name</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="John" />
                   </VCol>
-                  <VCol v-if="isVisible('lastName')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('lastName')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">Last Name</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="Doe" />
                   </VCol>
-                  <VCol v-if="isVisible('companyName')" cols="12" lg="12" md="12">
+                  <VCol v-if="isVisible('companyName')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">Company Name</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="Innovate Inc." />
@@ -207,22 +207,22 @@ onMounted(() => {
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="123 Main St" />
                   </VCol>
-                  <VCol v-if="isVisible('city')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('city')" cols="12" lg="3" md="3">
                     <label class="account_label mb-2">City</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="Mumbai" />
                   </VCol>
-                  <VCol v-if="isVisible('state')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('state')" cols="12" lg="3" md="3">
                     <label class="account_label mb-2">State</label>
                     <VSelect class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="Select a state" />
                   </VCol>
-                  <VCol v-if="isVisible('zipCode')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('zipCode')" cols="12" lg="3" md="3">
                     <label class="account_label mb-2">ZIP Code</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="400001" />
                   </VCol>
-                  <VCol v-if="isVisible('gstin')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('gstin')" cols="12" lg="3" md="3">
                     <label class="account_label mb-2">GSTIN (Optional)</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="15-digit GST Identification Number" />
@@ -249,7 +249,7 @@ onMounted(() => {
           :widgets="vendorWidgetData" />
       </VCol>
     </VRow>
-    <VBtn @click="showAddVendorForm" :key="vibrateKey" class="account_add_new_btn vibrate">
+    <VBtn @click="showAddVendorForm" :key="bounceKey" class="account_add_new_btn bounce">
       <template #prepend>
         <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
       </template>
@@ -259,53 +259,25 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@keyframes vibrate {
-  0% {
-    transform: translate(0, 0);
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-
-  10% {
-    transform: translate(-2px, 2px);
-  }
-
   20% {
-    transform: translate(-2px, -2px);
+    transform: translateY(-12px);
   }
-
-  30% {
-    transform: translate(2px, 2px);
-  }
-
   40% {
-    transform: translate(2px, -2px);
+    transform: translateY(0);
   }
-
-  50% {
-    transform: translate(-3px, 3px);
-  }
-
   60% {
-    transform: translate(3px, -3px);
+    transform: translateY(-6px);
   }
-
-  70% {
-    transform: translate(-2px, 2px);
-  }
-
   80% {
-    transform: translate(2px, -2px);
-  }
-
-  90% {
-    transform: translate(-1px, 1px);
-  }
-
-  100% {
-    transform: translate(0, 0);
+    transform: translateY(0);
   }
 }
 
-.vibrate {
-  animation: vibrate 0.3s linear;
+.bounce {
+  animation: bounce 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>

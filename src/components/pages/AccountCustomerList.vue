@@ -132,11 +132,11 @@ const balanceTypeList = ref([
 
 const selectedBalanceType = ref('credit');
 
-const vibrateKey = ref(0)
+const bounceKey = ref(0)
 
 onMounted(() => {
   setInterval(() => {
-    vibrateKey.value++ // force key change to retrigger animation
+    bounceKey.value++ // force key change to retrigger animation
   }, 3000)
 })
 </script>
@@ -145,7 +145,7 @@ onMounted(() => {
   <div class="account_customers_list">
     <VExpandTransition>
       <VRow v-if="addNewCustomerVisible" class="justify-center">
-        <VCol cols="8">
+        <VCol cols="12">
           <div class="account_ui_vcard">
             <VCard title="Create a New Customer" class="pa-2 account_vcard_border"
               subtitle="Fill in the details below to add a new customer to your records.">
@@ -190,19 +190,19 @@ onMounted(() => {
                     <h5 class="account_form_info_hdng">Core Information</h5>
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
-                  <VCol v-if="isVisible('name')" cols="12" lg="12" md="12">
+                  <VCol v-if="isVisible('name')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">Name (Mandatory)</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="Customer's Full Name or Company Name" />
                   </VCol>
-                  <VCol v-if="isVisible('mobile')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('mobile')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">Mobile</label>
                     <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
                       density="compact" placeholder="9876543210" />
                   </VCol>
-                  <VCol v-if="isVisible('openingBalance')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('openingBalance')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">Opening Balance</label>
-                    <div class="custom_option d-flex align-center">
+                    <div class="custom_option align-center">
                       <VTextField class="custom_option_field accouting_field accouting_active_field" type="number"
                         variant="outlined" density="compact" placeholder="0" />
                       <VSelect class="custom_option_select accouting_field accouting_active_field"
@@ -237,17 +237,17 @@ onMounted(() => {
                     <label class="account_label mb-2">Address</label>
                     <VTextarea class="accounting_v_textarea" placeholder="Full address" variant="outlined" />
                   </VCol>
-                  <VCol v-if="isVisible('state')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('state')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">State</label>
                     <VSelect class="accouting_field accouting_active_field" variant="outlined"
                       placeholder="Select an item" />
                   </VCol>
-                  <VCol v-if="isVisible('pincode')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('pincode')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">Pincode</label>
                     <VSelect class="accouting_field accouting_active_field" variant="outlined"
                       placeholder="e.g. 400001" />
                   </VCol>
-                  <VCol v-if="isVisible('country')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('country')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">Country</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="India" />
@@ -258,22 +258,22 @@ onMounted(() => {
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
 
-                  <VCol v-if="isVisible('gstin')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('gstin')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">GSTIN/UIN</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="15-digit GSTIN" />
                   </VCol>
-                  <VCol v-if="isVisible('pan')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('pan')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">PAN</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="15-digit PAN" />
                   </VCol>
-                  <VCol v-if="isVisible('taxReg')" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('taxReg')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">Tax Registration Number</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="If applicable" />
                   </VCol>
-                  <VCol v-if="isVisible('tds')" class="d-flex align-center" cols="12" lg="6" md="6">
+                  <VCol v-if="isVisible('tds')" class="d-flex align-center" cols="12" lg="12" md="12">
                     <VCheckbox density="compact" class="account_v_checkbox" label="TDS Applicable" />
                   </VCol>
 
@@ -363,9 +363,9 @@ onMounted(() => {
           :widgets="customerWidgetData" />
       </VCol>
     </VRow>
-    <VBtn @click="showAddCustomerForm" class="account_add_new_btn">
+    <VBtn @click="showAddCustomerForm" :key="bounceKey" class="account_add_new_btn bounce">
       <template #prepend>
-        <component :is="renderTablerIcon('plus')" style="font-size: 20px; margin-right: 6px;" />
+        <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
       </template>
       Add Customer
     </VBtn>
@@ -373,53 +373,25 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@keyframes vibrate {
-  0% {
-    transform: translate(0, 0);
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-
-  10% {
-    transform: translate(-2px, 2px);
-  }
-
   20% {
-    transform: translate(-2px, -2px);
+    transform: translateY(-12px);
   }
-
-  30% {
-    transform: translate(2px, 2px);
-  }
-
   40% {
-    transform: translate(2px, -2px);
+    transform: translateY(0);
   }
-
-  50% {
-    transform: translate(-3px, 3px);
-  }
-
   60% {
-    transform: translate(3px, -3px);
+    transform: translateY(-6px);
   }
-
-  70% {
-    transform: translate(-2px, 2px);
-  }
-
   80% {
-    transform: translate(2px, -2px);
-  }
-
-  90% {
-    transform: translate(-1px, 1px);
-  }
-
-  100% {
-    transform: translate(0, 0);
+    transform: translateY(0);
   }
 }
 
-.vibrate {
-  animation: vibrate 0.3s linear;
+.bounce {
+  animation: bounce 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>

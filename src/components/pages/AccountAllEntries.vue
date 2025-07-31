@@ -552,6 +552,13 @@ function getToAccounts(entry) {
 }
 
 const hoveredRowIndex = ref(null);
+const bounceKey = ref(0)
+
+onMounted(() => {
+  setInterval(() => {
+    bounceKey.value++ // force key change to retrigger animation
+  }, 3000)
+})
 </script>
 
 <template>
@@ -755,17 +762,6 @@ const hoveredRowIndex = ref(null);
 
     <VCard title="All Entries" subtitle="A record of all financial transactions."
       class="account_vcard_border pa-2 account_ui_vcard shadow-none">
-      <template #append>
-        <div class="d-flex align-center gap-2">
-          <VBtn @click="showJournalEntryCard = !showJournalEntryCard" class="account_v_btn_primary save_btn_height"
-            variant="outlined" size="default" rounded="2" color="primary">
-            <template #prepend>
-              <component :is="renderTablerIcon('plus')" style="font-size: 18px;" />
-            </template>
-            New Journal Entry
-          </VBtn>
-        </div>
-      </template>
       <div class="d-flex align-center px-3 justify-space-between">
         <VTextField style="max-width: 265px" prepend-inner-icon="mdi-magnify"
           class="accouting_field accouting_active_field" placeholder="Filter entries" variant="outlined" />
@@ -994,7 +990,7 @@ const hoveredRowIndex = ref(null);
               <span class="account_label_bold">Type:</span>
               <span class="account_label_light">{{
                 selectedEntry?.voucher_type
-                }}</span>
+              }}</span>
             </div>
           </div>
 
@@ -1058,16 +1054,47 @@ const hoveredRowIndex = ref(null);
             <span class="account_label_bold abc">Narration:</span>
             <span class="account_label_light font-italic">{{
               selectedEntry?.particulars?.description?.narration || "N/A"
-              }}</span>
+            }}</span>
           </div>
         </VCardText>
       </VCard>
     </VDialog>
+
+    <VBtn @click="showJournalEntryCard = !showJournalEntryCard" :key="bounceKey" class="account_add_new_btn bounce">
+      <template #prepend>
+        <component :is="renderTablerIcon('circle-plus')" style="font-size: 18px;" />
+      </template>
+      New Journal Entry
+    </VBtn>
   </div>
 </template>
 
 <style scoped>
-/* .hovered-cell {
-    background: rgb(230, 230, 230) !important;
-} */
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  20% {
+    transform: translateY(-12px);
+  }
+
+  40% {
+    transform: translateY(0);
+  }
+
+  60% {
+    transform: translateY(-6px);
+  }
+
+  80% {
+    transform: translateY(0);
+  }
+}
+
+.bounce {
+  animation: bounce 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
 </style>
