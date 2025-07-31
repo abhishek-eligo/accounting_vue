@@ -1,4 +1,4 @@
-import { reactive as it, mergeProps as X, toRaw as Ue, createApp as qc, defineComponent as La, nextTick as Ee, computed as k, createVNode as l, onMounted as st, onUnmounted as Ci, Fragment as ve, ref as A, h as mt, isVNode as Vi, cloneVNode as Bs, watchEffect as Re, shallowRef as _e, watch as we, capitalize as Ra, toRefs as Oa, Comment as Yc, unref as F, getCurrentInstance as Jc, provide as Ke, inject as Be, warn as dl, camelize as Es, isRef as Na, toRef as oe, Text as Kc, TransitionGroup as Ii, Transition as Ge, onBeforeMount as Fs, onBeforeUnmount as Ut, withDirectives as Ye, resolveDirective as Bt, vShow as Gt, onScopeDispose as bt, effectScope as Pi, markRaw as Xc, onUpdated as Qc, readonly as Ai, resolveDynamicComponent as ae, Teleport as Zc, createTextVNode as de, vModelText as ed, createElementBlock as re, openBlock as w, withCtx as c, createElementVNode as v, renderList as ze, createBlock as D, createCommentVNode as q, toDisplayString as ue, normalizeClass as ye, onBeforeUpdate as td, withModifiers as en, normalizeStyle as la, resolveComponent as Ti, createSlots as Ls, createStaticVNode as Wa, render as Rs } from "vue";
+import { reactive as it, mergeProps as X, toRaw as Ue, createApp as qc, defineComponent as Ra, nextTick as Ee, computed as S, createVNode as l, onMounted as st, onUnmounted as Ci, Fragment as de, ref as T, h as mt, isVNode as Vi, cloneVNode as Bs, watchEffect as Oe, shallowRef as _e, watch as we, capitalize as Oa, toRefs as Ma, Comment as Yc, unref as F, getCurrentInstance as Jc, provide as Ke, inject as Be, warn as dl, camelize as Es, isRef as Na, toRef as oe, Text as Kc, TransitionGroup as Ii, Transition as Ge, onBeforeMount as Fs, onBeforeUnmount as Ut, withDirectives as Ye, resolveDirective as Bt, vShow as Gt, onScopeDispose as bt, effectScope as Pi, markRaw as Xc, onUpdated as Qc, readonly as Ai, resolveDynamicComponent as te, Teleport as Zc, createTextVNode as ve, vModelText as ed, createElementBlock as re, openBlock as w, withCtx as c, createElementVNode as v, renderList as Re, createBlock as A, createCommentVNode as W, toDisplayString as ue, normalizeClass as ye, onBeforeUpdate as td, withModifiers as ba, normalizeStyle as la, resolveComponent as Ti, createSlots as Ls, createStaticVNode as qa, render as Rs } from "vue";
 import { createVuetify as ad } from "vuetify";
 const hn = {
   TOP_LEFT: "top-left",
@@ -7,7 +7,7 @@ const hn = {
   BOTTOM_LEFT: "bottom-left",
   BOTTOM_RIGHT: "bottom-right",
   BOTTOM_CENTER: "bottom-center"
-}, Da = {
+}, $a = {
   LIGHT: "light",
   DARK: "dark",
   COLORED: "colored",
@@ -107,7 +107,7 @@ function fd(e, a, t = !1) {
     `${Le.CSS_NAMESPACE}__toast-container--${e}`,
     t ? `${Le.CSS_NAMESPACE}__toast-container--rtl` : null
   ].filter(Boolean).join(" ");
-  return Aa(a) ? a({
+  return Ta(a) ? a({
     position: e,
     rtl: t,
     defaultClassName: n
@@ -121,10 +121,10 @@ function md(e) {
     n,
     i
   ), m.dataset.testid = `${Le.CSS_NAMESPACE}__toast-container--${t}`, m.id = cd(e);
-  for (const f in o)
-    if (Object.prototype.hasOwnProperty.call(o, f)) {
-      const x = o[f];
-      m.style[f] = x;
+  for (const p in o)
+    if (Object.prototype.hasOwnProperty.call(o, p)) {
+      const k = o[p];
+      m.style[p] = k;
     }
   return r || (b.className = Le.CSS_NAMESPACE, document.body.appendChild(b)), y || b.appendChild(m), m;
 }
@@ -172,14 +172,14 @@ function pd(e) {
         zs(t);
 }
 function bd(e) {
-  const a = $a().find((t) => t.toastId === e);
+  const a = Ba().find((t) => t.toastId === e);
   return a == null ? void 0 : a.containerId;
 }
-function Ni(e) {
+function Di(e) {
   return document.getElementById(e);
 }
 function _d(e) {
-  const a = Ni(e.containerId);
+  const a = Di(e.containerId);
   return a && a.classList.contains(vl);
 }
 function xo(e) {
@@ -197,22 +197,22 @@ function xd() {
   }
 }
 const ct = it({}), Ot = it({ items: [] });
-function $a() {
+function Ba() {
   const e = Ue(ct);
   return Object.values(e).reduce((a, t) => [...a, ...t], []);
 }
 function kd(e) {
-  return $a().find((a) => a.toastId === e);
+  return Ba().find((a) => a.toastId === e);
 }
 function On(e, a = {}) {
   if (_d(a)) {
-    const t = Ni(a.containerId);
+    const t = Di(a.containerId);
     t && t.addEventListener("animationend", Xl.bind(null, e, a), !1);
   } else
     Xl(e, a);
 }
 function Xl(e, a = {}) {
-  const t = Ni(a.containerId);
+  const t = Di(a.containerId);
   t && t.removeEventListener("animationend", Xl.bind(null, e, a), !1);
   const n = ct[a.containerId] || [], i = n.length > 0;
   if (!i && !dd(a.position)) {
@@ -286,7 +286,7 @@ const wt = {
   },
   dismiss(e) {
     if (e) {
-      const a = $a();
+      const a = Ba();
       for (const t of a)
         if (t.toastId === e) {
           zs(t, (n) => {
@@ -298,7 +298,7 @@ const wt = {
   },
   dismissForce(e) {
     if (e) {
-      const a = $a();
+      const a = Ba();
       for (const t of a)
         if (t.toastId === e) {
           const n = document.getElementById(e);
@@ -317,7 +317,7 @@ function wd(e) {
 function Ql(e) {
   return typeof e == "string";
 }
-function Aa(e) {
+function Ta(e) {
   return typeof e == "function";
 }
 function fl(...e) {
@@ -445,7 +445,7 @@ const js = {
   theme: {
     type: String,
     required: !1,
-    default: Da.AUTO
+    default: $a.AUTO
   },
   content: {
     type: [String, Object, Function],
@@ -542,7 +542,7 @@ const js = {
   theme: {
     type: String,
     required: !1,
-    default: Da.AUTO
+    default: $a.AUTO
   },
   hide: {
     type: Boolean,
@@ -579,25 +579,25 @@ const js = {
     required: !1,
     default: void 0
   }
-}, Ad = /* @__PURE__ */ La({
+}, Ad = /* @__PURE__ */ Ra({
   name: "ProgressBar",
   props: Pd,
   // @ts-ignore
   setup(e, {
     attrs: a
   }) {
-    const t = A(), n = k(() => e.hide ? "true" : "false"), i = k(() => ({
+    const t = T(), n = S(() => e.hide ? "true" : "false"), i = S(() => ({
       ...a.style || {},
       animationDuration: `${e.autoClose === !0 ? 5e3 : e.autoClose}ms`,
       animationPlayState: e.isRunning ? "running" : "paused",
       opacity: e.hide || e.autoClose === !1 ? 0 : 1,
       transform: e.controlledProgress ? `scaleX(${e.progress})` : "none"
-    })), o = k(() => [`${Le.CSS_NAMESPACE}__progress-bar`, e.controlledProgress ? `${Le.CSS_NAMESPACE}__progress-bar--controlled` : `${Le.CSS_NAMESPACE}__progress-bar--animated`, `${Le.CSS_NAMESPACE}__progress-bar-theme--${e.theme}`, `${Le.CSS_NAMESPACE}__progress-bar--${e.type}`, e.rtl ? `${Le.CSS_NAMESPACE}__progress-bar--rtl` : null].filter(Boolean).join(" ")), s = k(() => `${o.value} ${(a == null ? void 0 : a.class) || ""}`), u = () => {
+    })), o = S(() => [`${Le.CSS_NAMESPACE}__progress-bar`, e.controlledProgress ? `${Le.CSS_NAMESPACE}__progress-bar--controlled` : `${Le.CSS_NAMESPACE}__progress-bar--animated`, `${Le.CSS_NAMESPACE}__progress-bar-theme--${e.theme}`, `${Le.CSS_NAMESPACE}__progress-bar--${e.type}`, e.rtl ? `${Le.CSS_NAMESPACE}__progress-bar--rtl` : null].filter(Boolean).join(" ")), s = S(() => `${o.value} ${(a == null ? void 0 : a.class) || ""}`), u = () => {
       t.value && (t.value.onanimationend = null, t.value.ontransitionend = null);
     }, r = () => {
       e.isIn && e.closeToast && e.autoClose !== !1 && (e.closeToast(), u());
-    }, d = k(() => e.controlledProgress ? null : r), y = k(() => e.controlledProgress ? r : null);
-    return Re(() => {
+    }, d = S(() => e.controlledProgress ? null : r), y = S(() => e.controlledProgress ? r : null);
+    return Oe(() => {
       t.value && (u(), t.value.onanimationend = d.value, t.value.ontransitionend = y.value);
     }), () => l("div", {
       ref: t,
@@ -608,19 +608,19 @@ const js = {
       style: i.value
     }, null);
   }
-}), Td = /* @__PURE__ */ La({
+}), Td = /* @__PURE__ */ Ra({
   name: "CloseButton",
   inheritAttrs: !1,
   props: {
     theme: {
       type: String,
       required: !1,
-      default: Da.AUTO
+      default: $a.AUTO
     },
     type: {
       type: String,
       required: !1,
-      default: Da.LIGHT
+      default: $a.LIGHT
     },
     ariaLabel: {
       type: String,
@@ -662,12 +662,12 @@ const js = {
 }, n), [l("path", {
   d: t
 }, null)]);
-function Nd(e) {
+function Dd(e) {
   return l(ml, X(e, {
     path: "M23.32 17.191L15.438 2.184C14.728.833 13.416 0 11.996 0c-1.42 0-2.733.833-3.443 2.184L.533 17.448a4.744 4.744 0 000 4.368C1.243 23.167 2.555 24 3.975 24h16.05C22.22 24 24 22.044 24 19.632c0-.904-.251-1.746-.68-2.44zm-9.622 1.46c0 1.033-.724 1.823-1.698 1.823s-1.698-.79-1.698-1.822v-.043c0-1.028.724-1.822 1.698-1.822s1.698.79 1.698 1.822v.043zm.039-12.285l-.84 8.06c-.057.581-.408.943-.897.943-.49 0-.84-.367-.896-.942l-.84-8.065c-.057-.624.25-1.095.779-1.095h1.91c.528.005.84.476.784 1.1z"
   }), null);
 }
-function Dd(e) {
+function Nd(e) {
   return l(ml, X(e, {
     path: "M12 0a12 12 0 1012 12A12.013 12.013 0 0012 0zm.25 5a1.5 1.5 0 11-1.5 1.5 1.5 1.5 0 011.5-1.5zm2.25 13.5h-4a1 1 0 010-2h.75a.25.25 0 00.25-.25v-4.5a.25.25 0 00-.25-.25h-.75a1 1 0 010-2h1a2 2 0 012 2v4.75a.25.25 0 00.25.25h.75a1 1 0 110 2z"
   }), null);
@@ -688,8 +688,8 @@ function Ed() {
   }, null);
 }
 const Un = {
-  info: Dd,
-  warning: Nd,
+  info: Nd,
+  warning: Dd,
   success: $d,
   error: Bd,
   spinner: Ed
@@ -709,7 +709,7 @@ function Ld({
   if (n !== !1) {
     if (Mn(n))
       i = Ue(n);
-    else if (Aa(n)) {
+    else if (Ta(n)) {
       const u = n;
       s.type = o ? "loading" : a, i = u(s), i = !i && o ? Un.spinner() : i;
     } else Vi(n) ? i = Bs(n, s) : Ql(n) || wd(n) ? i = n : Fd(a) && (i = Un[a](s));
@@ -727,81 +727,81 @@ function Od(e, a, t = Le.COLLAPSE_DURATION) {
   });
 }
 function Md(e) {
-  const a = A(!1), t = A(!1), n = A(!1), i = A(zn.Enter), o = it({
+  const a = T(!1), t = T(!1), n = T(!1), i = T(zn.Enter), o = it({
     ...e,
     appendPosition: e.appendPosition || !1,
     collapse: typeof e.collapse > "u" ? !0 : e.collapse,
     collapseDuration: e.collapseDuration || Le.COLLAPSE_DURATION
-  }), s = o.done || Rd, u = k(() => o.appendPosition ? `${o.enter}--${o.position}` : o.enter), r = k(() => o.appendPosition ? `${o.exit}--${o.position}` : o.exit), d = k(() => e.pauseOnHover ? {
+  }), s = o.done || Rd, u = S(() => o.appendPosition ? `${o.enter}--${o.position}` : o.enter), r = S(() => o.appendPosition ? `${o.exit}--${o.position}` : o.exit), d = S(() => e.pauseOnHover ? {
     onMouseenter: h,
-    onMouseleave: p
+    onMouseleave: _
   } : {});
   function y() {
-    const g = u.value.split(" ");
+    const f = u.value.split(" ");
     m().addEventListener(
       Yl.ENTRANCE_ANIMATION_END,
-      p,
+      _,
       { once: !0 }
     );
-    const S = ($) => {
-      const O = m();
-      $.target === O && (O.dispatchEvent(new Event(Yl.ENTRANCE_ANIMATION_END)), O.removeEventListener("animationend", S), O.removeEventListener("animationcancel", S), i.value === zn.Enter && $.type !== "animationcancel" && O.classList.remove(...g));
-    }, I = () => {
+    const x = ($) => {
+      const L = m();
+      $.target === L && (L.dispatchEvent(new Event(Yl.ENTRANCE_ANIMATION_END)), L.removeEventListener("animationend", x), L.removeEventListener("animationcancel", x), i.value === zn.Enter && $.type !== "animationcancel" && L.classList.remove(...f));
+    }, V = () => {
       const $ = m();
-      $.classList.add(...g), $.addEventListener("animationend", S), $.addEventListener("animationcancel", S);
+      $.classList.add(...f), $.addEventListener("animationend", x), $.addEventListener("animationcancel", x);
     };
-    e.pauseOnFocusLoss && f(), I();
+    e.pauseOnFocusLoss && p(), V();
   }
   function b() {
     if (!m()) return;
-    const g = () => {
-      const I = m();
-      I.removeEventListener("animationend", g), o.collapse ? Od(I, s, o.collapseDuration) : s();
-    }, S = () => {
-      const I = m();
-      i.value = zn.Exit, I && (I.className += ` ${r.value}`, I.addEventListener("animationend", g));
+    const f = () => {
+      const V = m();
+      V.removeEventListener("animationend", f), o.collapse ? Od(V, s, o.collapseDuration) : s();
+    }, x = () => {
+      const V = m();
+      i.value = zn.Exit, V && (V.className += ` ${r.value}`, V.addEventListener("animationend", f));
     };
-    t.value || (n.value ? g() : setTimeout(S));
+    t.value || (n.value ? f() : setTimeout(x));
   }
   function m() {
     return e.toastRef.value;
   }
-  function f() {
-    document.hasFocus() || h(), window.addEventListener("focus", p), window.addEventListener("blur", h);
-  }
-  function x() {
-    window.removeEventListener("focus", p), window.removeEventListener("blur", h);
-  }
   function p() {
+    document.hasFocus() || h(), window.addEventListener("focus", _), window.addEventListener("blur", h);
+  }
+  function k() {
+    window.removeEventListener("focus", _), window.removeEventListener("blur", h);
+  }
+  function _() {
     (!e.loading.value || e.isLoading === void 0) && (a.value = !0);
   }
   function h() {
     a.value = !1;
   }
-  function _(g) {
-    g && (g.stopPropagation(), g.preventDefault()), t.value = !1;
+  function g(f) {
+    f && (f.stopPropagation(), f.preventDefault()), t.value = !1;
   }
-  return Re(b), Re(() => {
-    const g = $a();
-    t.value = g.findIndex((S) => S.toastId === o.toastId) > -1;
-  }), Re(() => {
-    e.isLoading !== void 0 && (e.loading.value ? h() : p());
+  return Oe(b), Oe(() => {
+    const f = Ba();
+    t.value = f.findIndex((x) => x.toastId === o.toastId) > -1;
+  }), Oe(() => {
+    e.isLoading !== void 0 && (e.loading.value ? h() : _());
   }), st(y), Ci(() => {
-    e.pauseOnFocusLoss && x();
+    e.pauseOnFocusLoss && k();
   }), {
     isIn: t,
     isRunning: a,
-    hideToast: _,
+    hideToast: g,
     eventHandlers: d
   };
 }
-const zd = /* @__PURE__ */ La({
+const zd = /* @__PURE__ */ Ra({
   name: "ToastItem",
   inheritAttrs: !1,
   props: js,
   // @ts-ignore
   setup(e) {
-    const a = A(), t = k(() => !!e.isLoading), n = k(() => e.progress !== void 0 && e.progress !== null), i = k(() => Ld(e)), o = k(() => [`${Le.CSS_NAMESPACE}__toast`, `${Le.CSS_NAMESPACE}__toast-theme--${e.theme}`, `${Le.CSS_NAMESPACE}__toast--${e.type}`, e.rtl ? `${Le.CSS_NAMESPACE}__toast--rtl` : void 0, e.toastClassName || ""].filter(Boolean).join(" ")), {
+    const a = T(), t = S(() => !!e.isLoading), n = S(() => e.progress !== void 0 && e.progress !== null), i = S(() => Ld(e)), o = S(() => [`${Le.CSS_NAMESPACE}__toast`, `${Le.CSS_NAMESPACE}__toast-theme--${e.theme}`, `${Le.CSS_NAMESPACE}__toast--${e.type}`, e.rtl ? `${Le.CSS_NAMESPACE}__toast--rtl` : void 0, e.toastClassName || ""].filter(Boolean).join(" ")), {
       isRunning: s,
       isIn: u,
       hideToast: r,
@@ -834,7 +834,7 @@ const zd = /* @__PURE__ */ La({
     }, [Mn(i.value) ? mt(Ue(i.value), {
       theme: e.theme,
       type: e.type
-    }) : Aa(i.value) ? i.value({
+    }) : Ta(i.value) ? i.value({
       theme: e.theme,
       type: e.type
     }) : i.value]), l("div", {
@@ -846,7 +846,7 @@ const zd = /* @__PURE__ */ La({
       ...e.expandCustomProps ? e.contentProps : {
         contentProps: e.contentProps || {}
       }
-    }) : Aa(e.content) ? e.content({
+    }) : Ta(e.content) ? e.content({
       toastProps: Ue(e),
       closeToast: r,
       data: e.data
@@ -861,7 +861,7 @@ const zd = /* @__PURE__ */ La({
       closeToast: r,
       type: e.type,
       theme: e.theme
-    }) : Aa(e.closeButton) ? e.closeButton({
+    }) : Ta(e.closeButton) ? e.closeButton({
       closeToast: r,
       type: e.type,
       theme: e.theme
@@ -881,22 +881,22 @@ const zd = /* @__PURE__ */ La({
     }, null)]);
   }
 });
-let Qa = 0;
+let Za = 0;
 function Hs() {
-  typeof window > "u" || (Qa && window.cancelAnimationFrame(Qa), Qa = window.requestAnimationFrame(Hs), Kn.lastUrl !== window.location.href && (Kn.lastUrl = window.location.href, wt.clear()));
+  typeof window > "u" || (Za && window.cancelAnimationFrame(Za), Za = window.requestAnimationFrame(Hs), Kn.lastUrl !== window.location.href && (Kn.lastUrl = window.location.href, wt.clear()));
 }
-const Ud = /* @__PURE__ */ La({
+const Ud = /* @__PURE__ */ Ra({
   name: "ToastifyContainer",
   inheritAttrs: !1,
   props: js,
   // @ts-ignore
   setup(e) {
-    const a = k(() => e.containerId), t = k(() => ct[a.value] || []), n = k(() => t.value.filter((i) => i.position === e.position));
+    const a = S(() => e.containerId), t = S(() => ct[a.value] || []), n = S(() => t.value.filter((i) => i.position === e.position));
     return st(() => {
       typeof window < "u" && e.clearOnUrlChange && window.requestAnimationFrame(Hs);
     }), Ci(() => {
-      typeof window < "u" && Qa && (window.cancelAnimationFrame(Qa), Kn.lastUrl = "");
-    }), () => l(ve, null, [n.value.map((i) => {
+      typeof window < "u" && Za && (window.cancelAnimationFrame(Za), Kn.lastUrl = "");
+    }), () => l(de, null, [n.value.map((i) => {
       const {
         toastId: o = ""
       } = i;
@@ -916,7 +916,7 @@ const Ws = {
 };
 function qs() {
   const e = [];
-  return $a().forEach((a) => {
+  return Ba().forEach((a) => {
     const t = document.getElementById(a.containerId);
     t && !t.classList.contains(vl) && e.push(a);
   }), e;
@@ -970,7 +970,7 @@ Te.success = (e, a) => ra(e, yt.DEFAULT, {
 });
 Te.loading = (e, a) => ra(e, yt.DEFAULT, fl(a, Ws));
 Te.dark = (e, a) => ra(e, yt.DEFAULT, fl(a, {
-  theme: Da.DARK
+  theme: $a.DARK
 }));
 Te.remove = (e) => {
   e ? wt.dismiss(e) : wt.clear();
@@ -1029,37 +1029,37 @@ function Hd(e, {
     isLoading: void 0,
     draggable: null,
     delay: 100
-  }, b = (f, x, p) => {
-    if (x == null) {
+  }, b = (p, k, _) => {
+    if (k == null) {
       Te.remove(r);
       return;
     }
     const h = {
-      type: f,
+      type: p,
       ...y,
       ...i,
-      data: p
-    }, _ = Ql(x) ? {
-      render: x
-    } : x;
+      data: _
+    }, g = Ql(k) ? {
+      render: k
+    } : k;
     return r ? Te.update(r, {
       ...h,
-      ..._,
+      ...g,
       isLoading: !1
-    }) : Te(_.render, {
+    }) : Te(g.render, {
       ...h,
-      ..._,
+      ...g,
       isLoading: !1
-    }), p;
-  }, m = Aa(e) ? e() : e;
-  return m.then((f) => {
-    b("success", n, f);
-  }).catch((f) => {
-    b("error", t, f);
+    }), _;
+  }, m = Ta(e) ? e() : e;
+  return m.then((p) => {
+    b("success", n, p);
+  }).catch((p) => {
+    b("error", t, p);
   }), m;
 }
 Te.POSITION = hn;
-Te.THEME = Da;
+Te.THEME = $a;
 Te.TYPE = yt;
 Te.TRANSITIONS = nd;
 const Wd = {
@@ -1238,7 +1238,7 @@ function Qd(e, a) {
     missing: /* @__PURE__ */ new Set()
   };
 }
-function Ba(e, a) {
+function Ea(e, a) {
   const t = So[e] || (So[e] = /* @__PURE__ */ Object.create(null));
   return t[a] || (t[a] = Qd(e, a));
 }
@@ -1262,7 +1262,7 @@ function Zs(e) {
 function ev(e) {
   const a = typeof e == "string" ? gl(e, !0, an) : e;
   if (a) {
-    const t = Ba(a.provider, a.prefix), n = a.name;
+    const t = Ea(a.provider, a.prefix), n = a.name;
     return t.icons[n] || (t.missing.has(n) ? null : void 0);
   }
 }
@@ -1270,7 +1270,7 @@ function tv(e, a) {
   const t = gl(e, !0, an);
   if (!t)
     return !1;
-  const n = Ba(t.provider, t.prefix);
+  const n = Ea(t.provider, t.prefix);
   return a ? Zd(n, t.name, a) : (n.missing.add(t.name), !0);
 }
 function av(e, a) {
@@ -1288,7 +1288,7 @@ function av(e, a) {
     name: "a"
   }))
     return !1;
-  const n = Ba(a, t);
+  const n = Ea(a, t);
   return !!Qs(n, e);
 }
 const eu = Object.freeze({
@@ -1362,19 +1362,19 @@ function rv(e, a) {
     height: t.height
   };
   let o = t.body;
-  [t, n].forEach((p) => {
-    const h = [], _ = p.hFlip, g = p.vFlip;
-    let S = p.rotate;
-    _ ? g ? S += 2 : (h.push(
+  [t, n].forEach((_) => {
+    const h = [], g = _.hFlip, f = _.vFlip;
+    let x = _.rotate;
+    g ? f ? x += 2 : (h.push(
       "translate(" + (i.width + i.left).toString() + " " + (0 - i.top).toString() + ")"
-    ), h.push("scale(-1 1)"), i.top = i.left = 0) : g && (h.push(
+    ), h.push("scale(-1 1)"), i.top = i.left = 0) : f && (h.push(
       "translate(" + (0 - i.left).toString() + " " + (i.height + i.top).toString() + ")"
     ), h.push("scale(1 -1)"), i.top = i.left = 0);
-    let I;
-    switch (S < 0 && (S -= Math.floor(S / 4) * 4), S = S % 4, S) {
+    let V;
+    switch (x < 0 && (x -= Math.floor(x / 4) * 4), x = x % 4, x) {
       case 1:
-        I = i.height / 2 + i.top, h.unshift(
-          "rotate(90 " + I.toString() + " " + I.toString() + ")"
+        V = i.height / 2 + i.top, h.unshift(
+          "rotate(90 " + V.toString() + " " + V.toString() + ")"
         );
         break;
       case 2:
@@ -1383,12 +1383,12 @@ function rv(e, a) {
         );
         break;
       case 3:
-        I = i.width / 2 + i.left, h.unshift(
-          "rotate(-90 " + I.toString() + " " + I.toString() + ")"
+        V = i.width / 2 + i.left, h.unshift(
+          "rotate(-90 " + V.toString() + " " + V.toString() + ")"
         );
         break;
     }
-    S % 2 === 1 && (i.left !== i.top && (I = i.left, i.left = i.top, i.top = I), i.width !== i.height && (I = i.width, i.width = i.height, i.height = I)), h.length && (o = sv(
+    x % 2 === 1 && (i.left !== i.top && (V = i.left, i.left = i.top, i.top = V), i.width !== i.height && (V = i.width, i.width = i.height, i.height = V)), h.length && (o = sv(
       o,
       '<g transform="' + h.join(" ") + '">',
       "</g>"
@@ -1397,14 +1397,14 @@ function rv(e, a) {
   const s = n.width, u = n.height, r = i.width, d = i.height;
   let y, b;
   s === null ? (b = u === null ? "1em" : u === "auto" ? d : u, y = wo(b, r / d)) : (y = s === "auto" ? r : s, b = u === null ? wo(y, d / r) : u === "auto" ? d : u);
-  const m = {}, f = (p, h) => {
-    uv(h) || (m[p] = h.toString());
+  const m = {}, p = (_, h) => {
+    uv(h) || (m[_] = h.toString());
   };
-  f("width", y), f("height", b);
-  const x = [i.left, i.top, r, d];
-  return m.viewBox = x.join(" "), {
+  p("width", y), p("height", b);
+  const k = [i.left, i.top, r, d];
+  return m.viewBox = k.join(" "), {
     attributes: m,
-    viewBox: x,
+    viewBox: k,
     body: o
   };
 }
@@ -1435,7 +1435,7 @@ function mv(e, a) {
 function ti(e) {
   return ei[e] || ei[""];
 }
-function Di(e) {
+function Ni(e) {
   let a;
   if (typeof e.resources == "string")
     a = [e.resources];
@@ -1460,17 +1460,17 @@ function Di(e) {
     dataAfterTimeout: e.dataAfterTimeout !== !1
   };
 }
-const $i = /* @__PURE__ */ Object.create(null), qa = [
+const $i = /* @__PURE__ */ Object.create(null), Ya = [
   "https://api.simplesvg.com",
   "https://api.unisvg.com"
 ], jn = [];
-for (; qa.length > 0; )
-  qa.length === 1 || Math.random() > 0.5 ? jn.push(qa.shift()) : jn.push(qa.pop());
-$i[""] = Di({
+for (; Ya.length > 0; )
+  Ya.length === 1 || Math.random() > 0.5 ? jn.push(Ya.shift()) : jn.push(Ya.pop());
+$i[""] = Ni({
   resources: ["https://api.iconify.design"].concat(jn)
 });
 function gv(e, a) {
-  const t = Di(a);
+  const t = Ni(a);
   return t === null ? !1 : ($i[e] = t, !0);
 }
 function Bi(e) {
@@ -1596,7 +1596,7 @@ function Sv(e) {
     if (n.name === i.name && n.prefix === i.prefix && n.provider === i.provider)
       return;
     n = i;
-    const o = i.provider, s = i.prefix, u = i.name, r = t[o] || (t[o] = /* @__PURE__ */ Object.create(null)), d = r[s] || (r[s] = Ba(o, s));
+    const o = i.provider, s = i.prefix, u = i.name, r = t[o] || (t[o] = /* @__PURE__ */ Object.create(null)), d = r[s] || (r[s] = Ea(o, s));
     let y;
     u in d.icons ? y = a.loaded : s === "" || d.missing.has(u) ? y = a.missing : y = a.pending;
     const b = {
@@ -1685,29 +1685,29 @@ function Av(e, a, t, n) {
   const i = e.resources.length, o = e.random ? Math.floor(Math.random() * i) : e.index;
   let s;
   if (e.random) {
-    let O = e.resources.slice(0);
-    for (s = []; O.length > 1; ) {
-      const E = Math.floor(Math.random() * O.length);
-      s.push(O[E]), O = O.slice(0, E).concat(O.slice(E + 1));
+    let L = e.resources.slice(0);
+    for (s = []; L.length > 1; ) {
+      const E = Math.floor(Math.random() * L.length);
+      s.push(L[E]), L = L.slice(0, E).concat(L.slice(E + 1));
     }
-    s = s.concat(O);
+    s = s.concat(L);
   } else
     s = e.resources.slice(o).concat(e.resources.slice(0, o));
   const u = Date.now();
-  let r = "pending", d = 0, y, b = null, m = [], f = [];
-  typeof n == "function" && f.push(n);
-  function x() {
+  let r = "pending", d = 0, y, b = null, m = [], p = [];
+  typeof n == "function" && p.push(n);
+  function k() {
     b && (clearTimeout(b), b = null);
   }
-  function p() {
-    r === "pending" && (r = "aborted"), x(), m.forEach((O) => {
-      O.status === "pending" && (O.status = "aborted");
+  function _() {
+    r === "pending" && (r = "aborted"), k(), m.forEach((L) => {
+      L.status === "pending" && (L.status = "aborted");
     }), m = [];
   }
-  function h(O, E) {
-    E && (f = []), typeof O == "function" && f.push(O);
+  function h(L, E) {
+    E && (p = []), typeof L == "function" && p.push(L);
   }
-  function _() {
+  function g() {
     return {
       startTime: u,
       payload: a,
@@ -1715,72 +1715,72 @@ function Av(e, a, t, n) {
       queriesSent: d,
       queriesPending: m.length,
       subscribe: h,
-      abort: p
+      abort: _
     };
   }
-  function g() {
-    r = "failed", f.forEach((O) => {
-      O(void 0, y);
+  function f() {
+    r = "failed", p.forEach((L) => {
+      L(void 0, y);
     });
   }
-  function S() {
-    m.forEach((O) => {
-      O.status === "pending" && (O.status = "aborted");
+  function x() {
+    m.forEach((L) => {
+      L.status === "pending" && (L.status = "aborted");
     }), m = [];
   }
-  function I(O, E, R) {
-    const T = E !== "success";
-    switch (m = m.filter((U) => U !== O), r) {
+  function V(L, E, O) {
+    const D = E !== "success";
+    switch (m = m.filter((U) => U !== L), r) {
       case "pending":
         break;
       case "failed":
-        if (T || !e.dataAfterTimeout)
+        if (D || !e.dataAfterTimeout)
           return;
         break;
       default:
         return;
     }
     if (E === "abort") {
-      y = R, g();
+      y = O, f();
       return;
     }
-    if (T) {
-      y = R, m.length || (s.length ? $() : g());
+    if (D) {
+      y = O, m.length || (s.length ? $() : f());
       return;
     }
-    if (x(), S(), !e.random) {
-      const U = e.resources.indexOf(O.resource);
+    if (k(), x(), !e.random) {
+      const U = e.resources.indexOf(L.resource);
       U !== -1 && U !== e.index && (e.index = U);
     }
-    r = "completed", f.forEach((U) => {
-      U(R);
+    r = "completed", p.forEach((U) => {
+      U(O);
     });
   }
   function $() {
     if (r !== "pending")
       return;
-    x();
-    const O = s.shift();
-    if (O === void 0) {
+    k();
+    const L = s.shift();
+    if (L === void 0) {
       if (m.length) {
         b = setTimeout(() => {
-          x(), r === "pending" && (S(), g());
+          k(), r === "pending" && (x(), f());
         }, e.timeout);
         return;
       }
-      g();
+      f();
       return;
     }
     const E = {
       status: "pending",
-      resource: O,
-      callback: (R, T) => {
-        I(E, R, T);
+      resource: L,
+      callback: (O, D) => {
+        V(E, O, D);
       }
     };
-    m.push(E), d++, b = setTimeout($, e.rotate), t(O, a, E.callback);
+    m.push(E), d++, b = setTimeout($, e.rotate), t(L, a, E.callback);
   }
-  return setTimeout($), _;
+  return setTimeout($), g;
 }
 function nu(e) {
   const a = {
@@ -1831,7 +1831,7 @@ function Tv(e) {
   }
   return Fl[e];
 }
-function Nv(e, a, t) {
+function Dv(e, a, t) {
   let n, i;
   if (typeof e == "string") {
     const o = ti(e);
@@ -1841,7 +1841,7 @@ function Nv(e, a, t) {
     const s = Tv(e);
     s && (n = s.redundancy);
   } else {
-    const o = Di(e);
+    const o = Ni(e);
     if (o) {
       n = nu(o);
       const s = e.resources ? e.resources[0] : "", u = ti(s);
@@ -1852,7 +1852,7 @@ function Nv(e, a, t) {
 }
 function Io() {
 }
-function Dv(e) {
+function Nv(e) {
   e.iconsLoaderFlag || (e.iconsLoaderFlag = !0, setTimeout(() => {
     e.iconsLoaderFlag = !1, wv(e);
   }));
@@ -1866,7 +1866,7 @@ function $v(e) {
     invalid: t
   };
 }
-function Ya(e, a, t) {
+function Ja(e, a, t) {
   function n() {
     const i = e.pendingIcons;
     a.forEach((o) => {
@@ -1882,7 +1882,7 @@ function Ya(e, a, t) {
     } catch (i) {
       console.error(i);
     }
-  n(), Dv(e);
+  n(), Nv(e);
 }
 function Po(e, a) {
   e instanceof Promise ? e.then((t) => {
@@ -1902,7 +1902,7 @@ function Bv(e, a) {
       Po(
         e.loadIcons(i, n, t),
         (y) => {
-          Ya(e, i, y);
+          Ja(e, i, y);
         }
       );
       return;
@@ -1911,28 +1911,28 @@ function Bv(e, a) {
       i.forEach((y) => {
         const b = o(y, n, t);
         Po(b, (m) => {
-          const f = m ? {
+          const p = m ? {
             prefix: n,
             icons: {
               [y]: m
             }
           } : null;
-          Ya(e, [y], f);
+          Ja(e, [y], p);
         });
       });
       return;
     }
     const { valid: s, invalid: u } = $v(i);
-    if (u.length && Ya(e, u, null), !s.length)
+    if (u.length && Ja(e, u, null), !s.length)
       return;
     const r = n.match(Ys) ? ti(t) : null;
     if (!r) {
-      Ya(e, s, null);
+      Ja(e, s, null);
       return;
     }
     r.prepare(t, n, s).forEach((y) => {
-      Nv(t, y, (b) => {
-        Ya(e, y.icons, b);
+      Dv(t, y, (b) => {
+        Ja(e, y.icons, b);
       });
     });
   }));
@@ -1958,12 +1958,12 @@ const Ev = (e, a) => {
     const { provider: d, prefix: y } = r;
     if (y === u && d === s)
       return;
-    s = d, u = y, o.push(Ba(d, y));
+    s = d, u = y, o.push(Ea(d, y));
     const b = i[d] || (i[d] = /* @__PURE__ */ Object.create(null));
     b[y] || (b[y] = []);
   }), n.pending.forEach((r) => {
-    const { provider: d, prefix: y, name: b } = r, m = Ba(d, y), f = m.pendingIcons || (m.pendingIcons = /* @__PURE__ */ new Set());
-    f.has(b) || (f.add(b), i[d][y].push(b));
+    const { provider: d, prefix: y, name: b } = r, m = Ea(d, y), p = m.pendingIcons || (m.pendingIcons = /* @__PURE__ */ new Set());
+    p.has(b) || (p.add(b), i[d][y].push(b));
   }), o.forEach((r) => {
     const d = i[r.provider][r.prefix];
     d.length && Bv(r, d);
@@ -2051,13 +2051,13 @@ const Ao = {
   Image: "var(--svg)",
   Repeat: "no-repeat",
   Size: "100% 100%"
-}, No = {
+}, Do = {
   webkitMask: ai,
   mask: ai,
   background: lu
 };
-for (const e in No) {
-  const a = No[e];
+for (const e in Do) {
+  const a = Do[e];
   for (const t in To)
     a[e + t] = To[t];
 }
@@ -2066,15 +2066,15 @@ const Hn = {};
   const a = e.slice(0, 1) + "Flip";
   Hn[e + "-flip"] = a, Hn[e.slice(0, 1) + "-flip"] = a, Hn[e + "Flip"] = a;
 });
-function Do(e) {
+function No(e) {
   return e + (e.match(/^[-0-9.]+$/) ? "px" : "");
 }
 const $o = (e, a) => {
   const t = Fv(Ao, a), n = { ...jv }, i = a.mode || "svg", o = {}, s = a.style, u = typeof s == "object" && !(s instanceof Array) ? s : {};
-  for (let p in a) {
-    const h = a[p];
+  for (let _ in a) {
+    const h = a[_];
     if (h !== void 0)
-      switch (p) {
+      switch (_) {
         // Properties to ignore
         case "icon":
         case "style":
@@ -2086,7 +2086,7 @@ const $o = (e, a) => {
         case "inline":
         case "hFlip":
         case "vFlip":
-          t[p] = h === !0 || h === "true" || h === 1;
+          t[_] = h === !0 || h === "true" || h === 1;
           break;
         // Flip as string: 'horizontal,vertical'
         case "flip":
@@ -2098,7 +2098,7 @@ const $o = (e, a) => {
           break;
         // Rotation as string
         case "rotate":
-          typeof h == "string" ? t[p] = Ov(h) : typeof h == "number" && (t[p] = h);
+          typeof h == "string" ? t[_] = Ov(h) : typeof h == "number" && (t[_] = h);
           break;
         // Remove aria-hidden
         case "ariaHidden":
@@ -2106,8 +2106,8 @@ const $o = (e, a) => {
           h !== !0 && h !== "true" && delete n["aria-hidden"];
           break;
         default: {
-          const _ = Hn[p];
-          _ ? (h === !0 || h === "true" || h === 1) && (t[_] = !0) : Ao[p] === void 0 && (n[p] = h);
+          const g = Hn[_];
+          g ? (h === !0 || h === "true" || h === 1) && (t[g] = !0) : Ao[_] === void 0 && (n[_] = h);
         }
       }
   }
@@ -2117,21 +2117,21 @@ const $o = (e, a) => {
       ...o,
       ...u
     }, Object.assign(n, d);
-    let p = 0, h = a.id;
-    return typeof h == "string" && (h = h.replace(/-/g, "_")), n.innerHTML = fv(r.body, h ? () => h + "ID" + p++ : "iconifyVue"), mt("svg", n);
+    let _ = 0, h = a.id;
+    return typeof h == "string" && (h = h.replace(/-/g, "_")), n.innerHTML = fv(r.body, h ? () => h + "ID" + _++ : "iconifyVue"), mt("svg", n);
   }
-  const { body: y, width: b, height: m } = e, f = i === "mask" || (i === "bg" ? !1 : y.indexOf("currentColor") !== -1), x = Mv(y, {
+  const { body: y, width: b, height: m } = e, p = i === "mask" || (i === "bg" ? !1 : y.indexOf("currentColor") !== -1), k = Mv(y, {
     ...d,
     width: b + "",
     height: m + ""
   });
   return n.style = {
     ...o,
-    "--svg": Gv(x),
-    width: Do(d.width),
-    height: Do(d.height),
+    "--svg": Gv(k),
+    width: No(d.width),
+    height: No(d.height),
     ...Hv,
-    ...f ? ai : lu,
+    ...p ? ai : lu,
     ...u
   }, mt("span", n);
 };
@@ -2171,13 +2171,13 @@ if (typeof document < "u" && typeof window < "u") {
 const Wv = {
   ...yl,
   body: ""
-}, qv = La((e, { emit: a }) => {
-  const t = A(null);
+}, qv = Ra((e, { emit: a }) => {
+  const t = T(null);
   function n() {
     var d, y;
     t.value && ((y = (d = t.value).abort) == null || y.call(d), t.value = null);
   }
-  const i = A(!!e.ssr), o = A(""), s = _e(null);
+  const i = T(!!e.ssr), o = T(""), s = _e(null);
   function u() {
     const d = e.icon;
     if (typeof d == "object" && d !== null && typeof d.body == "string")
@@ -2189,8 +2189,8 @@ const Wv = {
       return null;
     let b = ev(y);
     if (!b) {
-      const x = t.value;
-      return (!x || x.name !== d) && (b === null ? t.value = {
+      const k = t.value;
+      return (!k || k.name !== d) && (b === null ? t.value = {
         name: d
       } : t.value = {
         name: d,
@@ -2203,11 +2203,11 @@ const Wv = {
     const m = e.customise;
     if (m) {
       b = Object.assign({}, b);
-      const x = m(b.body, y.name, y.prefix, y.provider);
-      typeof x == "string" && (b.body = x);
+      const k = m(b.body, y.name, y.prefix, y.provider);
+      typeof k == "string" && (b.body = k);
     }
-    const f = ["iconify"];
-    return y.prefix !== "" && f.push("iconify--" + y.prefix), y.provider !== "" && f.push("iconify--" + y.provider), { data: b, classes: f };
+    const p = ["iconify"];
+    return y.prefix !== "" && p.push("iconify--" + y.prefix), y.provider !== "" && p.push("iconify--" + y.provider), { data: b, classes: p };
   }
   function r() {
     var y;
@@ -2256,7 +2256,7 @@ const Wv = {
   ],
   emits: ["load"]
 });
-function le(e, a = {}) {
+function ne(e, a = {}) {
   return mt(qv, { icon: `tabler:${e}`, ...a });
 }
 function iu(e) {
@@ -2306,15 +2306,15 @@ function iu(e) {
   }
   function o(y) {
     if (y === 0) return "zero";
-    const b = Math.floor(y / 1e7), m = Math.floor(y % 1e7 / 1e5), f = Math.floor(y % 1e5 / 1e3), x = y % 1e3;
-    let p = "";
-    return b > 0 && (p += i(b) + " crore"), m > 0 && (p !== "" && (p += " "), p += i(m) + " lakh"), f > 0 && (p !== "" && (p += " "), p += i(f) + " thousand"), x > 0 && (p !== "" && (p += " "), p += i(x)), p;
+    const b = Math.floor(y / 1e7), m = Math.floor(y % 1e7 / 1e5), p = Math.floor(y % 1e5 / 1e3), k = y % 1e3;
+    let _ = "";
+    return b > 0 && (_ += i(b) + " crore"), m > 0 && (_ !== "" && (_ += " "), _ += i(m) + " lakh"), p > 0 && (_ !== "" && (_ += " "), _ += i(p) + " thousand"), k > 0 && (_ !== "" && (_ += " "), _ += i(k)), _;
   }
   const s = e.toString().split("."), u = parseInt(s[0]), r = s[1] ? parseInt(s[1]) : 0;
   let d = o(u);
   return r > 0 && (d += " and " + o(r) + " paise"), d.charAt(0).toUpperCase() + d.slice(1);
 }
-function N2(e, a = "₹") {
+function $2(e, a = "₹") {
   const t = parseFloat(e) || 0, n = iu(t);
   return {
     amount: t,
@@ -2421,7 +2421,7 @@ const at = {
     const a = at.required(e);
     return a !== !0 ? a : !0;
   }
-}, D2 = {
+}, B2 = {
   // Customer name validation
   customerName: (e) => {
     const a = at.required(e);
@@ -2439,7 +2439,7 @@ const at = {
   customerPAN: (e) => e ? at.pan(e) : !0,
   // Opening balance validation
   openingBalance: (e) => e ? at.amount(e) : !0
-}, $2 = (e, a) => {
+}, E2 = (e, a) => {
   const t = {};
   for (const [n, i] of Object.entries(e))
     if (a[n]) {
@@ -2566,7 +2566,7 @@ function ni(e, a, t) {
     a.some((s) => s instanceof RegExp ? s.test(o) : s === o) ? n[o] = e[o] : i[o] = e[o];
   return [n, i];
 }
-function Me(e, a) {
+function ze(e, a) {
   const t = {
     ...e
   };
@@ -2577,8 +2577,8 @@ function uu(e, a) {
   return a.forEach((n) => t[n] = e[n]), t;
 }
 const ru = /^on[^a-z]/, pl = (e) => ru.test(e), Jv = ["onAfterscriptexecute", "onAnimationcancel", "onAnimationend", "onAnimationiteration", "onAnimationstart", "onAuxclick", "onBeforeinput", "onBeforescriptexecute", "onChange", "onClick", "onCompositionend", "onCompositionstart", "onCompositionupdate", "onContextmenu", "onCopy", "onCut", "onDblclick", "onFocusin", "onFocusout", "onFullscreenchange", "onFullscreenerror", "onGesturechange", "onGestureend", "onGesturestart", "onGotpointercapture", "onInput", "onKeydown", "onKeypress", "onKeyup", "onLostpointercapture", "onMousedown", "onMousemove", "onMouseout", "onMouseover", "onMouseup", "onMousewheel", "onPaste", "onPointercancel", "onPointerdown", "onPointerenter", "onPointerleave", "onPointermove", "onPointerout", "onPointerover", "onPointerup", "onReset", "onSelect", "onSubmit", "onTouchcancel", "onTouchend", "onTouchmove", "onTouchstart", "onTransitioncancel", "onTransitionend", "onTransitionrun", "onTransitionstart", "onWheel"];
-function ha(e) {
-  const [a, t] = ni(e, [ru]), n = Me(a, Jv), [i, o] = ni(t, ["class", "style", "id", /^data-/]);
+function xa(e) {
+  const [a, t] = ni(e, [ru]), n = ze(a, Jv), [i, o] = ni(t, ["class", "style", "id", /^data-/]);
   return Object.assign(i, a), Object.assign(o, n), [i, o];
 }
 function We(e) {
@@ -2651,7 +2651,7 @@ function Qt() {
   return n;
 }
 function cu(e) {
-  return e.map((a) => a.type === ve ? cu(a.children) : a).flat();
+  return e.map((a) => a.type === de ? cu(a.children) : a).flat();
 }
 function ya() {
   let e = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : "";
@@ -2660,30 +2660,30 @@ function ya() {
   return ya.cache.set(e, a), a;
 }
 ya.cache = /* @__PURE__ */ new Map();
-function Ka(e, a) {
+function Xa(e, a) {
   if (!a || typeof a != "object") return [];
   if (Array.isArray(a))
-    return a.map((t) => Ka(e, t)).flat(1);
+    return a.map((t) => Xa(e, t)).flat(1);
   if (a.suspense)
-    return Ka(e, a.ssContent);
+    return Xa(e, a.ssContent);
   if (Array.isArray(a.children))
-    return a.children.map((t) => Ka(e, t)).flat(1);
+    return a.children.map((t) => Xa(e, t)).flat(1);
   if (a.component) {
     if (Object.getOwnPropertySymbols(a.component.provides).includes(e))
       return [a.component];
     if (a.component.subTree)
-      return Ka(e, a.component.subTree).flat(1);
+      return Xa(e, a.component.subTree).flat(1);
   }
   return [];
 }
 function Ri(e) {
-  const a = it({}), t = k(e);
-  return Re(() => {
+  const a = it({}), t = S(e);
+  return Oe(() => {
     for (const n in t.value)
       a[n] = t.value[n];
   }, {
     flush: "sync"
-  }), Oa(a);
+  }), Ma(a);
 }
 function Qn(e, a) {
   return e.includes(a);
@@ -2693,7 +2693,7 @@ function du(e) {
 }
 const rt = () => [Function, Array];
 function Mo(e, a) {
-  return a = "on" + Ra(a), !!(e[a] || e[`${a}Once`] || e[`${a}Capture`] || e[`${a}OnceCapture`] || e[`${a}CaptureOnce`]);
+  return a = "on" + Oa(a), !!(e[a] || e[`${a}Once`] || e[`${a}Capture`] || e[`${a}OnceCapture`] || e[`${a}CaptureOnce`]);
 }
 function Oi(e) {
   for (var a = arguments.length, t = new Array(a > 1 ? a - 1 : 0), n = 1; n < a; n++)
@@ -2737,7 +2737,7 @@ function En(e) {
 }
 function Zv() {
 }
-function Ea(e, a) {
+function Fa(e, a) {
   if (!(et && typeof CSS < "u" && typeof CSS.supports < "u" && CSS.supports(`selector(${a})`))) return null;
   try {
     return !!e && e.matches(a);
@@ -2746,7 +2746,7 @@ function Ea(e, a) {
   }
 }
 function Mi(e) {
-  return e.some((a) => Vi(a) ? a.type === Yc ? !1 : a.type !== ve || Mi(a.children) : !0) ? e : null;
+  return e.some((a) => Vi(a) ? a.type === Yc ? !1 : a.type !== de || Mi(a.children) : !0) ? e : null;
 }
 function ef(e, a) {
   if (!et || e === 0)
@@ -2810,7 +2810,7 @@ function zi() {
   return e;
 }
 function pt(e, a) {
-  const t = zi(), n = A(e), i = k(() => {
+  const t = zi(), n = T(e), i = S(() => {
     if (F(a == null ? void 0 : a.disabled)) return t.value;
     const s = F(a == null ? void 0 : a.scoped), u = F(a == null ? void 0 : a.reset), r = F(a == null ? void 0 : a.root);
     if (n.value == null && !(s || u || r)) return t.value;
@@ -2839,17 +2839,17 @@ function lf() {
   const n = tt("useDefaults");
   if (a = a ?? n.type.name ?? n.type.__name, !a)
     throw new Error("[Vuetify] Could not determine component name");
-  const i = k(() => {
+  const i = S(() => {
     var r;
     return (r = t.value) == null ? void 0 : r[e._as ?? a];
   }), o = new Proxy(e, {
     get(r, d) {
-      var b, m, f, x, p, h, _;
+      var b, m, p, k, _, h, g;
       const y = Reflect.get(r, d);
-      return d === "class" || d === "style" ? [(b = i.value) == null ? void 0 : b[d], y].filter((g) => g != null) : typeof d == "string" && !nf(n.vnode, d) ? ((m = i.value) == null ? void 0 : m[d]) !== void 0 ? (f = i.value) == null ? void 0 : f[d] : ((p = (x = t.value) == null ? void 0 : x.global) == null ? void 0 : p[d]) !== void 0 ? (_ = (h = t.value) == null ? void 0 : h.global) == null ? void 0 : _[d] : y : y;
+      return d === "class" || d === "style" ? [(b = i.value) == null ? void 0 : b[d], y].filter((f) => f != null) : typeof d == "string" && !nf(n.vnode, d) ? ((m = i.value) == null ? void 0 : m[d]) !== void 0 ? (p = i.value) == null ? void 0 : p[d] : ((_ = (k = t.value) == null ? void 0 : k.global) == null ? void 0 : _[d]) !== void 0 ? (g = (h = t.value) == null ? void 0 : h.global) == null ? void 0 : g[d] : y : y;
     }
   }), s = _e();
-  Re(() => {
+  Oe(() => {
     if (i.value) {
       const r = Object.entries(i.value).filter((d) => {
         let [y] = d;
@@ -2861,7 +2861,7 @@ function lf() {
   });
   function u() {
     const r = af(tl, n);
-    Ke(tl, k(() => s.value ? Qt((r == null ? void 0 : r.value) ?? {}, s.value) : r == null ? void 0 : r.value));
+    Ke(tl, S(() => s.value ? Qt((r == null ? void 0 : r.value) ?? {}, s.value) : r == null ? void 0 : r.value));
   }
   return {
     props: o,
@@ -2965,12 +2965,12 @@ function Ui(e) {
       i = n.slice(7, -1).split(/, /), o = +i[0], s = +i[3], u = +i[4], r = +i[5];
     else
       return new pa(a);
-    const d = t.transformOrigin, y = a.x - u - (1 - o) * parseFloat(d), b = a.y - r - (1 - s) * parseFloat(d.slice(d.indexOf(" ") + 1)), m = o ? a.width / o : e.offsetWidth + 1, f = s ? a.height / s : e.offsetHeight + 1;
+    const d = t.transformOrigin, y = a.x - u - (1 - o) * parseFloat(d), b = a.y - r - (1 - s) * parseFloat(d.slice(d.indexOf(" ") + 1)), m = o ? a.width / o : e.offsetWidth + 1, p = s ? a.height / s : e.offsetHeight + 1;
     return new pa({
       x: y,
       y: b,
       width: m,
-      height: f
+      height: p
     });
   } else
     return new pa(a);
@@ -3024,9 +3024,9 @@ function uf(e, a) {
       e.removeAttribute(t);
   });
 }
-const Ia = 2.4, Ho = 0.2126729, Wo = 0.7151522, qo = 0.072175, rf = 0.55, cf = 0.58, df = 0.57, vf = 0.62, Fn = 0.03, Yo = 1.45, ff = 5e-4, mf = 1.25, gf = 1.25, Jo = 0.078, Ko = 12.82051282051282, Ln = 0.06, Xo = 1e-3;
+const Pa = 2.4, Ho = 0.2126729, Wo = 0.7151522, qo = 0.072175, rf = 0.55, cf = 0.58, df = 0.57, vf = 0.62, Fn = 0.03, Yo = 1.45, ff = 5e-4, mf = 1.25, gf = 1.25, Jo = 0.078, Ko = 12.82051282051282, Ln = 0.06, Xo = 1e-3;
 function Qo(e, a) {
-  const t = (e.r / 255) ** Ia, n = (e.g / 255) ** Ia, i = (e.b / 255) ** Ia, o = (a.r / 255) ** Ia, s = (a.g / 255) ** Ia, u = (a.b / 255) ** Ia;
+  const t = (e.r / 255) ** Pa, n = (e.g / 255) ** Pa, i = (e.b / 255) ** Pa, o = (a.r / 255) ** Pa, s = (a.g / 255) ** Pa, u = (a.b / 255) ** Pa;
   let r = t * Ho + n * Wo + i * qo, d = o * Ho + s * Wo + u * qo;
   if (r <= Fn && (r += (Fn - r) ** Yo), d <= Fn && (d += (Fn - d) ** Yo), Math.abs(d - r) < ff) return 0;
   let y;
@@ -3092,7 +3092,7 @@ const Zo = /^(?<fn>(?:rgb|hsl)a?)\((?<values>.+)\)/, bf = {
     a: n
   })
 };
-function Xa(e) {
+function Qa(e) {
   if (typeof e == "number")
     return (isNaN(e) || e < 0 || e > 16777215) && ia(`'${e}' is not a valid hex color`), {
       r: (e & 16711680) >> 16,
@@ -3171,8 +3171,8 @@ function hf(e) {
   return e.startsWith("#") && (e = e.slice(1)), e = e.replace(/([^0-9a-f])/gi, "F"), (e.length === 3 || e.length === 4) && (e = e.split("").map((a) => a + a).join("")), e.length !== 6 && (e = Ro(Ro(e, 6), 8, "F")), e;
 }
 function xf(e) {
-  const a = Math.abs(Qo(Xa(0), Xa(e)));
-  return Math.abs(Qo(Xa(16777215), Xa(e))) > Math.min(a, 50) ? "#fff" : "#000";
+  const a = Math.abs(Qo(Qa(0), Qa(e)));
+  return Math.abs(Qo(Qa(16777215), Qa(e))) > Math.min(a, 50) ? "#fff" : "#000";
 }
 function K(e, a) {
   return (t) => Object.keys(e).reduce((n, i) => {
@@ -3214,15 +3214,15 @@ function xn(e) {
 }
 function ie() {
   let e = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : !0;
-  return (a) => (e ? xn : La)(a);
+  return (a) => (e ? xn : Ra)(a);
 }
 function kf(e, a) {
   return a.props = e, a;
 }
-function Ma(e) {
+function za(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "div", t = arguments.length > 2 ? arguments[2] : void 0;
   return ie()({
-    name: t ?? Ra(Es(e.replace(/__/g, "-"))),
+    name: t ?? Oa(Es(e.replace(/__/g, "-"))),
     props: {
       tag: {
         type: String,
@@ -3301,7 +3301,7 @@ const If = K({
   reset: [Number, String],
   root: [Boolean, String],
   scoped: Boolean
-}, "VDefaultsProvider"), De = ie(!1)({
+}, "VDefaultsProvider"), Ne = ie(!1)({
   name: "VDefaultsProvider",
   props: If(),
   setup(e, a) {
@@ -3314,7 +3314,7 @@ const If = K({
       reset: o,
       root: s,
       scoped: u
-    } = Oa(e);
+    } = Ma(e);
     return pt(n, {
       reset: o,
       root: s,
@@ -3332,7 +3332,7 @@ function ji(e) {
     if (e.value.background)
       if (ii(e.value.background)) {
         if (t.backgroundColor = e.value.background, !e.value.text && pf(e.value.background)) {
-          const n = Xa(e.value.background);
+          const n = Qa(e.value.background);
           if (n.a == null || n.a === 1) {
             const i = xf(n);
             t.color = i, t.caretColor = i;
@@ -3347,7 +3347,7 @@ function ji(e) {
   });
 }
 function kt(e, a) {
-  const t = k(() => ({
+  const t = S(() => ({
     text: Na(e) ? e.value : a ? e[a] : null
   })), {
     colorClasses: n,
@@ -3359,7 +3359,7 @@ function kt(e, a) {
   };
 }
 function dt(e, a) {
-  const t = k(() => ({
+  const t = S(() => ({
     background: Na(e) ? e.value : a ? e[a] : null
   })), {
     colorClasses: n,
@@ -3414,7 +3414,7 @@ const Pf = {
   eyeDropper: "mdi-eyedropper"
 }, Af = {
   // Not using mergeProps here, functional components merge props by default (?)
-  component: (e) => mt(Df, {
+  component: (e) => mt(Nf, {
     ...e,
     class: "mdi"
   })
@@ -3444,7 +3444,7 @@ const Pf = {
       });
     };
   }
-}), Nf = xn({
+}), Df = xn({
   name: "VSvgIcon",
   inheritAttrs: !1,
   props: bl(),
@@ -3481,7 +3481,7 @@ xn({
     });
   }
 });
-const Df = xn({
+const Nf = xn({
   name: "VClassIcon",
   props: bl(),
   setup(e) {
@@ -3493,7 +3493,7 @@ const Df = xn({
   const a = Be(Tf);
   if (!a) throw new Error("Missing Vuetify Icons provide!");
   return {
-    iconData: k(() => {
+    iconData: S(() => {
       var r;
       const n = F(e);
       if (!n) return {
@@ -3502,7 +3502,7 @@ const Df = xn({
       let i = n;
       if (typeof i == "string" && (i = i.trim(), i.startsWith("$") && (i = (r = a.aliases) == null ? void 0 : r[i.slice(1)])), i || ia(`Could not find aliased icon "${n}"`), Array.isArray(i))
         return {
-          component: Nf,
+          component: Df,
           icon: i
         };
       if (typeof i != "string")
@@ -3517,7 +3517,7 @@ const Df = xn({
       };
     })
   };
-}, Bf = ["x-small", "small", "default", "large", "x-large"], za = K({
+}, Bf = ["x-small", "small", "default", "large", "x-large"], Ua = K({
   size: {
     type: [String, Number],
     default: "default"
@@ -3536,7 +3536,7 @@ function kn(e) {
     };
   });
 }
-const Oe = K({
+const Me = K({
   tag: {
     type: String,
     default: "div"
@@ -3548,7 +3548,7 @@ function Xe(e) {
   tt("provideTheme");
   const a = Be(oi, null);
   if (!a) throw new Error("Could not find Vuetify theme injection");
-  const t = k(() => e.theme ?? a.name.value), n = k(() => a.themes.value[t.value]), i = k(() => a.isDisabled ? void 0 : `v-theme--${t.value}`), o = {
+  const t = S(() => e.theme ?? a.name.value), n = S(() => a.themes.value[t.value]), i = S(() => a.isDisabled ? void 0 : `v-theme--${t.value}`), o = {
     ...a,
     name: t,
     current: n,
@@ -3569,8 +3569,8 @@ const Ff = K({
   end: Boolean,
   icon: Ie,
   ...Pe(),
-  ...za(),
-  ...Oe({
+  ...Ua(),
+  ...Me({
     tag: "i"
   }),
   ...je()
@@ -3582,20 +3582,20 @@ const Ff = K({
       attrs: t,
       slots: n
     } = a;
-    const i = A(), {
+    const i = T(), {
       themeClasses: o
     } = Xe(e), {
       iconData: s
-    } = $f(k(() => i.value || e.icon)), {
+    } = $f(S(() => i.value || e.icon)), {
       sizeClasses: u
     } = kn(e), {
       textColorClasses: r,
       textColorStyles: d
     } = kt(oe(e, "color"));
     return se(() => {
-      var m, f;
+      var m, p;
       const y = (m = n.default) == null ? void 0 : m.call(n);
-      y && (i.value = (f = cu(y).filter((x) => x.type === Kc && x.children && typeof x.children == "string")[0]) == null ? void 0 : f.children);
+      y && (i.value = (p = cu(y).filter((k) => k.type === Kc && k.children && typeof k.children == "string")[0]) == null ? void 0 : p.children);
       const b = !!(t.onClick || t.onClickOnce);
       return l(s.value.component, {
         tag: e.tag,
@@ -3629,7 +3629,7 @@ const Ff = K({
 }, "dimension");
 function Wt(e) {
   return {
-    dimensionStyles: k(() => {
+    dimensionStyles: S(() => {
       const t = {}, n = Se(e.height), i = Se(e.maxHeight), o = Se(e.maxWidth), s = Se(e.minHeight), u = Se(e.minWidth), r = Se(e.width);
       return n != null && (t.height = n), i != null && (t.maxHeight = i), o != null && (t.maxWidth = o), s != null && (t.minHeight = s), u != null && (t.minWidth = u), r != null && (t.width = r), t;
     })
@@ -3637,7 +3637,7 @@ function Wt(e) {
 }
 function Lf(e) {
   return {
-    aspectStyles: k(() => {
+    aspectStyles: S(() => {
       const a = Number(e.aspectRatio);
       return a ? {
         paddingBottom: String(1 / a * 100) + "%"
@@ -3688,7 +3688,7 @@ const hu = K({
 function _t(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : jt();
   return {
-    roundedClasses: k(() => {
+    roundedClasses: S(() => {
       const n = Na(e) ? e.value : e.rounded, i = Na(e) ? e.value : e.tile, o = [];
       if (n === !0 || n === "")
         o.push(`${a}--rounded`);
@@ -3700,7 +3700,7 @@ function _t(e) {
     })
   };
 }
-const xa = K({
+const ka = K({
   transition: {
     type: [Boolean, String, Object],
     default: "fade-transition",
@@ -3791,7 +3791,7 @@ const _l = {
   ...hu(),
   ...Pe(),
   ...vt(),
-  ...xa()
+  ...ka()
 }, "VImg"), ku = ie()({
   name: "VImg",
   directives: {
@@ -3813,7 +3813,7 @@ const _l = {
       backgroundColorStyles: o
     } = dt(oe(e, "color")), {
       roundedClasses: s
-    } = _t(e), u = tt("VImg"), r = _e(""), d = A(), y = _e(e.eager ? "loading" : "idle"), b = _e(), m = _e(), f = k(() => e.src && typeof e.src == "object" ? {
+    } = _t(e), u = tt("VImg"), r = _e(""), d = T(), y = _e(e.eager ? "loading" : "idle"), b = _e(), m = _e(), p = S(() => e.src && typeof e.src == "object" ? {
       src: e.src.src,
       srcset: e.srcset || e.src.srcset,
       lazySrc: e.lazySrc || e.src.lazySrc,
@@ -3823,73 +3823,73 @@ const _l = {
       srcset: e.srcset,
       lazySrc: e.lazySrc,
       aspect: Number(e.aspectRatio || 0)
-    }), x = k(() => f.value.aspect || b.value / m.value || 0);
+    }), k = S(() => p.value.aspect || b.value / m.value || 0);
     we(() => e.src, () => {
-      p(y.value !== "idle");
-    }), we(x, (C, L) => {
-      !C && L && d.value && I(d.value);
-    }), Fs(() => p());
-    function p(C) {
+      _(y.value !== "idle");
+    }), we(k, (C, R) => {
+      !C && R && d.value && V(d.value);
+    }), Fs(() => _());
+    function _(C) {
       if (!(e.eager && C) && !(Ei && !C && !e.eager)) {
-        if (y.value = "loading", f.value.lazySrc) {
-          const L = new Image();
-          L.src = f.value.lazySrc, I(L, null);
+        if (y.value = "loading", p.value.lazySrc) {
+          const R = new Image();
+          R.src = p.value.lazySrc, V(R, null);
         }
-        f.value.src && Ee(() => {
-          var L;
-          t("loadstart", ((L = d.value) == null ? void 0 : L.currentSrc) || f.value.src), setTimeout(() => {
-            var W;
+        p.value.src && Ee(() => {
+          var R;
+          t("loadstart", ((R = d.value) == null ? void 0 : R.currentSrc) || p.value.src), setTimeout(() => {
+            var q;
             if (!u.isUnmounted)
-              if ((W = d.value) != null && W.complete) {
-                if (d.value.naturalWidth || _(), y.value === "error") return;
-                x.value || I(d.value, null), y.value === "loading" && h();
+              if ((q = d.value) != null && q.complete) {
+                if (d.value.naturalWidth || g(), y.value === "error") return;
+                k.value || V(d.value, null), y.value === "loading" && h();
               } else
-                x.value || I(d.value), g();
+                k.value || V(d.value), f();
           });
         });
       }
     }
     function h() {
       var C;
-      u.isUnmounted || (g(), I(d.value), y.value = "loaded", t("load", ((C = d.value) == null ? void 0 : C.currentSrc) || f.value.src));
-    }
-    function _() {
-      var C;
-      u.isUnmounted || (y.value = "error", t("error", ((C = d.value) == null ? void 0 : C.currentSrc) || f.value.src));
+      u.isUnmounted || (f(), V(d.value), y.value = "loaded", t("load", ((C = d.value) == null ? void 0 : C.currentSrc) || p.value.src));
     }
     function g() {
+      var C;
+      u.isUnmounted || (y.value = "error", t("error", ((C = d.value) == null ? void 0 : C.currentSrc) || p.value.src));
+    }
+    function f() {
       const C = d.value;
       C && (r.value = C.currentSrc || C.src);
     }
-    let S = -1;
+    let x = -1;
     Ut(() => {
-      clearTimeout(S);
+      clearTimeout(x);
     });
-    function I(C) {
-      let L = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 100;
-      const W = () => {
-        if (clearTimeout(S), u.isUnmounted) return;
+    function V(C) {
+      let R = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 100;
+      const q = () => {
+        if (clearTimeout(x), u.isUnmounted) return;
         const {
           naturalHeight: Y,
           naturalWidth: J
         } = C;
-        Y || J ? (b.value = J, m.value = Y) : !C.complete && y.value === "loading" && L != null ? S = window.setTimeout(W, L) : (C.currentSrc.endsWith(".svg") || C.currentSrc.startsWith("data:image/svg+xml")) && (b.value = 1, m.value = 1);
+        Y || J ? (b.value = J, m.value = Y) : !C.complete && y.value === "loading" && R != null ? x = window.setTimeout(q, R) : (C.currentSrc.endsWith(".svg") || C.currentSrc.startsWith("data:image/svg+xml")) && (b.value = 1, m.value = 1);
       };
-      W();
+      q();
     }
-    const $ = k(() => ({
+    const $ = S(() => ({
       "v-img__img--cover": e.cover,
       "v-img__img--contain": !e.cover
-    })), O = () => {
-      var W;
-      if (!f.value.src || y.value === "idle") return null;
+    })), L = () => {
+      var q;
+      if (!p.value.src || y.value === "idle") return null;
       const C = l("img", {
         class: ["v-img__img", $.value],
         style: {
           objectPosition: e.position
         },
-        src: f.value.src,
-        srcset: f.value.srcset,
+        src: p.value.src,
+        srcset: p.value.srcset,
         alt: e.alt,
         crossorigin: e.crossorigin,
         referrerpolicy: e.referrerpolicy,
@@ -3897,38 +3897,38 @@ const _l = {
         sizes: e.sizes,
         ref: d,
         onLoad: h,
-        onError: _
-      }, null), L = (W = n.sources) == null ? void 0 : W.call(n);
+        onError: g
+      }, null), R = (q = n.sources) == null ? void 0 : q.call(n);
       return l(Tt, {
         transition: e.transition,
         appear: !0
       }, {
-        default: () => [Ye(L ? l("picture", {
+        default: () => [Ye(R ? l("picture", {
           class: "v-img__picture"
-        }, [L, C]) : C, [[Gt, y.value === "loaded"]])]
+        }, [R, C]) : C, [[Gt, y.value === "loaded"]])]
       });
     }, E = () => l(Tt, {
       transition: e.transition
     }, {
-      default: () => [f.value.lazySrc && y.value !== "loaded" && l("img", {
+      default: () => [p.value.lazySrc && y.value !== "loaded" && l("img", {
         class: ["v-img__img", "v-img__img--preload", $.value],
         style: {
           objectPosition: e.position
         },
-        src: f.value.lazySrc,
+        src: p.value.lazySrc,
         alt: e.alt,
         crossorigin: e.crossorigin,
         referrerpolicy: e.referrerpolicy,
         draggable: e.draggable
       }, null)]
-    }), R = () => n.placeholder ? l(Tt, {
+    }), O = () => n.placeholder ? l(Tt, {
       transition: e.transition,
       appear: !0
     }, {
       default: () => [(y.value === "loading" || y.value === "error" && !n.error) && l("div", {
         class: "v-img__placeholder"
       }, [n.placeholder()])]
-    }) : null, T = () => n.error ? l(Tt, {
+    }) : null, D = () => n.error ? l(Tt, {
       transition: e.transition,
       appear: !0
     }, {
@@ -3942,8 +3942,8 @@ const _l = {
       }
     }, null) : null, G = _e(!1);
     {
-      const C = we(x, (L) => {
-        L && (requestAnimationFrame(() => {
+      const C = we(k, (R) => {
+        R && (requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             G.value = !0;
           });
@@ -3960,14 +3960,14 @@ const _l = {
           width: Se(e.width === "auto" ? b.value : e.width)
         }, o.value, e.style]
       }, C, {
-        aspectRatio: x.value,
+        aspectRatio: k.value,
         "aria-label": e.alt,
         role: e.alt ? "img" : void 0
       }), {
-        additional: () => l(ve, null, [l(O, null, null), l(E, null, null), l(U, null, null), l(R, null, null), l(T, null, null)]),
+        additional: () => l(de, null, [l(L, null, null), l(E, null, null), l(U, null, null), l(O, null, null), l(D, null, null)]),
         default: n.default
       }), [[Bt("intersect"), {
-        handler: p,
+        handler: _,
         options: e.options
       }, null, {
         once: !0
@@ -3990,12 +3990,12 @@ const _l = {
 function Pt(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : jt();
   return {
-    densityClasses: k(() => `${a}--density-${e.density}`)
+    densityClasses: S(() => `${a}--density-${e.density}`)
   };
 }
 const zf = ["elevated", "flat", "tonal", "outlined", "text", "plain"];
 function ea(e, a) {
-  return l(ve, null, [e && l("span", {
+  return l(de, null, [e && l("span", {
     key: "overlay",
     class: `${a}__overlay`
   }, null), l("span", {
@@ -4011,9 +4011,9 @@ const Ft = K({
     validator: (e) => zf.includes(e)
   }
 }, "variant");
-function ka(e) {
+function Sa(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : jt();
-  const t = k(() => {
+  const t = S(() => {
     const {
       variant: o
     } = F(e);
@@ -4021,7 +4021,7 @@ function ka(e) {
   }), {
     colorClasses: n,
     colorStyles: i
-  } = ji(k(() => {
+  } = ji(S(() => {
     const {
       variant: o,
       color: s
@@ -4045,8 +4045,8 @@ const Uf = K({
   ...Pe(),
   ...St(),
   ...vt(),
-  ...za(),
-  ...Oe(),
+  ...Ua(),
+  ...Me(),
   ...je(),
   ...Ft({
     variant: "flat"
@@ -4064,7 +4064,7 @@ const Uf = K({
       colorClasses: i,
       colorStyles: o,
       variantClasses: s
-    } = ka(e), {
+    } = Sa(e), {
       densityClasses: u
     } = Pt(e), {
       roundedClasses: r
@@ -4079,7 +4079,7 @@ const Uf = K({
       }, n.value, i.value, u.value, r.value, d.value, s.value, e.class],
       style: [o.value, y.value, e.style]
     }, {
-      default: () => [t.default ? l(De, {
+      default: () => [t.default ? l(Ne, {
         key: "content-defaults",
         defaults: {
           VImg: {
@@ -4144,10 +4144,10 @@ function oa(e, a) {
 }
 function Ve(e, a, t) {
   let n = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : (b) => b, i = arguments.length > 4 && arguments[4] !== void 0 ? arguments[4] : (b) => b;
-  const o = tt("useProxiedModel"), s = A(e[a] !== void 0 ? e[a] : t), u = ya(a), d = u !== a ? k(() => {
-    var b, m, f, x;
-    return e[a], !!(((b = o.vnode.props) != null && b.hasOwnProperty(a) || (m = o.vnode.props) != null && m.hasOwnProperty(u)) && ((f = o.vnode.props) != null && f.hasOwnProperty(`onUpdate:${a}`) || (x = o.vnode.props) != null && x.hasOwnProperty(`onUpdate:${u}`)));
-  }) : k(() => {
+  const o = tt("useProxiedModel"), s = T(e[a] !== void 0 ? e[a] : t), u = ya(a), d = u !== a ? S(() => {
+    var b, m, p, k;
+    return e[a], !!(((b = o.vnode.props) != null && b.hasOwnProperty(a) || (m = o.vnode.props) != null && m.hasOwnProperty(u)) && ((p = o.vnode.props) != null && p.hasOwnProperty(`onUpdate:${a}`) || (k = o.vnode.props) != null && k.hasOwnProperty(`onUpdate:${u}`)));
+  }) : S(() => {
     var b, m;
     return e[a], !!((b = o.vnode.props) != null && b.hasOwnProperty(a) && ((m = o.vnode.props) != null && m.hasOwnProperty(`onUpdate:${a}`)));
   });
@@ -4156,14 +4156,14 @@ function Ve(e, a, t) {
       s.value = b;
     });
   });
-  const y = k({
+  const y = S({
     get() {
       const b = e[a];
       return n(d.value ? b : s.value);
     },
     set(b) {
-      const m = i(b), f = Ue(d.value ? e[a] : s.value);
-      f === m || n(f) === b || (s.value = m, o == null || o.emit(`update:${a}`, m));
+      const m = i(b), p = Ue(d.value ? e[a] : s.value);
+      p === m || n(p) === b || (s.value = m, o == null || o.emit(`update:${a}`, m));
     }
   });
   return Object.defineProperty(y, "externalValue", {
@@ -4218,7 +4218,7 @@ const Su = Symbol.for("vuetify:selection-control-group"), Wi = K({
     let {
       slots: t
     } = a;
-    const n = Ve(e, "modelValue"), i = It(), o = k(() => e.id || `v-selection-control-group-${i}`), s = k(() => e.name || o.value), u = /* @__PURE__ */ new Set();
+    const n = Ve(e, "modelValue"), i = It(), o = S(() => e.id || `v-selection-control-group-${i}`), s = S(() => e.name || o.value), u = /* @__PURE__ */ new Set();
     return Ke(Su, {
       modelValue: n,
       forceUpdate: () => {
@@ -4237,7 +4237,7 @@ const Su = Symbol.for("vuetify:selection-control-group"), Wi = K({
         error: oe(e, "error"),
         inline: oe(e, "inline"),
         modelValue: n,
-        multiple: k(() => !!e.multiple || e.multiple == null && Array.isArray(n.value)),
+        multiple: S(() => !!e.multiple || e.multiple == null && Array.isArray(n.value)),
         name: s,
         falseIcon: oe(e, "falseIcon"),
         trueIcon: oe(e, "trueIcon"),
@@ -4271,8 +4271,8 @@ const qf = function(e, a) {
   var b;
   let t = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {}, n = 0, i = 0;
   if (!wu(e)) {
-    const m = a.getBoundingClientRect(), f = ui(e) ? e.touches[e.touches.length - 1] : e;
-    n = f.clientX - m.left, i = f.clientY - m.top;
+    const m = a.getBoundingClientRect(), p = ui(e) ? e.touches[e.touches.length - 1] : e;
+    n = p.clientX - m.left, i = p.clientY - m.top;
   }
   let o = 0, s = 0.3;
   (b = a._ripple) != null && b.circle ? (s = 0.15, o = a.clientWidth / 2, o = t.center ? o : o + Math.sqrt((n - o) ** 2 + (i - o) ** 2) / 4) : o = Math.sqrt(a.clientWidth ** 2 + a.clientHeight ** 2) / 2;
@@ -4288,9 +4288,9 @@ const qf = function(e, a) {
 }, al = {
   /* eslint-disable max-statements */
   show(e, a) {
-    var f;
+    var p;
     let t = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
-    if (!((f = a == null ? void 0 : a._ripple) != null && f.enabled))
+    if (!((p = a == null ? void 0 : a._ripple) != null && p.enabled))
       return;
     const n = document.createElement("span"), i = document.createElement("span");
     n.appendChild(i), n.className = "v-ripple__container", t.class && (n.className += ` ${t.class}`);
@@ -4398,16 +4398,16 @@ function Tu(e, a, t) {
     }), e.addEventListener("touchcancel", Ct), e.addEventListener("mousedown", cn), e.addEventListener("mouseup", Ct), e.addEventListener("mouseleave", Ct), e.addEventListener("keydown", Iu), e.addEventListener("keyup", Pu), e.addEventListener("blur", Au), e.addEventListener("dragstart", Ct, {
       passive: !0
     });
-  } else !o && t && Nu(e);
+  } else !o && t && Du(e);
 }
-function Nu(e) {
+function Du(e) {
   e.removeEventListener("mousedown", cn), e.removeEventListener("touchstart", cn), e.removeEventListener("touchend", Ct), e.removeEventListener("touchmove", Vu), e.removeEventListener("touchcancel", Ct), e.removeEventListener("mouseup", Ct), e.removeEventListener("mouseleave", Ct), e.removeEventListener("keydown", Iu), e.removeEventListener("keyup", Pu), e.removeEventListener("dragstart", Ct), e.removeEventListener("blur", Au);
 }
 function Yf(e, a) {
   Tu(e, a, !1);
 }
 function Jf(e) {
-  delete e._ripple, Nu(e);
+  delete e._ripple, Du(e);
 }
 function Kf(e, a) {
   if (a.value === a.oldValue)
@@ -4431,27 +4431,27 @@ const ca = {
 function Xf(e) {
   const a = Be(Su, void 0), {
     densityClasses: t
-  } = Pt(e), n = Ve(e, "modelValue"), i = k(() => e.trueValue !== void 0 ? e.trueValue : e.value !== void 0 ? e.value : !0), o = k(() => e.falseValue !== void 0 ? e.falseValue : !1), s = k(() => !!e.multiple || e.multiple == null && Array.isArray(n.value)), u = k({
+  } = Pt(e), n = Ve(e, "modelValue"), i = S(() => e.trueValue !== void 0 ? e.trueValue : e.value !== void 0 ? e.value : !0), o = S(() => e.falseValue !== void 0 ? e.falseValue : !1), s = S(() => !!e.multiple || e.multiple == null && Array.isArray(n.value)), u = S({
     get() {
-      const f = a ? a.modelValue.value : n.value;
-      return s.value ? We(f).some((x) => e.valueComparator(x, i.value)) : e.valueComparator(f, i.value);
+      const p = a ? a.modelValue.value : n.value;
+      return s.value ? We(p).some((k) => e.valueComparator(k, i.value)) : e.valueComparator(p, i.value);
     },
-    set(f) {
+    set(p) {
       if (e.readonly) return;
-      const x = f ? i.value : o.value;
-      let p = x;
-      s.value && (p = f ? [...We(n.value), x] : We(n.value).filter((h) => !e.valueComparator(h, i.value))), a ? a.modelValue.value = p : n.value = p;
+      const k = p ? i.value : o.value;
+      let _ = k;
+      s.value && (_ = p ? [...We(n.value), k] : We(n.value).filter((h) => !e.valueComparator(h, i.value))), a ? a.modelValue.value = _ : n.value = _;
     }
   }), {
     textColorClasses: r,
     textColorStyles: d
-  } = kt(k(() => {
+  } = kt(S(() => {
     if (!(e.error || e.disabled))
       return u.value ? e.color : e.baseColor;
   })), {
     backgroundColorClasses: y,
     backgroundColorStyles: b
-  } = dt(k(() => u.value && !e.error && !e.disabled ? e.color : e.baseColor)), m = k(() => u.value ? e.trueIcon : e.falseIcon);
+  } = dt(S(() => u.value && !e.error && !e.disabled ? e.color : e.baseColor)), m = S(() => u.value ? e.trueIcon : e.falseIcon);
   return {
     group: a,
     densityClasses: t,
@@ -4465,7 +4465,7 @@ function Xf(e) {
     icon: m
   };
 }
-const ba = ie()({
+const _a = ie()({
   name: "VSelectionControl",
   directives: {
     Ripple: ca
@@ -4490,21 +4490,21 @@ const ba = ie()({
       backgroundColorClasses: y,
       backgroundColorStyles: b,
       trueValue: m
-    } = Xf(e), f = It(), x = _e(!1), p = _e(!1), h = A(), _ = k(() => e.id || `input-${f}`), g = k(() => !e.disabled && !e.readonly);
+    } = Xf(e), p = It(), k = _e(!1), _ = _e(!1), h = T(), g = S(() => e.id || `input-${p}`), f = S(() => !e.disabled && !e.readonly);
     i == null || i.onForceUpdate(() => {
       h.value && (h.value.checked = u.value);
     });
-    function S(E) {
-      g.value && (x.value = !0, Ea(E.target, ":focus-visible") !== !1 && (p.value = !0));
+    function x(E) {
+      f.value && (k.value = !0, Fa(E.target, ":focus-visible") !== !1 && (_.value = !0));
     }
-    function I() {
-      x.value = !1, p.value = !1;
+    function V() {
+      k.value = !1, _.value = !1;
     }
     function $(E) {
       E.stopPropagation();
     }
-    function O(E) {
-      if (!g.value) {
+    function L(E) {
+      if (!f.value) {
         h.value && (h.value.checked = u.value);
         return;
       }
@@ -4515,33 +4515,33 @@ const ba = ie()({
       const E = n.label ? n.label({
         label: e.label,
         props: {
-          for: _.value
+          for: g.value
         }
-      }) : e.label, [R, T] = ha(t), U = l("input", X({
+      }) : e.label, [O, D] = xa(t), U = l("input", X({
         ref: h,
         checked: u.value,
         disabled: !!e.disabled,
-        id: _.value,
-        onBlur: I,
-        onFocus: S,
-        onInput: O,
+        id: g.value,
+        onBlur: V,
+        onFocus: x,
+        onInput: L,
         "aria-disabled": !!e.disabled,
         "aria-label": e.label,
         type: e.type,
         value: m.value,
         name: e.name,
         "aria-checked": e.type === "checkbox" ? u.value : void 0
-      }, T), null);
+      }, D), null);
       return l("div", X({
         class: ["v-selection-control", {
           "v-selection-control--dirty": u.value,
           "v-selection-control--disabled": e.disabled,
           "v-selection-control--error": e.error,
-          "v-selection-control--focused": x.value,
-          "v-selection-control--focus-visible": p.value,
+          "v-selection-control--focused": k.value,
+          "v-selection-control--focus-visible": _.value,
           "v-selection-control--inline": e.inline
         }, o.value, e.class]
-      }, R, {
+      }, O, {
         style: e.style
       }), [l("div", {
         class: ["v-selection-control__wrapper", r.value],
@@ -4560,25 +4560,25 @@ const ba = ie()({
         inputNode: U,
         icon: s.value,
         props: {
-          onFocus: S,
-          onBlur: I,
-          id: _.value
+          onFocus: x,
+          onBlur: V,
+          id: g.value
         }
-      })) ?? l(ve, null, [s.value && l($e, {
+      })) ?? l(de, null, [s.value && l($e, {
         key: "icon",
         icon: s.value
       }, null), U])]), [[Bt("ripple"), e.ripple && [!e.disabled && !e.readonly, null, ["center", "circle"]]]])]), E && l(Hi, {
-        for: _.value,
+        for: g.value,
         onClick: $
       }, {
         default: () => [E]
       })]);
     }), {
-      isFocused: x,
+      isFocused: k,
       input: h
     };
   }
-}), Du = K({
+}), Nu = K({
   indeterminate: Boolean,
   indeterminateIcon: {
     type: Ie,
@@ -4590,7 +4590,7 @@ const ba = ie()({
   })
 }, "VCheckboxBtn"), sa = ie()({
   name: "VCheckboxBtn",
-  props: Du(),
+  props: Nu(),
   emits: {
     "update:modelValue": (e) => !0,
     "update:indeterminate": (e) => !0
@@ -4603,10 +4603,10 @@ const ba = ie()({
     function o(r) {
       n.value && (n.value = !1);
     }
-    const s = k(() => n.value ? e.indeterminateIcon : e.falseIcon), u = k(() => n.value ? e.indeterminateIcon : e.trueIcon);
+    const s = S(() => n.value ? e.indeterminateIcon : e.falseIcon), u = S(() => n.value ? e.indeterminateIcon : e.trueIcon);
     return se(() => {
-      const r = Me(ba.filterProps(e), ["modelValue"]);
-      return l(ba, X(r, {
+      const r = ze(_a.filterProps(e), ["modelValue"]);
+      return l(_a, X(r, {
         modelValue: i.value,
         "onUpdate:modelValue": [(d) => i.value = d, o],
         class: ["v-checkbox-btn", e.class],
@@ -4805,7 +4805,7 @@ const Zf = K({
       },
       async onEnter(i, o) {
         var m;
-        await new Promise((f) => requestAnimationFrame(f)), await new Promise((f) => requestAnimationFrame(f)), i.style.visibility = "";
+        await new Promise((p) => requestAnimationFrame(p)), await new Promise((p) => requestAnimationFrame(p)), i.style.visibility = "";
         const {
           x: s,
           y: u,
@@ -4819,8 +4819,8 @@ const Zf = K({
           duration: 225 * y,
           easing: Sf
         });
-        (m = os(i)) == null || m.forEach((f) => {
-          fa(f, [{
+        (m = os(i)) == null || m.forEach((p) => {
+          fa(p, [{
             opacity: 0
           }, {
             opacity: 0,
@@ -4839,7 +4839,7 @@ const Zf = K({
       },
       async onLeave(i, o) {
         var m;
-        await new Promise((f) => requestAnimationFrame(f));
+        await new Promise((p) => requestAnimationFrame(p));
         const {
           x: s,
           y: u,
@@ -4853,8 +4853,8 @@ const Zf = K({
         }], {
           duration: 125 * y,
           easing: wf
-        }).finished.then(() => o()), (m = os(i)) == null || m.forEach((f) => {
-          fa(f, [{}, {
+        }).finished.then(() => o()), (m = os(i)) == null || m.forEach((p) => {
+          fa(p, [{}, {
             opacity: 0,
             offset: 0.2
           }, {
@@ -4884,17 +4884,17 @@ function os(e) {
   return a && [...a];
 }
 function ss(e, a) {
-  const t = gu(e), n = Ui(a), [i, o] = getComputedStyle(a).transformOrigin.split(" ").map((_) => parseFloat(_)), [s, u] = getComputedStyle(a).getPropertyValue("--v-overlay-anchor-origin").split(" ");
+  const t = gu(e), n = Ui(a), [i, o] = getComputedStyle(a).transformOrigin.split(" ").map((g) => parseFloat(g)), [s, u] = getComputedStyle(a).getPropertyValue("--v-overlay-anchor-origin").split(" ");
   let r = t.left + t.width / 2;
   s === "left" || u === "left" ? r -= t.width / 2 : (s === "right" || u === "right") && (r += t.width / 2);
   let d = t.top + t.height / 2;
   s === "top" || u === "top" ? d -= t.height / 2 : (s === "bottom" || u === "bottom") && (d += t.height / 2);
-  const y = t.width / n.width, b = t.height / n.height, m = Math.max(1, y, b), f = y / m || 0, x = b / m || 0, p = n.width * n.height / (window.innerWidth * window.innerHeight), h = p > 0.12 ? Math.min(1.5, (p - 0.12) * 10 + 1) : 1;
+  const y = t.width / n.width, b = t.height / n.height, m = Math.max(1, y, b), p = y / m || 0, k = b / m || 0, _ = n.width * n.height / (window.innerWidth * window.innerHeight), h = _ > 0.12 ? Math.min(1.5, (_ - 0.12) * 10 + 1) : 1;
   return {
     x: r - (i + n.left),
     y: d - (o + n.top),
-    sx: f,
-    sy: x,
+    sx: p,
+    sy: k,
     speed: h
   };
 }
@@ -4910,7 +4910,7 @@ At("slide-x-transition");
 At("slide-x-reverse-transition");
 const xl = At("slide-y-transition");
 At("slide-y-reverse-transition");
-const Ua = Eu("expand-transition", Fu()), Lu = Eu("expand-x-transition", Fu("", !0)), tm = K({
+const Ga = Eu("expand-transition", Fu()), Lu = Eu("expand-x-transition", Fu("", !0)), tm = K({
   active: Boolean,
   color: String,
   messages: {
@@ -4918,7 +4918,7 @@ const Ua = Eu("expand-transition", Fu()), Lu = Eu("expand-x-transition", Fu("", 
     default: () => []
   },
   ...Pe(),
-  ...xa({
+  ...ka({
     transition: {
       component: xl,
       leaveAbsolute: !0,
@@ -4932,10 +4932,10 @@ const Ua = Eu("expand-transition", Fu()), Lu = Eu("expand-x-transition", Fu("", 
     let {
       slots: t
     } = a;
-    const n = k(() => We(e.messages)), {
+    const n = S(() => We(e.messages)), {
       textColorClasses: i,
       textColorStyles: o
-    } = kt(k(() => e.color));
+    } = kt(S(() => e.color));
     return se(() => l(Tt, {
       transition: e.transition,
       tag: "div",
@@ -4956,9 +4956,9 @@ const Ua = Eu("expand-transition", Fu()), Lu = Eu("expand-x-transition", Fu("", 
   focused: Boolean,
   "onUpdate:focused": rt()
 }, "focus");
-function Sa(e) {
+function wa(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : jt();
-  const t = Ve(e, "focused"), n = k(() => ({
+  const t = Ve(e, "focused"), n = S(() => ({
     [`${a}--focused`]: t.value
   }));
   function i() {
@@ -4988,16 +4988,16 @@ const Ru = Symbol.for("vuetify:form"), nm = K({
   }
 }, "form");
 function lm(e) {
-  const a = Ve(e, "modelValue"), t = k(() => e.disabled), n = k(() => e.readonly), i = _e(!1), o = A([]), s = A([]);
+  const a = Ve(e, "modelValue"), t = S(() => e.disabled), n = S(() => e.readonly), i = _e(!1), o = T([]), s = T([]);
   async function u() {
     const y = [];
     let b = !0;
     s.value = [], i.value = !0;
     for (const m of o.value) {
-      const f = await m.validate();
-      if (f.length > 0 && (b = !1, y.push({
+      const p = await m.validate();
+      if (p.length > 0 && (b = !1, y.push({
         id: m.id,
-        errorMessages: f
+        errorMessages: p
       })), !b && e.fastFail) break;
     }
     return s.value = y, i.value = !1, {
@@ -5014,11 +5014,11 @@ function lm(e) {
   return we(o, () => {
     let y = 0, b = 0;
     const m = [];
-    for (const f of o.value)
-      f.isValid === !1 ? (b++, m.push({
-        id: f.id,
-        errorMessages: f.errorMessages
-      })) : f.isValid === !0 && y++;
+    for (const p of o.value)
+      p.isValid === !1 ? (b++, m.push({
+        id: p.id,
+        errorMessages: p.errorMessages
+      })) : p.isValid === !0 && y++;
     s.value = m, a.value = b > 0 ? !1 : y === o.value.length ? !0 : null;
   }, {
     deep: !0,
@@ -5028,15 +5028,15 @@ function lm(e) {
       let {
         id: b,
         vm: m,
-        validate: f,
-        reset: x,
-        resetValidation: p
+        validate: p,
+        reset: k,
+        resetValidation: _
       } = y;
       o.value.some((h) => h.id === b) && ia(`Duplicate input name "${b}"`), o.value.push({
         id: b,
-        validate: f,
-        reset: x,
-        resetValidation: p,
+        validate: p,
+        reset: k,
+        resetValidation: _,
         vm: Xc(m),
         isValid: null,
         errorMessages: []
@@ -5046,8 +5046,8 @@ function lm(e) {
       o.value = o.value.filter((b) => b.id !== y);
     },
     update: (y, b, m) => {
-      const f = o.value.find((x) => x.id === y);
-      f && (f.isValid = b, f.errorMessages = m);
+      const p = o.value.find((k) => k.id === y);
+      p && (p.isValid = b, p.errorMessages = m);
     },
     isDisabled: t,
     isReadonly: n,
@@ -5101,80 +5101,80 @@ const im = K({
 }, "validation");
 function om(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : jt(), t = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : It();
-  const n = Ve(e, "modelValue"), i = k(() => e.validationValue === void 0 ? n.value : e.validationValue), o = kl(), s = A([]), u = _e(!0), r = k(() => !!(We(n.value === "" ? null : n.value).length || We(i.value === "" ? null : i.value).length)), d = k(() => !!(e.disabled ?? (o == null ? void 0 : o.isDisabled.value))), y = k(() => !!(e.readonly ?? (o == null ? void 0 : o.isReadonly.value))), b = k(() => {
+  const n = Ve(e, "modelValue"), i = S(() => e.validationValue === void 0 ? n.value : e.validationValue), o = kl(), s = T([]), u = _e(!0), r = S(() => !!(We(n.value === "" ? null : n.value).length || We(i.value === "" ? null : i.value).length)), d = S(() => !!(e.disabled ?? (o == null ? void 0 : o.isDisabled.value))), y = S(() => !!(e.readonly ?? (o == null ? void 0 : o.isReadonly.value))), b = S(() => {
     var $;
     return ($ = e.errorMessages) != null && $.length ? We(e.errorMessages).concat(s.value).slice(0, Math.max(0, +e.maxErrors)) : s.value;
-  }), m = k(() => {
+  }), m = S(() => {
     let $ = (e.validateOn ?? (o == null ? void 0 : o.validateOn.value)) || "input";
     $ === "lazy" && ($ = "input lazy");
-    const O = new Set(($ == null ? void 0 : $.split(" ")) ?? []);
+    const L = new Set(($ == null ? void 0 : $.split(" ")) ?? []);
     return {
-      blur: O.has("blur") || O.has("input"),
-      input: O.has("input"),
-      submit: O.has("submit"),
-      lazy: O.has("lazy")
+      blur: L.has("blur") || L.has("input"),
+      input: L.has("input"),
+      submit: L.has("submit"),
+      lazy: L.has("lazy")
     };
-  }), f = k(() => {
+  }), p = S(() => {
     var $;
     return e.error || ($ = e.errorMessages) != null && $.length ? !1 : e.rules.length ? u.value ? s.value.length || m.value.lazy ? null : !0 : !s.value.length : !0;
-  }), x = _e(!1), p = k(() => ({
-    [`${a}--error`]: f.value === !1,
+  }), k = _e(!1), _ = S(() => ({
+    [`${a}--error`]: p.value === !1,
     [`${a}--dirty`]: r.value,
     [`${a}--disabled`]: d.value,
     [`${a}--readonly`]: y.value
-  })), h = tt("validation"), _ = k(() => e.name ?? F(t));
+  })), h = tt("validation"), g = S(() => e.name ?? F(t));
   Fs(() => {
     o == null || o.register({
-      id: _.value,
+      id: g.value,
       vm: h,
-      validate: I,
-      reset: g,
-      resetValidation: S
+      validate: V,
+      reset: f,
+      resetValidation: x
     });
   }), Ut(() => {
-    o == null || o.unregister(_.value);
+    o == null || o.unregister(g.value);
   }), st(async () => {
-    m.value.lazy || await I(!0), o == null || o.update(_.value, f.value, b.value);
+    m.value.lazy || await V(!0), o == null || o.update(g.value, p.value, b.value);
   }), oa(() => m.value.input, () => {
     we(i, () => {
       if (i.value != null)
-        I();
+        V();
       else if (e.focused) {
-        const $ = we(() => e.focused, (O) => {
-          O || I(), $();
+        const $ = we(() => e.focused, (L) => {
+          L || V(), $();
         });
       }
     });
   }), oa(() => m.value.blur, () => {
     we(() => e.focused, ($) => {
-      $ || I();
+      $ || V();
     });
-  }), we([f, b], () => {
-    o == null || o.update(_.value, f.value, b.value);
+  }), we([p, b], () => {
+    o == null || o.update(g.value, p.value, b.value);
   });
-  async function g() {
-    n.value = null, await Ee(), await S();
+  async function f() {
+    n.value = null, await Ee(), await x();
   }
-  async function S() {
-    u.value = !0, m.value.lazy ? s.value = [] : await I(!0);
+  async function x() {
+    u.value = !0, m.value.lazy ? s.value = [] : await V(!0);
   }
-  async function I() {
+  async function V() {
     let $ = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : !1;
-    const O = [];
-    x.value = !0;
+    const L = [];
+    k.value = !0;
     for (const E of e.rules) {
-      if (O.length >= +(e.maxErrors ?? 1))
+      if (L.length >= +(e.maxErrors ?? 1))
         break;
-      const T = await (typeof E == "function" ? E : () => E)(i.value);
-      if (T !== !0) {
-        if (T !== !1 && typeof T != "string") {
-          console.warn(`${T} is not a valid value. Rule functions must return boolean true or a string.`);
+      const D = await (typeof E == "function" ? E : () => E)(i.value);
+      if (D !== !0) {
+        if (D !== !1 && typeof D != "string") {
+          console.warn(`${D} is not a valid value. Rule functions must return boolean true or a string.`);
           continue;
         }
-        O.push(T || "");
+        L.push(D || "");
       }
     }
-    return s.value = O, x.value = !1, u.value = $, s.value;
+    return s.value = L, k.value = !1, u.value = $, s.value;
   }
   return {
     errorMessages: b,
@@ -5182,15 +5182,15 @@ function om(e) {
     isDisabled: d,
     isReadonly: y,
     isPristine: u,
-    isValid: f,
-    isValidating: x,
-    reset: g,
-    resetValidation: S,
-    validate: I,
-    validationClasses: p
+    isValid: p,
+    isValidating: k,
+    reset: f,
+    resetValidation: x,
+    validate: V,
+    validationClasses: _
   };
 }
-const wa = K({
+const Ca = K({
   id: String,
   appendIcon: Ie,
   centerAffix: {
@@ -5221,7 +5221,7 @@ const wa = K({
 }, "VInput"), $t = ie()({
   name: "VInput",
   props: {
-    ...wa()
+    ...Ca()
   },
   emits: {
     "update:modelValue": (e) => !0
@@ -5242,37 +5242,37 @@ const wa = K({
       rtlClasses: r
     } = ta(), {
       InputIcon: d
-    } = Bu(e), y = It(), b = k(() => e.id || `input-${y}`), m = k(() => `${b.value}-messages`), {
-      errorMessages: f,
-      isDirty: x,
-      isDisabled: p,
+    } = Bu(e), y = It(), b = S(() => e.id || `input-${y}`), m = S(() => `${b.value}-messages`), {
+      errorMessages: p,
+      isDirty: k,
+      isDisabled: _,
       isReadonly: h,
-      isPristine: _,
-      isValid: g,
-      isValidating: S,
-      reset: I,
+      isPristine: g,
+      isValid: f,
+      isValidating: x,
+      reset: V,
       resetValidation: $,
-      validate: O,
+      validate: L,
       validationClasses: E
-    } = om(e, "v-input", b), R = k(() => ({
+    } = om(e, "v-input", b), O = S(() => ({
       id: b,
       messagesId: m,
-      isDirty: x,
-      isDisabled: p,
+      isDirty: k,
+      isDisabled: _,
       isReadonly: h,
-      isPristine: _,
-      isValid: g,
-      isValidating: S,
-      reset: I,
+      isPristine: g,
+      isValid: f,
+      isValidating: x,
+      reset: V,
       resetValidation: $,
-      validate: O
-    })), T = k(() => {
+      validate: L
+    })), D = S(() => {
       var U;
-      return (U = e.errorMessages) != null && U.length || !_.value && f.value.length ? f.value : e.hint && (e.persistentHint || e.focused) ? e.hint : e.messages;
+      return (U = e.errorMessages) != null && U.length || !g.value && p.value.length ? p.value : e.hint && (e.persistentHint || e.focused) ? e.hint : e.messages;
     });
     return se(() => {
-      var W, Y, J, H;
-      const U = !!(n.prepend || e.prependIcon), G = !!(n.append || e.appendIcon), C = T.value.length > 0, L = !e.hideDetails || e.hideDetails === "auto" && (C || !!n.details);
+      var q, Y, J, H;
+      const U = !!(n.prepend || e.prependIcon), G = !!(n.append || e.appendIcon), C = D.value.length > 0, R = !e.hideDetails || e.hideDetails === "auto" && (C || !!n.details);
       return l("div", {
         class: ["v-input", `v-input--${e.direction}`, {
           "v-input--center-affix": e.centerAffix,
@@ -5282,38 +5282,38 @@ const wa = K({
       }, [U && l("div", {
         key: "prepend",
         class: "v-input__prepend"
-      }, [(W = n.prepend) == null ? void 0 : W.call(n, R.value), e.prependIcon && l(d, {
+      }, [(q = n.prepend) == null ? void 0 : q.call(n, O.value), e.prependIcon && l(d, {
         key: "prepend-icon",
         name: "prepend"
       }, null)]), n.default && l("div", {
         class: "v-input__control"
-      }, [(Y = n.default) == null ? void 0 : Y.call(n, R.value)]), G && l("div", {
+      }, [(Y = n.default) == null ? void 0 : Y.call(n, O.value)]), G && l("div", {
         key: "append",
         class: "v-input__append"
       }, [e.appendIcon && l(d, {
         key: "append-icon",
         name: "append"
-      }, null), (J = n.append) == null ? void 0 : J.call(n, R.value)]), L && l("div", {
+      }, null), (J = n.append) == null ? void 0 : J.call(n, O.value)]), R && l("div", {
         class: "v-input__details"
       }, [l(am, {
         id: m.value,
         active: C,
-        messages: T.value
+        messages: D.value
       }, {
         message: n.message
-      }), (H = n.details) == null ? void 0 : H.call(n, R.value)])]);
+      }), (H = n.details) == null ? void 0 : H.call(n, O.value)])]);
     }), {
-      reset: I,
+      reset: V,
       resetValidation: $,
-      validate: O,
-      isValid: g,
-      errorMessages: f
+      validate: L,
+      isValid: f,
+      errorMessages: p
     };
   }
 }), sm = K({
-  ...wa(),
-  ...Me(Du(), ["inline"])
-}, "VCheckbox"), Dt = ie()({
+  ...Ca(),
+  ...ze(Nu(), ["inline"])
+}, "VCheckbox"), Nt = ie()({
   name: "VCheckbox",
   inheritAttrs: !1,
   props: sm(),
@@ -5330,36 +5330,36 @@ const wa = K({
       isFocused: o,
       focus: s,
       blur: u
-    } = Sa(e), r = It(), d = k(() => e.id || `checkbox-${r}`);
+    } = wa(e), r = It(), d = S(() => e.id || `checkbox-${r}`);
     return se(() => {
-      const [y, b] = ha(t), m = $t.filterProps(e), f = sa.filterProps(e);
+      const [y, b] = xa(t), m = $t.filterProps(e), p = sa.filterProps(e);
       return l($t, X({
         class: ["v-checkbox", e.class]
       }, y, m, {
         modelValue: i.value,
-        "onUpdate:modelValue": (x) => i.value = x,
+        "onUpdate:modelValue": (k) => i.value = k,
         id: d.value,
         focused: o.value,
         style: e.style
       }), {
         ...n,
-        default: (x) => {
+        default: (k) => {
           let {
-            id: p,
+            id: _,
             messagesId: h,
-            isDisabled: _,
-            isReadonly: g,
-            isValid: S
-          } = x;
-          return l(sa, X(f, {
-            id: p.value,
+            isDisabled: g,
+            isReadonly: f,
+            isValid: x
+          } = k;
+          return l(sa, X(p, {
+            id: _.value,
             "aria-describedby": h.value,
-            disabled: _.value,
-            readonly: g.value
+            disabled: g.value,
+            readonly: f.value
           }, b, {
-            error: S.value === !1,
+            error: x.value === !1,
             modelValue: i.value,
-            "onUpdate:modelValue": (I) => i.value = I,
+            "onUpdate:modelValue": (V) => i.value = V,
             onFocus: s,
             onBlur: u
           }), n);
@@ -5378,12 +5378,12 @@ function da() {
   let e = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : jt();
   const t = Be(um);
   if (!t) throw new Error("Could not find Vuetify display injection");
-  const n = k(() => {
+  const n = S(() => {
     if (e.mobile != null) return e.mobile;
     if (!e.mobileBreakpoint) return t.mobile.value;
     const o = typeof e.mobileBreakpoint == "number" ? e.mobileBreakpoint : t.thresholds.value[e.mobileBreakpoint];
     return t.width.value < o;
-  }), i = k(() => a ? {
+  }), i = S(() => a ? {
     [`${a}--mobile`]: n.value
   } : {});
   return {
@@ -5437,20 +5437,20 @@ async function us(e, a, t, n) {
   if (typeof u == "number")
     y = zl(u, t, s);
   else if (y = zl(u, t, s) - zl(r, t, s), o.layout) {
-    const x = window.getComputedStyle(u).getPropertyValue("--v-layout-top");
-    x && (y -= parseInt(x, 10));
+    const k = window.getComputedStyle(u).getPropertyValue("--v-layout-top");
+    k && (y -= parseInt(k, 10));
   }
   y += o.offset, y = fm(r, y, !!s, !!t);
   const b = r[i] ?? 0;
   if (y === b) return Promise.resolve(y);
   const m = performance.now();
-  return new Promise((f) => requestAnimationFrame(function x(p) {
-    const _ = (p - m) / o.duration, g = Math.floor(b + (y - b) * d(ht(_, 0, 1)));
-    if (r[i] = g, _ >= 1 && Math.abs(g - r[i]) < 10)
-      return f(y);
-    if (_ > 2)
-      return ia("Scroll target is not reachable"), f(r[i]);
-    requestAnimationFrame(x);
+  return new Promise((p) => requestAnimationFrame(function k(_) {
+    const g = (_ - m) / o.duration, f = Math.floor(b + (y - b) * d(ht(g, 0, 1)));
+    if (r[i] = f, g >= 1 && Math.abs(f - r[i]) < 10)
+      return p(y);
+    if (g > 2)
+      return ia("Scroll target is not reachable"), p(r[i]);
+    requestAnimationFrame(k);
   }));
 }
 function vm() {
@@ -5462,7 +5462,7 @@ function vm() {
   const n = {
     ...a,
     // can be set via VLocaleProvider
-    rtl: k(() => a.rtl.value || t.value)
+    rtl: S(() => a.rtl.value || t.value)
   };
   async function i(o, s) {
     return us(o, Qt(e, s), !1, n);
@@ -5504,7 +5504,7 @@ function Vn(e, a) {
     if (!t) return o;
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${a.description}`);
   }
-  const s = oe(e, "value"), u = k(() => !!(o.disabled.value || e.disabled));
+  const s = oe(e, "value"), u = S(() => !!(o.disabled.value || e.disabled));
   o.register({
     id: i,
     value: s,
@@ -5512,7 +5512,7 @@ function Vn(e, a) {
   }, n), Ut(() => {
     o.unregister(i);
   });
-  const r = k(() => o.isSelected(i)), d = k(() => o.items.value[0].id === i), y = k(() => o.items.value[o.items.value.length - 1].id === i), b = k(() => r.value && [o.selectedClass.value, e.selectedClass]);
+  const r = S(() => o.isSelected(i)), d = S(() => o.items.value[0].id === i), y = S(() => o.items.value[o.items.value.length - 1].id === i), b = S(() => r.value && [o.selectedClass.value, e.selectedClass]);
   return we(r, (m) => {
     n.emit("group:selected", {
       value: m
@@ -5532,24 +5532,24 @@ function Vn(e, a) {
     group: o
   };
 }
-function Ga(e, a) {
+function ja(e, a) {
   let t = !1;
   const n = it([]), i = Ve(e, "modelValue", [], (m) => m == null ? [] : Ou(n, We(m)), (m) => {
-    const f = gm(n, m);
-    return e.multiple ? f : f[0];
+    const p = gm(n, m);
+    return e.multiple ? p : p[0];
   }), o = tt("useGroup");
-  function s(m, f) {
-    const x = m, p = Symbol.for(`${a.description}:id`), _ = Ka(p, o == null ? void 0 : o.vnode).indexOf(f);
-    F(x.value) == null && (x.value = _, x.useIndexAsValue = !0), _ > -1 ? n.splice(_, 0, x) : n.push(x);
+  function s(m, p) {
+    const k = m, _ = Symbol.for(`${a.description}:id`), g = Xa(_, o == null ? void 0 : o.vnode).indexOf(p);
+    F(k.value) == null && (k.value = g, k.useIndexAsValue = !0), g > -1 ? n.splice(g, 0, k) : n.push(k);
   }
   function u(m) {
     if (t) return;
     r();
-    const f = n.findIndex((x) => x.id === m);
-    n.splice(f, 1);
+    const p = n.findIndex((k) => k.id === m);
+    n.splice(p, 1);
   }
   function r() {
-    const m = n.find((f) => !f.disabled);
+    const m = n.find((p) => !p.disabled);
     m && e.mandatory === "force" && !i.value.length && (i.value = [m.id]);
   }
   st(() => {
@@ -5560,30 +5560,30 @@ function Ga(e, a) {
     for (let m = 0; m < n.length; m++)
       n[m].useIndexAsValue && (n[m].value = m);
   });
-  function d(m, f) {
-    const x = n.find((p) => p.id === m);
-    if (!(f && (x != null && x.disabled)))
+  function d(m, p) {
+    const k = n.find((_) => _.id === m);
+    if (!(p && (k != null && k.disabled)))
       if (e.multiple) {
-        const p = i.value.slice(), h = p.findIndex((g) => g === m), _ = ~h;
-        if (f = f ?? !_, _ && e.mandatory && p.length <= 1 || !_ && e.max != null && p.length + 1 > e.max) return;
-        h < 0 && f ? p.push(m) : h >= 0 && !f && p.splice(h, 1), i.value = p;
+        const _ = i.value.slice(), h = _.findIndex((f) => f === m), g = ~h;
+        if (p = p ?? !g, g && e.mandatory && _.length <= 1 || !g && e.max != null && _.length + 1 > e.max) return;
+        h < 0 && p ? _.push(m) : h >= 0 && !p && _.splice(h, 1), i.value = _;
       } else {
-        const p = i.value.includes(m);
-        if (e.mandatory && p) return;
-        i.value = f ?? !p ? [m] : [];
+        const _ = i.value.includes(m);
+        if (e.mandatory && _) return;
+        i.value = p ?? !_ ? [m] : [];
       }
   }
   function y(m) {
     if (e.multiple && ia('This method is not supported when using "multiple" prop'), i.value.length) {
-      const f = i.value[0], x = n.findIndex((_) => _.id === f);
-      let p = (x + m) % n.length, h = n[p];
-      for (; h.disabled && p !== x; )
-        p = (p + m) % n.length, h = n[p];
+      const p = i.value[0], k = n.findIndex((g) => g.id === p);
+      let _ = (k + m) % n.length, h = n[_];
+      for (; h.disabled && _ !== k; )
+        _ = (_ + m) % n.length, h = n[_];
       if (h.disabled) return;
-      i.value = [n[p].id];
+      i.value = [n[_].id];
     } else {
-      const f = n.find((x) => !x.disabled);
-      f && (i.value = [f.id]);
+      const p = n.find((k) => !k.disabled);
+      p && (i.value = [p.id]);
     }
   }
   const b = {
@@ -5595,8 +5595,8 @@ function Ga(e, a) {
     prev: () => y(n.length - 1),
     next: () => y(1),
     isSelected: (m) => i.value.includes(m),
-    selectedClass: k(() => e.selectedClass),
-    items: k(() => n),
+    selectedClass: S(() => e.selectedClass),
+    items: S(() => n),
     getItemIndex: (m) => mm(n, m)
   };
   return Ke(a, b), b;
@@ -5622,9 +5622,9 @@ function gm(e, a) {
     }
   }), t;
 }
-function Fa(e) {
+function La(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "content";
-  const t = el(), n = A();
+  const t = el(), n = T();
   if (et) {
     const i = new ResizeObserver((o) => {
       e == null || e(o, i), o.length && (a === "content" ? n.value = o[0].contentRect : n.value = o[0].target.getBoundingClientRect());
@@ -5713,7 +5713,7 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
   ...Sn({
     mobile: null
   }),
-  ...Oe(),
+  ...Me(),
   ...wn({
     selectedClass: "v-slide-group-item--active"
   })
@@ -5732,114 +5732,114 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
     } = ta(), {
       displayClasses: i,
       mobile: o
-    } = da(e), s = Ga(e, e.symbol), u = _e(!1), r = _e(0), d = _e(0), y = _e(0), b = k(() => e.direction === "horizontal"), {
+    } = da(e), s = ja(e, e.symbol), u = _e(!1), r = _e(0), d = _e(0), y = _e(0), b = S(() => e.direction === "horizontal"), {
       resizeRef: m,
-      contentRect: f
-    } = Fa(), {
-      resizeRef: x,
       contentRect: p
-    } = Fa(), h = vm(), _ = k(() => ({
+    } = La(), {
+      resizeRef: k,
+      contentRect: _
+    } = La(), h = vm(), g = S(() => ({
       container: m.el,
       duration: 200,
       easing: "easeOutQuart"
-    })), g = k(() => s.selected.value.length ? s.items.value.findIndex((V) => V.id === s.selected.value[0]) : -1), S = k(() => s.selected.value.length ? s.items.value.findIndex((V) => V.id === s.selected.value[s.selected.value.length - 1]) : -1);
+    })), f = S(() => s.selected.value.length ? s.items.value.findIndex((I) => I.id === s.selected.value[0]) : -1), x = S(() => s.selected.value.length ? s.items.value.findIndex((I) => I.id === s.selected.value[s.selected.value.length - 1]) : -1);
     if (et) {
-      let V = -1;
-      we(() => [s.selected.value, f.value, p.value, b.value], () => {
-        cancelAnimationFrame(V), V = requestAnimationFrame(() => {
-          if (f.value && p.value) {
+      let I = -1;
+      we(() => [s.selected.value, p.value, _.value, b.value], () => {
+        cancelAnimationFrame(I), I = requestAnimationFrame(() => {
+          if (p.value && _.value) {
             const M = b.value ? "width" : "height";
-            d.value = f.value[M], y.value = p.value[M], u.value = d.value + 1 < y.value;
+            d.value = p.value[M], y.value = _.value[M], u.value = d.value + 1 < y.value;
           }
-          if (g.value >= 0 && x.el) {
-            const M = x.el.children[S.value];
+          if (f.value >= 0 && k.el) {
+            const M = k.el.children[x.value];
             $(M, e.centerActive);
           }
         });
       });
     }
-    const I = _e(!1);
-    function $(V, M) {
-      let te = 0;
-      M ? te = pm({
+    const V = _e(!1);
+    function $(I, M) {
+      let ae = 0;
+      M ? ae = pm({
         containerElement: m.el,
         isHorizontal: b.value,
-        selectedElement: V
-      }) : te = ym({
+        selectedElement: I
+      }) : ae = ym({
         containerElement: m.el,
         isHorizontal: b.value,
         isRtl: n.value,
-        selectedElement: V
-      }), O(te);
+        selectedElement: I
+      }), L(ae);
     }
-    function O(V) {
+    function L(I) {
       if (!et || !m.el) return;
-      const M = vn(b.value, m.el), te = Mu(b.value, n.value, m.el);
+      const M = vn(b.value, m.el), ae = Mu(b.value, n.value, m.el);
       if (!(rs(b.value, m.el) <= M || // Prevent scrolling by only a couple of pixels, which doesn't look smooth
-      Math.abs(V - te) < 16)) {
+      Math.abs(I - ae) < 16)) {
         if (b.value && n.value && m.el) {
           const {
             scrollWidth: be,
             offsetWidth: fe
           } = m.el;
-          V = be - fe - V;
+          I = be - fe - I;
         }
-        b.value ? h.horizontal(V, _.value) : h(V, _.value);
+        b.value ? h.horizontal(I, g.value) : h(I, g.value);
       }
     }
-    function E(V) {
+    function E(I) {
       const {
         scrollTop: M,
-        scrollLeft: te
-      } = V.target;
-      r.value = b.value ? te : M;
+        scrollLeft: ae
+      } = I.target;
+      r.value = b.value ? ae : M;
     }
-    function R(V) {
-      if (I.value = !0, !(!u.value || !x.el)) {
-        for (const M of V.composedPath())
-          for (const te of x.el.children)
-            if (te === M) {
-              $(te);
+    function O(I) {
+      if (V.value = !0, !(!u.value || !k.el)) {
+        for (const M of I.composedPath())
+          for (const ae of k.el.children)
+            if (ae === M) {
+              $(ae);
               return;
             }
       }
     }
-    function T(V) {
-      I.value = !1;
+    function D(I) {
+      V.value = !1;
     }
     let U = !1;
-    function G(V) {
+    function G(I) {
       var M;
-      !U && !I.value && !(V.relatedTarget && ((M = x.el) != null && M.contains(V.relatedTarget))) && W(), U = !1;
+      !U && !V.value && !(I.relatedTarget && ((M = k.el) != null && M.contains(I.relatedTarget))) && q(), U = !1;
     }
     function C() {
       U = !0;
     }
-    function L(V) {
-      if (!x.el) return;
-      function M(te) {
-        V.preventDefault(), W(te);
+    function R(I) {
+      if (!k.el) return;
+      function M(ae) {
+        I.preventDefault(), q(ae);
       }
-      b.value ? V.key === "ArrowRight" ? M(n.value ? "prev" : "next") : V.key === "ArrowLeft" && M(n.value ? "next" : "prev") : V.key === "ArrowDown" ? M("next") : V.key === "ArrowUp" && M("prev"), V.key === "Home" ? M("first") : V.key === "End" && M("last");
+      b.value ? I.key === "ArrowRight" ? M(n.value ? "prev" : "next") : I.key === "ArrowLeft" && M(n.value ? "next" : "prev") : I.key === "ArrowDown" ? M("next") : I.key === "ArrowUp" && M("prev"), I.key === "Home" ? M("first") : I.key === "End" && M("last");
     }
-    function W(V) {
-      var te, ge;
-      if (!x.el) return;
+    function q(I) {
+      var ae, ge;
+      if (!k.el) return;
       let M;
-      if (!V)
-        M = on(x.el)[0];
-      else if (V === "next") {
-        if (M = (te = x.el.querySelector(":focus")) == null ? void 0 : te.nextElementSibling, !M) return W("first");
-      } else if (V === "prev") {
-        if (M = (ge = x.el.querySelector(":focus")) == null ? void 0 : ge.previousElementSibling, !M) return W("last");
-      } else V === "first" ? M = x.el.firstElementChild : V === "last" && (M = x.el.lastElementChild);
+      if (!I)
+        M = on(k.el)[0];
+      else if (I === "next") {
+        if (M = (ae = k.el.querySelector(":focus")) == null ? void 0 : ae.nextElementSibling, !M) return q("first");
+      } else if (I === "prev") {
+        if (M = (ge = k.el.querySelector(":focus")) == null ? void 0 : ge.previousElementSibling, !M) return q("last");
+      } else I === "first" ? M = k.el.firstElementChild : I === "last" && (M = k.el.lastElementChild);
       M && M.focus({
         preventScroll: !0
       });
     }
-    function Y(V) {
-      const M = b.value && n.value ? -1 : 1, te = (V === "prev" ? -M : M) * d.value;
-      let ge = r.value + te;
+    function Y(I) {
+      const M = b.value && n.value ? -1 : 1, ae = (I === "prev" ? -M : M) * d.value;
+      let ge = r.value + ae;
       if (b.value && n.value && m.el) {
         const {
           scrollWidth: be,
@@ -5847,14 +5847,14 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
         } = m.el;
         ge += be - fe;
       }
-      O(ge);
+      L(ge);
     }
-    const J = k(() => ({
+    const J = S(() => ({
       next: s.next,
       prev: s.prev,
       select: s.select,
       isSelected: s.isSelected
-    })), H = k(() => {
+    })), H = S(() => {
       switch (e.showArrows) {
         // Always show arrows on desktop & mobile
         case "always":
@@ -5875,10 +5875,10 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
         default:
           return !o.value && (u.value || Math.abs(r.value) > 0);
       }
-    }), N = k(() => Math.abs(r.value) > 1), j = k(() => {
+    }), N = S(() => Math.abs(r.value) > 1), j = S(() => {
       if (!m.value) return !1;
-      const V = rs(b.value, m.el), M = bm(b.value, m.el);
-      return V - M - Math.abs(r.value) > 1;
+      const I = rs(b.value, m.el), M = bm(b.value, m.el);
+      return I - M - Math.abs(r.value) > 1;
     });
     return se(() => l(e.tag, {
       class: ["v-slide-group", {
@@ -5887,11 +5887,11 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
         "v-slide-group--is-overflowing": u.value
       }, i.value, e.class],
       style: e.style,
-      tabindex: I.value || s.selected.value.length ? -1 : 0,
+      tabindex: V.value || s.selected.value.length ? -1 : 0,
       onFocus: G
     }, {
       default: () => {
-        var V, M, te;
+        var I, M, ae;
         return [H.value && l("div", {
           key: "prev",
           class: ["v-slide-group__prev", {
@@ -5899,7 +5899,7 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
           }],
           onMousedown: C,
           onClick: () => N.value && Y("prev")
-        }, [((V = t.prev) == null ? void 0 : V.call(t, J.value)) ?? l(ri, null, {
+        }, [((I = t.prev) == null ? void 0 : I.call(t, J.value)) ?? l(ri, null, {
           default: () => [l($e, {
             icon: n.value ? e.nextIcon : e.prevIcon
           }, null)]
@@ -5909,11 +5909,11 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
           class: "v-slide-group__container",
           onScroll: E
         }, [l("div", {
-          ref: x,
+          ref: k,
           class: "v-slide-group__content",
-          onFocusin: R,
-          onFocusout: T,
-          onKeydown: L
+          onFocusin: O,
+          onFocusout: D,
+          onKeydown: R
         }, [(M = t.default) == null ? void 0 : M.call(t, J.value)])]), H.value && l("div", {
           key: "next",
           class: ["v-slide-group__next", {
@@ -5921,7 +5921,7 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
           }],
           onMousedown: C,
           onClick: () => j.value && Y("next")
-        }, [((te = t.next) == null ? void 0 : te.call(t, J.value)) ?? l(ri, null, {
+        }, [((ae = t.next) == null ? void 0 : ae.call(t, J.value)) ?? l(ri, null, {
           default: () => [l($e, {
             icon: n.value ? e.prevIcon : e.nextIcon
           }, null)]
@@ -5931,7 +5931,7 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
       selected: s.selected,
       scrollTo: Y,
       scrollOffset: r,
-      focus: W
+      focus: q
     };
   }
 }), Uu = Symbol.for("vuetify:v-chip-group"), hm = K({
@@ -5946,7 +5946,7 @@ const _m = Symbol.for("vuetify:v-slide-group"), Ki = K({
   ...wn({
     selectedClass: "v-chip--selected"
   }),
-  ...Oe(),
+  ...Me(),
   ...je(),
   ...Ft({
     variant: "tonal"
@@ -5970,7 +5970,7 @@ ie()({
       next: s,
       prev: u,
       selected: r
-    } = Ga(e, Uu);
+    } = ja(e, Uu);
     return pt({
       VChip: {
         color: oe(e, "color"),
@@ -6003,10 +6003,10 @@ ie()({
 const va = K({
   border: [Boolean, Number, String]
 }, "border");
-function Ca(e) {
+function Va(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : jt();
   return {
-    borderClasses: k(() => {
+    borderClasses: S(() => {
       const n = Na(e) ? e.value : e.border, i = [];
       if (n === !0 || n === "")
         i.push(`${a}--border`);
@@ -6030,7 +6030,7 @@ const qt = K({
 }, "elevation");
 function aa(e) {
   return {
-    elevationClasses: k(() => {
+    elevationClasses: S(() => {
       const t = Na(e) ? e.value : e.elevation, n = [];
       return t == null || n.push(`elevation-${t}`), n;
     })
@@ -6038,7 +6038,7 @@ function aa(e) {
 }
 function xm() {
   const e = tt("useRoute");
-  return k(() => {
+  return S(() => {
     var a;
     return (a = e == null ? void 0 : e.proxy) == null ? void 0 : a.$route;
   });
@@ -6049,27 +6049,27 @@ function km() {
 }
 function In(e, a) {
   var d, y;
-  const t = ae("RouterLink"), n = k(() => !!(e.href || e.to)), i = k(() => (n == null ? void 0 : n.value) || Mo(a, "click") || Mo(e, "click"));
+  const t = te("RouterLink"), n = S(() => !!(e.href || e.to)), i = S(() => (n == null ? void 0 : n.value) || Mo(a, "click") || Mo(e, "click"));
   if (typeof t == "string" || !("useLink" in t))
     return {
       isLink: n,
       isClickable: i,
       href: oe(e, "href")
     };
-  const o = k(() => ({
+  const o = S(() => ({
     ...e,
     to: oe(() => e.to || "")
-  })), s = t.useLink(o.value), u = k(() => e.to ? s : void 0), r = xm();
+  })), s = t.useLink(o.value), u = S(() => e.to ? s : void 0), r = xm();
   return {
     isLink: n,
     isClickable: i,
     route: (d = u.value) == null ? void 0 : d.route,
     navigate: (y = u.value) == null ? void 0 : y.navigate,
-    isActive: k(() => {
-      var b, m, f;
-      return u.value ? e.exact ? r.value ? ((f = u.value.isExactActive) == null ? void 0 : f.value) && Zt(u.value.route.value.query, r.value.query) : ((m = u.value.isExactActive) == null ? void 0 : m.value) ?? !1 : ((b = u.value.isActive) == null ? void 0 : b.value) ?? !1 : !1;
+    isActive: S(() => {
+      var b, m, p;
+      return u.value ? e.exact ? r.value ? ((p = u.value.isExactActive) == null ? void 0 : p.value) && Zt(u.value.route.value.query, r.value.query) : ((m = u.value.isExactActive) == null ? void 0 : m.value) ?? !1 : ((b = u.value.isActive) == null ? void 0 : b.value) ?? !1 : !1;
     }),
-    href: k(() => {
+    href: S(() => {
       var b;
       return e.to ? (b = u.value) == null ? void 0 : b.route.value.href : e.href;
     })
@@ -6143,8 +6143,8 @@ const wm = K({
   ...Cn(),
   ...vt(),
   ...wl(),
-  ...za(),
-  ...Oe({
+  ...Ua(),
+  ...Me({
     tag: "span"
   }),
   ...je(),
@@ -6173,59 +6173,59 @@ const wm = K({
       t: o
     } = Qe(), {
       borderClasses: s
-    } = Ca(e), {
+    } = Va(e), {
       colorClasses: u,
       colorStyles: r,
       variantClasses: d
-    } = ka(e), {
+    } = Sa(e), {
       densityClasses: y
     } = Pt(e), {
       elevationClasses: b
     } = aa(e), {
       roundedClasses: m
     } = _t(e), {
-      sizeClasses: f
+      sizeClasses: p
     } = kn(e), {
-      themeClasses: x
-    } = Xe(e), p = Ve(e, "modelValue"), h = Vn(e, Uu, !1), _ = In(e, t), g = k(() => e.link !== !1 && _.isLink.value), S = k(() => !e.disabled && e.link !== !1 && (!!h || e.link || _.isClickable.value)), I = k(() => ({
+      themeClasses: k
+    } = Xe(e), _ = Ve(e, "modelValue"), h = Vn(e, Uu, !1), g = In(e, t), f = S(() => e.link !== !1 && g.isLink.value), x = S(() => !e.disabled && e.link !== !1 && (!!h || e.link || g.isClickable.value)), V = S(() => ({
       "aria-label": o(e.closeLabel),
       onClick(E) {
-        E.preventDefault(), E.stopPropagation(), p.value = !1, n("click:close", E);
+        E.preventDefault(), E.stopPropagation(), _.value = !1, n("click:close", E);
       }
     }));
     function $(E) {
-      var R;
-      n("click", E), S.value && ((R = _.navigate) == null || R.call(_, E), h == null || h.toggle());
+      var O;
+      n("click", E), x.value && ((O = g.navigate) == null || O.call(g, E), h == null || h.toggle());
     }
-    function O(E) {
+    function L(E) {
       (E.key === "Enter" || E.key === " ") && (E.preventDefault(), $(E));
     }
     return () => {
-      const E = _.isLink.value ? "a" : e.tag, R = !!(e.appendIcon || e.appendAvatar), T = !!(R || i.append), U = !!(i.close || e.closable), G = !!(i.filter || e.filter) && h, C = !!(e.prependIcon || e.prependAvatar), L = !!(C || i.prepend), W = !h || h.isSelected.value;
-      return p.value && Ye(l(E, {
+      const E = g.isLink.value ? "a" : e.tag, O = !!(e.appendIcon || e.appendAvatar), D = !!(O || i.append), U = !!(i.close || e.closable), G = !!(i.filter || e.filter) && h, C = !!(e.prependIcon || e.prependAvatar), R = !!(C || i.prepend), q = !h || h.isSelected.value;
+      return _.value && Ye(l(E, {
         class: ["v-chip", {
           "v-chip--disabled": e.disabled,
           "v-chip--label": e.label,
-          "v-chip--link": S.value,
+          "v-chip--link": x.value,
           "v-chip--filter": G,
           "v-chip--pill": e.pill
-        }, x.value, s.value, W ? u.value : void 0, y.value, b.value, m.value, f.value, d.value, h == null ? void 0 : h.selectedClass.value, e.class],
-        style: [W ? r.value : void 0, e.style],
+        }, k.value, s.value, q ? u.value : void 0, y.value, b.value, m.value, p.value, d.value, h == null ? void 0 : h.selectedClass.value, e.class],
+        style: [q ? r.value : void 0, e.style],
         disabled: e.disabled || void 0,
         draggable: e.draggable,
-        href: _.href.value,
-        tabindex: S.value ? 0 : void 0,
+        href: g.href.value,
+        tabindex: x.value ? 0 : void 0,
         onClick: $,
-        onKeydown: S.value && !g.value && O
+        onKeydown: x.value && !f.value && L
       }, {
         default: () => {
           var Y;
-          return [ea(S.value, "v-chip"), G && l(Lu, {
+          return [ea(x.value, "v-chip"), G && l(Lu, {
             key: "filter"
           }, {
             default: () => [Ye(l("div", {
               class: "v-chip__filter"
-            }, [i.filter ? l(De, {
+            }, [i.filter ? l(Ne, {
               key: "filter-defaults",
               disabled: !e.filterIcon,
               defaults: {
@@ -6237,10 +6237,10 @@ const wm = K({
               key: "filter-icon",
               icon: e.filterIcon
             }, null)]), [[Gt, h.isSelected.value]])]
-          }), L && l("div", {
+          }), R && l("div", {
             key: "prepend",
             class: "v-chip__prepend"
-          }, [i.prepend ? l(De, {
+          }, [i.prepend ? l(Ne, {
             key: "prepend-defaults",
             disabled: !C,
             defaults: {
@@ -6253,7 +6253,7 @@ const wm = K({
                 start: !0
               }
             }
-          }, i.prepend) : l(ve, null, [e.prependIcon && l($e, {
+          }, i.prepend) : l(de, null, [e.prependIcon && l($e, {
             key: "prepend-icon",
             icon: e.prependIcon,
             start: !0
@@ -6271,12 +6271,12 @@ const wm = K({
             toggle: h == null ? void 0 : h.toggle,
             value: h == null ? void 0 : h.value.value,
             disabled: e.disabled
-          })) ?? e.text]), T && l("div", {
+          })) ?? e.text]), D && l("div", {
             key: "append",
             class: "v-chip__append"
-          }, [i.append ? l(De, {
+          }, [i.append ? l(Ne, {
             key: "append-defaults",
-            disabled: !R,
+            disabled: !O,
             defaults: {
               VAvatar: {
                 end: !0,
@@ -6287,7 +6287,7 @@ const wm = K({
                 icon: e.appendIcon
               }
             }
-          }, i.append) : l(ve, null, [e.appendIcon && l($e, {
+          }, i.append) : l(de, null, [e.appendIcon && l($e, {
             key: "append-icon",
             end: !0,
             icon: e.appendIcon
@@ -6299,7 +6299,7 @@ const wm = K({
             key: "close",
             class: "v-chip__close",
             type: "button"
-          }, I.value), [i.close ? l(De, {
+          }, V.value), [i.close ? l(Ne, {
             key: "close-defaults",
             defaults: {
               VIcon: {
@@ -6313,7 +6313,7 @@ const wm = K({
             size: "x-small"
           }, null)])];
         }
-      }), [[Bt("ripple"), S.value && e.ripple, null]]);
+      }), [[Bt("ripple"), x.value && e.ripple, null]]);
     };
   }
 }), ci = Symbol.for("vuetify:list");
@@ -6578,7 +6578,7 @@ const Xi = (e) => {
     in: a.in,
     out: a.out
   };
-}, Nm = (e) => {
+}, Dm = (e) => {
   const a = {
     select: (t) => {
       let {
@@ -6596,12 +6596,12 @@ const Xi = (e) => {
       }
       let y = u.get(n);
       for (; y; ) {
-        const b = s.get(y), m = b.every((x) => o.get(x) === "on"), f = b.every((x) => !o.has(x) || o.get(x) === "off");
-        o.set(y, m ? "on" : f ? "off" : "indeterminate"), y = u.get(y);
+        const b = s.get(y), m = b.every((k) => o.get(k) === "on"), p = b.every((k) => !o.has(k) || o.get(k) === "off");
+        o.set(y, m ? "on" : p ? "off" : "indeterminate"), y = u.get(y);
       }
-      return e && !i && Array.from(o.entries()).reduce((m, f) => {
-        let [x, p] = f;
-        return p === "on" && m.push(x), m;
+      return e && !i && Array.from(o.entries()).reduce((m, p) => {
+        let [k, _] = p;
+        return _ === "on" && m.push(k), m;
       }, []).length === 0 ? r : o;
     },
     in: (t, n, i) => {
@@ -6629,20 +6629,20 @@ const Xi = (e) => {
   root: {
     register: () => null,
     unregister: () => null,
-    parents: A(/* @__PURE__ */ new Map()),
-    children: A(/* @__PURE__ */ new Map()),
+    parents: T(/* @__PURE__ */ new Map()),
+    children: T(/* @__PURE__ */ new Map()),
     open: () => null,
     openOnSelect: () => null,
     activate: () => null,
     select: () => null,
-    activatable: A(!1),
-    selectable: A(!1),
-    opened: A(/* @__PURE__ */ new Set()),
-    activated: A(/* @__PURE__ */ new Set()),
-    selected: A(/* @__PURE__ */ new Map()),
-    selectedValues: A([])
+    activatable: T(!1),
+    selectable: T(!1),
+    opened: T(/* @__PURE__ */ new Set()),
+    activated: T(/* @__PURE__ */ new Set()),
+    selected: T(/* @__PURE__ */ new Map()),
+    selectedValues: T([])
   }
-}, Dm = K({
+}, Nm = K({
   activatable: Boolean,
   selectable: Boolean,
   activeStrategy: [String, Function, Object],
@@ -6654,7 +6654,7 @@ const Xi = (e) => {
   mandatory: Boolean
 }, "nested"), $m = (e) => {
   let a = !1;
-  const t = A(/* @__PURE__ */ new Map()), n = A(/* @__PURE__ */ new Map()), i = Ve(e, "opened", e.opened, (f) => new Set(f), (f) => [...f.values()]), o = k(() => {
+  const t = T(/* @__PURE__ */ new Map()), n = T(/* @__PURE__ */ new Map()), i = Ve(e, "opened", e.opened, (p) => new Set(p), (p) => [...p.values()]), o = S(() => {
     if (typeof e.activeStrategy == "object") return e.activeStrategy;
     if (typeof e.activeStrategy == "function") return e.activeStrategy(e.mandatory);
     switch (e.activeStrategy) {
@@ -6668,7 +6668,7 @@ const Xi = (e) => {
       default:
         return Hu(e.mandatory);
     }
-  }), s = k(() => {
+  }), s = S(() => {
     if (typeof e.selectStrategy == "object") return e.selectStrategy;
     if (typeof e.selectStrategy == "function") return e.selectStrategy(e.mandatory);
     switch (e.selectStrategy) {
@@ -6682,9 +6682,9 @@ const Xi = (e) => {
         return qu(e.mandatory);
       case "classic":
       default:
-        return Nm(e.mandatory);
+        return Dm(e.mandatory);
     }
-  }), u = k(() => {
+  }), u = S(() => {
     if (typeof e.openStrategy == "object") return e.openStrategy;
     switch (e.openStrategy) {
       case "list":
@@ -6695,16 +6695,16 @@ const Xi = (e) => {
       default:
         return Wu;
     }
-  }), r = Ve(e, "activated", e.activated, (f) => o.value.in(f, t.value, n.value), (f) => o.value.out(f, t.value, n.value)), d = Ve(e, "selected", e.selected, (f) => s.value.in(f, t.value, n.value), (f) => s.value.out(f, t.value, n.value));
+  }), r = Ve(e, "activated", e.activated, (p) => o.value.in(p, t.value, n.value), (p) => o.value.out(p, t.value, n.value)), d = Ve(e, "selected", e.selected, (p) => s.value.in(p, t.value, n.value), (p) => s.value.out(p, t.value, n.value));
   Ut(() => {
     a = !0;
   });
-  function y(f) {
-    const x = [];
-    let p = f;
-    for (; p != null; )
-      x.unshift(p), p = n.value.get(p);
-    return x;
+  function y(p) {
+    const k = [];
+    let _ = p;
+    for (; _ != null; )
+      k.unshift(_), _ = n.value.get(_);
+    return k;
   }
   const b = tt("nested"), m = {
     id: _e(),
@@ -6714,87 +6714,87 @@ const Xi = (e) => {
       selectable: oe(e, "selectable"),
       activated: r,
       selected: d,
-      selectedValues: k(() => {
-        const f = [];
-        for (const [x, p] of d.value.entries())
-          p === "on" && f.push(x);
-        return f;
+      selectedValues: S(() => {
+        const p = [];
+        for (const [k, _] of d.value.entries())
+          _ === "on" && p.push(k);
+        return p;
       }),
-      register: (f, x, p) => {
-        x && f !== x && n.value.set(f, x), p && t.value.set(f, []), x != null && t.value.set(x, [...t.value.get(x) || [], f]);
+      register: (p, k, _) => {
+        k && p !== k && n.value.set(p, k), _ && t.value.set(p, []), k != null && t.value.set(k, [...t.value.get(k) || [], p]);
       },
-      unregister: (f) => {
+      unregister: (p) => {
         if (a) return;
-        t.value.delete(f);
-        const x = n.value.get(f);
-        if (x) {
-          const p = t.value.get(x) ?? [];
-          t.value.set(x, p.filter((h) => h !== f));
+        t.value.delete(p);
+        const k = n.value.get(p);
+        if (k) {
+          const _ = t.value.get(k) ?? [];
+          t.value.set(k, _.filter((h) => h !== p));
         }
-        n.value.delete(f), i.value.delete(f);
+        n.value.delete(p), i.value.delete(p);
       },
-      open: (f, x, p) => {
+      open: (p, k, _) => {
         b.emit("click:open", {
-          id: f,
-          value: x,
-          path: y(f),
-          event: p
+          id: p,
+          value: k,
+          path: y(p),
+          event: _
         });
         const h = u.value.open({
-          id: f,
-          value: x,
+          id: p,
+          value: k,
           opened: new Set(i.value),
           children: t.value,
           parents: n.value,
-          event: p
+          event: _
         });
         h && (i.value = h);
       },
-      openOnSelect: (f, x, p) => {
+      openOnSelect: (p, k, _) => {
         const h = u.value.select({
-          id: f,
-          value: x,
+          id: p,
+          value: k,
           selected: new Map(d.value),
           opened: new Set(i.value),
           children: t.value,
           parents: n.value,
-          event: p
+          event: _
         });
         h && (i.value = h);
       },
-      select: (f, x, p) => {
+      select: (p, k, _) => {
         b.emit("click:select", {
-          id: f,
-          value: x,
-          path: y(f),
-          event: p
+          id: p,
+          value: k,
+          path: y(p),
+          event: _
         });
         const h = s.value.select({
-          id: f,
-          value: x,
+          id: p,
+          value: k,
           selected: new Map(d.value),
           children: t.value,
           parents: n.value,
-          event: p
+          event: _
         });
-        h && (d.value = h), m.root.openOnSelect(f, x, p);
+        h && (d.value = h), m.root.openOnSelect(p, k, _);
       },
-      activate: (f, x, p) => {
+      activate: (p, k, _) => {
         if (!e.activatable)
-          return m.root.select(f, !0, p);
+          return m.root.select(p, !0, _);
         b.emit("click:activate", {
-          id: f,
-          value: x,
-          path: y(f),
-          event: p
+          id: p,
+          value: k,
+          path: y(p),
+          event: _
         });
         const h = o.value.activate({
-          id: f,
-          value: x,
+          id: p,
+          value: k,
           activated: new Set(r.value),
           children: t.value,
           parents: n.value,
-          event: p
+          event: _
         });
         h && (r.value = h);
       },
@@ -6804,19 +6804,19 @@ const Xi = (e) => {
   };
   return Ke(fn, m), m.root;
 }, Zi = (e, a) => {
-  const t = Be(fn, Yu), n = Symbol(It()), i = k(() => e.value !== void 0 ? e.value : n), o = {
+  const t = Be(fn, Yu), n = Symbol(It()), i = S(() => e.value !== void 0 ? e.value : n), o = {
     ...t,
     id: i,
     open: (s, u) => t.root.open(i.value, s, u),
     openOnSelect: (s, u) => t.root.openOnSelect(i.value, s, u),
-    isOpen: k(() => t.root.opened.value.has(i.value)),
-    parent: k(() => t.root.parents.value.get(i.value)),
+    isOpen: S(() => t.root.opened.value.has(i.value)),
+    parent: S(() => t.root.parents.value.get(i.value)),
     activate: (s, u) => t.root.activate(i.value, s, u),
-    isActivated: k(() => t.root.activated.value.has(Ue(i.value))),
+    isActivated: S(() => t.root.activated.value.has(Ue(i.value))),
     select: (s, u) => t.root.select(i.value, s, u),
-    isSelected: k(() => t.root.selected.value.get(Ue(i.value)) === "on"),
-    isIndeterminate: k(() => t.root.selected.value.get(i.value) === "indeterminate"),
-    isLeaf: k(() => !t.root.children.value.get(i.value)),
+    isSelected: S(() => t.root.selected.value.get(Ue(i.value)) === "on"),
+    isIndeterminate: S(() => t.root.selected.value.get(i.value) === "indeterminate"),
+    isLeaf: S(() => !t.root.children.value.get(i.value)),
     isGroupActivator: t.isGroupActivator
   };
   return !t.isGroupActivator && t.root.register(i.value, t.id.value, a), Ut(() => {
@@ -6836,7 +6836,7 @@ function Ju() {
       e.value = !0;
     });
   }), {
-    ssrBootStyles: k(() => e.value ? void 0 : {
+    ssrBootStyles: S(() => e.value ? void 0 : {
       transition: "none !important"
     }),
     isBooted: Ai(e)
@@ -6873,7 +6873,7 @@ const Em = xn({
   title: String,
   value: null,
   ...Pe(),
-  ...Oe()
+  ...Me()
 }, "VListGroup"), ll = ie()({
   name: "VListGroup",
   props: Ku(),
@@ -6885,17 +6885,17 @@ const Em = xn({
       isOpen: n,
       open: i,
       id: o
-    } = Zi(oe(e, "value"), !0), s = k(() => `v-list-group--id-${String(o.value)}`), u = ju(), {
+    } = Zi(oe(e, "value"), !0), s = S(() => `v-list-group--id-${String(o.value)}`), u = ju(), {
       isBooted: r
     } = Ju();
-    function d(f) {
-      f.stopPropagation(), i(!n.value, f);
+    function d(p) {
+      p.stopPropagation(), i(!n.value, p);
     }
-    const y = k(() => ({
+    const y = S(() => ({
       onClick: d,
       class: "v-list-group__header",
       id: s.value
-    })), b = k(() => n.value ? e.collapseIcon : e.expandIcon), m = k(() => ({
+    })), b = S(() => n.value ? e.collapseIcon : e.expandIcon), m = S(() => ({
       VListItem: {
         active: n.value,
         activeColor: e.activeColor,
@@ -6916,7 +6916,7 @@ const Em = xn({
       }, e.class],
       style: e.style
     }, {
-      default: () => [t.activator && l(De, {
+      default: () => [t.activator && l(Ne, {
         defaults: m.value
       }, {
         default: () => [l(Em, null, {
@@ -6927,17 +6927,17 @@ const Em = xn({
         })]
       }), l(Tt, {
         transition: {
-          component: Ua
+          component: Ga
         },
         disabled: !r.value
       }, {
         default: () => {
-          var f;
+          var p;
           return [Ye(l("div", {
             class: "v-list-group__items",
             role: "group",
             "aria-labelledby": s.value
-          }, [(f = t.default) == null ? void 0 : f.call(t)]), [[Gt, n.value]])];
+          }, [(p = t.default) == null ? void 0 : p.call(t)]), [[Gt, n.value]])];
         }
       })]
     })), {
@@ -6947,7 +6947,7 @@ const Em = xn({
 }), Fm = K({
   opacity: [Number, String],
   ...Pe(),
-  ...Oe()
+  ...Me()
 }, "VListItemSubtitle"), Xu = ie()({
   name: "VListItemSubtitle",
   props: Fm(),
@@ -6962,7 +6962,7 @@ const Em = xn({
       }, e.style]
     }, t)), {};
   }
-}), il = Ma("v-list-item-title"), Qu = K({
+}), il = za("v-list-item-title"), Qu = K({
   active: {
     type: Boolean,
     default: void 0
@@ -6999,7 +6999,7 @@ const Em = xn({
   ...qt(),
   ...vt(),
   ...wl(),
-  ...Oe(),
+  ...Me(),
   ...je(),
   ...Ft({
     variant: "text"
@@ -7019,84 +7019,84 @@ const Em = xn({
       slots: n,
       emit: i
     } = a;
-    const o = In(e, t), s = k(() => e.value === void 0 ? o.href.value : e.value), {
+    const o = In(e, t), s = S(() => e.value === void 0 ? o.href.value : e.value), {
       activate: u,
       isActivated: r,
       select: d,
       isSelected: y,
       isIndeterminate: b,
       isGroupActivator: m,
-      root: f,
-      parent: x,
-      openOnSelect: p
-    } = Zi(s, !1), h = ju(), _ = k(() => {
-      var V;
-      return e.active !== !1 && (e.active || ((V = o.isActive) == null ? void 0 : V.value) || (f.activatable.value ? r.value : y.value));
-    }), g = k(() => e.link !== !1 && o.isLink.value), S = k(() => !e.disabled && e.link !== !1 && (e.link || o.isClickable.value || !!h && (f.selectable.value || f.activatable.value || e.value != null))), I = k(() => e.rounded || e.nav), $ = k(() => e.color ?? e.activeColor), O = k(() => ({
-      color: _.value ? $.value ?? e.baseColor : e.baseColor,
+      root: p,
+      parent: k,
+      openOnSelect: _
+    } = Zi(s, !1), h = ju(), g = S(() => {
+      var I;
+      return e.active !== !1 && (e.active || ((I = o.isActive) == null ? void 0 : I.value) || (p.activatable.value ? r.value : y.value));
+    }), f = S(() => e.link !== !1 && o.isLink.value), x = S(() => !e.disabled && e.link !== !1 && (e.link || o.isClickable.value || !!h && (p.selectable.value || p.activatable.value || e.value != null))), V = S(() => e.rounded || e.nav), $ = S(() => e.color ?? e.activeColor), L = S(() => ({
+      color: g.value ? $.value ?? e.baseColor : e.baseColor,
       variant: e.variant
     }));
     we(() => {
-      var V;
-      return (V = o.isActive) == null ? void 0 : V.value;
-    }, (V) => {
-      V && x.value != null && f.open(x.value, !0), V && p(V);
+      var I;
+      return (I = o.isActive) == null ? void 0 : I.value;
+    }, (I) => {
+      I && k.value != null && p.open(k.value, !0), I && _(I);
     }, {
       immediate: !0
     });
     const {
       themeClasses: E
     } = Xe(e), {
-      borderClasses: R
-    } = Ca(e), {
-      colorClasses: T,
+      borderClasses: O
+    } = Va(e), {
+      colorClasses: D,
       colorStyles: U,
       variantClasses: G
-    } = ka(O), {
+    } = Sa(L), {
       densityClasses: C
     } = Pt(e), {
-      dimensionStyles: L
+      dimensionStyles: R
     } = Wt(e), {
-      elevationClasses: W
+      elevationClasses: q
     } = aa(e), {
       roundedClasses: Y
-    } = _t(I), J = k(() => e.lines ? `v-list-item--${e.lines}-line` : void 0), H = k(() => ({
-      isActive: _.value,
+    } = _t(V), J = S(() => e.lines ? `v-list-item--${e.lines}-line` : void 0), H = S(() => ({
+      isActive: g.value,
       select: d,
       isSelected: y.value,
       isIndeterminate: b.value
     }));
-    function N(V) {
+    function N(I) {
       var M;
-      i("click", V), S.value && ((M = o.navigate) == null || M.call(o, V), !m && (f.activatable.value ? u(!r.value, V) : (f.selectable.value || e.value != null) && d(!y.value, V)));
+      i("click", I), x.value && ((M = o.navigate) == null || M.call(o, I), !m && (p.activatable.value ? u(!r.value, I) : (p.selectable.value || e.value != null) && d(!y.value, I)));
     }
-    function j(V) {
-      (V.key === "Enter" || V.key === " ") && (V.preventDefault(), N(V));
+    function j(I) {
+      (I.key === "Enter" || I.key === " ") && (I.preventDefault(), N(I));
     }
     return se(() => {
-      const V = g.value ? "a" : e.tag, M = n.title || e.title != null, te = n.subtitle || e.subtitle != null, ge = !!(e.appendAvatar || e.appendIcon), be = !!(ge || n.append), fe = !!(e.prependAvatar || e.prependIcon), pe = !!(fe || n.prepend);
-      return h == null || h.updateHasPrepend(pe), e.activeColor && yf("active-color", ["color", "base-color"]), Ye(l(V, {
+      const I = f.value ? "a" : e.tag, M = n.title || e.title != null, ae = n.subtitle || e.subtitle != null, ge = !!(e.appendAvatar || e.appendIcon), be = !!(ge || n.append), fe = !!(e.prependAvatar || e.prependIcon), pe = !!(fe || n.prepend);
+      return h == null || h.updateHasPrepend(pe), e.activeColor && yf("active-color", ["color", "base-color"]), Ye(l(I, {
         class: ["v-list-item", {
-          "v-list-item--active": _.value,
+          "v-list-item--active": g.value,
           "v-list-item--disabled": e.disabled,
-          "v-list-item--link": S.value,
+          "v-list-item--link": x.value,
           "v-list-item--nav": e.nav,
           "v-list-item--prepend": !pe && (h == null ? void 0 : h.hasPrepend.value),
           "v-list-item--slim": e.slim,
-          [`${e.activeClass}`]: e.activeClass && _.value
-        }, E.value, R.value, T.value, C.value, W.value, J.value, Y.value, G.value, e.class],
-        style: [U.value, L.value, e.style],
+          [`${e.activeClass}`]: e.activeClass && g.value
+        }, E.value, O.value, D.value, C.value, q.value, J.value, Y.value, G.value, e.class],
+        style: [U.value, R.value, e.style],
         href: o.href.value,
-        tabindex: S.value ? h ? -2 : 0 : void 0,
+        tabindex: x.value ? h ? -2 : 0 : void 0,
         onClick: N,
-        onKeydown: S.value && !g.value && j
+        onKeydown: x.value && !f.value && j
       }, {
         default: () => {
           var ce;
-          return [ea(S.value || _.value, "v-list-item"), pe && l("div", {
+          return [ea(x.value || g.value, "v-list-item"), pe && l("div", {
             key: "prepend",
             class: "v-list-item__prepend"
-          }, [n.prepend ? l(De, {
+          }, [n.prepend ? l(Ne, {
             key: "prepend-defaults",
             disabled: !fe,
             defaults: {
@@ -7117,7 +7117,7 @@ const Em = xn({
               var z;
               return [(z = n.prepend) == null ? void 0 : z.call(n, H.value)];
             }
-          }) : l(ve, null, [e.prependAvatar && l(Mt, {
+          }) : l(de, null, [e.prependAvatar && l(Mt, {
             key: "prepend-avatar",
             density: e.density,
             image: e.prependAvatar
@@ -7139,7 +7139,7 @@ const Em = xn({
                 title: e.title
               })) ?? e.title];
             }
-          }), te && l(Xu, {
+          }), ae && l(Xu, {
             key: "subtitle"
           }, {
             default: () => {
@@ -7151,7 +7151,7 @@ const Em = xn({
           }), (ce = n.default) == null ? void 0 : ce.call(n, H.value)]), be && l("div", {
             key: "append",
             class: "v-list-item__append"
-          }, [n.append ? l(De, {
+          }, [n.append ? l(Ne, {
             key: "append-defaults",
             disabled: !ge,
             defaults: {
@@ -7172,7 +7172,7 @@ const Em = xn({
               var z;
               return [(z = n.append) == null ? void 0 : z.call(n, H.value)];
             }
-          }) : l(ve, null, [e.appendIcon && l($e, {
+          }) : l(de, null, [e.appendIcon && l($e, {
             key: "append-icon",
             density: e.density,
             icon: e.appendIcon
@@ -7184,7 +7184,7 @@ const Em = xn({
             class: "v-list-item__spacer"
           }, null)])];
         }
-      }), [[Bt("ripple"), S.value && e.ripple]]);
+      }), [[Bt("ripple"), x.value && e.ripple]]);
     }), {
       activate: u,
       isActivated: r,
@@ -7200,7 +7200,7 @@ const Em = xn({
   sticky: Boolean,
   title: String,
   ...Pe(),
-  ...Oe()
+  ...Me()
 }, "VListSubheader"), Rm = ie()({
   name: "VListSubheader",
   props: Lm(),
@@ -7254,7 +7254,7 @@ const Em = xn({
     } = Xe(e), {
       textColorClasses: o,
       textColorStyles: s
-    } = kt(oe(e, "color")), u = k(() => {
+    } = kt(oe(e, "color")), u = S(() => {
       const r = {};
       return e.length && (r[e.vertical ? "height" : "width"] = Se(e.length)), e.thickness && (r[e.vertical ? "borderRightWidth" : "borderTopWidth"] = Se(e.thickness)), r;
     });
@@ -7294,7 +7294,7 @@ const Em = xn({
     return Gu(), () => {
       var n, i;
       return ((n = t.default) == null ? void 0 : n.call(t)) ?? ((i = e.items) == null ? void 0 : i.map((o) => {
-        var m, f;
+        var m, p;
         let {
           children: s,
           props: u,
@@ -7306,35 +7306,35 @@ const Em = xn({
             props: u
           })) ?? l(ke, u, null);
         if (r === "subheader")
-          return ((f = t.subheader) == null ? void 0 : f.call(t, {
+          return ((p = t.subheader) == null ? void 0 : p.call(t, {
             props: u
           })) ?? l(Rm, u, null);
         const y = {
-          subtitle: t.subtitle ? (x) => {
-            var p;
-            return (p = t.subtitle) == null ? void 0 : p.call(t, {
-              ...x,
+          subtitle: t.subtitle ? (k) => {
+            var _;
+            return (_ = t.subtitle) == null ? void 0 : _.call(t, {
+              ...k,
               item: d
             });
           } : void 0,
-          prepend: t.prepend ? (x) => {
-            var p;
-            return (p = t.prepend) == null ? void 0 : p.call(t, {
-              ...x,
+          prepend: t.prepend ? (k) => {
+            var _;
+            return (_ = t.prepend) == null ? void 0 : _.call(t, {
+              ...k,
               item: d
             });
           } : void 0,
-          append: t.append ? (x) => {
-            var p;
-            return (p = t.append) == null ? void 0 : p.call(t, {
-              ...x,
+          append: t.append ? (k) => {
+            var _;
+            return (_ = t.append) == null ? void 0 : _.call(t, {
+              ...k,
               item: d
             });
           } : void 0,
-          title: t.title ? (x) => {
-            var p;
-            return (p = t.title) == null ? void 0 : p.call(t, {
-              ...x,
+          title: t.title ? (k) => {
+            var _;
+            return (_ = t.title) == null ? void 0 : _.call(t, {
+              ...k,
               item: d
             });
           } : void 0
@@ -7342,13 +7342,13 @@ const Em = xn({
         return s ? l(ll, X({
           value: u == null ? void 0 : u.value
         }, b), {
-          activator: (x) => {
+          activator: (k) => {
             let {
-              props: p
-            } = x;
+              props: _
+            } = k;
             const h = {
               ...u,
-              ...p,
+              ..._,
               value: e.returnObject ? d : u.value
             };
             return t.header ? t.header({
@@ -7395,7 +7395,7 @@ const Em = xn({
   }
 }, "list-items");
 function di(e, a) {
-  const t = ut(a, e.itemTitle, a), n = ut(a, e.itemValue, t), i = ut(a, e.itemChildren), o = e.itemProps === !0 ? typeof a == "object" && a != null && !Array.isArray(a) ? "children" in a ? Me(a, ["children"]) : a : void 0 : ut(a, e.itemProps), s = {
+  const t = ut(a, e.itemTitle, a), n = ut(a, e.itemValue, t), i = ut(a, e.itemChildren), o = e.itemProps === !0 ? typeof a == "object" && a != null && !Array.isArray(a) ? "children" in a ? ze(a, ["children"]) : a : void 0 : ut(a, e.itemProps), s = {
     title: t,
     value: n,
     ...o
@@ -7415,7 +7415,7 @@ function tr(e, a) {
   return t;
 }
 function ar(e) {
-  const a = k(() => tr(e, e.items)), t = k(() => a.value.some((o) => o.value === null));
+  const a = S(() => tr(e, e.items)), t = S(() => a.value.some((o) => o.value === null));
   function n(o) {
     return t.value || (o = o.filter((s) => s !== null)), o.map((s) => e.returnObject && typeof s == "string" ? di(e, s) : a.value.find((u) => e.valueComparator(s, u.value)) || di(e, s));
   }
@@ -7442,7 +7442,7 @@ function zm(e) {
   return typeof e == "string" || typeof e == "number" || typeof e == "boolean";
 }
 function Um(e, a) {
-  const t = ut(a, e.itemType, "item"), n = zm(a) ? a : ut(a, e.itemTitle), i = ut(a, e.itemValue, void 0), o = ut(a, e.itemChildren), s = e.itemProps === !0 ? Me(a, ["children"]) : ut(a, e.itemProps), u = {
+  const t = ut(a, e.itemType, "item"), n = zm(a) ? a : ut(a, e.itemTitle), i = ut(a, e.itemValue, void 0), o = ut(a, e.itemChildren), s = e.itemProps === !0 ? ze(a, ["children"]) : ut(a, e.itemProps), u = {
     title: n,
     value: i,
     ...s
@@ -7464,7 +7464,7 @@ function nr(e, a) {
 }
 function lr(e) {
   return {
-    items: k(() => nr(e, e.items))
+    items: S(() => nr(e, e.items))
   };
 }
 const ir = K({
@@ -7485,7 +7485,7 @@ const ir = K({
   "onClick:open": rt(),
   "onClick:select": rt(),
   "onUpdate:opened": rt(),
-  ...Dm({
+  ...Nm({
     selectStrategy: "single-leaf",
     openStrategy: "list"
   }),
@@ -7500,12 +7500,12 @@ const ir = K({
   },
   ...er(),
   ...vt(),
-  ...Oe(),
+  ...Me(),
   ...je(),
   ...Ft({
     variant: "text"
   })
-}, "VList"), _a = ie()({
+}, "VList"), ha = ie()({
   name: "VList",
   props: ir(),
   emits: {
@@ -7529,7 +7529,7 @@ const ir = K({
       backgroundColorStyles: s
     } = dt(oe(e, "bgColor")), {
       borderClasses: u
-    } = Ca(e), {
+    } = Va(e), {
       densityClasses: r
     } = Pt(e), {
       dimensionStyles: d
@@ -7539,23 +7539,23 @@ const ir = K({
       roundedClasses: b
     } = _t(e), {
       children: m,
-      open: f,
-      parents: x,
-      select: p
-    } = $m(e), h = k(() => e.lines ? `v-list--${e.lines}-line` : void 0), _ = oe(e, "activeColor"), g = oe(e, "baseColor"), S = oe(e, "color");
+      open: p,
+      parents: k,
+      select: _
+    } = $m(e), h = S(() => e.lines ? `v-list--${e.lines}-line` : void 0), g = oe(e, "activeColor"), f = oe(e, "baseColor"), x = oe(e, "color");
     Gu(), pt({
       VListGroup: {
-        activeColor: _,
-        baseColor: g,
-        color: S,
+        activeColor: g,
+        baseColor: f,
+        color: x,
         expandIcon: oe(e, "expandIcon"),
         collapseIcon: oe(e, "collapseIcon")
       },
       VListItem: {
         activeClass: oe(e, "activeClass"),
-        activeColor: _,
-        baseColor: g,
-        color: S,
+        activeColor: g,
+        baseColor: f,
+        color: x,
         density: oe(e, "density"),
         disabled: oe(e, "disabled"),
         lines: oe(e, "lines"),
@@ -7564,20 +7564,20 @@ const ir = K({
         variant: oe(e, "variant")
       }
     });
-    const I = _e(!1), $ = A();
-    function O(C) {
-      I.value = !0;
+    const V = _e(!1), $ = T();
+    function L(C) {
+      V.value = !0;
     }
     function E(C) {
-      I.value = !1;
+      V.value = !1;
     }
-    function R(C) {
-      var L;
-      !I.value && !(C.relatedTarget && ((L = $.value) != null && L.contains(C.relatedTarget))) && G();
+    function O(C) {
+      var R;
+      !V.value && !(C.relatedTarget && ((R = $.value) != null && R.contains(C.relatedTarget))) && G();
     }
-    function T(C) {
-      const L = C.target;
-      if (!(!$.value || ["INPUT", "TEXTAREA"].includes(L.tagName))) {
+    function D(C) {
+      const R = C.target;
+      if (!(!$.value || ["INPUT", "TEXTAREA"].includes(R.tagName))) {
         if (C.key === "ArrowDown")
           G("next");
         else if (C.key === "ArrowUp")
@@ -7592,7 +7592,7 @@ const ir = K({
       }
     }
     function U(C) {
-      I.value = !0;
+      V.value = !0;
     }
     function G(C) {
       if ($.value)
@@ -7606,13 +7606,13 @@ const ir = K({
         "v-list--slim": e.slim
       }, i.value, o.value, u.value, r.value, y.value, h.value, b.value, e.class],
       style: [s.value, d.value, e.style],
-      tabindex: e.disabled || I.value ? -1 : 0,
+      tabindex: e.disabled || V.value ? -1 : 0,
       role: "listbox",
       "aria-activedescendant": void 0,
-      onFocusin: O,
+      onFocusin: L,
       onFocusout: E,
-      onFocus: R,
-      onKeydown: T,
+      onFocus: O,
+      onKeydown: D,
       onMousedown: U
     }, {
       default: () => [l(Zu, {
@@ -7620,18 +7620,18 @@ const ir = K({
         returnObject: e.returnObject
       }, t)]
     })), {
-      open: f,
-      select: p,
+      open: p,
+      select: _,
       focus: G,
       children: m,
-      parents: x
+      parents: k
     };
   }
 }), Gm = K({
   start: Boolean,
   end: Boolean,
   ...Pe(),
-  ...Oe()
+  ...Me()
 }, "VListItemAction"), cs = ie()({
   name: "VListItemAction",
   props: Gm(),
@@ -7707,7 +7707,7 @@ const or = {
   offset: [Number, String, Array]
 }, "VOverlay-location-strategies");
 function Wm(e, a) {
-  const t = A({}), n = A();
+  const t = T({}), n = T();
   et && oa(() => !!(a.isActive.value && e.locationStrategy), (o) => {
     var s, u;
     we(() => e.locationStrategy, o), bt(() => {
@@ -7742,67 +7742,67 @@ function Jm(e, a, t) {
     preferredAnchor: i,
     preferredOrigin: o
   } = Ri(() => {
-    const x = li(a.location, e.isRtl.value), p = a.origin === "overlap" ? x : a.origin === "auto" ? Ol(x) : li(a.origin, e.isRtl.value);
-    return x.side === p.side && x.align === Ml(p).align ? {
-      preferredAnchor: Uo(x),
-      preferredOrigin: Uo(p)
+    const k = li(a.location, e.isRtl.value), _ = a.origin === "overlap" ? k : a.origin === "auto" ? Ol(k) : li(a.origin, e.isRtl.value);
+    return k.side === _.side && k.align === Ml(_).align ? {
+      preferredAnchor: Uo(k),
+      preferredOrigin: Uo(_)
     } : {
-      preferredAnchor: x,
-      preferredOrigin: p
+      preferredAnchor: k,
+      preferredOrigin: _
     };
-  }), [s, u, r, d] = ["minWidth", "minHeight", "maxWidth", "maxHeight"].map((x) => k(() => {
-    const p = parseFloat(a[x]);
-    return isNaN(p) ? 1 / 0 : p;
-  })), y = k(() => {
+  }), [s, u, r, d] = ["minWidth", "minHeight", "maxWidth", "maxHeight"].map((k) => S(() => {
+    const _ = parseFloat(a[k]);
+    return isNaN(_) ? 1 / 0 : _;
+  })), y = S(() => {
     if (Array.isArray(a.offset))
       return a.offset;
     if (typeof a.offset == "string") {
-      const x = a.offset.split(" ").map(parseFloat);
-      return x.length < 2 && x.push(0), x;
+      const k = a.offset.split(" ").map(parseFloat);
+      return k.length < 2 && k.push(0), k;
     }
     return typeof a.offset == "number" ? [a.offset, 0] : [0, 0];
   });
   let b = !1;
   const m = new ResizeObserver(() => {
-    b && f();
+    b && p();
   });
-  we([e.target, e.contentEl], (x, p) => {
-    let [h, _] = x, [g, S] = p;
-    g && !Array.isArray(g) && m.unobserve(g), h && !Array.isArray(h) && m.observe(h), S && m.unobserve(S), _ && m.observe(_);
+  we([e.target, e.contentEl], (k, _) => {
+    let [h, g] = k, [f, x] = _;
+    f && !Array.isArray(f) && m.unobserve(f), h && !Array.isArray(h) && m.observe(h), x && m.unobserve(x), g && m.observe(g);
   }, {
     immediate: !0
   }), bt(() => {
     m.disconnect();
   });
-  function f() {
+  function p() {
     if (b = !1, requestAnimationFrame(() => b = !0), !e.target.value || !e.contentEl.value) return;
-    const x = gu(e.target.value), p = Ym(e.contentEl.value, e.isRtl.value), h = rn(e.contentEl.value), _ = 12;
-    h.length || (h.push(document.documentElement), e.contentEl.value.style.top && e.contentEl.value.style.left || (p.x -= parseFloat(document.documentElement.style.getPropertyValue("--v-body-scroll-x") || 0), p.y -= parseFloat(document.documentElement.style.getPropertyValue("--v-body-scroll-y") || 0)));
-    const g = h.reduce((G, C) => {
-      const L = C.getBoundingClientRect(), W = new pa({
-        x: C === document.documentElement ? 0 : L.x,
-        y: C === document.documentElement ? 0 : L.y,
+    const k = gu(e.target.value), _ = Ym(e.contentEl.value, e.isRtl.value), h = rn(e.contentEl.value), g = 12;
+    h.length || (h.push(document.documentElement), e.contentEl.value.style.top && e.contentEl.value.style.left || (_.x -= parseFloat(document.documentElement.style.getPropertyValue("--v-body-scroll-x") || 0), _.y -= parseFloat(document.documentElement.style.getPropertyValue("--v-body-scroll-y") || 0)));
+    const f = h.reduce((G, C) => {
+      const R = C.getBoundingClientRect(), q = new pa({
+        x: C === document.documentElement ? 0 : R.x,
+        y: C === document.documentElement ? 0 : R.y,
         width: C.clientWidth,
         height: C.clientHeight
       });
       return G ? new pa({
-        x: Math.max(G.left, W.left),
-        y: Math.max(G.top, W.top),
-        width: Math.min(G.right, W.right) - Math.max(G.left, W.left),
-        height: Math.min(G.bottom, W.bottom) - Math.max(G.top, W.top)
-      }) : W;
+        x: Math.max(G.left, q.left),
+        y: Math.max(G.top, q.top),
+        width: Math.min(G.right, q.right) - Math.max(G.left, q.left),
+        height: Math.min(G.bottom, q.bottom) - Math.max(G.top, q.top)
+      }) : q;
     }, void 0);
-    g.x += _, g.y += _, g.width -= _ * 2, g.height -= _ * 2;
-    let S = {
+    f.x += g, f.y += g, f.width -= g * 2, f.height -= g * 2;
+    let x = {
       anchor: i.value,
       origin: o.value
     };
-    function I(G) {
-      const C = new pa(p), L = ds(G.anchor, x), W = ds(G.origin, C);
+    function V(G) {
+      const C = new pa(_), R = ds(G.anchor, k), q = ds(G.origin, C);
       let {
         x: Y,
         y: J
-      } = jm(L, W);
+      } = jm(R, q);
       switch (G.anchor.side) {
         case "top":
           J -= y.value[0];
@@ -7832,89 +7832,89 @@ function Jm(e, a, t) {
           break;
       }
       return C.x += Y, C.y += J, C.width = Math.min(C.width, r.value), C.height = Math.min(C.height, d.value), {
-        overflows: jo(C, g),
+        overflows: jo(C, f),
         x: Y,
         y: J
       };
     }
-    let $ = 0, O = 0;
+    let $ = 0, L = 0;
     const E = {
       x: 0,
       y: 0
-    }, R = {
+    }, O = {
       x: !1,
       y: !1
     };
-    let T = -1;
+    let D = -1;
     for (; ; ) {
-      if (T++ > 10) {
+      if (D++ > 10) {
         yu("Infinite loop detected in connectedLocationStrategy");
         break;
       }
       const {
         x: G,
         y: C,
-        overflows: L
-      } = I(S);
-      $ += G, O += C, p.x += G, p.y += C;
+        overflows: R
+      } = V(x);
+      $ += G, L += C, _.x += G, _.y += C;
       {
-        const W = Go(S.anchor), Y = L.x.before || L.x.after, J = L.y.before || L.y.after;
+        const q = Go(x.anchor), Y = R.x.before || R.x.after, J = R.y.before || R.y.after;
         let H = !1;
         if (["x", "y"].forEach((N) => {
-          if (N === "x" && Y && !R.x || N === "y" && J && !R.y) {
+          if (N === "x" && Y && !O.x || N === "y" && J && !O.y) {
             const j = {
               anchor: {
-                ...S.anchor
+                ...x.anchor
               },
               origin: {
-                ...S.origin
+                ...x.origin
               }
-            }, V = N === "x" ? W === "y" ? Ml : Ol : W === "y" ? Ol : Ml;
-            j.anchor = V(j.anchor), j.origin = V(j.origin);
+            }, I = N === "x" ? q === "y" ? Ml : Ol : q === "y" ? Ol : Ml;
+            j.anchor = I(j.anchor), j.origin = I(j.origin);
             const {
               overflows: M
-            } = I(j);
-            (M[N].before <= L[N].before && M[N].after <= L[N].after || M[N].before + M[N].after < (L[N].before + L[N].after) / 2) && (S = j, H = R[N] = !0);
+            } = V(j);
+            (M[N].before <= R[N].before && M[N].after <= R[N].after || M[N].before + M[N].after < (R[N].before + R[N].after) / 2) && (x = j, H = O[N] = !0);
           }
         }), H) continue;
       }
-      L.x.before && ($ += L.x.before, p.x += L.x.before), L.x.after && ($ -= L.x.after, p.x -= L.x.after), L.y.before && (O += L.y.before, p.y += L.y.before), L.y.after && (O -= L.y.after, p.y -= L.y.after);
+      R.x.before && ($ += R.x.before, _.x += R.x.before), R.x.after && ($ -= R.x.after, _.x -= R.x.after), R.y.before && (L += R.y.before, _.y += R.y.before), R.y.after && (L -= R.y.after, _.y -= R.y.after);
       {
-        const W = jo(p, g);
-        E.x = g.width - W.x.before - W.x.after, E.y = g.height - W.y.before - W.y.after, $ += W.x.before, p.x += W.x.before, O += W.y.before, p.y += W.y.before;
+        const q = jo(_, f);
+        E.x = f.width - q.x.before - q.x.after, E.y = f.height - q.y.before - q.y.after, $ += q.x.before, _.x += q.x.before, L += q.y.before, _.y += q.y.before;
       }
       break;
     }
-    const U = Go(S.anchor);
+    const U = Go(x.anchor);
     return Object.assign(t.value, {
-      "--v-overlay-anchor-origin": `${S.anchor.side} ${S.anchor.align}`,
-      transformOrigin: `${S.origin.side} ${S.origin.align}`,
+      "--v-overlay-anchor-origin": `${x.anchor.side} ${x.anchor.align}`,
+      transformOrigin: `${x.origin.side} ${x.origin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
-      top: Se(jl(O)),
+      top: Se(jl(L)),
       left: e.isRtl.value ? void 0 : Se(jl($)),
       right: e.isRtl.value ? Se(jl(-$)) : void 0,
-      minWidth: Se(U === "y" ? Math.min(s.value, x.width) : s.value),
+      minWidth: Se(U === "y" ? Math.min(s.value, k.width) : s.value),
       maxWidth: Se(vs(ht(E.x, s.value === 1 / 0 ? 0 : s.value, r.value))),
       maxHeight: Se(vs(ht(E.y, u.value === 1 / 0 ? 0 : u.value, d.value)))
     }), {
       available: E,
-      contentBox: p
+      contentBox: _
     };
   }
-  return we(() => [i.value, o.value, a.offset, a.minWidth, a.minHeight, a.maxWidth, a.maxHeight], () => f()), Ee(() => {
-    const x = f();
-    if (!x) return;
+  return we(() => [i.value, o.value, a.offset, a.minWidth, a.minHeight, a.maxWidth, a.maxHeight], () => p()), Ee(() => {
+    const k = p();
+    if (!k) return;
     const {
-      available: p,
+      available: _,
       contentBox: h
-    } = x;
-    h.height > p.y && requestAnimationFrame(() => {
-      f(), requestAnimationFrame(() => {
-        f();
+    } = k;
+    h.height > _.y && requestAnimationFrame(() => {
+      p(), requestAnimationFrame(() => {
+        p();
       });
     });
   }), {
-    updateLocation: f
+    updateLocation: p
   };
 }
 function jl(e) {
@@ -7950,7 +7950,7 @@ const Yn = {
 function Qm(e, a) {
   if (!et) return;
   let t;
-  Re(async () => {
+  Oe(async () => {
     t == null || t.stop(), a.isActive.value && e.scrollStrategy && (t = Pi(), await new Promise((n) => setTimeout(n)), t.active && t.run(() => {
       var n;
       typeof e.scrollStrategy == "function" ? e.scrollStrategy(a, e, t) : (n = Yn[e.scrollStrategy]) == null || n.call(Yn, a, e, t);
@@ -8064,34 +8064,34 @@ function ig(e, a) {
     isActive: t,
     isTop: n
   } = a;
-  const i = tt("useActivator"), o = A();
+  const i = tt("useActivator"), o = T();
   let s = !1, u = !1, r = !0;
-  const d = k(() => e.openOnFocus || e.openOnFocus == null && e.openOnHover), y = k(() => e.openOnClick || e.openOnClick == null && !e.openOnHover && !d.value), {
+  const d = S(() => e.openOnFocus || e.openOnFocus == null && e.openOnHover), y = S(() => e.openOnClick || e.openOnClick == null && !e.openOnHover && !d.value), {
     runOpenDelay: b,
     runCloseDelay: m
   } = ng(e, (E) => {
     E === (e.openOnHover && s || d.value && u) && !(e.openOnHover && t.value && !n.value) && (t.value !== E && (r = !0), t.value = E);
-  }), f = A(), x = {
+  }), p = T(), k = {
     onClick: (E) => {
-      E.stopPropagation(), o.value = E.currentTarget || E.target, t.value || (f.value = [E.clientX, E.clientY]), t.value = !t.value;
+      E.stopPropagation(), o.value = E.currentTarget || E.target, t.value || (p.value = [E.clientX, E.clientY]), t.value = !t.value;
     },
     onMouseenter: (E) => {
-      var R;
-      (R = E.sourceCapabilities) != null && R.firesTouchEvents || (s = !0, o.value = E.currentTarget || E.target, b());
+      var O;
+      (O = E.sourceCapabilities) != null && O.firesTouchEvents || (s = !0, o.value = E.currentTarget || E.target, b());
     },
     onMouseleave: (E) => {
       s = !1, m();
     },
     onFocus: (E) => {
-      Ea(E.target, ":focus-visible") !== !1 && (u = !0, E.stopPropagation(), o.value = E.currentTarget || E.target, b());
+      Fa(E.target, ":focus-visible") !== !1 && (u = !0, E.stopPropagation(), o.value = E.currentTarget || E.target, b());
     },
     onBlur: (E) => {
       u = !1, E.stopPropagation(), m();
     }
-  }, p = k(() => {
+  }, _ = S(() => {
     const E = {};
-    return y.value && (E.onClick = x.onClick), e.openOnHover && (E.onMouseenter = x.onMouseenter, E.onMouseleave = x.onMouseleave), d.value && (E.onFocus = x.onFocus, E.onBlur = x.onBlur), E;
-  }), h = k(() => {
+    return y.value && (E.onClick = k.onClick), e.openOnHover && (E.onMouseenter = k.onMouseenter, E.onMouseleave = k.onMouseleave), d.value && (E.onFocus = k.onFocus, E.onBlur = k.onBlur), E;
+  }), h = S(() => {
     const E = {};
     if (e.openOnHover && (E.onMouseenter = () => {
       s = !0, b();
@@ -8102,13 +8102,13 @@ function ig(e, a) {
     }, E.onFocusout = () => {
       u = !1, m();
     }), e.closeOnContentClick) {
-      const R = Be(mi, null);
+      const O = Be(mi, null);
       E.onClick = () => {
-        t.value = !1, R == null || R.closeParents();
+        t.value = !1, O == null || O.closeParents();
       };
     }
     return E;
-  }), _ = k(() => {
+  }), g = S(() => {
     const E = {};
     return e.openOnHover && (E.onMouseenter = () => {
       r && (s = !0, r = !1, b());
@@ -8120,40 +8120,40 @@ function ig(e, a) {
     E && (e.openOnHover && !s && (!d.value || !u) || d.value && !u && (!e.openOnHover || !s)) && (t.value = !1);
   }), we(t, (E) => {
     E || setTimeout(() => {
-      f.value = void 0;
+      p.value = void 0;
     });
   }, {
     flush: "post"
   });
-  const g = el();
-  Re(() => {
-    g.value && Ee(() => {
-      o.value = g.el;
+  const f = el();
+  Oe(() => {
+    f.value && Ee(() => {
+      o.value = f.el;
     });
   });
-  const S = el(), I = k(() => e.target === "cursor" && f.value ? f.value : S.value ? S.el : ur(e.target, i) || o.value), $ = k(() => Array.isArray(I.value) ? void 0 : I.value);
-  let O;
+  const x = el(), V = S(() => e.target === "cursor" && p.value ? p.value : x.value ? x.el : ur(e.target, i) || o.value), $ = S(() => Array.isArray(V.value) ? void 0 : V.value);
+  let L;
   return we(() => !!e.activator, (E) => {
-    E && et ? (O = Pi(), O.run(() => {
+    E && et ? (L = Pi(), L.run(() => {
       og(e, i, {
         activatorEl: o,
-        activatorEvents: p
+        activatorEvents: _
       });
-    })) : O && O.stop();
+    })) : L && L.stop();
   }, {
     flush: "post",
     immediate: !0
   }), bt(() => {
-    O == null || O.stop();
+    L == null || L.stop();
   }), {
     activatorEl: o,
-    activatorRef: g,
-    target: I,
+    activatorRef: f,
+    target: V,
     targetEl: $,
-    targetRef: S,
-    activatorEvents: p,
+    targetRef: x,
+    activatorEvents: _,
     contentEvents: h,
-    scrimEvents: _
+    scrimEvents: g
   };
 }
 function og(e, a, t) {
@@ -8217,7 +8217,7 @@ const eo = K({
   eager: Boolean
 }, "lazy");
 function to(e, a) {
-  const t = _e(!1), n = k(() => t.value || e.eager || a.value);
+  const t = _e(!1), n = S(() => t.value || e.eager || a.value);
   we(a, () => t.value = !0);
   function i() {
     e.eager || (t.value = !1);
@@ -8228,7 +8228,7 @@ function to(e, a) {
     onAfterLeave: i
   };
 }
-function ja() {
+function Ha() {
   const a = tt("useScopeId").vnode.scopeId;
   return {
     scopeId: a ? {
@@ -8236,7 +8236,7 @@ function ja() {
     } : void 0
   };
 }
-const ms = Symbol.for("vuetify:stack"), Ja = it([]);
+const ms = Symbol.for("vuetify:stack"), Ka = it([]);
 function ug(e, a, t) {
   const n = tt("useStack"), i = !t, o = Be(ms, void 0), s = it({
     activeChildren: /* @__PURE__ */ new Set()
@@ -8245,33 +8245,33 @@ function ug(e, a, t) {
   const u = _e(+a.value);
   oa(e, () => {
     var b;
-    const y = (b = Ja.at(-1)) == null ? void 0 : b[1];
-    u.value = y ? y + 10 : +a.value, i && Ja.push([n.uid, u.value]), o == null || o.activeChildren.add(n.uid), bt(() => {
+    const y = (b = Ka.at(-1)) == null ? void 0 : b[1];
+    u.value = y ? y + 10 : +a.value, i && Ka.push([n.uid, u.value]), o == null || o.activeChildren.add(n.uid), bt(() => {
       if (i) {
-        const m = Ue(Ja).findIndex((f) => f[0] === n.uid);
-        Ja.splice(m, 1);
+        const m = Ue(Ka).findIndex((p) => p[0] === n.uid);
+        Ka.splice(m, 1);
       }
       o == null || o.activeChildren.delete(n.uid);
     });
   });
   const r = _e(!0);
-  i && Re(() => {
+  i && Oe(() => {
     var b;
-    const y = ((b = Ja.at(-1)) == null ? void 0 : b[0]) === n.uid;
+    const y = ((b = Ka.at(-1)) == null ? void 0 : b[0]) === n.uid;
     setTimeout(() => r.value = y);
   });
-  const d = k(() => !s.activeChildren.size);
+  const d = S(() => !s.activeChildren.size);
   return {
     globalTop: Ai(r),
     localTop: d,
-    stackStyles: k(() => ({
+    stackStyles: S(() => ({
       zIndex: u.value
     }))
   };
 }
 function rg(e) {
   return {
-    teleportTarget: k(() => {
+    teleportTarget: S(() => {
       const t = e();
       if (t === !0 || !et) return;
       const n = t === !1 ? document.body : typeof t == "string" ? document.querySelector(t) : t;
@@ -8384,7 +8384,7 @@ const Pn = K({
   ...Hm(),
   ...Xm(),
   ...je(),
-  ...xa()
+  ...ka()
 }, "VOverlay"), ua = ie()({
   name: "VOverlay",
   directives: {
@@ -8407,7 +8407,7 @@ const Pn = K({
       attrs: n,
       emit: i
     } = a;
-    const o = Ve(e, "modelValue"), s = k({
+    const o = Ve(e, "modelValue"), s = S({
       get: () => o.value,
       set: (fe) => {
         fe && e.disabled || (o.value = fe);
@@ -8420,24 +8420,24 @@ const Pn = K({
     } = ta(), {
       hasContent: y,
       onAfterLeave: b
-    } = to(e, s), m = dt(k(() => typeof e.scrim == "string" ? e.scrim : null)), {
-      globalTop: f,
-      localTop: x,
-      stackStyles: p
+    } = to(e, s), m = dt(S(() => typeof e.scrim == "string" ? e.scrim : null)), {
+      globalTop: p,
+      localTop: k,
+      stackStyles: _
     } = ug(s, oe(e, "zIndex"), e._disableGlobalStack), {
       activatorEl: h,
-      activatorRef: _,
-      target: g,
-      targetEl: S,
-      targetRef: I,
+      activatorRef: g,
+      target: f,
+      targetEl: x,
+      targetRef: V,
       activatorEvents: $,
-      contentEvents: O,
+      contentEvents: L,
       scrimEvents: E
     } = ig(e, {
       isActive: s,
-      isTop: x
+      isTop: k
     }), {
-      teleportTarget: R
+      teleportTarget: O
     } = rg(() => {
       var ce;
       const fe = e.attach || e.contained;
@@ -8445,35 +8445,35 @@ const Pn = K({
       const pe = (ce = h == null ? void 0 : h.value) == null ? void 0 : ce.getRootNode();
       return pe instanceof ShadowRoot ? pe : !1;
     }), {
-      dimensionStyles: T
+      dimensionStyles: D
     } = Wt(e), U = sg(), {
       scopeId: G
-    } = ja();
+    } = Ha();
     we(() => e.disabled, (fe) => {
       fe && (s.value = !1);
     });
-    const C = A(), L = A(), W = A(), {
+    const C = T(), R = T(), q = T(), {
       contentStyles: Y,
       updateLocation: J
     } = Wm(e, {
       isRtl: d,
-      contentEl: W,
-      target: g,
+      contentEl: q,
+      target: f,
       isActive: s
     });
     Qm(e, {
       root: C,
-      contentEl: W,
-      targetEl: S,
+      contentEl: q,
+      targetEl: x,
       isActive: s,
       updateLocation: J
     });
     function H(fe) {
-      i("click:outside", fe), e.persistent ? te() : s.value = !1;
+      i("click:outside", fe), e.persistent ? ae() : s.value = !1;
     }
     function N(fe) {
-      return s.value && f.value && // If using scrim, only close if clicking on it rather than anything opened on top
-      (!e.scrim || fe.target === L.value);
+      return s.value && p.value && // If using scrim, only close if clicking on it rather than anything opened on top
+      (!e.scrim || fe.target === R.value);
     }
     et && we(s, (fe) => {
       fe ? window.addEventListener("keydown", j) : window.removeEventListener("keydown", j);
@@ -8484,23 +8484,23 @@ const Pn = K({
     });
     function j(fe) {
       var pe, ce;
-      fe.key === "Escape" && f.value && (e.persistent ? te() : (s.value = !1, (pe = W.value) != null && pe.contains(document.activeElement) && ((ce = h.value) == null || ce.focus())));
+      fe.key === "Escape" && p.value && (e.persistent ? ae() : (s.value = !1, (pe = q.value) != null && pe.contains(document.activeElement) && ((ce = h.value) == null || ce.focus())));
     }
-    const V = km();
+    const I = km();
     oa(() => e.closeOnBack, () => {
-      Sm(V, (fe) => {
-        f.value && s.value ? (fe(!1), e.persistent ? te() : s.value = !1) : fe();
+      Sm(I, (fe) => {
+        p.value && s.value ? (fe(!1), e.persistent ? ae() : s.value = !1) : fe();
       });
     });
-    const M = A();
-    we(() => s.value && (e.absolute || e.contained) && R.value == null, (fe) => {
+    const M = T();
+    we(() => s.value && (e.absolute || e.contained) && O.value == null, (fe) => {
       if (fe) {
         const pe = _u(C.value);
         pe && pe !== document.scrollingElement && (M.value = pe.scrollTop);
       }
     });
-    function te() {
-      e.noClickAnimation || W.value && fa(W.value, [{
+    function ae() {
+      e.noClickAnimation || q.value && fa(q.value, [{
         transformOrigin: "center"
       }, {
         transform: "scale(1.03)"
@@ -8519,15 +8519,15 @@ const Pn = K({
     }
     return se(() => {
       var fe;
-      return l(ve, null, [(fe = t.activator) == null ? void 0 : fe.call(t, {
+      return l(de, null, [(fe = t.activator) == null ? void 0 : fe.call(t, {
         isActive: s.value,
-        targetRef: I,
+        targetRef: V,
         props: X({
-          ref: _
+          ref: g
         }, $.value, e.activatorProps)
       }), U.value && y.value && l(Zc, {
-        disabled: !R.value,
-        to: R.value
+        disabled: !O.value,
+        to: O.value
       }, {
         default: () => [l("div", X({
           class: ["v-overlay", {
@@ -8535,7 +8535,7 @@ const Pn = K({
             "v-overlay--active": s.value,
             "v-overlay--contained": e.contained
           }, u.value, r.value, e.class],
-          style: [p.value, {
+          style: [_.value, {
             "--v-overlay-opacity": e.opacity,
             top: Se(M.value)
           }, e.style],
@@ -8543,22 +8543,22 @@ const Pn = K({
         }, G, n), [l(vg, X({
           color: m,
           modelValue: s.value && !!e.scrim,
-          ref: L
+          ref: R
         }, E.value), null), l(Tt, {
           appear: !0,
           persisted: !0,
           transition: e.transition,
-          target: g.value,
+          target: f.value,
           onAfterEnter: ge,
           onAfterLeave: be
         }, {
           default: () => {
             var pe;
             return [Ye(l("div", X({
-              ref: W,
+              ref: q,
               class: ["v-overlay__content", e.contentClass],
-              style: [T.value, Y.value]
-            }, O.value, e.contentProps), [(pe = t.default) == null ? void 0 : pe.call(t, {
+              style: [D.value, Y.value]
+            }, L.value, e.contentProps), [(pe = t.default) == null ? void 0 : pe.call(t, {
               isActive: s
             })]), [[Gt, s.value], [Bt("click-outside"), {
               handler: H,
@@ -8570,12 +8570,12 @@ const Pn = K({
       })]);
     }), {
       activatorEl: h,
-      scrimEl: L,
-      target: g,
-      animateClick: te,
-      contentEl: W,
-      globalTop: f,
-      localTop: x,
+      scrimEl: R,
+      target: f,
+      animateClick: ae,
+      contentEl: q,
+      globalTop: p,
+      localTop: k,
       updateLocation: J
     };
   }
@@ -8638,8 +8638,8 @@ function Lt(e) {
           for (; y.length; ) {
             const b = y.shift(), m = Wl(b.value, o);
             if (m) return m;
-            const f = b.value && b.value[Hl];
-            f && y.push(...f);
+            const p = b.value && b.value[Hl];
+            p && y.push(...p);
           }
         }
       }
@@ -8650,7 +8650,7 @@ const fg = K({
   // TODO
   // disableKeys: Boolean,
   id: String,
-  ...Me(Pn({
+  ...ze(Pn({
     closeDelay: 250,
     closeOnContentClick: !0,
     locationStrategy: "connected",
@@ -8673,7 +8673,7 @@ const fg = K({
     } = a;
     const n = Ve(e, "modelValue"), {
       scopeId: i
-    } = ja(), o = It(), s = k(() => e.id || `v-menu-${o}`), u = A(), r = Be(mi, null), d = _e(0);
+    } = Ha(), o = It(), s = S(() => e.id || `v-menu-${o}`), u = T(), r = Be(mi, null), d = _e(0);
     Ke(mi, {
       register() {
         ++d.value;
@@ -8681,73 +8681,73 @@ const fg = K({
       unregister() {
         --d.value;
       },
-      closeParents(p) {
+      closeParents(_) {
         setTimeout(() => {
-          !d.value && !e.persistent && (p == null || p && !tf(p, u.value.contentEl)) && (n.value = !1, r == null || r.closeParents());
+          !d.value && !e.persistent && (_ == null || _ && !tf(_, u.value.contentEl)) && (n.value = !1, r == null || r.closeParents());
         }, 40);
       }
     });
-    async function y(p) {
-      var g, S, I;
-      const h = p.relatedTarget, _ = p.target;
-      await Ee(), n.value && h !== _ && ((g = u.value) != null && g.contentEl) && // We're the topmost menu
-      ((S = u.value) != null && S.globalTop) && // It isn't the document or the menu body
-      ![document, u.value.contentEl].includes(_) && // It isn't inside the menu body
-      !u.value.contentEl.contains(_) && ((I = on(u.value.contentEl)[0]) == null || I.focus());
+    async function y(_) {
+      var f, x, V;
+      const h = _.relatedTarget, g = _.target;
+      await Ee(), n.value && h !== g && ((f = u.value) != null && f.contentEl) && // We're the topmost menu
+      ((x = u.value) != null && x.globalTop) && // It isn't the document or the menu body
+      ![document, u.value.contentEl].includes(g) && // It isn't inside the menu body
+      !u.value.contentEl.contains(g) && ((V = on(u.value.contentEl)[0]) == null || V.focus());
     }
-    we(n, (p) => {
-      p ? (r == null || r.register(), document.addEventListener("focusin", y, {
+    we(n, (_) => {
+      _ ? (r == null || r.register(), document.addEventListener("focusin", y, {
         once: !0
       })) : (r == null || r.unregister(), document.removeEventListener("focusin", y));
     });
-    function b(p) {
-      r == null || r.closeParents(p);
+    function b(_) {
+      r == null || r.closeParents(_);
     }
-    function m(p) {
-      var h, _, g;
+    function m(_) {
+      var h, g, f;
       if (!e.disabled)
-        if (p.key === "Tab" || p.key === "Enter" && !e.closeOnContentClick) {
-          if (p.key === "Enter" && (p.target instanceof HTMLTextAreaElement || p.target instanceof HTMLInputElement && p.target.closest("form"))) return;
-          p.key === "Enter" && p.preventDefault(), vu(on((h = u.value) == null ? void 0 : h.contentEl, !1), p.shiftKey ? "prev" : "next", (I) => I.tabIndex >= 0) || (n.value = !1, (g = (_ = u.value) == null ? void 0 : _.activatorEl) == null || g.focus());
-        } else ["Enter", " "].includes(p.key) && e.closeOnContentClick && (n.value = !1, r == null || r.closeParents());
+        if (_.key === "Tab" || _.key === "Enter" && !e.closeOnContentClick) {
+          if (_.key === "Enter" && (_.target instanceof HTMLTextAreaElement || _.target instanceof HTMLInputElement && _.target.closest("form"))) return;
+          _.key === "Enter" && _.preventDefault(), vu(on((h = u.value) == null ? void 0 : h.contentEl, !1), _.shiftKey ? "prev" : "next", (V) => V.tabIndex >= 0) || (n.value = !1, (f = (g = u.value) == null ? void 0 : g.activatorEl) == null || f.focus());
+        } else ["Enter", " "].includes(_.key) && e.closeOnContentClick && (n.value = !1, r == null || r.closeParents());
     }
-    function f(p) {
-      var _;
+    function p(_) {
+      var g;
       if (e.disabled) return;
-      const h = (_ = u.value) == null ? void 0 : _.contentEl;
-      h && n.value ? p.key === "ArrowDown" ? (p.preventDefault(), Zn(h, "next")) : p.key === "ArrowUp" && (p.preventDefault(), Zn(h, "prev")) : ["ArrowDown", "ArrowUp"].includes(p.key) && (n.value = !0, p.preventDefault(), setTimeout(() => setTimeout(() => f(p))));
+      const h = (g = u.value) == null ? void 0 : g.contentEl;
+      h && n.value ? _.key === "ArrowDown" ? (_.preventDefault(), Zn(h, "next")) : _.key === "ArrowUp" && (_.preventDefault(), Zn(h, "prev")) : ["ArrowDown", "ArrowUp"].includes(_.key) && (n.value = !0, _.preventDefault(), setTimeout(() => setTimeout(() => p(_))));
     }
-    const x = k(() => X({
+    const k = S(() => X({
       "aria-haspopup": "menu",
       "aria-expanded": String(n.value),
       "aria-owns": s.value,
-      onKeydown: f
+      onKeydown: p
     }, e.activatorProps));
     return se(() => {
-      const p = ua.filterProps(e);
+      const _ = ua.filterProps(e);
       return l(ua, X({
         ref: u,
         id: s.value,
         class: ["v-menu", e.class],
         style: e.style
-      }, p, {
+      }, _, {
         modelValue: n.value,
         "onUpdate:modelValue": (h) => n.value = h,
         absolute: !0,
-        activatorProps: x.value,
+        activatorProps: k.value,
         "onClick:outside": b,
         onKeydown: m
       }, i), {
         activator: t.activator,
         default: function() {
-          for (var h = arguments.length, _ = new Array(h), g = 0; g < h; g++)
-            _[g] = arguments[g];
-          return l(De, {
+          for (var h = arguments.length, g = new Array(h), f = 0; f < h; f++)
+            g[f] = arguments[f];
+          return l(Ne, {
             root: "VMenu"
           }, {
             default: () => {
-              var S;
-              return [(S = t.default) == null ? void 0 : S.call(t, ..._)];
+              var x;
+              return [(x = t.default) == null ? void 0 : x.call(t, ...g)];
             }
           });
         }
@@ -8766,7 +8766,7 @@ const fg = K({
     default: 0
   },
   ...Pe(),
-  ...xa({
+  ...ka({
     transition: {
       component: xl
     }
@@ -8779,7 +8779,7 @@ const fg = K({
     let {
       slots: t
     } = a;
-    const n = k(() => e.max ? `${e.value} / ${e.max}` : String(e.value));
+    const n = S(() => e.max ? `${e.value} / ${e.max}` : String(e.value));
     return se(() => l(Tt, {
       transition: e.transition
     }, {
@@ -8815,7 +8815,7 @@ const fg = K({
   }
 });
 function vr(e, a) {
-  const t = A(), n = _e(!1);
+  const t = T(), n = _e(!1);
   if (Ei) {
     const i = new IntersectionObserver((o) => {
       n.value = !!o.find((s) => s.isIntersecting);
@@ -8839,16 +8839,16 @@ const ys = {
   bottom: "top",
   left: "right",
   right: "left"
-}, Va = K({
+}, Ia = K({
   location: String
 }, "location");
-function Ha(e) {
+function Wa(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : !1, t = arguments.length > 2 ? arguments[2] : void 0;
   const {
     isRtl: n
   } = ta();
   return {
-    locationStyles: k(() => {
+    locationStyles: S(() => {
       if (!e.location) return {};
       const {
         side: o,
@@ -8908,11 +8908,11 @@ const yg = K({
   striped: Boolean,
   roundedBar: Boolean,
   ...Pe(),
-  ...Va({
+  ...Ia({
     location: "top"
   }),
   ...vt(),
-  ...Oe(),
+  ...Me(),
   ...je()
 }, "VProgressLinear"), fr = ie()({
   name: "VProgressLinear",
@@ -8932,38 +8932,38 @@ const yg = K({
       themeClasses: s
     } = Xe(e), {
       locationStyles: u
-    } = Ha(e), {
+    } = Wa(e), {
       textColorClasses: r,
       textColorStyles: d
     } = kt(e, "color"), {
       backgroundColorClasses: y,
       backgroundColorStyles: b
-    } = dt(k(() => e.bgColor || e.color)), {
+    } = dt(S(() => e.bgColor || e.color)), {
       backgroundColorClasses: m,
-      backgroundColorStyles: f
-    } = dt(k(() => e.bufferColor || e.bgColor || e.color)), {
-      backgroundColorClasses: x,
       backgroundColorStyles: p
+    } = dt(S(() => e.bufferColor || e.bgColor || e.color)), {
+      backgroundColorClasses: k,
+      backgroundColorStyles: _
     } = dt(e, "color"), {
       roundedClasses: h
     } = _t(e), {
-      intersectionRef: _,
-      isIntersecting: g
-    } = vr(), S = k(() => parseFloat(e.max)), I = k(() => parseFloat(e.height)), $ = k(() => ht(parseFloat(e.bufferValue) / S.value * 100, 0, 100)), O = k(() => ht(parseFloat(n.value) / S.value * 100, 0, 100)), E = k(() => i.value !== e.reverse), R = k(() => e.indeterminate ? "fade-transition" : "slide-x-transition"), T = et && ((G = window.matchMedia) == null ? void 0 : G.call(window, "(forced-colors: active)").matches);
+      intersectionRef: g,
+      isIntersecting: f
+    } = vr(), x = S(() => parseFloat(e.max)), V = S(() => parseFloat(e.height)), $ = S(() => ht(parseFloat(e.bufferValue) / x.value * 100, 0, 100)), L = S(() => ht(parseFloat(n.value) / x.value * 100, 0, 100)), E = S(() => i.value !== e.reverse), O = S(() => e.indeterminate ? "fade-transition" : "slide-x-transition"), D = et && ((G = window.matchMedia) == null ? void 0 : G.call(window, "(forced-colors: active)").matches);
     function U(C) {
-      if (!_.value) return;
+      if (!g.value) return;
       const {
-        left: L,
-        right: W,
+        left: R,
+        right: q,
         width: Y
-      } = _.value.getBoundingClientRect(), J = E.value ? Y - C.clientX + (W - Y) : C.clientX - L;
-      n.value = Math.round(J / Y * S.value);
+      } = g.value.getBoundingClientRect(), J = E.value ? Y - C.clientX + (q - Y) : C.clientX - R;
+      n.value = Math.round(J / Y * x.value);
     }
     return se(() => l(e.tag, {
-      ref: _,
+      ref: g,
       class: ["v-progress-linear", {
         "v-progress-linear--absolute": e.absolute,
-        "v-progress-linear--active": e.active && g.value,
+        "v-progress-linear--active": e.active && f.value,
         "v-progress-linear--reverse": E.value,
         "v-progress-linear--rounded": e.rounded,
         "v-progress-linear--rounded-bar": e.roundedBar,
@@ -8972,15 +8972,15 @@ const yg = K({
       style: [{
         bottom: e.location === "bottom" ? 0 : void 0,
         top: e.location === "top" ? 0 : void 0,
-        height: e.active ? Se(I.value) : 0,
-        "--v-progress-linear-height": Se(I.value),
+        height: e.active ? Se(V.value) : 0,
+        "--v-progress-linear-height": Se(V.value),
         ...e.absolute ? u.value : {}
       }, e.style],
       role: "progressbar",
       "aria-hidden": e.active ? "false" : "true",
       "aria-valuemin": "0",
       "aria-valuemax": e.max,
-      "aria-valuenow": e.indeterminate ? void 0 : O.value,
+      "aria-valuenow": e.indeterminate ? void 0 : L.value,
       onClick: e.clickable && U
     }, {
       default: () => [e.stream && l("div", {
@@ -8988,44 +8988,44 @@ const yg = K({
         class: ["v-progress-linear__stream", r.value],
         style: {
           ...d.value,
-          [E.value ? "left" : "right"]: Se(-I.value),
-          borderTop: `${Se(I.value / 2)} dotted`,
+          [E.value ? "left" : "right"]: Se(-V.value),
+          borderTop: `${Se(V.value / 2)} dotted`,
           opacity: parseFloat(e.bufferOpacity),
-          top: `calc(50% - ${Se(I.value / 4)})`,
+          top: `calc(50% - ${Se(V.value / 4)})`,
           width: Se(100 - $.value, "%"),
-          "--v-progress-linear-stream-to": Se(I.value * (E.value ? 1 : -1))
+          "--v-progress-linear-stream-to": Se(V.value * (E.value ? 1 : -1))
         }
       }, null), l("div", {
-        class: ["v-progress-linear__background", T ? void 0 : y.value],
+        class: ["v-progress-linear__background", D ? void 0 : y.value],
         style: [b.value, {
           opacity: parseFloat(e.bgOpacity),
           width: e.stream ? 0 : void 0
         }]
       }, null), l("div", {
-        class: ["v-progress-linear__buffer", T ? void 0 : m.value],
-        style: [f.value, {
+        class: ["v-progress-linear__buffer", D ? void 0 : m.value],
+        style: [p.value, {
           opacity: parseFloat(e.bufferOpacity),
           width: Se($.value, "%")
         }]
       }, null), l(Ge, {
-        name: R.value
+        name: O.value
       }, {
         default: () => [e.indeterminate ? l("div", {
           class: "v-progress-linear__indeterminate"
         }, [["long", "short"].map((C) => l("div", {
           key: C,
-          class: ["v-progress-linear__indeterminate", C, T ? void 0 : x.value],
-          style: p.value
+          class: ["v-progress-linear__indeterminate", C, D ? void 0 : k.value],
+          style: _.value
         }, null))]) : l("div", {
-          class: ["v-progress-linear__determinate", T ? void 0 : x.value],
-          style: [p.value, {
-            width: Se(O.value, "%")
+          class: ["v-progress-linear__determinate", D ? void 0 : k.value],
+          style: [_.value, {
+            width: Se(L.value, "%")
           }]
         }, null)]
       }), t.default && l("div", {
         class: "v-progress-linear__content"
       }, [t.default({
-        value: O.value,
+        value: L.value,
         buffer: $.value
       })])]
     })), {};
@@ -9036,7 +9036,7 @@ const yg = K({
 function An(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : jt();
   return {
-    loaderClasses: k(() => ({
+    loaderClasses: S(() => ({
       [`${a}--loading`]: e.loading
     }))
   };
@@ -9125,34 +9125,34 @@ const pg = ["underlined", "outlined", "filled", "solo", "solo-inverted", "solo-f
       isFocused: r,
       focus: d,
       blur: y
-    } = Sa(e), {
+    } = wa(e), {
       InputIcon: b
     } = Bu(e), {
       roundedClasses: m
     } = _t(e), {
-      rtlClasses: f
-    } = ta(), x = k(() => e.dirty || e.active), p = k(() => !e.singleLine && !!(e.label || i.label)), h = It(), _ = k(() => e.id || `input-${h}`), g = k(() => `${_.value}-messages`), S = A(), I = A(), $ = A(), O = k(() => ["plain", "underlined"].includes(e.variant)), {
+      rtlClasses: p
+    } = ta(), k = S(() => e.dirty || e.active), _ = S(() => !e.singleLine && !!(e.label || i.label)), h = It(), g = S(() => e.id || `input-${h}`), f = S(() => `${g.value}-messages`), x = T(), V = T(), $ = T(), L = S(() => ["plain", "underlined"].includes(e.variant)), {
       backgroundColorClasses: E,
-      backgroundColorStyles: R
+      backgroundColorStyles: O
     } = dt(oe(e, "bgColor")), {
-      textColorClasses: T,
+      textColorClasses: D,
       textColorStyles: U
-    } = kt(k(() => e.error || e.disabled ? void 0 : x.value && r.value ? e.color : e.baseColor));
-    we(x, (W) => {
-      if (p.value) {
-        const Y = S.value.$el, J = I.value.$el;
+    } = kt(S(() => e.error || e.disabled ? void 0 : k.value && r.value ? e.color : e.baseColor));
+    we(k, (q) => {
+      if (_.value) {
+        const Y = x.value.$el, J = V.value.$el;
         requestAnimationFrame(() => {
-          const H = Ui(Y), N = J.getBoundingClientRect(), j = N.x - H.x, V = N.y - H.y - (H.height / 2 - N.height / 2), M = N.width / 0.75, te = Math.abs(M - H.width) > 1 ? {
+          const H = Ui(Y), N = J.getBoundingClientRect(), j = N.x - H.x, I = N.y - H.y - (H.height / 2 - N.height / 2), M = N.width / 0.75, ae = Math.abs(M - H.width) > 1 ? {
             maxWidth: Se(M)
           } : void 0, ge = getComputedStyle(Y), be = getComputedStyle(J), fe = parseFloat(ge.transitionDuration) * 1e3 || 150, pe = parseFloat(be.getPropertyValue("--v-field-label-scale")), ce = be.getPropertyValue("color");
           Y.style.visibility = "visible", J.style.visibility = "hidden", fa(Y, {
-            transform: `translate(${j}px, ${V}px) scale(${pe})`,
+            transform: `translate(${j}px, ${I}px) scale(${pe})`,
             color: ce,
-            ...te
+            ...ae
           }, {
             duration: fe,
             easing: un,
-            direction: W ? "normal" : "reverse"
+            direction: q ? "normal" : "reverse"
           }).finished.then(() => {
             Y.style.removeProperty("visibility"), J.style.removeProperty("visibility");
           });
@@ -9161,34 +9161,34 @@ const pg = ["underlined", "outlined", "filled", "solo", "solo-inverted", "solo-f
     }, {
       flush: "post"
     });
-    const G = k(() => ({
-      isActive: x,
+    const G = S(() => ({
+      isActive: k,
       isFocused: r,
       controlRef: $,
       blur: y,
       focus: d
     }));
-    function C(W) {
-      W.target !== document.activeElement && W.preventDefault();
+    function C(q) {
+      q.target !== document.activeElement && q.preventDefault();
     }
-    function L(W) {
+    function R(q) {
       var Y;
-      W.key !== "Enter" && W.key !== " " || (W.preventDefault(), W.stopPropagation(), (Y = e["onClick:clear"]) == null || Y.call(e, new MouseEvent("click")));
+      q.key !== "Enter" && q.key !== " " || (q.preventDefault(), q.stopPropagation(), (Y = e["onClick:clear"]) == null || Y.call(e, new MouseEvent("click")));
     }
     return se(() => {
-      var j, V, M;
-      const W = e.variant === "outlined", Y = !!(i["prepend-inner"] || e.prependInnerIcon), J = !!(e.clearable || i.clear), H = !!(i["append-inner"] || e.appendInnerIcon || J), N = () => i.label ? i.label({
+      var j, I, M;
+      const q = e.variant === "outlined", Y = !!(i["prepend-inner"] || e.prependInnerIcon), J = !!(e.clearable || i.clear), H = !!(i["append-inner"] || e.appendInnerIcon || J), N = () => i.label ? i.label({
         ...G.value,
         label: e.label,
         props: {
-          for: _.value
+          for: g.value
         }
       }) : e.label;
       return l("div", X({
         class: ["v-field", {
-          "v-field--active": x.value,
+          "v-field--active": k.value,
           "v-field--appended": H,
-          "v-field--center-affix": e.centerAffix ?? !O.value,
+          "v-field--center-affix": e.centerAffix ?? !L.value,
           "v-field--disabled": e.disabled,
           "v-field--dirty": e.dirty,
           "v-field--error": e.error,
@@ -9200,8 +9200,8 @@ const pg = ["underlined", "outlined", "filled", "solo", "solo-inverted", "solo-f
           "v-field--single-line": e.singleLine,
           "v-field--no-label": !N(),
           [`v-field--variant-${e.variant}`]: !0
-        }, o.value, E.value, u.value, s.value, m.value, f.value, e.class],
-        style: [R.value, e.style],
+        }, o.value, E.value, u.value, s.value, m.value, p.value, e.class],
+        style: [O.value, e.style],
         onClick: C
       }, t), [l("div", {
         class: "v-field__overlay"
@@ -9220,26 +9220,26 @@ const pg = ["underlined", "outlined", "filled", "solo", "solo-inverted", "solo-f
       }, null), (j = i["prepend-inner"]) == null ? void 0 : j.call(i, G.value)]), l("div", {
         class: "v-field__field",
         "data-no-activator": ""
-      }, [["filled", "solo", "solo-inverted", "solo-filled"].includes(e.variant) && p.value && l(Rn, {
+      }, [["filled", "solo", "solo-inverted", "solo-filled"].includes(e.variant) && _.value && l(Rn, {
         key: "floating-label",
-        ref: I,
-        class: [T.value],
+        ref: V,
+        class: [D.value],
         floating: !0,
-        for: _.value,
+        for: g.value,
         style: U.value
       }, {
         default: () => [N()]
       }), l(Rn, {
-        ref: S,
-        for: _.value
+        ref: x,
+        for: g.value
       }, {
         default: () => [N()]
-      }), (V = i.default) == null ? void 0 : V.call(i, {
+      }), (I = i.default) == null ? void 0 : I.call(i, {
         ...G.value,
         props: {
-          id: _.value,
+          id: g.value,
           class: "v-field__input",
-          "aria-describedby": g.value
+          "aria-describedby": f.value
         },
         focus: d,
         blur: y
@@ -9248,10 +9248,10 @@ const pg = ["underlined", "outlined", "filled", "solo", "solo-inverted", "solo-f
       }, {
         default: () => [Ye(l("div", {
           class: "v-field__clearable",
-          onMousedown: (te) => {
-            te.preventDefault(), te.stopPropagation();
+          onMousedown: (ae) => {
+            ae.preventDefault(), ae.stopPropagation();
           }
-        }, [l(De, {
+        }, [l(Ne, {
           defaults: {
             VIcon: {
               icon: e.clearIcon
@@ -9261,14 +9261,14 @@ const pg = ["underlined", "outlined", "filled", "solo", "solo-inverted", "solo-f
           default: () => [i.clear ? i.clear({
             ...G.value,
             props: {
-              onKeydown: L,
+              onKeydown: R,
               onFocus: d,
               onBlur: y,
               onClick: e["onClick:clear"]
             }
           }) : l(b, {
             name: "clear",
-            onKeydown: L,
+            onKeydown: R,
             onFocus: d,
             onBlur: y
           }, null)]
@@ -9280,24 +9280,24 @@ const pg = ["underlined", "outlined", "filled", "solo", "solo-inverted", "solo-f
         key: "append-icon",
         name: "appendInner"
       }, null)]), l("div", {
-        class: ["v-field__outline", T.value],
+        class: ["v-field__outline", D.value],
         style: U.value
-      }, [W && l(ve, null, [l("div", {
+      }, [q && l(de, null, [l("div", {
         class: "v-field__outline__start"
-      }, null), p.value && l("div", {
+      }, null), _.value && l("div", {
         class: "v-field__outline__notch"
       }, [l(Rn, {
-        ref: I,
+        ref: V,
         floating: !0,
-        for: _.value
+        for: g.value
       }, {
         default: () => [N()]
       })]), l("div", {
         class: "v-field__outline__end"
-      }, null)]), O.value && p.value && l(Rn, {
-        ref: I,
+      }, null)]), L.value && _.value && l(Rn, {
+        ref: V,
         floating: !0,
-        for: _.value
+        for: g.value
       }, {
         default: () => [N()]
       })])]);
@@ -9325,7 +9325,7 @@ const bg = ["color", "file", "time", "date", "datetime-local", "week", "month"],
     default: "text"
   },
   modelModifiers: Object,
-  ...wa(),
+  ...Ca(),
   ...Il()
 }, "VTextField"), ee = ie()({
   name: "VTextField",
@@ -9350,79 +9350,79 @@ const bg = ["color", "file", "time", "date", "datetime-local", "week", "month"],
       isFocused: s,
       focus: u,
       blur: r
-    } = Sa(e), d = k(() => typeof e.counterValue == "function" ? e.counterValue(o.value) : typeof e.counterValue == "number" ? e.counterValue : (o.value ?? "").toString().length), y = k(() => {
+    } = wa(e), d = S(() => typeof e.counterValue == "function" ? e.counterValue(o.value) : typeof e.counterValue == "number" ? e.counterValue : (o.value ?? "").toString().length), y = S(() => {
       if (t.maxlength) return t.maxlength;
       if (!(!e.counter || typeof e.counter != "number" && typeof e.counter != "string"))
         return e.counter;
-    }), b = k(() => ["plain", "underlined"].includes(e.variant));
-    function m(O, E) {
-      var R, T;
-      !e.autofocus || !O || (T = (R = E[0].target) == null ? void 0 : R.focus) == null || T.call(R);
+    }), b = S(() => ["plain", "underlined"].includes(e.variant));
+    function m(L, E) {
+      var O, D;
+      !e.autofocus || !L || (D = (O = E[0].target) == null ? void 0 : O.focus) == null || D.call(O);
     }
-    const f = A(), x = A(), p = A(), h = k(() => bg.includes(e.type) || e.persistentPlaceholder || s.value || e.active);
-    function _() {
-      var O;
-      p.value !== document.activeElement && ((O = p.value) == null || O.focus()), s.value || u();
+    const p = T(), k = T(), _ = T(), h = S(() => bg.includes(e.type) || e.persistentPlaceholder || s.value || e.active);
+    function g() {
+      var L;
+      _.value !== document.activeElement && ((L = _.value) == null || L.focus()), s.value || u();
     }
-    function g(O) {
-      n("mousedown:control", O), O.target !== p.value && (_(), O.preventDefault());
+    function f(L) {
+      n("mousedown:control", L), L.target !== _.value && (g(), L.preventDefault());
     }
-    function S(O) {
-      _(), n("click:control", O);
+    function x(L) {
+      g(), n("click:control", L);
     }
-    function I(O) {
-      O.stopPropagation(), _(), Ee(() => {
-        o.value = null, Oi(e["onClick:clear"], O);
+    function V(L) {
+      L.stopPropagation(), g(), Ee(() => {
+        o.value = null, Oi(e["onClick:clear"], L);
       });
     }
-    function $(O) {
-      var R;
-      const E = O.target;
-      if (o.value = E.value, (R = e.modelModifiers) != null && R.trim && ["text", "search", "password", "tel", "url"].includes(e.type)) {
-        const T = [E.selectionStart, E.selectionEnd];
+    function $(L) {
+      var O;
+      const E = L.target;
+      if (o.value = E.value, (O = e.modelModifiers) != null && O.trim && ["text", "search", "password", "tel", "url"].includes(e.type)) {
+        const D = [E.selectionStart, E.selectionEnd];
         Ee(() => {
-          E.selectionStart = T[0], E.selectionEnd = T[1];
+          E.selectionStart = D[0], E.selectionEnd = D[1];
         });
       }
     }
     return se(() => {
-      const O = !!(i.counter || e.counter !== !1 && e.counter != null), E = !!(O || i.details), [R, T] = ha(t), {
+      const L = !!(i.counter || e.counter !== !1 && e.counter != null), E = !!(L || i.details), [O, D] = xa(t), {
         modelValue: U,
         ...G
       } = $t.filterProps(e), C = no(e);
       return l($t, X({
-        ref: f,
+        ref: p,
         modelValue: o.value,
-        "onUpdate:modelValue": (L) => o.value = L,
+        "onUpdate:modelValue": (R) => o.value = R,
         class: ["v-text-field", {
           "v-text-field--prefixed": e.prefix,
           "v-text-field--suffixed": e.suffix,
           "v-input--plain-underlined": b.value
         }, e.class],
         style: e.style
-      }, R, G, {
+      }, O, G, {
         centerAffix: !b.value,
         focused: s.value
       }), {
         ...i,
-        default: (L) => {
+        default: (R) => {
           let {
-            id: W,
+            id: q,
             isDisabled: Y,
             isDirty: J,
             isReadonly: H,
             isValid: N
-          } = L;
+          } = R;
           return l(Pl, X({
-            ref: x,
-            onMousedown: g,
-            onClick: S,
-            "onClick:clear": I,
+            ref: k,
+            onMousedown: f,
+            onClick: x,
+            "onClick:clear": V,
             "onClick:prependInner": e["onClick:prependInner"],
             "onClick:appendInner": e["onClick:appendInner"],
             role: e.role
           }, C, {
-            id: W.value,
+            id: q.value,
             active: h.value || J.value,
             dirty: J.value || e.dirty,
             disabled: Y.value,
@@ -9433,12 +9433,12 @@ const bg = ["color", "file", "time", "date", "datetime-local", "week", "month"],
             default: (j) => {
               let {
                 props: {
-                  class: V,
+                  class: I,
                   ...M
                 }
               } = j;
-              const te = Ye(l("input", X({
-                ref: p,
+              const ae = Ye(l("input", X({
+                ref: _,
                 value: o.value,
                 onInput: $,
                 autofocus: e.autofocus,
@@ -9448,22 +9448,22 @@ const bg = ["color", "file", "time", "date", "datetime-local", "week", "month"],
                 placeholder: e.placeholder,
                 size: 1,
                 type: e.type,
-                onFocus: _,
+                onFocus: g,
                 onBlur: r
-              }, M, T), null), [[Bt("intersect"), {
+              }, M, D), null), [[Bt("intersect"), {
                 handler: m
               }, null, {
                 once: !0
               }]]);
-              return l(ve, null, [e.prefix && l("span", {
+              return l(de, null, [e.prefix && l("span", {
                 class: "v-text-field__prefix"
               }, [l("span", {
                 class: "v-text-field__prefix__text"
               }, [e.prefix])]), i.default ? l("div", {
-                class: V,
+                class: I,
                 "data-no-activator": ""
-              }, [i.default(), te]) : Bs(te, {
-                class: V
+              }, [i.default(), ae]) : Bs(ae, {
+                class: I
               }), e.suffix && l("span", {
                 class: "v-text-field__suffix"
               }, [l("span", {
@@ -9472,9 +9472,9 @@ const bg = ["color", "file", "time", "date", "datetime-local", "week", "month"],
             }
           });
         },
-        details: E ? (L) => {
-          var W;
-          return l(ve, null, [(W = i.details) == null ? void 0 : W.call(i, L), O && l(ve, null, [l("span", null, null), l(ao, {
+        details: E ? (R) => {
+          var q;
+          return l(de, null, [(q = i.details) == null ? void 0 : q.call(i, R), L && l(de, null, [l("span", null, null), l(ao, {
             active: e.persistentCounter || s.value,
             value: d.value,
             max: y.value,
@@ -9482,7 +9482,7 @@ const bg = ["color", "file", "time", "date", "datetime-local", "week", "month"],
           }, i.counter)])]);
         } : void 0
       });
-    }), Lt({}, f, x, p);
+    }), Lt({}, p, k, _);
   }
 }), _g = K({
   renderless: Boolean,
@@ -9503,7 +9503,7 @@ const bg = ["color", "file", "time", "date", "datetime-local", "week", "month"],
     const {
       resizeRef: o,
       contentRect: s
-    } = Fa(void 0, "border");
+    } = La(void 0, "border");
     we(() => {
       var u;
       return (u = s.value) == null ? void 0 : u.height;
@@ -9511,7 +9511,7 @@ const bg = ["color", "file", "time", "date", "datetime-local", "week", "month"],
       u != null && n("update:height", u);
     }), se(() => {
       var u, r;
-      return e.renderless ? l(ve, null, [(u = i.default) == null ? void 0 : u.call(i, {
+      return e.renderless ? l(de, null, [(u = i.default) == null ? void 0 : u.call(i, {
         itemRef: o
       })]) : l("div", X({
         ref: o,
@@ -9529,7 +9529,7 @@ const bg = ["color", "file", "time", "date", "datetime-local", "week", "month"],
 }, "virtual");
 function yr(e, a) {
   const t = da(), n = _e(0);
-  Re(() => {
+  Oe(() => {
     n.value = parseFloat(e.itemHeight || 0);
   });
   const i = _e(0), o = _e(Math.ceil(
@@ -9538,101 +9538,101 @@ function yr(e, a) {
     // the chance of ending up with empty space at the bottom.
     // The default value is set here to avoid poisoning getSize()
     (parseInt(e.height) || t.height.value) / (n.value || 16)
-  ) || 1), s = _e(0), u = _e(0), r = A(), d = A();
+  ) || 1), s = _e(0), u = _e(0), r = T(), d = T();
   let y = 0;
   const {
     resizeRef: b,
     contentRect: m
-  } = Fa();
-  Re(() => {
+  } = La();
+  Oe(() => {
     b.value = r.value;
   });
-  const f = k(() => {
+  const p = S(() => {
     var j;
     return r.value === document.documentElement ? t.height.value : ((j = m.value) == null ? void 0 : j.height) || parseInt(e.height) || 0;
-  }), x = k(() => !!(r.value && d.value && f.value && n.value));
-  let p = Array.from({
+  }), k = S(() => !!(r.value && d.value && p.value && n.value));
+  let _ = Array.from({
     length: a.value.length
   }), h = Array.from({
     length: a.value.length
   });
-  const _ = _e(0);
-  let g = -1;
-  function S(j) {
-    return p[j] || n.value;
+  const g = _e(0);
+  let f = -1;
+  function x(j) {
+    return _[j] || n.value;
   }
-  const I = Kv(() => {
+  const V = Kv(() => {
     const j = performance.now();
     h[0] = 0;
-    const V = a.value.length;
-    for (let M = 1; M <= V - 1; M++)
-      h[M] = (h[M - 1] || 0) + S(M - 1);
-    _.value = Math.max(_.value, performance.now() - j);
-  }, _), $ = we(x, (j) => {
-    j && ($(), y = d.value.offsetTop, I.immediate(), Y(), ~g && Ee(() => {
+    const I = a.value.length;
+    for (let M = 1; M <= I - 1; M++)
+      h[M] = (h[M - 1] || 0) + x(M - 1);
+    g.value = Math.max(g.value, performance.now() - j);
+  }, g), $ = we(k, (j) => {
+    j && ($(), y = d.value.offsetTop, V.immediate(), Y(), ~f && Ee(() => {
       et && window.requestAnimationFrame(() => {
-        H(g), g = -1;
+        H(f), f = -1;
       });
     }));
   });
   bt(() => {
-    I.clear();
+    V.clear();
   });
-  function O(j, V) {
-    const M = p[j], te = n.value;
-    n.value = te ? Math.min(n.value, V) : V, (M !== V || te !== n.value) && (p[j] = V, I());
+  function L(j, I) {
+    const M = _[j], ae = n.value;
+    n.value = ae ? Math.min(n.value, I) : I, (M !== I || ae !== n.value) && (_[j] = I, V());
   }
   function E(j) {
     return j = ht(j, 0, a.value.length - 1), h[j] || 0;
   }
-  function R(j) {
+  function O(j) {
     return kg(h, j);
   }
-  let T = 0, U = 0, G = 0;
-  we(f, (j, V) => {
-    V && (Y(), j < V && requestAnimationFrame(() => {
+  let D = 0, U = 0, G = 0;
+  we(p, (j, I) => {
+    I && (Y(), j < I && requestAnimationFrame(() => {
       U = 0, Y();
     }));
   });
   function C() {
     if (!r.value || !d.value) return;
-    const j = r.value.scrollTop, V = performance.now();
-    V - G > 500 ? (U = Math.sign(j - T), y = d.value.offsetTop) : U = j - T, T = j, G = V, Y();
+    const j = r.value.scrollTop, I = performance.now();
+    I - G > 500 ? (U = Math.sign(j - D), y = d.value.offsetTop) : U = j - D, D = j, G = I, Y();
   }
-  function L() {
+  function R() {
     !r.value || !d.value || (U = 0, G = 0, Y());
   }
-  let W = -1;
+  let q = -1;
   function Y() {
-    cancelAnimationFrame(W), W = requestAnimationFrame(J);
+    cancelAnimationFrame(q), q = requestAnimationFrame(J);
   }
   function J() {
-    if (!r.value || !f.value) return;
-    const j = T - y, V = Math.sign(U), M = Math.max(0, j - ql), te = ht(R(M), 0, a.value.length), ge = j + f.value + ql, be = ht(R(ge) + 1, te + 1, a.value.length);
+    if (!r.value || !p.value) return;
+    const j = D - y, I = Math.sign(U), M = Math.max(0, j - ql), ae = ht(O(M), 0, a.value.length), ge = j + p.value + ql, be = ht(O(ge) + 1, ae + 1, a.value.length);
     if (
       // Only update the side we're scrolling towards,
       // the other side will be updated incidentally
-      (V !== hg || te < i.value) && (V !== xg || be > o.value)
+      (I !== hg || ae < i.value) && (I !== xg || be > o.value)
     ) {
-      const fe = E(i.value) - E(te), pe = E(be) - E(o.value);
-      Math.max(fe, pe) > ql ? (i.value = te, o.value = be) : (te <= 0 && (i.value = te), be >= a.value.length && (o.value = be));
+      const fe = E(i.value) - E(ae), pe = E(be) - E(o.value);
+      Math.max(fe, pe) > ql ? (i.value = ae, o.value = be) : (ae <= 0 && (i.value = ae), be >= a.value.length && (o.value = be));
     }
     s.value = E(i.value), u.value = E(a.value.length) - E(o.value);
   }
   function H(j) {
-    const V = E(j);
-    !r.value || j && !V ? g = j : r.value.scrollTop = V;
+    const I = E(j);
+    !r.value || j && !I ? f = j : r.value.scrollTop = I;
   }
-  const N = k(() => a.value.slice(i.value, o.value).map((j, V) => ({
+  const N = S(() => a.value.slice(i.value, o.value).map((j, I) => ({
     raw: j,
-    index: V + i.value
+    index: I + i.value
   })));
   return we(a, () => {
-    p = Array.from({
+    _ = Array.from({
       length: a.value.length
     }), h = Array.from({
       length: a.value.length
-    }), I.immediate(), Y();
+    }), V.immediate(), Y();
   }, {
     deep: !0
   }), {
@@ -9643,8 +9643,8 @@ function yr(e, a) {
     paddingBottom: u,
     scrollToIndex: H,
     handleScroll: C,
-    handleScrollend: L,
-    handleItemResize: O
+    handleScrollend: R,
+    handleItemResize: L
   };
 }
 function kg(e, a) {
@@ -9686,43 +9686,43 @@ const Sg = K({
       scrollToIndex: y,
       paddingTop: b,
       paddingBottom: m,
-      computedItems: f
+      computedItems: p
     } = yr(e, oe(e, "items"));
     return oa(() => e.renderless, () => {
-      function x() {
-        var _, g;
+      function k() {
+        var g, f;
         const h = (arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : !1) ? "addEventListener" : "removeEventListener";
         o.value === document.documentElement ? (document[h]("scroll", u, {
           passive: !0
-        }), document[h]("scrollend", r)) : ((_ = o.value) == null || _[h]("scroll", u, {
+        }), document[h]("scrollend", r)) : ((g = o.value) == null || g[h]("scroll", u, {
           passive: !0
-        }), (g = o.value) == null || g[h]("scrollend", r));
+        }), (f = o.value) == null || f[h]("scrollend", r));
       }
       st(() => {
-        o.value = _u(n.vnode.el, !0), x(!0);
-      }), bt(x);
+        o.value = _u(n.vnode.el, !0), k(!0);
+      }), bt(k);
     }), se(() => {
-      const x = f.value.map((p) => l(mr, {
-        key: p.index,
+      const k = p.value.map((_) => l(mr, {
+        key: _.index,
         renderless: e.renderless,
-        "onUpdate:height": (h) => d(p.index, h)
+        "onUpdate:height": (h) => d(_.index, h)
       }, {
         default: (h) => {
-          var _;
-          return (_ = t.default) == null ? void 0 : _.call(t, {
-            item: p.raw,
-            index: p.index,
+          var g;
+          return (g = t.default) == null ? void 0 : g.call(t, {
+            item: _.raw,
+            index: _.index,
             ...h
           });
         }
       }));
-      return e.renderless ? l(ve, null, [l("div", {
+      return e.renderless ? l(de, null, [l("div", {
         ref: s,
         class: "v-virtual-scroll__spacer",
         style: {
           paddingTop: Se(b.value)
         }
-      }, null), x, l("div", {
+      }, null), k, l("div", {
         class: "v-virtual-scroll__spacer",
         style: {
           paddingBottom: Se(m.value)
@@ -9740,7 +9740,7 @@ const Sg = K({
           paddingTop: Se(b.value),
           paddingBottom: Se(m.value)
         }
-      }, [x])]);
+      }, [k])]);
     }), {
       scrollToIndex: y
     };
@@ -9777,16 +9777,16 @@ function br(e, a) {
     const d = r.querySelectorAll(":scope > :not(.v-virtual-scroll__spacer)");
     if (u.key === "PageDown" || u.key === "Home") {
       const m = r.getBoundingClientRect().top;
-      for (const f of d)
-        if (f.getBoundingClientRect().top >= m) {
-          f.focus();
+      for (const p of d)
+        if (p.getBoundingClientRect().top >= m) {
+          p.focus();
           break;
         }
     } else {
       const m = r.getBoundingClientRect().bottom;
-      for (const f of [...d].reverse())
-        if (f.getBoundingClientRect().bottom <= m) {
-          f.focus();
+      for (const p of [...d].reverse())
+        if (p.getBoundingClientRect().bottom <= m) {
+          p.focus();
           break;
         }
     }
@@ -9833,11 +9833,11 @@ const _r = K({
   })
 }, "Select"), wg = K({
   ..._r(),
-  ...Me(Tn({
+  ...ze(Tn({
     modelValue: null,
     role: "combobox"
   }), ["validationValue", "dirty", "appendInnerIcon"]),
-  ...xa({
+  ...ka({
     transition: {
       component: qi
     }
@@ -9856,7 +9856,7 @@ const _r = K({
     } = a;
     const {
       t: n
-    } = Qe(), i = A(), o = A(), s = A(), u = Ve(e, "menu"), r = k({
+    } = Qe(), i = T(), o = T(), s = T(), u = Ve(e, "menu"), r = S({
       get: () => u.value,
       set: (N) => {
         var j;
@@ -9869,9 +9869,9 @@ const _r = K({
     } = ar(e), m = Ve(e, "modelValue", [], (N) => y(N === null ? [null] : We(N)), (N) => {
       const j = b(N);
       return e.multiple ? j : j[0] ?? null;
-    }), f = k(() => typeof e.counterValue == "function" ? e.counterValue(m.value) : typeof e.counterValue == "number" ? e.counterValue : m.value.length), x = kl(), p = k(() => m.value.map((N) => N.value)), h = _e(!1), _ = k(() => r.value ? e.closeText : e.openText);
-    let g = "", S;
-    const I = k(() => e.hideSelected ? d.value.filter((N) => !m.value.some((j) => e.valueComparator(j, N))) : d.value), $ = k(() => e.hideNoData && !I.value.length || e.readonly || (x == null ? void 0 : x.isReadonly.value)), O = k(() => {
+    }), p = S(() => typeof e.counterValue == "function" ? e.counterValue(m.value) : typeof e.counterValue == "number" ? e.counterValue : m.value.length), k = kl(), _ = S(() => m.value.map((N) => N.value)), h = _e(!1), g = S(() => r.value ? e.closeText : e.openText);
+    let f = "", x;
+    const V = S(() => e.hideSelected ? d.value.filter((N) => !m.value.some((j) => e.valueComparator(j, N))) : d.value), $ = S(() => e.hideNoData && !V.value.length || e.readonly || (k == null ? void 0 : k.isReadonly.value)), L = S(() => {
       var N;
       return {
         ...e.menuProps,
@@ -9881,9 +9881,9 @@ const _r = K({
           // Set aria-haspopup to 'listbox'
         }
       };
-    }), E = A(), {
-      onListScroll: R,
-      onListKeydown: T
+    }), E = T(), {
+      onListScroll: O,
+      onListKeydown: D
     } = br(E, i);
     function U(N) {
       e.openOnClear && (r.value = !0);
@@ -9893,43 +9893,43 @@ const _r = K({
     }
     function C(N) {
       var ge, be;
-      if (!N.key || e.readonly || x != null && x.isReadonly.value) return;
+      if (!N.key || e.readonly || k != null && k.isReadonly.value) return;
       ["Enter", " ", "ArrowDown", "ArrowUp", "Home", "End"].includes(N.key) && N.preventDefault(), ["Enter", "ArrowDown", " "].includes(N.key) && (r.value = !0), ["Escape", "Tab"].includes(N.key) && (r.value = !1), N.key === "Home" ? (ge = E.value) == null || ge.focus("first") : N.key === "End" && ((be = E.value) == null || be.focus("last"));
       const j = 1e3;
-      function V(fe) {
+      function I(fe) {
         const pe = fe.key.length === 1, ce = !fe.ctrlKey && !fe.metaKey && !fe.altKey;
         return pe && ce;
       }
-      if (e.multiple || !V(N)) return;
+      if (e.multiple || !I(N)) return;
       const M = performance.now();
-      M - S > j && (g = ""), g += N.key.toLowerCase(), S = M;
-      const te = d.value.find((fe) => fe.title.toLowerCase().startsWith(g));
-      if (te !== void 0) {
-        m.value = [te];
-        const fe = I.value.indexOf(te);
+      M - x > j && (f = ""), f += N.key.toLowerCase(), x = M;
+      const ae = d.value.find((fe) => fe.title.toLowerCase().startsWith(f));
+      if (ae !== void 0) {
+        m.value = [ae];
+        const fe = V.value.indexOf(ae);
         et && window.requestAnimationFrame(() => {
           var pe;
           fe >= 0 && ((pe = s.value) == null || pe.scrollToIndex(fe));
         });
       }
     }
-    function L(N) {
+    function R(N) {
       let j = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : !0;
       if (!N.props.disabled)
         if (e.multiple) {
-          const V = m.value.findIndex((te) => e.valueComparator(te.value, N.value)), M = j ?? !~V;
-          if (~V) {
-            const te = M ? [...m.value, N] : [...m.value];
-            te.splice(V, 1), m.value = te;
+          const I = m.value.findIndex((ae) => e.valueComparator(ae.value, N.value)), M = j ?? !~I;
+          if (~I) {
+            const ae = M ? [...m.value, N] : [...m.value];
+            ae.splice(I, 1), m.value = ae;
           } else M && (m.value = [...m.value, N]);
         } else {
-          const V = j !== !1;
-          m.value = V ? [N] : [], Ee(() => {
+          const I = j !== !1;
+          m.value = I ? [N] : [], Ee(() => {
             r.value = !1;
           });
         }
     }
-    function W(N) {
+    function q(N) {
       var j;
       (j = E.value) != null && j.$el.contains(N.relatedTarget) || (r.value = !1);
     }
@@ -9942,14 +9942,14 @@ const _r = K({
     }
     function H(N) {
       if (N == null) m.value = [];
-      else if (Ea(i.value, ":autofill") || Ea(i.value, ":-webkit-autofill")) {
-        const j = d.value.find((V) => V.title === N);
-        j && L(j);
+      else if (Fa(i.value, ":autofill") || Fa(i.value, ":-webkit-autofill")) {
+        const j = d.value.find((I) => I.title === N);
+        j && R(j);
       } else i.value && (i.value.value = "");
     }
     return we(r, () => {
       if (!e.hideSelected && r.value && m.value.length) {
-        const N = I.value.findIndex((j) => m.value.some((V) => e.valueComparator(V.value, j.value)));
+        const N = V.value.findIndex((j) => m.value.some((I) => e.valueComparator(I.value, j.value)));
         et && window.requestAnimationFrame(() => {
           var j;
           N >= 0 && ((j = s.value) == null || j.scrollToIndex(N));
@@ -9958,7 +9958,7 @@ const _r = K({
     }), we(() => e.items, (N, j) => {
       r.value || h.value && !j.length && N.length && (r.value = !0);
     }), se(() => {
-      const N = !!(e.chips || t.chip), j = !!(!e.hideNoData || I.value.length || t["prepend-item"] || t["append-item"] || t["no-data"]), V = m.value.length > 0, M = ee.filterProps(e), te = V || !h.value && e.label && !e.persistentPlaceholder ? void 0 : e.placeholder;
+      const N = !!(e.chips || t.chip), j = !!(!e.hideNoData || V.value.length || t["prepend-item"] || t["append-item"] || t["no-data"]), I = m.value.length > 0, M = ee.filterProps(e), ae = I || !h.value && e.label && !e.persistentPlaceholder ? void 0 : e.placeholder;
       return l(ee, X({
         ref: i
       }, M, {
@@ -9967,8 +9967,8 @@ const _r = K({
         focused: h.value,
         "onUpdate:focused": (ge) => h.value = ge,
         validationValue: m.externalValue,
-        counterValue: f.value,
-        dirty: V,
+        counterValue: p.value,
+        dirty: I,
         class: ["v-select", {
           "v-select--active-menu": r.value,
           "v-select--chips": !!e.chips,
@@ -9978,16 +9978,16 @@ const _r = K({
         }, e.class],
         style: e.style,
         inputmode: "none",
-        placeholder: te,
+        placeholder: ae,
         "onClick:clear": U,
         "onMousedown:control": G,
-        onBlur: W,
+        onBlur: q,
         onKeydown: C,
-        "aria-label": n(_.value),
-        title: n(_.value)
+        "aria-label": n(g.value),
+        title: n(g.value)
       }), {
         ...t,
-        default: () => l(ve, null, [l(ot, X({
+        default: () => l(de, null, [l(ot, X({
           ref: o,
           modelValue: r.value,
           "onUpdate:modelValue": (ge) => r.value = ge,
@@ -10000,30 +10000,30 @@ const _r = K({
           closeOnContentClick: !1,
           transition: e.transition,
           onAfterLeave: Y
-        }, O.value), {
-          default: () => [j && l(_a, X({
+        }, L.value), {
+          default: () => [j && l(ha, X({
             ref: E,
-            selected: p.value,
+            selected: _.value,
             selectStrategy: e.multiple ? "independent" : "single-independent",
             onMousedown: (ge) => ge.preventDefault(),
-            onKeydown: T,
+            onKeydown: D,
             onFocusin: J,
-            onScrollPassive: R,
+            onScrollPassive: O,
             tabindex: "-1",
             "aria-live": "polite",
             color: e.itemColor ?? e.color
           }, e.listProps), {
             default: () => {
               var ge, be, fe;
-              return [(ge = t["prepend-item"]) == null ? void 0 : ge.call(t), !I.value.length && !e.hideNoData && (((be = t["no-data"]) == null ? void 0 : be.call(t)) ?? l(xt, {
+              return [(ge = t["prepend-item"]) == null ? void 0 : ge.call(t), !V.value.length && !e.hideNoData && (((be = t["no-data"]) == null ? void 0 : be.call(t)) ?? l(xt, {
                 title: n(e.noDataText)
               }, null)), l(pr, {
                 ref: s,
                 renderless: !0,
-                items: I.value
+                items: V.value
               }, {
                 default: (pe) => {
-                  var ne;
+                  var le;
                   let {
                     item: ce,
                     index: z,
@@ -10032,9 +10032,9 @@ const _r = K({
                   const P = X(ce.props, {
                     ref: Q,
                     key: z,
-                    onClick: () => L(ce, null)
+                    onClick: () => R(ce, null)
                   });
-                  return ((ne = t.item) == null ? void 0 : ne.call(t, {
+                  return ((le = t.item) == null ? void 0 : le.call(t, {
                     item: ce,
                     index: z,
                     props: P
@@ -10045,7 +10045,7 @@ const _r = K({
                       let {
                         isSelected: Ce
                       } = he;
-                      return l(ve, null, [e.multiple && !e.hideSelected ? l(sa, {
+                      return l(de, null, [e.multiple && !e.hideSelected ? l(sa, {
                         key: ce.value,
                         modelValue: Ce,
                         ripple: !1,
@@ -10063,7 +10063,7 @@ const _r = K({
           })]
         }), m.value.map((ge, be) => {
           function fe(Q) {
-            Q.stopPropagation(), Q.preventDefault(), L(ge, !1);
+            Q.stopPropagation(), Q.preventDefault(), R(ge, !1);
           }
           const pe = {
             "onClick:close": fe,
@@ -10087,7 +10087,7 @@ const _r = K({
             return l("div", {
               key: ge.value,
               class: "v-select__selection"
-            }, [N ? t.chip ? l(De, {
+            }, [N ? t.chip ? l(Ne, {
               key: "chip-defaults",
               defaults: {
                 VChip: {
@@ -10108,13 +10108,13 @@ const _r = K({
               class: "v-select__selection-text"
             }, [ge.title, e.multiple && be < m.value.length - 1 && l("span", {
               class: "v-select__selection-comma"
-            }, [de(",")])])]);
+            }, [ve(",")])])]);
         })]),
         "append-inner": function() {
           var pe;
           for (var ge = arguments.length, be = new Array(ge), fe = 0; fe < ge; fe++)
             be[fe] = arguments[fe];
-          return l(ve, null, [(pe = t["append-inner"]) == null ? void 0 : pe.call(t, ...be), e.menuIcon ? l($e, {
+          return l(de, null, [(pe = t["append-inner"]) == null ? void 0 : pe.call(t, ...be), e.menuIcon ? l($e, {
             class: "v-select__menu-icon",
             icon: e.menuIcon
           }, null) : void 0]);
@@ -10123,7 +10123,7 @@ const _r = K({
     }), Lt({
       isFocused: h,
       menu: r,
-      select: L
+      select: R
     }, i);
   }
 }), Cg = (e, a, t) => e == null || a == null ? -1 : e.toString().toLocaleLowerCase().indexOf(a.toString().toLocaleLowerCase()), Al = K({
@@ -10142,21 +10142,21 @@ function Vg(e, a, t) {
   if (!(e != null && e.length)) return n;
   e: for (let r = 0; r < e.length; r++) {
     const [d, y = d] = We(e[r]), b = {}, m = {};
-    let f = -1;
+    let p = -1;
     if ((a || s > 0) && !(t != null && t.noFilter)) {
       if (typeof d == "object") {
         const h = o || Object.keys(y);
-        for (const _ of h) {
-          const g = ut(y, _), S = (u = t == null ? void 0 : t.customKeyFilter) == null ? void 0 : u[_];
-          if (f = S ? S(g, a, d) : i(g, a, d), f !== -1 && f !== !1)
-            S ? b[_] = f : m[_] = f;
+        for (const g of h) {
+          const f = ut(y, g), x = (u = t == null ? void 0 : t.customKeyFilter) == null ? void 0 : u[g];
+          if (p = x ? x(f, a, d) : i(f, a, d), p !== -1 && p !== !1)
+            x ? b[g] = p : m[g] = p;
           else if ((t == null ? void 0 : t.filterMode) === "every")
             continue e;
         }
       } else
-        f = i(d, a, d), f !== -1 && f !== !1 && (m.title = f);
-      const x = Object.keys(m).length, p = Object.keys(b).length;
-      if (!x && !p || (t == null ? void 0 : t.filterMode) === "union" && p !== s && !x || (t == null ? void 0 : t.filterMode) === "intersection" && (p !== s || !x)) continue;
+        p = i(d, a, d), p !== -1 && p !== !1 && (m.title = p);
+      const k = Object.keys(m).length, _ = Object.keys(b).length;
+      if (!k && !_ || (t == null ? void 0 : t.filterMode) === "union" && _ !== s && !k || (t == null ? void 0 : t.filterMode) === "intersection" && (_ !== s || !k)) continue;
     }
     n.push({
       index: r,
@@ -10169,8 +10169,8 @@ function Vg(e, a, t) {
   return n;
 }
 function Tl(e, a, t, n) {
-  const i = A([]), o = A(/* @__PURE__ */ new Map()), s = k(() => n != null && n.transform ? F(a).map((r) => [r, n.transform(r)]) : F(a));
-  Re(() => {
+  const i = T([]), o = T(/* @__PURE__ */ new Map()), s = S(() => n != null && n.transform ? F(a).map((r) => [r, n.transform(r)]) : F(a));
+  Oe(() => {
     const r = typeof t == "function" ? t() : F(t), d = typeof r != "string" && typeof r != "number" ? "" : String(r), y = Vg(s.value, d, {
       customKeyFilter: {
         ...e.customKeyFilter,
@@ -10180,15 +10180,15 @@ function Tl(e, a, t, n) {
       filterKeys: e.filterKeys,
       filterMode: e.filterMode,
       noFilter: e.noFilter
-    }), b = F(a), m = [], f = /* @__PURE__ */ new Map();
-    y.forEach((x) => {
+    }), b = F(a), m = [], p = /* @__PURE__ */ new Map();
+    y.forEach((k) => {
       let {
-        index: p,
+        index: _,
         matches: h
-      } = x;
-      const _ = b[p];
-      m.push(_), f.set(_.value, h);
-    }), i.value = m, o.value = f;
+      } = k;
+      const g = b[_];
+      m.push(g), p.set(g.value, h);
+    }), i.value = m, o.value = p;
   });
   function u(r) {
     return o.value.get(r.value);
@@ -10202,7 +10202,7 @@ function Tl(e, a, t, n) {
 function Ig(e, a, t) {
   if (a == null) return e;
   if (Array.isArray(a)) throw new Error("Multiple matches is not implemented");
-  return typeof a == "number" && ~a ? l(ve, null, [l("span", {
+  return typeof a == "number" && ~a ? l(de, null, [l("span", {
     class: "v-autocomplete__unmask"
   }, [e.substr(0, a)]), l("span", {
     class: "v-autocomplete__mask"
@@ -10220,11 +10220,11 @@ const Pg = K({
     filterKeys: ["title"]
   }),
   ..._r(),
-  ...Me(Tn({
+  ...ze(Tn({
     modelValue: null,
     role: "combobox"
   }), ["validationValue", "dirty", "appendInnerIcon"]),
-  ...xa({
+  ...ka({
     transition: !1
   })
 }, "VAutocomplete"), lt = ie()({
@@ -10242,65 +10242,65 @@ const Pg = K({
     } = a;
     const {
       t: n
-    } = Qe(), i = A(), o = _e(!1), s = _e(!0), u = _e(!1), r = A(), d = A(), y = Ve(e, "menu"), b = k({
+    } = Qe(), i = T(), o = _e(!1), s = _e(!0), u = _e(!1), r = T(), d = T(), y = Ve(e, "menu"), b = S({
       get: () => y.value,
       set: (P) => {
-        var ne;
-        y.value && !P && ((ne = r.value) != null && ne.ΨopenChildren) || (y.value = P);
+        var le;
+        y.value && !P && ((le = r.value) != null && le.ΨopenChildren) || (y.value = P);
       }
-    }), m = _e(-1), f = k(() => {
+    }), m = _e(-1), p = S(() => {
       var P;
       return (P = i.value) == null ? void 0 : P.color;
-    }), x = k(() => b.value ? e.closeText : e.openText), {
-      items: p,
+    }), k = S(() => b.value ? e.closeText : e.openText), {
+      items: _,
       transformIn: h,
-      transformOut: _
+      transformOut: g
     } = ar(e), {
-      textColorClasses: g,
-      textColorStyles: S
-    } = kt(f), I = Ve(e, "search", ""), $ = Ve(e, "modelValue", [], (P) => h(P === null ? [null] : We(P)), (P) => {
-      const ne = _(P);
-      return e.multiple ? ne : ne[0] ?? null;
-    }), O = k(() => typeof e.counterValue == "function" ? e.counterValue($.value) : typeof e.counterValue == "number" ? e.counterValue : $.value.length), E = kl(), {
-      filteredItems: R,
-      getMatches: T
-    } = Tl(e, p, () => s.value ? "" : I.value), U = k(() => e.hideSelected ? R.value.filter((P) => !$.value.some((ne) => ne.value === P.value)) : R.value), G = k(() => !!(e.chips || t.chip)), C = k(() => G.value || !!t.selection), L = k(() => $.value.map((P) => P.props.value)), W = k(() => {
-      var ne;
-      return (e.autoSelectFirst === !0 || e.autoSelectFirst === "exact" && I.value === ((ne = U.value[0]) == null ? void 0 : ne.title)) && U.value.length > 0 && !s.value && !u.value;
-    }), Y = k(() => e.hideNoData && !U.value.length || e.readonly || (E == null ? void 0 : E.isReadonly.value)), J = A(), {
+      textColorClasses: f,
+      textColorStyles: x
+    } = kt(p), V = Ve(e, "search", ""), $ = Ve(e, "modelValue", [], (P) => h(P === null ? [null] : We(P)), (P) => {
+      const le = g(P);
+      return e.multiple ? le : le[0] ?? null;
+    }), L = S(() => typeof e.counterValue == "function" ? e.counterValue($.value) : typeof e.counterValue == "number" ? e.counterValue : $.value.length), E = kl(), {
+      filteredItems: O,
+      getMatches: D
+    } = Tl(e, _, () => s.value ? "" : V.value), U = S(() => e.hideSelected ? O.value.filter((P) => !$.value.some((le) => le.value === P.value)) : O.value), G = S(() => !!(e.chips || t.chip)), C = S(() => G.value || !!t.selection), R = S(() => $.value.map((P) => P.props.value)), q = S(() => {
+      var le;
+      return (e.autoSelectFirst === !0 || e.autoSelectFirst === "exact" && V.value === ((le = U.value[0]) == null ? void 0 : le.title)) && U.value.length > 0 && !s.value && !u.value;
+    }), Y = S(() => e.hideNoData && !U.value.length || e.readonly || (E == null ? void 0 : E.isReadonly.value)), J = T(), {
       onListScroll: H,
       onListKeydown: N
     } = br(J, i);
     function j(P) {
-      e.openOnClear && (b.value = !0), I.value = "";
+      e.openOnClear && (b.value = !0), V.value = "";
     }
-    function V() {
+    function I() {
       Y.value || (b.value = !0);
     }
     function M(P) {
       Y.value || (o.value && (P.preventDefault(), P.stopPropagation()), b.value = !b.value);
     }
-    function te(P) {
-      var Ce, Ne, He;
+    function ae(P) {
+      var Ce, De, He;
       if (e.readonly || E != null && E.isReadonly.value) return;
-      const ne = i.value.selectionStart, he = $.value.length;
-      if ((m.value > -1 || ["Enter", "ArrowDown", "ArrowUp"].includes(P.key)) && P.preventDefault(), ["Enter", "ArrowDown"].includes(P.key) && (b.value = !0), ["Escape"].includes(P.key) && (b.value = !1), W.value && ["Enter", "Tab"].includes(P.key) && !$.value.some((Fe) => {
+      const le = i.value.selectionStart, he = $.value.length;
+      if ((m.value > -1 || ["Enter", "ArrowDown", "ArrowUp"].includes(P.key)) && P.preventDefault(), ["Enter", "ArrowDown"].includes(P.key) && (b.value = !0), ["Escape"].includes(P.key) && (b.value = !1), q.value && ["Enter", "Tab"].includes(P.key) && !$.value.some((Fe) => {
         let {
           value: qe
         } = Fe;
         return qe === U.value[0].value;
-      }) && Q(U.value[0]), P.key === "ArrowDown" && W.value && ((Ce = J.value) == null || Ce.focus("next")), ["Backspace", "Delete"].includes(P.key)) {
-        if (!e.multiple && C.value && $.value.length > 0 && !I.value) return Q($.value[0], !1);
+      }) && Q(U.value[0]), P.key === "ArrowDown" && q.value && ((Ce = J.value) == null || Ce.focus("next")), ["Backspace", "Delete"].includes(P.key)) {
+        if (!e.multiple && C.value && $.value.length > 0 && !V.value) return Q($.value[0], !1);
         if (~m.value) {
           const Fe = m.value;
           Q($.value[m.value], !1), m.value = Fe >= he - 1 ? he - 2 : Fe;
-        } else P.key === "Backspace" && !I.value && (m.value = he - 1);
+        } else P.key === "Backspace" && !V.value && (m.value = he - 1);
       }
       if (e.multiple) {
         if (P.key === "ArrowLeft") {
-          if (m.value < 0 && ne > 0) return;
+          if (m.value < 0 && le > 0) return;
           const Fe = m.value > -1 ? m.value - 1 : he - 1;
-          $.value[Fe] ? m.value = Fe : (m.value = -1, i.value.setSelectionRange((Ne = I.value) == null ? void 0 : Ne.length, (He = I.value) == null ? void 0 : He.length));
+          $.value[Fe] ? m.value = Fe : (m.value = -1, i.value.setSelectionRange((De = V.value) == null ? void 0 : De.length, (He = V.value) == null ? void 0 : He.length));
         }
         if (P.key === "ArrowRight") {
           if (m.value < 0) return;
@@ -10310,9 +10310,9 @@ const Pg = K({
       }
     }
     function ge(P) {
-      if (Ea(i.value, ":autofill") || Ea(i.value, ":-webkit-autofill")) {
-        const ne = p.value.find((he) => he.title === P.target.value);
-        ne && Q(ne);
+      if (Fa(i.value, ":autofill") || Fa(i.value, ":-webkit-autofill")) {
+        const le = _.value.find((he) => he.title === P.target.value);
+        le && Q(le);
       }
     }
     function be() {
@@ -10332,54 +10332,54 @@ const Pg = K({
     }
     const z = _e(!1);
     function Q(P) {
-      let ne = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : !0;
+      let le = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : !0;
       if (!(!P || P.props.disabled))
         if (e.multiple) {
-          const he = $.value.findIndex((Ne) => e.valueComparator(Ne.value, P.value)), Ce = ne ?? !~he;
+          const he = $.value.findIndex((De) => e.valueComparator(De.value, P.value)), Ce = le ?? !~he;
           if (~he) {
-            const Ne = Ce ? [...$.value, P] : [...$.value];
-            Ne.splice(he, 1), $.value = Ne;
+            const De = Ce ? [...$.value, P] : [...$.value];
+            De.splice(he, 1), $.value = De;
           } else Ce && ($.value = [...$.value, P]);
-          e.clearOnSelect && (I.value = "");
+          e.clearOnSelect && (V.value = "");
         } else {
-          const he = ne !== !1;
-          $.value = he ? [P] : [], I.value = he && !C.value ? P.title : "", Ee(() => {
+          const he = le !== !1;
+          $.value = he ? [P] : [], V.value = he && !C.value ? P.title : "", Ee(() => {
             b.value = !1, s.value = !0;
           });
         }
     }
-    return we(o, (P, ne) => {
+    return we(o, (P, le) => {
       var he;
-      P !== ne && (P ? (z.value = !0, I.value = e.multiple || C.value ? "" : String(((he = $.value.at(-1)) == null ? void 0 : he.props.title) ?? ""), s.value = !0, Ee(() => z.value = !1)) : (!e.multiple && I.value == null && ($.value = []), b.value = !1, $.value.some((Ce) => {
+      P !== le && (P ? (z.value = !0, V.value = e.multiple || C.value ? "" : String(((he = $.value.at(-1)) == null ? void 0 : he.props.title) ?? ""), s.value = !0, Ee(() => z.value = !1)) : (!e.multiple && V.value == null && ($.value = []), b.value = !1, $.value.some((Ce) => {
         let {
-          title: Ne
+          title: De
         } = Ce;
-        return Ne === I.value;
-      }) || (I.value = ""), m.value = -1));
-    }), we(I, (P) => {
+        return De === V.value;
+      }) || (V.value = ""), m.value = -1));
+    }), we(V, (P) => {
       !o.value || z.value || (P && (b.value = !0), s.value = !P);
     }), we(b, () => {
       if (!e.hideSelected && b.value && $.value.length) {
-        const P = U.value.findIndex((ne) => $.value.some((he) => ne.value === he.value));
+        const P = U.value.findIndex((le) => $.value.some((he) => le.value === he.value));
         et && window.requestAnimationFrame(() => {
-          var ne;
-          P >= 0 && ((ne = d.value) == null || ne.scrollToIndex(P));
+          var le;
+          P >= 0 && ((le = d.value) == null || le.scrollToIndex(P));
         });
       }
-    }), we(() => e.items, (P, ne) => {
-      b.value || o.value && !ne.length && P.length && (b.value = !0);
+    }), we(() => e.items, (P, le) => {
+      b.value || o.value && !le.length && P.length && (b.value = !0);
     }), se(() => {
-      const P = !!(!e.hideNoData || U.value.length || t["prepend-item"] || t["append-item"] || t["no-data"]), ne = $.value.length > 0, he = ee.filterProps(e);
+      const P = !!(!e.hideNoData || U.value.length || t["prepend-item"] || t["append-item"] || t["no-data"]), le = $.value.length > 0, he = ee.filterProps(e);
       return l(ee, X({
         ref: i
       }, he, {
-        modelValue: I.value,
-        "onUpdate:modelValue": [(Ce) => I.value = Ce, ce],
+        modelValue: V.value,
+        "onUpdate:modelValue": [(Ce) => V.value = Ce, ce],
         focused: o.value,
         "onUpdate:focused": (Ce) => o.value = Ce,
         validationValue: $.externalValue,
-        counterValue: O.value,
-        dirty: ne,
+        counterValue: L.value,
+        dirty: le,
         onChange: ge,
         class: ["v-autocomplete", `v-autocomplete--${e.multiple ? "multiple" : "single"}`, {
           "v-autocomplete--active-menu": b.value,
@@ -10389,13 +10389,13 @@ const Pg = K({
         }, e.class],
         style: e.style,
         readonly: e.readonly,
-        placeholder: ne ? void 0 : e.placeholder,
+        placeholder: le ? void 0 : e.placeholder,
         "onClick:clear": j,
-        "onMousedown:control": V,
-        onKeydown: te
+        "onMousedown:control": I,
+        onKeydown: ae
       }), {
         ...t,
-        default: () => l(ve, null, [l(ot, X({
+        default: () => l(de, null, [l(ot, X({
           ref: r,
           modelValue: b.value,
           "onUpdate:modelValue": (Ce) => b.value = Ce,
@@ -10409,9 +10409,9 @@ const Pg = K({
           transition: e.transition,
           onAfterLeave: be
         }, e.menuProps), {
-          default: () => [P && l(_a, X({
+          default: () => [P && l(ha, X({
             ref: J,
-            selected: L.value,
+            selected: R.value,
             selectStrategy: e.multiple ? "independent" : "single-independent",
             onMousedown: (Ce) => Ce.preventDefault(),
             onKeydown: N,
@@ -10423,8 +10423,8 @@ const Pg = K({
             color: e.itemColor ?? e.color
           }, e.listProps), {
             default: () => {
-              var Ce, Ne, He;
-              return [(Ce = t["prepend-item"]) == null ? void 0 : Ce.call(t), !U.value.length && !e.hideNoData && (((Ne = t["no-data"]) == null ? void 0 : Ne.call(t)) ?? l(xt, {
+              var Ce, De, He;
+              return [(Ce = t["prepend-item"]) == null ? void 0 : Ce.call(t), !U.value.length && !e.hideNoData && (((De = t["no-data"]) == null ? void 0 : De.call(t)) ?? l(xt, {
                 title: n(e.noDataText)
               }, null)), l(pr, {
                 ref: d,
@@ -10441,7 +10441,7 @@ const Pg = K({
                   const bo = X(qe.props, {
                     ref: ft,
                     key: Jt,
-                    active: W.value && Jt === 0 ? !0 : void 0,
+                    active: q.value && Jt === 0 ? !0 : void 0,
                     onClick: () => Q(qe, null)
                   });
                   return ((_o = t.item) == null ? void 0 : _o.call(t, {
@@ -10455,7 +10455,7 @@ const Pg = K({
                       let {
                         isSelected: Bn
                       } = $n;
-                      return l(ve, null, [e.multiple && !e.hideSelected ? l(sa, {
+                      return l(de, null, [e.multiple && !e.hideSelected ? l(sa, {
                         key: qe.value,
                         modelValue: Bn,
                         ripple: !1,
@@ -10468,14 +10468,14 @@ const Pg = K({
                     },
                     title: () => {
                       var $n, Bn;
-                      return s.value ? qe.title : Ig(qe.title, ($n = T(qe)) == null ? void 0 : $n.title, ((Bn = I.value) == null ? void 0 : Bn.length) ?? 0);
+                      return s.value ? qe.title : Ig(qe.title, ($n = D(qe)) == null ? void 0 : $n.title, ((Bn = V.value) == null ? void 0 : Bn.length) ?? 0);
                     }
                   });
                 }
               }), (He = t["append-item"]) == null ? void 0 : He.call(t)];
             }
           })]
-        }), $.value.map((Ce, Ne) => {
+        }), $.value.map((Ce, De) => {
           function He(ft) {
             ft.stopPropagation(), ft.preventDefault(), Q(Ce, !1);
           }
@@ -10491,18 +10491,18 @@ const Pg = K({
             "onUpdate:modelValue": void 0
           }, qe = G.value ? !!t.chip : !!t.selection, Jt = qe ? Mi(G.value ? t.chip({
             item: Ce,
-            index: Ne,
+            index: De,
             props: Fe
           }) : t.selection({
             item: Ce,
-            index: Ne
+            index: De
           })) : void 0;
           if (!(qe && !Jt))
             return l("div", {
               key: Ce.value,
-              class: ["v-autocomplete__selection", Ne === m.value && ["v-autocomplete__selection--selected", g.value]],
-              style: Ne === m.value ? S.value : {}
-            }, [G.value ? t.chip ? l(De, {
+              class: ["v-autocomplete__selection", De === m.value && ["v-autocomplete__selection--selected", f.value]],
+              style: De === m.value ? x.value : {}
+            }, [G.value ? t.chip ? l(Ne, {
               key: "chip-defaults",
               defaults: {
                 VChip: {
@@ -10521,21 +10521,21 @@ const Pg = K({
               disabled: Ce.props.disabled
             }, Fe), null) : Jt ?? l("span", {
               class: "v-autocomplete__selection-text"
-            }, [Ce.title, e.multiple && Ne < $.value.length - 1 && l("span", {
+            }, [Ce.title, e.multiple && De < $.value.length - 1 && l("span", {
               class: "v-autocomplete__selection-comma"
-            }, [de(",")])])]);
+            }, [ve(",")])])]);
         })]),
         "append-inner": function() {
           var Fe;
-          for (var Ce = arguments.length, Ne = new Array(Ce), He = 0; He < Ce; He++)
-            Ne[He] = arguments[He];
-          return l(ve, null, [(Fe = t["append-inner"]) == null ? void 0 : Fe.call(t, ...Ne), e.menuIcon ? l($e, {
+          for (var Ce = arguments.length, De = new Array(Ce), He = 0; He < Ce; He++)
+            De[He] = arguments[He];
+          return l(de, null, [(Fe = t["append-inner"]) == null ? void 0 : Fe.call(t, ...De), e.menuIcon ? l($e, {
             class: "v-autocomplete__menu-icon",
             icon: e.menuIcon,
             onMousedown: M,
             onClick: Zv,
-            "aria-label": n(x.value),
-            title: n(x.value),
+            "aria-label": n(k.value),
+            title: n(k.value),
             tabindex: "-1"
           }, null) : void 0]);
         }
@@ -10544,8 +10544,8 @@ const Pg = K({
       isFocused: o,
       isPristine: s,
       menu: b,
-      search: I,
-      filteredItems: R,
+      search: V,
+      filteredItems: O,
       select: Q
     }, i);
   }
@@ -10557,7 +10557,7 @@ const Pg = K({
   ...St(),
   ...qt(),
   ...vt(),
-  ...Oe(),
+  ...Me(),
   ...je(),
   ...Ft()
 }, "VBtnGroup"), ps = ie()({
@@ -10573,7 +10573,7 @@ const Pg = K({
       densityClasses: i
     } = Pt(e), {
       borderClasses: o
-    } = Ca(e), {
+    } = Va(e), {
       elevationClasses: s
     } = aa(e), {
       roundedClasses: u
@@ -10613,7 +10613,7 @@ const Pg = K({
       prev: o,
       select: s,
       selected: u
-    } = Ga(e, xr);
+    } = ja(e, xr);
     return se(() => {
       const r = ps.filterProps(e);
       return l(ps, X({
@@ -10638,7 +10638,7 @@ const Pg = K({
       select: s
     };
   }
-}), Ng = K({
+}), Dg = K({
   bgColor: String,
   color: String,
   indeterminate: [Boolean, String],
@@ -10655,19 +10655,19 @@ const Pg = K({
     default: 4
   },
   ...Pe(),
-  ...za(),
-  ...Oe({
+  ...Ua(),
+  ...Me({
     tag: "div"
   }),
   ...je()
 }, "VProgressCircular"), mn = ie()({
   name: "VProgressCircular",
-  props: Ng(),
+  props: Dg(),
   setup(e, a) {
     let {
       slots: t
     } = a;
-    const n = 20, i = 2 * Math.PI * n, o = A(), {
+    const n = 20, i = 2 * Math.PI * n, o = T(), {
       themeClasses: s
     } = Xe(e), {
       sizeClasses: u,
@@ -10679,33 +10679,33 @@ const Pg = K({
       textColorClasses: b,
       textColorStyles: m
     } = kt(oe(e, "bgColor")), {
-      intersectionRef: f,
-      isIntersecting: x
+      intersectionRef: p,
+      isIntersecting: k
     } = vr(), {
-      resizeRef: p,
+      resizeRef: _,
       contentRect: h
-    } = Fa(), _ = k(() => Math.max(0, Math.min(100, parseFloat(e.modelValue)))), g = k(() => Number(e.width)), S = k(() => r.value ? Number(e.size) : h.value ? h.value.width : Math.max(g.value, 32)), I = k(() => n / (1 - g.value / S.value) * 2), $ = k(() => g.value / S.value * I.value), O = k(() => Se((100 - _.value) / 100 * i));
-    return Re(() => {
-      f.value = o.value, p.value = o.value;
+    } = La(), g = S(() => Math.max(0, Math.min(100, parseFloat(e.modelValue)))), f = S(() => Number(e.width)), x = S(() => r.value ? Number(e.size) : h.value ? h.value.width : Math.max(f.value, 32)), V = S(() => n / (1 - f.value / x.value) * 2), $ = S(() => f.value / x.value * V.value), L = S(() => Se((100 - g.value) / 100 * i));
+    return Oe(() => {
+      p.value = o.value, _.value = o.value;
     }), se(() => l(e.tag, {
       ref: o,
       class: ["v-progress-circular", {
         "v-progress-circular--indeterminate": !!e.indeterminate,
-        "v-progress-circular--visible": x.value,
+        "v-progress-circular--visible": k.value,
         "v-progress-circular--disable-shrink": e.indeterminate === "disable-shrink"
       }, s.value, u.value, d.value, e.class],
       style: [r.value, y.value, e.style],
       role: "progressbar",
       "aria-valuemin": "0",
       "aria-valuemax": "100",
-      "aria-valuenow": e.indeterminate ? void 0 : _.value
+      "aria-valuenow": e.indeterminate ? void 0 : g.value
     }, {
       default: () => [l("svg", {
         style: {
           transform: `rotate(calc(-90deg + ${Number(e.rotate)}deg))`
         },
         xmlns: "http://www.w3.org/2000/svg",
-        viewBox: `0 0 ${I.value} ${I.value}`
+        viewBox: `0 0 ${V.value} ${V.value}`
       }, [l("circle", {
         class: ["v-progress-circular__underlay", b.value],
         style: m.value,
@@ -10724,27 +10724,27 @@ const Pg = K({
         r: n,
         "stroke-width": $.value,
         "stroke-dasharray": i,
-        "stroke-dashoffset": O.value
+        "stroke-dashoffset": L.value
       }, null)]), t.default && l("div", {
         class: "v-progress-circular__content"
       }, [t.default({
-        value: _.value
+        value: g.value
       })])]
     })), {};
   }
-}), Dg = ["static", "relative", "fixed", "absolute", "sticky"], Nn = K({
+}), Ng = ["static", "relative", "fixed", "absolute", "sticky"], Dn = K({
   position: {
     type: String,
     validator: (
       /* istanbul ignore next */
-      (e) => Dg.includes(e)
+      (e) => Ng.includes(e)
     )
   }
 }, "position");
-function Dn(e) {
+function Nn(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : jt();
   return {
-    positionClasses: k(() => e.position ? `${a}--${e.position}` : void 0)
+    positionClasses: S(() => e.position ? `${a}--${e.position}` : void 0)
   };
 }
 function $g(e, a) {
@@ -10789,12 +10789,12 @@ const kr = K({
   ...qt(),
   ...Cn(),
   ...Cl(),
-  ...Va(),
-  ...Nn(),
+  ...Ia(),
+  ...Dn(),
   ...vt(),
   ...wl(),
-  ...za(),
-  ...Oe({
+  ...Ua(),
+  ...Me({
     tag: "button"
   }),
   ...je(),
@@ -10816,7 +10816,7 @@ const kr = K({
       themeClasses: i
     } = Xe(e), {
       borderClasses: o
-    } = Ca(e), {
+    } = Va(e), {
       densityClasses: s
     } = Pt(e), {
       dimensionStyles: u
@@ -10826,42 +10826,42 @@ const kr = K({
       loaderClasses: d
     } = An(e), {
       locationStyles: y
-    } = Ha(e), {
+    } = Wa(e), {
       positionClasses: b
-    } = Dn(e), {
+    } = Nn(e), {
       roundedClasses: m
     } = _t(e), {
-      sizeClasses: f,
-      sizeStyles: x
-    } = kn(e), p = Vn(e, e.symbol, !1), h = In(e, t), _ = k(() => {
+      sizeClasses: p,
+      sizeStyles: k
+    } = kn(e), _ = Vn(e, e.symbol, !1), h = In(e, t), g = S(() => {
       var U;
-      return e.active !== void 0 ? e.active : h.isLink.value ? (U = h.isActive) == null ? void 0 : U.value : p == null ? void 0 : p.isSelected.value;
-    }), g = k(() => {
+      return e.active !== void 0 ? e.active : h.isLink.value ? (U = h.isActive) == null ? void 0 : U.value : _ == null ? void 0 : _.isSelected.value;
+    }), f = S(() => {
       var G, C;
       return {
-        color: (p == null ? void 0 : p.isSelected.value) && (!h.isLink.value || ((G = h.isActive) == null ? void 0 : G.value)) || !p || ((C = h.isActive) == null ? void 0 : C.value) ? e.color ?? e.baseColor : e.baseColor,
+        color: (_ == null ? void 0 : _.isSelected.value) && (!h.isLink.value || ((G = h.isActive) == null ? void 0 : G.value)) || !_ || ((C = h.isActive) == null ? void 0 : C.value) ? e.color ?? e.baseColor : e.baseColor,
         variant: e.variant
       };
     }), {
-      colorClasses: S,
-      colorStyles: I,
+      colorClasses: x,
+      colorStyles: V,
       variantClasses: $
-    } = ka(g), O = k(() => (p == null ? void 0 : p.disabled.value) || e.disabled), E = k(() => e.variant === "elevated" && !(e.disabled || e.flat || e.border)), R = k(() => {
+    } = Sa(f), L = S(() => (_ == null ? void 0 : _.disabled.value) || e.disabled), E = S(() => e.variant === "elevated" && !(e.disabled || e.flat || e.border)), O = S(() => {
       if (!(e.value === void 0 || typeof e.value == "symbol"))
         return Object(e.value) === e.value ? JSON.stringify(e.value, null, 0) : e.value;
     });
-    function T(U) {
+    function D(U) {
       var G;
-      O.value || h.isLink.value && (U.metaKey || U.ctrlKey || U.shiftKey || U.button !== 0 || t.target === "_blank") || ((G = h.navigate) == null || G.call(h, U), p == null || p.toggle());
+      L.value || h.isLink.value && (U.metaKey || U.ctrlKey || U.shiftKey || U.button !== 0 || t.target === "_blank") || ((G = h.navigate) == null || G.call(h, U), _ == null || _.toggle());
     }
-    return $g(h, p == null ? void 0 : p.select), se(() => {
-      const U = h.isLink.value ? "a" : e.tag, G = !!(e.prependIcon || n.prepend), C = !!(e.appendIcon || n.append), L = !!(e.icon && e.icon !== !0);
+    return $g(h, _ == null ? void 0 : _.select), se(() => {
+      const U = h.isLink.value ? "a" : e.tag, G = !!(e.prependIcon || n.prepend), C = !!(e.appendIcon || n.append), R = !!(e.icon && e.icon !== !0);
       return Ye(l(U, {
         type: U === "a" ? void 0 : "button",
-        class: ["v-btn", p == null ? void 0 : p.selectedClass.value, {
-          "v-btn--active": _.value,
+        class: ["v-btn", _ == null ? void 0 : _.selectedClass.value, {
+          "v-btn--active": g.value,
           "v-btn--block": e.block,
-          "v-btn--disabled": O.value,
+          "v-btn--disabled": L.value,
           "v-btn--elevated": E.value,
           "v-btn--flat": e.flat,
           "v-btn--icon": !!e.icon,
@@ -10869,21 +10869,21 @@ const kr = K({
           "v-btn--readonly": e.readonly,
           "v-btn--slim": e.slim,
           "v-btn--stacked": e.stacked
-        }, i.value, o.value, S.value, s.value, r.value, d.value, b.value, m.value, f.value, $.value, e.class],
-        style: [I.value, u.value, y.value, x.value, e.style],
+        }, i.value, o.value, x.value, s.value, r.value, d.value, b.value, m.value, p.value, $.value, e.class],
+        style: [V.value, u.value, y.value, k.value, e.style],
         "aria-busy": e.loading ? !0 : void 0,
-        disabled: O.value || void 0,
+        disabled: L.value || void 0,
         href: h.href.value,
         tabindex: e.loading || e.readonly ? -1 : void 0,
-        onClick: T,
-        value: R.value
+        onClick: D,
+        value: O.value
       }, {
         default: () => {
-          var W;
+          var q;
           return [ea(!0, "v-btn"), !e.icon && G && l("span", {
             key: "prepend",
             class: "v-btn__prepend"
-          }, [n.prepend ? l(De, {
+          }, [n.prepend ? l(Ne, {
             key: "prepend-defaults",
             disabled: !e.prependIcon,
             defaults: {
@@ -10897,12 +10897,12 @@ const kr = K({
           }, null)]), l("span", {
             class: "v-btn__content",
             "data-no-activator": ""
-          }, [!n.default && L ? l($e, {
+          }, [!n.default && R ? l($e, {
             key: "content-icon",
             icon: e.icon
-          }, null) : l(De, {
+          }, null) : l(Ne, {
             key: "content-defaults",
-            disabled: !L,
+            disabled: !R,
             defaults: {
               VIcon: {
                 icon: e.icon
@@ -10916,7 +10916,7 @@ const kr = K({
           })]), !e.icon && C && l("span", {
             key: "append",
             class: "v-btn__append"
-          }, [n.append ? l(De, {
+          }, [n.append ? l(Ne, {
             key: "append-defaults",
             disabled: !e.appendIcon,
             defaults: {
@@ -10930,17 +10930,17 @@ const kr = K({
           }, null)]), !!e.loading && l("span", {
             key: "loader",
             class: "v-btn__loader"
-          }, [((W = n.loader) == null ? void 0 : W.call(n)) ?? l(mn, {
+          }, [((q = n.loader) == null ? void 0 : q.call(n)) ?? l(mn, {
             color: typeof e.loading == "boolean" ? void 0 : e.loading,
             indeterminate: !0,
             width: "2"
           }, null)])];
         }
-      }), [[ca, !O.value && !!e.ripple, "", {
+      }), [[ca, !L.value && !!e.ripple, "", {
         center: !!e.icon
       }]]);
     }), {
-      group: p
+      group: _
     };
   }
 }), Rt = ie()({
@@ -10966,7 +10966,7 @@ const kr = K({
 }), Bg = K({
   opacity: [Number, String],
   ...Pe(),
-  ...Oe()
+  ...Me()
 }, "VCardSubtitle"), ma = ie()({
   name: "VCardSubtitle",
   props: Bg(),
@@ -10981,7 +10981,7 @@ const kr = K({
       }, e.style]
     }, t)), {};
   }
-}), na = Ma("v-card-title"), Eg = K({
+}), na = za("v-card-title"), Eg = K({
   appendAvatar: String,
   appendIcon: Ie,
   prependAvatar: String,
@@ -11006,7 +11006,7 @@ const kr = K({
       }, [i && l("div", {
         key: "prepend",
         class: "v-card-item__prepend"
-      }, [t.prepend ? l(De, {
+      }, [t.prepend ? l(Ne, {
         key: "prepend-defaults",
         disabled: !n,
         defaults: {
@@ -11019,7 +11019,7 @@ const kr = K({
             icon: e.prependIcon
           }
         }
-      }, t.prepend) : l(ve, null, [e.prependAvatar && l(Mt, {
+      }, t.prepend) : l(de, null, [e.prependAvatar && l(Mt, {
         key: "prepend-avatar",
         density: e.density,
         image: e.prependAvatar
@@ -11046,7 +11046,7 @@ const kr = K({
       }), (d = t.default) == null ? void 0 : d.call(t)]), s && l("div", {
         key: "append",
         class: "v-card-item__append"
-      }, [t.append ? l(De, {
+      }, [t.append ? l(Ne, {
         key: "append-defaults",
         disabled: !o,
         defaults: {
@@ -11059,7 +11059,7 @@ const kr = K({
             icon: e.appendIcon
           }
         }
-      }, t.append) : l(ve, null, [e.appendIcon && l($e, {
+      }, t.append) : l(de, null, [e.appendIcon && l($e, {
         key: "append-icon",
         density: e.density,
         icon: e.appendIcon
@@ -11073,7 +11073,7 @@ const kr = K({
 }), Lg = K({
   opacity: [Number, String],
   ...Pe(),
-  ...Oe()
+  ...Me()
 }, "VCardText"), Ae = ie()({
   name: "VCardText",
   props: Lg(),
@@ -11114,11 +11114,11 @@ const kr = K({
   ...Ht(),
   ...qt(),
   ...Cl(),
-  ...Va(),
-  ...Nn(),
+  ...Ia(),
+  ...Dn(),
   ...vt(),
   ...wl(),
-  ...Oe(),
+  ...Me(),
   ...je(),
   ...Ft({
     variant: "elevated"
@@ -11138,11 +11138,11 @@ const kr = K({
       themeClasses: i
     } = Xe(e), {
       borderClasses: o
-    } = Ca(e), {
+    } = Va(e), {
       colorClasses: s,
       colorStyles: u,
       variantClasses: r
-    } = ka(e), {
+    } = Sa(e), {
       densityClasses: d
     } = Pt(e), {
       dimensionStyles: y
@@ -11151,32 +11151,32 @@ const kr = K({
     } = aa(e), {
       loaderClasses: m
     } = An(e), {
-      locationStyles: f
-    } = Ha(e), {
-      positionClasses: x
-    } = Dn(e), {
-      roundedClasses: p
-    } = _t(e), h = In(e, t), _ = k(() => e.link !== !1 && h.isLink.value), g = k(() => !e.disabled && e.link !== !1 && (e.link || h.isClickable.value));
+      locationStyles: p
+    } = Wa(e), {
+      positionClasses: k
+    } = Nn(e), {
+      roundedClasses: _
+    } = _t(e), h = In(e, t), g = S(() => e.link !== !1 && h.isLink.value), f = S(() => !e.disabled && e.link !== !1 && (e.link || h.isClickable.value));
     return se(() => {
-      const S = _.value ? "a" : e.tag, I = !!(n.title || e.title != null), $ = !!(n.subtitle || e.subtitle != null), O = I || $, E = !!(n.append || e.appendAvatar || e.appendIcon), R = !!(n.prepend || e.prependAvatar || e.prependIcon), T = !!(n.image || e.image), U = O || R || E, G = !!(n.text || e.text != null);
-      return Ye(l(S, {
+      const x = g.value ? "a" : e.tag, V = !!(n.title || e.title != null), $ = !!(n.subtitle || e.subtitle != null), L = V || $, E = !!(n.append || e.appendAvatar || e.appendIcon), O = !!(n.prepend || e.prependAvatar || e.prependIcon), D = !!(n.image || e.image), U = L || O || E, G = !!(n.text || e.text != null);
+      return Ye(l(x, {
         class: ["v-card", {
           "v-card--disabled": e.disabled,
           "v-card--flat": e.flat,
           "v-card--hover": e.hover && !(e.disabled || e.flat),
-          "v-card--link": g.value
-        }, i.value, o.value, s.value, d.value, b.value, m.value, x.value, p.value, r.value, e.class],
-        style: [u.value, y.value, f.value, e.style],
+          "v-card--link": f.value
+        }, i.value, o.value, s.value, d.value, b.value, m.value, k.value, _.value, r.value, e.class],
+        style: [u.value, y.value, p.value, e.style],
         href: h.href.value,
-        onClick: g.value && h.navigate,
+        onClick: f.value && h.navigate,
         tabindex: e.disabled ? -1 : void 0
       }, {
         default: () => {
           var C;
-          return [T && l("div", {
+          return [D && l("div", {
             key: "image",
             class: "v-card__image"
-          }, [n.image ? l(De, {
+          }, [n.image ? l(Ne, {
             key: "image-defaults",
             disabled: !e.image,
             defaults: {
@@ -11213,14 +11213,14 @@ const kr = K({
             key: "text"
           }, {
             default: () => {
-              var L;
-              return [((L = n.text) == null ? void 0 : L.call(n)) ?? e.text];
+              var R;
+              return [((R = n.text) == null ? void 0 : R.call(n)) ?? e.text];
             }
           }), (C = n.default) == null ? void 0 : C.call(n), n.actions && l(Rt, null, {
             default: n.actions
-          }), ea(g.value, "v-card")];
+          }), ea(f.value, "v-card")];
         }
-      }), [[Bt("ripple"), g.value && e.ripple]]);
+      }), [[Bt("ripple"), f.value && e.ripple]]);
     }), {};
   }
 }), Og = K({
@@ -11252,18 +11252,18 @@ const kr = K({
     } = a;
     const i = Ve(e, "modelValue"), {
       scopeId: o
-    } = ja(), s = A();
+    } = Ha(), s = T();
     function u(y) {
-      var f, x;
+      var p, k;
       const b = y.relatedTarget, m = y.target;
-      if (b !== m && ((f = s.value) != null && f.contentEl) && // We're the topmost dialog
-      ((x = s.value) != null && x.globalTop) && // It isn't the document or the dialog body
+      if (b !== m && ((p = s.value) != null && p.contentEl) && // We're the topmost dialog
+      ((k = s.value) != null && k.globalTop) && // It isn't the document or the dialog body
       ![document, s.value.contentEl].includes(m) && // It isn't inside the dialog body
       !s.value.contentEl.contains(m)) {
-        const p = on(s.value.contentEl);
-        if (!p.length) return;
-        const h = p[0], _ = p[p.length - 1];
-        b === h ? _.focus() : h.focus();
+        const _ = on(s.value.contentEl);
+        if (!_.length) return;
+        const h = _[0], g = _[_.length - 1];
+        b === h ? g.focus() : h.focus();
       }
     }
     et && we(() => i.value && e.retainFocus, (y) => {
@@ -11301,7 +11301,7 @@ const kr = K({
         style: e.style
       }, y, {
         modelValue: i.value,
-        "onUpdate:modelValue": (f) => i.value = f,
+        "onUpdate:modelValue": (p) => i.value = p,
         "aria-modal": "true",
         activatorProps: b,
         contentProps: m,
@@ -11311,14 +11311,14 @@ const kr = K({
       }, o), {
         activator: n.activator,
         default: function() {
-          for (var f = arguments.length, x = new Array(f), p = 0; p < f; p++)
-            x[p] = arguments[p];
-          return l(De, {
+          for (var p = arguments.length, k = new Array(p), _ = 0; _ < p; _++)
+            k[_] = arguments[_];
+          return l(Ne, {
             root: "VDialog"
           }, {
             default: () => {
               var h;
-              return [(h = n.default) == null ? void 0 : h.call(n, ...x)];
+              return [(h = n.default) == null ? void 0 : h.call(n, ...k)];
             }
           });
         }
@@ -11328,7 +11328,7 @@ const kr = K({
 }), Mg = K({
   ...Pe(),
   ...nm()
-}, "VForm"), Za = ie()({
+}, "VForm"), en = ie()({
   name: "VForm",
   props: Mg(),
   emits: {
@@ -11340,18 +11340,18 @@ const kr = K({
       slots: t,
       emit: n
     } = a;
-    const i = lm(e), o = A();
+    const i = lm(e), o = T();
     function s(r) {
       r.preventDefault(), i.reset();
     }
     function u(r) {
       const d = r, y = i.validate();
       d.then = y.then.bind(y), d.catch = y.catch.bind(y), d.finally = y.finally.bind(y), n("submit", d), d.defaultPrevented || y.then((b) => {
-        var f;
+        var p;
         let {
           valid: m
         } = b;
-        m && ((f = o.value) == null || f.submit());
+        m && ((p = o.value) == null || p.submit());
       }), d.preventDefault();
     }
     return se(() => {
@@ -11370,13 +11370,13 @@ const kr = K({
   type: [Boolean, String, Number],
   default: !1
 }, e), {}), wr = Sl.reduce((e, a) => {
-  const t = "offset" + Ra(a);
+  const t = "offset" + Oa(a);
   return e[t] = {
     type: [String, Number],
     default: null
   }, e;
 }, {}), Cr = Sl.reduce((e, a) => {
-  const t = "order" + Ra(a);
+  const t = "order" + Oa(a);
   return e[t] = {
     type: [String, Number],
     default: null
@@ -11418,7 +11418,7 @@ const Ug = ["auto", "start", "end", "center", "baseline", "stretch"], Gg = K({
     validator: (e) => Ug.includes(e)
   },
   ...Pe(),
-  ...Oe()
+  ...Me()
 }, "VCol"), B = ie()({
   name: "VCol",
   props: Gg(),
@@ -11426,7 +11426,7 @@ const Ug = ["auto", "start", "end", "center", "baseline", "stretch"], Gg = K({
     let {
       slots: t
     } = a;
-    const n = k(() => {
+    const n = S(() => {
       const i = [];
       let o;
       for (o in bs)
@@ -11455,7 +11455,7 @@ const Ug = ["auto", "start", "end", "center", "baseline", "stretch"], Gg = K({
 }), lo = ["start", "end", "center"], Vr = ["space-between", "space-around", "space-evenly"];
 function io(e, a) {
   return Sl.reduce((t, n) => {
-    const i = e + Ra(n);
+    const i = e + Oa(n);
     return t[i] = a(), t;
   }, {});
 }
@@ -11467,14 +11467,14 @@ const jg = [...lo, "baseline", "stretch"], Ir = (e) => jg.includes(e), Pr = io("
   type: String,
   default: null,
   validator: Ar
-})), Wg = [...lo, ...Vr, "stretch"], Nr = (e) => Wg.includes(e), Dr = io("alignContent", () => ({
+})), Wg = [...lo, ...Vr, "stretch"], Dr = (e) => Wg.includes(e), Nr = io("alignContent", () => ({
   type: String,
   default: null,
-  validator: Nr
+  validator: Dr
 })), _s = {
   align: Object.keys(Pr),
   justify: Object.keys(Tr),
-  alignContent: Object.keys(Dr)
+  alignContent: Object.keys(Nr)
 }, qg = {
   align: "align",
   justify: "justify",
@@ -11508,11 +11508,11 @@ const Jg = K({
   alignContent: {
     type: String,
     default: null,
-    validator: Nr
+    validator: Dr
   },
-  ...Dr,
+  ...Nr,
   ...Pe(),
-  ...Oe()
+  ...Me()
 }, "VRow"), xe = ie()({
   name: "VRow",
   props: Jg(),
@@ -11520,7 +11520,7 @@ const Jg = K({
     let {
       slots: t
     } = a;
-    const n = k(() => {
+    const n = S(() => {
       const i = [];
       let o;
       for (o in _s)
@@ -11544,7 +11544,7 @@ const Jg = K({
       }, (i = t.default) == null ? void 0 : i.call(t));
     };
   }
-}), $r = Ma("v-spacer", "div", "VSpacer"), Kg = K({
+}), $r = za("v-spacer", "div", "VSpacer"), Kg = K({
   indeterminate: Boolean,
   inset: Boolean,
   flat: Boolean,
@@ -11552,7 +11552,7 @@ const Jg = K({
     type: [Boolean, String],
     default: !1
   },
-  ...wa(),
+  ...Ca(),
   ...hl()
 }, "VSwitch"), nt = ie()({
   name: "VSwitch",
@@ -11574,16 +11574,16 @@ const Jg = K({
       isFocused: u,
       focus: r,
       blur: d
-    } = Sa(e), y = A(), b = et && window.matchMedia("(forced-colors: active)").matches, m = k(() => typeof e.loading == "string" && e.loading !== "" ? e.loading : e.color), f = It(), x = k(() => e.id || `switch-${f}`);
-    function p() {
+    } = wa(e), y = T(), b = et && window.matchMedia("(forced-colors: active)").matches, m = S(() => typeof e.loading == "string" && e.loading !== "" ? e.loading : e.color), p = It(), k = S(() => e.id || `switch-${p}`);
+    function _() {
       i.value && (i.value = !1);
     }
-    function h(_) {
-      var g, S;
-      _.stopPropagation(), _.preventDefault(), (S = (g = y.value) == null ? void 0 : g.input) == null || S.click();
+    function h(g) {
+      var f, x;
+      g.stopPropagation(), g.preventDefault(), (x = (f = y.value) == null ? void 0 : f.input) == null || x.click();
     }
     return se(() => {
-      const [_, g] = ha(t), S = $t.filterProps(e), I = ba.filterProps(e);
+      const [g, f] = xa(t), x = $t.filterProps(e), V = _a.filterProps(e);
       return l($t, X({
         class: ["v-switch", {
           "v-switch--flat": e.flat
@@ -11592,49 +11592,49 @@ const Jg = K({
         }, {
           "v-switch--indeterminate": i.value
         }, s.value, e.class]
-      }, _, S, {
+      }, g, x, {
         modelValue: o.value,
         "onUpdate:modelValue": ($) => o.value = $,
-        id: x.value,
+        id: k.value,
         focused: u.value,
         style: e.style
       }), {
         ...n,
         default: ($) => {
           let {
-            id: O,
+            id: L,
             messagesId: E,
-            isDisabled: R,
-            isReadonly: T,
+            isDisabled: O,
+            isReadonly: D,
             isValid: U
           } = $;
           const G = {
             model: o,
             isValid: U
           };
-          return l(ba, X({
+          return l(_a, X({
             ref: y
-          }, I, {
+          }, V, {
             modelValue: o.value,
-            "onUpdate:modelValue": [(C) => o.value = C, p],
-            id: O.value,
+            "onUpdate:modelValue": [(C) => o.value = C, _],
+            id: L.value,
             "aria-describedby": E.value,
             type: "checkbox",
             "aria-checked": i.value ? "mixed" : void 0,
-            disabled: R.value,
-            readonly: T.value,
+            disabled: O.value,
+            readonly: D.value,
             onFocus: r,
             onBlur: d
-          }, g), {
+          }, f), {
             ...n,
             default: (C) => {
               let {
-                backgroundColorClasses: L,
-                backgroundColorStyles: W
+                backgroundColorClasses: R,
+                backgroundColorStyles: q
               } = C;
               return l("div", {
-                class: ["v-switch__track", b ? void 0 : L.value],
-                style: W.value,
+                class: ["v-switch__track", b ? void 0 : R.value],
+                style: q.value,
                 onClick: h
               }, [n["track-true"] && l("div", {
                 key: "prepend",
@@ -11646,27 +11646,27 @@ const Jg = K({
             },
             input: (C) => {
               let {
-                inputNode: L,
-                icon: W,
+                inputNode: R,
+                icon: q,
                 backgroundColorClasses: Y,
                 backgroundColorStyles: J
               } = C;
-              return l(ve, null, [L, l("div", {
+              return l(de, null, [R, l("div", {
                 class: ["v-switch__thumb", {
-                  "v-switch__thumb--filled": W || e.loading
+                  "v-switch__thumb--filled": q || e.loading
                 }, e.inset || b ? void 0 : Y.value],
                 style: e.inset ? void 0 : J.value
-              }, [n.thumb ? l(De, {
+              }, [n.thumb ? l(Ne, {
                 defaults: {
                   VIcon: {
-                    icon: W,
+                    icon: q,
                     size: "x-small"
                   }
                 }
               }, {
                 default: () => [n.thumb({
                   ...G,
-                  icon: W
+                  icon: q
                 })]
               }) : l(em, null, {
                 default: () => [e.loading ? l(Vl, {
@@ -11681,9 +11681,9 @@ const Jg = K({
                     size: "16",
                     width: "2"
                   }, null)
-                }) : W && l($e, {
-                  key: String(W),
-                  icon: W,
+                }) : q && l($e, {
+                  key: String(q),
+                  icon: q,
                   size: "x-small"
                 }, null)]
               })])]);
@@ -11700,7 +11700,7 @@ const Jg = K({
   hover: Boolean,
   ...Pe(),
   ...St(),
-  ...Oe(),
+  ...Me(),
   ...je()
 }, "VTable"), gn = ie()({
   name: "VTable",
@@ -11758,9 +11758,9 @@ const Jg = K({
   },
   suffix: String,
   modelModifiers: Object,
-  ...wa(),
+  ...Ca(),
   ...Il()
-}, "VTextarea"), Nt = ie()({
+}, "VTextarea"), Dt = ie()({
   name: "VTextarea",
   directives: {
     Intersect: _l
@@ -11783,60 +11783,60 @@ const Jg = K({
       isFocused: s,
       focus: u,
       blur: r
-    } = Sa(e), d = k(() => typeof e.counterValue == "function" ? e.counterValue(o.value) : (o.value || "").toString().length), y = k(() => {
+    } = wa(e), d = S(() => typeof e.counterValue == "function" ? e.counterValue(o.value) : (o.value || "").toString().length), y = S(() => {
       if (t.maxlength) return t.maxlength;
       if (!(!e.counter || typeof e.counter != "number" && typeof e.counter != "string"))
         return e.counter;
     });
     function b(G, C) {
-      var L, W;
-      !e.autofocus || !G || (W = (L = C[0].target) == null ? void 0 : L.focus) == null || W.call(L);
+      var R, q;
+      !e.autofocus || !G || (q = (R = C[0].target) == null ? void 0 : R.focus) == null || q.call(R);
     }
-    const m = A(), f = A(), x = _e(""), p = A(), h = k(() => e.persistentPlaceholder || s.value || e.active);
-    function _() {
+    const m = T(), p = T(), k = _e(""), _ = T(), h = S(() => e.persistentPlaceholder || s.value || e.active);
+    function g() {
       var G;
-      p.value !== document.activeElement && ((G = p.value) == null || G.focus()), s.value || u();
+      _.value !== document.activeElement && ((G = _.value) == null || G.focus()), s.value || u();
     }
-    function g(G) {
-      _(), n("click:control", G);
+    function f(G) {
+      g(), n("click:control", G);
     }
-    function S(G) {
+    function x(G) {
       n("mousedown:control", G);
     }
-    function I(G) {
-      G.stopPropagation(), _(), Ee(() => {
+    function V(G) {
+      G.stopPropagation(), g(), Ee(() => {
         o.value = "", Oi(e["onClick:clear"], G);
       });
     }
     function $(G) {
-      var L;
+      var R;
       const C = G.target;
-      if (o.value = C.value, (L = e.modelModifiers) != null && L.trim) {
-        const W = [C.selectionStart, C.selectionEnd];
+      if (o.value = C.value, (R = e.modelModifiers) != null && R.trim) {
+        const q = [C.selectionStart, C.selectionEnd];
         Ee(() => {
-          C.selectionStart = W[0], C.selectionEnd = W[1];
+          C.selectionStart = q[0], C.selectionEnd = q[1];
         });
       }
     }
-    const O = A(), E = A(+e.rows), R = k(() => ["plain", "underlined"].includes(e.variant));
-    Re(() => {
+    const L = T(), E = T(+e.rows), O = S(() => ["plain", "underlined"].includes(e.variant));
+    Oe(() => {
       e.autoGrow || (E.value = +e.rows);
     });
-    function T() {
+    function D() {
       e.autoGrow && Ee(() => {
-        if (!O.value || !f.value) return;
-        const G = getComputedStyle(O.value), C = getComputedStyle(f.value.$el), L = parseFloat(G.getPropertyValue("--v-field-padding-top")) + parseFloat(G.getPropertyValue("--v-input-padding-top")) + parseFloat(G.getPropertyValue("--v-field-padding-bottom")), W = O.value.scrollHeight, Y = parseFloat(G.lineHeight), J = Math.max(parseFloat(e.rows) * Y + L, parseFloat(C.getPropertyValue("--v-input-control-height"))), H = parseFloat(e.maxRows) * Y + L || 1 / 0, N = ht(W ?? 0, J, H);
-        E.value = Math.floor((N - L) / Y), x.value = Se(N);
+        if (!L.value || !p.value) return;
+        const G = getComputedStyle(L.value), C = getComputedStyle(p.value.$el), R = parseFloat(G.getPropertyValue("--v-field-padding-top")) + parseFloat(G.getPropertyValue("--v-input-padding-top")) + parseFloat(G.getPropertyValue("--v-field-padding-bottom")), q = L.value.scrollHeight, Y = parseFloat(G.lineHeight), J = Math.max(parseFloat(e.rows) * Y + R, parseFloat(C.getPropertyValue("--v-input-control-height"))), H = parseFloat(e.maxRows) * Y + R || 1 / 0, N = ht(q ?? 0, J, H);
+        E.value = Math.floor((N - R) / Y), k.value = Se(N);
       });
     }
-    st(T), we(o, T), we(() => e.rows, T), we(() => e.maxRows, T), we(() => e.density, T);
+    st(D), we(o, D), we(() => e.rows, D), we(() => e.maxRows, D), we(() => e.density, D);
     let U;
-    return we(O, (G) => {
-      G ? (U = new ResizeObserver(T), U.observe(O.value)) : U == null || U.disconnect();
+    return we(L, (G) => {
+      G ? (U = new ResizeObserver(D), U.observe(L.value)) : U == null || U.disconnect();
     }), Ut(() => {
       U == null || U.disconnect();
     }), se(() => {
-      const G = !!(i.counter || e.counter || e.counterValue), C = !!(G || i.details), [L, W] = ha(t), {
+      const G = !!(i.counter || e.counter || e.counterValue), C = !!(G || i.details), [R, q] = xa(t), {
         modelValue: Y,
         ...J
       } = $t.filterProps(e), H = no(e);
@@ -11851,38 +11851,38 @@ const Jg = K({
           "v-text-field--suffixed": e.suffix,
           "v-textarea--auto-grow": e.autoGrow,
           "v-textarea--no-resize": e.noResize || e.autoGrow,
-          "v-input--plain-underlined": R.value
+          "v-input--plain-underlined": O.value
         }, e.class],
         style: e.style
-      }, L, J, {
-        centerAffix: E.value === 1 && !R.value,
+      }, R, J, {
+        centerAffix: E.value === 1 && !O.value,
         focused: s.value
       }), {
         ...i,
         default: (N) => {
           let {
             id: j,
-            isDisabled: V,
+            isDisabled: I,
             isDirty: M,
-            isReadonly: te,
+            isReadonly: ae,
             isValid: ge
           } = N;
           return l(Pl, X({
-            ref: f,
+            ref: p,
             style: {
-              "--v-textarea-control-height": x.value
+              "--v-textarea-control-height": k.value
             },
-            onClick: g,
-            onMousedown: S,
-            "onClick:clear": I,
+            onClick: f,
+            onMousedown: x,
+            "onClick:clear": V,
             "onClick:prependInner": e["onClick:prependInner"],
             "onClick:appendInner": e["onClick:appendInner"]
           }, H, {
             id: j.value,
             active: h.value || M.value,
-            centerAffix: E.value === 1 && !R.value,
+            centerAffix: E.value === 1 && !O.value,
             dirty: M.value || e.dirty,
-            disabled: V.value,
+            disabled: I.value,
             focused: s.value,
             error: ge.value === !1
           }), {
@@ -11894,22 +11894,22 @@ const Jg = K({
                   ...pe
                 }
               } = be;
-              return l(ve, null, [e.prefix && l("span", {
+              return l(de, null, [e.prefix && l("span", {
                 class: "v-text-field__prefix"
               }, [e.prefix]), Ye(l("textarea", X({
-                ref: p,
+                ref: _,
                 class: fe,
                 value: o.value,
                 onInput: $,
                 autofocus: e.autofocus,
-                readonly: te.value,
-                disabled: V.value,
+                readonly: ae.value,
+                disabled: I.value,
                 placeholder: e.placeholder,
                 rows: e.rows,
                 name: e.name,
-                onFocus: _,
+                onFocus: g,
                 onBlur: r
-              }, pe, W), null), [[Bt("intersect"), {
+              }, pe, q), null), [[Bt("intersect"), {
                 handler: b
               }, null, {
                 once: !0
@@ -11917,7 +11917,7 @@ const Jg = K({
                 class: [fe, "v-textarea__sizer"],
                 id: `${pe.id}-sizer`,
                 "onUpdate:modelValue": (ce) => o.value = ce,
-                ref: O,
+                ref: L,
                 readonly: !0,
                 "aria-hidden": "true"
               }, null), [[ed, o.value]]), e.suffix && l("span", {
@@ -11928,7 +11928,7 @@ const Jg = K({
         },
         details: C ? (N) => {
           var j;
-          return l(ve, null, [(j = i.details) == null ? void 0 : j.call(i, N), G && l(ve, null, [l("span", null, null), l(ao, {
+          return l(de, null, [(j = i.details) == null ? void 0 : j.call(i, N), G && l(de, null, [l("span", null, null), l(ao, {
             active: e.persistentCounter || s.value,
             value: d.value,
             max: y.value,
@@ -11936,12 +11936,12 @@ const Jg = K({
           }, i.counter)])]);
         } : void 0
       });
-    }), Lt({}, m, f, p);
+    }), Lt({}, m, p, _);
   }
 }), Qg = K({
   id: String,
   text: String,
-  ...Me(Pn({
+  ...ze(Pn({
     closeOnBack: !1,
     location: "end",
     locationStrategy: "connected",
@@ -11967,7 +11967,7 @@ const Jg = K({
     } = a;
     const n = Ve(e, "modelValue"), {
       scopeId: i
-    } = ja(), o = It(), s = k(() => e.id || `v-tooltip-${o}`), u = A(), r = k(() => e.location.split(" ").length > 1 ? e.location : e.location + " center"), d = k(() => e.origin === "auto" || e.origin === "overlap" || e.origin.split(" ").length > 1 || e.location.split(" ").length > 1 ? e.origin : e.origin + " center"), y = k(() => e.transition ? e.transition : n.value ? "scale-transition" : "fade-transition"), b = k(() => X({
+    } = Ha(), o = It(), s = S(() => e.id || `v-tooltip-${o}`), u = T(), r = S(() => e.location.split(" ").length > 1 ? e.location : e.location + " center"), d = S(() => e.origin === "auto" || e.origin === "overlap" || e.origin.split(" ").length > 1 || e.location.split(" ").length > 1 ? e.origin : e.origin + " center"), y = S(() => e.transition ? e.transition : n.value ? "scale-transition" : "fade-transition"), b = S(() => X({
       "aria-describedby": s.value
     }, e.activatorProps));
     return se(() => {
@@ -11979,7 +11979,7 @@ const Jg = K({
         id: s.value
       }, m, {
         modelValue: n.value,
-        "onUpdate:modelValue": (f) => n.value = f,
+        "onUpdate:modelValue": (p) => n.value = p,
         transition: y.value,
         absolute: !0,
         location: r.value,
@@ -11992,9 +11992,9 @@ const Jg = K({
         activator: t.activator,
         default: function() {
           var h;
-          for (var f = arguments.length, x = new Array(f), p = 0; p < f; p++)
-            x[p] = arguments[p];
-          return ((h = t.default) == null ? void 0 : h.call(t, ...x)) ?? e.text;
+          for (var p = arguments.length, k = new Array(p), _ = 0; _ < p; _++)
+            k[_] = arguments[_];
+          return ((h = t.default) == null ? void 0 : h.call(t, ...k)) ?? e.text;
         }
       });
     }), Lt({}, u);
@@ -12014,23 +12014,23 @@ const Jg = K({
 }, vy = { class: "font-italic amountInWords" }, fy = { class: "d-flex align-center pr-9 mb-4 justify-end" }, my = { class: "d-flex align-start gap-3" }, gy = {
   key: 0,
   class: "text-error"
-}, yy = { class: "d-flex align-center justify-end gap-2" }, py = { class: "d-flex align-center gap-2" }, by = { class: "d-flex align-center px-3 justify-space-between" }, _y = { class: "d-flex align-center gap-2" }, hy = { class: "account_table_filter_menu py-1" }, xy = { class: "account_vcard_menu_item" }, ky = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Sy = { class: "account_vcard_menu_item" }, wy = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Cy = { class: "account_vcard_menu_item" }, Vy = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Iy = { class: "gst_summary_table_container" }, Py = { class: "table table-bordered account_entries_table text-center w-100" }, Ay = ["onMouseover"], Ty = ["rowspan"], Ny = ["rowspan"], Dy = ["onClick"], $y = ["rowspan"], By = { class: "account_entries_table_debit account_primary_color" }, Ey = { class: "account_entries_table_credit account_error_color" }, Fy = ["rowspan"], Ly = ["rowspan"], Ry = { class: "d-flex align-center justify-center gap-2" }, Oy = ["onMouseover"], My = { class: "d-flex flex-column align-start justify-center" }, zy = { class: "account_entry_desc_text" }, Uy = { class: "mb-3" }, Gy = { class: "mb-3" }, jy = { class: "d-flex align-center justify-space-between mb-2" }, Hy = { class: "d-flex align-center gap-1" }, Wy = { class: "account_label_light" }, qy = { class: "d-flex align-center gap-1" }, Yy = { class: "account_label_light" }, Jy = { class: "d-flex align-center justify-space-between" }, Ky = { class: "" }, Xy = { class: "text-success text-right" }, Qy = { class: "text-error text-right" }, Zy = { class: "font-weight-bold" }, e0 = { class: "text-success text-right" }, t0 = { class: "text-error text-right" }, a0 = { class: "d-flex align-center gap-1 mt-3 mb-2" }, n0 = { class: "account_label_light font-italic" }, l0 = {
+}, yy = { class: "d-flex align-center justify-end gap-2" }, py = { class: "d-flex align-center gap-2" }, by = { class: "d-flex align-center px-3 justify-space-between" }, _y = { class: "d-flex align-center gap-2" }, hy = { class: "account_table_filter_menu py-1" }, xy = { class: "account_vcard_menu_item" }, ky = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Sy = { class: "account_vcard_menu_item" }, wy = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Cy = { class: "account_vcard_menu_item" }, Vy = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Iy = { class: "gst_summary_table_container" }, Py = { class: "table table-bordered account_entries_table text-center w-100" }, Ay = ["onMouseover"], Ty = ["rowspan"], Dy = ["rowspan"], Ny = ["onClick"], $y = ["rowspan"], By = { class: "account_entries_table_debit account_primary_color" }, Ey = { class: "account_entries_table_credit account_error_color" }, Fy = ["rowspan"], Ly = ["rowspan"], Ry = { class: "d-flex align-center justify-center gap-2" }, Oy = ["onMouseover"], My = { class: "d-flex flex-column align-start justify-center" }, zy = { class: "account_entry_desc_text" }, Uy = { class: "mb-3" }, Gy = { class: "mb-3" }, jy = { class: "d-flex align-center justify-space-between mb-2" }, Hy = { class: "d-flex align-center gap-1" }, Wy = { class: "account_label_light" }, qy = { class: "d-flex align-center gap-1" }, Yy = { class: "account_label_light" }, Jy = { class: "d-flex align-center justify-space-between" }, Ky = { class: "" }, Xy = { class: "text-success text-right" }, Qy = { class: "text-error text-right" }, Zy = { class: "font-weight-bold" }, e0 = { class: "text-success text-right" }, t0 = { class: "text-error text-right" }, a0 = { class: "d-flex align-center gap-1 mt-3 mb-2" }, n0 = { class: "account_label_light font-italic" }, l0 = {
   __name: "AccountAllEntries",
   setup(e) {
     function a(J, H, N) {
-      const j = J.target.value, V = parseFloat(j) || 0, M = iu(V);
-      N === "debit" ? (p.value[H].amount = V, p.value[H].amountInWords = M) : (h.value[H].amount = V, h.value[H].amountInWords = M);
+      const j = J.target.value, I = parseFloat(j) || 0, M = iu(I);
+      N === "debit" ? (_.value[H].amount = I, _.value[H].amountInWords = M) : (h.value[H].amount = I, h.value[H].amountInWords = M);
     }
-    const t = A({
+    const t = T({
       entryDate: "",
       description: "",
       voucherType: ""
-    }), n = A(""), i = (J) => {
+    }), n = T(""), i = (J) => {
       n.value = Ll(
         J,
         Yv.description
       ), console.log(n.value);
-    }, o = A();
+    }, o = T();
     async function s() {
       var H, N;
       i(t.value.description);
@@ -12041,7 +12041,7 @@ const Jg = K({
         entryDate: "",
         description: "",
         voucherType: ""
-      }, p.value = [{ account: null, amount: 0, amountInWords: "" }], h.value = [{ account: null, amount: 0, amountInWords: "" }], r.value = !1, (N = o.value) == null || N.resetValidation();
+      }, _.value = [{ account: null, amount: 0, amountInWords: "" }], h.value = [{ account: null, amount: 0, amountInWords: "" }], r.value = !1, (N = o.value) == null || N.resetValidation();
     }
     const u = it([
       {
@@ -12133,7 +12133,7 @@ const Jg = K({
           }
         ]
       }
-    ]), r = A(!1), d = A(!1), y = A(!1), b = A(null), m = A([
+    ]), r = T(!1), d = T(!1), y = T(!1), b = T(null), m = T([
       {
         date: "29-Apr-25",
         entry: "JRNL-2025-1001",
@@ -12342,7 +12342,7 @@ const Jg = K({
         status: "Pending"
       }
     ]);
-    A([
+    T([
       { title: "Date", value: "date", visible: !0 },
       { title: "Entry #", value: "entry", visible: !0 },
       { title: "Voucher Type", value: "voucher_type", visible: !0 },
@@ -12352,7 +12352,7 @@ const Jg = K({
       { title: "Status", value: "status", visible: !0 },
       { title: "Actions", value: "actions", visible: !0 }
     ]);
-    const f = A([
+    const p = T([
       { title: "HDFC Bank", value: "1.1.2.1", groupId: "1.1.2" },
       { title: "ICICI Bank", value: "1.1.2.2", groupId: "1.1.2" },
       { title: "Cash", value: "1.1.1.1", groupId: "1.1.1" },
@@ -12362,29 +12362,29 @@ const Jg = K({
       { title: "Computers", value: "1.2.1.2", groupId: "1.2.1" },
       { title: "GST Payable", value: "2.1.1.1", groupId: "2.1" },
       { title: "Cloud Services LLC", value: "1.1.3.3", groupId: "1.1.3" }
-    ]), x = A([
+    ]), k = T([
       { title: "Sales Voucher", value: "sales_voucher" },
       { title: "Purchase Voucher", value: "purchase_voucher" },
       { title: "Journal Voucher", value: "journal_voucher" },
       { title: "Payment Voucher", value: "payment_voucher" },
       { title: "Reciept Voucher", value: "reciept_voucher" }
-    ]), p = A([{ account: null, amount: 0, amountInWords: "" }]), h = A([{ account: null, amount: 0, amountInWords: "" }]), _ = it({
+    ]), _ = T([{ account: null, amount: 0, amountInWords: "" }]), h = T([{ account: null, amount: 0, amountInWords: "" }]), g = it({
       name: "",
       parentGroup: null
-    }), g = A(), S = [(J) => Ll(J, Bo.ledgerName)], I = [
+    }), f = T(), x = [(J) => Ll(J, Bo.ledgerName)], V = [
       (J) => Ll(J, Bo.parentGroup)
     ];
     function $(J, H = 0) {
       return J.flatMap((N) => {
         if (!N.children && N.children !== void 0) return [];
-        const V = {
+        const I = {
           title: `${"— ".repeat(H)}${N.name}`,
           value: N.id
         }, M = N.children ? $(N.children, H + 1) : [];
-        return [V, ...M];
+        return [I, ...M];
       });
     }
-    const O = A($(u));
+    const L = T($(u));
     function E(J, H) {
       for (const N of J) {
         if (N.id === H) return N;
@@ -12395,51 +12395,51 @@ const Jg = K({
       }
       return null;
     }
-    async function R() {
-      var M, te;
-      const { valid: J } = await ((M = g.value) == null ? void 0 : M.validate());
+    async function O() {
+      var M, ae;
+      const { valid: J } = await ((M = f.value) == null ? void 0 : M.validate());
       if (!J) {
         Te.error("Please fill all required fields for Ledger.");
         return;
       }
-      const H = E(u, _.parentGroup);
+      const H = E(u, g.parentGroup);
       if (!H) {
         Te.error("Parent group not found.");
         return;
       }
-      H.children || (H.children = []), _.parentGroup.split(".");
+      H.children || (H.children = []), g.parentGroup.split(".");
       const N = H.children.length ? Math.max(
         ...H.children.map((ge) => parseInt(ge.id.split(".").pop()))
-      ) + 1 : 1, V = {
-        id: `${_.parentGroup}.${N}`,
-        name: _.name,
+      ) + 1 : 1, I = {
+        id: `${g.parentGroup}.${N}`,
+        name: g.name,
         type: H.type,
         children: null
       };
-      H.children.push(V), O.value = $(u), Te.success("Ledger created successfully."), d.value = !1, _.name = "", _.parentGroup = null, (te = g.value) == null || te.resetValidation();
+      H.children.push(I), L.value = $(u), Te.success("Ledger created successfully."), d.value = !1, g.name = "", g.parentGroup = null, (ae = f.value) == null || ae.resetValidation();
     }
-    const T = () => {
-      p.value.push({ account: null, amount: 0, amountInWords: "" });
+    const D = () => {
+      _.value.push({ account: null, amount: 0, amountInWords: "" });
     }, U = (J) => {
-      p.value.length > 1 && p.value.splice(J, 1);
+      _.value.length > 1 && _.value.splice(J, 1);
     }, G = () => {
       h.value.push({ account: null, amount: 0, amountInWords: "" });
     }, C = (J) => {
       h.value.length > 1 && h.value.splice(J, 1);
     };
-    function L(J) {
+    function R(J) {
       b.value = J, y.value = !0;
     }
-    function W(J, H) {
-      return !J || !Array.isArray(J) ? "₹0.00" : `₹${J.reduce((j, V) => {
-        var te;
-        const M = ((te = V[H]) == null ? void 0 : te.replace(/[^0-9.-]+/g, "")) || "0";
+    function q(J, H) {
+      return !J || !Array.isArray(J) ? "₹0.00" : `₹${J.reduce((j, I) => {
+        var ae;
+        const M = ((ae = I[H]) == null ? void 0 : ae.replace(/[^0-9.-]+/g, "")) || "0";
         return j + parseFloat(M);
       }, 0).toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
     }
-    const Y = A(null);
+    const Y = T(null);
     return (J, H) => (w(), re("div", Zg, [
-      l(Ua, null, {
+      l(Ga, null, {
         default: c(() => [
           Ye(l(xe, { class: "justify-center" }, {
             default: c(() => [
@@ -12463,11 +12463,11 @@ const Jg = K({
                       }, {
                         prepend: c(() => [
                           v("span", ey, [
-                            (w(), D(ae(F(le)("plus")), { style: { "font-size": "22px" } }))
+                            (w(), A(te(F(ne)("plus")), { style: { "font-size": "22px" } }))
                           ])
                         ]),
                         default: c(() => [
-                          H[16] || (H[16] = de(" Add Ledger ", -1))
+                          H[16] || (H[16] = ve(" Add Ledger ", -1))
                         ]),
                         _: 1,
                         __: [16]
@@ -12476,7 +12476,7 @@ const Jg = K({
                     default: c(() => [
                       l(Ae, { class: "mt-4" }, {
                         default: c(() => [
-                          l(Za, {
+                          l(en, {
                             ref_key: "journalEntryFormRef",
                             ref: o
                           }, {
@@ -12510,7 +12510,7 @@ const Jg = K({
                                 ]),
                                 _: 1
                               }),
-                              (w(!0), re(ve, null, ze(p.value, (N, j) => (w(), D(xe, {
+                              (w(!0), re(de, null, Re(_.value, (N, j) => (w(), A(xe, {
                                 key: j,
                                 class: "mb-1"
                               }, {
@@ -12523,18 +12523,18 @@ const Jg = K({
                                     default: c(() => [
                                       v("div", ay, [
                                         v("div", ny, [
-                                          j === 0 ? (w(), re("label", ly, "Debit*")) : q("", !0)
+                                          j === 0 ? (w(), re("label", ly, "Debit*")) : W("", !0)
                                         ]),
                                         l(lt, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
                                           placeholder: "Select Account",
                                           density: "compact",
-                                          items: f.value,
+                                          items: p.value,
                                           "item-title": "title",
                                           "item-value": "value",
                                           modelValue: N.account,
-                                          "onUpdate:modelValue": (V) => N.account = V
+                                          "onUpdate:modelValue": (I) => N.account = I
                                         }, null, 8, ["items", "modelValue", "onUpdate:modelValue"])
                                       ])
                                     ]),
@@ -12553,8 +12553,8 @@ const Jg = K({
                                         variant: "outlined",
                                         density: "compact",
                                         modelValue: N.amount,
-                                        "onUpdate:modelValue": (V) => N.amount = V,
-                                        onInput: (V) => a(V, j, "debit")
+                                        "onUpdate:modelValue": (I) => N.amount = I,
+                                        onInput: (I) => a(I, j, "debit")
                                       }, {
                                         append: c(() => [
                                           l(Z, {
@@ -12562,10 +12562,10 @@ const Jg = K({
                                             variant: "text",
                                             size: "x-small",
                                             rounded: "3",
-                                            onClick: (V) => U(j)
+                                            onClick: (I) => U(j)
                                           }, {
                                             default: c(() => [
-                                              (w(), D(ae(F(le)("x")), { style: { "font-size": "18px" } }))
+                                              (w(), A(te(F(ne)("x")), { style: { "font-size": "18px" } }))
                                             ]),
                                             _: 2
                                           }, 1032, ["onClick"])
@@ -12574,7 +12574,7 @@ const Jg = K({
                                       }, 1032, ["modelValue", "onUpdate:modelValue", "onInput"]),
                                       N.amountInWords ? (w(), re("div", iy, [
                                         v("small", oy, ue(N.amountInWords) + " rupees only ", 1)
-                                      ])) : q("", !0)
+                                      ])) : W("", !0)
                                     ]),
                                     _: 2
                                   }, 1024)
@@ -12587,19 +12587,19 @@ const Jg = K({
                                   variant: "text",
                                   size: "small",
                                   rounded: "",
-                                  onClick: T
+                                  onClick: D
                                 }, {
                                   prepend: c(() => [
-                                    (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
+                                    (w(), A(te(F(ne)("plus")), { style: { "font-size": "18px" } }))
                                   ]),
                                   default: c(() => [
-                                    H[18] || (H[18] = de(" Add Debit Amount ", -1))
+                                    H[18] || (H[18] = ve(" Add Debit Amount ", -1))
                                   ]),
                                   _: 1,
                                   __: [18]
                                 })
                               ]),
-                              (w(!0), re(ve, null, ze(h.value, (N, j) => (w(), D(xe, {
+                              (w(!0), re(de, null, Re(h.value, (N, j) => (w(), A(xe, {
                                 key: j,
                                 class: "mb-1"
                               }, {
@@ -12612,18 +12612,18 @@ const Jg = K({
                                     default: c(() => [
                                       v("div", uy, [
                                         v("div", ry, [
-                                          j === 0 ? (w(), re("label", cy, "Credit *")) : q("", !0)
+                                          j === 0 ? (w(), re("label", cy, "Credit *")) : W("", !0)
                                         ]),
                                         l(lt, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
                                           placeholder: "Select Account",
                                           density: "compact",
-                                          items: f.value,
+                                          items: p.value,
                                           "item-title": "title",
                                           "item-value": "value",
                                           modelValue: N.account,
-                                          "onUpdate:modelValue": (V) => N.account = V
+                                          "onUpdate:modelValue": (I) => N.account = I
                                         }, null, 8, ["items", "modelValue", "onUpdate:modelValue"])
                                       ])
                                     ]),
@@ -12642,19 +12642,19 @@ const Jg = K({
                                         variant: "outlined",
                                         density: "compact",
                                         modelValue: N.amount,
-                                        "onUpdate:modelValue": (V) => N.amount = V,
-                                        onInput: (V) => a(V, j, "credit")
+                                        "onUpdate:modelValue": (I) => N.amount = I,
+                                        onInput: (I) => a(I, j, "credit")
                                       }, {
                                         append: c(() => [
                                           l(Z, {
-                                            onClick: (V) => C(j),
+                                            onClick: (I) => C(j),
                                             class: "account_v_btn_ghost account_btn_primary_text",
                                             variant: "text",
                                             size: "x-small",
                                             rounded: "1"
                                           }, {
                                             default: c(() => [
-                                              (w(), D(ae(F(le)("x")), { style: { "font-size": "18px" } }))
+                                              (w(), A(te(F(ne)("x")), { style: { "font-size": "18px" } }))
                                             ]),
                                             _: 2
                                           }, 1032, ["onClick"])
@@ -12663,7 +12663,7 @@ const Jg = K({
                                       }, 1032, ["modelValue", "onUpdate:modelValue", "onInput"]),
                                       N.amountInWords ? (w(), re("div", dy, [
                                         v("small", vy, ue(N.amountInWords) + " rupees only ", 1)
-                                      ])) : q("", !0)
+                                      ])) : W("", !0)
                                     ]),
                                     _: 2
                                   }, 1024)
@@ -12679,10 +12679,10 @@ const Jg = K({
                                   rounded: ""
                                 }, {
                                   prepend: c(() => [
-                                    (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
+                                    (w(), A(te(F(ne)("plus")), { style: { "font-size": "18px" } }))
                                   ]),
                                   default: c(() => [
-                                    H[19] || (H[19] = de(" Add Credit Amount ", -1))
+                                    H[19] || (H[19] = ve(" Add Credit Amount ", -1))
                                   ]),
                                   _: 1,
                                   __: [19]
@@ -12700,14 +12700,14 @@ const Jg = K({
                                         H[20] || (H[20] = v("div", { class: "account_entry_form_label" }, [
                                           v("label", { class: "account_label mt-3" }, "Description *")
                                         ], -1)),
-                                        l(Nt, {
+                                        l(Dt, {
                                           modelValue: t.value.description,
                                           "onUpdate:modelValue": H[2] || (H[2] = (N) => t.value.description = N),
                                           class: "accounting_v_textarea",
                                           placeholder: "e.g. Inventory purchased on credit. XYZ Capital Introduce. Max length 254 characters",
                                           variant: "outlined"
                                         }, null, 8, ["modelValue"]),
-                                        n.value ? (w(), re("small", gy, ue(n.value), 1)) : q("", !0)
+                                        n.value ? (w(), re("small", gy, ue(n.value), 1)) : W("", !0)
                                       ])
                                     ]),
                                     _: 1
@@ -12725,7 +12725,7 @@ const Jg = K({
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined",
                                         density: "compact",
-                                        items: x.value,
+                                        items: k.value,
                                         "item-title": "title",
                                         "item-value": "value",
                                         placeholder: "Select Voucher Type"
@@ -12780,7 +12780,7 @@ const Jg = K({
                                           size: "default"
                                         }, {
                                           default: c(() => H[22] || (H[22] = [
-                                            de("Cancel", -1)
+                                            ve("Cancel", -1)
                                           ])),
                                           _: 1,
                                           __: [22]
@@ -12794,10 +12794,10 @@ const Jg = K({
                                           color: "primary"
                                         }, {
                                           prepend: c(() => [
-                                            (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "18px" } }))
+                                            (w(), A(te(F(ne)("device-floppy")), { style: { "font-size": "18px" } }))
                                           ]),
                                           default: c(() => [
-                                            H[23] || (H[23] = de(" Save Voucher ", -1))
+                                            H[23] || (H[23] = ve(" Save Voucher ", -1))
                                           ]),
                                           _: 1,
                                           __: [23]
@@ -12845,10 +12845,10 @@ const Jg = K({
               color: "primary"
             }, {
               prepend: c(() => [
-                (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
+                (w(), A(te(F(ne)("plus")), { style: { "font-size": "18px" } }))
               ]),
               default: c(() => [
-                H[24] || (H[24] = de(" New Journal Entry ", -1))
+                H[24] || (H[24] = ve(" New Journal Entry ", -1))
               ]),
               _: 1,
               __: [24]
@@ -12891,7 +12891,7 @@ const Jg = K({
                         size: "36"
                       }), {
                         default: c(() => [
-                          (w(), D(ae(F(le)("filter")), { style: { "font-size": "24px" } }))
+                          (w(), A(te(F(ne)("filter")), { style: { "font-size": "24px" } }))
                         ]),
                         _: 2
                       }, 1040)
@@ -12907,7 +12907,7 @@ const Jg = K({
                       v("div", hy, [
                         v("div", xy, [
                           v("div", ky, [
-                            l(Dt, {
+                            l(Nt, {
                               class: "account_v_checkbox account_filter_menu_checkbox",
                               density: "compact"
                             }),
@@ -12916,7 +12916,7 @@ const Jg = K({
                         ]),
                         v("div", Sy, [
                           v("div", wy, [
-                            l(Dt, {
+                            l(Nt, {
                               class: "account_v_checkbox account_filter_menu_checkbox",
                               density: "compact"
                             }),
@@ -12925,7 +12925,7 @@ const Jg = K({
                         ]),
                         v("div", Cy, [
                           v("div", Vy, [
-                            l(Dt, {
+                            l(Nt, {
                               class: "account_v_checkbox account_filter_menu_checkbox",
                               density: "compact"
                             }),
@@ -12953,7 +12953,7 @@ const Jg = K({
                     size: "36"
                   }), {
                     default: c(() => [
-                      (w(), D(ae(F(le)("download")), { style: { "font-size": "24px" } }))
+                      (w(), A(te(F(ne)("download")), { style: { "font-size": "24px" } }))
                     ]),
                     _: 2
                   }, 1040)
@@ -13004,10 +13004,10 @@ const Jg = K({
                         ])
                       ], -1)),
                       v("tbody", null, [
-                        (w(!0), re(ve, null, ze(m.value, (N, j) => {
-                          var V, M, te, ge;
-                          return w(), re(ve, { key: j }, [
-                            N && N.particulars && N.particulars.accounts && Array.isArray(N.particulars.accounts) && N.particulars.accounts.length > 0 ? (w(), re(ve, { key: 0 }, [
+                        (w(!0), re(de, null, Re(m.value, (N, j) => {
+                          var I, M, ae, ge;
+                          return w(), re(de, { key: j }, [
+                            N && N.particulars && N.particulars.accounts && Array.isArray(N.particulars.accounts) && N.particulars.accounts.length > 0 ? (w(), re(de, { key: 0 }, [
                               v("tr", {
                                 class: ye([
                                   "account_entries_table_row",
@@ -13024,22 +13024,22 @@ const Jg = K({
                                   class: ye(["account_entries_table_entry", { "hovered-cell": Y.value === j }]),
                                   rowspan: N.particulars.accounts.length + 1
                                 }, [
-                                  de(ue(N.entry || "N/A"), 1),
+                                  ve(ue(N.entry || "N/A"), 1),
                                   H[30] || (H[30] = v("br", null, null, -1)),
                                   v("span", {
-                                    onClick: (be) => L(N),
+                                    onClick: (be) => R(N),
                                     style: { "font-size": "12px", color: "#009688", cursor: "pointer" }
-                                  }, "View Details", 8, Dy)
-                                ], 10, Ny),
+                                  }, "View Details", 8, Ny)
+                                ], 10, Dy),
                                 v("td", {
                                   class: ye(["account_entries_table_voucher", { "hovered-cell": Y.value === j }]),
                                   rowspan: N.particulars.accounts.length + 1
                                 }, ue(N.voucher_type || "N/A"), 11, $y),
                                 v("td", {
                                   class: ye(["account_entries_table_particulars", { "hovered-cell": Y.value === j }])
-                                }, ue(((V = N.particulars.accounts[0]) == null ? void 0 : V.title) || "N/A"), 3),
+                                }, ue(((I = N.particulars.accounts[0]) == null ? void 0 : I.title) || "N/A"), 3),
                                 v("td", By, ue(((M = N.particulars.accounts[0]) == null ? void 0 : M.debit) || ""), 1),
-                                v("td", Ey, ue(((te = N.particulars.accounts[0]) == null ? void 0 : te.credit) || ""), 1),
+                                v("td", Ey, ue(((ae = N.particulars.accounts[0]) == null ? void 0 : ae.credit) || ""), 1),
                                 v("td", {
                                   class: "account_entries_table_status",
                                   rowspan: N.particulars.accounts.length + 1
@@ -13049,7 +13049,7 @@ const Jg = K({
                                     size: "small"
                                   }, {
                                     default: c(() => [
-                                      de(ue(N.status || "N/A"), 1)
+                                      ve(ue(N.status || "N/A"), 1)
                                     ]),
                                     _: 2
                                   }, 1032, ["class"])
@@ -13065,7 +13065,7 @@ const Jg = K({
                                       variant: "text"
                                     }, {
                                       default: c(() => [
-                                        (w(), D(ae(F(le)("pencil")), { style: { "font-size": "20px" } }))
+                                        (w(), A(te(F(ne)("pencil")), { style: { "font-size": "20px" } }))
                                       ]),
                                       _: 1
                                     }),
@@ -13075,7 +13075,7 @@ const Jg = K({
                                       variant: "text"
                                     }, {
                                       default: c(() => [
-                                        (w(), D(ae(F(le)("arrow-back-up")), { style: { "font-size": "20px" } }))
+                                        (w(), A(te(F(ne)("arrow-back-up")), { style: { "font-size": "20px" } }))
                                       ]),
                                       _: 1
                                     }),
@@ -13085,14 +13085,14 @@ const Jg = K({
                                       variant: "text"
                                     }, {
                                       default: c(() => [
-                                        (w(), D(ae(F(le)("trash")), { style: { "font-size": "20px" } }))
+                                        (w(), A(te(F(ne)("trash")), { style: { "font-size": "20px" } }))
                                       ]),
                                       _: 1
                                     })
                                   ])
                                 ], 8, Ly)
                               ], 42, Ay),
-                              (w(!0), re(ve, null, ze(N.particulars.accounts.slice(1), (be, fe) => (w(), re("tr", {
+                              (w(!0), re(de, null, Re(N.particulars.accounts.slice(1), (be, fe) => (w(), re("tr", {
                                 key: `${j}-${fe}`,
                                 class: ye(["account_entries_table_row", { "even-entry-extension": j % 2 === 0 }]),
                                 onMouseover: (pe) => Y.value = j,
@@ -13120,7 +13120,7 @@ const Jg = K({
                                   ])
                                 ], 2)
                               ], 2)
-                            ], 64)) : q("", !0)
+                            ], 64)) : W("", !0)
                           ], 64);
                         }), 128))
                       ])
@@ -13141,7 +13141,7 @@ const Jg = K({
         "max-width": "400",
         "onClick:outside": H[12] || (H[12] = (N) => {
           var j;
-          return (j = g.value) == null ? void 0 : j.resetValidation();
+          return (j = f.value) == null ? void 0 : j.resetValidation();
         })
       }, {
         default: c(() => [
@@ -13149,31 +13149,31 @@ const Jg = K({
             default: c(() => [
               l(na, { class: "account_ui_swtich_title pb-0" }, {
                 default: c(() => H[32] || (H[32] = [
-                  de("Add New Ledger", -1)
+                  ve("Add New Ledger", -1)
                 ])),
                 _: 1,
                 __: [32]
               }),
               l(ma, { class: "account_ui_swtich_subtitle text-wrap px-3" }, {
                 default: c(() => H[33] || (H[33] = [
-                  de(" Create a new ledger account under a specified group. ", -1)
+                  ve(" Create a new ledger account under a specified group. ", -1)
                 ])),
                 _: 1,
                 __: [33]
               }),
               l(Ae, null, {
                 default: c(() => [
-                  l(Za, {
+                  l(en, {
                     ref_key: "ledgerFormRef",
-                    ref: g
+                    ref: f
                   }, {
                     default: c(() => [
                       v("div", Uy, [
                         H[34] || (H[34] = v("label", { class: "account_label" }, "Ledger Name", -1)),
                         l(ee, {
-                          modelValue: F(_).name,
-                          "onUpdate:modelValue": H[8] || (H[8] = (N) => F(_).name = N),
-                          rules: S,
+                          modelValue: F(g).name,
+                          "onUpdate:modelValue": H[8] || (H[8] = (N) => F(g).name = N),
+                          rules: x,
                           class: "accouting_field accouting_active_field",
                           placeholder: "Enter ledger name",
                           variant: "outlined",
@@ -13183,10 +13183,10 @@ const Jg = K({
                       v("div", Gy, [
                         H[35] || (H[35] = v("label", { class: "account_label" }, "Parent Group", -1)),
                         l(lt, {
-                          modelValue: F(_).parentGroup,
-                          "onUpdate:modelValue": H[9] || (H[9] = (N) => F(_).parentGroup = N),
-                          items: O.value,
-                          rules: I,
+                          modelValue: F(g).parentGroup,
+                          "onUpdate:modelValue": H[9] || (H[9] = (N) => F(g).parentGroup = N),
+                          items: L.value,
+                          rules: V,
                           class: "accouting_field accouting_active_field",
                           placeholder: "Select parent group",
                           "item-title": "title",
@@ -13209,13 +13209,13 @@ const Jg = K({
                     variant: "outlined",
                     onClick: H[10] || (H[10] = (N) => {
                       var j;
-                      d.value = !1, (j = g.value) == null || j.resetValidation();
+                      d.value = !1, (j = f.value) == null || j.resetValidation();
                     })
                   }),
                   l(Z, {
                     text: "Add Ledger",
                     class: "account_v_btn_primary",
-                    onClick: R
+                    onClick: O
                   })
                 ]),
                 _: 1
@@ -13249,7 +13249,7 @@ const Jg = K({
                   class: "account_vcard_close_btn"
                 }, {
                   default: c(() => [
-                    (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
+                    (w(), A(te(F(ne)("x")), { style: { "font-size": "20px" } }))
                   ]),
                   _: 1
                 })
@@ -13257,7 +13257,7 @@ const Jg = K({
               default: c(() => [
                 l(Ae, null, {
                   default: c(() => {
-                    var j, V, M, te, ge, be;
+                    var j, I, M, ae, ge, be;
                     return [
                       v("div", jy, [
                         v("div", Hy, [
@@ -13266,7 +13266,7 @@ const Jg = K({
                         ]),
                         v("div", qy, [
                           H[37] || (H[37] = v("span", { class: "account_label_bold" }, "Type:", -1)),
-                          v("span", Yy, ue((V = b.value) == null ? void 0 : V.voucher_type), 1)
+                          v("span", Yy, ue((I = b.value) == null ? void 0 : I.voucher_type), 1)
                         ])
                       ]),
                       v("div", Jy, [
@@ -13297,7 +13297,7 @@ const Jg = K({
                                   ])
                                 ], -1)),
                                 v("tbody", null, [
-                                  (w(!0), re(ve, null, ze((pe = (fe = b.value) == null ? void 0 : fe.particulars) == null ? void 0 : pe.accounts, (ce, z) => (w(), re("tr", { key: z }, [
+                                  (w(!0), re(de, null, Re((pe = (fe = b.value) == null ? void 0 : fe.particulars) == null ? void 0 : pe.accounts, (ce, z) => (w(), re("tr", { key: z }, [
                                     v("td", {
                                       class: ye({ "pl-9": z !== 0 })
                                     }, ue(ce.title), 3),
@@ -13306,8 +13306,8 @@ const Jg = K({
                                   ]))), 128)),
                                   v("tr", Zy, [
                                     H[39] || (H[39] = v("td", null, "Total", -1)),
-                                    v("td", e0, ue(W(b.value.particulars.accounts, "debit")), 1),
-                                    v("td", t0, ue(W(b.value.particulars.accounts, "credit")), 1)
+                                    v("td", e0, ue(q(b.value.particulars.accounts, "debit")), 1),
+                                    v("td", t0, ue(q(b.value.particulars.accounts, "credit")), 1)
                                   ])
                                 ])
                               ];
@@ -13320,7 +13320,7 @@ const Jg = K({
                       }),
                       v("div", a0, [
                         H[41] || (H[41] = v("span", { class: "account_label_bold abc" }, "Narration:", -1)),
-                        v("span", n0, ue(((be = (ge = (te = b.value) == null ? void 0 : te.particulars) == null ? void 0 : ge.description) == null ? void 0 : be.narration) || "N/A"), 1)
+                        v("span", n0, ue(((be = (ge = (ae = b.value) == null ? void 0 : ae.particulars) == null ? void 0 : ge.description) == null ? void 0 : be.narration) || "N/A"), 1)
                       ])
                     ];
                   }),
@@ -13375,7 +13375,7 @@ function r0() {
   };
 }
 function c0() {
-  const e = A([]);
+  const e = T([]);
   td(() => e.value = []);
   function a(t, n) {
     e.value[n] = t;
@@ -13456,8 +13456,8 @@ const d0 = K({
   ...St(),
   ...qt(),
   ...vt(),
-  ...za(),
-  ...Oe({
+  ...Ua(),
+  ...Me({
     tag: "nav"
   }),
   ...je(),
@@ -13494,46 +13494,46 @@ const d0 = K({
     });
     const {
       resizeRef: b
-    } = Fa((R) => {
-      if (!R.length) return;
+    } = La((O) => {
+      if (!O.length) return;
       const {
-        target: T,
+        target: D,
         contentRect: U
-      } = R[0], G = T.querySelector(".v-pagination__list > *");
+      } = O[0], G = D.querySelector(".v-pagination__list > *");
       if (!G) return;
-      const C = U.width, L = G.offsetWidth + parseFloat(getComputedStyle(G).marginRight) * 2;
-      y.value = p(C, L);
-    }), m = k(() => parseInt(e.length, 10)), f = k(() => parseInt(e.start, 10)), x = k(() => e.totalVisible != null ? parseInt(e.totalVisible, 10) : y.value >= 0 ? y.value : p(d.value, 58));
-    function p(R, T) {
+      const C = U.width, R = G.offsetWidth + parseFloat(getComputedStyle(G).marginRight) * 2;
+      y.value = _(C, R);
+    }), m = S(() => parseInt(e.length, 10)), p = S(() => parseInt(e.start, 10)), k = S(() => e.totalVisible != null ? parseInt(e.totalVisible, 10) : y.value >= 0 ? y.value : _(d.value, 58));
+    function _(O, D) {
       const U = e.showFirstLastPage ? 5 : 3;
       return Math.max(0, Math.floor(
         // Round to two decimal places to avoid floating point errors
-        +((R - T * U) / T).toFixed(2)
+        +((O - D * U) / D).toFixed(2)
       ));
     }
-    const h = k(() => {
+    const h = S(() => {
       if (m.value <= 0 || isNaN(m.value) || m.value > Number.MAX_SAFE_INTEGER) return [];
-      if (x.value <= 0) return [];
-      if (x.value === 1) return [i.value];
-      if (m.value <= x.value)
-        return Xt(m.value, f.value);
-      const R = x.value % 2 === 0, T = R ? x.value / 2 : Math.floor(x.value / 2), U = R ? T : T + 1, G = m.value - T;
+      if (k.value <= 0) return [];
+      if (k.value === 1) return [i.value];
+      if (m.value <= k.value)
+        return Xt(m.value, p.value);
+      const O = k.value % 2 === 0, D = O ? k.value / 2 : Math.floor(k.value / 2), U = O ? D : D + 1, G = m.value - D;
       if (U - i.value >= 0)
-        return [...Xt(Math.max(1, x.value - 1), f.value), e.ellipsis, m.value];
-      if (i.value - G >= (R ? 1 : 0)) {
-        const C = x.value - 1, L = m.value - C + f.value;
-        return [f.value, e.ellipsis, ...Xt(C, L)];
+        return [...Xt(Math.max(1, k.value - 1), p.value), e.ellipsis, m.value];
+      if (i.value - G >= (O ? 1 : 0)) {
+        const C = k.value - 1, R = m.value - C + p.value;
+        return [p.value, e.ellipsis, ...Xt(C, R)];
       } else {
-        const C = Math.max(1, x.value - 3), L = C === 1 ? i.value : i.value - Math.ceil(C / 2) + f.value;
-        return [f.value, e.ellipsis, ...Xt(C, L), e.ellipsis, m.value];
+        const C = Math.max(1, k.value - 3), R = C === 1 ? i.value : i.value - Math.ceil(C / 2) + p.value;
+        return [p.value, e.ellipsis, ...Xt(C, R), e.ellipsis, m.value];
       }
     });
-    function _(R, T, U) {
-      R.preventDefault(), i.value = T, U && n(U, T);
+    function g(O, D, U) {
+      O.preventDefault(), i.value = D, U && n(U, D);
     }
     const {
-      refs: g,
-      updateRef: S
+      refs: f,
+      updateRef: x
     } = c0();
     pt({
       VPaginationBtn: {
@@ -13546,13 +13546,13 @@ const d0 = K({
         elevation: oe(e, "elevation")
       }
     });
-    const I = k(() => h.value.map((R, T) => {
-      const U = (G) => S(G, T);
-      if (typeof R == "string")
+    const V = S(() => h.value.map((O, D) => {
+      const U = (G) => x(G, D);
+      if (typeof O == "string")
         return {
           isActive: !1,
-          key: `ellipsis-${T}`,
-          page: R,
+          key: `ellipsis-${D}`,
+          page: O,
           props: {
             ref: U,
             ellipsis: !0,
@@ -13561,11 +13561,11 @@ const d0 = K({
           }
         };
       {
-        const G = R === i.value;
+        const G = O === i.value;
         return {
           isActive: G,
-          key: R,
-          page: s(R),
+          key: O,
+          page: s(O),
           props: {
             ref: U,
             ellipsis: !1,
@@ -13573,51 +13573,51 @@ const d0 = K({
             disabled: !!e.disabled || +e.length < 2,
             color: G ? e.activeColor : e.color,
             "aria-current": G,
-            "aria-label": o(G ? e.currentPageAriaLabel : e.pageAriaLabel, R),
-            onClick: (C) => _(C, R)
+            "aria-label": o(G ? e.currentPageAriaLabel : e.pageAriaLabel, O),
+            onClick: (C) => g(C, O)
           }
         };
       }
-    })), $ = k(() => {
-      const R = !!e.disabled || i.value <= f.value, T = !!e.disabled || i.value >= f.value + m.value - 1;
+    })), $ = S(() => {
+      const O = !!e.disabled || i.value <= p.value, D = !!e.disabled || i.value >= p.value + m.value - 1;
       return {
         first: e.showFirstLastPage ? {
           icon: u.value ? e.lastIcon : e.firstIcon,
-          onClick: (U) => _(U, f.value, "first"),
-          disabled: R,
+          onClick: (U) => g(U, p.value, "first"),
+          disabled: O,
           "aria-label": o(e.firstAriaLabel),
-          "aria-disabled": R
+          "aria-disabled": O
         } : void 0,
         prev: {
           icon: u.value ? e.nextIcon : e.prevIcon,
-          onClick: (U) => _(U, i.value - 1, "prev"),
-          disabled: R,
+          onClick: (U) => g(U, i.value - 1, "prev"),
+          disabled: O,
           "aria-label": o(e.previousAriaLabel),
-          "aria-disabled": R
+          "aria-disabled": O
         },
         next: {
           icon: u.value ? e.prevIcon : e.nextIcon,
-          onClick: (U) => _(U, i.value + 1, "next"),
-          disabled: T,
+          onClick: (U) => g(U, i.value + 1, "next"),
+          disabled: D,
           "aria-label": o(e.nextAriaLabel),
-          "aria-disabled": T
+          "aria-disabled": D
         },
         last: e.showFirstLastPage ? {
           icon: u.value ? e.firstIcon : e.lastIcon,
-          onClick: (U) => _(U, f.value + m.value - 1, "last"),
-          disabled: T,
+          onClick: (U) => g(U, p.value + m.value - 1, "last"),
+          disabled: D,
           "aria-label": o(e.lastAriaLabel),
-          "aria-disabled": T
+          "aria-disabled": D
         } : void 0
       };
     });
-    function O() {
-      var T;
-      const R = i.value - f.value;
-      (T = g.value[R]) == null || T.$el.focus();
+    function L() {
+      var D;
+      const O = i.value - p.value;
+      (D = f.value[O]) == null || D.$el.focus();
     }
-    function E(R) {
-      R.key === Fo.left && !e.disabled && i.value > +e.start ? (i.value = i.value - 1, Ee(O)) : R.key === Fo.right && !e.disabled && i.value < f.value + m.value - 1 && (i.value = i.value + 1, Ee(O));
+    function E(O) {
+      O.key === Fo.left && !e.disabled && i.value > +e.start ? (i.value = i.value - 1, Ee(L)) : O.key === Fo.right && !e.disabled && i.value < p.value + m.value - 1 && (i.value = i.value + 1, Ee(L));
     }
     return se(() => l(e.tag, {
       ref: b,
@@ -13642,16 +13642,16 @@ const d0 = K({
         "data-test": "v-pagination-prev"
       }, [t.prev ? t.prev($.value.prev) : l(Z, X({
         _as: "VPaginationBtn"
-      }, $.value.prev), null)]), I.value.map((R, T) => l("li", {
-        key: R.key,
+      }, $.value.prev), null)]), V.value.map((O, D) => l("li", {
+        key: O.key,
         class: ["v-pagination__item", {
-          "v-pagination__item--is-active": R.isActive
+          "v-pagination__item--is-active": O.isActive
         }],
         "data-test": "v-pagination-item"
-      }, [t.item ? t.item(R) : l(Z, X({
+      }, [t.item ? t.item(O) : l(Z, X({
         _as: "VPaginationBtn"
-      }, R.props), {
-        default: () => [R.page]
+      }, O.props), {
+        default: () => [O.page]
       })])), l("li", {
         key: "next",
         class: "v-pagination__next",
@@ -13689,8 +13689,8 @@ function m0(e) {
     page: a,
     itemsPerPage: t,
     itemsLength: n
-  } = e, i = k(() => t.value === -1 ? 0 : t.value * (a.value - 1)), o = k(() => t.value === -1 ? n.value : Math.min(n.value, i.value + t.value)), s = k(() => t.value === -1 || n.value === 0 ? 1 : Math.ceil(n.value / t.value));
-  Re(() => {
+  } = e, i = S(() => t.value === -1 ? 0 : t.value * (a.value - 1)), o = S(() => t.value === -1 ? n.value : Math.min(n.value, i.value + t.value)), s = S(() => t.value === -1 || n.value === 0 ? 1 : Math.ceil(n.value / t.value));
+  Oe(() => {
     a.value > s.value && (a.value = s.value);
   });
   function u(m) {
@@ -13730,7 +13730,7 @@ function y0(e) {
     startIndex: n,
     stopIndex: i,
     itemsPerPage: o
-  } = e, s = k(() => o.value <= 0 ? t.value : t.value.slice(n.value, i.value));
+  } = e, s = S(() => o.value <= 0 ? t.value : t.value.slice(n.value, i.value));
   return we(s, (u) => {
     a.emit("update:currentItems", u);
   }), {
@@ -13815,7 +13815,7 @@ const Lr = K({
       itemsLength: r,
       itemsPerPage: d,
       setItemsPerPage: y
-    } = g0(), b = k(() => e.itemsPerPageOptions.map((m) => typeof m == "number" ? {
+    } = g0(), b = S(() => e.itemsPerPageOptions.map((m) => typeof m == "number" ? {
       value: m,
       title: m === -1 ? n("$vuetify.dataFooter.itemsPerPageAll") : String(m)
     } : {
@@ -13823,16 +13823,16 @@ const Lr = K({
       title: isNaN(Number(m.title)) ? n(m.title) : m.title
     }));
     return se(() => {
-      var f;
+      var p;
       const m = gi.filterProps(e);
       return l("div", {
         class: "v-data-table-footer"
-      }, [(f = t.prepend) == null ? void 0 : f.call(t), l("div", {
+      }, [(p = t.prepend) == null ? void 0 : p.call(t), l("div", {
         class: "v-data-table-footer__items-per-page"
       }, [l("span", null, [n(e.itemsPerPageText)]), l(Ze, {
         items: b.value,
         modelValue: d.value,
-        "onUpdate:modelValue": (x) => y(Number(x)),
+        "onUpdate:modelValue": (k) => y(Number(k)),
         density: "compact",
         variant: "outlined",
         "hide-details": !0
@@ -13842,7 +13842,7 @@ const Lr = K({
         class: "v-data-table-footer__pagination"
       }, [l(gi, X({
         modelValue: i.value,
-        "onUpdate:modelValue": (x) => i.value = x,
+        "onUpdate:modelValue": (k) => i.value = k,
         density: "comfortable",
         "first-aria-label": e.firstPageLabel,
         "last-aria-label": e.lastPageLabel,
@@ -14013,8 +14013,8 @@ function k0(e, a) {
         colspan: d.children ? yi(d).length : 1
       }), d.children)
         for (const m of d.children) {
-          const f = y % 1 + r / Math.pow(10, n + 2);
-          i.enqueue(m, n + b + f);
+          const p = y % 1 + r / Math.pow(10, n + 2);
+          i.enqueue(m, n + b + p);
         }
       r += 1, s -= 1;
     }
@@ -14043,28 +14043,28 @@ function zr(e) {
   return a;
 }
 function Ur(e, a) {
-  const t = A([]), n = A([]), i = A({}), o = A({}), s = A({});
-  Re(() => {
-    var p, h, _;
-    const d = (e.headers || Object.keys(e.items[0] ?? {}).map((g) => ({
-      key: g,
-      title: Ra(g)
+  const t = T([]), n = T([]), i = T({}), o = T({}), s = T({});
+  Oe(() => {
+    var _, h, g;
+    const d = (e.headers || Object.keys(e.items[0] ?? {}).map((f) => ({
+      key: f,
+      title: Oa(f)
     }))).slice(), y = Mr(d);
-    (p = a == null ? void 0 : a.groupBy) != null && p.value.length && !y.has("data-table-group") && d.unshift({
+    (_ = a == null ? void 0 : a.groupBy) != null && _.value.length && !y.has("data-table-group") && d.unshift({
       key: "data-table-group",
       title: "Group"
     }), (h = a == null ? void 0 : a.showSelect) != null && h.value && !y.has("data-table-select") && d.unshift({
       key: "data-table-select"
-    }), (_ = a == null ? void 0 : a.showExpand) != null && _.value && !y.has("data-table-expand") && d.push({
+    }), (g = a == null ? void 0 : a.showExpand) != null && g.value && !y.has("data-table-expand") && d.push({
       key: "data-table-expand"
     });
     const b = zr(d);
     x0(b);
-    const m = Math.max(...b.map((g) => so(g))) + 1, f = k0(b, m);
-    t.value = f.headers, n.value = f.columns;
-    const x = f.headers.flat(1);
-    for (const g of x)
-      g.key && (g.sortable && (g.sort && (i.value[g.key] = g.sort), g.sortRaw && (o.value[g.key] = g.sortRaw)), g.filter && (s.value[g.key] = g.filter));
+    const m = Math.max(...b.map((f) => so(f))) + 1, p = k0(b, m);
+    t.value = p.headers, n.value = p.columns;
+    const k = p.headers.flat(1);
+    for (const f of k)
+      f.key && (f.sortable && (f.sort && (i.value[f.key] = f.sort), f.sortRaw && (o.value[f.key] = f.sortRaw)), f.filter && (s.value[f.key] = f.filter));
   });
   const u = {
     headers: t,
@@ -14075,7 +14075,7 @@ function Ur(e, a) {
   };
   return Ke(Rr, u), u;
 }
-function Nl() {
+function Dl() {
   const e = Be(Rr);
   if (!e) throw new Error("Missing headers!");
   return e;
@@ -14177,10 +14177,10 @@ function Wr(e, a) {
     allItems: t,
     currentPage: n
   } = a;
-  const i = Ve(e, "modelValue", e.modelValue, (_) => new Set(We(_).map((g) => {
-    var S;
-    return ((S = t.value.find((I) => e.valueComparator(g, I.value))) == null ? void 0 : S.value) ?? g;
-  })), (_) => [..._.values()]), o = k(() => t.value.filter((_) => _.selectable)), s = k(() => n.value.filter((_) => _.selectable)), u = k(() => {
+  const i = Ve(e, "modelValue", e.modelValue, (g) => new Set(We(g).map((f) => {
+    var x;
+    return ((x = t.value.find((V) => e.valueComparator(f, V.value))) == null ? void 0 : x.value) ?? f;
+  })), (g) => [...g.values()]), o = S(() => t.value.filter((g) => g.selectable)), s = S(() => n.value.filter((g) => g.selectable)), u = S(() => {
     if (typeof e.selectStrategy == "object") return e.selectStrategy;
     switch (e.selectStrategy) {
       case "single":
@@ -14192,51 +14192,51 @@ function Wr(e, a) {
         return Gr;
     }
   });
-  function r(_) {
-    return We(_).every((g) => i.value.has(g.value));
+  function r(g) {
+    return We(g).every((f) => i.value.has(f.value));
   }
-  function d(_) {
-    return We(_).some((g) => i.value.has(g.value));
+  function d(g) {
+    return We(g).some((f) => i.value.has(f.value));
   }
-  function y(_, g) {
-    const S = u.value.select({
-      items: _,
-      value: g,
+  function y(g, f) {
+    const x = u.value.select({
+      items: g,
+      value: f,
       selected: new Set(i.value)
     });
-    i.value = S;
+    i.value = x;
   }
-  function b(_) {
-    y([_], !r([_]));
+  function b(g) {
+    y([g], !r([g]));
   }
-  function m(_) {
-    const g = u.value.selectAll({
-      value: _,
+  function m(g) {
+    const f = u.value.selectAll({
+      value: g,
       allItems: o.value,
       currentPage: s.value,
       selected: new Set(i.value)
     });
-    i.value = g;
+    i.value = f;
   }
-  const f = k(() => i.value.size > 0), x = k(() => {
-    const _ = u.value.allSelected({
+  const p = S(() => i.value.size > 0), k = S(() => {
+    const g = u.value.allSelected({
       allItems: o.value,
       currentPage: s.value
     });
-    return !!_.length && r(_);
-  }), p = k(() => u.value.showSelectAll), h = {
+    return !!g.length && r(g);
+  }), _ = S(() => u.value.showSelectAll), h = {
     toggleSelect: b,
     select: y,
     selectAll: m,
     isSelected: r,
     isSomeSelected: d,
-    someSelected: f,
-    allSelected: x,
-    showSelectAll: p
+    someSelected: p,
+    allSelected: k,
+    showSelectAll: _
   };
   return Ke(Hr, h), h;
 }
-function Dl() {
+function Nl() {
   const e = Be(Hr);
   if (!e) throw new Error("Missing selection!");
   return e;
@@ -14296,7 +14296,7 @@ function Kr() {
 function Xr(e, a, t, n) {
   const i = Qe();
   return {
-    sortedItems: k(() => {
+    sortedItems: S(() => {
       var s, u;
       return t.value.length ? V0(a.value, t.value, i.current.value, {
         transform: n == null ? void 0 : n.transform,
@@ -14318,24 +14318,24 @@ function V0(e, a, t, n) {
     var r, d;
     for (let y = 0; y < a.length; y++) {
       let b = !1;
-      const m = a[y].key, f = a[y].order ?? "asc";
-      if (f === !1) continue;
-      let x = nn(s[1], m), p = nn(u[1], m), h = s[0].raw, _ = u[0].raw;
-      if (f === "desc" && ([x, p] = [p, x], [h, _] = [_, h]), (r = n == null ? void 0 : n.sortRawFunctions) != null && r[m]) {
-        const g = n.sortRawFunctions[m](h, _);
-        if (g == null) continue;
-        if (b = !0, g) return g;
+      const m = a[y].key, p = a[y].order ?? "asc";
+      if (p === !1) continue;
+      let k = nn(s[1], m), _ = nn(u[1], m), h = s[0].raw, g = u[0].raw;
+      if (p === "desc" && ([k, _] = [_, k], [h, g] = [g, h]), (r = n == null ? void 0 : n.sortRawFunctions) != null && r[m]) {
+        const f = n.sortRawFunctions[m](h, g);
+        if (f == null) continue;
+        if (b = !0, f) return f;
       }
       if ((d = n == null ? void 0 : n.sortFunctions) != null && d[m]) {
-        const g = n.sortFunctions[m](x, p);
-        if (g == null) continue;
-        if (b = !0, g) return g;
+        const f = n.sortFunctions[m](k, _);
+        if (f == null) continue;
+        if (b = !0, f) return f;
       }
       if (!b) {
-        if (x instanceof Date && p instanceof Date)
-          return x.getTime() - p.getTime();
-        if ([x, p] = [x, p].map((g) => g != null ? g.toString().toLocaleLowerCase() : g), x !== p)
-          return En(x) && En(p) ? 0 : En(x) ? -1 : En(p) ? 1 : !isNaN(x) && !isNaN(p) ? Number(x) - Number(p) : i.compare(x, p);
+        if (k instanceof Date && _ instanceof Date)
+          return k.getTime() - _.getTime();
+        if ([k, _] = [k, _].map((f) => f != null ? f.toString().toLocaleLowerCase() : f), k !== _)
+          return En(k) && En(_) ? 0 : En(k) ? -1 : En(_) ? 1 : !isNaN(k) && !isNaN(_) ? Number(k) - Number(_) : i.compare(k, _);
       }
     }
     return 0;
@@ -14380,31 +14380,31 @@ const Qr = K({
       allSelected: r,
       selectAll: d,
       showSelectAll: y
-    } = Dl(), {
+    } = Nl(), {
       columns: b,
       headers: m
-    } = Nl(), {
-      loaderClasses: f
+    } = Dl(), {
+      loaderClasses: p
     } = An(e);
-    function x(R, T) {
-      if (!(!e.sticky && !R.fixed))
+    function k(O, D) {
+      if (!(!e.sticky && !O.fixed))
         return {
           position: "sticky",
-          left: R.fixed ? Se(R.fixedOffset) : void 0,
-          top: e.sticky ? `calc(var(--v-table-header-height) * ${T})` : void 0
+          left: O.fixed ? Se(O.fixedOffset) : void 0,
+          top: e.sticky ? `calc(var(--v-table-header-height) * ${D})` : void 0
         };
     }
-    function p(R) {
-      const T = o.value.find((U) => U.key === R.key);
-      return T ? T.order === "asc" ? e.sortAscIcon : e.sortDescIcon : e.sortAscIcon;
+    function _(O) {
+      const D = o.value.find((U) => U.key === O.key);
+      return D ? D.order === "asc" ? e.sortAscIcon : e.sortDescIcon : e.sortAscIcon;
     }
     const {
       backgroundColorClasses: h,
-      backgroundColorStyles: _
+      backgroundColorStyles: g
     } = dt(e, "color"), {
-      displayClasses: g,
-      mobile: S
-    } = da(e), I = k(() => ({
+      displayClasses: f,
+      mobile: x
+    } = da(e), V = S(() => ({
       headers: m.value,
       columns: b.value,
       toggleSort: i,
@@ -14413,69 +14413,69 @@ const Qr = K({
       someSelected: u.value,
       allSelected: r.value,
       selectAll: d,
-      getSortIcon: p
-    })), $ = k(() => ["v-data-table__th", {
+      getSortIcon: _
+    })), $ = S(() => ["v-data-table__th", {
       "v-data-table__th--sticky": e.sticky
-    }, g.value, f.value]), O = (R) => {
+    }, f.value, p.value]), L = (O) => {
       let {
-        column: T,
+        column: D,
         x: U,
         y: G
-      } = R;
-      const C = T.key === "data-table-select" || T.key === "data-table-expand", L = X(e.headerProps ?? {}, T.headerProps ?? {});
+      } = O;
+      const C = D.key === "data-table-select" || D.key === "data-table-expand", R = X(e.headerProps ?? {}, D.headerProps ?? {});
       return l(sl, X({
         tag: "th",
-        align: T.align,
+        align: D.align,
         class: [{
-          "v-data-table__th--sortable": T.sortable && !e.disableSort,
-          "v-data-table__th--sorted": s(T),
-          "v-data-table__th--fixed": T.fixed
+          "v-data-table__th--sortable": D.sortable && !e.disableSort,
+          "v-data-table__th--sorted": s(D),
+          "v-data-table__th--fixed": D.fixed
         }, ...$.value],
         style: {
-          width: Se(T.width),
-          minWidth: Se(T.minWidth),
-          maxWidth: Se(T.maxWidth),
-          ...x(T, G)
+          width: Se(D.width),
+          minWidth: Se(D.minWidth),
+          maxWidth: Se(D.maxWidth),
+          ...k(D, G)
         },
-        colspan: T.colspan,
-        rowspan: T.rowspan,
-        onClick: T.sortable ? () => i(T) : void 0,
-        fixed: T.fixed,
-        nowrap: T.nowrap,
-        lastFixed: T.lastFixed,
+        colspan: D.colspan,
+        rowspan: D.rowspan,
+        onClick: D.sortable ? () => i(D) : void 0,
+        fixed: D.fixed,
+        nowrap: D.nowrap,
+        lastFixed: D.lastFixed,
         noPadding: C
-      }, L), {
+      }, R), {
         default: () => {
           var J;
-          const W = `header.${T.key}`, Y = {
-            column: T,
+          const q = `header.${D.key}`, Y = {
+            column: D,
             selectAll: d,
             isSorted: s,
             toggleSort: i,
             sortBy: o.value,
             someSelected: u.value,
             allSelected: r.value,
-            getSortIcon: p
+            getSortIcon: _
           };
-          return t[W] ? t[W](Y) : T.key === "data-table-select" ? ((J = t["header.data-table-select"]) == null ? void 0 : J.call(t, Y)) ?? (y.value && l(sa, {
+          return t[q] ? t[q](Y) : D.key === "data-table-select" ? ((J = t["header.data-table-select"]) == null ? void 0 : J.call(t, Y)) ?? (y.value && l(sa, {
             modelValue: r.value,
             indeterminate: u.value && !r.value,
             "onUpdate:modelValue": d
           }, null)) : l("div", {
             class: "v-data-table-header__content"
-          }, [l("span", null, [T.title]), T.sortable && !e.disableSort && l($e, {
+          }, [l("span", null, [D.title]), D.sortable && !e.disableSort && l($e, {
             key: "icon",
             class: "v-data-table-header__sort-icon",
-            icon: p(T)
-          }, null), e.multiSort && s(T) && l("div", {
+            icon: _(D)
+          }, null), e.multiSort && s(D) && l("div", {
             key: "badge",
             class: ["v-data-table-header__sort-badge", ...h.value],
-            style: _.value
-          }, [o.value.findIndex((H) => H.key === T.key) + 1])]);
+            style: g.value
+          }, [o.value.findIndex((H) => H.key === D.key) + 1])]);
         }
       });
     }, E = () => {
-      const R = X(e.headerProps ?? {} ?? {}), T = k(() => b.value.filter((G) => (G == null ? void 0 : G.sortable) && !e.disableSort)), U = k(() => {
+      const O = X(e.headerProps ?? {} ?? {}), D = S(() => b.value.filter((G) => (G == null ? void 0 : G.sortable) && !e.disableSort)), U = S(() => {
         if (b.value.find((C) => C.key === "data-table-select") != null)
           return r.value ? "$checkboxOn" : u.value ? "$checkboxIndeterminate" : "$checkboxOff";
       });
@@ -14483,7 +14483,7 @@ const Qr = K({
         tag: "th",
         class: [...$.value],
         colspan: m.value.length + 1
-      }, R), {
+      }, O), {
         default: () => [l("div", {
           class: "v-data-table-header__content"
         }, [l(Ze, {
@@ -14491,7 +14491,7 @@ const Qr = K({
           class: "v-data-table__td-sort-select",
           clearable: !0,
           density: "default",
-          items: T.value,
+          items: D.value,
           label: n("$vuetify.dataTable.sortBy"),
           multiple: e.multiSort,
           variant: "underlined",
@@ -14504,13 +14504,13 @@ const Qr = K({
             var C;
             return l(gt, {
               onClick: (C = G.item.raw) != null && C.sortable ? () => i(G.item.raw) : void 0,
-              onMousedown: (L) => {
-                L.preventDefault(), L.stopPropagation();
+              onMousedown: (R) => {
+                R.preventDefault(), R.stopPropagation();
               }
             }, {
               default: () => [G.item.title, l($e, {
                 class: ["v-data-table__td-sort-icon", s(G.item.raw) && "v-data-table__td-sort-icon-active"],
-                icon: p(G.item.raw),
+                icon: _(G.item.raw),
                 size: "small"
               }, null)]
             });
@@ -14518,10 +14518,10 @@ const Qr = K({
         })])]
       });
     };
-    se(() => S.value ? l("tr", null, [l(E, null, null)]) : l(ve, null, [t.headers ? t.headers(I.value) : m.value.map((R, T) => l("tr", null, [R.map((U, G) => l(O, {
+    se(() => x.value ? l("tr", null, [l(E, null, null)]) : l(de, null, [t.headers ? t.headers(V.value) : m.value.map((O, D) => l("tr", null, [O.map((U, G) => l(L, {
       column: U,
       x: G,
-      y: T
+      y: D
     }, null))])), e.loading && l("tr", {
       class: "v-data-table-progress"
     }, [l("th", {
@@ -14552,7 +14552,7 @@ function ac(e) {
     disableSort: a,
     groupBy: t,
     sortBy: n
-  } = e, i = A(/* @__PURE__ */ new Set()), o = k(() => t.value.map((y) => ({
+  } = e, i = T(/* @__PURE__ */ new Set()), o = S(() => t.value.map((y) => ({
     ...y,
     order: y.order ?? !1
   })).concat(a != null && a.value ? [] : n.value));
@@ -14565,10 +14565,10 @@ function ac(e) {
   }
   function r(y) {
     function b(m) {
-      const f = [];
-      for (const x of m.items)
-        "type" in x && x.type === "group" ? f.push(...b(x)) : f.push(x);
-      return f;
+      const p = [];
+      for (const k of m.items)
+        "type" in k && k.type === "group" ? p.push(...b(k)) : p.push(k);
+      return p;
     }
     return b({
       items: y
@@ -14622,7 +14622,7 @@ function ic(e, a) {
 }
 function oc(e, a, t) {
   return {
-    flatItems: k(() => {
+    flatItems: S(() => {
       if (!a.value.length) return e.value;
       const i = lc(e.value, a.value.map((o) => o.key));
       return ic(i, t.value);
@@ -14649,24 +14649,24 @@ const P0 = K({
       isSelected: s,
       isSomeSelected: u,
       select: r
-    } = Dl(), {
+    } = Nl(), {
       columns: d
-    } = Nl(), y = k(() => o([e.item]));
+    } = Dl(), y = S(() => o([e.item]));
     return () => l("tr", {
       class: "v-data-table-group-header-row",
       style: {
         "--v-data-table-group-header-row-depth": e.item.depth
       }
     }, [d.value.map((b) => {
-      var m, f;
+      var m, p;
       if (b.key === "data-table-group") {
-        const x = n(e.item) ? "$expand" : "$next", p = () => i(e.item);
+        const k = n(e.item) ? "$expand" : "$next", _ = () => i(e.item);
         return ((m = t["data-table-group"]) == null ? void 0 : m.call(t, {
           item: e.item,
           count: y.value.length,
           props: {
-            icon: x,
-            onClick: p
+            icon: k,
+            onClick: _
           }
         })) ?? l(sl, {
           class: "v-data-table-group-header-row__column"
@@ -14674,22 +14674,22 @@ const P0 = K({
           default: () => [l(Z, {
             size: "small",
             variant: "text",
-            icon: x,
-            onClick: p
-          }, null), l("span", null, [e.item.value]), l("span", null, [de("("), y.value.length, de(")")])]
+            icon: k,
+            onClick: _
+          }, null), l("span", null, [e.item.value]), l("span", null, [ve("("), y.value.length, ve(")")])]
         });
       }
       if (b.key === "data-table-select") {
-        const x = s(y.value), p = u(y.value) && !x, h = (_) => r(y.value, _);
-        return ((f = t["data-table-select"]) == null ? void 0 : f.call(t, {
+        const k = s(y.value), _ = u(y.value) && !k, h = (g) => r(y.value, g);
+        return ((p = t["data-table-select"]) == null ? void 0 : p.call(t, {
           props: {
-            modelValue: x,
-            indeterminate: p,
+            modelValue: k,
+            indeterminate: _,
             "onUpdate:modelValue": h
           }
         })) ?? l("td", null, [l(sa, {
-          modelValue: x,
-          indeterminate: p,
+          modelValue: k,
+          indeterminate: _,
           "onUpdate:modelValue": h
         }, null)]);
       }
@@ -14730,7 +14730,7 @@ function rc() {
   if (!e) throw new Error("foo");
   return e;
 }
-const N0 = K({
+const D0 = K({
   index: Number,
   item: Object,
   cellProps: [Object, Function],
@@ -14740,7 +14740,7 @@ const N0 = K({
   ...Sn()
 }, "VDataTableRow"), cc = ie()({
   name: "VDataTableRow",
-  props: N0(),
+  props: D0(),
   setup(e, a) {
     let {
       slots: t
@@ -14754,16 +14754,16 @@ const N0 = K({
       someSelected: u,
       allSelected: r,
       selectAll: d
-    } = Dl(), {
+    } = Nl(), {
       isExpanded: y,
       toggleExpand: b
     } = rc(), {
       toggleSort: m,
-      sortBy: f,
-      isSorted: x
+      sortBy: p,
+      isSorted: k
     } = Kr(), {
-      columns: p
-    } = Nl();
+      columns: _
+    } = Dl();
     se(() => l("tr", {
       class: ["v-data-table__tr", {
         "v-data-table__tr--clickable": !!(e.onClick || e.onContextmenu || e.onDblclick)
@@ -14771,23 +14771,23 @@ const N0 = K({
       onClick: e.onClick,
       onContextmenu: e.onContextmenu,
       onDblclick: e.onDblclick
-    }, [e.item && p.value.map((h, _) => {
-      const g = e.item, S = `item.${h.key}`, I = `header.${h.key}`, $ = {
+    }, [e.item && _.value.map((h, g) => {
+      const f = e.item, x = `item.${h.key}`, V = `header.${h.key}`, $ = {
         index: e.index,
-        item: g.raw,
-        internalItem: g,
-        value: nn(g.columns, h.key),
+        item: f.raw,
+        internalItem: f,
+        value: nn(f.columns, h.key),
         column: h,
         isSelected: o,
         toggleSelect: s,
         isExpanded: y,
         toggleExpand: b
-      }, O = {
+      }, L = {
         column: h,
         selectAll: d,
-        isSorted: x,
+        isSorted: k,
         toggleSort: m,
-        sortBy: f.value,
+        sortBy: p.value,
         someSelected: u.value,
         allSelected: r.value,
         getSortIcon: () => ""
@@ -14797,7 +14797,7 @@ const N0 = K({
         internalItem: $.internalItem,
         value: $.value,
         column: h
-      }) : e.cellProps, R = typeof h.cellProps == "function" ? h.cellProps({
+      }) : e.cellProps, O = typeof h.cellProps == "function" ? h.cellProps({
         index: $.index,
         item: $.item,
         internalItem: $.internalItem,
@@ -14816,29 +14816,29 @@ const N0 = K({
         noPadding: h.key === "data-table-select" || h.key === "data-table-expand",
         nowrap: h.nowrap,
         width: i.value ? void 0 : h.width
-      }, E, R), {
+      }, E, O), {
         default: () => {
-          var U, G, C, L, W;
-          if (t[S] && !i.value) return (U = t[S]) == null ? void 0 : U.call(t, $);
+          var U, G, C, R, q;
+          if (t[x] && !i.value) return (U = t[x]) == null ? void 0 : U.call(t, $);
           if (h.key === "data-table-select")
             return ((G = t["item.data-table-select"]) == null ? void 0 : G.call(t, $)) ?? l(sa, {
-              disabled: !g.selectable,
-              modelValue: o([g]),
-              onClick: en(() => s(g), ["stop"])
+              disabled: !f.selectable,
+              modelValue: o([f]),
+              onClick: ba(() => s(f), ["stop"])
             }, null);
           if (h.key === "data-table-expand")
             return ((C = t["item.data-table-expand"]) == null ? void 0 : C.call(t, $)) ?? l(Z, {
-              icon: y(g) ? "$collapse" : "$expand",
+              icon: y(f) ? "$collapse" : "$expand",
               size: "small",
               variant: "text",
-              onClick: en(() => b(g), ["stop"])
+              onClick: ba(() => b(f), ["stop"])
             }, null);
-          const T = ue($.value);
-          return i.value ? l(ve, null, [l("div", {
+          const D = ue($.value);
+          return i.value ? l(de, null, [l("div", {
             class: "v-data-table__td-title"
-          }, [((L = t[I]) == null ? void 0 : L.call(t, O)) ?? h.title]), l("div", {
+          }, [((R = t[V]) == null ? void 0 : R.call(t, L)) ?? h.title]), l("div", {
             class: "v-data-table__td-value"
-          }, [((W = t[S]) == null ? void 0 : W.call(t, $)) ?? T])]) : T;
+          }, [((q = t[x]) == null ? void 0 : q.call(t, $)) ?? D])]) : D;
         }
       });
     })]));
@@ -14872,38 +14872,38 @@ const N0 = K({
     } = a;
     const {
       columns: i
-    } = Nl(), {
+    } = Dl(), {
       expandOnClick: o,
       toggleExpand: s,
       isExpanded: u
     } = rc(), {
       isSelected: r,
       toggleSelect: d
-    } = Dl(), {
+    } = Nl(), {
       toggleGroup: y,
       isGroupOpen: b
     } = nc(), {
       t: m
     } = Qe(), {
-      mobile: f
+      mobile: p
     } = da(e);
     return se(() => {
-      var x, p;
+      var k, _;
       return e.loading && (!e.items.length || n.loading) ? l("tr", {
         class: "v-data-table-rows-loading",
         key: "loading"
       }, [l("td", {
         colspan: i.value.length
-      }, [((x = n.loading) == null ? void 0 : x.call(n)) ?? m(e.loadingText)])]) : !e.loading && !e.items.length && !e.hideNoData ? l("tr", {
+      }, [((k = n.loading) == null ? void 0 : k.call(n)) ?? m(e.loadingText)])]) : !e.loading && !e.items.length && !e.hideNoData ? l("tr", {
         class: "v-data-table-rows-no-data",
         key: "no-data"
       }, [l("td", {
         colspan: i.value.length
-      }, [((p = n["no-data"]) == null ? void 0 : p.call(n)) ?? m(e.noDataText)])]) : l(ve, null, [e.items.map((h, _) => {
-        var I;
+      }, [((_ = n["no-data"]) == null ? void 0 : _.call(n)) ?? m(e.noDataText)])]) : l(de, null, [e.items.map((h, g) => {
+        var V;
         if (h.type === "group") {
           const $ = {
-            index: _,
+            index: g,
             item: h,
             columns: i.value,
             isExpanded: u,
@@ -14918,8 +14918,8 @@ const N0 = K({
             item: h
           }, ts(t, ":group-header", () => $)), n);
         }
-        const g = {
-          index: _,
+        const f = {
+          index: g,
           item: h.raw,
           internalItem: h,
           columns: i.value,
@@ -14927,30 +14927,30 @@ const N0 = K({
           toggleExpand: s,
           isSelected: r,
           toggleSelect: d
-        }, S = {
-          ...g,
+        }, x = {
+          ...f,
           props: X({
             key: `item_${h.key ?? h.index}`,
             onClick: o.value ? () => {
               s(h);
             } : void 0,
-            index: _,
+            index: g,
             item: h,
             cellProps: e.cellProps,
-            mobile: f.value
-          }, ts(t, ":row", () => g), typeof e.rowProps == "function" ? e.rowProps({
-            item: g.item,
-            index: g.index,
-            internalItem: g.internalItem
+            mobile: p.value
+          }, ts(t, ":row", () => f), typeof e.rowProps == "function" ? e.rowProps({
+            item: f.item,
+            index: f.index,
+            internalItem: f.internalItem
           }) : e.rowProps)
         };
-        return l(ve, {
-          key: S.props.key
-        }, [n.item ? n.item(S) : l(cc, S.props, n), u(h) && ((I = n["expanded-row"]) == null ? void 0 : I.call(n, g))]);
+        return l(de, {
+          key: x.props.key
+        }, [n.item ? n.item(x) : l(cc, x.props, n), u(h) && ((V = n["expanded-row"]) == null ? void 0 : V.call(n, f))]);
       })]);
     }), {};
   }
-}), D0 = K({
+}), N0 = K({
   items: {
     type: Array,
     default: () => []
@@ -14984,7 +14984,7 @@ function B0(e, a, t) {
 }
 function vc(e, a) {
   return {
-    items: k(() => B0(e, e.items, a.value))
+    items: S(() => B0(e, e.items, a.value))
   };
 }
 function fc(e) {
@@ -14995,7 +14995,7 @@ function fc(e) {
     groupBy: i,
     search: o
   } = e;
-  const s = tt("VDataTable"), u = k(() => ({
+  const s = tt("VDataTable"), u = S(() => ({
     page: a.value,
     itemsPerPage: t.value,
     sortBy: n.value,
@@ -15020,7 +15020,7 @@ const mc = K({
   ...T0(),
   ...Zr(),
   ...p0(),
-  ...D0(),
+  ...N0(),
   ...w0(),
   ...C0(),
   ...Qr(),
@@ -15059,55 +15059,55 @@ const mc = K({
       itemsPerPage: d
     } = f0(e), {
       disableSort: y
-    } = Oa(e), {
+    } = Ma(e), {
       columns: b,
       headers: m,
-      sortFunctions: f,
-      sortRawFunctions: x,
-      filterFunctions: p
+      sortFunctions: p,
+      sortRawFunctions: k,
+      filterFunctions: _
     } = Ur(e, {
       groupBy: i,
       showSelect: oe(e, "showSelect"),
       showExpand: oe(e, "showExpand")
     }), {
       items: h
-    } = vc(e, b), _ = oe(e, "search"), {
-      filteredItems: g
-    } = Tl(e, h, _, {
+    } = vc(e, b), g = oe(e, "search"), {
+      filteredItems: f
+    } = Tl(e, h, g, {
       transform: (ce) => ce.columns,
-      customKeyFilter: p
+      customKeyFilter: _
     }), {
-      toggleSort: S
+      toggleSort: x
     } = Jr({
       sortBy: o,
       multiSort: s,
       mustSort: u,
       page: r
     }), {
-      sortByWithGroups: I,
+      sortByWithGroups: V,
       opened: $,
-      extractRows: O,
+      extractRows: L,
       isGroupOpen: E,
-      toggleGroup: R
+      toggleGroup: O
     } = ac({
       groupBy: i,
       sortBy: o,
       disableSort: y
     }), {
-      sortedItems: T
-    } = Xr(e, g, I, {
+      sortedItems: D
+    } = Xr(e, f, V, {
       transform: (ce) => ({
         ...ce.raw,
         ...ce.columns
       }),
-      sortFunctions: f,
-      sortRawFunctions: x
+      sortFunctions: p,
+      sortRawFunctions: k
     }), {
       flatItems: U
-    } = oc(T, i, $), G = k(() => U.value.length), {
+    } = oc(D, i, $), G = S(() => U.value.length), {
       startIndex: C,
-      stopIndex: L,
-      pageCount: W,
+      stopIndex: R,
+      pageCount: q,
       setItemsPerPage: Y
     } = m0({
       page: r,
@@ -15118,14 +15118,14 @@ const mc = K({
     } = y0({
       items: U,
       startIndex: C,
-      stopIndex: L,
+      stopIndex: R,
       itemsPerPage: d
-    }), H = k(() => O(J.value)), {
+    }), H = S(() => L(J.value)), {
       isSelected: N,
       select: j,
-      selectAll: V,
+      selectAll: I,
       toggleSelect: M,
-      someSelected: te,
+      someSelected: ae,
       allSelected: ge
     } = Wr(e, {
       allItems: h,
@@ -15139,7 +15139,7 @@ const mc = K({
       itemsPerPage: d,
       sortBy: o,
       groupBy: i,
-      search: _
+      search: g
     }), pt({
       VDataTableRows: {
         hideNoData: oe(e, "hideNoData"),
@@ -15148,23 +15148,23 @@ const mc = K({
         loadingText: oe(e, "loadingText")
       }
     });
-    const pe = k(() => ({
+    const pe = S(() => ({
       page: r.value,
       itemsPerPage: d.value,
       sortBy: o.value,
-      pageCount: W.value,
-      toggleSort: S,
+      pageCount: q.value,
+      toggleSort: x,
       setItemsPerPage: Y,
-      someSelected: te.value,
+      someSelected: ae.value,
       allSelected: ge.value,
       isSelected: N,
       select: j,
-      selectAll: V,
+      selectAll: I,
       toggleSelect: M,
       isExpanded: be,
       toggleExpand: fe,
       isGroupOpen: E,
-      toggleGroup: R,
+      toggleGroup: O,
       items: H.value.map((ce) => ce.raw),
       internalItems: H.value,
       groupedItems: J.value,
@@ -15181,18 +15181,18 @@ const mc = K({
         style: e.style
       }, P), {
         top: () => {
-          var ne;
-          return (ne = n.top) == null ? void 0 : ne.call(n, pe.value);
+          var le;
+          return (le = n.top) == null ? void 0 : le.call(n, pe.value);
         },
         default: () => {
-          var ne, he, Ce, Ne, He, Fe;
-          return n.default ? n.default(pe.value) : l(ve, null, [(ne = n.colgroup) == null ? void 0 : ne.call(n, pe.value), !e.hideDefaultHeader && l("thead", {
+          var le, he, Ce, De, He, Fe;
+          return n.default ? n.default(pe.value) : l(de, null, [(le = n.colgroup) == null ? void 0 : le.call(n, pe.value), !e.hideDefaultHeader && l("thead", {
             key: "thead"
           }, [l(ul, z, n)]), (he = n.thead) == null ? void 0 : he.call(n, pe.value), !e.hideDefaultBody && l("tbody", null, [(Ce = n["body.prepend"]) == null ? void 0 : Ce.call(n, pe.value), n.body ? n.body(pe.value) : l(rl, X(t, Q, {
             items: J.value
-          }), n), (Ne = n["body.append"]) == null ? void 0 : Ne.call(n, pe.value)]), (He = n.tbody) == null ? void 0 : He.call(n, pe.value), (Fe = n.tfoot) == null ? void 0 : Fe.call(n, pe.value)]);
+          }), n), (De = n["body.append"]) == null ? void 0 : De.call(n, pe.value)]), (He = n.tbody) == null ? void 0 : He.call(n, pe.value), (Fe = n.tfoot) == null ? void 0 : Fe.call(n, pe.value)]);
         },
-        bottom: () => n.bottom ? n.bottom(pe.value) : !e.hideDefaultFooter && l(ve, null, [l(ke, null, null), l(hs, ce, {
+        bottom: () => n.bottom ? n.bottom(pe.value) : !e.hideDefaultFooter && l(de, null, [l(ke, null, null), l(hs, ce, {
           prepend: n["footer.prepend"]
         })])
       });
@@ -15226,79 +15226,79 @@ const mc = K({
       mustSort: u
     } = Yr(e), {
       disableSort: r
-    } = Oa(e), {
+    } = Ma(e), {
       columns: d,
       headers: y,
       filterFunctions: b,
       sortFunctions: m,
-      sortRawFunctions: f
+      sortRawFunctions: p
     } = Ur(e, {
       groupBy: i,
       showSelect: oe(e, "showSelect"),
       showExpand: oe(e, "showExpand")
     }), {
-      items: x
-    } = vc(e, d), p = oe(e, "search"), {
+      items: k
+    } = vc(e, d), _ = oe(e, "search"), {
       filteredItems: h
-    } = Tl(e, x, p, {
+    } = Tl(e, k, _, {
       transform: (z) => z.columns,
       customKeyFilter: b
     }), {
-      toggleSort: _
+      toggleSort: g
     } = Jr({
       sortBy: o,
       multiSort: s,
       mustSort: u
     }), {
-      sortByWithGroups: g,
-      opened: S,
-      extractRows: I,
+      sortByWithGroups: f,
+      opened: x,
+      extractRows: V,
       isGroupOpen: $,
-      toggleGroup: O
+      toggleGroup: L
     } = ac({
       groupBy: i,
       sortBy: o,
       disableSort: r
     }), {
       sortedItems: E
-    } = Xr(e, h, g, {
+    } = Xr(e, h, f, {
       transform: (z) => ({
         ...z.raw,
         ...z.columns
       }),
       sortFunctions: m,
-      sortRawFunctions: f
+      sortRawFunctions: p
     }), {
-      flatItems: R
-    } = oc(E, i, S), T = k(() => I(R.value)), {
+      flatItems: O
+    } = oc(E, i, x), D = S(() => V(O.value)), {
       isSelected: U,
       select: G,
       selectAll: C,
-      toggleSelect: L,
-      someSelected: W,
+      toggleSelect: R,
+      someSelected: q,
       allSelected: Y
     } = Wr(e, {
-      allItems: T,
-      currentPage: T
+      allItems: D,
+      currentPage: D
     }), {
       isExpanded: J,
       toggleExpand: H
     } = uc(e), {
       containerRef: N,
       markerRef: j,
-      paddingTop: V,
+      paddingTop: I,
       paddingBottom: M,
-      computedItems: te,
+      computedItems: ae,
       handleItemResize: ge,
       handleScroll: be,
       handleScrollend: fe
-    } = yr(e, R), pe = k(() => te.value.map((z) => z.raw));
+    } = yr(e, O), pe = S(() => ae.value.map((z) => z.raw));
     fc({
       sortBy: o,
       page: _e(1),
       itemsPerPage: _e(-1),
       groupBy: i,
-      search: p
+      search: _
     }), pt({
       VDataTableRows: {
         hideNoData: oe(e, "hideNoData"),
@@ -15307,22 +15307,22 @@ const mc = K({
         loadingText: oe(e, "loadingText")
       }
     });
-    const ce = k(() => ({
+    const ce = S(() => ({
       sortBy: o.value,
-      toggleSort: _,
-      someSelected: W.value,
+      toggleSort: g,
+      someSelected: q.value,
       allSelected: Y.value,
       isSelected: U,
       select: G,
       selectAll: C,
-      toggleSelect: L,
+      toggleSelect: R,
       isExpanded: J,
       toggleExpand: H,
       isGroupOpen: $,
-      toggleGroup: O,
-      items: T.value.map((z) => z.raw),
-      internalItems: T.value,
-      groupedItems: R.value,
+      toggleGroup: L,
+      items: D.value.map((z) => z.raw),
+      internalItems: D.value,
+      groupedItems: O.value,
       columns: d.value,
       headers: y.value
     }));
@@ -15335,11 +15335,11 @@ const mc = K({
         style: e.style
       }, P), {
         top: () => {
-          var ne;
-          return (ne = n.top) == null ? void 0 : ne.call(n, ce.value);
+          var le;
+          return (le = n.top) == null ? void 0 : le.call(n, ce.value);
         },
         wrapper: () => {
-          var ne, he, Ce;
+          var le, he, Ce;
           return l("div", {
             ref: N,
             onScrollPassive: be,
@@ -15348,14 +15348,14 @@ const mc = K({
             style: {
               height: Se(e.height)
             }
-          }, [l("table", null, [(ne = n.colgroup) == null ? void 0 : ne.call(n, ce.value), !e.hideDefaultHeader && l("thead", {
+          }, [l("table", null, [(le = n.colgroup) == null ? void 0 : le.call(n, ce.value), !e.hideDefaultHeader && l("thead", {
             key: "thead"
           }, [l(ul, X(z, {
             sticky: e.fixedHeader
           }), n)]), !e.hideDefaultBody && l("tbody", null, [l("tr", {
             ref: j,
             style: {
-              height: Se(V.value),
+              height: Se(I.value),
               border: 0
             }
           }, [l("td", {
@@ -15368,10 +15368,10 @@ const mc = K({
             items: pe.value
           }), {
             ...n,
-            item: (Ne) => l(mr, {
-              key: Ne.internalItem.index,
+            item: (De) => l(mr, {
+              key: De.internalItem.index,
               renderless: !0,
-              "onUpdate:height": (He) => ge(Ne.internalItem.index, He)
+              "onUpdate:height": (He) => ge(De.internalItem.index, He)
             }, {
               default: (He) => {
                 var qe;
@@ -15379,12 +15379,12 @@ const mc = K({
                   itemRef: Fe
                 } = He;
                 return ((qe = n.item) == null ? void 0 : qe.call(n, {
-                  ...Ne,
+                  ...De,
                   itemRef: Fe
-                })) ?? l(cc, X(Ne.props, {
+                })) ?? l(cc, X(De.props, {
                   ref: Fe,
-                  key: Ne.internalItem.index,
-                  index: Ne.internalItem.index
+                  key: De.internalItem.index,
+                  index: De.internalItem.index
                 }), n);
               }
             })
@@ -15402,8 +15402,8 @@ const mc = K({
           }, null)])])])]);
         },
         bottom: () => {
-          var ne;
-          return (ne = n.bottom) == null ? void 0 : ne.call(n, ce.value);
+          var le;
+          return (le = n.bottom) == null ? void 0 : le.call(n, ce.value);
         }
       });
     });
@@ -15447,7 +15447,7 @@ const mc = K({
 }, yp = { class: "account_liabilities_title" }, pp = {
   __name: "AccountBalanceSheet",
   setup(e) {
-    const a = A([
+    const a = T([
       {
         name: "Fixed Assets",
         percent: "65.42%",
@@ -15636,7 +15636,7 @@ const mc = K({
           }
         ]
       }
-    ]), t = A([
+    ]), t = T([
       {
         name: "Capital Account",
         percent: "65.42%",
@@ -15829,7 +15829,7 @@ const mc = K({
           }
         ]
       }
-    ]), n = k(() => [
+    ]), n = S(() => [
       {
         title: "Assets",
         value: "name",
@@ -15858,7 +15858,7 @@ const mc = K({
         align: "end",
         visible: d.value
       }
-    ].filter((h) => h.visible)), i = k(() => [
+    ].filter((h) => h.visible)), i = S(() => [
       {
         title: "Liabilities",
         value: "name",
@@ -15888,50 +15888,50 @@ const mc = K({
         visible: d.value
       }
     ].filter((h) => h.visible));
-    function o(h, _ = 0, g = "") {
-      const S = [];
-      for (const I of h)
-        S.push({
-          ...I,
-          level: _,
-          parentType: g
-        }), I.children && I.children.length && S.push(...o(I.children, _ + 1, I.type));
-      return S;
+    function o(h, g = 0, f = "") {
+      const x = [];
+      for (const V of h)
+        x.push({
+          ...V,
+          level: g,
+          parentType: f
+        }), V.children && V.children.length && x.push(...o(V.children, g + 1, V.type));
+      return x;
     }
-    const s = k(() => o([...a.value])), u = k(
+    const s = S(() => o([...a.value])), u = S(
       () => o([...t.value])
-    ), r = A(!1), d = A(!1), y = A(!1), b = (h) => {
-      let _ = {
+    ), r = T(!1), d = T(!1), y = T(!1), b = (h) => {
+      let g = {
         current: 0,
         previous: 0
       };
-      function g(I) {
-        var $, O, E;
-        for (const R of I) {
-          if (R.type === "ledger") {
-            const T = parseFloat((($ = R.current) == null ? void 0 : $.replace(/[^0-9.-]+/g, "")) || 0), U = parseFloat(((O = R.previous) == null ? void 0 : O.replace(/[^0-9.-]+/g, "")) || 0);
-            _.current += T, _.previous += U;
+      function f(V) {
+        var $, L, E;
+        for (const O of V) {
+          if (O.type === "ledger") {
+            const D = parseFloat((($ = O.current) == null ? void 0 : $.replace(/[^0-9.-]+/g, "")) || 0), U = parseFloat(((L = O.previous) == null ? void 0 : L.replace(/[^0-9.-]+/g, "")) || 0);
+            g.current += D, g.previous += U;
           }
-          (E = R.children) != null && E.length && g(R.children);
+          (E = O.children) != null && E.length && f(O.children);
         }
       }
-      g(h);
-      const S = _.previous === 0 ? 0 : (_.current - _.previous) / _.previous * 100;
+      f(h);
+      const x = g.previous === 0 ? 0 : (g.current - g.previous) / g.previous * 100;
       return {
-        currentFormatted: `₹${_.current.toLocaleString("en-IN", {
+        currentFormatted: `₹${g.current.toLocaleString("en-IN", {
           minimumFractionDigits: 2
         })}`,
-        previousFormatted: `₹${_.previous.toLocaleString("en-IN", {
+        previousFormatted: `₹${g.previous.toLocaleString("en-IN", {
           minimumFractionDigits: 2
         })}`,
-        changeFormatted: `${S.toFixed(1)}%`,
-        isIncrease: S >= 0
+        changeFormatted: `${x.toFixed(1)}%`,
+        isIncrease: x >= 0
       };
-    }, m = k(() => b(a.value)), f = k(() => b(t.value)), x = A(!1);
-    function p(h) {
-      x.value = !1, console.log("Download as", h);
+    }, m = S(() => b(a.value)), p = S(() => b(t.value)), k = T(!1);
+    function _(h) {
+      k.value = !1, console.log("Download as", h);
     }
-    return (h, _) => (w(), re("div", R0, [
+    return (h, g) => (w(), re("div", R0, [
       l(xe, null, {
         default: c(() => [
           l(B, { cols: "12" }, {
@@ -15945,7 +15945,7 @@ const mc = K({
                   v("div", O0, [
                     l(nt, {
                       modelValue: y.value,
-                      "onUpdate:modelValue": _[0] || (_[0] = (g) => y.value = g),
+                      "onUpdate:modelValue": g[0] || (g[0] = (f) => y.value = f),
                       density: "compact",
                       inset: "",
                       label: "Show %",
@@ -15965,15 +15965,15 @@ const mc = K({
                       "offset-y": "",
                       "close-on-content-click": !1
                     }, {
-                      activator: c(({ props: g }) => [
-                        l(Z, X(g, {
+                      activator: c(({ props: f }) => [
+                        l(Z, X(f, {
                           class: "account_v_btn_outlined",
                           variant: "outlined",
                           size: "34",
                           rounded: "2"
                         }), {
                           default: c(() => [
-                            (w(), D(ae(F(le)("settings")), { style: { "font-size": "22px" } }))
+                            (w(), A(te(F(ne)("settings")), { style: { "font-size": "22px" } }))
                           ]),
                           _: 2
                         }, 1040)
@@ -15985,12 +15985,12 @@ const mc = K({
                               v("div", z0, [
                                 v("div", {
                                   class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
-                                  onClick: _[1] || (_[1] = (g) => r.value = !r.value)
+                                  onClick: g[1] || (g[1] = (f) => r.value = !r.value)
                                 }, [
-                                  r.value ? (w(), D(ae(F(le)("check")), {
+                                  r.value ? (w(), A(te(F(ne)("check")), {
                                     key: 0,
                                     style: { "font-size": "16px" }
-                                  })) : q("", !0),
+                                  })) : W("", !0),
                                   v("span", {
                                     class: ye(r.value ? "" : "ml-6")
                                   }, "Full Width View", 2)
@@ -15999,12 +15999,12 @@ const mc = K({
                               v("div", U0, [
                                 v("div", {
                                   class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
-                                  onClick: _[2] || (_[2] = (g) => d.value = !d.value)
+                                  onClick: g[2] || (g[2] = (f) => d.value = !d.value)
                                 }, [
-                                  d.value ? (w(), D(ae(F(le)("check")), {
+                                  d.value ? (w(), A(te(F(ne)("check")), {
                                     key: 0,
                                     style: { "font-size": "16px" }
-                                  })) : q("", !0),
+                                  })) : W("", !0),
                                   v("span", {
                                     class: ye(d.value ? "" : "ml-6")
                                   }, "Compare Periods", 2)
@@ -16013,18 +16013,18 @@ const mc = K({
                               l(ke, { class: "my-2" }),
                               v("div", G0, [
                                 l(ot, {
-                                  modelValue: x.value,
-                                  "onUpdate:modelValue": _[5] || (_[5] = (g) => x.value = g),
+                                  modelValue: k.value,
+                                  "onUpdate:modelValue": g[5] || (g[5] = (f) => k.value = f),
                                   location: "end",
                                   offset: "10",
                                   transition: "slide-y-transition",
                                   "close-on-content-click": !1
                                 }, {
-                                  activator: c(({ props: g }) => [
-                                    v("div", X(g, { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }), [
-                                      (w(), D(ae(F(le)("download")), { style: { "font-size": "16px" } })),
-                                      _[6] || (_[6] = v("span", null, "Download", -1)),
-                                      (w(), D(ae(F(le)("chevron-right")), {
+                                  activator: c(({ props: f }) => [
+                                    v("div", X(f, { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }), [
+                                      (w(), A(te(F(ne)("download")), { style: { "font-size": "16px" } })),
+                                      g[6] || (g[6] = v("span", null, "Download", -1)),
+                                      (w(), A(te(F(ne)("chevron-right")), {
                                         style: { "font-size": "14px" },
                                         class: "ml-auto"
                                       }))
@@ -16039,14 +16039,14 @@ const mc = K({
                                         v("div", j0, [
                                           v("div", {
                                             class: "account_vcard_menu_item field_list_title cursor-pointer px-3 py-1",
-                                            onClick: _[3] || (_[3] = (g) => p("pdf"))
-                                          }, _[7] || (_[7] = [
+                                            onClick: g[3] || (g[3] = (f) => _("pdf"))
+                                          }, g[7] || (g[7] = [
                                             v("span", null, "PDF", -1)
                                           ])),
                                           v("div", {
                                             class: "account_vcard_menu_item field_list_title cursor-pointer px-3 py-1",
-                                            onClick: _[4] || (_[4] = (g) => p("xls"))
-                                          }, _[8] || (_[8] = [
+                                            onClick: g[4] || (g[4] = (f) => _("xls"))
+                                          }, g[8] || (g[8] = [
                                             v("span", null, "XLS", -1)
                                           ]))
                                         ])
@@ -16059,8 +16059,8 @@ const mc = K({
                               ]),
                               v("div", H0, [
                                 v("div", W0, [
-                                  (w(), D(ae(F(le)("printer")), { style: { "font-size": "16px" } })),
-                                  _[9] || (_[9] = v("span", null, "Print", -1))
+                                  (w(), A(te(F(ne)("printer")), { style: { "font-size": "16px" } })),
+                                  g[9] || (g[9] = v("span", null, "Print", -1))
                                 ])
                               ])
                             ])
@@ -16097,54 +16097,54 @@ const mc = K({
                                     "hide-default-footer": "",
                                     "item-value": "name"
                                   }, {
-                                    item: c(({ item: g }) => {
-                                      var S;
+                                    item: c(({ item: f }) => {
+                                      var x;
                                       return [
                                         v("tr", {
                                           class: ye(
-                                            g.type === "group" ? g.level === 0 ? "amount_income_item_title" : "amount_income_overlay_item_title" : ""
+                                            f.type === "group" ? f.level === 0 ? "amount_income_item_title" : "amount_income_overlay_item_title" : ""
                                           )
                                         }, [
                                           v("td", null, [
                                             v("div", {
                                               class: "d-flex align-center gap-2",
-                                              style: la({ paddingLeft: `${g.level * 24}px` })
+                                              style: la({ paddingLeft: `${f.level * 24}px` })
                                             }, [
-                                              g.type === "group" ? (w(), D(ae(F(le)("folder")), {
+                                              f.type === "group" ? (w(), A(te(F(ne)("folder")), {
                                                 key: 0,
                                                 style: { "font-size": "16px" }
-                                              })) : (w(), D(ae(F(le)("file-text")), {
+                                              })) : (w(), A(te(F(ne)("file-text")), {
                                                 key: 1,
                                                 style: { "font-size": "16px" }
                                               })),
                                               v("p", {
                                                 class: ye([
                                                   "mb-0 amount_income_group_item",
-                                                  g.type === "ledger" ? "account_ledger_secondary" : (S = g.name) != null && S.toLowerCase().includes("liability") ? "account_group_error" : "account_group_primary"
+                                                  f.type === "ledger" ? "account_ledger_secondary" : (x = f.name) != null && x.toLowerCase().includes("liability") ? "account_group_error" : "account_group_primary"
                                                 ])
-                                              }, ue(g.name), 3),
-                                              g.percent && y.value ? (w(), D(gt, {
+                                              }, ue(f.name), 3),
+                                              f.percent && y.value ? (w(), A(gt, {
                                                 key: 2,
                                                 density: "compact",
                                                 class: ye([
                                                   "account_income_chip py-1 px-1",
-                                                  g.type === "ledger" ? "account_chip_outline" : "account_chip_secondary"
+                                                  f.type === "ledger" ? "account_chip_outline" : "account_chip_secondary"
                                                 ])
                                               }, {
                                                 default: c(() => [
-                                                  de(" (" + ue(g.percent) + ") ", 1)
+                                                  ve(" (" + ue(f.percent) + ") ", 1)
                                                 ]),
                                                 _: 2
-                                              }, 1032, ["class"])) : q("", !0)
+                                              }, 1032, ["class"])) : W("", !0)
                                             ], 4)
                                           ]),
                                           (w(), re("td", q0, [
                                             v("p", {
                                               class: ye([
                                                 "mb-0 amount_inc_current_item",
-                                                g.level === 0 && g.type === "group" ? "amount_inc_current_font_wght" : ""
+                                                f.level === 0 && f.type === "group" ? "amount_inc_current_font_wght" : ""
                                               ])
-                                            }, ue(g.current), 3)
+                                            }, ue(f.current), 3)
                                           ])),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
@@ -16152,10 +16152,10 @@ const mc = K({
                                                 v("p", {
                                                   class: ye([
                                                     "mb-0 amount_inc_previous_item",
-                                                    g.level > 0 && g.type === "group" ? "amount_inc_previous_font_wght" : ""
+                                                    f.level > 0 && f.type === "group" ? "amount_inc_previous_font_wght" : ""
                                                   ])
-                                                }, ue(g.previous), 3)
-                                              ])) : q("", !0)
+                                                }, ue(f.previous), 3)
+                                              ])) : W("", !0)
                                             ]),
                                             _: 2
                                           }, 1024),
@@ -16165,21 +16165,21 @@ const mc = K({
                                                 v("div", K0, [
                                                   v("p", {
                                                     class: ye(["mb-0 amount_inc_change_item", [
-                                                      g.type === "ledger" ? "amount_inc_change_font_wght" : "",
-                                                      parseFloat(g.change) > 0 ? "text-success" : parseFloat(g.change) < 0 ? "text-error" : "text-medium-emphasis"
+                                                      f.type === "ledger" ? "amount_inc_change_font_wght" : "",
+                                                      parseFloat(f.change) > 0 ? "text-success" : parseFloat(f.change) < 0 ? "text-error" : "text-medium-emphasis"
                                                     ]])
-                                                  }, ue(g.change), 3),
-                                                  g.new ? (w(), D(ae(F(le)("star")), {
+                                                  }, ue(f.change), 3),
+                                                  f.new ? (w(), A(te(F(ne)("star")), {
                                                     key: 0,
                                                     style: { "font-size": "12px" },
                                                     class: "text-info"
-                                                  })) : (w(), D(ae(F(le)(parseFloat(g.change) < 0 ? "arrow-down" : "arrow-up")), {
+                                                  })) : (w(), A(te(F(ne)(parseFloat(f.change) < 0 ? "arrow-down" : "arrow-up")), {
                                                     key: 1,
                                                     style: { "font-size": "12px" },
-                                                    class: ye(parseFloat(g.change) < 0 ? "text-error" : "text-success")
+                                                    class: ye(parseFloat(f.change) < 0 ? "text-error" : "text-success")
                                                   }, null, 8, ["class"]))
                                                 ])
-                                              ])) : q("", !0)
+                                              ])) : W("", !0)
                                             ]),
                                             _: 2
                                           }, 1024)
@@ -16192,26 +16192,26 @@ const mc = K({
                                   v("div", X0, [
                                     v("table", Q0, [
                                       v("tr", Z0, [
-                                        _[10] || (_[10] = v("td", {
+                                        g[10] || (g[10] = v("td", {
                                           style: { "min-width": "240px" },
                                           class: "text-start"
                                         }, " Total Assets ", -1)),
                                         v("td", ep, ue(m.value.currentFormatted), 1),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", tp, ue(m.value.previousFormatted), 1)) : q("", !0)
+                                            d.value ? (w(), re("td", tp, ue(m.value.previousFormatted), 1)) : W("", !0)
                                           ]),
                                           _: 1
                                         }),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
                                             d.value ? (w(), re("td", ap, [
-                                              de(ue(m.value.changeFormatted) + " ", 1),
-                                              (w(), D(ae(F(le)(m.value.isIncrease ? "arrow-up" : "arrow-down")), {
+                                              ve(ue(m.value.changeFormatted) + " ", 1),
+                                              (w(), A(te(F(ne)(m.value.isIncrease ? "arrow-up" : "arrow-down")), {
                                                 style: { "font-size": "12px" },
                                                 class: ye(m.value.isIncrease ? "text-success" : "text-error")
                                               }, null, 8, ["class"]))
-                                            ])) : q("", !0)
+                                            ])) : W("", !0)
                                           ]),
                                           _: 1
                                         })
@@ -16244,54 +16244,54 @@ const mc = K({
                                     "hide-default-footer": "",
                                     "item-value": "name"
                                   }, {
-                                    item: c(({ item: g }) => {
-                                      var S;
+                                    item: c(({ item: f }) => {
+                                      var x;
                                       return [
                                         v("tr", {
                                           class: ye(
-                                            g.type === "group" ? g.level === 0 ? "amount_income_item_title" : "amount_income_overlay_item_title" : ""
+                                            f.type === "group" ? f.level === 0 ? "amount_income_item_title" : "amount_income_overlay_item_title" : ""
                                           )
                                         }, [
                                           v("td", null, [
                                             v("div", {
                                               class: "d-flex align-center gap-2",
-                                              style: la({ paddingLeft: `${g.level * 24}px` })
+                                              style: la({ paddingLeft: `${f.level * 24}px` })
                                             }, [
-                                              g.type === "group" ? (w(), D(ae(F(le)("folder")), {
+                                              f.type === "group" ? (w(), A(te(F(ne)("folder")), {
                                                 key: 0,
                                                 style: { "font-size": "16px" }
-                                              })) : (w(), D(ae(F(le)("file-text")), {
+                                              })) : (w(), A(te(F(ne)("file-text")), {
                                                 key: 1,
                                                 style: { "font-size": "16px" }
                                               })),
                                               v("p", {
                                                 class: ye([
                                                   "mb-0 amount_income_group_item",
-                                                  g.type === "ledger" ? "account_ledger_secondary" : (S = g.name) != null && S.toLowerCase().includes("asset") ? "account_group_success" : "account_group_error"
+                                                  f.type === "ledger" ? "account_ledger_secondary" : (x = f.name) != null && x.toLowerCase().includes("asset") ? "account_group_success" : "account_group_error"
                                                 ])
-                                              }, ue(g.name), 3),
-                                              g.percent && y.value ? (w(), D(gt, {
+                                              }, ue(f.name), 3),
+                                              f.percent && y.value ? (w(), A(gt, {
                                                 key: 2,
                                                 density: "compact",
                                                 class: ye([
                                                   "account_income_chip py-1 px-1",
-                                                  g.type === "ledger" ? "account_chip_outline" : "account_chip_secondary"
+                                                  f.type === "ledger" ? "account_chip_outline" : "account_chip_secondary"
                                                 ])
                                               }, {
                                                 default: c(() => [
-                                                  de(" (" + ue(g.percent) + ") ", 1)
+                                                  ve(" (" + ue(f.percent) + ") ", 1)
                                                 ]),
                                                 _: 2
-                                              }, 1032, ["class"])) : q("", !0)
+                                              }, 1032, ["class"])) : W("", !0)
                                             ], 4)
                                           ]),
                                           (w(), re("td", np, [
                                             v("p", {
                                               class: ye([
                                                 "mb-0 amount_inc_current_item",
-                                                g.level === 0 && g.type === "group" ? "amount_inc_current_font_wght" : ""
+                                                f.level === 0 && f.type === "group" ? "amount_inc_current_font_wght" : ""
                                               ])
-                                            }, ue(g.current), 3)
+                                            }, ue(f.current), 3)
                                           ])),
                                           d.value ? (w(), re("td", lp, [
                                             l(Ge, { name: "slide-fade" }, {
@@ -16299,34 +16299,34 @@ const mc = K({
                                                 v("p", {
                                                   class: ye([
                                                     "mb-0 amount_inc_previous_item",
-                                                    g.level > 0 && g.type === "group" ? "amount_inc_previous_font_wght" : ""
+                                                    f.level > 0 && f.type === "group" ? "amount_inc_previous_font_wght" : ""
                                                   ])
-                                                }, ue(g.previous), 3)
+                                                }, ue(f.previous), 3)
                                               ]),
                                               _: 2
                                             }, 1024)
-                                          ])) : q("", !0),
+                                          ])) : W("", !0),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
                                               d.value ? (w(), re("td", ip, [
                                                 v("div", op, [
                                                   v("p", {
                                                     class: ye(["mb-0 amount_inc_change_item", [
-                                                      g.type === "ledger" ? "amount_inc_change_font_wght" : "",
-                                                      parseFloat(g.change) > 0 ? "text-success" : parseFloat(g.change) < 0 ? "text-error" : "text-medium-emphasis"
+                                                      f.type === "ledger" ? "amount_inc_change_font_wght" : "",
+                                                      parseFloat(f.change) > 0 ? "text-success" : parseFloat(f.change) < 0 ? "text-error" : "text-medium-emphasis"
                                                     ]])
-                                                  }, ue(g.change), 3),
-                                                  g.new ? (w(), D(ae(F(le)("star")), {
+                                                  }, ue(f.change), 3),
+                                                  f.new ? (w(), A(te(F(ne)("star")), {
                                                     key: 0,
                                                     style: { "font-size": "12px" },
                                                     class: "text-info"
-                                                  })) : (w(), D(ae(F(le)(parseFloat(g.change) < 0 ? "arrow-down" : "arrow-up")), {
+                                                  })) : (w(), A(te(F(ne)(parseFloat(f.change) < 0 ? "arrow-down" : "arrow-up")), {
                                                     key: 1,
                                                     style: { "font-size": "12px" },
-                                                    class: ye(parseFloat(g.change) < 0 ? "text-error" : "text-success")
+                                                    class: ye(parseFloat(f.change) < 0 ? "text-error" : "text-success")
                                                   }, null, 8, ["class"]))
                                                 ])
-                                              ])) : q("", !0)
+                                              ])) : W("", !0)
                                             ]),
                                             _: 2
                                           }, 1024)
@@ -16339,26 +16339,26 @@ const mc = K({
                                   v("div", sp, [
                                     v("table", up, [
                                       v("tr", rp, [
-                                        _[11] || (_[11] = v("td", {
+                                        g[11] || (g[11] = v("td", {
                                           style: { "min-width": "240px" },
                                           class: "text-start"
                                         }, " Total Liabilities ", -1)),
-                                        v("td", cp, ue(f.value.currentFormatted), 1),
+                                        v("td", cp, ue(p.value.currentFormatted), 1),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", dp, ue(f.value.previousFormatted), 1)) : q("", !0)
+                                            d.value ? (w(), re("td", dp, ue(p.value.previousFormatted), 1)) : W("", !0)
                                           ]),
                                           _: 1
                                         }),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
                                             d.value ? (w(), re("td", vp, [
-                                              de(ue(f.value.changeFormatted) + " ", 1),
-                                              (w(), D(ae(F(le)(f.value.isIncrease ? "arrow-up" : "arrow-down")), {
+                                              ve(ue(p.value.changeFormatted) + " ", 1),
+                                              (w(), A(te(F(ne)(p.value.isIncrease ? "arrow-up" : "arrow-down")), {
                                                 style: { "font-size": "12px" },
-                                                class: ye(f.value.isIncrease ? "text-success" : "text-error")
+                                                class: ye(p.value.isIncrease ? "text-success" : "text-error")
                                               }, null, 8, ["class"]))
-                                            ])) : q("", !0)
+                                            ])) : W("", !0)
                                           ]),
                                           _: 1
                                         })
@@ -16384,7 +16384,7 @@ const mc = K({
                           }, {
                             default: c(() => [
                               v("div", fp, [
-                                _[12] || (_[12] = v("div", { class: "d-flex align-center gap-2" }, [
+                                g[12] || (g[12] = v("div", { class: "d-flex align-center gap-2" }, [
                                   v("h5", { class: "mb-0 account_assets_title" }, "Total Assets")
                                 ], -1)),
                                 v("div", null, [
@@ -16401,11 +16401,11 @@ const mc = K({
                           }, {
                             default: c(() => [
                               v("div", gp, [
-                                _[13] || (_[13] = v("div", { class: "d-flex align-center gap-2" }, [
+                                g[13] || (g[13] = v("div", { class: "d-flex align-center gap-2" }, [
                                   v("h5", { class: "mb-0 account_liabilities_title" }, " Total Liabilities ")
                                 ], -1)),
                                 v("div", null, [
-                                  v("span", yp, ue(f.value.currentFormatted), 1)
+                                  v("span", yp, ue(p.value.currentFormatted), 1)
                                 ])
                               ])
                             ]),
@@ -16419,7 +16419,7 @@ const mc = K({
                   }),
                   l(ke),
                   l(Ae, { class: "account_note_section pt-1 px-4" }, {
-                    default: c(() => _[14] || (_[14] = [
+                    default: c(() => g[14] || (g[14] = [
                       v("p", { class: "mb-0" }, "Notes:", -1),
                       v("ul", { class: "px-5" }, [
                         v("li", { class: "mb-1" }, " All figures are in Indian Rupees (INR) unless otherwise stated. "),
@@ -16440,7 +16440,7 @@ const mc = K({
       })
     ]));
   }
-}, bp = /* @__PURE__ */ Et(pp, [["__scopeId", "data-v-9ee98344"]]), _p = Ma("v-alert-title"), hp = ["success", "info", "warning", "error"], xp = K({
+}, bp = /* @__PURE__ */ Et(pp, [["__scopeId", "data-v-9ee98344"]]), _p = za("v-alert-title"), hp = ["success", "info", "warning", "error"], xp = K({
   border: {
     type: [Boolean, String],
     validator: (e) => typeof e == "boolean" || ["top", "end", "bottom", "start"].includes(e)
@@ -16474,10 +16474,10 @@ const mc = K({
   ...St(),
   ...Ht(),
   ...qt(),
-  ...Va(),
-  ...Nn(),
+  ...Ia(),
+  ...Dn(),
   ...vt(),
-  ...Oe(),
+  ...Me(),
   ...je(),
   ...Ft({
     variant: "flat"
@@ -16494,10 +16494,10 @@ const mc = K({
       emit: t,
       slots: n
     } = a;
-    const i = Ve(e, "modelValue"), o = k(() => {
+    const i = Ve(e, "modelValue"), o = S(() => {
       if (e.icon !== !1)
         return e.type ? e.icon ?? `$${e.type}` : e.icon;
-    }), s = k(() => ({
+    }), s = S(() => ({
       color: e.color ?? e.type,
       variant: e.variant
     })), {
@@ -16506,51 +16506,51 @@ const mc = K({
       colorClasses: r,
       colorStyles: d,
       variantClasses: y
-    } = ka(s), {
+    } = Sa(s), {
       densityClasses: b
     } = Pt(e), {
       dimensionStyles: m
     } = Wt(e), {
-      elevationClasses: f
+      elevationClasses: p
     } = aa(e), {
-      locationStyles: x
-    } = Ha(e), {
-      positionClasses: p
-    } = Dn(e), {
+      locationStyles: k
+    } = Wa(e), {
+      positionClasses: _
+    } = Nn(e), {
       roundedClasses: h
     } = _t(e), {
-      textColorClasses: _,
-      textColorStyles: g
+      textColorClasses: g,
+      textColorStyles: f
     } = kt(oe(e, "borderColor")), {
-      t: S
-    } = Qe(), I = k(() => ({
-      "aria-label": S(e.closeLabel),
+      t: x
+    } = Qe(), V = S(() => ({
+      "aria-label": x(e.closeLabel),
       onClick($) {
         i.value = !1, t("click:close", $);
       }
     }));
     return () => {
-      const $ = !!(n.prepend || o.value), O = !!(n.title || e.title), E = !!(n.close || e.closable);
+      const $ = !!(n.prepend || o.value), L = !!(n.title || e.title), E = !!(n.close || e.closable);
       return i.value && l(e.tag, {
         class: ["v-alert", e.border && {
           "v-alert--border": !!e.border,
           [`v-alert--border-${e.border === !0 ? "start" : e.border}`]: !0
         }, {
           "v-alert--prominent": e.prominent
-        }, u.value, r.value, b.value, f.value, p.value, h.value, y.value, e.class],
-        style: [d.value, m.value, x.value, e.style],
+        }, u.value, r.value, b.value, p.value, _.value, h.value, y.value, e.class],
+        style: [d.value, m.value, k.value, e.style],
         role: "alert"
       }, {
         default: () => {
-          var R, T;
+          var O, D;
           return [ea(!1, "v-alert"), e.border && l("div", {
             key: "border",
-            class: ["v-alert__border", _.value],
-            style: g.value
+            class: ["v-alert__border", g.value],
+            style: f.value
           }, null), $ && l("div", {
             key: "prepend",
             class: "v-alert__prepend"
-          }, [n.prepend ? l(De, {
+          }, [n.prepend ? l(Ne, {
             key: "prepend-defaults",
             disabled: !o.value,
             defaults: {
@@ -16567,20 +16567,20 @@ const mc = K({
             size: e.prominent ? 44 : 28
           }, null)]), l("div", {
             class: "v-alert__content"
-          }, [O && l(_p, {
+          }, [L && l(_p, {
             key: "title"
           }, {
             default: () => {
               var U;
               return [((U = n.title) == null ? void 0 : U.call(n)) ?? e.title];
             }
-          }), ((R = n.text) == null ? void 0 : R.call(n)) ?? e.text, (T = n.default) == null ? void 0 : T.call(n)]), n.append && l("div", {
+          }), ((O = n.text) == null ? void 0 : O.call(n)) ?? e.text, (D = n.default) == null ? void 0 : D.call(n)]), n.append && l("div", {
             key: "append",
             class: "v-alert__append"
           }, [n.append()]), E && l("div", {
             key: "close",
             class: "v-alert__close"
-          }, [n.close ? l(De, {
+          }, [n.close ? l(Ne, {
             key: "close-defaults",
             defaults: {
               VBtn: {
@@ -16593,7 +16593,7 @@ const mc = K({
             default: () => {
               var U;
               return [(U = n.close) == null ? void 0 : U.call(n, {
-                props: I.value
+                props: V.value
               })];
             }
           }) : l(Z, X({
@@ -16601,7 +16601,7 @@ const mc = K({
             icon: e.closeIcon,
             size: "x-small",
             variant: "text"
-          }, I.value), null)])];
+          }, V.value), null)])];
         }
       });
     };
@@ -16627,13 +16627,13 @@ const mc = K({
   offsetY: [Number, String],
   textColor: String,
   ...Pe(),
-  ...Va({
+  ...Ia({
     location: "top end"
   }),
   ...vt(),
-  ...Oe(),
+  ...Me(),
   ...je(),
-  ...xa({
+  ...ka({
     transition: "scale-rotate-transition"
   })
 }, "VBadge"), wp = ie()({
@@ -16655,9 +16655,9 @@ const mc = K({
       themeClasses: r
     } = Ef(), {
       locationStyles: d
-    } = Ha(e, !0, (y) => (e.floating ? e.dot ? 2 : 4 : e.dot ? 8 : 12) + (["top", "bottom"].includes(y) ? +(e.offsetY ?? 0) : ["left", "right"].includes(y) ? +(e.offsetX ?? 0) : 0));
+    } = Wa(e, !0, (y) => (e.floating ? e.dot ? 2 : 4 : e.dot ? 8 : 12) + (["top", "bottom"].includes(y) ? +(e.offsetY ?? 0) : ["left", "right"].includes(y) ? +(e.offsetX ?? 0) : 0));
     return se(() => {
-      const y = Number(e.content), b = !e.max || isNaN(y) ? e.content : y <= +e.max ? y : `${e.max}+`, [m, f] = ni(a.attrs, ["aria-atomic", "aria-label", "aria-live", "role", "title"]);
+      const y = Number(e.content), b = !e.max || isNaN(y) ? e.content : y <= +e.max ? y : `${e.max}+`, [m, p] = ni(a.attrs, ["aria-atomic", "aria-label", "aria-live", "role", "title"]);
       return l(e.tag, X({
         class: ["v-badge", {
           "v-badge--bordered": e.bordered,
@@ -16665,18 +16665,18 @@ const mc = K({
           "v-badge--floating": e.floating,
           "v-badge--inline": e.inline
         }, e.class]
-      }, f, {
+      }, p, {
         style: e.style
       }), {
         default: () => {
-          var x, p;
+          var k, _;
           return [l("div", {
             class: "v-badge__wrapper"
-          }, [(p = (x = a.slots).default) == null ? void 0 : p.call(x), l(Tt, {
+          }, [(_ = (k = a.slots).default) == null ? void 0 : _.call(k), l(Tt, {
             transition: e.transition
           }, {
             default: () => {
-              var h, _;
+              var h, g;
               return [Ye(l("span", X({
                 class: ["v-badge__badge", r.value, t.value, i.value, s.value],
                 style: [n.value, u.value, e.inline ? {} : d.value],
@@ -16684,7 +16684,7 @@ const mc = K({
                 "aria-label": o(e.label, y),
                 "aria-live": "polite",
                 role: "status"
-              }, m), [e.dot ? void 0 : a.slots.badge ? (_ = (h = a.slots).badge) == null ? void 0 : _.call(h) : e.icon ? l($e, {
+              }, m), [e.dot ? void 0 : a.slots.badge ? (g = (h = a.slots).badge) == null ? void 0 : g.call(h) : e.icon ? l($e, {
                 icon: e.icon
               }, null) : b]), [[Gt, e.modelValue]])];
             }
@@ -16762,7 +16762,7 @@ function Tp(e, a) {
     n.addEventListener(r, s[r], i);
   });
 }
-function Np(e, a) {
+function Dp(e, a) {
   var o, s;
   const t = (o = a.value) != null && o.parent ? e.parentElement : e, n = (s = a.instance) == null ? void 0 : s.$.uid;
   if (!(t != null && t._touchHandlers) || !n) return;
@@ -16773,7 +16773,7 @@ function Np(e, a) {
 }
 const uo = {
   mounted: Tp,
-  unmounted: Np
+  unmounted: Dp
 }, gc = Symbol.for("vuetify:v-window"), yc = Symbol.for("vuetify:v-window-group"), ro = K({
   continuous: Boolean,
   nextIcon: {
@@ -16809,7 +16809,7 @@ const uo = {
     default: "force"
   },
   ...Pe(),
-  ...Oe(),
+  ...Me(),
   ...je()
 }, "VWindow"), yn = ie()({
   name: "VWindow",
@@ -16830,13 +16830,13 @@ const uo = {
       isRtl: i
     } = ta(), {
       t: o
-    } = Qe(), s = Ga(e, yc), u = A(), r = k(() => i.value ? !e.reverse : e.reverse), d = _e(!1), y = k(() => {
-      const I = e.direction === "vertical" ? "y" : "x", O = (r.value ? !d.value : d.value) ? "-reverse" : "";
-      return `v-window-${I}${O}-transition`;
-    }), b = _e(0), m = A(void 0), f = k(() => s.items.value.findIndex((I) => s.selected.value.includes(I.id)));
-    we(f, (I, $) => {
-      const O = s.items.value.length, E = O - 1;
-      O <= 2 ? d.value = I < $ : I === E && $ === 0 ? d.value = !0 : I === 0 && $ === E ? d.value = !1 : d.value = I < $;
+    } = Qe(), s = ja(e, yc), u = T(), r = S(() => i.value ? !e.reverse : e.reverse), d = _e(!1), y = S(() => {
+      const V = e.direction === "vertical" ? "y" : "x", L = (r.value ? !d.value : d.value) ? "-reverse" : "";
+      return `v-window-${V}${L}-transition`;
+    }), b = _e(0), m = T(void 0), p = S(() => s.items.value.findIndex((V) => s.selected.value.includes(V.id)));
+    we(p, (V, $) => {
+      const L = s.items.value.length, E = L - 1;
+      L <= 2 ? d.value = V < $ : V === E && $ === 0 ? d.value = !0 : V === 0 && $ === E ? d.value = !1 : d.value = V < $;
     }), Ke(gc, {
       transition: y,
       isReversed: d,
@@ -16844,45 +16844,45 @@ const uo = {
       transitionHeight: m,
       rootRef: u
     });
-    const x = k(() => e.continuous || f.value !== 0), p = k(() => e.continuous || f.value !== s.items.value.length - 1);
+    const k = S(() => e.continuous || p.value !== 0), _ = S(() => e.continuous || p.value !== s.items.value.length - 1);
     function h() {
-      x.value && s.prev();
+      k.value && s.prev();
     }
-    function _() {
-      p.value && s.next();
+    function g() {
+      _.value && s.next();
     }
-    const g = k(() => {
-      const I = [], $ = {
+    const f = S(() => {
+      const V = [], $ = {
         icon: i.value ? e.nextIcon : e.prevIcon,
         class: `v-window__${r.value ? "right" : "left"}`,
         onClick: s.prev,
         "aria-label": o("$vuetify.carousel.prev")
       };
-      I.push(x.value ? t.prev ? t.prev({
+      V.push(k.value ? t.prev ? t.prev({
         props: $
       }) : l(Z, $, null) : l("div", null, null));
-      const O = {
+      const L = {
         icon: i.value ? e.prevIcon : e.nextIcon,
         class: `v-window__${r.value ? "left" : "right"}`,
         onClick: s.next,
         "aria-label": o("$vuetify.carousel.next")
       };
-      return I.push(p.value ? t.next ? t.next({
-        props: O
-      }) : l(Z, O, null) : l("div", null, null)), I;
-    }), S = k(() => e.touch === !1 ? e.touch : {
+      return V.push(_.value ? t.next ? t.next({
+        props: L
+      }) : l(Z, L, null) : l("div", null, null)), V;
+    }), x = S(() => e.touch === !1 ? e.touch : {
       ...{
         left: () => {
-          r.value ? h() : _();
+          r.value ? h() : g();
         },
         right: () => {
-          r.value ? _() : h();
+          r.value ? g() : h();
         },
         start: ($) => {
           let {
-            originalEvent: O
+            originalEvent: L
           } = $;
-          O.stopPropagation();
+          L.stopPropagation();
         }
       },
       ...e.touch === !0 ? {} : e.touch
@@ -16895,21 +16895,21 @@ const uo = {
       style: e.style
     }, {
       default: () => {
-        var I, $;
+        var V, $;
         return [l("div", {
           class: "v-window__container",
           style: {
             height: m.value
           }
-        }, [(I = t.default) == null ? void 0 : I.call(t, {
+        }, [(V = t.default) == null ? void 0 : V.call(t, {
           group: s
         }), e.showArrows !== !1 && l("div", {
           class: "v-window__controls"
-        }, [g.value])]), ($ = t.additional) == null ? void 0 : $.call(t, {
+        }, [f.value])]), ($ = t.additional) == null ? void 0 : $.call(t, {
           group: s
         })];
       }
-    }), [[Bt("touch"), S.value]])), {
+    }), [[Bt("touch"), x.value]])), {
       group: s
     };
   }
@@ -16942,26 +16942,26 @@ const uo = {
       isBooted: o
     } = Ju();
     if (!n || !i) throw new Error("[Vuetify] VWindowItem must be used inside VWindow");
-    const s = _e(!1), u = k(() => o.value && (n.isReversed.value ? e.reverseTransition !== !1 : e.transition !== !1));
+    const s = _e(!1), u = S(() => o.value && (n.isReversed.value ? e.reverseTransition !== !1 : e.transition !== !1));
     function r() {
       !s.value || !n || (s.value = !1, n.transitionCount.value > 0 && (n.transitionCount.value -= 1, n.transitionCount.value === 0 && (n.transitionHeight.value = void 0)));
     }
     function d() {
-      var x;
-      s.value || !n || (s.value = !0, n.transitionCount.value === 0 && (n.transitionHeight.value = Se((x = n.rootRef.value) == null ? void 0 : x.clientHeight)), n.transitionCount.value += 1);
+      var k;
+      s.value || !n || (s.value = !0, n.transitionCount.value === 0 && (n.transitionHeight.value = Se((k = n.rootRef.value) == null ? void 0 : k.clientHeight)), n.transitionCount.value += 1);
     }
     function y() {
       r();
     }
-    function b(x) {
+    function b(k) {
       s.value && Ee(() => {
-        !u.value || !s.value || !n || (n.transitionHeight.value = Se(x.clientHeight));
+        !u.value || !s.value || !n || (n.transitionHeight.value = Se(k.clientHeight));
       });
     }
-    const m = k(() => {
-      const x = n.isReversed.value ? e.reverseTransition : e.transition;
+    const m = S(() => {
+      const k = n.isReversed.value ? e.reverseTransition : e.transition;
       return u.value ? {
-        name: typeof x != "string" ? n.transition.value : x,
+        name: typeof k != "string" ? n.transition.value : k,
         onBeforeEnter: d,
         onAfterEnter: r,
         onEnterCancelled: y,
@@ -16971,18 +16971,18 @@ const uo = {
         onEnter: b
       } : !1;
     }), {
-      hasContent: f
+      hasContent: p
     } = to(e, i.isSelected);
     return se(() => l(Tt, {
       transition: m.value,
       disabled: !o.value
     }, {
       default: () => {
-        var x;
+        var k;
         return [Ye(l("div", {
           class: ["v-window-item", i.selectedClass.value, e.class],
           style: e.style
-        }, [f.value && ((x = t.default) == null ? void 0 : x.call(t))]), [[Gt, i.isSelected.value]])];
+        }, [p.value && ((k = t.default) == null ? void 0 : k.call(t))]), [[Gt, i.isSelected.value]])];
       }
     })), {
       groupItem: i
@@ -16994,10 +16994,10 @@ const uo = {
   ...Pe(),
   ...Ht(),
   ...qt(),
-  ...Va(),
-  ...Nn(),
+  ...Ia(),
+  ...Dn(),
   ...vt(),
-  ...Oe(),
+  ...Me(),
   ...je()
 }, "VSheet"), pn = ie()({
   name: "VSheet",
@@ -17013,15 +17013,15 @@ const uo = {
       backgroundColorStyles: o
     } = dt(oe(e, "color")), {
       borderClasses: s
-    } = Ca(e), {
+    } = Va(e), {
       dimensionStyles: u
     } = Wt(e), {
       elevationClasses: r
     } = aa(e), {
       locationStyles: d
-    } = Ha(e), {
+    } = Wa(e), {
       positionClasses: y
-    } = Dn(e), {
+    } = Nn(e), {
       roundedClasses: b
     } = _t(e);
     return se(() => l(e.tag, {
@@ -17053,13 +17053,13 @@ const uo = {
       emit: t,
       slots: n
     } = a;
-    const i = Ve(e, "modelValue"), o = A();
-    Re(() => {
+    const i = Ve(e, "modelValue"), o = T();
+    Oe(() => {
       o.value = structuredClone(Ue(i.value));
     });
     const {
       t: s
-    } = Qe(), u = k(() => Zt(i.value, o.value));
+    } = Qe(), u = S(() => Zt(i.value, o.value));
     function r() {
       i.value = o.value, t("save", o.value);
     }
@@ -17069,7 +17069,7 @@ const uo = {
     let y = !1;
     return se(() => {
       var m;
-      const b = l(ve, null, [l(Z, {
+      const b = l(de, null, [l(Z, {
         disabled: u.value,
         variant: "text",
         color: e.color,
@@ -17082,7 +17082,7 @@ const uo = {
         onClick: r,
         text: s(e.okText)
       }, null)]);
-      return l(ve, null, [(m = n.default) == null ? void 0 : m.call(n, {
+      return l(de, null, [(m = n.default) == null ? void 0 : m.call(n, {
         model: o,
         save: r,
         cancel: d,
@@ -17137,7 +17137,7 @@ const uo = {
     let {
       emit: t
     } = a;
-    const n = k(() => Array.isArray(e.disabled) ? e.disabled.includes("text") : !!e.disabled), i = k(() => Array.isArray(e.disabled) ? e.disabled.includes("mode") : !!e.disabled), o = k(() => Array.isArray(e.disabled) ? e.disabled.includes("prev") : !!e.disabled), s = k(() => Array.isArray(e.disabled) ? e.disabled.includes("next") : !!e.disabled);
+    const n = S(() => Array.isArray(e.disabled) ? e.disabled.includes("text") : !!e.disabled), i = S(() => Array.isArray(e.disabled) ? e.disabled.includes("mode") : !!e.disabled), o = S(() => Array.isArray(e.disabled) ? e.disabled.includes("prev") : !!e.disabled), s = S(() => Array.isArray(e.disabled) ? e.disabled.includes("next") : !!e.disabled);
     function u() {
       t("click:prev");
     }
@@ -17184,7 +17184,7 @@ const uo = {
       onClick: r
     }, null)])])), {};
   }
-}), Dp = K({
+}), Np = K({
   appendIcon: String,
   color: String,
   header: String,
@@ -17192,7 +17192,7 @@ const uo = {
   onClick: rt()
 }, "VDatePickerHeader"), Ss = ie()({
   name: "VDatePickerHeader",
-  props: Dp(),
+  props: Np(),
   emits: {
     click: () => !0,
     "click:append": () => !0
@@ -17236,7 +17236,7 @@ const uo = {
         }
       }), d && l("div", {
         class: "v-date-picker-header__append"
-      }, [n.append ? l(De, {
+      }, [n.append ? l(Ne, {
         key: "append-defaults",
         disabled: !e.appendIcon,
         defaults: {
@@ -17279,62 +17279,62 @@ const uo = {
   firstDayOfWeek: [Number, String]
 }, "calendar");
 function hc(e) {
-  const a = Yt(), t = Ve(e, "modelValue", [], (f) => We(f)), n = k(() => e.displayValue ? a.date(e.displayValue) : t.value.length > 0 ? a.date(t.value[0]) : e.min ? a.date(e.min) : Array.isArray(e.allowedDates) ? a.date(e.allowedDates[0]) : a.date()), i = Ve(e, "year", void 0, (f) => {
-    const x = f != null ? Number(f) : a.getYear(n.value);
-    return a.startOfYear(a.setYear(a.date(), x));
-  }, (f) => a.getYear(f)), o = Ve(e, "month", void 0, (f) => {
-    const x = f != null ? Number(f) : a.getMonth(n.value), p = a.setYear(a.startOfMonth(a.date()), a.getYear(i.value));
-    return a.setMonth(p, x);
-  }, (f) => a.getMonth(f)), s = k(() => {
-    const f = Number(e.firstDayOfWeek ?? 0);
-    return e.weekdays.map((x) => (x + f) % 7);
-  }), u = k(() => {
-    const f = a.getWeekArray(o.value, e.firstDayOfWeek), x = f.flat(), p = 42;
-    if (e.weeksInMonth === "static" && x.length < p) {
-      const h = x[x.length - 1];
-      let _ = [];
-      for (let g = 1; g <= p - x.length; g++)
-        _.push(a.addDays(h, g)), g % 7 === 0 && (f.push(_), _ = []);
+  const a = Yt(), t = Ve(e, "modelValue", [], (p) => We(p)), n = S(() => e.displayValue ? a.date(e.displayValue) : t.value.length > 0 ? a.date(t.value[0]) : e.min ? a.date(e.min) : Array.isArray(e.allowedDates) ? a.date(e.allowedDates[0]) : a.date()), i = Ve(e, "year", void 0, (p) => {
+    const k = p != null ? Number(p) : a.getYear(n.value);
+    return a.startOfYear(a.setYear(a.date(), k));
+  }, (p) => a.getYear(p)), o = Ve(e, "month", void 0, (p) => {
+    const k = p != null ? Number(p) : a.getMonth(n.value), _ = a.setYear(a.startOfMonth(a.date()), a.getYear(i.value));
+    return a.setMonth(_, k);
+  }, (p) => a.getMonth(p)), s = S(() => {
+    const p = Number(e.firstDayOfWeek ?? 0);
+    return e.weekdays.map((k) => (k + p) % 7);
+  }), u = S(() => {
+    const p = a.getWeekArray(o.value, e.firstDayOfWeek), k = p.flat(), _ = 42;
+    if (e.weeksInMonth === "static" && k.length < _) {
+      const h = k[k.length - 1];
+      let g = [];
+      for (let f = 1; f <= _ - k.length; f++)
+        g.push(a.addDays(h, f)), f % 7 === 0 && (p.push(g), g = []);
     }
-    return f;
+    return p;
   });
-  function r(f, x) {
-    return f.filter((p) => s.value.includes(a.toJsDate(p).getDay())).map((p, h) => {
-      const _ = a.toISO(p), g = !a.isSameMonth(p, o.value), S = a.isSameDay(p, a.startOfMonth(o.value)), I = a.isSameDay(p, a.endOfMonth(o.value)), $ = a.isSameDay(p, o.value);
+  function r(p, k) {
+    return p.filter((_) => s.value.includes(a.toJsDate(_).getDay())).map((_, h) => {
+      const g = a.toISO(_), f = !a.isSameMonth(_, o.value), x = a.isSameDay(_, a.startOfMonth(o.value)), V = a.isSameDay(_, a.endOfMonth(o.value)), $ = a.isSameDay(_, o.value);
       return {
-        date: p,
-        isoDate: _,
-        formatted: a.format(p, "keyboardDate"),
-        year: a.getYear(p),
-        month: a.getMonth(p),
-        isDisabled: m(p),
+        date: _,
+        isoDate: g,
+        formatted: a.format(_, "keyboardDate"),
+        year: a.getYear(_),
+        month: a.getMonth(_),
+        isDisabled: m(_),
         isWeekStart: h % 7 === 0,
         isWeekEnd: h % 7 === 6,
-        isToday: a.isSameDay(p, x),
-        isAdjacent: g,
-        isHidden: g && !e.showAdjacentMonths,
-        isStart: S,
-        isSelected: t.value.some((O) => a.isSameDay(p, O)),
-        isEnd: I,
+        isToday: a.isSameDay(_, k),
+        isAdjacent: f,
+        isHidden: f && !e.showAdjacentMonths,
+        isStart: x,
+        isSelected: t.value.some((L) => a.isSameDay(_, L)),
+        isEnd: V,
         isSame: $,
-        localized: a.format(p, "dayOfMonth")
+        localized: a.format(_, "dayOfMonth")
       };
     });
   }
-  const d = k(() => {
-    const f = a.startOfWeek(n.value, e.firstDayOfWeek), x = [];
+  const d = S(() => {
+    const p = a.startOfWeek(n.value, e.firstDayOfWeek), k = [];
     for (let h = 0; h <= 6; h++)
-      x.push(a.addDays(f, h));
-    const p = a.date();
-    return r(x, p);
-  }), y = k(() => {
-    const f = u.value.flat(), x = a.date();
-    return r(f, x);
-  }), b = k(() => u.value.map((f) => f.length ? u0(a, f[0]) : null));
-  function m(f) {
+      k.push(a.addDays(p, h));
+    const _ = a.date();
+    return r(k, _);
+  }), y = S(() => {
+    const p = u.value.flat(), k = a.date();
+    return r(p, k);
+  }), b = S(() => u.value.map((p) => p.length ? u0(a, p[0]) : null));
+  function m(p) {
     if (e.disabled) return !0;
-    const x = a.date(f);
-    return e.min && a.isAfter(a.date(e.min), x) || e.max && a.isAfter(x, a.date(e.max)) ? !0 : Array.isArray(e.allowedDates) && e.allowedDates.length > 0 ? !e.allowedDates.some((p) => a.isSameDay(a.date(p), x)) : typeof e.allowedDates == "function" ? !e.allowedDates(x) : !1;
+    const k = a.date(p);
+    return e.min && a.isAfter(a.date(e.min), k) || e.max && a.isAfter(k, a.date(e.max)) ? !0 : Array.isArray(e.allowedDates) && e.allowedDates.length > 0 ? !e.allowedDates.some((_) => a.isSameDay(a.date(_), k)) : typeof e.allowedDates == "function" ? !e.allowedDates(k) : !1;
   }
   return {
     displayValue: n,
@@ -17374,49 +17374,49 @@ const xc = K({
       emit: t,
       slots: n
     } = a;
-    const i = A(), {
+    const i = T(), {
       daysInMonth: o,
       model: s,
       weekNumbers: u
-    } = hc(e), r = Yt(), d = _e(), y = _e(), b = _e(!1), m = k(() => b.value ? e.reverseTransition : e.transition);
+    } = hc(e), r = Yt(), d = _e(), y = _e(), b = _e(!1), m = S(() => b.value ? e.reverseTransition : e.transition);
     e.multiple === "range" && s.value.length > 0 && (d.value = s.value[0], s.value.length > 1 && (y.value = s.value[s.value.length - 1]));
-    const f = k(() => {
-      const _ = ["number", "string"].includes(typeof e.multiple) ? Number(e.multiple) : 1 / 0;
-      return s.value.length >= _;
+    const p = S(() => {
+      const g = ["number", "string"].includes(typeof e.multiple) ? Number(e.multiple) : 1 / 0;
+      return s.value.length >= g;
     });
-    we(o, (_, g) => {
-      g && (b.value = r.isBefore(_[0].date, g[0].date));
+    we(o, (g, f) => {
+      f && (b.value = r.isBefore(g[0].date, f[0].date));
     });
-    function x(_) {
-      const g = r.startOfDay(_);
+    function k(g) {
+      const f = r.startOfDay(g);
       if (s.value.length === 0 ? d.value = void 0 : s.value.length === 1 && (d.value = s.value[0], y.value = void 0), !d.value)
-        d.value = g, s.value = [d.value];
+        d.value = f, s.value = [d.value];
       else if (y.value)
-        d.value = _, y.value = void 0, s.value = [d.value];
+        d.value = g, y.value = void 0, s.value = [d.value];
       else {
-        if (r.isSameDay(g, d.value)) {
+        if (r.isSameDay(f, d.value)) {
           d.value = void 0, s.value = [];
           return;
-        } else r.isBefore(g, d.value) ? (y.value = r.endOfDay(d.value), d.value = g) : y.value = r.endOfDay(g);
-        const S = r.getDiff(y.value, d.value, "days"), I = [d.value];
-        for (let $ = 1; $ < S; $++) {
-          const O = r.addDays(d.value, $);
-          I.push(O);
+        } else r.isBefore(f, d.value) ? (y.value = r.endOfDay(d.value), d.value = f) : y.value = r.endOfDay(f);
+        const x = r.getDiff(y.value, d.value, "days"), V = [d.value];
+        for (let $ = 1; $ < x; $++) {
+          const L = r.addDays(d.value, $);
+          V.push(L);
         }
-        I.push(y.value), s.value = I;
+        V.push(y.value), s.value = V;
       }
     }
-    function p(_) {
-      const g = s.value.findIndex((S) => r.isSameDay(S, _));
-      if (g === -1)
-        s.value = [...s.value, _];
+    function _(g) {
+      const f = s.value.findIndex((x) => r.isSameDay(x, g));
+      if (f === -1)
+        s.value = [...s.value, g];
       else {
-        const S = [...s.value];
-        S.splice(g, 1), s.value = S;
+        const x = [...s.value];
+        x.splice(f, 1), s.value = x;
       }
     }
-    function h(_) {
-      e.multiple === "range" ? x(_) : e.multiple ? p(_) : s.value = [_];
+    function h(g) {
+      e.multiple === "range" ? k(g) : e.multiple ? _(g) : s.value = [g];
     }
     return () => l("div", {
       class: "v-date-picker-month"
@@ -17426,53 +17426,53 @@ const xc = K({
     }, [!e.hideWeekdays && l("div", {
       key: "hide-week-days",
       class: "v-date-picker-month__day"
-    }, [de(" ")]), u.value.map((_) => l("div", {
+    }, [ve(" ")]), u.value.map((g) => l("div", {
       class: ["v-date-picker-month__day", "v-date-picker-month__day--adjacent"]
-    }, [_]))]), l(Tt, {
+    }, [g]))]), l(Tt, {
       name: m.value
     }, {
       default: () => {
-        var _;
+        var g;
         return [l("div", {
           ref: i,
-          key: (_ = o.value[0].date) == null ? void 0 : _.toString(),
+          key: (g = o.value[0].date) == null ? void 0 : g.toString(),
           class: "v-date-picker-month__days"
-        }, [!e.hideWeekdays && r.getWeekdays(e.firstDayOfWeek).map((g) => l("div", {
+        }, [!e.hideWeekdays && r.getWeekdays(e.firstDayOfWeek).map((f) => l("div", {
           class: ["v-date-picker-month__day", "v-date-picker-month__weekday"]
-        }, [g])), o.value.map((g, S) => {
-          const I = {
+        }, [f])), o.value.map((f, x) => {
+          const V = {
             props: {
-              onClick: () => h(g.date)
+              onClick: () => h(f.date)
             },
-            item: g,
-            i: S
+            item: f,
+            i: x
           };
-          return f.value && !g.isSelected && (g.isDisabled = !0), l("div", {
+          return p.value && !f.isSelected && (f.isDisabled = !0), l("div", {
             class: ["v-date-picker-month__day", {
-              "v-date-picker-month__day--adjacent": g.isAdjacent,
-              "v-date-picker-month__day--hide-adjacent": g.isHidden,
-              "v-date-picker-month__day--selected": g.isSelected,
-              "v-date-picker-month__day--week-end": g.isWeekEnd,
-              "v-date-picker-month__day--week-start": g.isWeekStart
+              "v-date-picker-month__day--adjacent": f.isAdjacent,
+              "v-date-picker-month__day--hide-adjacent": f.isHidden,
+              "v-date-picker-month__day--selected": f.isSelected,
+              "v-date-picker-month__day--week-end": f.isWeekEnd,
+              "v-date-picker-month__day--week-start": f.isWeekStart
             }],
-            "data-v-date": g.isDisabled ? void 0 : g.isoDate
-          }, [(e.showAdjacentMonths || !g.isAdjacent) && l(De, {
+            "data-v-date": f.isDisabled ? void 0 : f.isoDate
+          }, [(e.showAdjacentMonths || !f.isAdjacent) && l(Ne, {
             defaults: {
               VBtn: {
                 class: "v-date-picker-month__day-btn",
-                color: (g.isSelected || g.isToday) && !g.isDisabled ? e.color : void 0,
-                disabled: g.isDisabled,
+                color: (f.isSelected || f.isToday) && !f.isDisabled ? e.color : void 0,
+                disabled: f.isDisabled,
                 icon: !0,
                 ripple: !1,
-                text: g.localized,
-                variant: g.isDisabled ? g.isToday ? "outlined" : "text" : g.isToday && !g.isSelected ? "outlined" : "flat",
-                onClick: () => h(g.date)
+                text: f.localized,
+                variant: f.isDisabled ? f.isToday ? "outlined" : "text" : f.isToday && !f.isSelected ? "outlined" : "flat",
+                onClick: () => h(f.date)
               }
             }
           }, {
             default: () => {
               var $;
-              return [(($ = n.day) == null ? void 0 : $.call(n, I)) ?? l(Z, I.props, null)];
+              return [(($ = n.day) == null ? void 0 : $.call(n, V)) ?? l(Z, V.props, null)];
             }
           })]);
         })])];
@@ -17497,7 +17497,7 @@ const xc = K({
       emit: t,
       slots: n
     } = a;
-    const i = Yt(), o = Ve(e, "modelValue"), s = k(() => {
+    const i = Yt(), o = Ve(e, "modelValue"), s = S(() => {
       let u = i.startOfYear(i.date());
       return e.year && (u = i.setYear(u, e.year)), Xt(12).map((r) => {
         const d = i.format(u, "monthShort"), y = !!(e.min && i.isAfter(i.startOfMonth(i.date(e.min)), u) || e.max && i.isAfter(u, i.startOfMonth(i.date(e.max))));
@@ -17508,7 +17508,7 @@ const xc = K({
         };
       });
     });
-    return Re(() => {
+    return Oe(() => {
       o.value = o.value ?? i.getMonth(i.date());
     }), se(() => l("div", {
       class: "v-date-picker-months",
@@ -17561,20 +17561,20 @@ const xc = K({
       emit: t,
       slots: n
     } = a;
-    const i = Yt(), o = Ve(e, "modelValue"), s = k(() => {
+    const i = Yt(), o = Ve(e, "modelValue"), s = S(() => {
       const r = i.getYear(i.date());
       let d = r - 100, y = r + 52;
       e.min && (d = i.getYear(i.date(e.min))), e.max && (y = i.getYear(i.date(e.max)));
       let b = i.startOfYear(i.date());
       return b = i.setYear(b, d), Xt(y - d + 1, d).map((m) => {
-        const f = i.format(b, "year");
+        const p = i.format(b, "year");
         return b = i.setYear(b, i.getYear(b) + 1), {
-          text: f,
+          text: p,
           value: m
         };
       });
     });
-    Re(() => {
+    Oe(() => {
       o.value = o.value ?? i.getYear(i.date());
     });
     const u = el();
@@ -17616,7 +17616,7 @@ const xc = K({
       }, y), null);
     })])])), {};
   }
-}), wc = Ma("v-picker-title"), fo = K({
+}), wc = za("v-picker-title"), fo = K({
   bgColor: String,
   landscape: Boolean,
   title: String,
@@ -17660,7 +17660,7 @@ const xc = K({
             class: "v-picker__header"
           }, [t.header()])]), l("div", {
             class: "v-picker__body"
-          }, [(u = t.default) == null ? void 0 : u.call(t)]), t.actions && l(De, {
+          }, [(u = t.default) == null ? void 0 : u.call(t)]), t.actions && l(Ne, {
             defaults: {
               VBtn: {
                 slim: !0,
@@ -17706,8 +17706,8 @@ const xc = K({
   ...xc({
     weeksInMonth: "static"
   }),
-  ...Me(kc(), ["modelValue"]),
-  ...Me(Sc(), ["modelValue"]),
+  ...ze(kc(), ["modelValue"]),
+  ...ze(Sc(), ["modelValue"]),
   ...fo({
     title: "$vuetify.datePicker.title"
   }),
@@ -17729,69 +17729,69 @@ const xc = K({
     } = a;
     const i = Yt(), {
       t: o
-    } = Qe(), s = Ve(e, "modelValue", void 0, (T) => We(T), (T) => e.multiple ? T : T[0]), u = Ve(e, "viewMode"), r = k(() => {
+    } = Qe(), s = Ve(e, "modelValue", void 0, (D) => We(D), (D) => e.multiple ? D : D[0]), u = Ve(e, "viewMode"), r = S(() => {
       var U;
-      const T = i.date((U = s.value) == null ? void 0 : U[0]);
-      return T && i.isValid(T) ? T : i.date();
-    }), d = A(Number(e.month ?? i.getMonth(i.startOfMonth(r.value)))), y = A(Number(e.year ?? i.getYear(i.startOfYear(i.setMonth(r.value, d.value))))), b = _e(!1), m = k(() => e.multiple && s.value.length > 1 ? o("$vuetify.datePicker.itemsSelected", s.value.length) : s.value[0] && i.isValid(s.value[0]) ? i.format(i.date(s.value[0]), "normalDateWithWeekday") : o(e.header)), f = k(() => {
-      let T = i.date();
-      return T = i.setDate(T, 1), T = i.setMonth(T, d.value), T = i.setYear(T, y.value), i.format(T, "monthAndYear");
-    }), x = k(() => `date-picker-header${b.value ? "-reverse" : ""}-transition`), p = k(() => {
-      const T = i.date(e.min);
-      return e.min && i.isValid(T) ? T : null;
-    }), h = k(() => {
-      const T = i.date(e.max);
-      return e.max && i.isValid(T) ? T : null;
-    }), _ = k(() => {
+      const D = i.date((U = s.value) == null ? void 0 : U[0]);
+      return D && i.isValid(D) ? D : i.date();
+    }), d = T(Number(e.month ?? i.getMonth(i.startOfMonth(r.value)))), y = T(Number(e.year ?? i.getYear(i.startOfYear(i.setMonth(r.value, d.value))))), b = _e(!1), m = S(() => e.multiple && s.value.length > 1 ? o("$vuetify.datePicker.itemsSelected", s.value.length) : s.value[0] && i.isValid(s.value[0]) ? i.format(i.date(s.value[0]), "normalDateWithWeekday") : o(e.header)), p = S(() => {
+      let D = i.date();
+      return D = i.setDate(D, 1), D = i.setMonth(D, d.value), D = i.setYear(D, y.value), i.format(D, "monthAndYear");
+    }), k = S(() => `date-picker-header${b.value ? "-reverse" : ""}-transition`), _ = S(() => {
+      const D = i.date(e.min);
+      return e.min && i.isValid(D) ? D : null;
+    }), h = S(() => {
+      const D = i.date(e.max);
+      return e.max && i.isValid(D) ? D : null;
+    }), g = S(() => {
       if (e.disabled) return !0;
-      const T = [];
+      const D = [];
       if (u.value !== "month")
-        T.push("prev", "next");
+        D.push("prev", "next");
       else {
         let U = i.date();
-        if (U = i.setYear(U, y.value), U = i.setMonth(U, d.value), p.value) {
+        if (U = i.setYear(U, y.value), U = i.setMonth(U, d.value), _.value) {
           const G = i.addDays(i.startOfMonth(U), -1);
-          i.isAfter(p.value, G) && T.push("prev");
+          i.isAfter(_.value, G) && D.push("prev");
         }
         if (h.value) {
           const G = i.addDays(i.endOfMonth(U), 1);
-          i.isAfter(G, h.value) && T.push("next");
+          i.isAfter(G, h.value) && D.push("next");
         }
       }
-      return T;
+      return D;
     });
-    function g() {
-      d.value < 11 ? d.value++ : (y.value++, d.value = 0, R(y.value)), E(d.value);
+    function f() {
+      d.value < 11 ? d.value++ : (y.value++, d.value = 0, O(y.value)), E(d.value);
     }
-    function S() {
-      d.value > 0 ? d.value-- : (y.value--, d.value = 11, R(y.value)), E(d.value);
+    function x() {
+      d.value > 0 ? d.value-- : (y.value--, d.value = 11, O(y.value)), E(d.value);
     }
-    function I() {
+    function V() {
       u.value = "month";
     }
     function $() {
       u.value = u.value === "months" ? "month" : "months";
     }
-    function O() {
+    function L() {
       u.value = u.value === "year" ? "month" : "year";
     }
-    function E(T) {
-      u.value === "months" && $(), t("update:month", T);
+    function E(D) {
+      u.value === "months" && $(), t("update:month", D);
     }
-    function R(T) {
-      u.value === "year" && O(), t("update:year", T);
+    function O(D) {
+      u.value === "year" && L(), t("update:year", D);
     }
-    return we(s, (T, U) => {
-      const G = We(U), C = We(T);
+    return we(s, (D, U) => {
+      const G = We(U), C = We(D);
       if (!C.length) return;
-      const L = i.date(G[G.length - 1]), W = i.date(C[C.length - 1]), Y = i.getMonth(W), J = i.getYear(W);
-      Y !== d.value && (d.value = Y, E(d.value)), J !== y.value && (y.value = J, R(y.value)), b.value = i.isBefore(L, W);
+      const R = i.date(G[G.length - 1]), q = i.date(C[C.length - 1]), Y = i.getMonth(q), J = i.getYear(q);
+      Y !== d.value && (d.value = Y, E(d.value)), J !== y.value && (y.value = J, O(y.value)), b.value = i.isBefore(R, q);
     }), se(() => {
-      const T = bn.filterProps(e), U = ks.filterProps(e), G = Ss.filterProps(e), C = ws.filterProps(e), L = Me(Cs.filterProps(e), ["modelValue"]), W = Me(Vs.filterProps(e), ["modelValue"]), Y = {
+      const D = bn.filterProps(e), U = ks.filterProps(e), G = Ss.filterProps(e), C = ws.filterProps(e), R = ze(Cs.filterProps(e), ["modelValue"]), q = ze(Vs.filterProps(e), ["modelValue"]), Y = {
         header: m.value,
-        transition: x.value
+        transition: k.value
       };
-      return l(bn, X(T, {
+      return l(bn, X(D, {
         class: ["v-date-picker", `v-date-picker--${u.value}`, {
           "v-date-picker--show-week": e.showWeek
         }, e.class],
@@ -17803,7 +17803,7 @@ const xc = K({
             class: "v-date-picker__title"
           }, [o(e.title)]);
         },
-        header: () => n.header ? l(De, {
+        header: () => n.header ? l(Ne, {
           defaults: {
             VDatePickerHeader: {
               ...Y
@@ -17817,35 +17817,35 @@ const xc = K({
         }) : l(Ss, X({
           key: "header"
         }, G, Y, {
-          onClick: u.value !== "month" ? I : void 0
+          onClick: u.value !== "month" ? V : void 0
         }), {
           ...n,
           default: void 0
         }),
-        default: () => l(ve, null, [l(ks, X(U, {
-          disabled: _.value,
-          text: f.value,
-          "onClick:next": g,
-          "onClick:prev": S,
+        default: () => l(de, null, [l(ks, X(U, {
+          disabled: g.value,
+          text: p.value,
+          "onClick:next": f,
+          "onClick:prev": x,
           "onClick:month": $,
-          "onClick:year": O
+          "onClick:year": L
         }), null), l(ri, {
           hideOnLeave: !0
         }, {
           default: () => [u.value === "months" ? l(Cs, X({
             key: "date-picker-months"
-          }, L, {
+          }, R, {
             modelValue: d.value,
             "onUpdate:modelValue": [(J) => d.value = J, E],
-            min: p.value,
+            min: _.value,
             max: h.value,
             year: y.value
           }), null) : u.value === "year" ? l(Vs, X({
             key: "date-picker-years"
-          }, W, {
+          }, q, {
             modelValue: y.value,
-            "onUpdate:modelValue": [(J) => y.value = J, R],
-            min: p.value,
+            "onUpdate:modelValue": [(J) => y.value = J, O],
+            min: _.value,
             max: h.value
           }), null) : l(ws, X({
             key: "date-picker-month"
@@ -17855,8 +17855,8 @@ const xc = K({
             month: d.value,
             "onUpdate:month": [(J) => d.value = J, E],
             year: y.value,
-            "onUpdate:year": [(J) => y.value = J, R],
-            min: p.value,
+            "onUpdate:year": [(J) => y.value = J, O],
+            min: _.value,
             max: h.value
           }), null)]
         })]),
@@ -17880,7 +17880,7 @@ const xc = K({
       hasContent: i,
       onAfterLeave: o
     } = to(e, n.isSelected);
-    return se(() => l(Ua, {
+    return se(() => l(Ga, {
       onAfterLeave: o
     }, {
       default: () => {
@@ -17928,13 +17928,13 @@ const xc = K({
     const {
       backgroundColorClasses: i,
       backgroundColorStyles: o
-    } = dt(e, "color"), s = k(() => ({
+    } = dt(e, "color"), s = S(() => ({
       collapseIcon: e.collapseIcon,
       disabled: n.disabled.value,
       expanded: n.isSelected.value,
       expandIcon: e.expandIcon,
       readonly: e.readonly
-    })), u = k(() => n.isSelected.value ? e.collapseIcon : e.expandIcon);
+    })), u = S(() => n.isSelected.value ? e.collapseIcon : e.expandIcon);
     return se(() => {
       var r;
       return Ye(l("button", {
@@ -17951,7 +17951,7 @@ const xc = K({
         onClick: e.readonly ? void 0 : n.toggle
       }, [l("span", {
         class: "v-expansion-panel-title__overlay"
-      }, null), (r = t.default) == null ? void 0 : r.call(t, s.value), !e.hideActions && l(De, {
+      }, null), (r = t.default) == null ? void 0 : r.call(t, s.value), !e.hideActions && l(Ne, {
         defaults: {
           VIcon: {
             icon: u.value
@@ -17974,7 +17974,7 @@ const xc = K({
   ...qt(),
   ...Cn(),
   ...vt(),
-  ...Oe(),
+  ...Me(),
   ...Ic(),
   ...Vc()
 }, "VExpansionPanel"), Ts = ie()({
@@ -17994,15 +17994,15 @@ const xc = K({
       elevationClasses: s
     } = aa(e), {
       roundedClasses: u
-    } = _t(e), r = k(() => (n == null ? void 0 : n.disabled.value) || e.disabled), d = k(() => n.group.items.value.reduce((m, f, x) => (n.group.selected.value.includes(f.id) && m.push(x), m), [])), y = k(() => {
-      const m = n.group.items.value.findIndex((f) => f.id === n.id);
-      return !n.isSelected.value && d.value.some((f) => f - m === 1);
-    }), b = k(() => {
-      const m = n.group.items.value.findIndex((f) => f.id === n.id);
-      return !n.isSelected.value && d.value.some((f) => f - m === -1);
+    } = _t(e), r = S(() => (n == null ? void 0 : n.disabled.value) || e.disabled), d = S(() => n.group.items.value.reduce((m, p, k) => (n.group.selected.value.includes(p.id) && m.push(k), m), [])), y = S(() => {
+      const m = n.group.items.value.findIndex((p) => p.id === n.id);
+      return !n.isSelected.value && d.value.some((p) => p - m === 1);
+    }), b = S(() => {
+      const m = n.group.items.value.findIndex((p) => p.id === n.id);
+      return !n.isSelected.value && d.value.some((p) => p - m === -1);
     });
     return Ke(_n, n), se(() => {
-      const m = !!(t.text || e.text), f = !!(t.title || e.title), x = As.filterProps(e), p = Ps.filterProps(e);
+      const m = !!(t.text || e.text), p = !!(t.title || e.title), k = As.filterProps(e), _ = Ps.filterProps(e);
       return l(e.tag, {
         class: ["v-expansion-panel", {
           "v-expansion-panel--active": n.isSelected.value,
@@ -18014,19 +18014,19 @@ const xc = K({
       }, {
         default: () => [l("div", {
           class: ["v-expansion-panel__shadow", ...s.value]
-        }, null), l(De, {
+        }, null), l(Ne, {
           defaults: {
             VExpansionPanelTitle: {
-              ...x
+              ...k
             },
             VExpansionPanelText: {
-              ...p
+              ..._
             }
           }
         }, {
           default: () => {
             var h;
-            return [f && l(As, {
+            return [p && l(As, {
               key: "title"
             }, {
               default: () => [t.title ? t.title() : e.title]
@@ -18048,13 +18048,13 @@ const xc = K({
   ...Li(mo(), ["bgColor", "collapseIcon", "color", "eager", "elevation", "expandIcon", "focusable", "hideActions", "readonly", "ripple", "rounded", "tile", "static"]),
   ...je(),
   ...Pe(),
-  ...Oe(),
+  ...Me(),
   variant: {
     type: String,
     default: "default",
     validator: (e) => $p.includes(e)
   }
-}, "VExpansionPanels"), Ns = ie()({
+}, "VExpansionPanels"), Ds = ie()({
   name: "VExpansionPanels",
   props: Pc(),
   emits: {
@@ -18067,9 +18067,9 @@ const xc = K({
     const {
       next: n,
       prev: i
-    } = Ga(e, _n), {
+    } = ja(e, _n), {
       themeClasses: o
-    } = Xe(e), s = k(() => e.variant && `v-expansion-panels--variant-${e.variant}`);
+    } = Xe(e), s = S(() => e.variant && `v-expansion-panels--variant-${e.variant}`);
     return pt({
       VExpansionPanel: {
         bgColor: oe(e, "bgColor"),
@@ -18122,7 +18122,7 @@ const xc = K({
     default: !1,
     validator: (e) => typeof e == "boolean" || [1e3, 1024].includes(Number(e))
   },
-  ...wa({
+  ...Ca({
     prependIcon: "$file"
   }),
   modelValue: {
@@ -18151,66 +18151,66 @@ const xc = K({
     } = a;
     const {
       t: o
-    } = Qe(), s = Ve(e, "modelValue", e.modelValue, (T) => We(T), (T) => e.multiple || Array.isArray(e.modelValue) ? T : T[0] ?? null), {
+    } = Qe(), s = Ve(e, "modelValue", e.modelValue, (D) => We(D), (D) => e.multiple || Array.isArray(e.modelValue) ? D : D[0] ?? null), {
       isFocused: u,
       focus: r,
       blur: d
-    } = Sa(e), y = k(() => typeof e.showSize != "boolean" ? e.showSize : void 0), b = k(() => (s.value ?? []).reduce((T, U) => {
+    } = wa(e), y = S(() => typeof e.showSize != "boolean" ? e.showSize : void 0), b = S(() => (s.value ?? []).reduce((D, U) => {
       let {
         size: G = 0
       } = U;
-      return T + G;
-    }, 0)), m = k(() => Oo(b.value, y.value)), f = k(() => (s.value ?? []).map((T) => {
+      return D + G;
+    }, 0)), m = S(() => Oo(b.value, y.value)), p = S(() => (s.value ?? []).map((D) => {
       const {
         name: U = "",
         size: G = 0
-      } = T;
+      } = D;
       return e.showSize ? `${U} (${Oo(G, y.value)})` : U;
-    })), x = k(() => {
+    })), k = S(() => {
       var U;
-      const T = ((U = s.value) == null ? void 0 : U.length) ?? 0;
-      return e.showSize ? o(e.counterSizeString, T, m.value) : o(e.counterString, T);
-    }), p = A(), h = A(), _ = A(), g = k(() => u.value || e.active), S = k(() => ["plain", "underlined"].includes(e.variant));
-    function I() {
-      var T;
-      _.value !== document.activeElement && ((T = _.value) == null || T.focus()), u.value || r();
+      const D = ((U = s.value) == null ? void 0 : U.length) ?? 0;
+      return e.showSize ? o(e.counterSizeString, D, m.value) : o(e.counterString, D);
+    }), _ = T(), h = T(), g = T(), f = S(() => u.value || e.active), x = S(() => ["plain", "underlined"].includes(e.variant));
+    function V() {
+      var D;
+      g.value !== document.activeElement && ((D = g.value) == null || D.focus()), u.value || r();
     }
-    function $(T) {
+    function $(D) {
       var U;
-      (U = _.value) == null || U.click();
+      (U = g.value) == null || U.click();
     }
-    function O(T) {
-      n("mousedown:control", T);
+    function L(D) {
+      n("mousedown:control", D);
     }
-    function E(T) {
+    function E(D) {
       var U;
-      (U = _.value) == null || U.click(), n("click:control", T);
+      (U = g.value) == null || U.click(), n("click:control", D);
     }
-    function R(T) {
-      T.stopPropagation(), I(), Ee(() => {
-        s.value = [], Oi(e["onClick:clear"], T);
+    function O(D) {
+      D.stopPropagation(), V(), Ee(() => {
+        s.value = [], Oi(e["onClick:clear"], D);
       });
     }
-    return we(s, (T) => {
-      (!Array.isArray(T) || !T.length) && _.value && (_.value.value = "");
+    return we(s, (D) => {
+      (!Array.isArray(D) || !D.length) && g.value && (g.value.value = "");
     }), se(() => {
-      const T = !!(i.counter || e.counter), U = !!(T || i.details), [G, C] = ha(t), {
-        modelValue: L,
-        ...W
+      const D = !!(i.counter || e.counter), U = !!(D || i.details), [G, C] = xa(t), {
+        modelValue: R,
+        ...q
       } = $t.filterProps(e), Y = no(e);
       return l($t, X({
-        ref: p,
+        ref: _,
         modelValue: s.value,
         "onUpdate:modelValue": (J) => s.value = J,
         class: ["v-file-input", {
           "v-file-input--chips": !!e.chips,
           "v-file-input--hide": e.hideInput,
-          "v-input--plain-underlined": S.value
+          "v-input--plain-underlined": x.value
         }, e.class],
         style: e.style,
         "onClick:prepend": $
-      }, G, W, {
-        centerAffix: !S.value,
+      }, G, q, {
+        centerAffix: !x.value,
         focused: u.value
       }), {
         ...i,
@@ -18219,82 +18219,82 @@ const xc = K({
             id: H,
             isDisabled: N,
             isDirty: j,
-            isReadonly: V,
+            isReadonly: I,
             isValid: M
           } = J;
           return l(Pl, X({
             ref: h,
             "prepend-icon": e.prependIcon,
-            onMousedown: O,
+            onMousedown: L,
             onClick: E,
-            "onClick:clear": R,
+            "onClick:clear": O,
             "onClick:prependInner": e["onClick:prependInner"],
             "onClick:appendInner": e["onClick:appendInner"]
           }, Y, {
             id: H.value,
-            active: g.value || j.value,
+            active: f.value || j.value,
             dirty: j.value || e.dirty,
             disabled: N.value,
             focused: u.value,
             error: M.value === !1
           }), {
             ...i,
-            default: (te) => {
+            default: (ae) => {
               var fe;
               let {
                 props: {
                   class: ge,
                   ...be
                 }
-              } = te;
-              return l(ve, null, [l("input", X({
-                ref: _,
+              } = ae;
+              return l(de, null, [l("input", X({
+                ref: g,
                 type: "file",
-                readonly: V.value,
+                readonly: I.value,
                 disabled: N.value,
                 multiple: e.multiple,
                 name: e.name,
                 onClick: (pe) => {
-                  pe.stopPropagation(), V.value && pe.preventDefault(), I();
+                  pe.stopPropagation(), I.value && pe.preventDefault(), V();
                 },
                 onChange: (pe) => {
                   if (!pe.target) return;
                   const ce = pe.target;
                   s.value = [...ce.files ?? []];
                 },
-                onFocus: I,
+                onFocus: V,
                 onBlur: d
               }, be, C), null), l("div", {
                 class: ge
               }, [!!((fe = s.value) != null && fe.length) && !e.hideInput && (i.selection ? i.selection({
-                fileNames: f.value,
+                fileNames: p.value,
                 totalBytes: b.value,
                 totalBytesReadable: m.value
-              }) : e.chips ? f.value.map((pe) => l(gt, {
+              }) : e.chips ? p.value.map((pe) => l(gt, {
                 key: pe,
                 size: "small",
                 text: pe
-              }, null)) : f.value.join(", "))])]);
+              }, null)) : p.value.join(", "))])]);
             }
           });
         },
         details: U ? (J) => {
           var H, N;
-          return l(ve, null, [(H = i.details) == null ? void 0 : H.call(i, J), T && l(ve, null, [l("span", null, null), l(ao, {
+          return l(de, null, [(H = i.details) == null ? void 0 : H.call(i, J), D && l(de, null, [l("span", null, null), l(ao, {
             active: !!((N = s.value) != null && N.length),
-            value: x.value,
+            value: k.value,
             disabled: e.disabled
           }, i.counter)])]);
         } : void 0
       });
-    }), Lt({}, p, h, _);
+    }), Lt({}, _, h, g);
   }
 }), Fp = K({
   ...hl({
     falseIcon: "$radioOff",
     trueIcon: "$radioOn"
   })
-}, "VRadio"), Ta = ie()({
+}, "VRadio"), Da = ie()({
   name: "VRadio",
   props: Fp(),
   setup(e, a) {
@@ -18302,8 +18302,8 @@ const xc = K({
       slots: t
     } = a;
     return se(() => {
-      const n = ba.filterProps(e);
-      return l(ba, X(n, {
+      const n = _a.filterProps(e);
+      return l(_a, X(n, {
         class: ["v-radio", e.class],
         style: e.style,
         type: "radio"
@@ -18315,8 +18315,8 @@ const xc = K({
     type: [Number, String],
     default: "auto"
   },
-  ...wa(),
-  ...Me(Wi(), ["multiple"]),
+  ...Ca(),
+  ...ze(Wi(), ["multiple"]),
   trueIcon: {
     type: Ie,
     default: "$radioOn"
@@ -18341,9 +18341,9 @@ const xc = K({
       attrs: t,
       slots: n
     } = a;
-    const i = It(), o = k(() => e.id || `radio-group-${i}`), s = Ve(e, "modelValue");
+    const i = It(), o = S(() => e.id || `radio-group-${i}`), s = Ve(e, "modelValue");
     return se(() => {
-      const [u, r] = ha(t), d = $t.filterProps(e), y = ba.filterProps(e), b = n.label ? n.label({
+      const [u, r] = xa(t), d = $t.filterProps(e), y = _a.filterProps(e), b = n.label ? n.label({
         label: e.label,
         props: {
           for: o.value
@@ -18360,29 +18360,29 @@ const xc = K({
         ...n,
         default: (m) => {
           let {
-            id: f,
-            messagesId: x,
-            isDisabled: p,
+            id: p,
+            messagesId: k,
+            isDisabled: _,
             isReadonly: h
           } = m;
-          return l(ve, null, [b && l(Hi, {
-            id: f.value
+          return l(de, null, [b && l(Hi, {
+            id: p.value
           }, {
             default: () => [b]
           }), l(Hf, X(y, {
-            id: f.value,
-            "aria-describedby": x.value,
+            id: p.value,
+            "aria-describedby": k.value,
             defaultsTarget: "VRadio",
             trueIcon: e.trueIcon,
             falseIcon: e.falseIcon,
             type: e.type,
-            disabled: p.value,
+            disabled: _.value,
             readonly: h.value,
-            "aria-labelledby": b ? f.value : void 0,
+            "aria-labelledby": b ? p.value : void 0,
             multiple: !1
           }, r, {
             modelValue: s.value,
-            "onUpdate:modelValue": (_) => s.value = _
+            "onUpdate:modelValue": (g) => s.value = g
           }), n)]);
         }
       });
@@ -18425,17 +18425,17 @@ const Tc = K({
     default: 5e3
   },
   vertical: Boolean,
-  ...Va({
+  ...Ia({
     location: "bottom"
   }),
-  ...Nn(),
+  ...Dn(),
   ...vt(),
   ...Ft(),
   ...je(),
-  ...Me(Pn({
+  ...ze(Pn({
     transition: "v-snackbar-transition"
   }), ["persistent", "noClickAnimation", "scrim", "scrollStrategy"])
-}, "VSnackbar"), Ds = ie()({
+}, "VSnackbar"), Ns = ie()({
   name: "VSnackbar",
   props: Tc(),
   emits: {
@@ -18447,51 +18447,51 @@ const Tc = K({
     } = a;
     const n = Ve(e, "modelValue"), {
       positionClasses: i
-    } = Dn(e), {
+    } = Nn(e), {
       scopeId: o
-    } = ja(), {
+    } = Ha(), {
       themeClasses: s
     } = Xe(e), {
       colorClasses: u,
       colorStyles: r,
       variantClasses: d
-    } = ka(e), {
+    } = Sa(e), {
       roundedClasses: y
-    } = _t(e), b = Rp(Number(e.timeout)), m = A(), f = A(), x = _e(!1), p = _e(0), h = A(), _ = Be(Er, void 0);
-    oa(() => !!_, () => {
+    } = _t(e), b = Rp(Number(e.timeout)), m = T(), p = T(), k = _e(!1), _ = _e(0), h = T(), g = Be(Er, void 0);
+    oa(() => !!g, () => {
       const U = r0();
-      Re(() => {
+      Oe(() => {
         h.value = U.mainStyles.value;
       });
-    }), we(n, S), we(() => e.timeout, S), st(() => {
-      n.value && S();
+    }), we(n, x), we(() => e.timeout, x), st(() => {
+      n.value && x();
     });
-    let g = -1;
-    function S() {
-      b.reset(), window.clearTimeout(g);
+    let f = -1;
+    function x() {
+      b.reset(), window.clearTimeout(f);
       const U = Number(e.timeout);
       if (!n.value || U === -1) return;
-      const G = Fi(f.value);
-      b.start(G), g = window.setTimeout(() => {
+      const G = Fi(p.value);
+      b.start(G), f = window.setTimeout(() => {
         n.value = !1;
       }, U);
     }
-    function I() {
-      b.reset(), window.clearTimeout(g);
+    function V() {
+      b.reset(), window.clearTimeout(f);
     }
     function $() {
-      x.value = !0, I();
+      k.value = !0, V();
     }
-    function O() {
-      x.value = !1, S();
+    function L() {
+      k.value = !1, x();
     }
     function E(U) {
-      p.value = U.touches[0].clientY;
+      _.value = U.touches[0].clientY;
     }
-    function R(U) {
-      Math.abs(p.value - U.changedTouches[0].clientY) > 50 && (n.value = !1);
+    function O(U) {
+      Math.abs(_.value - U.changedTouches[0].clientY) > 50 && (n.value = !1);
     }
-    const T = k(() => e.location.split(" ").reduce((U, G) => (U[`v-snackbar--${G}`] = !0, U), {}));
+    const D = S(() => e.location.split(" ").reduce((U, G) => (U[`v-snackbar--${G}`] = !0, U), {}));
     return se(() => {
       const U = ua.filterProps(e), G = !!(t.default || t.text || e.text);
       return l(ua, X({
@@ -18501,7 +18501,7 @@ const Tc = K({
           "v-snackbar--multi-line": e.multiLine && !e.vertical,
           "v-snackbar--timer": !!e.timer,
           "v-snackbar--vertical": e.vertical
-        }, T.value, i.value, e.class],
+        }, D.value, i.value, e.class],
         style: [h.value, e.style]
       }, U, {
         modelValue: n.value,
@@ -18510,7 +18510,7 @@ const Tc = K({
           class: ["v-snackbar__wrapper", s.value, u.value, y.value, d.value],
           style: [r.value],
           onPointerenter: $,
-          onPointerleave: O
+          onPointerleave: L
         }, U.contentProps),
         persistent: !0,
         noClickAnimation: !0,
@@ -18518,15 +18518,15 @@ const Tc = K({
         scrollStrategy: "none",
         _disableGlobalStack: !0,
         onTouchstartPassive: E,
-        onTouchend: R
+        onTouchend: O
       }, o), {
         default: () => {
-          var C, L;
-          return [ea(!1, "v-snackbar"), e.timer && !x.value && l("div", {
+          var C, R;
+          return [ea(!1, "v-snackbar"), e.timer && !k.value && l("div", {
             key: "timer",
             class: "v-snackbar__timer"
           }, [l(fr, {
-            ref: f,
+            ref: p,
             color: typeof e.timer == "string" ? e.timer : "info",
             max: e.timeout,
             "model-value": b.time.value
@@ -18535,7 +18535,7 @@ const Tc = K({
             class: "v-snackbar__content",
             role: "status",
             "aria-live": "polite"
-          }, [((C = t.text) == null ? void 0 : C.call(t)) ?? e.text, (L = t.default) == null ? void 0 : L.call(t)]), t.actions && l(De, {
+          }, [((C = t.text) == null ? void 0 : C.call(t)) ?? e.text, (R = t.default) == null ? void 0 : R.call(t)]), t.actions && l(Ne, {
             defaults: {
               VBtn: {
                 variant: "text",
@@ -18598,7 +18598,7 @@ const Tc = K({
       };
       return l("div", {
         class: "v-stepper-actions"
-      }, [l(De, {
+      }, [l(Ne, {
         defaults: {
           VBtn: {
             disabled: ["prev", !0].includes(e.disabled),
@@ -18613,7 +18613,7 @@ const Tc = K({
             props: u
           })) ?? l(Z, u, null)];
         }
-      }), l(De, {
+      }), l(Ne, {
         defaults: {
           VBtn: {
             color: e.color,
@@ -18632,7 +18632,7 @@ const Tc = K({
       })]);
     }), {};
   }
-}), Op = Ma("v-stepper-header"), Nc = K({
+}), Op = za("v-stepper-header"), Dc = K({
   color: String,
   title: String,
   subtitle: String,
@@ -18661,7 +18661,7 @@ const Tc = K({
     default: () => []
   }
 }, "StepperItem"), Mp = K({
-  ...Nc(),
+  ...Dc(),
   ...Cn()
 }, "VStepperItem"), zp = ie()({
   name: "VStepperItem",
@@ -18676,7 +18676,7 @@ const Tc = K({
     let {
       slots: t
     } = a;
-    const n = Vn(e, go, !0), i = k(() => (n == null ? void 0 : n.value.value) ?? e.value), o = k(() => e.rules.every((m) => m() === !0)), s = k(() => !e.disabled && e.editable), u = k(() => !e.disabled && e.editable), r = k(() => e.error || !o.value), d = k(() => e.complete || e.rules.length > 0 && o.value), y = k(() => r.value ? e.errorIcon : d.value ? e.completeIcon : n.isSelected.value && e.editable ? e.editIcon : e.icon), b = k(() => ({
+    const n = Vn(e, go, !0), i = S(() => (n == null ? void 0 : n.value.value) ?? e.value), o = S(() => e.rules.every((m) => m() === !0)), s = S(() => !e.disabled && e.editable), u = S(() => !e.disabled && e.editable), r = S(() => e.error || !o.value), d = S(() => e.complete || e.rules.length > 0 && o.value), y = S(() => r.value ? e.errorIcon : d.value ? e.completeIcon : n.isSelected.value && e.editable ? e.editIcon : e.icon), b = S(() => ({
       canEdit: u.value,
       hasError: r.value,
       hasCompleted: d.value,
@@ -18686,9 +18686,9 @@ const Tc = K({
       value: e.value
     }));
     return se(() => {
-      var h, _, g;
-      const m = (!n || n.isSelected.value || d.value || u.value) && !r.value && !e.disabled, f = !!(e.title != null || t.title), x = !!(e.subtitle != null || t.subtitle);
-      function p() {
+      var h, g, f;
+      const m = (!n || n.isSelected.value || d.value || u.value) && !r.value && !e.disabled, p = !!(e.title != null || t.title), k = !!(e.subtitle != null || t.subtitle);
+      function _() {
         n == null || n.toggle();
       }
       return Ye(l("button", {
@@ -18698,7 +18698,7 @@ const Tc = K({
           "v-stepper-item--error": r.value
         }, n == null ? void 0 : n.selectedClass.value],
         disabled: !e.editable,
-        onClick: p
+        onClick: _
       }, [s.value && ea(!0, "v-stepper-item"), l(Mt, {
         key: "stepper-avatar",
         class: "v-stepper-item__avatar",
@@ -18706,24 +18706,24 @@ const Tc = K({
         size: 24
       }, {
         default: () => {
-          var S;
-          return [((S = t.icon) == null ? void 0 : S.call(t, b.value)) ?? (y.value ? l($e, {
+          var x;
+          return [((x = t.icon) == null ? void 0 : x.call(t, b.value)) ?? (y.value ? l($e, {
             icon: y.value
           }, null) : i.value)];
         }
       }), l("div", {
         class: "v-stepper-item__content"
-      }, [f && l("div", {
+      }, [p && l("div", {
         key: "title",
         class: "v-stepper-item__title"
-      }, [((h = t.title) == null ? void 0 : h.call(t, b.value)) ?? e.title]), x && l("div", {
+      }, [((h = t.title) == null ? void 0 : h.call(t, b.value)) ?? e.title]), k && l("div", {
         key: "subtitle",
         class: "v-stepper-item__subtitle"
-      }, [((_ = t.subtitle) == null ? void 0 : _.call(t, b.value)) ?? e.subtitle]), (g = t.default) == null ? void 0 : g.call(t, b.value)])]), [[Bt("ripple"), e.ripple && e.editable, null]]);
+      }, [((g = t.subtitle) == null ? void 0 : g.call(t, b.value)) ?? e.subtitle]), (f = t.default) == null ? void 0 : f.call(t, b.value)])]), [[Bt("ripple"), e.ripple && e.editable, null]]);
     }), {};
   }
 }), Up = K({
-  ...Me(ro(), ["continuous", "nextIcon", "prevIcon", "showArrows", "touch", "mandatory"])
+  ...ze(ro(), ["continuous", "nextIcon", "prevIcon", "showArrows", "touch", "mandatory"])
 }, "VStepperWindow"), Gp = ie()({
   name: "VStepperWindow",
   props: Up(),
@@ -18734,7 +18734,7 @@ const Tc = K({
     let {
       slots: t
     } = a;
-    const n = Be(go, null), i = Ve(e, "modelValue"), o = k({
+    const n = Be(go, null), i = Ve(e, "modelValue"), o = S({
       get() {
         var s;
         return i.value != null || !n ? i.value : (s = n.items.value.find((u) => n.selected.value.includes(u.id))) == null ? void 0 : s.value;
@@ -18776,7 +18776,7 @@ const Tc = K({
       }), t);
     }), {};
   }
-}), Dc = K({
+}), Nc = K({
   altLabels: Boolean,
   bgColor: String,
   completeIcon: String,
@@ -18800,7 +18800,7 @@ const Tc = K({
   flat: Boolean,
   ...Sn()
 }, "Stepper"), Wp = K({
-  ...Dc(),
+  ...Nc(),
   ...wn({
     mandatory: "force",
     selectedClass: "v-stepper-item--selected"
@@ -18823,7 +18823,7 @@ ie()({
       next: i,
       prev: o,
       selected: s
-    } = Ga(e, go), {
+    } = ja(e, go), {
       displayClasses: u,
       mobile: r
     } = da(e), {
@@ -18831,35 +18831,35 @@ ie()({
       editIcon: y,
       errorIcon: b,
       color: m,
-      editable: f,
-      prevText: x,
-      nextText: p
-    } = Oa(e), h = k(() => e.items.map((S, I) => {
-      const $ = ut(S, e.itemTitle, S), O = ut(S, e.itemValue, I + 1);
+      editable: p,
+      prevText: k,
+      nextText: _
+    } = Ma(e), h = S(() => e.items.map((x, V) => {
+      const $ = ut(x, e.itemTitle, x), L = ut(x, e.itemValue, V + 1);
       return {
         title: $,
-        value: O,
-        raw: S
+        value: L,
+        raw: x
       };
-    })), _ = k(() => n.value.findIndex((S) => s.value.includes(S.id))), g = k(() => e.disabled ? e.disabled : _.value === 0 ? "prev" : _.value === n.value.length - 1 ? "next" : !1);
+    })), g = S(() => n.value.findIndex((x) => s.value.includes(x.id))), f = S(() => e.disabled ? e.disabled : g.value === 0 ? "prev" : g.value === n.value.length - 1 ? "next" : !1);
     return pt({
       VStepperItem: {
-        editable: f,
+        editable: p,
         errorIcon: b,
         completeIcon: d,
         editIcon: y,
-        prevText: x,
-        nextText: p
+        prevText: k,
+        nextText: _
       },
       VStepperActions: {
         color: m,
-        disabled: g,
-        prevText: x,
-        nextText: p
+        disabled: f,
+        prevText: k,
+        nextText: _
       }
     }), se(() => {
-      const S = pn.filterProps(e), I = !!(t.header || e.items.length), $ = e.items.length > 0, O = !e.hideActions && !!($ || t.actions);
-      return l(pn, X(S, {
+      const x = pn.filterProps(e), V = !!(t.header || e.items.length), $ = e.items.length > 0, L = !e.hideActions && !!($ || t.actions);
+      return l(pn, X(x, {
         color: e.bgColor,
         class: ["v-stepper", {
           "v-stepper--alt-labels": e.altLabels,
@@ -18870,16 +18870,16 @@ ie()({
         style: e.style
       }), {
         default: () => {
-          var E, R;
-          return [I && l(Op, {
+          var E, O;
+          return [V && l(Op, {
             key: "stepper-header"
           }, {
-            default: () => [h.value.map((T, U) => {
+            default: () => [h.value.map((D, U) => {
               let {
                 raw: G,
                 ...C
-              } = T;
-              return l(ve, null, [!!U && l(ke, null, null), l(zp, C, {
+              } = D;
+              return l(de, null, [!!U && l(ke, null, null), l(zp, C, {
                 default: t[`header-item.${C.value}`] ?? t.header,
                 icon: t.icon,
                 title: t.title,
@@ -18889,18 +18889,18 @@ ie()({
           }), $ && l(Gp, {
             key: "stepper-window"
           }, {
-            default: () => [h.value.map((T) => l(Hp, {
-              value: T.value
+            default: () => [h.value.map((D) => l(Hp, {
+              value: D.value
             }, {
               default: () => {
                 var U, G;
-                return ((U = t[`item.${T.value}`]) == null ? void 0 : U.call(t, T)) ?? ((G = t.item) == null ? void 0 : G.call(t, T));
+                return ((U = t[`item.${D.value}`]) == null ? void 0 : U.call(t, D)) ?? ((G = t.item) == null ? void 0 : G.call(t, D));
               }
             }))]
           }), (E = t.default) == null ? void 0 : E.call(t, {
             prev: o,
             next: i
-          }), O && (((R = t.actions) == null ? void 0 : R.call(t, {
+          }), L && (((O = t.actions) == null ? void 0 : O.call(t, {
             next: i,
             prev: o
           })) ?? l(pi, {
@@ -18924,11 +18924,11 @@ const po = Symbol.for("vuetify:v-tabs"), qp = K({
     type: String,
     default: "horizontal"
   },
-  ...Me(kr({
+  ...ze(kr({
     selectedClass: "v-tab--selected",
     variant: "text"
   }), ["active", "block", "flat", "location", "position", "symbol"])
-}, "VTab"), Pa = ie()({
+}, "VTab"), Aa = ie()({
   name: "VTab",
   props: qp(),
   setup(e, a) {
@@ -18939,22 +18939,22 @@ const po = Symbol.for("vuetify:v-tabs"), qp = K({
     const {
       textColorClasses: i,
       textColorStyles: o
-    } = kt(e, "sliderColor"), s = A(), u = A(), r = k(() => e.direction === "horizontal"), d = k(() => {
+    } = kt(e, "sliderColor"), s = T(), u = T(), r = S(() => e.direction === "horizontal"), d = S(() => {
       var b, m;
       return ((m = (b = s.value) == null ? void 0 : b.group) == null ? void 0 : m.isSelected.value) ?? !1;
     });
     function y(b) {
-      var f, x;
+      var p, k;
       let {
         value: m
       } = b;
       if (m) {
-        const p = (x = (f = s.value) == null ? void 0 : f.$el.parentElement) == null ? void 0 : x.querySelector(".v-tab--selected .v-tab__slider"), h = u.value;
-        if (!p || !h) return;
-        const _ = getComputedStyle(p).color, g = p.getBoundingClientRect(), S = h.getBoundingClientRect(), I = r.value ? "x" : "y", $ = r.value ? "X" : "Y", O = r.value ? "right" : "bottom", E = r.value ? "width" : "height", R = g[I], T = S[I], U = R > T ? g[O] - S[O] : g[I] - S[I], G = Math.sign(U) > 0 ? r.value ? "right" : "bottom" : Math.sign(U) < 0 ? r.value ? "left" : "top" : "center", L = (Math.abs(U) + (Math.sign(U) < 0 ? g[E] : S[E])) / Math.max(g[E], S[E]) || 0, W = g[E] / S[E] || 0, Y = 1.5;
+        const _ = (k = (p = s.value) == null ? void 0 : p.$el.parentElement) == null ? void 0 : k.querySelector(".v-tab--selected .v-tab__slider"), h = u.value;
+        if (!_ || !h) return;
+        const g = getComputedStyle(_).color, f = _.getBoundingClientRect(), x = h.getBoundingClientRect(), V = r.value ? "x" : "y", $ = r.value ? "X" : "Y", L = r.value ? "right" : "bottom", E = r.value ? "width" : "height", O = f[V], D = x[V], U = O > D ? f[L] - x[L] : f[V] - x[V], G = Math.sign(U) > 0 ? r.value ? "right" : "bottom" : Math.sign(U) < 0 ? r.value ? "left" : "top" : "center", R = (Math.abs(U) + (Math.sign(U) < 0 ? f[E] : x[E])) / Math.max(f[E], x[E]) || 0, q = f[E] / x[E] || 0, Y = 1.5;
         fa(h, {
-          backgroundColor: [_, "currentcolor"],
-          transform: [`translate${$}(${U}px) scale${$}(${W})`, `translate${$}(${U / Y}px) scale${$}(${(L - 1) / Y + 1})`, "none"],
+          backgroundColor: [g, "currentcolor"],
+          transform: [`translate${$}(${U}px) scale${$}(${q})`, `translate${$}(${U / Y}px) scale${$}(${(R - 1) / Y + 1})`, "none"],
           transformOrigin: Array(3).fill(G)
         }, {
           duration: 225,
@@ -18981,7 +18981,7 @@ const po = Symbol.for("vuetify:v-tabs"), qp = K({
         ...t,
         default: () => {
           var m;
-          return l(ve, null, [((m = t.default) == null ? void 0 : m.call(t)) ?? e.text, !e.hideSlider && l("div", {
+          return l(de, null, [((m = t.default) == null ? void 0 : m.call(t)) ?? e.text, !e.hideSlider && l("div", {
             ref: u,
             class: ["v-tab__slider", i.value],
             style: o.value
@@ -18991,7 +18991,7 @@ const po = Symbol.for("vuetify:v-tabs"), qp = K({
     }), Lt({}, s);
   }
 }), Yp = K({
-  ...Me(ro(), ["continuous", "nextIcon", "prevIcon", "showArrows", "touch", "mandatory"])
+  ...ze(ro(), ["continuous", "nextIcon", "prevIcon", "showArrows", "touch", "mandatory"])
 }, "VTabsWindow"), Jp = ie()({
   name: "VTabsWindow",
   props: Yp(),
@@ -19002,7 +19002,7 @@ const po = Symbol.for("vuetify:v-tabs"), qp = K({
     let {
       slots: t
     } = a;
-    const n = Be(po, null), i = Ve(e, "modelValue"), o = k({
+    const n = Be(po, null), i = Ve(e, "modelValue"), o = S({
       get() {
         var s;
         return i.value != null || !n ? i.value : (s = n.items.value.find((u) => n.selected.value.includes(u.id))) == null ? void 0 : s.value;
@@ -19076,7 +19076,7 @@ const Zp = K({
     selectedClass: "v-tab-item--selected"
   }),
   ...St(),
-  ...Oe()
+  ...Me()
 }, "VTabs"), eb = ie()({
   name: "VTabs",
   props: Zp(),
@@ -19088,14 +19088,14 @@ const Zp = K({
       attrs: t,
       slots: n
     } = a;
-    const i = Ve(e, "modelValue"), o = k(() => Qp(e.items)), {
+    const i = Ve(e, "modelValue"), o = S(() => Qp(e.items)), {
       densityClasses: s
     } = Pt(e), {
       backgroundColorClasses: u,
       backgroundColorStyles: r
     } = dt(oe(e, "bgColor")), {
       scopeId: d
-    } = ja();
+    } = Ha();
     return pt({
       VTab: {
         color: oe(e, "color"),
@@ -19107,7 +19107,7 @@ const Zp = K({
       }
     }), se(() => {
       const y = nl.filterProps(e), b = !!(n.window || e.items.length > 0);
-      return l(ve, null, [l(nl, X(y, {
+      return l(de, null, [l(nl, X(y, {
         modelValue: i.value,
         "onUpdate:modelValue": (m) => i.value = m,
         class: ["v-tabs", `v-tabs--${e.direction}`, `v-tabs--align-tabs-${e.alignTabs}`, {
@@ -19123,18 +19123,18 @@ const Zp = K({
       }, d, t), {
         default: () => {
           var m;
-          return [((m = n.default) == null ? void 0 : m.call(n)) ?? o.value.map((f) => {
-            var x;
-            return ((x = n.tab) == null ? void 0 : x.call(n, {
-              item: f
-            })) ?? l(Pa, X(f, {
-              key: f.text,
-              value: f.value
+          return [((m = n.default) == null ? void 0 : m.call(n)) ?? o.value.map((p) => {
+            var k;
+            return ((k = n.tab) == null ? void 0 : k.call(n, {
+              item: p
+            })) ?? l(Aa, X(p, {
+              key: p.text,
+              value: p.value
             }), {
-              default: n[`tab.${f.value}`] ? () => {
-                var p;
-                return (p = n[`tab.${f.value}`]) == null ? void 0 : p.call(n, {
-                  item: f
+              default: n[`tab.${p.value}`] ? () => {
+                var _;
+                return (_ = n[`tab.${p.value}`]) == null ? void 0 : _.call(n, {
+                  item: p
                 });
               } : void 0
             });
@@ -19147,17 +19147,17 @@ const Zp = K({
       }, d), {
         default: () => {
           var m;
-          return [o.value.map((f) => {
-            var x;
-            return ((x = n.item) == null ? void 0 : x.call(n, {
-              item: f
+          return [o.value.map((p) => {
+            var k;
+            return ((k = n.item) == null ? void 0 : k.call(n, {
+              item: p
             })) ?? l(Xp, {
-              value: f.value
+              value: p.value
             }, {
               default: () => {
-                var p;
-                return (p = n[`item.${f.value}`]) == null ? void 0 : p.call(n, {
-                  item: f
+                var _;
+                return (_ = n[`item.${p.value}`]) == null ? void 0 : _.call(n, {
+                  item: p
                 });
               }
             });
@@ -19203,31 +19203,31 @@ const Zp = K({
     }
   },
   setup(e) {
-    const a = e, t = A(1), n = A(10), i = k(() => a.headers.filter((_) => _.visible !== !1)), o = k(() => a.filters.some((_) => s(_.title)));
-    A(!1);
-    const s = (_) => {
-      var g;
-      return ((g = a.filters.find((S) => S.title === _)) == null ? void 0 : g.checked) || !1;
-    }, u = (_) => {
-      const g = a.filters.find((S) => S.title === _);
-      g && (g.checked = !g.checked);
-    }, r = (_) => {
-      const g = a.filters.find((S) => S.title === _);
-      g && (g.checked = !1);
-    }, d = A(!1);
-    A(!1);
-    const y = A(!1), b = A(null), m = (_, g) => {
+    const a = e, t = T(1), n = T(10), i = S(() => a.headers.filter((g) => g.visible !== !1)), o = S(() => a.filters.some((g) => s(g.title)));
+    T(!1);
+    const s = (g) => {
+      var f;
+      return ((f = a.filters.find((x) => x.title === g)) == null ? void 0 : f.checked) || !1;
+    }, u = (g) => {
+      const f = a.filters.find((x) => x.title === g);
+      f && (f.checked = !f.checked);
+    }, r = (g) => {
+      const f = a.filters.find((x) => x.title === g);
+      f && (f.checked = !1);
+    }, d = T(!1);
+    T(!1);
+    const y = T(!1), b = T(null), m = (g, f) => {
       if (!y.value) {
-        _.preventDefault();
+        g.preventDefault();
         return;
       }
-      b.value = g, _.dataTransfer.effectAllowed = "move";
-    }, f = (_, g) => {
-      if (b.value === null || b.value === g) return;
-      const S = a.headers[b.value];
-      a.headers[b.value] = a.headers[g], a.headers[g] = S, b.value = null, y.value = !1;
-    }, x = (_) => {
-      switch (_ == null ? void 0 : _.toLowerCase()) {
+      b.value = f, g.dataTransfer.effectAllowed = "move";
+    }, p = (g, f) => {
+      if (b.value === null || b.value === f) return;
+      const x = a.headers[b.value];
+      a.headers[b.value] = a.headers[f], a.headers[f] = x, b.value = null, y.value = !1;
+    }, k = (g) => {
+      switch (g == null ? void 0 : g.toLowerCase()) {
         case "active":
           return "active";
         case "inactive":
@@ -19237,12 +19237,12 @@ const Zp = K({
         default:
           return "";
       }
-    }, p = k(() => {
-      const _ = (t.value - 1) * n.value, g = _ + n.value;
-      return a.items.slice(_, g);
-    }), h = k(() => Math.ceil(a.items.length / n.value));
-    return (_, g) => {
-      const S = Ti("v-date-input");
+    }, _ = S(() => {
+      const g = (t.value - 1) * n.value, f = g + n.value;
+      return a.items.slice(g, f);
+    }), h = S(() => Math.ceil(a.items.length / n.value));
+    return (g, f) => {
+      const x = Ti("v-date-input");
       return w(), re("div", tb, [
         l(xe, { class: "" }, {
           default: c(() => [
@@ -19256,11 +19256,11 @@ const Zp = K({
                   class: "account_v_card_dark account_widget_vcard account_vcard_border"
                 }, {
                   append: c(() => [
-                    (w(), D(ae(F(le)("users")), { style: { color: "white", "font-size": "16px" } }))
+                    (w(), A(te(F(ne)("users")), { style: { color: "white", "font-size": "16px" } }))
                   ]),
                   default: c(() => [
                     l(Ae, null, {
-                      default: c(() => g[12] || (g[12] = [
+                      default: c(() => f[12] || (f[12] = [
                         v("h5", { class: "account_texth5 mb-0 account_text_white font-weight-bold" }, "10,000", -1)
                       ])),
                       _: 1,
@@ -19282,7 +19282,7 @@ const Zp = K({
                   class: "account_vcard_border account_widget_vcard"
                 }, {
                   append: c(() => [
-                    (w(), D(ae(F(le)("currency-rupee")), { style: { "font-size": "16px" } }))
+                    (w(), A(te(F(ne)("currency-rupee")), { style: { "font-size": "16px" } }))
                   ]),
                   default: c(() => [
                     l(Ae, null, {
@@ -19307,7 +19307,7 @@ const Zp = K({
                   class: "account_vcard_border account_widget_vcard"
                 }, {
                   append: c(() => [
-                    (w(), D(ae(F(le)("trending-up")), { style: { "font-size": "16px" } }))
+                    (w(), A(te(F(ne)("trending-up")), { style: { "font-size": "16px" } }))
                   ]),
                   default: c(() => [
                     l(Ae, null, {
@@ -19332,7 +19332,7 @@ const Zp = K({
                   class: "account_vcard_border account_widget_vcard"
                 }, {
                   append: c(() => [
-                    (w(), D(ae(F(le)("star")), { style: { "font-size": "16px" } }))
+                    (w(), A(te(F(ne)("star")), { style: { "font-size": "16px" } }))
                   ]),
                   default: c(() => [
                     l(Ae, null, {
@@ -19365,7 +19365,7 @@ const Zp = K({
                   placeholder: e.title === "Accounting" ? "Search by Name" : "Search by Customer Name"
                 }, {
                   "prepend-inner": c(() => [
-                    (w(), D(ae(F(le)("search")), { style: { "font-size": "20px" } }))
+                    (w(), A(te(F(ne)("search")), { style: { "font-size": "20px" } }))
                   ]),
                   _: 1
                 }, 8, ["placeholder"]),
@@ -19379,26 +19379,26 @@ const Zp = K({
                     "hide-details": "",
                     label: "Compact View",
                     modelValue: d.value,
-                    "onUpdate:modelValue": g[0] || (g[0] = (I) => d.value = I)
+                    "onUpdate:modelValue": f[0] || (f[0] = (V) => d.value = V)
                   }, null, 8, ["modelValue"]),
                   l(ot, {
                     location: "bottom",
                     "close-on-content-click": !1
                   }, {
-                    activator: c(({ props: I }) => [
+                    activator: c(({ props: V }) => [
                       l(oo, {
                         text: "Filters list",
                         location: "top"
                       }, {
                         activator: c(({ props: $ }) => [
-                          l(Z, X({ ...I, ...$ }, {
+                          l(Z, X({ ...V, ...$ }, {
                             variant: "text",
                             class: "account_filter_btn_color",
                             rounded: "1",
                             size: "36"
                           }), {
                             default: c(() => [
-                              (w(), D(ae(F(le)("filter")), { style: { "font-size": "22px" } }))
+                              (w(), A(te(F(ne)("filter")), { style: { "font-size": "22px" } }))
                             ]),
                             _: 2
                           }, 1040)
@@ -19409,21 +19409,21 @@ const Zp = K({
                     default: c(() => [
                       l(me, { class: "account_vcard_menu account_vcard_border" }, {
                         default: c(() => [
-                          g[13] || (g[13] = v("div", { class: "account_vcard_menu_hdng px-4" }, "Add Filters", -1)),
+                          f[13] || (f[13] = v("div", { class: "account_vcard_menu_hdng px-4" }, "Add Filters", -1)),
                           l(ke, { class: "my-1 mt-0" }),
                           v("div", ob, [
-                            (w(!0), re(ve, null, ze(e.filters, (I) => (w(), re("div", {
+                            (w(!0), re(de, null, Re(e.filters, (V) => (w(), re("div", {
                               class: "account_vcard_menu_item",
-                              key: I.title
+                              key: V.title
                             }, [
                               v("div", sb, [
-                                l(Dt, {
-                                  "model-value": s(I.title),
-                                  "onUpdate:modelValue": ($) => u(I.title),
+                                l(Nt, {
+                                  "model-value": s(V.title),
+                                  "onUpdate:modelValue": ($) => u(V.title),
                                   class: "account_v_checkbox account_filter_menu_checkbox",
                                   density: "compact"
                                 }, null, 8, ["model-value", "onUpdate:modelValue"]),
-                                v("span", null, ue(I.title), 1)
+                                v("span", null, ue(V.title), 1)
                               ])
                             ]))), 128))
                           ])
@@ -19439,15 +19439,15 @@ const Zp = K({
                     location: "bottom",
                     "close-on-content-click": !1
                   }, {
-                    activator: c(({ props: I }) => [
-                      l(Z, X(I, {
+                    activator: c(({ props: V }) => [
+                      l(Z, X(V, {
                         class: "account_filter_btn_color",
                         variant: "text",
                         rounded: "1",
                         size: "36"
                       }), {
                         default: c(() => [
-                          (w(), D(ae(F(le)("columns-3")), { style: { "font-size": "22px" } }))
+                          (w(), A(te(F(ne)("columns-3")), { style: { "font-size": "22px" } }))
                         ]),
                         _: 2
                       }, 1040)
@@ -19456,8 +19456,8 @@ const Zp = K({
                       l(me, null, {
                         default: c(() => [
                           l(na, null, {
-                            default: c(() => g[14] || (g[14] = [
-                              de("Toggle and Reorder", -1)
+                            default: c(() => f[14] || (f[14] = [
+                              ve("Toggle and Reorder", -1)
                             ])),
                             _: 1,
                             __: [14]
@@ -19465,28 +19465,28 @@ const Zp = K({
                           l(ke, { class: "mb-2 ma-0" }),
                           l(xe, { class: "ma-0" }, {
                             default: c(() => [
-                              (w(!0), re(ve, null, ze(a.headers, (I, $) => (w(), D(B, {
+                              (w(!0), re(de, null, Re(a.headers, (V, $) => (w(), A(B, {
                                 cols: "12",
                                 class: "py-1 draggable-header",
-                                key: I.value,
+                                key: V.value,
                                 draggable: "true",
-                                onDragstart: (O) => m(O, $),
-                                onDragover: g[3] || (g[3] = en(() => {
+                                onDragstart: (L) => m(L, $),
+                                onDragover: f[3] || (f[3] = ba(() => {
                                 }, ["prevent"])),
-                                onDrop: (O) => f(O, $)
+                                onDrop: (L) => p(L, $)
                               }, {
                                 default: c(() => [
                                   v("div", ub, [
                                     v("div", {
                                       class: "d-flex align-center w-100 gap-1 cursor-grab",
-                                      onMousedown: g[1] || (g[1] = (O) => y.value = !0),
-                                      onMouseup: g[2] || (g[2] = (O) => y.value = !1)
+                                      onMousedown: f[1] || (f[1] = (L) => y.value = !0),
+                                      onMouseup: f[2] || (f[2] = (L) => y.value = !1)
                                     }, [
-                                      (w(), D(ae(F(le)("grip-vertical")), {
+                                      (w(), A(te(F(ne)("grip-vertical")), {
                                         style: { "font-size": "18px" },
                                         class: "drag-icon"
                                       })),
-                                      v("p", rb, ue(I.title), 1)
+                                      v("p", rb, ue(V.title), 1)
                                     ], 32),
                                     l(nt, {
                                       density: "compact",
@@ -19495,7 +19495,7 @@ const Zp = K({
                                       class: "account_swtich_btn",
                                       inset: "",
                                       modelValue: a.headers[$].visible,
-                                      "onUpdate:modelValue": (O) => a.headers[$].visible = O
+                                      "onUpdate:modelValue": (L) => a.headers[$].visible = L
                                     }, null, 8, ["modelValue", "onUpdate:modelValue"])
                                   ])
                                 ]),
@@ -19515,15 +19515,15 @@ const Zp = K({
                     location: "bottom",
                     "close-on-content-click": !1
                   }, {
-                    activator: c(({ props: I }) => [
-                      l(Z, X(I, {
+                    activator: c(({ props: V }) => [
+                      l(Z, X(V, {
                         class: "account_filter_btn_color",
                         variant: "text",
                         rounded: "1",
                         size: "36"
                       }), {
                         default: c(() => [
-                          (w(), D(ae(F(le)("download")), { style: { "font-size": "22px" } }))
+                          (w(), A(te(F(ne)("download")), { style: { "font-size": "22px" } }))
                         ]),
                         _: 2
                       }, 1040)
@@ -19531,7 +19531,7 @@ const Zp = K({
                     default: c(() => [
                       l(me, { class: "account_vcard_border" }, {
                         default: c(() => [
-                          l(_a, null, {
+                          l(ha, null, {
                             default: c(() => [
                               l(xt, {
                                 title: "PDF",
@@ -19563,9 +19563,9 @@ const Zp = K({
         }),
         l(xl, { mode: "in-out" }, {
           default: c(() => [
-            o.value ? (w(), D(xe, { key: 0 }, {
+            o.value ? (w(), A(xe, { key: 0 }, {
               default: c(() => [
-                o.value ? q("", !0) : (w(), D(B, {
+                o.value ? W("", !0) : (w(), A(B, {
                   key: 0,
                   cols: "12"
                 }, {
@@ -19574,8 +19574,8 @@ const Zp = K({
                       type: "info",
                       variant: "tonal"
                     }, {
-                      default: c(() => g[15] || (g[15] = [
-                        de(" No filters selected. Please select a filter to apply. ", -1)
+                      default: c(() => f[15] || (f[15] = [
+                        ve(" No filters selected. Please select a filter to apply. ", -1)
                       ])),
                       _: 1,
                       __: [15]
@@ -19583,7 +19583,7 @@ const Zp = K({
                   ]),
                   _: 1
                 })),
-                s("Status") ? (w(), D(B, {
+                s("Status") ? (w(), A(B, {
                   key: 1,
                   cols: "12",
                   lg: "3",
@@ -19603,10 +19603,10 @@ const Zp = K({
                         l(Z, {
                           variant: "text",
                           size: "small",
-                          onClick: g[4] || (g[4] = (I) => r("Status"))
+                          onClick: f[4] || (f[4] = (V) => r("Status"))
                         }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                            (w(), A(te(F(ne)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -19615,8 +19615,8 @@ const Zp = K({
                     }, 8, ["items"])
                   ]),
                   _: 1
-                })) : q("", !0),
-                s("Account Type") ? (w(), D(B, {
+                })) : W("", !0),
+                s("Account Type") ? (w(), A(B, {
                   key: 2,
                   cols: "12",
                   lg: "3",
@@ -19636,10 +19636,10 @@ const Zp = K({
                         l(Z, {
                           variant: "text",
                           size: "small",
-                          onClick: g[5] || (g[5] = (I) => r("Account Type"))
+                          onClick: f[5] || (f[5] = (V) => r("Account Type"))
                         }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                            (w(), A(te(F(ne)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -19648,8 +19648,8 @@ const Zp = K({
                     }, 8, ["items"])
                   ]),
                   _: 1
-                })) : q("", !0),
-                s("Customer Type") ? (w(), D(B, {
+                })) : W("", !0),
+                s("Customer Type") ? (w(), A(B, {
                   key: 3,
                   cols: "12",
                   lg: "3",
@@ -19669,10 +19669,10 @@ const Zp = K({
                         l(Z, {
                           variant: "text",
                           size: "small",
-                          onClick: g[6] || (g[6] = (I) => r("Customer Type"))
+                          onClick: f[6] || (f[6] = (V) => r("Customer Type"))
                         }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                            (w(), A(te(F(ne)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -19681,8 +19681,8 @@ const Zp = K({
                     }, 8, ["items"])
                   ]),
                   _: 1
-                })) : q("", !0),
-                s("Currency") ? (w(), D(B, {
+                })) : W("", !0),
+                s("Currency") ? (w(), A(B, {
                   key: 4,
                   cols: "12",
                   lg: "3",
@@ -19702,10 +19702,10 @@ const Zp = K({
                         l(Z, {
                           variant: "text",
                           size: "small",
-                          onClick: g[7] || (g[7] = (I) => r("Currency"))
+                          onClick: f[7] || (f[7] = (V) => r("Currency"))
                         }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                            (w(), A(te(F(ne)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -19714,8 +19714,8 @@ const Zp = K({
                     }, 8, ["items"])
                   ]),
                   _: 1
-                })) : q("", !0),
-                s("Last Transaction From") ? (w(), D(B, {
+                })) : W("", !0),
+                s("Last Transaction From") ? (w(), A(B, {
                   key: 5,
                   cols: "12",
                   lg: "3",
@@ -19723,32 +19723,32 @@ const Zp = K({
                 }, {
                   default: c(() => [
                     v("div", cb, [
-                      l(S, {
+                      l(x, {
                         class: "accounting_date_input",
                         placeholder: "Last Transaction From",
                         "max-width": "368",
                         multiple: "range"
                       }, {
                         "prepend-inner": c(() => [
-                          (w(), D(ae(F(le)("calendar")), { style: { "font-size": "20px" } }))
+                          (w(), A(te(F(ne)("calendar")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 1
                       }),
                       l(Z, {
                         variant: "text",
                         size: "small",
-                        onClick: g[8] || (g[8] = (I) => r("Last Transaction From"))
+                        onClick: f[8] || (f[8] = (V) => r("Last Transaction From"))
                       }, {
                         default: c(() => [
-                          (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                          (w(), A(te(F(ne)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 1
                       })
                     ])
                   ]),
                   _: 1
-                })) : q("", !0),
-                s("Last Order From") ? (w(), D(B, {
+                })) : W("", !0),
+                s("Last Order From") ? (w(), A(B, {
                   key: 6,
                   cols: "12",
                   lg: "3",
@@ -19756,34 +19756,34 @@ const Zp = K({
                 }, {
                   default: c(() => [
                     v("div", db, [
-                      l(S, {
+                      l(x, {
                         class: "accounting_date_input",
                         placeholder: "Last Order From",
                         "max-width": "368",
                         multiple: "range"
                       }, {
                         "prepend-inner": c(() => [
-                          (w(), D(ae(F(le)("calendar")), { style: { "font-size": "20px" } }))
+                          (w(), A(te(F(ne)("calendar")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 1
                       }),
                       l(Z, {
                         variant: "text",
                         size: "small",
-                        onClick: g[9] || (g[9] = (I) => r("Last Order From"))
+                        onClick: f[9] || (f[9] = (V) => r("Last Order From"))
                       }, {
                         default: c(() => [
-                          (w(), D(ae(F(le)("circle-dashed-x")), { style: { "font-size": "20px" } }))
+                          (w(), A(te(F(ne)("circle-dashed-x")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 1
                       })
                     ])
                   ]),
                   _: 1
-                })) : q("", !0)
+                })) : W("", !0)
               ]),
               _: 1
-            })) : q("", !0)
+            })) : W("", !0)
           ]),
           _: 1
         }),
@@ -19791,43 +19791,43 @@ const Zp = K({
           default: c(() => [
             l(zt, {
               headers: i.value,
-              items: p.value,
+              items: _.value,
               "items-per-page": n.value,
               "show-select": "",
               density: d.value ? "compact" : "default",
               class: "elevation-1 border rounded account_dynamic_table"
             }, {
-              "item.actions": c(({ item: I }) => [
+              "item.actions": c(({ item: V }) => [
                 v("div", vb, [
-                  (w(), D(ae(F(le)("eye")), {
+                  (w(), A(te(F(ne)("eye")), {
                     class: "account_v_btn_color",
                     style: { "font-size": "20px", cursor: "pointer" }
                   })),
-                  (w(), D(ae(F(le)("edit")), {
+                  (w(), A(te(F(ne)("edit")), {
                     class: "account_v_btn_color",
                     style: { "font-size": "20px", cursor: "pointer" }
                   })),
-                  (w(), D(ae(F(le)("trash")), {
+                  (w(), A(te(F(ne)("trash")), {
                     class: "account_v_btn_color",
                     style: { "font-size": "20px", cursor: "pointer", color: "red" }
                   }))
                 ])
               ]),
-              "item.status": c(({ item: I }) => [
+              "item.status": c(({ item: V }) => [
                 l(gt, {
-                  class: ye(["account_table_chip", x(I.status)]),
+                  class: ye(["account_table_chip", k(V.status)]),
                   size: "small"
                 }, {
                   default: c(() => [
-                    de(ue(I.status), 1)
+                    ve(ue(V.status), 1)
                   ]),
                   _: 2
                 }, 1032, ["class"])
               ]),
-              "item.customerName": c(({ item: I }) => [
+              "item.customerName": c(({ item: V }) => [
                 v("div", fb, [
-                  v("p", mb, ue(I.customerName), 1),
-                  v("p", gb, ue(I.customerEmail), 1)
+                  v("p", mb, ue(V.customerName), 1),
+                  v("p", gb, ue(V.customerEmail), 1)
                 ])
               ]),
               _: 1
@@ -19846,21 +19846,21 @@ const Zp = K({
                   v("div", pb, [
                     v("p", bb, "Page " + ue(t.value) + " of " + ue(h.value), 1),
                     v("div", _b, [
-                      g[16] || (g[16] = v("p", { class: "mb-0 account_table_pagination_text" }, "Rows per page:", -1)),
+                      f[16] || (f[16] = v("p", { class: "mb-0 account_table_pagination_text" }, "Rows per page:", -1)),
                       l(Ze, {
                         class: "accouting_field accouting_active_field",
                         variant: "outlined",
                         density: "compact",
                         items: [5, 10, 15, 20, 25, 30, 50],
                         modelValue: n.value,
-                        "onUpdate:modelValue": g[10] || (g[10] = (I) => n.value = I)
+                        "onUpdate:modelValue": f[10] || (f[10] = (V) => n.value = V)
                       }, null, 8, ["modelValue"])
                     ])
                   ]),
                   l(gi, {
                     class: "account_pagination_bg",
                     modelValue: t.value,
-                    "onUpdate:modelValue": g[11] || (g[11] = (I) => t.value = I),
+                    "onUpdate:modelValue": f[11] || (f[11] = (V) => t.value = V),
                     "total-visible": 3,
                     "next-icon": "mdi-arrow-right-drop-circle-outline",
                     "prev-icon": "mdi-arrow-left-drop-circle-outline",
@@ -19876,86 +19876,96 @@ const Zp = K({
       ]);
     };
   }
-}, $l = /* @__PURE__ */ Et(hb, [["__scopeId", "data-v-99b015f6"]]), xb = { class: "account_customers_list" }, kb = { class: "account_ui_vcard" }, Sb = { class: "d-flex align-center gap-2" }, wb = { class: "account_vcard_menu_items py-1" }, Cb = ["onClick"], Vb = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Ib = { class: "custom_option d-flex align-center" }, Pb = { class: "d-flex align-center justify-end mt-4" }, Ab = {
+}, $l = /* @__PURE__ */ Et(hb, [["__scopeId", "data-v-99b015f6"]]), xb = { class: "account_customers_list" }, kb = { class: "account_ui_vcard" }, Sb = { class: "d-flex align-center gap-2" }, wb = { class: "account_vcard_menu_items py-1" }, Cb = ["onClick"], Vb = { class: "font-weight-bold" }, Ib = ["onClick"], Pb = { class: "custom_option d-flex align-center" }, Ab = { class: "d-flex align-center justify-end mt-4" }, Tb = {
   __name: "AccountCustomerList",
   setup(e) {
-    const a = A([
+    const a = T([
       // Core Information
-      { label: "Name", key: "name", visible: !0 },
-      { label: "Mobile", key: "mobile", visible: !0 },
-      { label: "Opening Balance", key: "openingBalance", visible: !0 },
+      { section: "Core Information", label: "Name", key: "name", visible: !0 },
+      { section: "Core Information", label: "Mobile", key: "mobile", visible: !0 },
+      { section: "Core Information", label: "Opening Balance", key: "openingBalance", visible: !0 },
       // Contact Details
-      { label: "Mailing Name", key: "mailingName", visible: !0 },
-      { label: "Email", key: "email", visible: !0 },
-      { label: "Address", key: "address", visible: !0 },
-      { label: "State", key: "state", visible: !0 },
-      { label: "Pincode", key: "pincode", visible: !0 },
-      { label: "Country", key: "country", visible: !0 },
+      { section: "Contact Details", label: "Mailing Name", key: "mailingName", visible: !0 },
+      { section: "Contact Details", label: "Email", key: "email", visible: !0 },
+      { section: "Contact Details", label: "Address", key: "address", visible: !0 },
+      { section: "Contact Details", label: "State", key: "state", visible: !0 },
+      { section: "Contact Details", label: "Pincode", key: "pincode", visible: !0 },
+      { section: "Contact Details", label: "Country", key: "country", visible: !0 },
       // Tax & Compliance
-      { label: "GSTIN/UIN", key: "gstin", visible: !0 },
-      { label: "PAN", key: "pan", visible: !0 },
-      { label: "Tax Registration Number", key: "taxReg", visible: !0 },
-      { label: "TDS Applicable", key: "tds", visible: !0 },
+      { section: "Tax & Compliance", label: "GSTIN/UIN", key: "gstin", visible: !0 },
+      { section: "Tax & Compliance", label: "PAN", key: "pan", visible: !0 },
+      { section: "Tax & Compliance", label: "Tax Registration Number", key: "taxReg", visible: !0 },
+      { section: "Tax & Compliance", label: "TDS Applicable", key: "tds", visible: !0 },
       // Financial Controls
-      { label: "Credit Limit", key: "creditLimit", visible: !0 },
-      { label: "Credit Period (Days)", key: "creditPeriod", visible: !0 },
-      { label: "Maintain Bill-wise Details", key: "billWise", visible: !0 },
+      { section: "Financial Controls", label: "Credit Limit", key: "creditLimit", visible: !0 },
+      { section: "Financial Controls", label: "Credit Period (Days)", key: "creditPeriod", visible: !0 },
+      { section: "Financial Controls", label: "Maintain Bill-wise Details", key: "billWise", visible: !0 },
       // Banking Details
-      { label: "Bank Name", key: "bankName", visible: !0 },
-      { label: "Account Number", key: "accountNumber", visible: !0 },
-      { label: "IFSC Code", key: "ifscCode", visible: !0 },
+      { section: "Banking Details", label: "Bank Name", key: "bankName", visible: !0 },
+      { section: "Banking Details", label: "Account Number", key: "accountNumber", visible: !0 },
+      { section: "Banking Details", label: "IFSC Code", key: "ifscCode", visible: !0 },
       // Additional Fields
-      { label: "Additional Country 1", key: "addCountry1", visible: !0 },
-      { label: "Place of Supply", key: "state", visible: !0 },
-      { label: "Ship-to Address", key: "shipToAddress", visible: !0 }
-    ]), t = (x) => {
-      var p;
-      return (p = a.value.find((h) => h.key === x)) == null ? void 0 : p.visible;
-    }, n = A([
+      { section: "Additional Fields", label: "Additional Country 1", key: "addCountry1", visible: !0 },
+      { section: "Additional Fields", label: "Place of Supply", key: "state", visible: !0 },
+      { section: "Additional Fields", label: "Ship-to Address", key: "shipToAddress", visible: !0 }
+    ]), t = S(() => {
+      const f = {};
+      return a.value.forEach((x) => {
+        f[x.section] || (f[x.section] = []), f[x.section].push(x);
+      }), f;
+    }), n = (f) => t.value[f].every((V) => V.visible), i = (f) => {
+      const x = t.value[f], V = x.every(($) => $.visible);
+      x.forEach(($) => {
+        $.visible = !V;
+      });
+    }, o = (f) => a.value.some((x) => x.section === f && x.visible), s = (f) => {
+      var x;
+      return (x = a.value.find((V) => V.key === f)) == null ? void 0 : x.visible;
+    }, u = T([
       { title: "Customer Name", align: "start", sortable: !1, value: "customerName", visible: !0 },
       { title: "Customer Type", value: "customerType", visible: !0 },
       { title: "Total Orders", value: "totalOrders", visible: !0 },
       { title: "Last Order Date", value: "lastOrderDate", visible: !0 },
       { title: "Status", value: "status", visible: !0 },
       { title: "Actions", value: "actions", visible: !0 }
-    ]), i = A(Array.from({ length: 100 }, (x, p) => ({
-      customerName: `Customer ${p + 1}`,
-      customerEmail: `customer${p + 1}@test.com`,
+    ]), r = T(Array.from({ length: 100 }, (f, x) => ({
+      customerName: `Customer ${x + 1}`,
+      customerEmail: `customer${x + 1}@test.com`,
       customerType: ["Individual", "Business"][Math.floor(Math.random() * 2)],
       totalOrders: Math.floor(Math.random() * 20),
       lastOrderDate: `2025-${String(Math.floor(Math.random() * 6) + 1).padStart(2, "0")}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, "0")}`,
       status: ["Active", "Pending", "Inactive"][Math.floor(Math.random() * 3)]
-    }))), o = A([
+    }))), d = T([
       { title: "Status", checked: !1 },
       { title: "Customer Type", checked: !1 },
       { title: "Last Order From", checked: !1 },
       { title: "Last Order To", checked: !1 }
-    ]), s = A([
+    ]), y = T([
       { title: "Active", value: "Active" },
       { title: "Pending", value: "Pending" },
       { title: "Inactive", value: "Inactive" }
-    ]), u = A([
+    ]), b = T([
       { title: "Individual", value: "Individual" },
       { title: "Business", value: "Business" }
-    ]), r = k(() => ({
-      totalRecords: i.value.length,
-      avgSale: i.value.reduce((x, p) => x + p.totalOrders * 100, 0) / i.value.length,
-      top10AvgSale: i.value.sort((x, p) => p.totalOrders - x.totalOrders).slice(0, Math.ceil(i.value.length * 0.1)).reduce((x, p) => x + p.totalOrders * 100, 0) / Math.ceil(i.value.length * 0.1),
+    ]), m = S(() => ({
+      totalRecords: r.value.length,
+      avgSale: r.value.reduce((f, x) => f + x.totalOrders * 100, 0) / r.value.length,
+      top10AvgSale: r.value.sort((f, x) => x.totalOrders - f.totalOrders).slice(0, Math.ceil(r.value.length * 0.1)).reduce((f, x) => f + x.totalOrders * 100, 0) / Math.ceil(r.value.length * 0.1),
       avgRating: 4.2
-    })), d = A(!1), y = () => {
-      d.value = !d.value;
-    }, b = A([
+    })), p = T(!1), k = () => {
+      p.value = !p.value;
+    }, _ = T([
       { title: "Credit", value: "credit" },
       { title: "Debit", value: "debit" }
-    ]), m = A("credit"), f = A(0);
+    ]), h = T("credit"), g = T(0);
     return st(() => {
       setInterval(() => {
-        f.value++;
+        g.value++;
       }, 3e3);
-    }), (x, p) => (w(), re("div", xb, [
-      l(Ua, null, {
+    }), (f, x) => (w(), re("div", xb, [
+      l(Ga, null, {
         default: c(() => [
-          d.value ? (w(), D(xe, {
+          p.value ? (w(), A(xe, {
             key: 0,
             class: "justify-center"
           }, {
@@ -19976,40 +19986,54 @@ const Zp = K({
                             "offset-y": "",
                             "close-on-content-click": !1
                           }, {
-                            activator: c(({ props: h }) => [
-                              l(Z, X(h, {
+                            activator: c(({ props: V }) => [
+                              l(Z, X(V, {
                                 variant: "text",
                                 size: "x-small",
                                 rounded: ""
                               }), {
                                 default: c(() => [
-                                  (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
+                                  (w(), A(te(F(ne)("settings")), { style: { "font-size": "20px" } }))
                                 ]),
                                 _: 2
                               }, 1040)
                             ]),
                             default: c(() => [
-                              l(me, { class: "account_vcard_menu account_vcard_border" }, {
+                              l(me, {
+                                class: "account_vcard_menu account_vcard_border",
+                                width: "250px"
+                              }, {
                                 default: c(() => [
-                                  p[1] || (p[1] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
+                                  x[1] || (x[1] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                                   l(ke, { class: "my-1 mt-0" }),
                                   v("div", wb, [
-                                    (w(!0), re(ve, null, ze(a.value, (h) => (w(), re("div", {
-                                      key: h.key,
-                                      class: "account_vcard_menu_item",
-                                      onClick: (_) => h.visible = !h.visible
-                                    }, [
-                                      v("div", Vb, [
-                                        h.visible ? (w(), D($e, {
-                                          key: 0,
-                                          size: "16",
-                                          icon: "mdi-check"
-                                        })) : q("", !0),
-                                        v("span", {
-                                          class: ye(h.visible ? "" : "field_list_dynamic_ml")
-                                        }, ue(h.label), 3)
-                                      ])
-                                    ], 8, Cb))), 128))
+                                    (w(!0), re(de, null, Re(t.value, (V, $) => (w(), re("div", { key: $ }, [
+                                      v("div", {
+                                        class: "field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
+                                        onClick: (L) => i($)
+                                      }, [
+                                        (w(), A(te(F(ne)(n($) ? "check" : "square")), { style: { "font-size": "16px" } })),
+                                        v("span", Vb, ue($), 1)
+                                      ], 8, Cb),
+                                      (w(!0), re(de, null, Re(V, (L) => (w(), re("div", {
+                                        key: L.key,
+                                        class: "account_vcard_menu_item",
+                                        style: { "padding-left": "10px" }
+                                      }, [
+                                        v("div", {
+                                          class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
+                                          onClick: ba((E) => L.visible = !L.visible, ["stop"])
+                                        }, [
+                                          L.visible ? (w(), A(te(F(ne)("check")), {
+                                            key: 0,
+                                            style: { "font-size": "16px" }
+                                          })) : W("", !0),
+                                          v("span", {
+                                            class: ye(L.visible ? "" : "field_list_dynamic_ml")
+                                          }, ue(L.label), 3)
+                                        ], 8, Ib)
+                                      ]))), 128))
+                                    ]))), 128))
                                   ])
                                 ]),
                                 _: 1,
@@ -20019,14 +20043,14 @@ const Zp = K({
                             _: 1
                           }),
                           l(Z, {
-                            onClick: y,
+                            onClick: k,
                             variant: "text",
                             size: "x-small",
                             rounded: "",
                             class: "account_vcard_close_btn"
                           }, {
                             default: c(() => [
-                              (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
+                              (w(), A(te(F(ne)("x")), { style: { "font-size": "20px" } }))
                             ]),
                             _: 1
                           })
@@ -20037,25 +20061,26 @@ const Zp = K({
                           default: c(() => [
                             l(xe, null, {
                               default: c(() => [
-                                l(B, {
+                                o("Core Information") ? (w(), A(B, {
+                                  key: 0,
                                   cols: "12",
                                   class: "pb-0"
                                 }, {
                                   default: c(() => [
-                                    p[2] || (p[2] = v("h5", { class: "account_form_info_hdng" }, "Core Information", -1)),
+                                    x[2] || (x[2] = v("h5", { class: "account_form_info_hdng" }, "Core Information", -1)),
                                     l(ke, { class: "mb-2 mt-1" })
                                   ]),
                                   _: 1,
                                   __: [2]
-                                }),
-                                t("name") ? (w(), D(B, {
-                                  key: 0,
+                                })) : W("", !0),
+                                s("name") ? (w(), A(B, {
+                                  key: 1,
                                   cols: "12",
                                   lg: "12",
                                   md: "12"
                                 }, {
                                   default: c(() => [
-                                    p[3] || (p[3] = v("label", { class: "account_label mb-2" }, "Name (Mandatory)", -1)),
+                                    x[3] || (x[3] = v("label", { class: "account_label mb-2" }, "Name (Mandatory)", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20065,15 +20090,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [3]
-                                })) : q("", !0),
-                                t("mobile") ? (w(), D(B, {
-                                  key: 1,
+                                })) : W("", !0),
+                                s("mobile") ? (w(), A(B, {
+                                  key: 2,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[4] || (p[4] = v("label", { class: "account_label mb-2" }, "Mobile", -1)),
+                                    x[4] || (x[4] = v("label", { class: "account_label mb-2" }, "Mobile", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       type: "number",
@@ -20084,16 +20109,16 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [4]
-                                })) : q("", !0),
-                                t("openingBalance") ? (w(), D(B, {
-                                  key: 2,
+                                })) : W("", !0),
+                                s("openingBalance") ? (w(), A(B, {
+                                  key: 3,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[5] || (p[5] = v("label", { class: "account_label mb-2" }, "Opening Balance", -1)),
-                                    v("div", Ib, [
+                                    x[5] || (x[5] = v("label", { class: "account_label mb-2" }, "Opening Balance", -1)),
+                                    v("div", Pb, [
                                       l(ee, {
                                         class: "custom_option_field accouting_field accouting_active_field",
                                         type: "number",
@@ -20103,9 +20128,9 @@ const Zp = K({
                                       }),
                                       l(Ze, {
                                         class: "custom_option_select accouting_field accouting_active_field",
-                                        modelValue: m.value,
-                                        "onUpdate:modelValue": p[0] || (p[0] = (h) => m.value = h),
-                                        items: b.value,
+                                        modelValue: h.value,
+                                        "onUpdate:modelValue": x[0] || (x[0] = (V) => h.value = V),
+                                        items: _.value,
                                         variant: "outlined",
                                         density: "comapct"
                                       }, null, 8, ["modelValue", "items"])
@@ -20113,26 +20138,27 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [5]
-                                })) : q("", !0),
-                                l(B, {
+                                })) : W("", !0),
+                                o("Contact Details") ? (w(), A(B, {
+                                  key: 4,
                                   cols: "12",
                                   class: "pb-0"
                                 }, {
                                   default: c(() => [
-                                    p[6] || (p[6] = v("h5", { class: "account_form_info_hdng" }, "Contact Details", -1)),
+                                    x[6] || (x[6] = v("h5", { class: "account_form_info_hdng" }, "Contact Details", -1)),
                                     l(ke, { class: "mb-2 mt-1" })
                                   ]),
                                   _: 1,
                                   __: [6]
-                                }),
-                                t("mailingName") ? (w(), D(B, {
-                                  key: 3,
+                                })) : W("", !0),
+                                s("mailingName") ? (w(), A(B, {
+                                  key: 5,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[7] || (p[7] = v("label", { class: "account_label mb-2" }, "Mailing Name", -1)),
+                                    x[7] || (x[7] = v("label", { class: "account_label mb-2" }, "Mailing Name", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20142,15 +20168,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [7]
-                                })) : q("", !0),
-                                t("email") ? (w(), D(B, {
-                                  key: 4,
+                                })) : W("", !0),
+                                s("email") ? (w(), A(B, {
+                                  key: 6,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[8] || (p[8] = v("label", { class: "account_label mb-2" }, "Email", -1)),
+                                    x[8] || (x[8] = v("label", { class: "account_label mb-2" }, "Email", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20160,16 +20186,16 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [8]
-                                })) : q("", !0),
-                                t("address") ? (w(), D(B, {
-                                  key: 5,
+                                })) : W("", !0),
+                                s("address") ? (w(), A(B, {
+                                  key: 7,
                                   cols: "12",
                                   lg: "12",
                                   md: "12"
                                 }, {
                                   default: c(() => [
-                                    p[9] || (p[9] = v("label", { class: "account_label mb-2" }, "Address", -1)),
-                                    l(Nt, {
+                                    x[9] || (x[9] = v("label", { class: "account_label mb-2" }, "Address", -1)),
+                                    l(Dt, {
                                       class: "accounting_v_textarea",
                                       placeholder: "Full address",
                                       variant: "outlined"
@@ -20177,15 +20203,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [9]
-                                })) : q("", !0),
-                                t("state") ? (w(), D(B, {
-                                  key: 6,
+                                })) : W("", !0),
+                                s("state") ? (w(), A(B, {
+                                  key: 8,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[10] || (p[10] = v("label", { class: "account_label mb-2" }, "State", -1)),
+                                    x[10] || (x[10] = v("label", { class: "account_label mb-2" }, "State", -1)),
                                     l(Ze, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20194,15 +20220,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [10]
-                                })) : q("", !0),
-                                t("pincode") ? (w(), D(B, {
-                                  key: 7,
+                                })) : W("", !0),
+                                s("pincode") ? (w(), A(B, {
+                                  key: 9,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[11] || (p[11] = v("label", { class: "account_label mb-2" }, "Pincode", -1)),
+                                    x[11] || (x[11] = v("label", { class: "account_label mb-2" }, "Pincode", -1)),
                                     l(Ze, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20211,15 +20237,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [11]
-                                })) : q("", !0),
-                                t("country") ? (w(), D(B, {
-                                  key: 8,
+                                })) : W("", !0),
+                                s("country") ? (w(), A(B, {
+                                  key: 10,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[12] || (p[12] = v("label", { class: "account_label mb-2" }, "Country", -1)),
+                                    x[12] || (x[12] = v("label", { class: "account_label mb-2" }, "Country", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20229,26 +20255,27 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [12]
-                                })) : q("", !0),
-                                l(B, {
+                                })) : W("", !0),
+                                o("Tax & Compliance") ? (w(), A(B, {
+                                  key: 11,
                                   cols: "12",
                                   class: "pb-0"
                                 }, {
                                   default: c(() => [
-                                    p[13] || (p[13] = v("h5", { class: "account_form_info_hdng" }, "Tax & Compliance", -1)),
+                                    x[13] || (x[13] = v("h5", { class: "account_form_info_hdng" }, "Tax & Compliance", -1)),
                                     l(ke, { class: "mb-2 mt-1" })
                                   ]),
                                   _: 1,
                                   __: [13]
-                                }),
-                                t("gstin") ? (w(), D(B, {
-                                  key: 9,
+                                })) : W("", !0),
+                                s("gstin") ? (w(), A(B, {
+                                  key: 12,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[14] || (p[14] = v("label", { class: "account_label mb-2" }, "GSTIN/UIN", -1)),
+                                    x[14] || (x[14] = v("label", { class: "account_label mb-2" }, "GSTIN/UIN", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20258,15 +20285,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [14]
-                                })) : q("", !0),
-                                t("pan") ? (w(), D(B, {
-                                  key: 10,
+                                })) : W("", !0),
+                                s("pan") ? (w(), A(B, {
+                                  key: 13,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[15] || (p[15] = v("label", { class: "account_label mb-2" }, "PAN", -1)),
+                                    x[15] || (x[15] = v("label", { class: "account_label mb-2" }, "PAN", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20276,15 +20303,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [15]
-                                })) : q("", !0),
-                                t("taxReg") ? (w(), D(B, {
-                                  key: 11,
+                                })) : W("", !0),
+                                s("taxReg") ? (w(), A(B, {
+                                  key: 14,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[16] || (p[16] = v("label", { class: "account_label mb-2" }, "Tax Registration Number", -1)),
+                                    x[16] || (x[16] = v("label", { class: "account_label mb-2" }, "Tax Registration Number", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20294,42 +20321,43 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [16]
-                                })) : q("", !0),
-                                t("tds") ? (w(), D(B, {
-                                  key: 12,
+                                })) : W("", !0),
+                                s("tds") ? (w(), A(B, {
+                                  key: 15,
                                   class: "d-flex align-center",
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    l(Dt, {
+                                    l(Nt, {
                                       density: "compact",
                                       class: "account_v_checkbox",
                                       label: "TDS Applicable"
                                     })
                                   ]),
                                   _: 1
-                                })) : q("", !0),
-                                l(B, {
+                                })) : W("", !0),
+                                o("Financial Controls") ? (w(), A(B, {
+                                  key: 16,
                                   cols: "12",
                                   class: "pb-0"
                                 }, {
                                   default: c(() => [
-                                    p[17] || (p[17] = v("h5", { class: "account_form_info_hdng" }, "Financial Controls", -1)),
+                                    x[17] || (x[17] = v("h5", { class: "account_form_info_hdng" }, "Financial Controls", -1)),
                                     l(ke, { class: "mb-2 mt-1" })
                                   ]),
                                   _: 1,
                                   __: [17]
-                                }),
-                                t("creditLimit") ? (w(), D(B, {
-                                  key: 13,
+                                })) : W("", !0),
+                                s("creditLimit") ? (w(), A(B, {
+                                  key: 17,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[18] || (p[18] = v("label", { class: "account_label mb-2" }, "Credit Limit", -1)),
+                                    x[18] || (x[18] = v("label", { class: "account_label mb-2" }, "Credit Limit", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       type: "number",
@@ -20340,15 +20368,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [18]
-                                })) : q("", !0),
-                                t("creditPeriod") ? (w(), D(B, {
-                                  key: 14,
+                                })) : W("", !0),
+                                s("creditPeriod") ? (w(), A(B, {
+                                  key: 18,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[19] || (p[19] = v("label", { class: "account_label mb-2" }, "Credit Period (Days)", -1)),
+                                    x[19] || (x[19] = v("label", { class: "account_label mb-2" }, "Credit Period (Days)", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       type: "number",
@@ -20359,42 +20387,43 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [19]
-                                })) : q("", !0),
-                                t("billWise") ? (w(), D(B, {
-                                  key: 15,
+                                })) : W("", !0),
+                                s("billWise") ? (w(), A(B, {
+                                  key: 19,
                                   class: "d-flex align-center",
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    l(Dt, {
+                                    l(Nt, {
                                       density: "compact",
                                       class: "account_v_checkbox",
                                       label: "Maintain Bill-wise Details"
                                     })
                                   ]),
                                   _: 1
-                                })) : q("", !0),
-                                l(B, {
+                                })) : W("", !0),
+                                o("Banking Details") ? (w(), A(B, {
+                                  key: 20,
                                   cols: "12",
                                   class: "pb-0"
                                 }, {
                                   default: c(() => [
-                                    p[20] || (p[20] = v("h5", { class: "account_form_info_hdng" }, "Banking Details", -1)),
+                                    x[20] || (x[20] = v("h5", { class: "account_form_info_hdng" }, "Banking Details", -1)),
                                     l(ke, { class: "mb-2 mt-1" })
                                   ]),
                                   _: 1,
                                   __: [20]
-                                }),
-                                t("bankName") ? (w(), D(B, {
-                                  key: 16,
+                                })) : W("", !0),
+                                s("bankName") ? (w(), A(B, {
+                                  key: 21,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[21] || (p[21] = v("label", { class: "account_label mb-2" }, "Bank Name", -1)),
+                                    x[21] || (x[21] = v("label", { class: "account_label mb-2" }, "Bank Name", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20404,15 +20433,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [21]
-                                })) : q("", !0),
-                                t("accountNumber") ? (w(), D(B, {
-                                  key: 17,
+                                })) : W("", !0),
+                                s("accountNumber") ? (w(), A(B, {
+                                  key: 22,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[22] || (p[22] = v("label", { class: "account_label mb-2" }, "Account Number", -1)),
+                                    x[22] || (x[22] = v("label", { class: "account_label mb-2" }, "Account Number", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20422,15 +20451,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [22]
-                                })) : q("", !0),
-                                t("ifscCode") ? (w(), D(B, {
-                                  key: 18,
+                                })) : W("", !0),
+                                s("ifscCode") ? (w(), A(B, {
+                                  key: 23,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[23] || (p[23] = v("label", { class: "account_label mb-2" }, "IFSC Code", -1)),
+                                    x[23] || (x[23] = v("label", { class: "account_label mb-2" }, "IFSC Code", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20440,26 +20469,27 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [23]
-                                })) : q("", !0),
-                                l(B, {
+                                })) : W("", !0),
+                                o("Additional Fields") ? (w(), A(B, {
+                                  key: 24,
                                   cols: "12",
                                   class: "pb-0"
                                 }, {
                                   default: c(() => [
-                                    p[24] || (p[24] = v("h5", { class: "account_form_info_hdng" }, "Additional Fields", -1)),
+                                    x[24] || (x[24] = v("h5", { class: "account_form_info_hdng" }, "Additional Fields", -1)),
                                     l(ke, { class: "mb-2 mt-1" })
                                   ]),
                                   _: 1,
                                   __: [24]
-                                }),
-                                t("addCountry1") ? (w(), D(B, {
-                                  key: 19,
+                                })) : W("", !0),
+                                s("addCountry1") ? (w(), A(B, {
+                                  key: 25,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[25] || (p[25] = v("label", { class: "account_label mb-2" }, "Country", -1)),
+                                    x[25] || (x[25] = v("label", { class: "account_label mb-2" }, "Country", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20469,15 +20499,15 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [25]
-                                })) : q("", !0),
-                                t("state") ? (w(), D(B, {
-                                  key: 20,
+                                })) : W("", !0),
+                                s("state") ? (w(), A(B, {
+                                  key: 26,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    p[26] || (p[26] = v("label", { class: "account_label mb-2" }, "Place of Supply", -1)),
+                                    x[26] || (x[26] = v("label", { class: "account_label mb-2" }, "Place of Supply", -1)),
                                     l(Ze, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -20487,27 +20517,27 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [26]
-                                })) : q("", !0),
-                                t("shipToAddress") ? (w(), D(B, {
-                                  key: 21,
+                                })) : W("", !0),
+                                s("shipToAddress") ? (w(), A(B, {
+                                  key: 27,
                                   cols: "12",
                                   lg: "12",
                                   md: "12"
                                 }, {
                                   default: c(() => [
-                                    p[28] || (p[28] = v("label", { class: "account_label mb-2" }, "Ship-to Address", -1)),
-                                    l(Nt, {
+                                    x[28] || (x[28] = v("label", { class: "account_label mb-2" }, "Ship-to Address", -1)),
+                                    l(Dt, {
                                       class: "accounting_v_textarea",
                                       placeholder: "Optional delivery address",
                                       variant: "outlined"
                                     }),
-                                    v("div", Pb, [
+                                    v("div", Ab, [
                                       l(Z, { class: "account_v_btn_primary" }, {
                                         prepend: c(() => [
-                                          (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                          (w(), A(te(F(ne)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                         ]),
                                         default: c(() => [
-                                          p[27] || (p[27] = de(" Save Customer ", -1))
+                                          x[27] || (x[27] = ve(" Save Customer ", -1))
                                         ]),
                                         _: 1,
                                         __: [27]
@@ -20516,7 +20546,7 @@ const Zp = K({
                                   ]),
                                   _: 1,
                                   __: [28]
-                                })) : q("", !0)
+                                })) : W("", !0)
                               ]),
                               _: 1
                             })
@@ -20532,7 +20562,7 @@ const Zp = K({
               })
             ]),
             _: 1
-          })) : q("", !0)
+          })) : W("", !0)
         ]),
         _: 1
       }),
@@ -20541,14 +20571,14 @@ const Zp = K({
           l(B, { cols: "12" }, {
             default: c(() => [
               l($l, {
-                headers: n.value,
-                items: i.value,
-                filters: o.value,
+                headers: u.value,
+                items: r.value,
+                filters: d.value,
                 title: "Customer",
-                "status-items": s.value,
-                "account-type-items": u.value,
+                "status-items": y.value,
+                "account-type-items": b.value,
                 "currency-items": [],
-                widgets: r.value
+                widgets: m.value
               }, null, 8, ["headers", "items", "filters", "status-items", "account-type-items", "widgets"])
             ]),
             _: 1
@@ -20557,27 +20587,27 @@ const Zp = K({
         _: 1
       }),
       l(Z, {
-        onClick: y,
+        onClick: k,
         class: "account_add_new_btn"
       }, {
         prepend: c(() => [
-          (w(), D(ae(F(le)("plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+          (w(), A(te(F(ne)("plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
         ]),
         default: c(() => [
-          p[29] || (p[29] = de(" Add Customer ", -1))
+          x[29] || (x[29] = ve(" Add Customer ", -1))
         ]),
         _: 1,
         __: [29]
       })
     ]));
   }
-}, Tb = /* @__PURE__ */ Et(Ab, [["__scopeId", "data-v-fe9d844b"]]), Nb = { class: "d-flex align-center gap-3" }, Db = { key: 0 }, $b = { class: "gst_report_title mb-2" }, Bb = { class: "group-header-row" }, Eb = ["colspan"], Fb = {
+}, Db = /* @__PURE__ */ Et(Tb, [["__scopeId", "data-v-40df7c15"]]), Nb = { class: "d-flex align-center gap-3" }, $b = { key: 0 }, Bb = { class: "gst_report_title mb-2" }, Eb = { class: "group-header-row" }, Fb = ["colspan"], Lb = {
   key: 2,
   class: "font-weight-bold bg-grey-lighten-3"
-}, Lb = {
+}, Rb = {
   __name: "AccountGSTReports",
   setup(e) {
-    const a = A(), t = A(["GSTR-1", "GSTR-2", "GSTR-3B"]), n = A(""), i = A(!1), o = A([
+    const a = T(), t = T(["GSTR-1", "GSTR-2", "GSTR-3B"]), n = T(""), i = T(!1), o = T([
       {
         title: "GSTR-3B",
         summary_report: "Monthly Summary Return",
@@ -20686,7 +20716,7 @@ const Zp = K({
           }
         ]
       }
-    ]), s = k(() => o.value.find((r) => r.title === n.value));
+    ]), s = S(() => o.value.find((r) => r.title === n.value));
     function u() {
       var r, d;
       n.value && ((r = a.value) != null && r[0]) && ((d = a.value) != null && d[1]) ? i.value = !0 : (i.value = !1, Te.error("Please select report type and date range."));
@@ -20701,7 +20731,7 @@ const Zp = K({
                 l(me, { class: "account_vcard_border shadow-none gst_reports_vcard pa-6" }, {
                   default: c(() => [
                     v("div", Nb, [
-                      (w(), D(ae(F(le)("file-analytics")), {
+                      (w(), A(te(F(ne)("file-analytics")), {
                         class: "account_icon_color",
                         style: { "font-size": "38px", "margin-right": "6px" }
                       })),
@@ -20744,7 +20774,7 @@ const Zp = K({
                               multiple: "range"
                             }, {
                               "prepend-inner": c(() => [
-                                (w(), D(ae(F(le)("calendar")), { style: { "font-size": "20px" } }))
+                                (w(), A(te(F(ne)("calendar")), { style: { "font-size": "20px" } }))
                               ]),
                               _: 1
                             }, 8, ["modelValue"])
@@ -20764,7 +20794,7 @@ const Zp = K({
                               onClick: u
                             }, {
                               default: c(() => d[5] || (d[5] = [
-                                de(" Generate Reports ", -1)
+                                ve(" Generate Reports ", -1)
                               ])),
                               _: 1,
                               __: [5]
@@ -20779,12 +20809,12 @@ const Zp = K({
                   _: 1
                 }),
                 l(ke, { class: "my-5" }),
-                i.value && s.value ? (w(), re("div", Db, [
-                  (w(!0), re(ve, null, ze(s.value.table, (b, m) => (w(), re("div", {
+                i.value && s.value ? (w(), re("div", $b, [
+                  (w(!0), re(de, null, Re(s.value.table, (b, m) => (w(), re("div", {
                     key: m,
                     class: "mb-6"
                   }, [
-                    v("h4", $b, ue(b.title), 1),
+                    v("h4", Bb, ue(b.title), 1),
                     l(me, { class: "account_vcard_border shadow-none gst_reports_table_vcard mt-3" }, {
                       default: c(() => [
                         l(zt, {
@@ -20794,38 +20824,38 @@ const Zp = K({
                           "hide-default-footer": ""
                         }, {
                           body: c(() => {
-                            var f, x;
+                            var p, k;
                             return [
-                              (x = (f = b.tableData) == null ? void 0 : f[0]) != null && x.group ? (w(!0), re(ve, { key: 0 }, ze(b.tableData, (p, h) => (w(), re(ve, { key: h }, [
-                                v("tr", Bb, [
+                              (k = (p = b.tableData) == null ? void 0 : p[0]) != null && k.group ? (w(!0), re(de, { key: 0 }, Re(b.tableData, (_, h) => (w(), re(de, { key: h }, [
+                                v("tr", Eb, [
                                   v("td", {
                                     colspan: b.headers.length,
                                     class: "text-medium-emphasis font-weight-bold"
-                                  }, ue(p.group), 9, Eb)
+                                  }, ue(_.group), 9, Fb)
                                 ]),
-                                (w(!0), re(ve, null, ze(p.rows, (_, g) => (w(), re("tr", {
-                                  key: `${h}-${g}`
+                                (w(!0), re(de, null, Re(_.rows, (g, f) => (w(), re("tr", {
+                                  key: `${h}-${f}`
                                 }, [
-                                  (w(!0), re(ve, null, ze(b.headers, (S) => (w(), re("td", {
-                                    key: S.value
+                                  (w(!0), re(de, null, Re(b.headers, (x) => (w(), re("td", {
+                                    key: x.value
                                   }, [
                                     v("p", {
-                                      class: ye([S.align === "end" ? "text-end pr-4" : "pl-6", "mb-0"])
-                                    }, ue(_[S.value] || "-"), 3)
+                                      class: ye([x.align === "end" ? "text-end pr-4" : "pl-6", "mb-0"])
+                                    }, ue(g[x.value] || "-"), 3)
                                   ]))), 128))
                                 ]))), 128))
-                              ], 64))), 128)) : (w(!0), re(ve, { key: 1 }, ze(b.tableData, (p, h) => (w(), re("tr", { key: h }, [
-                                (w(!0), re(ve, null, ze(b.headers, (_) => (w(), re("td", {
+                              ], 64))), 128)) : (w(!0), re(de, { key: 1 }, Re(b.tableData, (_, h) => (w(), re("tr", { key: h }, [
+                                (w(!0), re(de, null, Re(b.headers, (g) => (w(), re("td", {
+                                  key: g.value,
+                                  class: ye(g.align === "end" ? "text-end pr-4" : "pl-4")
+                                }, ue(_[g.value] || "-"), 3))), 128))
+                              ]))), 128)),
+                              b.totalRow ? (w(), re("tr", Lb, [
+                                (w(!0), re(de, null, Re(b.headers, (_) => (w(), re("td", {
                                   key: _.value,
                                   class: ye(_.align === "end" ? "text-end pr-4" : "pl-4")
-                                }, ue(p[_.value] || "-"), 3))), 128))
-                              ]))), 128)),
-                              b.totalRow ? (w(), re("tr", Fb, [
-                                (w(!0), re(ve, null, ze(b.headers, (p) => (w(), re("td", {
-                                  key: p.value,
-                                  class: ye(p.align === "end" ? "text-end pr-4" : "pl-4")
-                                }, ue(b.totalRow[p.value] || ""), 3))), 128))
-                              ])) : q("", !0)
+                                }, ue(b.totalRow[_.value] || ""), 3))), 128))
+                              ])) : W("", !0)
                             ];
                           }),
                           _: 2
@@ -20834,7 +20864,7 @@ const Zp = K({
                       _: 2
                     }, 1024)
                   ]))), 128))
-                ])) : q("", !0)
+                ])) : W("", !0)
               ]),
               _: 1
             })
@@ -20844,11 +20874,11 @@ const Zp = K({
       ]);
     };
   }
-}, Rb = /* @__PURE__ */ Et(Lb, [["__scopeId", "data-v-43d96d6f"]]), Ob = { class: "d-flex align-center gap-2" }, Mb = {
+}, Ob = /* @__PURE__ */ Et(Rb, [["__scopeId", "data-v-43d96d6f"]]), Mb = { class: "d-flex align-center gap-2" }, zb = {
   key: 0,
   style: { width: "16px", height: "16px" },
   class: ""
-}, zb = { class: "" }, Ub = { class: "more_options_w" }, Gb = { key: 0 }, $c = {
+}, Ub = { class: "" }, Gb = { class: "more_options_w" }, jb = { key: 0 }, $c = {
   __name: "TreeItem",
   props: {
     node: Object,
@@ -20859,7 +20889,7 @@ const Zp = K({
   },
   emits: ["edit", "delete"],
   setup(e, { emit: a }) {
-    const t = e, n = A(!1), i = A(!1), o = A(!1);
+    const t = e, n = T(!1), i = T(!1), o = T(!1);
     function s() {
       t.node.children && (n.value = !n.value);
     }
@@ -20869,34 +20899,34 @@ const Zp = K({
     function r() {
       console.log("Delete:", t.node), i.value = !1, b("delete", t.node);
     }
-    const d = k(() => t.node.type === "Balance Sheet" ? "account_balance_chip" : "account_profit_loss_chip"), y = k(() => t.node.children === null || t.node.children && t.node.children.length === 0 && !t.node.children);
+    const d = S(() => t.node.type === "Balance Sheet" ? "account_balance_chip" : "account_profit_loss_chip"), y = S(() => t.node.children === null || t.node.children && t.node.children.length === 0 && !t.node.children);
     st(() => {
       t.node.children && t.node.children.length > 0 && (n.value = !0);
     });
     const b = a;
-    return (m, f) => (w(), re("div", {
+    return (m, p) => (w(), re("div", {
       class: "mb-1",
       style: la({ paddingLeft: `${t.level * 16}px` }),
-      onMouseenter: f[4] || (f[4] = (x) => o.value = !0),
-      onMouseleave: f[5] || (f[5] = (x) => o.value = !1)
+      onMouseenter: p[4] || (p[4] = (k) => o.value = !0),
+      onMouseleave: p[5] || (p[5] = (k) => o.value = !1)
     }, [
       v("div", {
         class: "d-flex align-center justify-space-between pa-1",
         onClick: s,
         style: { cursor: "pointer" }
       }, [
-        v("div", Ob, [
-          y.value ? q("", !0) : (w(), re("div", Mb, [
-            t.node.children ? (w(), D(ae(F(le)(n.value ? "chevron-down" : "chevron-right")), {
+        v("div", Mb, [
+          y.value ? W("", !0) : (w(), re("div", zb, [
+            t.node.children ? (w(), A(te(F(ne)(n.value ? "chevron-down" : "chevron-right")), {
               key: 0,
               style: { "font-size": "16px" }
-            })) : q("", !0)
+            })) : W("", !0)
           ])),
-          (w(), D(ae(F(le)(y.value ? "file-text" : "folder")), {
+          (w(), A(te(F(ne)(y.value ? "file-text" : "folder")), {
             class: ye(y.value ? "account_ledger_icon" : "account_folder_icon"),
             style: { "font-size": "16px" }
           }, null, 8, ["class"])),
-          v("div", zb, [
+          v("div", Ub, [
             v("h6", {
               class: ye([
                 t.level === 0 ? "expansion_base_parent_title" : "expansion_node_title",
@@ -20907,42 +20937,42 @@ const Zp = K({
         ]),
         v("div", {
           class: "d-flex align-center gap-2",
-          onClick: f[1] || (f[1] = en(() => {
+          onClick: p[1] || (p[1] = ba(() => {
           }, ["stop"]))
         }, [
-          y.value ? q("", !0) : (w(), D(F(gt), {
+          y.value ? W("", !0) : (w(), A(F(gt), {
             key: 0,
             class: ye(d.value),
             size: "small"
           }, {
             default: c(() => [
-              de(ue(t.node.type), 1)
+              ve(ue(t.node.type), 1)
             ]),
             _: 1
           }, 8, ["class"])),
-          v("div", Ub, [
+          v("div", Gb, [
             l(ot, {
               modelValue: i.value,
-              "onUpdate:modelValue": f[0] || (f[0] = (x) => i.value = x),
+              "onUpdate:modelValue": p[0] || (p[0] = (k) => i.value = k),
               "close-on-content-click": !1,
               class: "account_vmenu_border",
               location: "bottom end"
             }, {
-              activator: c(({ props: x }) => [
-                o.value || i.value ? (w(), D(ae(F(le)("dots")), X({
+              activator: c(({ props: k }) => [
+                o.value || i.value ? (w(), A(te(F(ne)("dots")), X({
                   key: 0,
                   style: { "font-size": "16px" }
-                }, x), null, 16)) : q("", !0)
+                }, k), null, 16)) : W("", !0)
               ]),
               default: c(() => [
-                l(_a, { class: "account_expansion_list" }, {
+                l(ha, { class: "account_expansion_list" }, {
                   default: c(() => [
                     l(xt, { onClick: u }, {
                       default: c(() => [
                         l(il, { class: "d-flex align-center gap-3" }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("pencil")), { style: { "font-size": "18px" } })),
-                            f[6] || (f[6] = v("p", { class: "mb-0" }, "Edit", -1))
+                            (w(), A(te(F(ne)("pencil")), { style: { "font-size": "18px" } })),
+                            p[6] || (p[6] = v("p", { class: "mb-0" }, "Edit", -1))
                           ]),
                           _: 1,
                           __: [6]
@@ -20954,8 +20984,8 @@ const Zp = K({
                       default: c(() => [
                         l(il, { class: "d-flex trash align-center gap-3" }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("trash")), { style: { "font-size": "18px" } })),
-                            f[7] || (f[7] = v("p", { class: "mb-0" }, "Delete", -1))
+                            (w(), A(te(F(ne)("trash")), { style: { "font-size": "18px" } })),
+                            p[7] || (p[7] = v("p", { class: "mb-0" }, "Delete", -1))
                           ]),
                           _: 1,
                           __: [7]
@@ -20972,21 +21002,21 @@ const Zp = K({
           ])
         ])
       ]),
-      n.value ? (w(), re("div", Gb, [
-        (w(!0), re(ve, null, ze(t.node.children, (x) => (w(), D($c, {
-          key: x.id,
-          node: x,
+      n.value ? (w(), re("div", jb, [
+        (w(!0), re(de, null, Re(t.node.children, (k) => (w(), A($c, {
+          key: k.id,
+          node: k,
           level: t.level + 1,
-          onEdit: f[2] || (f[2] = (p) => b("edit", p)),
-          onDelete: f[3] || (f[3] = (p) => b("delete", p))
+          onEdit: p[2] || (p[2] = (_) => b("edit", _)),
+          onDelete: p[3] || (p[3] = (_) => b("delete", _))
         }, null, 8, ["node", "level"]))), 128))
-      ])) : q("", !0)
+      ])) : W("", !0)
     ], 36));
   }
-}, jb = { class: "account_ui_vcard" }, Hb = { class: "d-flex align-center gap-2" }, Wb = { class: "d-flex align-center gap-2 mb-2" }, qb = { class: "d-flex align-center gap-1" }, Yb = { class: "d-flex align-center gap-1" }, Jb = { class: "custom_expansion_item" }, Kb = {
+}, Hb = { class: "account_ui_vcard" }, Wb = { class: "d-flex align-center gap-2" }, qb = { class: "d-flex align-center gap-2 mb-2" }, Yb = { class: "d-flex align-center gap-1" }, Jb = { class: "d-flex align-center gap-1" }, Kb = { class: "custom_expansion_item" }, Xb = {
   __name: "AccountGroupAndLedger",
   setup(e) {
-    A(!1);
+    T(!1);
     const a = it([
       {
         id: "1",
@@ -21077,144 +21107,144 @@ const Zp = K({
           }
         ]
       }
-    ]), t = A(!1), n = A(!1), i = A(!1), o = A(!1), s = A(null), u = A(null), r = A(), d = A(), y = A(), b = it({
+    ]), t = T(!1), n = T(!1), i = T(!1), o = T(!1), s = T(null), u = T(null), r = T(), d = T(), y = T(), b = it({
       name: "",
       parentGroup: null
     }), m = it({
       name: "",
       parentGroup: null
-    }), f = it({
+    }), p = it({
       name: "",
       position: "",
       parentGroup: null
-    }), x = [(G) => !!G || "This field is required"], p = [(G) => !!G || "This field is required"];
+    }), k = [(G) => !!G || "This field is required"], _ = [(G) => !!G || "This field is required"];
     function h(G, C = 0) {
-      return G.flatMap((L) => {
-        if (!L.children && L.children !== void 0) return [];
+      return G.flatMap((R) => {
+        if (!R.children && R.children !== void 0) return [];
         const Y = {
-          title: `${"— ".repeat(C)}${L.name}`,
-          value: L.id
-        }, J = L.children ? h(L.children, C + 1) : [];
+          title: `${"— ".repeat(C)}${R.name}`,
+          value: R.id
+        }, J = R.children ? h(R.children, C + 1) : [];
         return [Y, ...J];
       });
     }
-    const _ = A(h(a));
-    function g(G, C) {
-      for (const L of G) {
-        if (L.id === C) return L;
-        if (L.children) {
-          const W = g(L.children, C);
-          if (W) return W;
+    const g = T(h(a));
+    function f(G, C) {
+      for (const R of G) {
+        if (R.id === C) return R;
+        if (R.children) {
+          const q = f(R.children, C);
+          if (q) return q;
         }
       }
       return null;
     }
-    async function S() {
+    async function x() {
       var J, H;
       const { valid: G } = await ((J = r.value) == null ? void 0 : J.validate());
       if (!G) {
         Te.error("Please fill all required fields for Ledger.");
         return;
       }
-      const C = g(a, b.parentGroup);
+      const C = f(a, b.parentGroup);
       if (!C) {
         Te.error("Parent group not found.");
         return;
       }
       C.children || (C.children = []), b.parentGroup.split(".");
-      const L = C.children.length ? Math.max(...C.children.map((N) => parseInt(N.id.split(".").pop()))) + 1 : 1, Y = {
-        id: `${b.parentGroup}.${L}`,
+      const R = C.children.length ? Math.max(...C.children.map((N) => parseInt(N.id.split(".").pop()))) + 1 : 1, Y = {
+        id: `${b.parentGroup}.${R}`,
         name: b.name,
         type: C.type,
         children: null
       };
-      C.children.push(Y), _.value = h(a), Te.success("Ledger created successfully."), t.value = !1, b.name = "", b.parentGroup = null, (H = r.value) == null || H.resetValidation();
+      C.children.push(Y), g.value = h(a), Te.success("Ledger created successfully."), t.value = !1, b.name = "", b.parentGroup = null, (H = r.value) == null || H.resetValidation();
     }
-    async function I() {
+    async function V() {
       var J, H;
       const { valid: G } = await ((J = d.value) == null ? void 0 : J.validate());
       if (!G) {
         Te.error("Please fill all required fields for Group.");
         return;
       }
-      const C = g(a, m.parentGroup);
+      const C = f(a, m.parentGroup);
       if (!C) {
         Te.error("Parent group not found.");
         return;
       }
       C.children || (C.children = []), m.parentGroup.split(".");
-      const L = C.children.length ? Math.max(...C.children.map((N) => parseInt(N.id.split(".").pop()))) + 1 : 1, Y = {
-        id: `${m.parentGroup}.${L}`,
+      const R = C.children.length ? Math.max(...C.children.map((N) => parseInt(N.id.split(".").pop()))) + 1 : 1, Y = {
+        id: `${m.parentGroup}.${R}`,
         name: m.name,
         type: C.type,
         children: []
       };
-      C.children.push(Y), _.value = h(a), Te.success("Group created successfully."), n.value = !1, m.name = "", m.parentGroup = null, (H = d.value) == null || H.resetValidation();
+      C.children.push(Y), g.value = h(a), Te.success("Group created successfully."), n.value = !1, m.name = "", m.parentGroup = null, (H = d.value) == null || H.resetValidation();
     }
     async function $() {
-      var j, V;
+      var j, I;
       const { valid: G } = await ((j = y.value) == null ? void 0 : j.validate());
       if (!G || !s.value) return;
-      const C = s.value, L = f.name, W = f.parentGroup, Y = parseInt(f.position), J = E(C), H = g(a, J), N = g(a, W);
+      const C = s.value, R = p.name, q = p.parentGroup, Y = parseInt(p.position), J = E(C), H = f(a, J), N = f(a, q);
       if (!N || J && !H) {
         Te.error("Parent group not found.");
         return;
       }
-      if (J === W) {
-        const M = H.children || [], te = M.findIndex((ge) => ge.id === C.id);
-        if (te === -1) return;
-        M.splice(te, 1), M.splice(Y - 1, 0, C);
+      if (J === q) {
+        const M = H.children || [], ae = M.findIndex((ge) => ge.id === C.id);
+        if (ae === -1) return;
+        M.splice(ae, 1), M.splice(Y - 1, 0, C);
       } else {
         N.children || (N.children = []);
-        const M = `${N.id}.${N.children.length + 1}`, te = {
+        const M = `${N.id}.${N.children.length + 1}`, ae = {
           ...C,
           id: M,
-          name: L
+          name: R
         };
-        H.children = H.children.filter((ge) => ge.id !== C.id), N.children.splice(Y - 1, 0, te), s.value = te;
+        H.children = H.children.filter((ge) => ge.id !== C.id), N.children.splice(Y - 1, 0, ae), s.value = ae;
       }
-      s.value.name = L, _.value = h(a), Te.success("Node updated successfully."), i.value = !1, f.name = "", f.position = "", f.parentGroup = null, (V = y.value) == null || V.resetValidation();
+      s.value.name = R, g.value = h(a), Te.success("Node updated successfully."), i.value = !1, p.name = "", p.position = "", p.parentGroup = null, (I = y.value) == null || I.resetValidation();
     }
-    function O(G) {
-      s.value = G, f.name = G.name, f.position = R(G), f.parentGroup = E(G), i.value = !0;
+    function L(G) {
+      s.value = G, p.name = G.name, p.position = O(G), p.parentGroup = E(G), i.value = !0;
     }
     function E(G) {
-      const C = (L, W) => {
-        for (const Y of L)
+      const C = (R, q) => {
+        for (const Y of R)
           if (Y.children) {
-            if (Y.children.some((H) => H.id === W)) return Y.id;
-            const J = C(Y.children, W);
+            if (Y.children.some((H) => H.id === q)) return Y.id;
+            const J = C(Y.children, q);
             if (J) return J;
           }
         return null;
       };
       return C(a, G.id);
     }
-    function R(G) {
+    function O(G) {
       const C = E(G);
       if (!C) return 1;
-      const L = g(a, C);
-      if (!(L != null && L.children)) return 1;
-      const W = L.children.findIndex((Y) => Y.id === G.id);
-      return W >= 0 ? W + 1 : 1;
+      const R = f(a, C);
+      if (!(R != null && R.children)) return 1;
+      const q = R.children.findIndex((Y) => Y.id === G.id);
+      return q >= 0 ? q + 1 : 1;
     }
-    async function T() {
+    async function D() {
       if (!u.value) return;
       const G = E(u.value);
       if (G) {
-        const C = g(a, G);
-        C && C.children && (C.children = C.children.filter((L) => L.id !== u.value.id));
+        const C = f(a, G);
+        C && C.children && (C.children = C.children.filter((R) => R.id !== u.value.id));
       } else
         a.splice(
           a.findIndex((C) => C.id === u.value.id),
           1
         );
-      _.value = h(a), Te.success("Node deleted successfully."), o.value = !1, u.value = null;
+      g.value = h(a), Te.success("Node deleted successfully."), o.value = !1, u.value = null;
     }
     function U(G) {
       u.value = G, o.value = !0;
     }
-    return (G, C) => (w(), re("div", jb, [
+    return (G, C) => (w(), re("div", Hb, [
       l(F(xe), null, {
         default: c(() => [
           l(F(B), {
@@ -21229,31 +21259,31 @@ const Zp = K({
                 subtitle: "Create and manage your ledger accounts and groups."
               }, {
                 append: c(() => [
-                  v("div", Hb, [
+                  v("div", Wb, [
                     l(F(Z), {
-                      onClick: C[0] || (C[0] = (L) => n.value = !0),
+                      onClick: C[0] || (C[0] = (R) => n.value = !0),
                       class: "account_v_btn_outlined",
                       variant: "outlined"
                     }, {
                       prepend: c(() => [
-                        (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
+                        (w(), A(te(F(ne)("plus")), { style: { "font-size": "18px" } }))
                       ]),
                       default: c(() => [
-                        C[21] || (C[21] = de(" Add Group ", -1))
+                        C[21] || (C[21] = ve(" Add Group ", -1))
                       ]),
                       _: 1,
                       __: [21]
                     }),
                     l(F(Z), {
-                      onClick: C[1] || (C[1] = (L) => t.value = !0),
+                      onClick: C[1] || (C[1] = (R) => t.value = !0),
                       class: "account_v_btn_primary",
                       variant: "tonal"
                     }, {
                       prepend: c(() => [
-                        (w(), D(ae(F(le)("plus")), { style: { "font-size": "18px" } }))
+                        (w(), A(te(F(ne)("plus")), { style: { "font-size": "18px" } }))
                       ]),
                       default: c(() => [
-                        C[22] || (C[22] = de(" Add Ledger ", -1))
+                        C[22] || (C[22] = ve(" Add Ledger ", -1))
                       ]),
                       _: 1,
                       __: [22]
@@ -21263,16 +21293,16 @@ const Zp = K({
                 default: c(() => [
                   l(F(Ae), null, {
                     default: c(() => [
-                      v("div", Wb, [
-                        v("div", qb, [
-                          (w(), D(ae(F(le)("folder")), {
+                      v("div", qb, [
+                        v("div", Yb, [
+                          (w(), A(te(F(ne)("folder")), {
                             class: "account_folder_icon",
                             style: { "font-size": "16px" }
                           })),
                           C[23] || (C[23] = v("p", { class: "mb-0 account_info_title" }, "Group", -1))
                         ]),
-                        v("div", Yb, [
-                          (w(), D(ae(F(le)("file-text")), {
+                        v("div", Jb, [
+                          (w(), A(te(F(ne)("file-text")), {
                             class: "account_ledger_icon",
                             style: { "font-size": "16px" }
                           })),
@@ -21284,12 +21314,12 @@ const Zp = K({
                         variant: "text"
                       }, {
                         default: c(() => [
-                          v("div", Jb, [
-                            (w(!0), re(ve, null, ze(a, (L) => (w(), D($c, {
-                              key: L.id,
-                              node: L,
+                          v("div", Kb, [
+                            (w(!0), re(de, null, Re(a, (R) => (w(), A($c, {
+                              key: R.id,
+                              node: R,
                               level: 0,
-                              onEdit: O,
+                              onEdit: L,
                               onDelete: U
                             }, null, 8, ["node"]))), 128))
                           ])
@@ -21310,11 +21340,11 @@ const Zp = K({
       }),
       l(F(Vt), {
         modelValue: t.value,
-        "onUpdate:modelValue": C[5] || (C[5] = (L) => t.value = L),
+        "onUpdate:modelValue": C[5] || (C[5] = (R) => t.value = R),
         "max-width": "400",
-        "onClick:outside": C[6] || (C[6] = (L) => {
-          var W;
-          return (W = r.value) == null ? void 0 : W.resetValidation();
+        "onClick:outside": C[6] || (C[6] = (R) => {
+          var q;
+          return (q = r.value) == null ? void 0 : q.resetValidation();
         })
       }, {
         default: c(() => [
@@ -21322,29 +21352,29 @@ const Zp = K({
             default: c(() => [
               l(F(na), { class: "account_ui_swtich_title pb-0" }, {
                 default: c(() => C[25] || (C[25] = [
-                  de("Add New Ledger", -1)
+                  ve("Add New Ledger", -1)
                 ])),
                 _: 1,
                 __: [25]
               }),
               l(F(ma), { class: "account_ui_swtich_subtitle text-wrap px-3" }, {
                 default: c(() => C[26] || (C[26] = [
-                  de("Add a new ledger to an existing group in your chart of accounts.", -1)
+                  ve("Add a new ledger to an existing group in your chart of accounts.", -1)
                 ])),
                 _: 1,
                 __: [26]
               }),
               l(F(Ae), null, {
                 default: c(() => [
-                  l(F(Za), {
+                  l(F(en), {
                     ref_key: "ledgerFormRef",
                     ref: r
                   }, {
                     default: c(() => [
                       l(F(ee), {
                         modelValue: b.name,
-                        "onUpdate:modelValue": C[2] || (C[2] = (L) => b.name = L),
-                        rules: x,
+                        "onUpdate:modelValue": C[2] || (C[2] = (R) => b.name = R),
+                        rules: k,
                         class: "accouting_field accouting_active_field mb-2",
                         placeholder: "Name",
                         variant: "outlined",
@@ -21352,9 +21382,9 @@ const Zp = K({
                       }, null, 8, ["modelValue"]),
                       l(F(lt), {
                         modelValue: b.parentGroup,
-                        "onUpdate:modelValue": C[3] || (C[3] = (L) => b.parentGroup = L),
-                        items: _.value,
-                        rules: p,
+                        "onUpdate:modelValue": C[3] || (C[3] = (R) => b.parentGroup = R),
+                        items: g.value,
+                        rules: _,
                         class: "accouting_field accouting_active_field",
                         placeholder: "Parent Group",
                         "item-title": "title",
@@ -21374,15 +21404,15 @@ const Zp = K({
                     text: "Cancel",
                     class: "account_v_btn_outlined",
                     variant: "outlined",
-                    onClick: C[4] || (C[4] = (L) => {
-                      var W;
-                      t.value = !1, (W = r.value) == null || W.resetValidation();
+                    onClick: C[4] || (C[4] = (R) => {
+                      var q;
+                      t.value = !1, (q = r.value) == null || q.resetValidation();
                     })
                   }),
                   l(F(Z), {
                     text: "Add Ledger",
                     class: "account_v_btn_primary",
-                    onClick: S
+                    onClick: x
                   })
                 ]),
                 _: 1
@@ -21395,11 +21425,11 @@ const Zp = K({
       }, 8, ["modelValue"]),
       l(F(Vt), {
         modelValue: n.value,
-        "onUpdate:modelValue": C[10] || (C[10] = (L) => n.value = L),
+        "onUpdate:modelValue": C[10] || (C[10] = (R) => n.value = R),
         "max-width": "400",
-        "onClick:outside": C[11] || (C[11] = (L) => {
-          var W;
-          return (W = d.value) == null ? void 0 : W.resetValidation();
+        "onClick:outside": C[11] || (C[11] = (R) => {
+          var q;
+          return (q = d.value) == null ? void 0 : q.resetValidation();
         })
       }, {
         default: c(() => [
@@ -21410,29 +21440,29 @@ const Zp = K({
                 "pb-0": ""
               }, {
                 default: c(() => C[27] || (C[27] = [
-                  de("Add New Group", -1)
+                  ve("Add New Group", -1)
                 ])),
                 _: 1,
                 __: [27]
               }),
               l(F(ma), { class: "account_ui_swtich_subtitle px-3" }, {
                 default: c(() => C[28] || (C[28] = [
-                  de("Add a new group to your chart of accounts. ", -1)
+                  ve("Add a new group to your chart of accounts. ", -1)
                 ])),
                 _: 1,
                 __: [28]
               }),
               l(F(Ae), null, {
                 default: c(() => [
-                  l(F(Za), {
+                  l(F(en), {
                     ref_key: "groupFormRef",
                     ref: d
                   }, {
                     default: c(() => [
                       l(F(ee), {
                         modelValue: m.name,
-                        "onUpdate:modelValue": C[7] || (C[7] = (L) => m.name = L),
-                        rules: x,
+                        "onUpdate:modelValue": C[7] || (C[7] = (R) => m.name = R),
+                        rules: k,
                         class: "accouting_field accouting_active_field mb-2",
                         placeholder: "Name",
                         variant: "outlined",
@@ -21440,9 +21470,9 @@ const Zp = K({
                       }, null, 8, ["modelValue"]),
                       l(F(lt), {
                         modelValue: m.parentGroup,
-                        "onUpdate:modelValue": C[8] || (C[8] = (L) => m.parentGroup = L),
-                        items: _.value,
-                        rules: p,
+                        "onUpdate:modelValue": C[8] || (C[8] = (R) => m.parentGroup = R),
+                        items: g.value,
+                        rules: _,
                         class: "accouting_field accouting_active_field",
                         placeholder: "Parent Group",
                         "item-title": "title",
@@ -21462,15 +21492,15 @@ const Zp = K({
                     text: "Cancel",
                     class: "account_v_btn_outlined",
                     variant: "outlined",
-                    onClick: C[9] || (C[9] = (L) => {
-                      var W;
-                      n.value = !1, (W = d.value) == null || W.resetValidation();
+                    onClick: C[9] || (C[9] = (R) => {
+                      var q;
+                      n.value = !1, (q = d.value) == null || q.resetValidation();
                     })
                   }),
                   l(F(Z), {
                     text: "Add Group",
                     class: "account_v_btn_primary",
-                    onClick: I
+                    onClick: V
                   })
                 ]),
                 _: 1
@@ -21483,11 +21513,11 @@ const Zp = K({
       }, 8, ["modelValue"]),
       l(F(Vt), {
         modelValue: i.value,
-        "onUpdate:modelValue": C[16] || (C[16] = (L) => i.value = L),
+        "onUpdate:modelValue": C[16] || (C[16] = (R) => i.value = R),
         "max-width": "400",
-        "onClick:outside": C[17] || (C[17] = (L) => {
-          var W;
-          return (W = y.value) == null ? void 0 : W.resetValidation();
+        "onClick:outside": C[17] || (C[17] = (R) => {
+          var q;
+          return (q = y.value) == null ? void 0 : q.resetValidation();
         })
       }, {
         default: c(() => [
@@ -21495,47 +21525,47 @@ const Zp = K({
             default: c(() => [
               l(F(na), { class: "account_ui_swtich_title pb-0" }, {
                 default: c(() => C[29] || (C[29] = [
-                  de("Edit group", -1)
+                  ve("Edit group", -1)
                 ])),
                 _: 1,
                 __: [29]
               }),
               l(F(ma), { class: "account_ui_swtich_subtitle px-3" }, {
                 default: c(() => C[30] || (C[30] = [
-                  de("Update the name or parent group.", -1)
+                  ve("Update the name or parent group.", -1)
                 ])),
                 _: 1,
                 __: [30]
               }),
               l(F(Ae), null, {
                 default: c(() => [
-                  l(F(Za), {
+                  l(F(en), {
                     ref_key: "editFormRef",
                     ref: y
                   }, {
                     default: c(() => [
                       l(F(ee), {
-                        modelValue: f.name,
-                        "onUpdate:modelValue": C[12] || (C[12] = (L) => f.name = L),
-                        rules: x,
+                        modelValue: p.name,
+                        "onUpdate:modelValue": C[12] || (C[12] = (R) => p.name = R),
+                        rules: k,
                         class: "accouting_field accouting_active_field mb-2",
                         placeholder: "Name",
                         variant: "outlined",
                         "hide-details": "auto"
                       }, null, 8, ["modelValue"]),
                       l(F(ee), {
-                        modelValue: f.position,
-                        "onUpdate:modelValue": C[13] || (C[13] = (L) => f.position = L),
+                        modelValue: p.position,
+                        "onUpdate:modelValue": C[13] || (C[13] = (R) => p.position = R),
                         class: "accouting_field accouting_active_field mb-2",
                         placeholder: "Position",
                         variant: "outlined",
                         "hide-details": "auto"
                       }, null, 8, ["modelValue"]),
                       l(F(lt), {
-                        modelValue: f.parentGroup,
-                        "onUpdate:modelValue": C[14] || (C[14] = (L) => f.parentGroup = L),
-                        items: _.value,
-                        rules: p,
+                        modelValue: p.parentGroup,
+                        "onUpdate:modelValue": C[14] || (C[14] = (R) => p.parentGroup = R),
+                        items: g.value,
+                        rules: _,
                         class: "accouting_field accouting_active_field",
                         placeholder: "Parent Group",
                         "item-title": "title",
@@ -21555,9 +21585,9 @@ const Zp = K({
                     text: "Cancel",
                     class: "account_v_btn_outlined",
                     variant: "outlined",
-                    onClick: C[15] || (C[15] = (L) => {
-                      var W;
-                      i.value = !1, (W = y.value) == null || W.resetValidation();
+                    onClick: C[15] || (C[15] = (R) => {
+                      var q;
+                      i.value = !1, (q = y.value) == null || q.resetValidation();
                     })
                   }),
                   l(F(Z), {
@@ -21576,25 +21606,25 @@ const Zp = K({
       }, 8, ["modelValue"]),
       l(F(Vt), {
         modelValue: o.value,
-        "onUpdate:modelValue": C[19] || (C[19] = (L) => o.value = L),
+        "onUpdate:modelValue": C[19] || (C[19] = (R) => o.value = R),
         "max-width": "400",
-        "onClick:outside": C[20] || (C[20] = (L) => o.value = !1)
+        "onClick:outside": C[20] || (C[20] = (R) => o.value = !1)
       }, {
         default: c(() => [
           l(F(me), null, {
             default: c(() => [
               l(F(na), { class: "account_ui_swtich_title pb-0" }, {
                 default: c(() => C[31] || (C[31] = [
-                  de("Are you absolutely sure?", -1)
+                  ve("Are you absolutely sure?", -1)
                 ])),
                 _: 1,
                 __: [31]
               }),
               l(F(ma), { class: "account_ui_swtich_subtitle text-wrap px-3" }, {
                 default: c(() => {
-                  var L;
+                  var R;
                   return [
-                    de(" This action cannot be undone. This will permanently delete the " + ue((L = u.value) == null ? void 0 : L.name) + " group and all of its subgroups. ", 1)
+                    ve(" This action cannot be undone. This will permanently delete the " + ue((R = u.value) == null ? void 0 : R.name) + " group and all of its subgroups. ", 1)
                   ];
                 }),
                 _: 1
@@ -21605,12 +21635,12 @@ const Zp = K({
                     text: "Cancel",
                     class: "account_v_btn_outlined",
                     variant: "outlined",
-                    onClick: C[18] || (C[18] = (L) => o.value = !1)
+                    onClick: C[18] || (C[18] = (R) => o.value = !1)
                   }),
                   l(F(Z), {
                     text: "Continue",
                     class: "account_v_btn_primary",
-                    onClick: T
+                    onClick: D
                   })
                 ]),
                 _: 1
@@ -21623,16 +21653,16 @@ const Zp = K({
       }, 8, ["modelValue"])
     ]));
   }
-}, Xb = { class: "account_ui_vcard" }, Qb = { class: "d-flex align-center gap-2" }, Zb = { class: "mb-0" }, e_ = { class: "pa-3" }, t_ = { class: "d-flex align-center gap-2 justify-end mt-3" }, a_ = { class: "pb-4 d-flex align-center justify-end" }, n_ = { class: "account_invoice_list" }, l_ = {
+}, Qb = { class: "account_ui_vcard" }, Zb = { class: "d-flex align-center gap-2" }, e_ = { class: "mb-0" }, t_ = { class: "pa-3" }, a_ = { class: "d-flex align-center gap-2 justify-end mt-3" }, n_ = { class: "pb-4 d-flex align-center justify-end" }, l_ = { class: "account_invoice_list" }, i_ = {
   key: 0,
   class: "account_ui_vcard"
-}, i_ = { class: "d-flex align-center gap-2" }, o_ = { class: "account_vcard_menu_items py-1" }, s_ = ["onClick"], u_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, r_ = { class: "custom_option d-flex align-center" }, c_ = { class: "d-flex align-center justify-end mt-4" }, d_ = {
+}, o_ = { class: "d-flex align-center gap-2" }, s_ = { class: "account_vcard_menu_items py-1" }, u_ = ["onClick"], r_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, c_ = { class: "custom_option d-flex align-center" }, d_ = { class: "d-flex align-center justify-end mt-4" }, v_ = {
   key: 0,
   class: "account_ui_vcard"
-}, v_ = { class: "d-flex align-center justify-space-between" }, f_ = { class: "d-flex align-center justify-space-between" }, m_ = { class: "d-flex align-center justify-space-between" }, g_ = { class: "d-flex align-center justify-space-between" }, y_ = { class: "d-flex align-center justify-space-between" }, p_ = { class: "d-flex align-center justify-space-between" }, b_ = {
+}, f_ = { class: "d-flex align-center justify-space-between" }, m_ = { class: "d-flex align-center justify-space-between" }, g_ = { class: "d-flex align-center justify-space-between" }, y_ = { class: "d-flex align-center justify-space-between" }, p_ = { class: "d-flex align-center justify-space-between" }, b_ = { class: "d-flex align-center justify-space-between" }, __ = {
   __name: "AccountInvoiceReturn",
   setup(e) {
-    const a = A([
+    const a = T([
       { title: "Invoice Number", value: "invoiceNumber", visible: !0, minWidth: "120px" },
       { title: "Customer Name", value: "customerName", visible: !0, minWidth: "120px" },
       { title: "Invoice Date", value: "invoiceDate", visible: !0, minWidth: "120px" },
@@ -21645,7 +21675,7 @@ const Zp = K({
       { title: "GST Type", value: "gstType", visible: !0 },
       { title: "Created By", value: "createdBy", visible: !0 },
       { title: "Actions", value: "actions", visible: !0 }
-    ]), t = A(!1), n = A([]);
+    ]), t = T(!1), n = T([]);
     async function i() {
       try {
         const ce = [
@@ -21865,7 +21895,7 @@ const Zp = K({
         console.error("Error fetching invoice data:", ce);
       }
     }
-    const o = A([
+    const o = T([
       { title: "Payment Status", checked: !0 },
       { title: "Currency", checked: !1 },
       { title: "GST Type", checked: !1 },
@@ -21875,15 +21905,15 @@ const Zp = K({
       { title: "Invoice Date To", checked: !1 },
       { title: "Due Date From", checked: !1 },
       { title: "Due Date To", checked: !1 }
-    ]), s = A([
+    ]), s = T([
       { title: "Paid", value: "Paid" },
       { title: "Overdue", value: "Overdue" },
       { title: "Outstanding", value: "Outstanding" }
-    ]), u = A([
+    ]), u = T([
       { title: "INR", value: "INR" },
       { title: "USD", value: "USD" },
       { title: "EUR", value: "EUR" }
-    ]), r = A([
+    ]), r = T([
       {
         label: "TOTAL SALES (BCY)",
         value: "₹84,67,225.00",
@@ -21914,7 +21944,7 @@ const Zp = K({
         icon: "mdi-bank-outline",
         color: "info"
       }
-    ]), d = A("item"), y = A([
+    ]), d = T("item"), y = T([
       { title: "Item", value: "item", minWidth: "250px" },
       { title: "HSN/SAC", value: "hsn", minWidth: "250px" },
       { title: "Qty", value: "quantity", minWidth: "70px" },
@@ -21922,7 +21952,7 @@ const Zp = K({
       { title: "GST(%)", value: "gst", minWidth: "" },
       { title: "Amount", value: "amount", minWidth: "" },
       { title: "", value: "actions", minWidth: "" }
-    ]), b = A(["0%", "5%", "12%", "18%", "28%"]), m = A([
+    ]), b = T(["0%", "5%", "12%", "18%", "28%"]), m = T([
       { title: "Service", value: "item", minWidth: "250px" },
       { title: "Amount", value: "rate", minWidth: "100px" },
       { title: "Discount(%)", value: "discount", minWidth: "100px" },
@@ -21930,8 +21960,8 @@ const Zp = K({
       { title: "GST(%)", value: "gst" },
       { title: "Total", value: "total" },
       { title: "", value: "actions" }
-    ]), f = A([]);
-    async function x() {
+    ]), p = T([]);
+    async function k() {
       try {
         const ce = [
           { title: "Andhra Pradesh", value: "Andhra Pradesh" },
@@ -21971,16 +22001,16 @@ const Zp = K({
           { title: "Lakshadweep", value: "Lakshadweep" },
           { title: "Puducherry", value: "Puducherry" }
         ];
-        f.value = ce;
+        p.value = ce;
       } catch (ce) {
         console.error("Error fetching states data:", ce);
       }
     }
-    const p = A([
+    const _ = T([
       { title: "Credit", value: "credit" },
       { title: "Debit", value: "debit" }
-    ]), h = A("credit");
-    function _(ce = !1) {
+    ]), h = T("credit");
+    function g(ce = !1) {
       return {
         item: "",
         hsnCode: "",
@@ -21994,27 +22024,27 @@ const Zp = K({
         lockedRate: !1
       };
     }
-    const g = A([_()]), S = A([_(!0)]);
-    function I(ce) {
-      const z = ce === "service" ? S : g;
-      z.value.push({ ..._(ce === "service"), lockedRate: z.value.length > 0 }), z.value.forEach((Q, P) => Q.lockedRate = P !== 0);
+    const f = T([g()]), x = T([g(!0)]);
+    function V(ce) {
+      const z = ce === "service" ? x : f;
+      z.value.push({ ...g(ce === "service"), lockedRate: z.value.length > 0 }), z.value.forEach((Q, P) => Q.lockedRate = P !== 0);
     }
     function $(ce, z) {
-      const Q = z === "service" ? S : g;
-      Q.value.length > 1 && (Q.value.splice(ce, 1), Q.value.forEach((P, ne) => P.lockedRate = ne !== 0));
+      const Q = z === "service" ? x : f;
+      Q.value.length > 1 && (Q.value.splice(ce, 1), Q.value.forEach((P, le) => P.lockedRate = le !== 0));
     }
-    function O(ce) {
-      Re(() => {
+    function L(ce) {
+      Oe(() => {
         ce.value.forEach((z) => {
-          const Q = parseFloat(z.quantity) || 1, P = parseFloat(z.rate) || 0, ne = parseFloat(z.discount) || 0, he = (z.quantity !== void 0 ? Q : 1) * P, Ce = he * (ne / 100), Ne = he - Ce, He = parseFloat(z.gst) || 0, Fe = Ne * (He / 100), qe = Ne + Fe;
-          z.taxableAmnt = Ne.toFixed(2), z.total = qe.toFixed(2);
+          const Q = parseFloat(z.quantity) || 1, P = parseFloat(z.rate) || 0, le = parseFloat(z.discount) || 0, he = (z.quantity !== void 0 ? Q : 1) * P, Ce = he * (le / 100), De = he - Ce, He = parseFloat(z.gst) || 0, Fe = De * (He / 100), qe = De + Fe;
+          z.taxableAmnt = De.toFixed(2), z.total = qe.toFixed(2);
         });
       });
     }
-    O(g), O(S), st(() => {
-      i(), x(), g.value[0].lockedRate = !1, S.value[0].lockedRate = !1;
+    L(f), L(x), st(() => {
+      i(), k(), f.value[0].lockedRate = !1, x.value[0].lockedRate = !1;
     });
-    const E = A([
+    const E = T([
       // Core Information
       { label: "Name", key: "name", visible: !0 },
       { label: "Mobile", key: "mobile", visible: !0 },
@@ -22043,10 +22073,10 @@ const Zp = K({
       { label: "Additional Country 1", key: "addCountry1", visible: !0 },
       { label: "Place of Supply", key: "state", visible: !0 },
       { label: "Ship-to Address", key: "shipToAddress", visible: !0 }
-    ]), R = (ce) => {
+    ]), O = (ce) => {
       var z;
       return (z = E.value.find((Q) => Q.key === ce)) == null ? void 0 : z.visible;
-    }, T = A([
+    }, D = T([
       {
         title: "Innovative Inc.",
         value: "innovative_inc",
@@ -22128,34 +22158,34 @@ const Zp = K({
           shipToAddress: "789 Tech Park, Chennai, Tamil Nadu, 600001"
         }
       }
-    ]), U = A(!1), G = () => {
+    ]), U = T(!1), G = () => {
       U.value = !U.value;
-    }, C = A(null), L = A(""), W = A(""), Y = A("INR"), J = A(""), H = A(""), N = A((/* @__PURE__ */ new Date()).toISOString().split("T")[0]);
-    k(() => {
+    }, C = T(null), R = T(""), q = T(""), Y = T("INR"), J = T(""), H = T(""), N = T((/* @__PURE__ */ new Date()).toISOString().split("T")[0]);
+    S(() => {
       if (!C.value) return "";
-      const ce = T.value.find((z) => z.value === C.value);
+      const ce = D.value.find((z) => z.value === C.value);
       return ce ? `GSTIN: ${ce.data.gstin}
 Billing Address: ${ce.data.address}, ${ce.data.state}, ${ce.data.pincode}
 Currency: ${Y.value}` : "";
-    }), Re(() => {
+    }), Oe(() => {
       if (C.value) {
-        const ce = T.value.find((z) => z.value === C.value);
-        ce && (L.value = ce.data.gstin, W.value = `${ce.data.address}, ${ce.data.state}, ${ce.data.pincode}`, Y.value = ce.data.currency || "INR", H.value = ce.data.state);
+        const ce = D.value.find((z) => z.value === C.value);
+        ce && (R.value = ce.data.gstin, q.value = `${ce.data.address}, ${ce.data.state}, ${ce.data.pincode}`, Y.value = ce.data.currency || "INR", H.value = ce.data.state);
       } else
-        L.value = "", W.value = "", Y.value = "INR", H.value = "";
+        R.value = "", q.value = "", Y.value = "INR", H.value = "";
     });
-    const j = A(!1), V = A("Numbering"), M = ["Numbering", "Columns", "Fields", "Mode"], te = A("Text"), ge = A(""), be = A(1), fe = k(() => {
+    const j = T(!1), I = T("Numbering"), M = ["Numbering", "Columns", "Fields", "Mode"], ae = T("Text"), ge = T(""), be = T(1), fe = S(() => {
       const ce = /* @__PURE__ */ new Date(), z = ce.getFullYear(), Q = ce.getMonth() >= 3 ? z + 1 : z;
       return `${Q - 1}-${Q.toString().slice(-2)}`;
     });
-    Re(() => {
-      te.value === "Financial Year" ? ge.value = fe.value : ge.value = "";
+    Oe(() => {
+      ae.value === "Financial Year" ? ge.value = fe.value : ge.value = "";
     });
-    const pe = k(() => !ge.value || !be.value ? "" : `${ge.value}/${be.value}`);
-    return (ce, z) => (w(), re("div", Xb, [
-      l(Ua, null, {
+    const pe = S(() => !ge.value || !be.value ? "" : `${ge.value}/${be.value}`);
+    return (ce, z) => (w(), re("div", Qb, [
+      l(Ga, null, {
         default: c(() => [
-          t.value ? (w(), D(xe, {
+          t.value ? (w(), A(xe, {
             key: 0,
             class: "mb-3"
           }, {
@@ -22168,7 +22198,7 @@ Currency: ${Y.value}` : "";
                     subtitle: "Fill out the details below to create a new sales invoice."
                   }, {
                     append: c(() => [
-                      v("div", Qb, [
+                      v("div", Zb, [
                         l(Z, {
                           onClick: z[0] || (z[0] = (Q) => j.value = !0),
                           variant: "text",
@@ -22176,7 +22206,7 @@ Currency: ${Y.value}` : "";
                           rounded: ""
                         }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
+                            (w(), A(te(F(ne)("settings")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         }),
@@ -22188,7 +22218,7 @@ Currency: ${Y.value}` : "";
                           class: "account_vcard_close_btn"
                         }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
+                            (w(), A(te(F(ne)("x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -22211,7 +22241,7 @@ Currency: ${Y.value}` : "";
                                     "onUpdate:modelValue": z[3] || (z[3] = (Q) => C.value = Q),
                                     placeholder: "Select a customer",
                                     class: "accouting_field accouting_active_field",
-                                    items: T.value,
+                                    items: D.value,
                                     variant: "outlined"
                                   }, {
                                     append: c(() => [
@@ -22221,7 +22251,7 @@ Currency: ${Y.value}` : "";
                                         rounded: "2"
                                       }, {
                                         default: c(() => [
-                                          (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px" } }))
+                                          (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px" } }))
                                         ]),
                                         _: 1
                                       })
@@ -22243,7 +22273,7 @@ Currency: ${Y.value}` : "";
                                   l(ee, {
                                     class: "accouting_field accouting_active_field",
                                     variant: "outlined",
-                                    items: f.value
+                                    items: p.value
                                   }, null, 8, ["items"])
                                 ]),
                                 _: 1,
@@ -22262,7 +22292,7 @@ Currency: ${Y.value}` : "";
                                     "onUpdate:modelValue": z[4] || (z[4] = (Q) => H.value = Q),
                                     class: "accouting_field accouting_active_field",
                                     variant: "outlined",
-                                    items: f.value
+                                    items: p.value
                                   }, null, 8, ["modelValue", "items"])
                                 ]),
                                 _: 1,
@@ -22368,13 +22398,13 @@ Currency: ${Y.value}` : "";
                                 default: c(() => [
                                   l(zt, {
                                     headers: d.value === "item" ? y.value : m.value,
-                                    items: d.value === "item" ? g.value : S.value,
+                                    items: d.value === "item" ? f.value : x.value,
                                     class: "account_dynamic_table account_invoice_table"
                                   }, {
                                     "item.item": c(({ index: Q }) => [
                                       l(ee, {
-                                        modelValue: (d.value === "item" ? g.value : S.value)[Q].item,
-                                        "onUpdate:modelValue": (P) => (d.value === "item" ? g.value : S.value)[Q].item = P,
+                                        modelValue: (d.value === "item" ? f.value : x.value)[Q].item,
+                                        "onUpdate:modelValue": (P) => (d.value === "item" ? f.value : x.value)[Q].item = P,
                                         placeholder: "Item/Service description",
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined"
@@ -22382,8 +22412,8 @@ Currency: ${Y.value}` : "";
                                     ]),
                                     "item.hsn": c(({ index: Q }) => [
                                       l(ee, {
-                                        modelValue: (d.value === "item" ? g.value : S.value)[Q].hsnCode,
-                                        "onUpdate:modelValue": (P) => (d.value === "item" ? g.value : S.value)[Q].hsnCode = P,
+                                        modelValue: (d.value === "item" ? f.value : x.value)[Q].hsnCode,
+                                        "onUpdate:modelValue": (P) => (d.value === "item" ? f.value : x.value)[Q].hsnCode = P,
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined",
                                         placeholder: "Enter HSN/SAC code"
@@ -22391,8 +22421,8 @@ Currency: ${Y.value}` : "";
                                     ]),
                                     "item.quantity": c(({ index: Q }) => [
                                       l(ee, {
-                                        modelValue: g.value[Q].quantity,
-                                        "onUpdate:modelValue": (P) => g.value[Q].quantity = P,
+                                        modelValue: f.value[Q].quantity,
+                                        "onUpdate:modelValue": (P) => f.value[Q].quantity = P,
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined",
                                         type: "number",
@@ -22402,9 +22432,9 @@ Currency: ${Y.value}` : "";
                                     ]),
                                     "item.rate": c(({ index: Q }) => [
                                       l(ee, {
-                                        modelValue: (d.value === "item" ? g.value : S.value)[Q].rate,
-                                        "onUpdate:modelValue": (P) => (d.value === "item" ? g.value : S.value)[Q].rate = P,
-                                        readonly: (d.value === "item" ? g.value : S.value)[Q].lockedRate,
+                                        modelValue: (d.value === "item" ? f.value : x.value)[Q].rate,
+                                        "onUpdate:modelValue": (P) => (d.value === "item" ? f.value : x.value)[Q].rate = P,
+                                        readonly: (d.value === "item" ? f.value : x.value)[Q].lockedRate,
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined",
                                         type: "number",
@@ -22414,24 +22444,24 @@ Currency: ${Y.value}` : "";
                                     ]),
                                     "item.gst": c(({ index: Q }) => [
                                       l(Ze, {
-                                        modelValue: (d.value === "item" ? g.value : S.value)[Q].gst,
-                                        "onUpdate:modelValue": (P) => (d.value === "item" ? g.value : S.value)[Q].gst = P,
+                                        modelValue: (d.value === "item" ? f.value : x.value)[Q].gst,
+                                        "onUpdate:modelValue": (P) => (d.value === "item" ? f.value : x.value)[Q].gst = P,
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined",
                                         items: b.value
                                       }, null, 8, ["modelValue", "onUpdate:modelValue", "items"])
                                     ]),
                                     "item.amount": c(({ index: Q }) => [
-                                      v("p", Zb, "₹" + ue((d.value === "item" ? g.value : S.value)[Q].total), 1)
+                                      v("p", e_, "₹" + ue((d.value === "item" ? f.value : x.value)[Q].total), 1)
                                     ]),
                                     "item.actions": c(({ index: Q }) => [
                                       l($e, {
                                         icon: "mdi-trash-can-outline",
                                         class: ye(["cursor-pointer table_row_icon", {
-                                          "opacity-50": (d.value === "item" ? g.value : S.value).length === 1,
-                                          "cursor-not-allowed": (d.value === "item" ? g.value : S.value).length === 1
+                                          "opacity-50": (d.value === "item" ? f.value : x.value).length === 1,
+                                          "cursor-not-allowed": (d.value === "item" ? f.value : x.value).length === 1
                                         }]),
-                                        disabled: (d.value === "item" ? g.value : S.value).length === 1,
+                                        disabled: (d.value === "item" ? f.value : x.value).length === 1,
                                         onClick: (P) => $(Q, d.value)
                                       }, null, 8, ["class", "disabled", "onClick"])
                                     ]),
@@ -22445,13 +22475,13 @@ Currency: ${Y.value}` : "";
                                   l(Z, {
                                     class: "account_v_btn_outlined mt-3",
                                     variant: "text",
-                                    onClick: z[7] || (z[7] = (Q) => I(d.value))
+                                    onClick: z[7] || (z[7] = (Q) => V(d.value))
                                   }, {
                                     prepend: c(() => [
-                                      (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                      (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                     ]),
                                     default: c(() => [
-                                      z[24] || (z[24] = de(" Add Another Line ", -1))
+                                      z[24] || (z[24] = ve(" Add Another Line ", -1))
                                     ]),
                                     _: 1,
                                     __: [24]
@@ -22483,7 +22513,7 @@ Currency: ${Y.value}` : "";
                                         default: c(() => [
                                           l(me, { class: "shadow-none w-100" }, {
                                             default: c(() => [
-                                              v("div", e_, [
+                                              v("div", t_, [
                                                 z[25] || (z[25] = v("div", { class: "d-flex align-center justify-space-between" }, [
                                                   v("span", { class: "account_gst_invoice_subtitle" }, "Subtotal"),
                                                   v("span", { class: "account_gst_invoice_subtitle_val" }, "₹0.00")
@@ -22521,13 +22551,13 @@ Currency: ${Y.value}` : "";
                             ]),
                             _: 1
                           }),
-                          v("div", t_, [
+                          v("div", a_, [
                             l(Z, { class: "account_v_btn_primary" }, {
                               prepend: c(() => [
-                                (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                (w(), A(te(F(ne)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                               ]),
                               default: c(() => [
-                                z[30] || (z[30] = de(" Save Credit Note ", -1))
+                                z[30] || (z[30] = ve(" Save Credit Note ", -1))
                               ]),
                               _: 1,
                               __: [30]
@@ -22544,26 +22574,26 @@ Currency: ${Y.value}` : "";
               })
             ]),
             _: 1
-          })) : q("", !0)
+          })) : W("", !0)
         ]),
         _: 1
       }),
-      v("div", a_, [
+      v("div", n_, [
         l(Z, {
           onClick: z[8] || (z[8] = (Q) => t.value = !0),
           class: "account_v_btn_primary"
         }, {
           prepend: c(() => [
-            (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+            (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
           ]),
           default: c(() => [
-            z[31] || (z[31] = de(" Create Invoice ", -1))
+            z[31] || (z[31] = ve(" Create Invoice ", -1))
           ]),
           _: 1,
           __: [31]
         })
       ]),
-      v("div", n_, [
+      v("div", l_, [
         l($l, {
           title: "Invoices",
           headers: a.value,
@@ -22581,14 +22611,14 @@ Currency: ${Y.value}` : "";
         "onUpdate:modelValue": z[10] || (z[10] = (Q) => U.value = Q)
       }, {
         default: c(() => [
-          U.value ? (w(), re("div", l_, [
+          U.value ? (w(), re("div", i_, [
             l(me, {
               title: "Create a New Customer",
               class: "pa-2 account_vcard_border shadow-none",
               subtitle: "Fill in the details below to add a new customer to your records."
             }, {
               append: c(() => [
-                v("div", i_, [
+                v("div", o_, [
                   l(ot, {
                     location: "start",
                     transition: "slide-y-transition",
@@ -22608,23 +22638,23 @@ Currency: ${Y.value}` : "";
                         default: c(() => [
                           z[32] || (z[32] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                           l(ke, { class: "my-1 mt-0" }),
-                          v("div", o_, [
-                            (w(!0), re(ve, null, ze(E.value, (Q) => (w(), re("div", {
+                          v("div", s_, [
+                            (w(!0), re(de, null, Re(E.value, (Q) => (w(), re("div", {
                               key: Q.key,
                               class: "account_vcard_menu_item",
                               onClick: (P) => Q.visible = !Q.visible
                             }, [
-                              v("div", u_, [
-                                Q.visible ? (w(), D($e, {
+                              v("div", r_, [
+                                Q.visible ? (w(), A($e, {
                                   key: 0,
                                   size: "16",
                                   icon: "mdi-check"
-                                })) : q("", !0),
+                                })) : W("", !0),
                                 v("span", {
                                   class: ye(Q.visible ? "" : "field_list_dynamic_ml")
                                 }, ue(Q.label), 3)
                               ])
-                            ], 8, s_))), 128))
+                            ], 8, u_))), 128))
                           ])
                         ]),
                         _: 1,
@@ -22659,7 +22689,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [33]
                         }),
-                        R("name") ? (w(), D(B, {
+                        O("name") ? (w(), A(B, {
                           key: 0,
                           cols: "12",
                           lg: "12",
@@ -22676,8 +22706,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [34]
-                        })) : q("", !0),
-                        R("mobile") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("mobile") ? (w(), A(B, {
                           key: 1,
                           cols: "12",
                           lg: "5",
@@ -22695,8 +22725,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [35]
-                        })) : q("", !0),
-                        R("openingBalance") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("openingBalance") ? (w(), A(B, {
                           key: 2,
                           cols: "12",
                           lg: "7",
@@ -22704,7 +22734,7 @@ Currency: ${Y.value}` : "";
                         }, {
                           default: c(() => [
                             z[36] || (z[36] = v("label", { class: "account_label mb-2" }, "Opening Balance", -1)),
-                            v("div", r_, [
+                            v("div", c_, [
                               l(ee, {
                                 class: "custom_option_field accouting_field accouting_active_field",
                                 type: "number",
@@ -22716,7 +22746,7 @@ Currency: ${Y.value}` : "";
                                 class: "custom_option_select accouting_field accouting_active_field",
                                 modelValue: h.value,
                                 "onUpdate:modelValue": z[9] || (z[9] = (Q) => h.value = Q),
-                                items: p.value,
+                                items: _.value,
                                 variant: "outlined",
                                 density: "comapct"
                               }, null, 8, ["modelValue", "items"])
@@ -22724,7 +22754,7 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [36]
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -22736,7 +22766,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [37]
                         }),
-                        R("mailingName") ? (w(), D(B, {
+                        O("mailingName") ? (w(), A(B, {
                           key: 3,
                           cols: "12",
                           lg: "6",
@@ -22753,8 +22783,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [38]
-                        })) : q("", !0),
-                        R("email") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("email") ? (w(), A(B, {
                           key: 4,
                           cols: "12",
                           lg: "6",
@@ -22771,8 +22801,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [39]
-                        })) : q("", !0),
-                        R("address") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("address") ? (w(), A(B, {
                           key: 5,
                           cols: "12",
                           lg: "12",
@@ -22780,7 +22810,7 @@ Currency: ${Y.value}` : "";
                         }, {
                           default: c(() => [
                             z[40] || (z[40] = v("label", { class: "account_label mb-2" }, "Address", -1)),
-                            l(Nt, {
+                            l(Dt, {
                               class: "accounting_v_textarea",
                               placeholder: "Full address",
                               variant: "outlined"
@@ -22788,8 +22818,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [40]
-                        })) : q("", !0),
-                        R("state") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("state") ? (w(), A(B, {
                           key: 6,
                           cols: "12",
                           lg: "6",
@@ -22805,8 +22835,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [41]
-                        })) : q("", !0),
-                        R("pincode") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("pincode") ? (w(), A(B, {
                           key: 7,
                           cols: "12",
                           lg: "6",
@@ -22822,8 +22852,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [42]
-                        })) : q("", !0),
-                        R("country") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("country") ? (w(), A(B, {
                           key: 8,
                           cols: "12",
                           lg: "6",
@@ -22840,7 +22870,7 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [43]
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -22852,7 +22882,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [44]
                         }),
-                        R("gstin") ? (w(), D(B, {
+                        O("gstin") ? (w(), A(B, {
                           key: 9,
                           cols: "12",
                           lg: "6",
@@ -22869,8 +22899,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [45]
-                        })) : q("", !0),
-                        R("pan") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("pan") ? (w(), A(B, {
                           key: 10,
                           cols: "12",
                           lg: "6",
@@ -22887,8 +22917,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [46]
-                        })) : q("", !0),
-                        R("taxReg") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("taxReg") ? (w(), A(B, {
                           key: 11,
                           cols: "12",
                           lg: "6",
@@ -22905,8 +22935,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [47]
-                        })) : q("", !0),
-                        R("tds") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("tds") ? (w(), A(B, {
                           key: 12,
                           class: "d-flex align-center",
                           cols: "12",
@@ -22914,14 +22944,14 @@ Currency: ${Y.value}` : "";
                           md: "6"
                         }, {
                           default: c(() => [
-                            l(Dt, {
+                            l(Nt, {
                               density: "compact",
                               class: "account_v_checkbox",
                               label: "TDS Applicable"
                             })
                           ]),
                           _: 1
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -22933,7 +22963,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [48]
                         }),
-                        R("creditLimit") ? (w(), D(B, {
+                        O("creditLimit") ? (w(), A(B, {
                           key: 13,
                           cols: "12",
                           lg: "6",
@@ -22951,8 +22981,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [49]
-                        })) : q("", !0),
-                        R("creditPeriod") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("creditPeriod") ? (w(), A(B, {
                           key: 14,
                           cols: "12",
                           lg: "6",
@@ -22970,8 +23000,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [50]
-                        })) : q("", !0),
-                        R("billWise") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("billWise") ? (w(), A(B, {
                           key: 15,
                           class: "d-flex align-center",
                           cols: "12",
@@ -22979,14 +23009,14 @@ Currency: ${Y.value}` : "";
                           md: "6"
                         }, {
                           default: c(() => [
-                            l(Dt, {
+                            l(Nt, {
                               density: "compact",
                               class: "account_v_checkbox",
                               label: "Maintain Bill-wise Details"
                             })
                           ]),
                           _: 1
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -22998,7 +23028,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [51]
                         }),
-                        R("bankName") ? (w(), D(B, {
+                        O("bankName") ? (w(), A(B, {
                           key: 16,
                           cols: "12",
                           lg: "6",
@@ -23015,8 +23045,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [52]
-                        })) : q("", !0),
-                        R("accountNumber") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("accountNumber") ? (w(), A(B, {
                           key: 17,
                           cols: "12",
                           lg: "6",
@@ -23033,8 +23063,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [53]
-                        })) : q("", !0),
-                        R("ifscCode") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("ifscCode") ? (w(), A(B, {
                           key: 18,
                           cols: "12",
                           lg: "6",
@@ -23051,7 +23081,7 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [54]
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -23063,7 +23093,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [55]
                         }),
-                        R("addCountry1") ? (w(), D(B, {
+                        O("addCountry1") ? (w(), A(B, {
                           key: 19,
                           cols: "12",
                           lg: "6",
@@ -23080,8 +23110,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [56]
-                        })) : q("", !0),
-                        R("state") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("state") ? (w(), A(B, {
                           key: 20,
                           cols: "12",
                           lg: "6",
@@ -23098,8 +23128,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [57]
-                        })) : q("", !0),
-                        R("shipToAddress") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("shipToAddress") ? (w(), A(B, {
                           key: 21,
                           cols: "12",
                           lg: "12",
@@ -23107,18 +23137,18 @@ Currency: ${Y.value}` : "";
                         }, {
                           default: c(() => [
                             z[59] || (z[59] = v("label", { class: "account_label mb-2" }, "Ship-to Address", -1)),
-                            l(Nt, {
+                            l(Dt, {
                               class: "accounting_v_textarea",
                               placeholder: "Optional delivery address",
                               variant: "outlined"
                             }),
-                            v("div", c_, [
+                            v("div", d_, [
                               l(Z, {
                                 class: "account_v_btn_primary",
                                 "prepend-icon": "mdi-content-save-outline"
                               }, {
                                 default: c(() => z[58] || (z[58] = [
-                                  de("Save Customer", -1)
+                                  ve("Save Customer", -1)
                                 ])),
                                 _: 1,
                                 __: [58]
@@ -23127,7 +23157,7 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [59]
-                        })) : q("", !0)
+                        })) : W("", !0)
                       ]),
                       _: 1
                     })
@@ -23137,7 +23167,7 @@ Currency: ${Y.value}` : "";
               ]),
               _: 1
             })
-          ])) : q("", !0)
+          ])) : W("", !0)
         ]),
         _: 1
       }, 8, ["modelValue"]),
@@ -23147,7 +23177,7 @@ Currency: ${Y.value}` : "";
         "onUpdate:modelValue": z[16] || (z[16] = (Q) => j.value = Q)
       }, {
         default: c(() => [
-          j.value ? (w(), re("div", d_, [
+          j.value ? (w(), re("div", v_, [
             l(me, {
               title: "Invoice Settings",
               class: "pa-2 account_vcard_border shadow-none",
@@ -23168,7 +23198,7 @@ Currency: ${Y.value}` : "";
                   default: c(() => [
                     l(xe, { class: "acc_invoice_settings_row mx-1" }, {
                       default: c(() => [
-                        (w(), re(ve, null, ze(M, (Q) => l(B, {
+                        (w(), re(de, null, Re(M, (Q) => l(B, {
                           class: "pa-1",
                           cols: "3",
                           key: Q
@@ -23176,12 +23206,12 @@ Currency: ${Y.value}` : "";
                           default: c(() => [
                             l(Z, {
                               size: "small",
-                              class: ye(["w-100", V.value === Q ? "account_v_btn_light" : "account_v_btn_ghost"]),
+                              class: ye(["w-100", I.value === Q ? "account_v_btn_light" : "account_v_btn_ghost"]),
                               variant: "text",
-                              onClick: (P) => V.value = Q
+                              onClick: (P) => I.value = Q
                             }, {
                               default: c(() => [
-                                de(ue(Q), 1)
+                                ve(ue(Q), 1)
                               ]),
                               _: 2
                             }, 1032, ["class", "onClick"])
@@ -23195,7 +23225,7 @@ Currency: ${Y.value}` : "";
                       default: c(() => [
                         l(B, { cols: "12" }, {
                           default: c(() => [
-                            V.value === "Numbering" ? (w(), D(me, {
+                            I.value === "Numbering" ? (w(), A(me, {
                               key: 0,
                               class: "account_vcard_border shadow-none pa-4"
                             }, {
@@ -23209,7 +23239,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", v_, [
+                                                v("div", f_, [
                                                   z[60] || (z[60] = v("p", { class: "mb-0" }, "Change Every FY", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23236,12 +23266,12 @@ Currency: ${Y.value}` : "";
                                             l(B, { cols: "6" }, {
                                               default: c(() => [
                                                 l(Z, {
-                                                  class: ye(["w-100 account_v_btn_outlined", te.value === "Text" ? "active_border" : ""]),
+                                                  class: ye(["w-100 account_v_btn_outlined", ae.value === "Text" ? "active_border" : ""]),
                                                   size: "large",
-                                                  onClick: z[12] || (z[12] = (Q) => te.value = "Text")
+                                                  onClick: z[12] || (z[12] = (Q) => ae.value = "Text")
                                                 }, {
                                                   default: c(() => z[61] || (z[61] = [
-                                                    de(" Text ", -1)
+                                                    ve(" Text ", -1)
                                                   ])),
                                                   _: 1,
                                                   __: [61]
@@ -23252,12 +23282,12 @@ Currency: ${Y.value}` : "";
                                             l(B, { cols: "6" }, {
                                               default: c(() => [
                                                 l(Z, {
-                                                  class: ye(["w-100 account_v_btn_outlined", te.value === "Financial Year" ? "active_border" : ""]),
+                                                  class: ye(["w-100 account_v_btn_outlined", ae.value === "Financial Year" ? "active_border" : ""]),
                                                   size: "large",
-                                                  onClick: z[13] || (z[13] = (Q) => te.value = "Financial Year")
+                                                  onClick: z[13] || (z[13] = (Q) => ae.value = "Financial Year")
                                                 }, {
                                                   default: c(() => z[62] || (z[62] = [
-                                                    de(" Financial Year ", -1)
+                                                    ve(" Financial Year ", -1)
                                                   ])),
                                                   _: 1,
                                                   __: [62]
@@ -23285,7 +23315,7 @@ Currency: ${Y.value}` : "";
                                           density: "compact",
                                           modelValue: ge.value,
                                           "onUpdate:modelValue": z[14] || (z[14] = (Q) => ge.value = Q),
-                                          readonly: te.value === "Financial Year"
+                                          readonly: ae.value === "Financial Year"
                                         }, null, 8, ["modelValue", "readonly"])
                                       ]),
                                       _: 1,
@@ -23330,8 +23360,8 @@ Currency: ${Y.value}` : "";
                               ]),
                               _: 1,
                               __: [67]
-                            })) : q("", !0),
-                            V.value === "Columns" ? (w(), D(me, {
+                            })) : W("", !0),
+                            I.value === "Columns" ? (w(), A(me, {
                               key: 1,
                               class: "account_vcard_border shadow-none pa-4"
                             }, {
@@ -23345,7 +23375,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", f_, [
+                                                v("div", m_, [
                                                   z[68] || (z[68] = v("p", { class: "mb-0" }, "Unit", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23370,7 +23400,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", m_, [
+                                                v("div", g_, [
                                                   z[69] || (z[69] = v("p", { class: "mb-0" }, "HSN/SAC Code", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23395,7 +23425,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", g_, [
+                                                v("div", y_, [
                                                   z[70] || (z[70] = v("p", { class: "mb-0" }, "Discount (%)", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23420,8 +23450,8 @@ Currency: ${Y.value}` : "";
                               ]),
                               _: 1,
                               __: [71]
-                            })) : q("", !0),
-                            V.value === "Fields" ? (w(), D(me, {
+                            })) : W("", !0),
+                            I.value === "Fields" ? (w(), A(me, {
                               key: 2,
                               class: "account_vcard_border shadow-none pa-4"
                             }, {
@@ -23435,7 +23465,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", y_, [
+                                                v("div", p_, [
                                                   z[72] || (z[72] = v("p", { class: "mb-0" }, "Due Date", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23460,7 +23490,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", p_, [
+                                                v("div", b_, [
                                                   z[73] || (z[73] = v("p", { class: "mb-0" }, "Currency & Exchange Rate", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -23485,8 +23515,8 @@ Currency: ${Y.value}` : "";
                               ]),
                               _: 1,
                               __: [74]
-                            })) : q("", !0),
-                            V.value === "Mode" ? (w(), D(me, {
+                            })) : W("", !0),
+                            I.value === "Mode" ? (w(), A(me, {
                               key: 3,
                               class: "account_vcard_border shadow-none pa-4"
                             }, {
@@ -23494,15 +23524,15 @@ Currency: ${Y.value}` : "";
                                 z[75] || (z[75] = v("h6", { class: "mb-4" }, "Invoice Mode", -1)),
                                 l(Ac, { class: "accounting_v_radio" }, {
                                   default: c(() => [
-                                    l(Ta, {
+                                    l(Da, {
                                       label: "Items and Services",
                                       value: "item_service"
                                     }),
-                                    l(Ta, {
+                                    l(Da, {
                                       label: "Items Only",
                                       value: "items"
                                     }),
-                                    l(Ta, {
+                                    l(Da, {
                                       label: "Services Only",
                                       value: "services"
                                     })
@@ -23512,7 +23542,7 @@ Currency: ${Y.value}` : "";
                               ]),
                               _: 1,
                               __: [75]
-                            })) : q("", !0)
+                            })) : W("", !0)
                           ]),
                           _: 1
                         })
@@ -23525,56 +23555,56 @@ Currency: ${Y.value}` : "";
               ]),
               _: 1
             })
-          ])) : q("", !0)
+          ])) : W("", !0)
         ]),
         _: 1
       }, 8, ["modelValue"])
     ]));
   }
-}, __ = { class: "account_ui_vcard" }, h_ = { class: "d-flex align-center gap-2" }, x_ = { class: "py-1" }, k_ = { class: "account_vcard_menu_item" }, S_ = { class: "account_vcard_menu_item" }, w_ = { class: "account_vcard_menu_item" }, C_ = { class: "py-1" }, V_ = { class: "account_vcard_menu_item" }, I_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, P_ = {
-  key: 0,
-  class: "text-end"
-}, A_ = {
+}, h_ = { class: "account_ui_vcard" }, x_ = { class: "d-flex align-center gap-2" }, k_ = { class: "py-1" }, S_ = { class: "account_vcard_menu_item" }, w_ = { class: "account_vcard_menu_item" }, C_ = { class: "account_vcard_menu_item" }, V_ = { class: "py-1" }, I_ = { class: "account_vcard_menu_item" }, P_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, A_ = {
   key: 0,
   class: "text-end"
 }, T_ = {
   key: 0,
   class: "text-end"
-}, N_ = { class: "d-flex justify-end align-center gap-2" }, D_ = { class: "d-flex justify-end mb-3 px-4" }, $_ = { style: { "min-width": "100%" } }, B_ = { class: "font-weight-medium" }, E_ = { class: "text-end amount_inc_current_item" }, F_ = {
+}, D_ = {
+  key: 0,
+  class: "text-end"
+}, N_ = { class: "d-flex justify-end align-center gap-2" }, $_ = { class: "d-flex justify-end mb-3 px-4" }, B_ = { style: { "min-width": "100%" } }, E_ = { class: "font-weight-medium" }, F_ = { class: "text-end amount_inc_current_item" }, L_ = {
   key: 0,
   class: "text-end amount_inc_previous_item"
-}, L_ = {
-  key: 0,
-  class: "text-end d-flex align-center amount_inc_change_item justify-end gap-2"
 }, R_ = {
   key: 0,
-  class: "text-end"
+  class: "text-end d-flex align-center amount_inc_change_item justify-end gap-2"
 }, O_ = {
-  key: 1,
+  key: 0,
   class: "text-end"
 }, M_ = {
+  key: 1,
+  class: "text-end"
+}, z_ = {
   key: 0,
   class: "text-end"
-}, z_ = { class: "d-flex justify-end align-center gap-2" }, U_ = { class: "d-flex justify-end mb-3 px-4" }, G_ = { style: { "min-width": "100%" } }, j_ = { class: "font-weight-medium" }, H_ = { class: "text-end amount_inc_current_item" }, W_ = {
+}, U_ = { class: "d-flex justify-end align-center gap-2" }, G_ = { class: "d-flex justify-end mb-3 px-4" }, j_ = { style: { "min-width": "100%" } }, H_ = { class: "font-weight-medium" }, W_ = { class: "text-end amount_inc_current_item" }, q_ = {
   key: 0,
   class: "text-end amount_inc_previous_item"
-}, q_ = {
+}, Y_ = {
   key: 0,
   class: "text-end d-flex align-center justify-end amount_inc_change_item gap-2"
-}, Y_ = { class: "d-flex align-center gap-2" }, J_ = { class: "d-flex justify-end align-center gap-2" }, K_ = {
+}, J_ = { class: "d-flex align-center gap-2" }, K_ = { class: "d-flex justify-end align-center gap-2" }, X_ = {
   class: "d-flex justify-space-between align-center px-4 py-2 rounded",
   style: { "background-color": "#e6fff0" }
-}, X_ = { class: "d-flex align-center gap-2" }, Q_ = { class: "d-flex align-center gap-4" }, Z_ = {
+}, Q_ = { class: "d-flex align-center gap-2" }, Z_ = { class: "d-flex align-center gap-4" }, eh = {
   key: 0,
   class: "px-2 py-1",
   style: { "background-color": "#f5d6c6", "border-radius": "4px" }
-}, eh = { class: "font-weight-medium" }, th = { class: "text-success font-weight-bold" }, ah = {
+}, th = { class: "font-weight-medium" }, ah = { class: "text-success font-weight-bold" }, nh = {
   key: 1,
   class: "d-flex align-center gap-1"
-}, nh = {
+}, lh = {
   __name: "AccountProfitAndLoss",
   setup(e) {
-    const a = A([
+    const a = T([
       {
         name: "Income (Direct)",
         percent: "95.03%",
@@ -23662,7 +23692,7 @@ Currency: ${Y.value}` : "";
           }
         ]
       }
-    ]), t = A([
+    ]), t = T([
       {
         name: "Expenses (Direct)",
         percent: "20.00%",
@@ -23879,63 +23909,63 @@ Currency: ${Y.value}` : "";
           }
         ]
       }
-    ]), n = k(() => [
+    ]), n = S(() => [
       { title: "Income Type", value: "name", width: "550px", align: "start", visible: !0 },
       { title: d.value ? "Current" : "", value: "current", width: "", align: "end", visible: !0 },
       { title: "Previous", value: "previous", width: "", align: "end", visible: d.value },
       { title: "Change", value: "change", width: "", align: "end", visible: d.value }
-    ].filter((_) => _.visible)), i = k(() => [
+    ].filter((g) => g.visible)), i = S(() => [
       { title: "Expense Type", value: "name", width: "550px", align: "start", visible: !0 },
       { title: d.value ? "Current" : "", value: "current", width: "", align: "end", visible: !0 },
       { title: "Previous", value: "previous", width: "", align: "end", visible: d.value },
       { title: "Change", value: "change", width: "", align: "end", visible: d.value }
-    ].filter((_) => _.visible));
-    function o(_, g = 0, S = "") {
-      const I = [];
-      for (const $ of _)
-        I.push({
+    ].filter((g) => g.visible));
+    function o(g, f = 0, x = "") {
+      const V = [];
+      for (const $ of g)
+        V.push({
           ...$,
-          level: g,
-          parentType: S
-        }), $.children && $.children.length && I.push(...o($.children, g + 1, $.type));
-      return I;
+          level: f,
+          parentType: x
+        }), $.children && $.children.length && V.push(...o($.children, f + 1, $.type));
+      return V;
     }
-    const s = k(() => o([...a.value])), u = k(() => o([...t.value])), r = A(!1), d = A(!1), y = A(!1), b = (_) => {
-      let g = {
+    const s = S(() => o([...a.value])), u = S(() => o([...t.value])), r = T(!1), d = T(!1), y = T(!1), b = (g) => {
+      let f = {
         current: 0,
         previous: 0
       };
-      function S($) {
-        var O, E, R;
-        for (const T of $) {
-          if (T.type === "ledger") {
-            const U = parseFloat(((O = T.current) == null ? void 0 : O.replace(/[^0-9.-]+/g, "")) || 0), G = parseFloat(((E = T.previous) == null ? void 0 : E.replace(/[^0-9.-]+/g, "")) || 0);
-            g.current += U, g.previous += G;
+      function x($) {
+        var L, E, O;
+        for (const D of $) {
+          if (D.type === "ledger") {
+            const U = parseFloat(((L = D.current) == null ? void 0 : L.replace(/[^0-9.-]+/g, "")) || 0), G = parseFloat(((E = D.previous) == null ? void 0 : E.replace(/[^0-9.-]+/g, "")) || 0);
+            f.current += U, f.previous += G;
           }
-          (R = T.children) != null && R.length && S(T.children);
+          (O = D.children) != null && O.length && x(D.children);
         }
       }
-      S(_);
-      const I = g.previous === 0 ? 0 : (g.current - g.previous) / g.previous * 100;
+      x(g);
+      const V = f.previous === 0 ? 0 : (f.current - f.previous) / f.previous * 100;
       return {
-        currentFormatted: `₹${g.current.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
-        previousFormatted: `₹${g.previous.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
-        changeFormatted: `${I.toFixed(1)}%`,
-        isIncrease: I >= 0
+        currentFormatted: `₹${f.current.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
+        previousFormatted: `₹${f.previous.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
+        changeFormatted: `${V.toFixed(1)}%`,
+        isIncrease: V >= 0
       };
-    }, m = k(() => b(a.value)), f = k(() => b(t.value)), x = k(() => {
-      const _ = b(a.value), g = b(t.value), S = parseFloat(_.currentFormatted.replace(/[^0-9.-]+/g, "")) - parseFloat(g.currentFormatted.replace(/[^0-9.-]+/g, "")), I = parseFloat(_.previousFormatted.replace(/[^0-9.-]+/g, "")) - parseFloat(g.previousFormatted.replace(/[^0-9.-]+/g, "")), $ = I === 0 ? 0 : (S - I) / I * 100;
+    }, m = S(() => b(a.value)), p = S(() => b(t.value)), k = S(() => {
+      const g = b(a.value), f = b(t.value), x = parseFloat(g.currentFormatted.replace(/[^0-9.-]+/g, "")) - parseFloat(f.currentFormatted.replace(/[^0-9.-]+/g, "")), V = parseFloat(g.previousFormatted.replace(/[^0-9.-]+/g, "")) - parseFloat(f.previousFormatted.replace(/[^0-9.-]+/g, "")), $ = V === 0 ? 0 : (x - V) / V * 100;
       return {
         percent: `${$.toFixed(1)}%`,
-        currentFormatted: `₹${S.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
-        previousFormatted: `₹${I.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
+        currentFormatted: `₹${x.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
+        previousFormatted: `₹${V.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
         isIncrease: $ >= 0
       };
-    }), p = A(!1);
-    function h(_) {
-      p.value = !1, console.log("Download as", _);
+    }), _ = T(!1);
+    function h(g) {
+      _.value = !1, console.log("Download as", g);
     }
-    return (_, g) => (w(), re("div", __, [
+    return (g, f) => (w(), re("div", h_, [
       l(xe, null, {
         default: c(() => [
           l(B, { cols: "12" }, {
@@ -23946,10 +23976,10 @@ Currency: ${Y.value}` : "";
                 subtitle: "For the period of Jan 01, 2025 to Jul 07, 2025"
               }, {
                 append: c(() => [
-                  v("div", h_, [
+                  v("div", x_, [
                     l(nt, {
                       modelValue: y.value,
-                      "onUpdate:modelValue": g[0] || (g[0] = (S) => y.value = S),
+                      "onUpdate:modelValue": f[0] || (f[0] = (x) => y.value = x),
                       density: "compact",
                       inset: "",
                       label: "Show %",
@@ -23969,15 +23999,15 @@ Currency: ${Y.value}` : "";
                       "offset-y": "",
                       "close-on-content-click": !1
                     }, {
-                      activator: c(({ props: S }) => [
-                        l(Z, X(S, {
+                      activator: c(({ props: x }) => [
+                        l(Z, X(x, {
                           class: "account_v_btn_outlined",
                           variant: "outlined",
                           size: "34",
                           rounded: "2"
                         }), {
                           default: c(() => [
-                            (w(), D(ae(F(le)("settings")), { style: { "font-size": "22px" } }))
+                            (w(), A(te(F(ne)("settings")), { style: { "font-size": "22px" } }))
                           ]),
                           _: 2
                         }, 1040)
@@ -23985,50 +24015,50 @@ Currency: ${Y.value}` : "";
                       default: c(() => [
                         l(me, { class: "account_vcard_menu account_vcard_border" }, {
                           default: c(() => [
-                            v("div", x_, [
-                              v("div", k_, [
+                            v("div", k_, [
+                              v("div", S_, [
                                 v("div", {
                                   class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
-                                  onClick: g[1] || (g[1] = (S) => r.value = !r.value)
+                                  onClick: f[1] || (f[1] = (x) => r.value = !r.value)
                                 }, [
-                                  r.value ? (w(), D(ae(F(le)("check")), {
+                                  r.value ? (w(), A(te(F(ne)("check")), {
                                     key: 0,
                                     style: { "font-size": "16px" }
-                                  })) : q("", !0),
+                                  })) : W("", !0),
                                   v("span", {
                                     class: ye(r.value ? "" : "ml-6")
                                   }, "Full Width View", 2)
                                 ])
                               ]),
-                              v("div", S_, [
+                              v("div", w_, [
                                 v("div", {
                                   class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
-                                  onClick: g[2] || (g[2] = (S) => d.value = !d.value)
+                                  onClick: f[2] || (f[2] = (x) => d.value = !d.value)
                                 }, [
-                                  d.value ? (w(), D(ae(F(le)("check")), {
+                                  d.value ? (w(), A(te(F(ne)("check")), {
                                     key: 0,
                                     style: { "font-size": "16px" }
-                                  })) : q("", !0),
+                                  })) : W("", !0),
                                   v("span", {
                                     class: ye(d.value ? "" : "ml-6")
                                   }, "Compare Periods", 2)
                                 ])
                               ]),
                               l(ke, { class: "my-2" }),
-                              v("div", w_, [
+                              v("div", C_, [
                                 l(ot, {
-                                  modelValue: p.value,
-                                  "onUpdate:modelValue": g[5] || (g[5] = (S) => p.value = S),
+                                  modelValue: _.value,
+                                  "onUpdate:modelValue": f[5] || (f[5] = (x) => _.value = x),
                                   location: "end",
                                   offset: "10",
                                   transition: "slide-y-transition",
                                   "close-on-content-click": !1
                                 }, {
-                                  activator: c(({ props: S }) => [
-                                    v("div", X(S, { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }), [
-                                      (w(), D(ae(F(le)("download")), { style: { "font-size": "16px" } })),
-                                      g[6] || (g[6] = v("span", null, "Download", -1)),
-                                      (w(), D(ae(F(le)("chevron-right")), {
+                                  activator: c(({ props: x }) => [
+                                    v("div", X(x, { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }), [
+                                      (w(), A(te(F(ne)("download")), { style: { "font-size": "16px" } })),
+                                      f[6] || (f[6] = v("span", null, "Download", -1)),
+                                      (w(), A(te(F(ne)("chevron-right")), {
                                         style: { "font-size": "14px" },
                                         class: "ml-auto"
                                       }))
@@ -24040,17 +24070,17 @@ Currency: ${Y.value}` : "";
                                       width: "120"
                                     }, {
                                       default: c(() => [
-                                        v("div", C_, [
+                                        v("div", V_, [
                                           v("div", {
                                             class: "account_vcard_menu_item field_list_title cursor-pointer px-3 py-1",
-                                            onClick: g[3] || (g[3] = (S) => h("pdf"))
-                                          }, g[7] || (g[7] = [
+                                            onClick: f[3] || (f[3] = (x) => h("pdf"))
+                                          }, f[7] || (f[7] = [
                                             v("span", null, "PDF", -1)
                                           ])),
                                           v("div", {
                                             class: "account_vcard_menu_item field_list_title cursor-pointer px-3 py-1",
-                                            onClick: g[4] || (g[4] = (S) => h("xls"))
-                                          }, g[8] || (g[8] = [
+                                            onClick: f[4] || (f[4] = (x) => h("xls"))
+                                          }, f[8] || (f[8] = [
                                             v("span", null, "XLS", -1)
                                           ]))
                                         ])
@@ -24061,10 +24091,10 @@ Currency: ${Y.value}` : "";
                                   _: 1
                                 }, 8, ["modelValue"])
                               ]),
-                              v("div", V_, [
-                                v("div", I_, [
-                                  (w(), D(ae(F(le)("printer")), { style: { "font-size": "16px" } })),
-                                  g[9] || (g[9] = v("span", null, "Print", -1))
+                              v("div", I_, [
+                                v("div", P_, [
+                                  (w(), A(te(F(ne)("printer")), { style: { "font-size": "16px" } })),
+                                  f[9] || (f[9] = v("span", null, "Print", -1))
                                 ])
                               ])
                             ])
@@ -24100,75 +24130,75 @@ Currency: ${Y.value}` : "";
                                     "hide-default-footer": "",
                                     "item-value": "name"
                                   }, {
-                                    item: c(({ item: S }) => {
-                                      var I;
+                                    item: c(({ item: x }) => {
+                                      var V;
                                       return [
                                         v("tr", {
-                                          class: ye(S.type === "group" ? S.level === 0 ? "amount_income_item_title" : "amount_income_overlay_item_title" : "")
+                                          class: ye(x.type === "group" ? x.level === 0 ? "amount_income_item_title" : "amount_income_overlay_item_title" : "")
                                         }, [
                                           v("td", null, [
                                             v("div", {
                                               class: "d-flex align-center gap-2",
-                                              style: la({ paddingLeft: `${S.level * 24}px` })
+                                              style: la({ paddingLeft: `${x.level * 24}px` })
                                             }, [
-                                              S.type === "group" ? (w(), D(ae(F(le)("folder")), {
+                                              x.type === "group" ? (w(), A(te(F(ne)("folder")), {
                                                 key: 0,
                                                 style: { "font-size": "16px" }
-                                              })) : (w(), D(ae(F(le)("file-text")), {
+                                              })) : (w(), A(te(F(ne)("file-text")), {
                                                 key: 1,
                                                 style: { "font-size": "16px" }
                                               })),
                                               v("p", {
-                                                class: ye(["mb-0 amount_income_group_item", S.type === "ledger" ? "account_ledger_secondary" : (I = S.name) != null && I.toLowerCase().includes("expense") ? "account_group_error" : "account_group_primary"])
-                                              }, ue(S.name), 3),
-                                              S.percent && y.value ? (w(), D(gt, {
+                                                class: ye(["mb-0 amount_income_group_item", x.type === "ledger" ? "account_ledger_secondary" : (V = x.name) != null && V.toLowerCase().includes("expense") ? "account_group_error" : "account_group_primary"])
+                                              }, ue(x.name), 3),
+                                              x.percent && y.value ? (w(), A(gt, {
                                                 key: 2,
                                                 density: "compact",
-                                                class: ye(["account_income_chip py-1 px-1", S.type === "ledger" ? "account_chip_outline" : "account_chip_secondary"])
+                                                class: ye(["account_income_chip py-1 px-1", x.type === "ledger" ? "account_chip_outline" : "account_chip_secondary"])
                                               }, {
                                                 default: c(() => [
-                                                  de(" (" + ue(S.percent) + ") ", 1)
+                                                  ve(" (" + ue(x.percent) + ") ", 1)
                                                 ]),
                                                 _: 2
-                                              }, 1032, ["class"])) : q("", !0)
+                                              }, 1032, ["class"])) : W("", !0)
                                             ], 4)
                                           ]),
-                                          (w(), re("td", P_, [
+                                          (w(), re("td", A_, [
                                             v("p", {
-                                              class: ye(["mb-0 amount_inc_current_item", S.level === 0 && S.type === "group" ? "amount_inc_current_font_wght" : ""])
-                                            }, ue(S.current), 3)
+                                              class: ye(["mb-0 amount_inc_current_item", x.level === 0 && x.type === "group" ? "amount_inc_current_font_wght" : ""])
+                                            }, ue(x.current), 3)
                                           ])),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
-                                              d.value ? (w(), re("td", A_, [
+                                              d.value ? (w(), re("td", T_, [
                                                 v("p", {
-                                                  class: ye(["mb-0 amount_inc_previous_item", S.level > 0 && S.type === "group" ? "amount_inc_previous_font_wght" : ""])
-                                                }, ue(S.previous), 3)
-                                              ])) : q("", !0)
+                                                  class: ye(["mb-0 amount_inc_previous_item", x.level > 0 && x.type === "group" ? "amount_inc_previous_font_wght" : ""])
+                                                }, ue(x.previous), 3)
+                                              ])) : W("", !0)
                                             ]),
                                             _: 2
                                           }, 1024),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
-                                              d.value ? (w(), re("td", T_, [
+                                              d.value ? (w(), re("td", D_, [
                                                 v("div", N_, [
                                                   v("p", {
                                                     class: ye(["mb-0 amount_inc_change_item", [
-                                                      S.type === "ledger" ? "amount_inc_change_font_wght" : "",
-                                                      parseFloat(S.change) > 0 ? "text-success" : parseFloat(S.change) < 0 ? "text-error" : "text-medium-emphasis"
+                                                      x.type === "ledger" ? "amount_inc_change_font_wght" : "",
+                                                      parseFloat(x.change) > 0 ? "text-success" : parseFloat(x.change) < 0 ? "text-error" : "text-medium-emphasis"
                                                     ]])
-                                                  }, ue(S.change), 3),
-                                                  S.new ? (w(), D(ae(F(le)("star")), {
+                                                  }, ue(x.change), 3),
+                                                  x.new ? (w(), A(te(F(ne)("star")), {
                                                     key: 0,
                                                     style: { "font-size": "12px" },
                                                     class: "text-info"
-                                                  })) : (w(), D(ae(F(le)(parseFloat(S.change) < 0 ? "arrow-down" : "arrow-up")), {
+                                                  })) : (w(), A(te(F(ne)(parseFloat(x.change) < 0 ? "arrow-down" : "arrow-up")), {
                                                     key: 1,
                                                     style: { "font-size": "12px" },
-                                                    class: ye(parseFloat(S.change) < 0 ? "text-error" : "text-success")
+                                                    class: ye(parseFloat(x.change) < 0 ? "text-error" : "text-success")
                                                   }, null, 8, ["class"]))
                                                 ])
-                                              ])) : q("", !0)
+                                              ])) : W("", !0)
                                             ]),
                                             _: 2
                                           }, 1024)
@@ -24177,29 +24207,29 @@ Currency: ${Y.value}` : "";
                                     }),
                                     _: 1
                                   }, 8, ["headers", "items"]),
-                                  v("div", D_, [
-                                    v("table", $_, [
-                                      v("tr", B_, [
-                                        g[10] || (g[10] = v("td", {
+                                  v("div", $_, [
+                                    v("table", B_, [
+                                      v("tr", E_, [
+                                        f[10] || (f[10] = v("td", {
                                           style: { "min-width": "240px" },
                                           class: "text-start"
                                         }, "Total Income", -1)),
-                                        v("td", E_, ue(F(m).currentFormatted), 1),
+                                        v("td", F_, ue(F(m).currentFormatted), 1),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", F_, ue(F(m).previousFormatted), 1)) : q("", !0)
+                                            d.value ? (w(), re("td", L_, ue(F(m).previousFormatted), 1)) : W("", !0)
                                           ]),
                                           _: 1
                                         }),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", L_, [
-                                              de(ue(F(m).changeFormatted) + " ", 1),
-                                              (w(), D(ae(F(le)(F(m).isIncrease ? "arrow-up" : "arrow-down")), {
+                                            d.value ? (w(), re("td", R_, [
+                                              ve(ue(F(m).changeFormatted) + " ", 1),
+                                              (w(), A(te(F(ne)(F(m).isIncrease ? "arrow-up" : "arrow-down")), {
                                                 style: { "font-size": "12px" },
                                                 class: ye(F(m).isIncrease ? "text-success" : "text-error")
                                               }, null, 8, ["class"]))
-                                            ])) : q("", !0)
+                                            ])) : W("", !0)
                                           ]),
                                           _: 1
                                         })
@@ -24231,75 +24261,75 @@ Currency: ${Y.value}` : "";
                                     "hide-default-footer": "",
                                     "item-value": "name"
                                   }, {
-                                    item: c(({ item: S }) => {
-                                      var I;
+                                    item: c(({ item: x }) => {
+                                      var V;
                                       return [
                                         v("tr", {
-                                          class: ye(S.type === "group" ? S.level === 0 ? "amount_income_item_title" : "amount_income_overlay_item_title" : "")
+                                          class: ye(x.type === "group" ? x.level === 0 ? "amount_income_item_title" : "amount_income_overlay_item_title" : "")
                                         }, [
                                           v("td", null, [
                                             v("div", {
                                               class: "d-flex align-center gap-2",
-                                              style: la({ paddingLeft: `${S.level * 24}px` })
+                                              style: la({ paddingLeft: `${x.level * 24}px` })
                                             }, [
-                                              S.type === "group" ? (w(), D(ae(F(le)("folder")), {
+                                              x.type === "group" ? (w(), A(te(F(ne)("folder")), {
                                                 key: 0,
                                                 style: { "font-size": "16px" }
-                                              })) : (w(), D(ae(F(le)("file-text")), {
+                                              })) : (w(), A(te(F(ne)("file-text")), {
                                                 key: 1,
                                                 style: { "font-size": "16px" }
                                               })),
                                               v("p", {
-                                                class: ye(["mb-0 amount_income_group_item", S.type === "ledger" ? "account_ledger_secondary" : (I = S.name) != null && I.toLowerCase().includes("income") ? "account_group_success" : "account_group_error"])
-                                              }, ue(S.name), 3),
-                                              S.percent && y.value ? (w(), D(gt, {
+                                                class: ye(["mb-0 amount_income_group_item", x.type === "ledger" ? "account_ledger_secondary" : (V = x.name) != null && V.toLowerCase().includes("income") ? "account_group_success" : "account_group_error"])
+                                              }, ue(x.name), 3),
+                                              x.percent && y.value ? (w(), A(gt, {
                                                 key: 2,
                                                 density: "compact",
-                                                class: ye(["account_income_chip py-1 px-1", S.type === "ledger" ? "account_chip_outline" : "account_chip_secondary"])
+                                                class: ye(["account_income_chip py-1 px-1", x.type === "ledger" ? "account_chip_outline" : "account_chip_secondary"])
                                               }, {
                                                 default: c(() => [
-                                                  de(" (" + ue(S.percent) + ") ", 1)
+                                                  ve(" (" + ue(x.percent) + ") ", 1)
                                                 ]),
                                                 _: 2
-                                              }, 1032, ["class"])) : q("", !0)
+                                              }, 1032, ["class"])) : W("", !0)
                                             ], 4)
                                           ]),
-                                          (w(), re("td", R_, [
+                                          (w(), re("td", O_, [
                                             v("p", {
-                                              class: ye(["mb-0 amount_inc_current_item", S.level === 0 && S.type === "group" ? "amount_inc_current_font_wght" : ""])
-                                            }, ue(S.current), 3)
+                                              class: ye(["mb-0 amount_inc_current_item", x.level === 0 && x.type === "group" ? "amount_inc_current_font_wght" : ""])
+                                            }, ue(x.current), 3)
                                           ])),
-                                          d.value ? (w(), re("td", O_, [
+                                          d.value ? (w(), re("td", M_, [
                                             l(Ge, { name: "slide-fade" }, {
                                               default: c(() => [
                                                 v("p", {
-                                                  class: ye(["mb-0 amount_inc_previous_item", S.level > 0 && S.type === "group" ? "amount_inc_previous_font_wght" : ""])
-                                                }, ue(S.previous), 3)
+                                                  class: ye(["mb-0 amount_inc_previous_item", x.level > 0 && x.type === "group" ? "amount_inc_previous_font_wght" : ""])
+                                                }, ue(x.previous), 3)
                                               ]),
                                               _: 2
                                             }, 1024)
-                                          ])) : q("", !0),
+                                          ])) : W("", !0),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
-                                              d.value ? (w(), re("td", M_, [
-                                                v("div", z_, [
+                                              d.value ? (w(), re("td", z_, [
+                                                v("div", U_, [
                                                   v("p", {
                                                     class: ye(["mb-0 amount_inc_change_item", [
-                                                      S.type === "ledger" ? "amount_inc_change_font_wght" : "",
-                                                      parseFloat(S.change) > 0 ? "text-success" : parseFloat(S.change) < 0 ? "text-error" : "text-medium-emphasis"
+                                                      x.type === "ledger" ? "amount_inc_change_font_wght" : "",
+                                                      parseFloat(x.change) > 0 ? "text-success" : parseFloat(x.change) < 0 ? "text-error" : "text-medium-emphasis"
                                                     ]])
-                                                  }, ue(S.change), 3),
-                                                  S.new ? (w(), D(ae(F(le)("star")), {
+                                                  }, ue(x.change), 3),
+                                                  x.new ? (w(), A(te(F(ne)("star")), {
                                                     key: 0,
                                                     style: { "font-size": "12px" },
                                                     class: "text-info"
-                                                  })) : (w(), D(ae(F(le)(parseFloat(S.change) < 0 ? "arrow-down" : "arrow-up")), {
+                                                  })) : (w(), A(te(F(ne)(parseFloat(x.change) < 0 ? "arrow-down" : "arrow-up")), {
                                                     key: 1,
                                                     style: { "font-size": "12px" },
-                                                    class: ye(parseFloat(S.change) < 0 ? "text-error" : "text-success")
+                                                    class: ye(parseFloat(x.change) < 0 ? "text-error" : "text-success")
                                                   }, null, 8, ["class"]))
                                                 ])
-                                              ])) : q("", !0)
+                                              ])) : W("", !0)
                                             ]),
                                             _: 2
                                           }, 1024)
@@ -24308,29 +24338,29 @@ Currency: ${Y.value}` : "";
                                     }),
                                     _: 1
                                   }, 8, ["headers", "items"]),
-                                  v("div", U_, [
-                                    v("table", G_, [
-                                      v("tr", j_, [
-                                        g[11] || (g[11] = v("td", {
+                                  v("div", G_, [
+                                    v("table", j_, [
+                                      v("tr", H_, [
+                                        f[11] || (f[11] = v("td", {
                                           style: { "min-width": "240px" },
                                           class: "text-start"
                                         }, "Total Expenses", -1)),
-                                        v("td", H_, ue(F(f).currentFormatted), 1),
+                                        v("td", W_, ue(F(p).currentFormatted), 1),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", W_, ue(F(f).previousFormatted), 1)) : q("", !0)
+                                            d.value ? (w(), re("td", q_, ue(F(p).previousFormatted), 1)) : W("", !0)
                                           ]),
                                           _: 1
                                         }),
                                         l(Ge, { name: "slide-fade" }, {
                                           default: c(() => [
-                                            d.value ? (w(), re("td", q_, [
-                                              de(ue(F(f).changeFormatted) + " ", 1),
-                                              (w(), D(ae(F(le)(F(f).isIncrease ? "arrow-up" : "arrow-down")), {
+                                            d.value ? (w(), re("td", Y_, [
+                                              ve(ue(F(p).changeFormatted) + " ", 1),
+                                              (w(), A(te(F(ne)(F(p).isIncrease ? "arrow-up" : "arrow-down")), {
                                                 style: { "font-size": "12px" },
-                                                class: ye(F(f).isIncrease ? "text-success" : "text-error")
+                                                class: ye(F(p).isIncrease ? "text-success" : "text-error")
                                               }, null, 8, ["class"]))
-                                            ])) : q("", !0)
+                                            ])) : W("", !0)
                                           ]),
                                           _: 1
                                         })
@@ -24366,21 +24396,21 @@ Currency: ${Y.value}` : "";
                                         default: c(() => [
                                           l(B, { cols: "7" }, {
                                             default: c(() => [
-                                              v("div", Y_, [
-                                                g[13] || (g[13] = v("h5", { class: "mb-0" }, "Profit Before Tax", -1)),
-                                                y.value ? (w(), D(gt, {
+                                              v("div", J_, [
+                                                f[13] || (f[13] = v("h5", { class: "mb-0" }, "Profit Before Tax", -1)),
+                                                y.value ? (w(), A(gt, {
                                                   key: 0,
                                                   density: "compact",
                                                   class: "account_chip account_chip_outlined py-1 px-1"
                                                 }, {
-                                                  default: c(() => g[12] || (g[12] = [
-                                                    de(" 12.5% ", -1)
+                                                  default: c(() => f[12] || (f[12] = [
+                                                    ve(" 12.5% ", -1)
                                                   ])),
                                                   _: 1,
                                                   __: [12]
-                                                })) : q("", !0)
+                                                })) : W("", !0)
                                               ]),
-                                              g[14] || (g[14] = v("p", { class: "mb-0 mt-2" }, "Less: Income Tax", -1))
+                                              f[14] || (f[14] = v("p", { class: "mb-0 mt-2" }, "Less: Income Tax", -1))
                                             ]),
                                             _: 1,
                                             __: [14]
@@ -24389,7 +24419,7 @@ Currency: ${Y.value}` : "";
                                             class: "px-0",
                                             cols: "2"
                                           }, {
-                                            default: c(() => g[15] || (g[15] = [
+                                            default: c(() => f[15] || (f[15] = [
                                               v("div", { class: "d-flex justify-end flex-column" }, [
                                                 v("p", { class: "mb-0 amount_inc_current_item" }, "₹4,16,000.00"),
                                                 v("p", { class: "mb-0 mt-2" }, "(₹85,000.00)")
@@ -24400,12 +24430,12 @@ Currency: ${Y.value}` : "";
                                           }),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
-                                              d.value ? (w(), D(B, {
+                                              d.value ? (w(), A(B, {
                                                 key: 0,
                                                 class: "px-0",
                                                 cols: "2"
                                               }, {
-                                                default: c(() => g[16] || (g[16] = [
+                                                default: c(() => f[16] || (f[16] = [
                                                   v("div", { class: "d-flex justify-end flex-column" }, [
                                                     v("p", { class: "mb-0 amount_inc_previous_item" }, "₹2,91,500.00"),
                                                     v("p", { class: "mb-0 mt-2" }, "(₹75,000.00)")
@@ -24413,28 +24443,28 @@ Currency: ${Y.value}` : "";
                                                 ])),
                                                 _: 1,
                                                 __: [16]
-                                              })) : q("", !0)
+                                              })) : W("", !0)
                                             ]),
                                             _: 1
                                           }),
                                           l(Ge, { name: "slide-fade" }, {
                                             default: c(() => [
-                                              d.value ? (w(), D(B, {
+                                              d.value ? (w(), A(B, {
                                                 key: 0,
                                                 class: "px-0",
                                                 cols: "1"
                                               }, {
                                                 default: c(() => [
-                                                  v("div", J_, [
-                                                    g[17] || (g[17] = v("p", { class: "mb-0 amount_inc_change_item" }, "42.7%", -1)),
-                                                    (w(), D(ae(F(le)("arrow-up")), {
+                                                  v("div", K_, [
+                                                    f[17] || (f[17] = v("p", { class: "mb-0 amount_inc_change_item" }, "42.7%", -1)),
+                                                    (w(), A(te(F(ne)("arrow-up")), {
                                                       style: { "font-size": "12px" },
                                                       class: "text-success"
                                                     }))
                                                   ])
                                                 ]),
                                                 _: 1
-                                              })) : q("", !0)
+                                              })) : W("", !0)
                                             ]),
                                             _: 1
                                           })
@@ -24457,36 +24487,36 @@ Currency: ${Y.value}` : "";
                         default: c(() => [
                           l(B, { cols: "12" }, {
                             default: c(() => [
-                              v("div", K_, [
-                                v("div", X_, [
-                                  g[18] || (g[18] = v("h5", { class: "mb-0 text-success font-weight-bold" }, "Net Profit", -1)),
+                              v("div", X_, [
+                                v("div", Q_, [
+                                  f[18] || (f[18] = v("h5", { class: "mb-0 text-success font-weight-bold" }, "Net Profit", -1)),
                                   l(gt, {
                                     density: "compact",
                                     class: "py-1 px-2 text-success",
                                     variant: "outlined"
                                   }, {
                                     default: c(() => [
-                                      de(ue(F(x).percent), 1)
+                                      ve(ue(F(k).percent), 1)
                                     ]),
                                     _: 1
                                   })
                                 ]),
-                                v("div", Q_, [
-                                  d.value ? (w(), re("div", Z_, [
-                                    v("span", eh, ue(F(x).previousFormatted), 1)
-                                  ])) : q("", !0),
+                                v("div", Z_, [
+                                  d.value ? (w(), re("div", eh, [
+                                    v("span", th, ue(F(k).previousFormatted), 1)
+                                  ])) : W("", !0),
                                   v("div", null, [
-                                    v("span", th, ue(F(x).currentFormatted), 1)
+                                    v("span", ah, ue(F(k).currentFormatted), 1)
                                   ]),
-                                  d.value ? (w(), re("div", ah, [
+                                  d.value ? (w(), re("div", nh, [
                                     v("span", {
-                                      class: ye(F(x).isIncrease ? "text-success" : "text-error")
-                                    }, ue(F(x).percent), 3),
-                                    (w(), D(ae(F(le)(F(x).isIncrease ? "arrow-up" : "arrow-down")), {
+                                      class: ye(F(k).isIncrease ? "text-success" : "text-error")
+                                    }, ue(F(k).percent), 3),
+                                    (w(), A(te(F(ne)(F(k).isIncrease ? "arrow-up" : "arrow-down")), {
                                       style: { "font-size": "14px" },
-                                      class: ye(F(x).isIncrease ? "text-success" : "text-error")
+                                      class: ye(F(k).isIncrease ? "text-success" : "text-error")
                                     }, null, 8, ["class"]))
-                                  ])) : q("", !0)
+                                  ])) : W("", !0)
                                 ])
                               ])
                             ]),
@@ -24500,7 +24530,7 @@ Currency: ${Y.value}` : "";
                   }),
                   l(ke, { class: "my-2" }),
                   l(Ae, { class: "account_note_section pt-1 px-4" }, {
-                    default: c(() => g[19] || (g[19] = [
+                    default: c(() => f[19] || (f[19] = [
                       v("p", { class: "mb-0" }, "Notes:", -1),
                       v("ul", { class: "px-5" }, [
                         v("li", { class: "mb-1" }, "All figures are in Indian Rupee (INR) unless otherwise stated.."),
@@ -24522,30 +24552,30 @@ Currency: ${Y.value}` : "";
       })
     ]));
   }
-}, lh = /* @__PURE__ */ Et(nh, [["__scopeId", "data-v-8c6a91e8"]]), ih = { class: "account_vcard_menu_items py-1" }, oh = ["onClick"], sh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, uh = {
+}, ih = /* @__PURE__ */ Et(lh, [["__scopeId", "data-v-8c6a91e8"]]), oh = { class: "account_vcard_menu_items py-1" }, sh = ["onClick"], uh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, rh = {
   key: 0,
   class: "d-flex gap-2 mb-2"
-}, rh = { class: "d-flex flex-column align-end" }, ch = { class: "d-flex justify-space-between w-100 mb-1" }, dh = { class: "d-flex justify-space-between w-100 mb-1" }, vh = { class: "d-flex justify-space-between w-100 mb-1" }, fh = { class: "d-flex justify-space-between w-100 mb-1" }, mh = { class: "d-flex justify-space-between w-100 font-weight-bold" }, gh = {
+}, ch = { class: "d-flex flex-column align-end" }, dh = { class: "d-flex justify-space-between w-100 mb-1" }, vh = { class: "d-flex justify-space-between w-100 mb-1" }, fh = { class: "d-flex justify-space-between w-100 mb-1" }, mh = { class: "d-flex justify-space-between w-100 mb-1" }, gh = { class: "d-flex justify-space-between w-100 font-weight-bold" }, yh = {
   key: 0,
   class: "account_ui_vcard"
-}, yh = {
+}, ph = {
   __name: "AccountPurchaseBill",
   setup(e) {
-    const a = A([
+    const a = T([
       { title: "Vendor 1", value: "vendor1", gstin: "22AAAAA0000A1Z5", state: "Maharashtra" },
       { title: "Vendor 2", value: "vendor2", gstin: "33BBBBB1111B2Z6", state: "Tamil Nadu" }
-    ]), t = A(null), n = A("");
-    A("");
-    const i = A(""), o = A(""), s = A(""), u = A(""), r = A(!1);
-    Re(() => {
-      const j = a.value.find((V) => V.value === t.value);
+    ]), t = T(null), n = T("");
+    T("");
+    const i = T(""), o = T(""), s = T(""), u = T(""), r = T(!1);
+    Oe(() => {
+      const j = a.value.find((I) => I.value === t.value);
       j ? (n.value = j.gstin, i.value = j.state) : (n.value = "", i.value = "");
     });
     const d = [
       { label: "Assets & Inventory", value: "both" },
       { label: "Assets Only", value: "asset" },
       { label: "Inventory Only", value: "inventory" }
-    ], y = A("both"), b = A(!1), m = A("inventory"), f = [
+    ], y = T("both"), b = T(!1), m = T("inventory"), p = [
       { title: "Item", value: "item", width: "300px" },
       { title: "Account", value: "account", width: "250px" },
       { title: "HSN/SAC", value: "hsn", width: "150px" },
@@ -24554,7 +24584,7 @@ Currency: ${Y.value}` : "";
       { title: "GST%", value: "gst" },
       { title: "Amount", value: "amount" },
       { title: "", value: "actions" }
-    ], x = [
+    ], k = [
       { title: "Item", value: "item", width: "300px" },
       { title: "HSN/SAC", value: "hsn", width: "150px" },
       { title: "Qty", value: "qty" },
@@ -24563,33 +24593,33 @@ Currency: ${Y.value}` : "";
       { title: "Amount", value: "amount" },
       { title: "", value: "actions" }
     ];
-    function p() {
+    function _() {
       return { item: "", account: "", hsn: "", qty: 1, rate: 0, gst: 18, amount: 0 };
     }
     function h() {
       return { item: "", hsn: "", qty: 1, rate: 0, gst: 18, amount: 0 };
     }
-    const _ = A([p()]), g = A([h()]);
-    function S() {
-      m.value === "inventory" ? _.value.push(p()) : g.value.push(h());
+    const g = T([_()]), f = T([h()]);
+    function x() {
+      m.value === "inventory" ? g.value.push(_()) : f.value.push(h());
     }
-    function I(j) {
-      m.value === "inventory" ? _.value.length > 1 && _.value.splice(j, 1) : g.value.length > 1 && g.value.splice(j, 1);
+    function V(j) {
+      m.value === "inventory" ? g.value.length > 1 && g.value.splice(j, 1) : f.value.length > 1 && f.value.splice(j, 1);
     }
     function $() {
-      (m.value === "inventory" ? _.value : g.value).forEach((V) => {
-        const M = parseFloat(V.qty) || 0, te = parseFloat(V.rate) || 0, ge = parseFloat(V.gst) || 0, be = M * te;
-        V.amount = (be * (1 + ge / 100)).toFixed(2);
+      (m.value === "inventory" ? g.value : f.value).forEach((I) => {
+        const M = parseFloat(I.qty) || 0, ae = parseFloat(I.rate) || 0, ge = parseFloat(I.gst) || 0, be = M * ae;
+        I.amount = (be * (1 + ge / 100)).toFixed(2);
       });
     }
-    Re($);
-    const O = k(() => (m.value === "inventory" ? _.value : g.value).reduce((V, M) => V + (parseFloat(M.qty) * parseFloat(M.rate) || 0), 0)), E = k(() => (m.value === "inventory" ? _.value : g.value).reduce((V, M) => {
-      const te = parseFloat(M.qty) || 0, ge = parseFloat(M.rate) || 0, be = parseFloat(M.gst) || 0;
-      return V + te * ge * be / 100;
-    }, 0)), R = k(() => E.value / 2), T = k(() => E.value / 2), U = k(() => 0), G = k(() => O.value + E.value), C = A(""), L = A([
+    Oe($);
+    const L = S(() => (m.value === "inventory" ? g.value : f.value).reduce((I, M) => I + (parseFloat(M.qty) * parseFloat(M.rate) || 0), 0)), E = S(() => (m.value === "inventory" ? g.value : f.value).reduce((I, M) => {
+      const ae = parseFloat(M.qty) || 0, ge = parseFloat(M.rate) || 0, be = parseFloat(M.gst) || 0;
+      return I + ae * ge * be / 100;
+    }, 0)), O = S(() => E.value / 2), D = S(() => E.value / 2), U = S(() => 0), G = S(() => L.value + E.value), C = T(""), R = T([
       { title: "Purchase A/c", value: "purchase" },
       { title: "Expense A/c", value: "expense" }
-    ]), W = A([
+    ]), q = T([
       { label: "First Name", key: "firstName", visible: !0 },
       { label: "Last Name", key: "lastName", visible: !0 },
       { label: "Company Name", key: "companyName", visible: !0 },
@@ -24601,9 +24631,9 @@ Currency: ${Y.value}` : "";
       { label: "ZIP Code", key: "zipCode", visible: !0 },
       { label: "GSTIN (Optional)", key: "gstin", visible: !0 }
     ]), Y = (j) => {
-      var V;
-      return (V = W.value.find((M) => M.key === j)) == null ? void 0 : V.visible;
-    }, J = A({});
+      var I;
+      return (I = q.value.find((M) => M.key === j)) == null ? void 0 : I.visible;
+    }, J = T({});
     function H() {
       a.value.push({
         title: J.value.companyName || J.value.firstName + " " + J.value.lastName,
@@ -24612,7 +24642,7 @@ Currency: ${Y.value}` : "";
         state: J.value.state || ""
       }), r.value = !1, J.value = {};
     }
-    const N = A([
+    const N = T([
       { title: "Andhra Pradesh", value: "Andhra Pradesh" },
       { title: "Arunachal Pradesh", value: "Arunachal Pradesh" },
       { title: "Assam", value: "Assam" },
@@ -24650,7 +24680,7 @@ Currency: ${Y.value}` : "";
       { title: "Lakshadweep", value: "Lakshadweep" },
       { title: "Puducherry", value: "Puducherry" }
     ]);
-    return (j, V) => (w(), re("div", null, [
+    return (j, I) => (w(), re("div", null, [
       l(xe, { class: "justify-center" }, {
         default: c(() => [
           l(B, { cols: "12" }, {
@@ -24663,7 +24693,7 @@ Currency: ${Y.value}` : "";
                 append: c(() => [
                   l(ot, {
                     modelValue: b.value,
-                    "onUpdate:modelValue": V[0] || (V[0] = (M) => b.value = M),
+                    "onUpdate:modelValue": I[0] || (I[0] = (M) => b.value = M),
                     location: "bottom end",
                     "offset-y": "",
                     transition: "slide-y-transition",
@@ -24676,7 +24706,7 @@ Currency: ${Y.value}` : "";
                         rounded: ""
                       }), {
                         default: c(() => [
-                          (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
+                          (w(), A(te(F(ne)("settings")), { style: { "font-size": "20px" } }))
                         ]),
                         _: 2
                       }, 1040)
@@ -24684,24 +24714,24 @@ Currency: ${Y.value}` : "";
                     default: c(() => [
                       l(me, { class: "account_vcard_menu account_vcard_border" }, {
                         default: c(() => [
-                          V[23] || (V[23] = v("div", { class: "account_vcard_menu_hdng" }, "Purchase Mode", -1)),
+                          I[23] || (I[23] = v("div", { class: "account_vcard_menu_hdng" }, "Purchase Mode", -1)),
                           l(ke, { class: "my-1 mt-0" }),
-                          v("div", ih, [
-                            (w(), re(ve, null, ze(d, (M) => v("div", {
+                          v("div", oh, [
+                            (w(), re(de, null, Re(d, (M) => v("div", {
                               key: M.value,
                               class: "account_vcard_menu_item",
-                              onClick: (te) => y.value = M.value
+                              onClick: (ae) => y.value = M.value
                             }, [
-                              v("div", sh, [
-                                y.value === M.value ? (w(), D(ae(F(le)("check")), {
+                              v("div", uh, [
+                                y.value === M.value ? (w(), A(te(F(ne)("check")), {
                                   key: 0,
                                   style: { "font-size": "16px" }
-                                })) : q("", !0),
+                                })) : W("", !0),
                                 v("span", {
                                   class: ye(y.value === M.value ? "" : "field_list_dynamic_ml")
                                 }, ue(M.label), 3)
                               ])
-                            ], 8, oh)), 64))
+                            ], 8, sh)), 64))
                           ])
                         ]),
                         _: 1,
@@ -24721,10 +24751,10 @@ Currency: ${Y.value}` : "";
                             md: "6"
                           }, {
                             default: c(() => [
-                              V[24] || (V[24] = v("label", { class: "account_label mb-2" }, "Vendor", -1)),
+                              I[24] || (I[24] = v("label", { class: "account_label mb-2" }, "Vendor", -1)),
                               l(lt, {
                                 modelValue: t.value,
-                                "onUpdate:modelValue": V[2] || (V[2] = (M) => t.value = M),
+                                "onUpdate:modelValue": I[2] || (I[2] = (M) => t.value = M),
                                 items: a.value,
                                 placeholder: "Select a vendor",
                                 variant: "outlined",
@@ -24733,11 +24763,11 @@ Currency: ${Y.value}` : "";
                                 append: c(() => [
                                   l(Z, {
                                     class: "account_v_btn_outlined",
-                                    onClick: V[1] || (V[1] = (M) => r.value = !0),
+                                    onClick: I[1] || (I[1] = (M) => r.value = !0),
                                     rounded: "2"
                                   }, {
                                     default: c(() => [
-                                      (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px" } }))
+                                      (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px" } }))
                                     ]),
                                     _: 1
                                   })
@@ -24753,10 +24783,10 @@ Currency: ${Y.value}` : "";
                             md: "6"
                           }, {
                             default: c(() => [
-                              V[25] || (V[25] = v("label", { class: "account_label mb-2" }, "Bill Number", -1)),
+                              I[25] || (I[25] = v("label", { class: "account_label mb-2" }, "Bill Number", -1)),
                               l(ee, {
                                 modelValue: o.value,
-                                "onUpdate:modelValue": V[3] || (V[3] = (M) => o.value = M),
+                                "onUpdate:modelValue": I[3] || (I[3] = (M) => o.value = M),
                                 variant: "outlined",
                                 class: "accouting_field accouting_active_field"
                               }, null, 8, ["modelValue"])
@@ -24769,10 +24799,10 @@ Currency: ${Y.value}` : "";
                             md: "6"
                           }, {
                             default: c(() => [
-                              V[26] || (V[26] = v("label", { class: "account_label mb-2" }, "Vendor GSTIN", -1)),
+                              I[26] || (I[26] = v("label", { class: "account_label mb-2" }, "Vendor GSTIN", -1)),
                               l(ee, {
                                 modelValue: n.value,
-                                "onUpdate:modelValue": V[4] || (V[4] = (M) => n.value = M),
+                                "onUpdate:modelValue": I[4] || (I[4] = (M) => n.value = M),
                                 variant: "outlined",
                                 readonly: "",
                                 placeholder: "15-digit GSTIN",
@@ -24787,10 +24817,10 @@ Currency: ${Y.value}` : "";
                             md: "6"
                           }, {
                             default: c(() => [
-                              V[27] || (V[27] = v("label", { class: "account_label mb-2" }, "Bill Date", -1)),
+                              I[27] || (I[27] = v("label", { class: "account_label mb-2" }, "Bill Date", -1)),
                               l(ee, {
                                 modelValue: s.value,
-                                "onUpdate:modelValue": V[5] || (V[5] = (M) => s.value = M),
+                                "onUpdate:modelValue": I[5] || (I[5] = (M) => s.value = M),
                                 type: "date",
                                 variant: "outlined",
                                 class: "accouting_field accouting_active_field"
@@ -24804,11 +24834,11 @@ Currency: ${Y.value}` : "";
                             md: "6"
                           }, {
                             default: c(() => [
-                              V[28] || (V[28] = v("label", { class: "account_label mb-2" }, "Place of Supply (Vendor's State)", -1)),
+                              I[28] || (I[28] = v("label", { class: "account_label mb-2" }, "Place of Supply (Vendor's State)", -1)),
                               l(lt, {
                                 items: N.value,
                                 modelValue: i.value,
-                                "onUpdate:modelValue": V[6] || (V[6] = (M) => i.value = M),
+                                "onUpdate:modelValue": I[6] || (I[6] = (M) => i.value = M),
                                 variant: "outlined",
                                 placeholder: "Select state",
                                 class: "accouting_field accouting_active_field"
@@ -24822,10 +24852,10 @@ Currency: ${Y.value}` : "";
                             md: "6"
                           }, {
                             default: c(() => [
-                              V[29] || (V[29] = v("label", { class: "account_label mb-2" }, "Due Date", -1)),
+                              I[29] || (I[29] = v("label", { class: "account_label mb-2" }, "Due Date", -1)),
                               l(ee, {
                                 modelValue: u.value,
-                                "onUpdate:modelValue": V[7] || (V[7] = (M) => u.value = M),
+                                "onUpdate:modelValue": I[7] || (I[7] = (M) => u.value = M),
                                 type: "date",
                                 variant: "outlined",
                                 class: "accouting_field accouting_active_field"
@@ -24838,39 +24868,39 @@ Currency: ${Y.value}` : "";
                         _: 1
                       }),
                       l(ke, { class: "my-4" }),
-                      y.value === "both" ? (w(), re("div", uh, [
+                      y.value === "both" ? (w(), re("div", rh, [
                         l(Z, {
                           class: ye(m.value === "inventory" ? "account_v_btn_primary" : "account_v_btn_outlined"),
-                          onClick: V[8] || (V[8] = (M) => m.value = "inventory")
+                          onClick: I[8] || (I[8] = (M) => m.value = "inventory")
                         }, {
-                          default: c(() => V[30] || (V[30] = [
-                            de("Inventory Purchase", -1)
+                          default: c(() => I[30] || (I[30] = [
+                            ve("Inventory Purchase", -1)
                           ])),
                           _: 1,
                           __: [30]
                         }, 8, ["class"]),
                         l(Z, {
                           class: ye(m.value === "asset" ? "account_v_btn_primary" : "account_v_btn_outlined"),
-                          onClick: V[9] || (V[9] = (M) => m.value = "asset")
+                          onClick: I[9] || (I[9] = (M) => m.value = "asset")
                         }, {
-                          default: c(() => V[31] || (V[31] = [
-                            de("Asset Purchase", -1)
+                          default: c(() => I[31] || (I[31] = [
+                            ve("Asset Purchase", -1)
                           ])),
                           _: 1,
                           __: [31]
                         }, 8, ["class"])
-                      ])) : q("", !0),
-                      y.value === "both" || (y.value === "asset" ? m.value = "asset" : m.value = "inventory") ? (w(), D(zt, {
+                      ])) : W("", !0),
+                      y.value === "both" || (y.value === "asset" ? m.value = "asset" : m.value = "inventory") ? (w(), A(zt, {
                         key: 1,
-                        headers: y.value === "both" ? m.value === "inventory" ? f : x : y.value === "asset" ? x : f,
-                        items: y.value === "both" ? m.value === "inventory" ? _.value : g.value : y.value === "asset" ? g.value : _.value,
+                        headers: y.value === "both" ? m.value === "inventory" ? p : k : y.value === "asset" ? k : p,
+                        items: y.value === "both" ? m.value === "inventory" ? g.value : f.value : y.value === "asset" ? f.value : g.value,
                         class: "account_dynamic_table account_invoice_table",
                         "hide-default-footer": ""
                       }, Ls({
                         "item.item": c(({ index: M }) => [
                           l(ee, {
-                            modelValue: (m.value === "inventory" ? _.value : g.value)[M].item,
-                            "onUpdate:modelValue": (te) => (m.value === "inventory" ? _.value : g.value)[M].item = te,
+                            modelValue: (m.value === "inventory" ? g.value : f.value)[M].item,
+                            "onUpdate:modelValue": (ae) => (m.value === "inventory" ? g.value : f.value)[M].item = ae,
                             placeholder: "Item name",
                             variant: "outlined",
                             class: "accouting_field accouting_active_field"
@@ -24878,8 +24908,8 @@ Currency: ${Y.value}` : "";
                         ]),
                         "item.hsn": c(({ index: M }) => [
                           l(ee, {
-                            modelValue: (m.value === "inventory" ? _.value : g.value)[M].hsn,
-                            "onUpdate:modelValue": (te) => (m.value === "inventory" ? _.value : g.value)[M].hsn = te,
+                            modelValue: (m.value === "inventory" ? g.value : f.value)[M].hsn,
+                            "onUpdate:modelValue": (ae) => (m.value === "inventory" ? g.value : f.value)[M].hsn = ae,
                             placeholder: "HSN Code",
                             variant: "outlined",
                             class: "accouting_field accouting_active_field"
@@ -24887,8 +24917,8 @@ Currency: ${Y.value}` : "";
                         ]),
                         "item.qty": c(({ index: M }) => [
                           l(ee, {
-                            modelValue: (m.value === "inventory" ? _.value : g.value)[M].qty,
-                            "onUpdate:modelValue": (te) => (m.value === "inventory" ? _.value : g.value)[M].qty = te,
+                            modelValue: (m.value === "inventory" ? g.value : f.value)[M].qty,
+                            "onUpdate:modelValue": (ae) => (m.value === "inventory" ? g.value : f.value)[M].qty = ae,
                             type: "number",
                             variant: "outlined",
                             class: "accouting_field accouting_active_field"
@@ -24896,8 +24926,8 @@ Currency: ${Y.value}` : "";
                         ]),
                         "item.rate": c(({ index: M }) => [
                           l(ee, {
-                            modelValue: (m.value === "inventory" ? _.value : g.value)[M].rate,
-                            "onUpdate:modelValue": (te) => (m.value === "inventory" ? _.value : g.value)[M].rate = te,
+                            modelValue: (m.value === "inventory" ? g.value : f.value)[M].rate,
+                            "onUpdate:modelValue": (ae) => (m.value === "inventory" ? g.value : f.value)[M].rate = ae,
                             type: "number",
                             variant: "outlined",
                             class: "accouting_field accouting_active_field"
@@ -24905,24 +24935,24 @@ Currency: ${Y.value}` : "";
                         ]),
                         "item.gst": c(({ index: M }) => [
                           l(ee, {
-                            modelValue: (m.value === "inventory" ? _.value : g.value)[M].gst,
-                            "onUpdate:modelValue": (te) => (m.value === "inventory" ? _.value : g.value)[M].gst = te,
+                            modelValue: (m.value === "inventory" ? g.value : f.value)[M].gst,
+                            "onUpdate:modelValue": (ae) => (m.value === "inventory" ? g.value : f.value)[M].gst = ae,
                             type: "number",
                             variant: "outlined",
                             class: "accouting_field accouting_active_field"
                           }, null, 8, ["modelValue", "onUpdate:modelValue"])
                         ]),
                         "item.amount": c(({ index: M }) => [
-                          v("span", null, "₹" + ue((m.value === "inventory" ? _.value : g.value)[M].amount), 1)
+                          v("span", null, "₹" + ue((m.value === "inventory" ? g.value : f.value)[M].amount), 1)
                         ]),
                         "item.actions": c(({ index: M }) => [
-                          (w(), D(ae(F(le)("trash")), {
+                          (w(), A(te(F(ne)("trash")), {
                             class: ye(["text-error cursor-pointer table_row_icon", {
-                              "opacity-50": (m.value === "inventory" ? _.value : g.value).length === 1,
-                              "cursor-not-allowed": (m.value === "inventory" ? _.value : g.value).length === 1
+                              "opacity-50": (m.value === "inventory" ? g.value : f.value).length === 1,
+                              "cursor-not-allowed": (m.value === "inventory" ? g.value : f.value).length === 1
                             }]),
-                            disabled: (m.value === "inventory" ? _.value : g.value).length === 1,
-                            onClick: (te) => I(M),
+                            disabled: (m.value === "inventory" ? g.value : f.value).length === 1,
+                            onClick: (ae) => V(M),
                             style: { "font-size": "20px" }
                           }, null, 8, ["class", "disabled", "onClick"]))
                         ]),
@@ -24932,9 +24962,9 @@ Currency: ${Y.value}` : "";
                           name: "item.account",
                           fn: c(({ index: M }) => [
                             l(Ze, {
-                              modelValue: _.value[M].account,
-                              "onUpdate:modelValue": (te) => _.value[M].account = te,
-                              items: L.value,
+                              modelValue: g.value[M].account,
+                              "onUpdate:modelValue": (ae) => g.value[M].account = ae,
+                              items: R.value,
                               placeholder: "Select account",
                               variant: "outlined",
                               class: "accouting_field accouting_active_field"
@@ -24942,17 +24972,17 @@ Currency: ${Y.value}` : "";
                           ]),
                           key: "0"
                         } : void 0
-                      ]), 1032, ["headers", "items"])) : q("", !0),
+                      ]), 1032, ["headers", "items"])) : W("", !0),
                       l(Z, {
                         class: "account_v_btn_outlined mt-3",
                         variant: "text",
-                        onClick: S
+                        onClick: x
                       }, {
                         prepend: c(() => [
-                          (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                          (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                         ]),
                         default: c(() => [
-                          V[32] || (V[32] = de(" Add Item ", -1))
+                          I[32] || (I[32] = ve(" Add Item ", -1))
                         ]),
                         _: 1,
                         __: [32]
@@ -24962,9 +24992,9 @@ Currency: ${Y.value}` : "";
                         default: c(() => [
                           l(B, { cols: "12" }, {
                             default: c(() => [
-                              l(Nt, {
+                              l(Dt, {
                                 modelValue: C.value,
-                                "onUpdate:modelValue": V[10] || (V[10] = (M) => C.value = M),
+                                "onUpdate:modelValue": I[10] || (I[10] = (M) => C.value = M),
                                 placeholder: "Notes",
                                 variant: "outlined",
                                 class: "accounting_v_textarea"
@@ -24987,27 +25017,27 @@ Currency: ${Y.value}` : "";
                             md: "6"
                           }, {
                             default: c(() => [
-                              v("div", rh, [
-                                v("div", ch, [
-                                  V[33] || (V[33] = v("span", null, "Subtotal", -1)),
-                                  v("span", null, "₹" + ue(O.value.toFixed(2)), 1)
-                                ]),
+                              v("div", ch, [
                                 v("div", dh, [
-                                  V[34] || (V[34] = v("span", null, "CGST", -1)),
-                                  v("span", null, "₹" + ue(R.value.toFixed(2)), 1)
+                                  I[33] || (I[33] = v("span", null, "Subtotal", -1)),
+                                  v("span", null, "₹" + ue(L.value.toFixed(2)), 1)
                                 ]),
                                 v("div", vh, [
-                                  V[35] || (V[35] = v("span", null, "SGST", -1)),
-                                  v("span", null, "₹" + ue(T.value.toFixed(2)), 1)
+                                  I[34] || (I[34] = v("span", null, "CGST", -1)),
+                                  v("span", null, "₹" + ue(O.value.toFixed(2)), 1)
                                 ]),
                                 v("div", fh, [
-                                  V[36] || (V[36] = v("span", null, "IGST", -1)),
+                                  I[35] || (I[35] = v("span", null, "SGST", -1)),
+                                  v("span", null, "₹" + ue(D.value.toFixed(2)), 1)
+                                ]),
+                                v("div", mh, [
+                                  I[36] || (I[36] = v("span", null, "IGST", -1)),
                                   v("span", null, "₹" + ue(U.value.toFixed(2)), 1)
                                 ])
                               ]),
                               l(ke, { class: "my-2" }),
-                              v("div", mh, [
-                                V[37] || (V[37] = v("span", null, "Total Amount", -1)),
+                              v("div", gh, [
+                                I[37] || (I[37] = v("span", null, "Total Amount", -1)),
                                 v("span", null, "₹" + ue(G.value.toFixed(2)), 1)
                               ])
                             ]),
@@ -25021,8 +25051,8 @@ Currency: ${Y.value}` : "";
                         default: c(() => [
                           l(B, { cols: "12" }, {
                             default: c(() => [
-                              V[38] || (V[38] = v("label", { class: "account_label mb-2" }, "Notes", -1)),
-                              l(Nt, {
+                              I[38] || (I[38] = v("label", { class: "account_label mb-2" }, "Notes", -1)),
+                              l(Dt, {
                                 class: "accounting_v_textarea",
                                 placeholder: "Any notes related to this purchase bill",
                                 variant: "outlined"
@@ -25038,10 +25068,10 @@ Currency: ${Y.value}` : "";
                             default: c(() => [
                               l(Z, { class: "account_v_btn_primary" }, {
                                 prepend: c(() => [
-                                  (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                  (w(), A(te(F(ne)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                 ]),
                                 default: c(() => [
-                                  V[39] || (V[39] = de(" Save Purchase Bill ", -1))
+                                  I[39] || (I[39] = ve(" Save Purchase Bill ", -1))
                                 ]),
                                 _: 1,
                                 __: [39]
@@ -25067,10 +25097,10 @@ Currency: ${Y.value}` : "";
       l(Vt, {
         "max-width": "700",
         modelValue: r.value,
-        "onUpdate:modelValue": V[22] || (V[22] = (M) => r.value = M)
+        "onUpdate:modelValue": I[22] || (I[22] = (M) => r.value = M)
       }, {
         default: c(() => [
-          r.value ? (w(), re("div", gh, [
+          r.value ? (w(), re("div", yh, [
             l(me, {
               title: "Create a New Vendor",
               class: "pa-2 account_vcard_border shadow-none",
@@ -25078,7 +25108,7 @@ Currency: ${Y.value}` : "";
             }, {
               append: c(() => [
                 l(Z, {
-                  onClick: V[11] || (V[11] = (M) => r.value = !1),
+                  onClick: I[11] || (I[11] = (M) => r.value = !1),
                   icon: "mdi-close",
                   variant: "text",
                   size: "x-small",
@@ -25091,17 +25121,17 @@ Currency: ${Y.value}` : "";
                   default: c(() => [
                     l(xe, null, {
                       default: c(() => [
-                        Y("firstName") ? (w(), D(B, {
+                        Y("firstName") ? (w(), A(B, {
                           key: 0,
                           cols: "12",
                           lg: "6",
                           md: "6"
                         }, {
                           default: c(() => [
-                            V[40] || (V[40] = v("label", { class: "account_label mb-2" }, "First Name", -1)),
+                            I[40] || (I[40] = v("label", { class: "account_label mb-2" }, "First Name", -1)),
                             l(ee, {
                               modelValue: J.value.firstName,
-                              "onUpdate:modelValue": V[12] || (V[12] = (M) => J.value.firstName = M),
+                              "onUpdate:modelValue": I[12] || (I[12] = (M) => J.value.firstName = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "John",
@@ -25110,18 +25140,18 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [40]
-                        })) : q("", !0),
-                        Y("lastName") ? (w(), D(B, {
+                        })) : W("", !0),
+                        Y("lastName") ? (w(), A(B, {
                           key: 1,
                           cols: "12",
                           lg: "6",
                           md: "6"
                         }, {
                           default: c(() => [
-                            V[41] || (V[41] = v("label", { class: "account_label mb-2" }, "Last Name", -1)),
+                            I[41] || (I[41] = v("label", { class: "account_label mb-2" }, "Last Name", -1)),
                             l(ee, {
                               modelValue: J.value.lastName,
-                              "onUpdate:modelValue": V[13] || (V[13] = (M) => J.value.lastName = M),
+                              "onUpdate:modelValue": I[13] || (I[13] = (M) => J.value.lastName = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "Doe",
@@ -25130,18 +25160,18 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [41]
-                        })) : q("", !0),
-                        Y("companyName") ? (w(), D(B, {
+                        })) : W("", !0),
+                        Y("companyName") ? (w(), A(B, {
                           key: 2,
                           cols: "12",
                           lg: "12",
                           md: "12"
                         }, {
                           default: c(() => [
-                            V[42] || (V[42] = v("label", { class: "account_label mb-2" }, "Company Name", -1)),
+                            I[42] || (I[42] = v("label", { class: "account_label mb-2" }, "Company Name", -1)),
                             l(ee, {
                               modelValue: J.value.companyName,
-                              "onUpdate:modelValue": V[14] || (V[14] = (M) => J.value.companyName = M),
+                              "onUpdate:modelValue": I[14] || (I[14] = (M) => J.value.companyName = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "Innovate Inc.",
@@ -25150,18 +25180,18 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [42]
-                        })) : q("", !0),
-                        Y("email") ? (w(), D(B, {
+                        })) : W("", !0),
+                        Y("email") ? (w(), A(B, {
                           key: 3,
                           cols: "12",
                           lg: "6",
                           md: "6"
                         }, {
                           default: c(() => [
-                            V[43] || (V[43] = v("label", { class: "account_label mb-2" }, "Email Address", -1)),
+                            I[43] || (I[43] = v("label", { class: "account_label mb-2" }, "Email Address", -1)),
                             l(ee, {
                               modelValue: J.value.email,
-                              "onUpdate:modelValue": V[15] || (V[15] = (M) => J.value.email = M),
+                              "onUpdate:modelValue": I[15] || (I[15] = (M) => J.value.email = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "john.doe@example.com",
@@ -25170,18 +25200,18 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [43]
-                        })) : q("", !0),
-                        Y("phone") ? (w(), D(B, {
+                        })) : W("", !0),
+                        Y("phone") ? (w(), A(B, {
                           key: 4,
                           cols: "12",
                           lg: "6",
                           md: "6"
                         }, {
                           default: c(() => [
-                            V[44] || (V[44] = v("label", { class: "account_label mb-2" }, "Phone Number", -1)),
+                            I[44] || (I[44] = v("label", { class: "account_label mb-2" }, "Phone Number", -1)),
                             l(ee, {
                               modelValue: J.value.phone,
-                              "onUpdate:modelValue": V[16] || (V[16] = (M) => J.value.phone = M),
+                              "onUpdate:modelValue": I[16] || (I[16] = (M) => J.value.phone = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "(123) 456-7890",
@@ -25190,18 +25220,18 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [44]
-                        })) : q("", !0),
-                        Y("streetAddress") ? (w(), D(B, {
+                        })) : W("", !0),
+                        Y("streetAddress") ? (w(), A(B, {
                           key: 5,
                           cols: "12",
                           lg: "12",
                           md: "12"
                         }, {
                           default: c(() => [
-                            V[45] || (V[45] = v("label", { class: "account_label mb-2" }, "Street Address", -1)),
+                            I[45] || (I[45] = v("label", { class: "account_label mb-2" }, "Street Address", -1)),
                             l(ee, {
                               modelValue: J.value.streetAddress,
-                              "onUpdate:modelValue": V[17] || (V[17] = (M) => J.value.streetAddress = M),
+                              "onUpdate:modelValue": I[17] || (I[17] = (M) => J.value.streetAddress = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "123 Main St",
@@ -25210,18 +25240,18 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [45]
-                        })) : q("", !0),
-                        Y("city") ? (w(), D(B, {
+                        })) : W("", !0),
+                        Y("city") ? (w(), A(B, {
                           key: 6,
                           cols: "12",
                           lg: "6",
                           md: "6"
                         }, {
                           default: c(() => [
-                            V[46] || (V[46] = v("label", { class: "account_label mb-2" }, "City", -1)),
+                            I[46] || (I[46] = v("label", { class: "account_label mb-2" }, "City", -1)),
                             l(ee, {
                               modelValue: J.value.city,
-                              "onUpdate:modelValue": V[18] || (V[18] = (M) => J.value.city = M),
+                              "onUpdate:modelValue": I[18] || (I[18] = (M) => J.value.city = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "Mumbai",
@@ -25230,18 +25260,18 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [46]
-                        })) : q("", !0),
-                        Y("state") ? (w(), D(B, {
+                        })) : W("", !0),
+                        Y("state") ? (w(), A(B, {
                           key: 7,
                           cols: "12",
                           lg: "6",
                           md: "6"
                         }, {
                           default: c(() => [
-                            V[47] || (V[47] = v("label", { class: "account_label mb-2" }, "State", -1)),
+                            I[47] || (I[47] = v("label", { class: "account_label mb-2" }, "State", -1)),
                             l(ee, {
                               modelValue: J.value.state,
-                              "onUpdate:modelValue": V[19] || (V[19] = (M) => J.value.state = M),
+                              "onUpdate:modelValue": I[19] || (I[19] = (M) => J.value.state = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "Select a state",
@@ -25250,18 +25280,18 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [47]
-                        })) : q("", !0),
-                        Y("zipCode") ? (w(), D(B, {
+                        })) : W("", !0),
+                        Y("zipCode") ? (w(), A(B, {
                           key: 8,
                           cols: "12",
                           lg: "6",
                           md: "6"
                         }, {
                           default: c(() => [
-                            V[48] || (V[48] = v("label", { class: "account_label mb-2" }, "ZIP Code", -1)),
+                            I[48] || (I[48] = v("label", { class: "account_label mb-2" }, "ZIP Code", -1)),
                             l(ee, {
                               modelValue: J.value.zipCode,
-                              "onUpdate:modelValue": V[20] || (V[20] = (M) => J.value.zipCode = M),
+                              "onUpdate:modelValue": I[20] || (I[20] = (M) => J.value.zipCode = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "400001",
@@ -25270,18 +25300,18 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [48]
-                        })) : q("", !0),
-                        Y("gstin") ? (w(), D(B, {
+                        })) : W("", !0),
+                        Y("gstin") ? (w(), A(B, {
                           key: 9,
                           cols: "12",
                           lg: "6",
                           md: "6"
                         }, {
                           default: c(() => [
-                            V[49] || (V[49] = v("label", { class: "account_label mb-2" }, "GSTIN (Optional)", -1)),
+                            I[49] || (I[49] = v("label", { class: "account_label mb-2" }, "GSTIN (Optional)", -1)),
                             l(ee, {
                               modelValue: J.value.gstin,
-                              "onUpdate:modelValue": V[21] || (V[21] = (M) => J.value.gstin = M),
+                              "onUpdate:modelValue": I[21] || (I[21] = (M) => J.value.gstin = M),
                               variant: "outlined",
                               density: "compact",
                               placeholder: "15-digit GST Identification Number",
@@ -25290,7 +25320,7 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [49]
-                        })) : q("", !0)
+                        })) : W("", !0)
                       ]),
                       _: 1
                     })
@@ -25305,8 +25335,8 @@ Currency: ${Y.value}` : "";
                       "prepend-icon": "mdi-content-save",
                       onClick: H
                     }, {
-                      default: c(() => V[50] || (V[50] = [
-                        de("Save Vendor", -1)
+                      default: c(() => I[50] || (I[50] = [
+                        ve("Save Vendor", -1)
                       ])),
                       _: 1,
                       __: [50]
@@ -25317,25 +25347,25 @@ Currency: ${Y.value}` : "";
               ]),
               _: 1
             })
-          ])) : q("", !0)
+          ])) : W("", !0)
         ]),
         _: 1
       }, 8, ["modelValue"])
     ]));
   }
-}, ph = { class: "account_ui_vcard" }, bh = { class: "d-flex align-center gap-2" }, _h = { class: "d-flex align-center gap-2 mb-3" }, hh = { class: "mb-0" }, xh = { class: "mb-0" }, kh = { class: "pa-3" }, Sh = { class: "d-flex align-center justify-space-between" }, wh = {
+}, bh = { class: "account_ui_vcard" }, _h = { class: "d-flex align-center gap-2" }, hh = { class: "d-flex align-center gap-2 mb-3" }, xh = { class: "mb-0" }, kh = { class: "mb-0" }, Sh = { class: "pa-3" }, wh = { class: "d-flex align-center justify-space-between" }, Ch = {
   style: { "min-width": "200px" },
   class: "d-flex align-center gap-1"
-}, Ch = { class: "mb-2" }, Vh = { class: "d-flex align-center gap-2 justify-end mt-3" }, Ih = { class: "pb-4 d-flex align-center justify-end" }, Ph = { class: "account_invoice_list" }, Ah = {
+}, Vh = { class: "mb-2" }, Ih = { class: "d-flex align-center gap-2 justify-end mt-3" }, Ph = { class: "pb-4 d-flex align-center justify-end" }, Ah = { class: "account_invoice_list" }, Th = {
   key: 0,
   class: "account_ui_vcard"
-}, Th = { class: "d-flex align-center gap-2" }, Nh = { class: "account_vcard_menu_items py-1" }, Dh = ["onClick"], $h = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Bh = { class: "custom_option d-flex align-center" }, Eh = { class: "d-flex align-center justify-end mt-4" }, Fh = {
+}, Dh = { class: "d-flex align-center gap-2" }, Nh = { class: "account_vcard_menu_items py-1" }, $h = ["onClick"], Bh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Eh = { class: "custom_option d-flex align-center" }, Fh = { class: "d-flex align-center justify-end mt-4" }, Lh = {
   key: 0,
   class: "account_ui_vcard"
-}, Lh = { class: "d-flex align-center justify-space-between" }, Rh = { class: "d-flex align-center justify-space-between" }, Oh = { class: "d-flex align-center justify-space-between" }, Mh = { class: "d-flex align-center justify-space-between" }, zh = { class: "d-flex align-center justify-space-between" }, Uh = { class: "d-flex align-center justify-space-between" }, Gh = {
+}, Rh = { class: "d-flex align-center justify-space-between" }, Oh = { class: "d-flex align-center justify-space-between" }, Mh = { class: "d-flex align-center justify-space-between" }, zh = { class: "d-flex align-center justify-space-between" }, Uh = { class: "d-flex align-center justify-space-between" }, Gh = { class: "d-flex align-center justify-space-between" }, jh = {
   __name: "AccountSalesInvoice",
   setup(e) {
-    const a = A([
+    const a = T([
       { title: "Invoice Number", value: "invoiceNumber", visible: !0, minWidth: "120px" },
       { title: "Customer Name", value: "customerName", visible: !0, minWidth: "120px" },
       { title: "Invoice Date", value: "invoiceDate", visible: !0, minWidth: "120px" },
@@ -25354,7 +25384,7 @@ Currency: ${Y.value}` : "";
       { title: "Payment Status", value: "status", visible: !0 },
       { title: "Created By", value: "createdBy", visible: !0 },
       { title: "Actions", value: "actions", visible: !0 }
-    ]), t = A(!1), n = A([]);
+    ]), t = T(!1), n = T([]);
     async function i() {
       try {
         const Q = [
@@ -25649,7 +25679,7 @@ Currency: ${Y.value}` : "";
         console.error("Error fetching invoice data:", Q);
       }
     }
-    const o = A([
+    const o = T([
       { title: "Payment Status", checked: !0 },
       { title: "Currency", checked: !1 },
       { title: "GST Type", checked: !1 },
@@ -25659,15 +25689,15 @@ Currency: ${Y.value}` : "";
       { title: "Invoice Date To", checked: !1 },
       { title: "Due Date From", checked: !1 },
       { title: "Due Date To", checked: !1 }
-    ]), s = A([
+    ]), s = T([
       { title: "Paid", value: "Paid" },
       { title: "Overdue", value: "Overdue" },
       { title: "Outstanding", value: "Outstanding" }
-    ]), u = A([
+    ]), u = T([
       { title: "INR", value: "INR" },
       { title: "USD", value: "USD" },
       { title: "EUR", value: "EUR" }
-    ]), r = A([
+    ]), r = T([
       {
         label: "TOTAL SALES (BCY)",
         value: "₹84,67,225.00",
@@ -25698,7 +25728,7 @@ Currency: ${Y.value}` : "";
         icon: "mdi-bank-outline",
         color: "info"
       }
-    ]), d = A("item"), y = A([
+    ]), d = T("item"), y = T([
       { title: "Item", value: "item", minWidth: "250px" },
       { title: "Qty", value: "quantity", minWidth: "70px" },
       { title: "Unit", value: "unit", minWidth: "70px" },
@@ -25708,7 +25738,7 @@ Currency: ${Y.value}` : "";
       { title: "GST(%)", value: "gst", minWidth: "" },
       { title: "Total", value: "total", minWidth: "" },
       { title: "", value: "actions", minWidth: "" }
-    ]), b = A(["0%", "5%", "12%", "18%", "28%"]), m = A([
+    ]), b = T(["0%", "5%", "12%", "18%", "28%"]), m = T([
       { title: "Service", value: "item", minWidth: "250px" },
       { title: "Amount", value: "rate", minWidth: "100px" },
       { title: "Discount(%)", value: "discount", minWidth: "100px" },
@@ -25716,8 +25746,8 @@ Currency: ${Y.value}` : "";
       { title: "GST(%)", value: "gst" },
       { title: "Total", value: "total" },
       { title: "", value: "actions" }
-    ]), f = A([]);
-    async function x() {
+    ]), p = T([]);
+    async function k() {
       try {
         const Q = [
           { title: "Andhra Pradesh", value: "Andhra Pradesh" },
@@ -25757,16 +25787,16 @@ Currency: ${Y.value}` : "";
           { title: "Lakshadweep", value: "Lakshadweep" },
           { title: "Puducherry", value: "Puducherry" }
         ];
-        f.value = Q;
+        p.value = Q;
       } catch (Q) {
         console.error("Error fetching states data:", Q);
       }
     }
-    const p = A([
+    const _ = T([
       { title: "Credit", value: "credit" },
       { title: "Debit", value: "debit" }
-    ]), h = A("credit");
-    function _(Q = !1) {
+    ]), h = T("credit");
+    function g(Q = !1) {
       return {
         item: "",
         hsnCode: "",
@@ -25780,27 +25810,27 @@ Currency: ${Y.value}` : "";
         lockedRate: !1
       };
     }
-    const g = A([_()]), S = A([_(!0)]);
-    function I(Q) {
-      const P = Q === "service" ? S : g;
-      P.value.push({ ..._(Q === "service"), lockedRate: P.value.length > 0 }), P.value.forEach((ne, he) => ne.lockedRate = he !== 0);
+    const f = T([g()]), x = T([g(!0)]);
+    function V(Q) {
+      const P = Q === "service" ? x : f;
+      P.value.push({ ...g(Q === "service"), lockedRate: P.value.length > 0 }), P.value.forEach((le, he) => le.lockedRate = he !== 0);
     }
     function $(Q, P) {
-      const ne = P === "service" ? S : g;
-      ne.value.length > 1 && (ne.value.splice(Q, 1), ne.value.forEach((he, Ce) => he.lockedRate = Ce !== 0));
+      const le = P === "service" ? x : f;
+      le.value.length > 1 && (le.value.splice(Q, 1), le.value.forEach((he, Ce) => he.lockedRate = Ce !== 0));
     }
-    function O(Q) {
-      Re(() => {
+    function L(Q) {
+      Oe(() => {
         Q.value.forEach((P) => {
-          const ne = parseFloat(P.quantity) || 1, he = parseFloat(P.rate) || 0, Ce = parseFloat(P.discount) || 0, Ne = (P.quantity !== void 0 ? ne : 1) * he, He = Ne * (Ce / 100), Fe = Ne - He, qe = parseFloat(P.gst) || 0, Jt = Fe * (qe / 100), ft = Fe + Jt;
+          const le = parseFloat(P.quantity) || 1, he = parseFloat(P.rate) || 0, Ce = parseFloat(P.discount) || 0, De = (P.quantity !== void 0 ? le : 1) * he, He = De * (Ce / 100), Fe = De - He, qe = parseFloat(P.gst) || 0, Jt = Fe * (qe / 100), ft = Fe + Jt;
           P.taxableAmnt = Fe.toFixed(2), P.total = ft.toFixed(2);
         });
       });
     }
-    O(g), O(S), st(() => {
-      i(), x(), g.value[0].lockedRate = !1, S.value[0].lockedRate = !1;
+    L(f), L(x), st(() => {
+      i(), k(), f.value[0].lockedRate = !1, x.value[0].lockedRate = !1;
     });
-    const E = A([
+    const E = T([
       // Core Information
       { label: "Name", key: "name", visible: !0 },
       { label: "Mobile", key: "mobile", visible: !0 },
@@ -25829,10 +25859,10 @@ Currency: ${Y.value}` : "";
       { label: "Additional Country 1", key: "addCountry1", visible: !0 },
       { label: "Place of Supply", key: "state", visible: !0 },
       { label: "Ship-to Address", key: "shipToAddress", visible: !0 }
-    ]), R = (Q) => {
+    ]), O = (Q) => {
       var P;
-      return (P = E.value.find((ne) => ne.key === Q)) == null ? void 0 : P.visible;
-    }, T = A([
+      return (P = E.value.find((le) => le.key === Q)) == null ? void 0 : P.visible;
+    }, D = T([
       {
         title: "Innovative Inc.",
         value: "innovative_inc",
@@ -25914,36 +25944,36 @@ Currency: ${Y.value}` : "";
           shipToAddress: "789 Tech Park, Chennai, Tamil Nadu, 600001"
         }
       }
-    ]), U = A(!1), G = () => {
+    ]), U = T(!1), G = () => {
       U.value = !U.value;
-    }, C = A(null), L = A(""), W = A(""), Y = A("INR"), J = A(""), H = A("");
-    A("");
-    const N = A(""), j = A(!0), V = k(() => {
+    }, C = T(null), R = T(""), q = T(""), Y = T("INR"), J = T(""), H = T("");
+    T("");
+    const N = T(""), j = T(!0), I = S(() => {
       if (!C.value) return "";
-      const Q = T.value.find((P) => P.value === C.value);
+      const Q = D.value.find((P) => P.value === C.value);
       return Q ? `GSTIN: ${Q.data.gstin}
 Billing Address: ${Q.data.address}, ${Q.data.state}, ${Q.data.pincode}
 Currency: ${Y.value}` : "";
     });
-    Re(() => {
+    Oe(() => {
       if (C.value) {
-        const Q = T.value.find((P) => P.value === C.value);
-        Q && (L.value = Q.data.gstin, W.value = `${Q.data.address}, ${Q.data.state}, ${Q.data.pincode}`, Y.value = Q.data.currency || "INR", N.value = Q.data.state);
+        const Q = D.value.find((P) => P.value === C.value);
+        Q && (R.value = Q.data.gstin, q.value = `${Q.data.address}, ${Q.data.state}, ${Q.data.pincode}`, Y.value = Q.data.currency || "INR", N.value = Q.data.state);
       } else
-        L.value = "", W.value = "", Y.value = "INR", N.value = "";
+        R.value = "", q.value = "", Y.value = "INR", N.value = "";
     });
-    const M = A(!1), te = A("Numbering"), ge = ["Numbering", "Columns", "Fields", "Mode"], be = A("Text"), fe = A(""), pe = A(1), ce = k(() => {
-      const Q = /* @__PURE__ */ new Date(), P = Q.getFullYear(), ne = Q.getMonth() >= 3 ? P + 1 : P;
-      return `${ne - 1}-${ne.toString().slice(-2)}`;
+    const M = T(!1), ae = T("Numbering"), ge = ["Numbering", "Columns", "Fields", "Mode"], be = T("Text"), fe = T(""), pe = T(1), ce = S(() => {
+      const Q = /* @__PURE__ */ new Date(), P = Q.getFullYear(), le = Q.getMonth() >= 3 ? P + 1 : P;
+      return `${le - 1}-${le.toString().slice(-2)}`;
     });
-    Re(() => {
+    Oe(() => {
       be.value === "Financial Year" ? fe.value = ce.value : fe.value = "";
     });
-    const z = k(() => !fe.value || !pe.value ? "" : `${fe.value}/${pe.value}`);
-    return (Q, P) => (w(), re("div", ph, [
-      l(Ua, null, {
+    const z = S(() => !fe.value || !pe.value ? "" : `${fe.value}/${pe.value}`);
+    return (Q, P) => (w(), re("div", bh, [
+      l(Ga, null, {
         default: c(() => [
-          t.value ? (w(), D(xe, {
+          t.value ? (w(), A(xe, {
             key: 0,
             class: "mb-3"
           }, {
@@ -25956,27 +25986,27 @@ Currency: ${Y.value}` : "";
                     subtitle: "Fill out the details below to create a new sales invoice."
                   }, {
                     append: c(() => [
-                      v("div", bh, [
+                      v("div", _h, [
                         l(Z, {
-                          onClick: P[0] || (P[0] = (ne) => M.value = !0),
+                          onClick: P[0] || (P[0] = (le) => M.value = !0),
                           variant: "text",
                           size: "x-small",
                           rounded: ""
                         }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
+                            (w(), A(te(F(ne)("settings")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         }),
                         l(Z, {
-                          onClick: P[1] || (P[1] = (ne) => t.value = !1),
+                          onClick: P[1] || (P[1] = (le) => t.value = !1),
                           variant: "text",
                           size: "x-small",
                           rounded: "",
                           class: "account_vcard_close_btn"
                         }, {
                           default: c(() => [
-                            (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
+                            (w(), A(te(F(ne)("x")), { style: { "font-size": "20px" } }))
                           ]),
                           _: 1
                         })
@@ -25996,21 +26026,21 @@ Currency: ${Y.value}` : "";
                                   P[21] || (P[21] = v("label", { class: "account_label mb-2" }, "Bill To", -1)),
                                   l(lt, {
                                     modelValue: C.value,
-                                    "onUpdate:modelValue": P[3] || (P[3] = (ne) => C.value = ne),
+                                    "onUpdate:modelValue": P[3] || (P[3] = (le) => C.value = le),
                                     placeholder: "Select a customer",
                                     class: "accouting_field accouting_active_field",
-                                    items: T.value,
+                                    items: D.value,
                                     variant: "outlined"
                                   }, {
                                     append: c(() => [
                                       l(Z, {
                                         class: "account_v_btn_outlined",
-                                        onClick: P[2] || (P[2] = (ne) => U.value = !0),
+                                        onClick: P[2] || (P[2] = (le) => U.value = !0),
                                         rounded: "1",
                                         size: "default"
                                       }, {
                                         default: c(() => [
-                                          (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px" } }))
+                                          (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px" } }))
                                         ]),
                                         _: 1
                                       })
@@ -26038,7 +26068,7 @@ Currency: ${Y.value}` : "";
                                           P[22] || (P[22] = v("label", { class: "account_label mb-2" }, "Invoice Number", -1)),
                                           l(ee, {
                                             modelValue: J.value,
-                                            "onUpdate:modelValue": P[4] || (P[4] = (ne) => J.value = ne),
+                                            "onUpdate:modelValue": P[4] || (P[4] = (le) => J.value = le),
                                             class: "accouting_field accouting_active_field",
                                             variant: "outlined",
                                             density: "compact"
@@ -26056,7 +26086,7 @@ Currency: ${Y.value}` : "";
                                           P[23] || (P[23] = v("label", { class: "account_label mb-2" }, "Invoice Date", -1)),
                                           l(ee, {
                                             modelValue: H.value,
-                                            "onUpdate:modelValue": P[5] || (P[5] = (ne) => H.value = ne),
+                                            "onUpdate:modelValue": P[5] || (P[5] = (le) => H.value = le),
                                             type: "date",
                                             class: "accouting_field accouting_active_field",
                                             variant: "outlined",
@@ -26078,8 +26108,8 @@ Currency: ${Y.value}` : "";
                                 md: "6"
                               }, {
                                 default: c(() => [
-                                  l(Nt, {
-                                    value: V.value,
+                                  l(Dt, {
+                                    value: I.value,
                                     class: "accounting_v_textarea",
                                     variant: "outlined",
                                     readonly: "",
@@ -26106,7 +26136,7 @@ Currency: ${Y.value}` : "";
                                           P[24] || (P[24] = v("label", { class: "account_label mb-2" }, "Currency", -1)),
                                           l(ee, {
                                             modelValue: Y.value,
-                                            "onUpdate:modelValue": P[6] || (P[6] = (ne) => Y.value = ne),
+                                            "onUpdate:modelValue": P[6] || (P[6] = (le) => Y.value = le),
                                             class: "accouting_field accouting_active_field",
                                             variant: "outlined",
                                             density: "compact"
@@ -26125,10 +26155,10 @@ Currency: ${Y.value}` : "";
                                           P[25] || (P[25] = v("label", { class: "account_label mb-2" }, "Place of Supply", -1)),
                                           l(lt, {
                                             modelValue: N.value,
-                                            "onUpdate:modelValue": P[7] || (P[7] = (ne) => N.value = ne),
+                                            "onUpdate:modelValue": P[7] || (P[7] = (le) => N.value = le),
                                             class: "accouting_field accouting_active_field",
                                             variant: "outlined",
-                                            items: f.value
+                                            items: p.value
                                           }, null, 8, ["modelValue", "items"])
                                         ]),
                                         _: 1,
@@ -26140,9 +26170,9 @@ Currency: ${Y.value}` : "";
                                         md: "12"
                                       }, {
                                         default: c(() => [
-                                          l(Dt, {
+                                          l(Nt, {
                                             modelValue: j.value,
-                                            "onUpdate:modelValue": P[8] || (P[8] = (ne) => j.value = ne),
+                                            "onUpdate:modelValue": P[8] || (P[8] = (le) => j.value = le),
                                             density: "compact",
                                             class: "account_v_checkbox",
                                             label: "Shipping address is the same as billing address"
@@ -26168,23 +26198,23 @@ Currency: ${Y.value}` : "";
                                 md: "12"
                               }, {
                                 default: c(() => [
-                                  v("div", _h, [
+                                  v("div", hh, [
                                     l(Z, {
                                       class: ye(d.value === "item" ? "account_v_btn_primary" : "account_v_btn_outlined"),
-                                      onClick: P[9] || (P[9] = (ne) => d.value = "item")
+                                      onClick: P[9] || (P[9] = (le) => d.value = "item")
                                     }, {
                                       default: c(() => P[26] || (P[26] = [
-                                        de(" Item Invoice ", -1)
+                                        ve(" Item Invoice ", -1)
                                       ])),
                                       _: 1,
                                       __: [26]
                                     }, 8, ["class"]),
                                     l(Z, {
                                       class: ye(d.value === "service" ? "account_v_btn_primary" : "account_v_btn_outlined"),
-                                      onClick: P[10] || (P[10] = (ne) => d.value = "service")
+                                      onClick: P[10] || (P[10] = (le) => d.value = "service")
                                     }, {
                                       default: c(() => P[27] || (P[27] = [
-                                        de(" Service Invoice ", -1)
+                                        ve(" Service Invoice ", -1)
                                       ])),
                                       _: 1,
                                       __: [27]
@@ -26192,62 +26222,62 @@ Currency: ${Y.value}` : "";
                                   ]),
                                   l(zt, {
                                     headers: d.value === "item" ? y.value : m.value,
-                                    items: d.value === "item" ? g.value : S.value,
+                                    items: d.value === "item" ? f.value : x.value,
                                     class: "account_dynamic_table account_invoice_table"
                                   }, Ls({
-                                    "item.item": c(({ item: ne, index: he }) => [
+                                    "item.item": c(({ item: le, index: he }) => [
                                       l(ee, {
-                                        modelValue: (d.value === "item" ? g.value : S.value)[he].item,
-                                        "onUpdate:modelValue": (Ce) => (d.value === "item" ? g.value : S.value)[he].item = Ce,
+                                        modelValue: (d.value === "item" ? f.value : x.value)[he].item,
+                                        "onUpdate:modelValue": (Ce) => (d.value === "item" ? f.value : x.value)[he].item = Ce,
                                         placeholder: "Item/Service description",
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined"
                                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                                     ]),
-                                    "item.rate": c(({ item: ne, index: he }) => [
+                                    "item.rate": c(({ item: le, index: he }) => [
                                       l(ee, {
-                                        modelValue: (d.value === "item" ? g.value : S.value)[he].rate,
-                                        "onUpdate:modelValue": (Ce) => (d.value === "item" ? g.value : S.value)[he].rate = Ce,
-                                        readonly: (d.value === "item" ? g.value : S.value)[he].lockedRate,
+                                        modelValue: (d.value === "item" ? f.value : x.value)[he].rate,
+                                        "onUpdate:modelValue": (Ce) => (d.value === "item" ? f.value : x.value)[he].rate = Ce,
+                                        readonly: (d.value === "item" ? f.value : x.value)[he].lockedRate,
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined",
                                         placeholder: "0",
                                         density: "compact"
                                       }, null, 8, ["modelValue", "onUpdate:modelValue", "readonly"])
                                     ]),
-                                    "item.discount": c(({ item: ne, index: he }) => [
+                                    "item.discount": c(({ item: le, index: he }) => [
                                       l(ee, {
-                                        modelValue: (d.value === "item" ? g.value : S.value)[he].discount,
-                                        "onUpdate:modelValue": (Ce) => (d.value === "item" ? g.value : S.value)[he].discount = Ce,
+                                        modelValue: (d.value === "item" ? f.value : x.value)[he].discount,
+                                        "onUpdate:modelValue": (Ce) => (d.value === "item" ? f.value : x.value)[he].discount = Ce,
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined",
                                         placeholder: "0",
                                         density: "compact"
                                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                                     ]),
-                                    "item.taxableAmount": c(({ item: ne, index: he }) => [
-                                      v("p", hh, "₹" + ue((d.value === "item" ? g.value : S.value)[he].taxableAmnt), 1)
+                                    "item.taxableAmount": c(({ item: le, index: he }) => [
+                                      v("p", xh, "₹" + ue((d.value === "item" ? f.value : x.value)[he].taxableAmnt), 1)
                                     ]),
-                                    "item.gst": c(({ item: ne, index: he }) => [
+                                    "item.gst": c(({ item: le, index: he }) => [
                                       l(Ze, {
-                                        modelValue: (d.value === "item" ? g.value : S.value)[he].gst,
-                                        "onUpdate:modelValue": (Ce) => (d.value === "item" ? g.value : S.value)[he].gst = Ce,
+                                        modelValue: (d.value === "item" ? f.value : x.value)[he].gst,
+                                        "onUpdate:modelValue": (Ce) => (d.value === "item" ? f.value : x.value)[he].gst = Ce,
                                         class: "accouting_field accouting_active_field",
                                         variant: "outlined",
                                         items: b.value
                                       }, null, 8, ["modelValue", "onUpdate:modelValue", "items"])
                                     ]),
-                                    "item.total": c(({ item: ne, index: he }) => [
-                                      v("p", xh, "₹" + ue((d.value === "item" ? g.value : S.value)[he].total), 1)
+                                    "item.total": c(({ item: le, index: he }) => [
+                                      v("p", kh, "₹" + ue((d.value === "item" ? f.value : x.value)[he].total), 1)
                                     ]),
-                                    "item.actions": c(({ index: ne }) => [
-                                      (w(), D(ae(F(le)("trash")), {
+                                    "item.actions": c(({ index: le }) => [
+                                      (w(), A(te(F(ne)("trash")), {
                                         class: ye(["cursor-pointer table_row_icon", {
-                                          "opacity-50": (d.value === "item" ? g.value : S.value).length === 1,
-                                          "cursor-not-allowed": (d.value === "item" ? g.value : S.value).length === 1
+                                          "opacity-50": (d.value === "item" ? f.value : x.value).length === 1,
+                                          "cursor-not-allowed": (d.value === "item" ? f.value : x.value).length === 1
                                         }]),
-                                        disabled: (d.value === "item" ? g.value : S.value).length === 1,
-                                        onClick: (he) => $(ne, d.value),
+                                        disabled: (d.value === "item" ? f.value : x.value).length === 1,
+                                        onClick: (he) => $(le, d.value),
                                         style: { "font-size": "20px" }
                                       }, null, 8, ["class", "disabled", "onClick"]))
                                     ]),
@@ -26255,10 +26285,10 @@ Currency: ${Y.value}` : "";
                                   }, [
                                     d.value === "item" ? {
                                       name: "item.quantity",
-                                      fn: c(({ item: ne, index: he }) => [
+                                      fn: c(({ item: le, index: he }) => [
                                         l(ee, {
-                                          modelValue: g.value[he].quantity,
-                                          "onUpdate:modelValue": (Ce) => g.value[he].quantity = Ce,
+                                          modelValue: f.value[he].quantity,
+                                          "onUpdate:modelValue": (Ce) => f.value[he].quantity = Ce,
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
                                           placeholder: "0",
@@ -26269,10 +26299,10 @@ Currency: ${Y.value}` : "";
                                     } : void 0,
                                     d.value === "item" ? {
                                       name: "item.unit",
-                                      fn: c(({ item: ne, index: he }) => [
+                                      fn: c(({ item: le, index: he }) => [
                                         l(ee, {
-                                          modelValue: g.value[he].unit,
-                                          "onUpdate:modelValue": (Ce) => g.value[he].unit = Ce,
+                                          modelValue: f.value[he].unit,
+                                          "onUpdate:modelValue": (Ce) => f.value[he].unit = Ce,
                                           class: "accouting_field accouting_active_field",
                                           suffix: "pcs",
                                           variant: "outlined",
@@ -26291,13 +26321,13 @@ Currency: ${Y.value}` : "";
                                   l(Z, {
                                     class: "account_v_btn_outlined mt-3",
                                     variant: "text",
-                                    onClick: P[11] || (P[11] = (ne) => I(d.value))
+                                    onClick: P[11] || (P[11] = (le) => V(d.value))
                                   }, {
                                     prepend: c(() => [
-                                      (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                      (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                     ]),
                                     default: c(() => [
-                                      P[28] || (P[28] = de(" Add Another Line ", -1))
+                                      P[28] || (P[28] = ve(" Add Another Line ", -1))
                                     ]),
                                     _: 1,
                                     __: [28]
@@ -26354,7 +26384,7 @@ Currency: ${Y.value}` : "";
                                         default: c(() => [
                                           l(me, { class: "account_vcard_border shadow-none w-100" }, {
                                             default: c(() => [
-                                              v("div", kh, [
+                                              v("div", Sh, [
                                                 P[31] || (P[31] = v("h6", { class: "account_gst_title mb-0" }, "Totals", -1)),
                                                 P[32] || (P[32] = v("div", { class: "d-flex align-center justify-space-between py-2" }, [
                                                   v("span", { class: "account_gst_subtitle" }, "Subtotal"),
@@ -26373,8 +26403,8 @@ Currency: ${Y.value}` : "";
                                                   v("span", { class: "account_gst_subtitle" }, "GST (18%)"),
                                                   v("span", { class: "account_gst_subtitle_val" }, "₹9.00")
                                                 ], -1)),
-                                                v("div", Sh, [
-                                                  v("div", wh, [
+                                                v("div", wh, [
+                                                  v("div", Ch, [
                                                     P[30] || (P[30] = v("span", { class: "account_gst_subtitle" }, "Round Off", -1)),
                                                     l(nt, {
                                                       density: "compact",
@@ -26433,7 +26463,7 @@ Currency: ${Y.value}` : "";
                                 md: "6"
                               }, {
                                 default: c(() => [
-                                  v("div", Ch, [
+                                  v("div", Vh, [
                                     P[39] || (P[39] = v("label", { class: "account_label mb-2" }, "Amount Received", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
@@ -26483,28 +26513,28 @@ Currency: ${Y.value}` : "";
                               l(B, { cols: "12" }, {
                                 default: c(() => [
                                   P[44] || (P[44] = v("label", { class: "account_label mb-2" }, "Notes / Terms & Conditions", -1)),
-                                  l(Nt, {
+                                  l(Dt, {
                                     class: "accounting_v_textarea",
                                     placeholder: "Thank you for your business. All payments are due within 30 days.",
                                     variant: "outlined"
                                   }),
-                                  v("div", Vh, [
+                                  v("div", Ih, [
                                     l(Z, { class: "account_v_btn_primary" }, {
                                       prepend: c(() => [
-                                        (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                        (w(), A(te(F(ne)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                       ]),
                                       default: c(() => [
-                                        P[42] || (P[42] = de(" Save as Default ", -1))
+                                        P[42] || (P[42] = ve(" Save as Default ", -1))
                                       ]),
                                       _: 1,
                                       __: [42]
                                     }),
                                     l(Z, { class: "account_v_btn_outlined" }, {
                                       prepend: c(() => [
-                                        (w(), D(ae(F(le)("send")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                        (w(), A(te(F(ne)("send")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                       ]),
                                       default: c(() => [
-                                        P[43] || (P[43] = de(" Save & Send Invoice ", -1))
+                                        P[43] || (P[43] = ve(" Save & Send Invoice ", -1))
                                       ]),
                                       _: 1,
                                       __: [43]
@@ -26528,26 +26558,26 @@ Currency: ${Y.value}` : "";
               })
             ]),
             _: 1
-          })) : q("", !0)
+          })) : W("", !0)
         ]),
         _: 1
       }),
-      v("div", Ih, [
+      v("div", Ph, [
         l(Z, {
-          onClick: P[12] || (P[12] = (ne) => t.value = !0),
+          onClick: P[12] || (P[12] = (le) => t.value = !0),
           class: "account_v_btn_primary"
         }, {
           prepend: c(() => [
-            (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+            (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
           ]),
           default: c(() => [
-            P[45] || (P[45] = de(" Create Invoice ", -1))
+            P[45] || (P[45] = ve(" Create Invoice ", -1))
           ]),
           _: 1,
           __: [45]
         })
       ]),
-      v("div", Ph, [
+      v("div", Ah, [
         l($l, {
           title: "Invoices",
           headers: a.value,
@@ -26562,25 +26592,25 @@ Currency: ${Y.value}` : "";
       l(Vt, {
         "max-width": "900",
         modelValue: U.value,
-        "onUpdate:modelValue": P[14] || (P[14] = (ne) => U.value = ne)
+        "onUpdate:modelValue": P[14] || (P[14] = (le) => U.value = le)
       }, {
         default: c(() => [
-          U.value ? (w(), re("div", Ah, [
+          U.value ? (w(), re("div", Th, [
             l(me, {
               title: "Create a New Customer",
               class: "pa-2 account_vcard_border shadow-none",
               subtitle: "Fill in the details below to add a new customer to your records."
             }, {
               append: c(() => [
-                v("div", Th, [
+                v("div", Dh, [
                   l(ot, {
                     location: "start",
                     transition: "slide-y-transition",
                     "offset-y": "",
                     "close-on-content-click": !1
                   }, {
-                    activator: c(({ props: ne }) => [
-                      l(Z, X(ne, {
+                    activator: c(({ props: le }) => [
+                      l(Z, X(le, {
                         icon: "mdi-cog-outline",
                         variant: "text",
                         size: "x-small",
@@ -26593,22 +26623,22 @@ Currency: ${Y.value}` : "";
                           P[46] || (P[46] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                           l(ke, { class: "my-1 mt-0" }),
                           v("div", Nh, [
-                            (w(!0), re(ve, null, ze(E.value, (ne) => (w(), re("div", {
-                              key: ne.key,
+                            (w(!0), re(de, null, Re(E.value, (le) => (w(), re("div", {
+                              key: le.key,
                               class: "account_vcard_menu_item",
-                              onClick: (he) => ne.visible = !ne.visible
+                              onClick: (he) => le.visible = !le.visible
                             }, [
-                              v("div", $h, [
-                                ne.visible ? (w(), D($e, {
+                              v("div", Bh, [
+                                le.visible ? (w(), A($e, {
                                   key: 0,
                                   size: "16",
                                   icon: "mdi-check"
-                                })) : q("", !0),
+                                })) : W("", !0),
                                 v("span", {
-                                  class: ye(ne.visible ? "" : "field_list_dynamic_ml")
-                                }, ue(ne.label), 3)
+                                  class: ye(le.visible ? "" : "field_list_dynamic_ml")
+                                }, ue(le.label), 3)
                               ])
-                            ], 8, Dh))), 128))
+                            ], 8, $h))), 128))
                           ])
                         ]),
                         _: 1,
@@ -26643,7 +26673,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [47]
                         }),
-                        R("name") ? (w(), D(B, {
+                        O("name") ? (w(), A(B, {
                           key: 0,
                           cols: "12",
                           lg: "12",
@@ -26660,8 +26690,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [48]
-                        })) : q("", !0),
-                        R("mobile") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("mobile") ? (w(), A(B, {
                           key: 1,
                           cols: "12",
                           lg: "5",
@@ -26679,8 +26709,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [49]
-                        })) : q("", !0),
-                        R("openingBalance") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("openingBalance") ? (w(), A(B, {
                           key: 2,
                           cols: "12",
                           lg: "7",
@@ -26688,7 +26718,7 @@ Currency: ${Y.value}` : "";
                         }, {
                           default: c(() => [
                             P[50] || (P[50] = v("label", { class: "account_label mb-2" }, "Opening Balance", -1)),
-                            v("div", Bh, [
+                            v("div", Eh, [
                               l(ee, {
                                 class: "custom_option_field accouting_field accouting_active_field",
                                 type: "number",
@@ -26699,8 +26729,8 @@ Currency: ${Y.value}` : "";
                               l(Ze, {
                                 class: "custom_option_select accouting_field accouting_active_field",
                                 modelValue: h.value,
-                                "onUpdate:modelValue": P[13] || (P[13] = (ne) => h.value = ne),
-                                items: p.value,
+                                "onUpdate:modelValue": P[13] || (P[13] = (le) => h.value = le),
+                                items: _.value,
                                 variant: "outlined",
                                 density: "comapct"
                               }, null, 8, ["modelValue", "items"])
@@ -26708,7 +26738,7 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [50]
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -26720,7 +26750,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [51]
                         }),
-                        R("mailingName") ? (w(), D(B, {
+                        O("mailingName") ? (w(), A(B, {
                           key: 3,
                           cols: "12",
                           lg: "6",
@@ -26737,8 +26767,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [52]
-                        })) : q("", !0),
-                        R("email") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("email") ? (w(), A(B, {
                           key: 4,
                           cols: "12",
                           lg: "6",
@@ -26755,8 +26785,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [53]
-                        })) : q("", !0),
-                        R("address") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("address") ? (w(), A(B, {
                           key: 5,
                           cols: "12",
                           lg: "12",
@@ -26764,7 +26794,7 @@ Currency: ${Y.value}` : "";
                         }, {
                           default: c(() => [
                             P[54] || (P[54] = v("label", { class: "account_label mb-2" }, "Address", -1)),
-                            l(Nt, {
+                            l(Dt, {
                               class: "accounting_v_textarea",
                               placeholder: "Full address",
                               variant: "outlined"
@@ -26772,8 +26802,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [54]
-                        })) : q("", !0),
-                        R("state") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("state") ? (w(), A(B, {
                           key: 6,
                           cols: "12",
                           lg: "6",
@@ -26789,8 +26819,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [55]
-                        })) : q("", !0),
-                        R("pincode") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("pincode") ? (w(), A(B, {
                           key: 7,
                           cols: "12",
                           lg: "6",
@@ -26806,8 +26836,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [56]
-                        })) : q("", !0),
-                        R("country") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("country") ? (w(), A(B, {
                           key: 8,
                           cols: "12",
                           lg: "6",
@@ -26824,7 +26854,7 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [57]
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -26836,7 +26866,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [58]
                         }),
-                        R("gstin") ? (w(), D(B, {
+                        O("gstin") ? (w(), A(B, {
                           key: 9,
                           cols: "12",
                           lg: "6",
@@ -26853,8 +26883,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [59]
-                        })) : q("", !0),
-                        R("pan") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("pan") ? (w(), A(B, {
                           key: 10,
                           cols: "12",
                           lg: "6",
@@ -26871,8 +26901,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [60]
-                        })) : q("", !0),
-                        R("taxReg") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("taxReg") ? (w(), A(B, {
                           key: 11,
                           cols: "12",
                           lg: "6",
@@ -26889,8 +26919,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [61]
-                        })) : q("", !0),
-                        R("tds") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("tds") ? (w(), A(B, {
                           key: 12,
                           class: "d-flex align-center",
                           cols: "12",
@@ -26898,14 +26928,14 @@ Currency: ${Y.value}` : "";
                           md: "6"
                         }, {
                           default: c(() => [
-                            l(Dt, {
+                            l(Nt, {
                               density: "compact",
                               class: "account_v_checkbox",
                               label: "TDS Applicable"
                             })
                           ]),
                           _: 1
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -26917,7 +26947,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [62]
                         }),
-                        R("creditLimit") ? (w(), D(B, {
+                        O("creditLimit") ? (w(), A(B, {
                           key: 13,
                           cols: "12",
                           lg: "6",
@@ -26935,8 +26965,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [63]
-                        })) : q("", !0),
-                        R("creditPeriod") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("creditPeriod") ? (w(), A(B, {
                           key: 14,
                           cols: "12",
                           lg: "6",
@@ -26954,8 +26984,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [64]
-                        })) : q("", !0),
-                        R("billWise") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("billWise") ? (w(), A(B, {
                           key: 15,
                           class: "d-flex align-center",
                           cols: "12",
@@ -26963,14 +26993,14 @@ Currency: ${Y.value}` : "";
                           md: "6"
                         }, {
                           default: c(() => [
-                            l(Dt, {
+                            l(Nt, {
                               density: "compact",
                               class: "account_v_checkbox",
                               label: "Maintain Bill-wise Details"
                             })
                           ]),
                           _: 1
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -26982,7 +27012,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [65]
                         }),
-                        R("bankName") ? (w(), D(B, {
+                        O("bankName") ? (w(), A(B, {
                           key: 16,
                           cols: "12",
                           lg: "6",
@@ -26999,8 +27029,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [66]
-                        })) : q("", !0),
-                        R("accountNumber") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("accountNumber") ? (w(), A(B, {
                           key: 17,
                           cols: "12",
                           lg: "6",
@@ -27017,8 +27047,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [67]
-                        })) : q("", !0),
-                        R("ifscCode") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("ifscCode") ? (w(), A(B, {
                           key: 18,
                           cols: "12",
                           lg: "6",
@@ -27035,7 +27065,7 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [68]
-                        })) : q("", !0),
+                        })) : W("", !0),
                         l(B, {
                           cols: "12",
                           class: "pb-0"
@@ -27047,7 +27077,7 @@ Currency: ${Y.value}` : "";
                           _: 1,
                           __: [69]
                         }),
-                        R("addCountry1") ? (w(), D(B, {
+                        O("addCountry1") ? (w(), A(B, {
                           key: 19,
                           cols: "12",
                           lg: "6",
@@ -27064,8 +27094,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [70]
-                        })) : q("", !0),
-                        R("state") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("state") ? (w(), A(B, {
                           key: 20,
                           cols: "12",
                           lg: "6",
@@ -27082,8 +27112,8 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [71]
-                        })) : q("", !0),
-                        R("shipToAddress") ? (w(), D(B, {
+                        })) : W("", !0),
+                        O("shipToAddress") ? (w(), A(B, {
                           key: 21,
                           cols: "12",
                           lg: "12",
@@ -27091,18 +27121,18 @@ Currency: ${Y.value}` : "";
                         }, {
                           default: c(() => [
                             P[73] || (P[73] = v("label", { class: "account_label mb-2" }, "Ship-to Address", -1)),
-                            l(Nt, {
+                            l(Dt, {
                               class: "accounting_v_textarea",
                               placeholder: "Optional delivery address",
                               variant: "outlined"
                             }),
-                            v("div", Eh, [
+                            v("div", Fh, [
                               l(Z, {
                                 class: "account_v_btn_primary",
                                 "prepend-icon": "mdi-content-save-outline"
                               }, {
                                 default: c(() => P[72] || (P[72] = [
-                                  de("Save Customer", -1)
+                                  ve("Save Customer", -1)
                                 ])),
                                 _: 1,
                                 __: [72]
@@ -27111,7 +27141,7 @@ Currency: ${Y.value}` : "";
                           ]),
                           _: 1,
                           __: [73]
-                        })) : q("", !0)
+                        })) : W("", !0)
                       ]),
                       _: 1
                     })
@@ -27121,17 +27151,17 @@ Currency: ${Y.value}` : "";
               ]),
               _: 1
             })
-          ])) : q("", !0)
+          ])) : W("", !0)
         ]),
         _: 1
       }, 8, ["modelValue"]),
       l(Vt, {
         "max-width": "600",
         modelValue: M.value,
-        "onUpdate:modelValue": P[20] || (P[20] = (ne) => M.value = ne)
+        "onUpdate:modelValue": P[20] || (P[20] = (le) => M.value = le)
       }, {
         default: c(() => [
-          M.value ? (w(), re("div", Fh, [
+          M.value ? (w(), re("div", Lh, [
             l(me, {
               title: "Invoice Settings",
               class: "pa-2 account_vcard_border shadow-none",
@@ -27139,7 +27169,7 @@ Currency: ${Y.value}` : "";
             }, {
               append: c(() => [
                 l(Z, {
-                  onClick: P[15] || (P[15] = (ne) => M.value = !1),
+                  onClick: P[15] || (P[15] = (le) => M.value = !1),
                   icon: "mdi-close",
                   variant: "text",
                   size: "x-small",
@@ -27152,20 +27182,20 @@ Currency: ${Y.value}` : "";
                   default: c(() => [
                     l(xe, { class: "acc_invoice_settings_row mx-1" }, {
                       default: c(() => [
-                        (w(), re(ve, null, ze(ge, (ne) => l(B, {
+                        (w(), re(de, null, Re(ge, (le) => l(B, {
                           class: "pa-1",
                           cols: "3",
-                          key: ne
+                          key: le
                         }, {
                           default: c(() => [
                             l(Z, {
                               size: "small",
-                              class: ye(["w-100", te.value === ne ? "account_v_btn_light" : "account_v_btn_ghost"]),
+                              class: ye(["w-100", ae.value === le ? "account_v_btn_light" : "account_v_btn_ghost"]),
                               variant: "text",
-                              onClick: (he) => te.value = ne
+                              onClick: (he) => ae.value = le
                             }, {
                               default: c(() => [
-                                de(ue(ne), 1)
+                                ve(ue(le), 1)
                               ]),
                               _: 2
                             }, 1032, ["class", "onClick"])
@@ -27179,7 +27209,7 @@ Currency: ${Y.value}` : "";
                       default: c(() => [
                         l(B, { cols: "12" }, {
                           default: c(() => [
-                            te.value === "Numbering" ? (w(), D(me, {
+                            ae.value === "Numbering" ? (w(), A(me, {
                               key: 0,
                               class: "account_vcard_border shadow-none pa-4"
                             }, {
@@ -27193,7 +27223,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Lh, [
+                                                v("div", Rh, [
                                                   P[74] || (P[74] = v("p", { class: "mb-0" }, "Change Every FY", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27222,10 +27252,10 @@ Currency: ${Y.value}` : "";
                                                 l(Z, {
                                                   class: ye(["w-100 account_v_btn_outlined", be.value === "Text" ? "active_border" : ""]),
                                                   size: "large",
-                                                  onClick: P[16] || (P[16] = (ne) => be.value = "Text")
+                                                  onClick: P[16] || (P[16] = (le) => be.value = "Text")
                                                 }, {
                                                   default: c(() => P[75] || (P[75] = [
-                                                    de(" Text ", -1)
+                                                    ve(" Text ", -1)
                                                   ])),
                                                   _: 1,
                                                   __: [75]
@@ -27238,10 +27268,10 @@ Currency: ${Y.value}` : "";
                                                 l(Z, {
                                                   class: ye(["w-100 account_v_btn_outlined", be.value === "Financial Year" ? "active_border" : ""]),
                                                   size: "large",
-                                                  onClick: P[17] || (P[17] = (ne) => be.value = "Financial Year")
+                                                  onClick: P[17] || (P[17] = (le) => be.value = "Financial Year")
                                                 }, {
                                                   default: c(() => P[76] || (P[76] = [
-                                                    de(" Financial Year ", -1)
+                                                    ve(" Financial Year ", -1)
                                                   ])),
                                                   _: 1,
                                                   __: [76]
@@ -27268,7 +27298,7 @@ Currency: ${Y.value}` : "";
                                           variant: "outlined",
                                           density: "compact",
                                           modelValue: fe.value,
-                                          "onUpdate:modelValue": P[18] || (P[18] = (ne) => fe.value = ne),
+                                          "onUpdate:modelValue": P[18] || (P[18] = (le) => fe.value = le),
                                           readonly: be.value === "Financial Year"
                                         }, null, 8, ["modelValue", "readonly"])
                                       ]),
@@ -27288,7 +27318,7 @@ Currency: ${Y.value}` : "";
                                           variant: "outlined",
                                           density: "compact",
                                           modelValue: pe.value,
-                                          "onUpdate:modelValue": P[19] || (P[19] = (ne) => pe.value = ne)
+                                          "onUpdate:modelValue": P[19] || (P[19] = (le) => pe.value = le)
                                         }, null, 8, ["modelValue"])
                                       ]),
                                       _: 1,
@@ -27314,8 +27344,8 @@ Currency: ${Y.value}` : "";
                               ]),
                               _: 1,
                               __: [81]
-                            })) : q("", !0),
-                            te.value === "Columns" ? (w(), D(me, {
+                            })) : W("", !0),
+                            ae.value === "Columns" ? (w(), A(me, {
                               key: 1,
                               class: "account_vcard_border shadow-none pa-4"
                             }, {
@@ -27329,7 +27359,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Rh, [
+                                                v("div", Oh, [
                                                   P[82] || (P[82] = v("p", { class: "mb-0" }, "Unit", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27354,7 +27384,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Oh, [
+                                                v("div", Mh, [
                                                   P[83] || (P[83] = v("p", { class: "mb-0" }, "HSN/SAC Code", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27379,7 +27409,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Mh, [
+                                                v("div", zh, [
                                                   P[84] || (P[84] = v("p", { class: "mb-0" }, "Discount (%)", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27404,8 +27434,8 @@ Currency: ${Y.value}` : "";
                               ]),
                               _: 1,
                               __: [85]
-                            })) : q("", !0),
-                            te.value === "Fields" ? (w(), D(me, {
+                            })) : W("", !0),
+                            ae.value === "Fields" ? (w(), A(me, {
                               key: 2,
                               class: "account_vcard_border shadow-none pa-4"
                             }, {
@@ -27419,7 +27449,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", zh, [
+                                                v("div", Uh, [
                                                   P[86] || (P[86] = v("p", { class: "mb-0" }, "Due Date", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27444,7 +27474,7 @@ Currency: ${Y.value}` : "";
                                           default: c(() => [
                                             l(Ae, { class: "py-1 px-2" }, {
                                               default: c(() => [
-                                                v("div", Uh, [
+                                                v("div", Gh, [
                                                   P[87] || (P[87] = v("p", { class: "mb-0" }, "Currency & Exchange Rate", -1)),
                                                   l(nt, {
                                                     density: "compact",
@@ -27469,8 +27499,8 @@ Currency: ${Y.value}` : "";
                               ]),
                               _: 1,
                               __: [88]
-                            })) : q("", !0),
-                            te.value === "Mode" ? (w(), D(me, {
+                            })) : W("", !0),
+                            ae.value === "Mode" ? (w(), A(me, {
                               key: 3,
                               class: "account_vcard_border shadow-none pa-4"
                             }, {
@@ -27478,15 +27508,15 @@ Currency: ${Y.value}` : "";
                                 P[89] || (P[89] = v("h6", { class: "mb-4" }, "Invoice Mode", -1)),
                                 l(Ac, { class: "accounting_v_radio" }, {
                                   default: c(() => [
-                                    l(Ta, {
+                                    l(Da, {
                                       label: "Items and Services",
                                       value: "item_service"
                                     }),
-                                    l(Ta, {
+                                    l(Da, {
                                       label: "Items Only",
                                       value: "items"
                                     }),
-                                    l(Ta, {
+                                    l(Da, {
                                       label: "Services Only",
                                       value: "services"
                                     })
@@ -27496,7 +27526,7 @@ Currency: ${Y.value}` : "";
                               ]),
                               _: 1,
                               __: [89]
-                            })) : q("", !0)
+                            })) : W("", !0)
                           ]),
                           _: 1
                         })
@@ -27509,16 +27539,16 @@ Currency: ${Y.value}` : "";
               ]),
               _: 1
             })
-          ])) : q("", !0)
+          ])) : W("", !0)
         ]),
         _: 1
       }, 8, ["modelValue"])
     ]));
   }
-}, jh = { class: "account_ui_vcard" }, Hh = { class: "d-flex align-center justify-space-between" }, Wh = { class: "account_vcard_menu_items py-1" }, qh = ["onClick"], Yh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Jh = { class: "mt-8" }, Kh = { class: "mt-8" }, Xh = { class: "pa-4 d-flex align-center justify-end" }, Qh = { class: "d-flex align-center justify-space-between" }, Zh = { class: "px-3" }, e1 = { class: "account_vcard_border" }, t1 = { class: "mt-3" }, a1 = { class: "d-flex align-center gap-2" }, n1 = { class: "pa-4 d-flex align-center justify-end" }, l1 = "net30", i1 = {
+}, Hh = { class: "account_ui_vcard" }, Wh = { class: "d-flex align-center justify-space-between" }, qh = { class: "account_vcard_menu_items py-1" }, Yh = ["onClick"], Jh = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, Kh = { class: "mt-8" }, Xh = { class: "mt-8" }, Qh = { class: "pa-4 d-flex align-center justify-end" }, Zh = { class: "d-flex align-center justify-space-between" }, e1 = { class: "px-3" }, t1 = { class: "account_vcard_border" }, a1 = { class: "mt-3" }, n1 = { class: "d-flex align-center gap-2" }, l1 = { class: "pa-4 d-flex align-center justify-end" }, i1 = "net30", o1 = {
   __name: "AccountSettings",
   setup(e) {
-    const a = A(""), t = A([]), n = it({
+    const a = T(""), t = T([]), n = it({
       gstin: !0,
       legalName: !0,
       tradingName: !0,
@@ -27563,58 +27593,58 @@ Currency: ${Y.value}` : "";
     };
     st(async () => {
       try {
-        const _ = await (await fetch("https://countriesnow.space/api/v0.1/countries/states", {
+        const g = await (await fetch("https://countriesnow.space/api/v0.1/countries/states", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({ country: "India" })
         })).json();
-        console.log("the data is :", _), t.value = _.data.states.map((g) => g.name);
+        console.log("the data is :", g), t.value = g.data.states.map((f) => f.name);
       } catch (h) {
         console.error("Failed to fetch states:", h);
       }
     });
-    const s = A([
+    const s = T([
       { title: "Travel Module", value: "travel_module", description: "Enable features for managing hotels, cabs, and trips.", active: !0 },
       { title: "Advanced Accounting View", value: "advanced_accounting_view", description: "Show detailed accounting views and reports.", active: !0 },
       { title: "Integrate Inventory with Accounts", value: "integrate_inventory_with_accounts", description: "Automatically create accounting entries for inventory transactions.", active: !0 }
-    ]), u = A([
+    ]), u = T([
       { title: "Rate (%)", value: "rate", visible: !0 },
       { title: "CGST (%)", value: "cgst", visible: !0 },
       { title: "SGST (%)", value: "sgst", visible: !0 },
       { title: "IGST (%)", value: "igst", visible: !0 },
       { title: "Actions", value: "actions", visible: !0 }
-    ]), r = A([
+    ]), r = T([
       { rate: 18, cgst: 9, sgst: 9, igst: 18 },
       { rate: 12, cgst: 6, sgst: 6, igst: 12 },
       { rate: 5, cgst: 2.5, sgst: 2.5, igst: 5 },
       { rate: 28, cgst: 14, sgst: 14, igst: 28 },
       { rate: 0, cgst: 0, sgst: 0, igst: 0 },
       { rate: 3, cgst: 1.5, sgst: 1.5, igst: 3 }
-    ]), d = A(!1), y = A(null), b = () => {
+    ]), d = T(!1), y = T(null), b = () => {
       const h = parseFloat(y.value);
       if (!isNaN(h)) {
-        const _ = {
+        const g = {
           rate: h,
           cgst: h / 2,
           sgst: h / 2,
           igst: h
         };
-        r.value.push(_), y.value = null, d.value = !1;
+        r.value.push(g), y.value = null, d.value = !1;
       }
     }, m = {
       net30: `Payment is due within 30 days.
 Please include the invoice number on your payment.`,
       dueOnReceipt: "Payment is due immediately upon receipt of this invoice.",
       upfront50: "50% of the total amount is due upon signing the contract. The remaining 50% is due upon project completion."
-    }, f = A(m[l1]), x = (h) => m[h] || "", p = (h) => {
-      const _ = x(h), g = f.value.trim();
-      f.value = g ? `${g}
+    }, p = T(m[i1]), k = (h) => m[h] || "", _ = (h) => {
+      const g = k(h), f = p.value.trim();
+      p.value = f ? `${f}
 
-${_}` : _;
+${g}` : g;
     };
-    return (h, _) => (w(), re("div", jh, [
+    return (h, g) => (w(), re("div", Hh, [
       l(me, {
         title: "Settings",
         subtitle: "Manage your company settings and preferences.",
@@ -27635,42 +27665,42 @@ ${_}` : _;
                       v("div", null, [
                         l(eb, {
                           modelValue: a.value,
-                          "onUpdate:modelValue": _[0] || (_[0] = (g) => a.value = g),
+                          "onUpdate:modelValue": g[0] || (g[0] = (f) => a.value = f),
                           direction: "vertical",
                           class: "company_setting_tabs tabs_pill"
                         }, {
                           default: c(() => [
-                            l(Pa, { value: 0 }, {
-                              default: c(() => _[10] || (_[10] = [
-                                de("Company", -1)
+                            l(Aa, { value: 0 }, {
+                              default: c(() => g[10] || (g[10] = [
+                                ve("Company", -1)
                               ])),
                               _: 1,
                               __: [10]
                             }),
-                            l(Pa, { value: 1 }, {
-                              default: c(() => _[11] || (_[11] = [
-                                de("Software", -1)
+                            l(Aa, { value: 1 }, {
+                              default: c(() => g[11] || (g[11] = [
+                                ve("Software", -1)
                               ])),
                               _: 1,
                               __: [11]
                             }),
-                            l(Pa, { value: 2 }, {
-                              default: c(() => _[12] || (_[12] = [
-                                de("GST Type", -1)
+                            l(Aa, { value: 2 }, {
+                              default: c(() => g[12] || (g[12] = [
+                                ve("GST Type", -1)
                               ])),
                               _: 1,
                               __: [12]
                             }),
-                            l(Pa, { value: 3 }, {
-                              default: c(() => _[13] || (_[13] = [
-                                de("Payment Terms", -1)
+                            l(Aa, { value: 3 }, {
+                              default: c(() => g[13] || (g[13] = [
+                                ve("Payment Terms", -1)
                               ])),
                               _: 1,
                               __: [13]
                             }),
-                            l(Pa, { value: 4 }, {
-                              default: c(() => _[14] || (_[14] = [
-                                de("Integration", -1)
+                            l(Aa, { value: 4 }, {
+                              default: c(() => g[14] || (g[14] = [
+                                ve("Integration", -1)
                               ])),
                               _: 1,
                               __: [14]
@@ -27691,13 +27721,13 @@ ${_}` : _;
                     default: c(() => [
                       l(F(yn), {
                         modelValue: a.value,
-                        "onUpdate:modelValue": _[9] || (_[9] = (g) => a.value = g)
+                        "onUpdate:modelValue": g[9] || (g[9] = (f) => a.value = f)
                       }, {
                         default: c(() => [
                           l(F(Kt), { value: 0 }, {
                             default: c(() => [
-                              v("div", Hh, [
-                                _[16] || (_[16] = v("div", null, [
+                              v("div", Wh, [
+                                g[16] || (g[16] = v("div", null, [
                                   v("h3", { class: "company-setting-heading m-0" }, "Company Settings")
                                 ], -1)),
                                 v("div", null, [
@@ -27707,14 +27737,14 @@ ${_}` : _;
                                     "offset-y": "",
                                     "close-on-content-click": !1
                                   }, {
-                                    activator: c(({ props: g }) => [
-                                      l(Z, X(g, {
+                                    activator: c(({ props: f }) => [
+                                      l(Z, X(f, {
                                         variant: "text",
                                         size: "x-small",
                                         rounded: ""
                                       }), {
                                         default: c(() => [
-                                          (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
+                                          (w(), A(te(F(ne)("settings")), { style: { "font-size": "20px" } }))
                                         ]),
                                         _: 2
                                       }, 1040)
@@ -27722,23 +27752,23 @@ ${_}` : _;
                                     default: c(() => [
                                       l(me, { class: "account_vcard_menu account_vcard_border" }, {
                                         default: c(() => [
-                                          _[15] || (_[15] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
+                                          g[15] || (g[15] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                                           l(ke, { class: "my-1 mt-0" }),
-                                          v("div", Wh, [
-                                            (w(), re(ve, null, ze(i, (g, S) => v("div", {
-                                              key: S,
-                                              onClick: (I) => o(S)
+                                          v("div", qh, [
+                                            (w(), re(de, null, Re(i, (f, x) => v("div", {
+                                              key: x,
+                                              onClick: (V) => o(x)
                                             }, [
-                                              v("div", Yh, [
-                                                F(n)[S] ? (w(), D(ae(F(le)("check")), {
+                                              v("div", Jh, [
+                                                F(n)[x] ? (w(), A(te(F(ne)("check")), {
                                                   key: 0,
                                                   style: { "font-size": "16px" }
-                                                })) : q("", !0),
+                                                })) : W("", !0),
                                                 v("span", {
-                                                  class: ye(F(n)[S] ? "" : "field_list_dynamic_ml")
-                                                }, ue(g), 3)
+                                                  class: ye(F(n)[x] ? "" : "field_list_dynamic_ml")
+                                                }, ue(f), 3)
                                               ])
-                                            ], 8, qh)), 64))
+                                            ], 8, Yh)), 64))
                                           ])
                                         ]),
                                         _: 1,
@@ -27749,17 +27779,17 @@ ${_}` : _;
                                   })
                                 ])
                               ]),
-                              v("div", Jh, [
+                              v("div", Kh, [
                                 l(xe, null, {
                                   default: c(() => [
-                                    F(n).gstin ? (w(), D(B, {
+                                    F(n).gstin ? (w(), A(B, {
                                       key: 0,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[17] || (_[17] = v("label", { class: "account_label mb-1" }, "GSTIN", -1)),
+                                        g[17] || (g[17] = v("label", { class: "account_label mb-1" }, "GSTIN", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27769,15 +27799,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [17]
-                                    })) : q("", !0),
-                                    F(n).legalName ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).legalName ? (w(), A(B, {
                                       key: 1,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[18] || (_[18] = v("label", { class: "account_label mb-1" }, "Legal Name", -1)),
+                                        g[18] || (g[18] = v("label", { class: "account_label mb-1" }, "Legal Name", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27787,15 +27817,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [18]
-                                    })) : q("", !0),
-                                    F(n).tradingName ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).tradingName ? (w(), A(B, {
                                       key: 2,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[19] || (_[19] = v("label", { class: "account_label mb-1" }, "Trading Name", -1)),
+                                        g[19] || (g[19] = v("label", { class: "account_label mb-1" }, "Trading Name", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27805,15 +27835,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [19]
-                                    })) : q("", !0),
-                                    F(n).businessType ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).businessType ? (w(), A(B, {
                                       key: 3,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[20] || (_[20] = v("label", { class: "account_label mb-1" }, "Business Type", -1)),
+                                        g[20] || (g[20] = v("label", { class: "account_label mb-1" }, "Business Type", -1)),
                                         l(lt, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27830,15 +27860,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [20]
-                                    })) : q("", !0),
-                                    F(n).state ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).state ? (w(), A(B, {
                                       key: 4,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[21] || (_[21] = v("label", { class: "account_label mb-1" }, "State", -1)),
+                                        g[21] || (g[21] = v("label", { class: "account_label mb-1" }, "State", -1)),
                                         l(lt, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27848,15 +27878,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [21]
-                                    })) : q("", !0),
-                                    F(n).address1 ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).address1 ? (w(), A(B, {
                                       key: 5,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[22] || (_[22] = v("label", { class: "account_label mb-1" }, "Address Line 1", -1)),
+                                        g[22] || (g[22] = v("label", { class: "account_label mb-1" }, "Address Line 1", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27866,15 +27896,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [22]
-                                    })) : q("", !0),
-                                    F(n).address2 ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).address2 ? (w(), A(B, {
                                       key: 6,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[23] || (_[23] = v("label", { class: "account_label mb-1" }, "Address Line 2", -1)),
+                                        g[23] || (g[23] = v("label", { class: "account_label mb-1" }, "Address Line 2", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27884,15 +27914,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [23]
-                                    })) : q("", !0),
-                                    F(n).city ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).city ? (w(), A(B, {
                                       key: 7,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[24] || (_[24] = v("label", { class: "account_label mb-1" }, "City", -1)),
+                                        g[24] || (g[24] = v("label", { class: "account_label mb-1" }, "City", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27902,15 +27932,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [24]
-                                    })) : q("", !0),
-                                    F(n).pincode ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).pincode ? (w(), A(B, {
                                       key: 8,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[25] || (_[25] = v("label", { class: "account_label mb-1" }, "Pincode", -1)),
+                                        g[25] || (g[25] = v("label", { class: "account_label mb-1" }, "Pincode", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27920,15 +27950,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [25]
-                                    })) : q("", !0),
-                                    F(n).contactEmail ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).contactEmail ? (w(), A(B, {
                                       key: 9,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[26] || (_[26] = v("label", { class: "account_label mb-1" }, "Contact Email", -1)),
+                                        g[26] || (g[26] = v("label", { class: "account_label mb-1" }, "Contact Email", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27938,15 +27968,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [26]
-                                    })) : q("", !0),
-                                    F(n).phone ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).phone ? (w(), A(B, {
                                       key: 10,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[27] || (_[27] = v("label", { class: "account_label mb-1" }, "Phone Number", -1)),
+                                        g[27] || (g[27] = v("label", { class: "account_label mb-1" }, "Phone Number", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27956,15 +27986,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [27]
-                                    })) : q("", !0),
-                                    F(n).website ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).website ? (w(), A(B, {
                                       key: 11,
                                       cols: "12",
                                       lg: "12",
                                       md: "12"
                                     }, {
                                       default: c(() => [
-                                        _[28] || (_[28] = v("label", { class: "account_label mb-1" }, "Website", -1)),
+                                        g[28] || (g[28] = v("label", { class: "account_label mb-1" }, "Website", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27974,15 +28004,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [28]
-                                    })) : q("", !0),
-                                    F(n).pan ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).pan ? (w(), A(B, {
                                       key: 12,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[29] || (_[29] = v("label", { class: "account_label mb-1" }, "PAN", -1)),
+                                        g[29] || (g[29] = v("label", { class: "account_label mb-1" }, "PAN", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -27992,15 +28022,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [29]
-                                    })) : q("", !0),
-                                    F(n).fyStart ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).fyStart ? (w(), A(B, {
                                       key: 13,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[30] || (_[30] = v("label", { class: "account_label mb-1" }, "Financial Year Start", -1)),
+                                        g[30] || (g[30] = v("label", { class: "account_label mb-1" }, "Financial Year Start", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -28010,15 +28040,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [30]
-                                    })) : q("", !0),
-                                    F(n).fyEnd ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).fyEnd ? (w(), A(B, {
                                       key: 14,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[31] || (_[31] = v("label", { class: "account_label mb-1" }, "Financial Year End", -1)),
+                                        g[31] || (g[31] = v("label", { class: "account_label mb-1" }, "Financial Year End", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -28028,15 +28058,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [31]
-                                    })) : q("", !0),
-                                    F(n).baseCurrency ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).baseCurrency ? (w(), A(B, {
                                       key: 15,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[32] || (_[32] = v("label", { class: "account_label mb-1" }, "Base Currency", -1)),
+                                        g[32] || (g[32] = v("label", { class: "account_label mb-1" }, "Base Currency", -1)),
                                         l(lt, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -28051,15 +28081,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [32]
-                                    })) : q("", !0),
-                                    F(n).decimalPlaces ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).decimalPlaces ? (w(), A(B, {
                                       key: 16,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[33] || (_[33] = v("label", { class: "account_label mb-1" }, "Decimal Places", -1)),
+                                        g[33] || (g[33] = v("label", { class: "account_label mb-1" }, "Decimal Places", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -28070,15 +28100,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [33]
-                                    })) : q("", !0),
-                                    F(n).thousandSeparator ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).thousandSeparator ? (w(), A(B, {
                                       key: 17,
                                       cols: "12",
                                       lg: "6",
                                       md: "6"
                                     }, {
                                       default: c(() => [
-                                        _[34] || (_[34] = v("label", { class: "account_label mb-1" }, "Thousand Separator", -1)),
+                                        g[34] || (g[34] = v("label", { class: "account_label mb-1" }, "Thousand Separator", -1)),
                                         l(ee, {
                                           class: "accouting_field accouting_active_field",
                                           variant: "outlined",
@@ -28087,15 +28117,15 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [34]
-                                    })) : q("", !0),
-                                    F(n).companyLogo ? (w(), D(B, {
+                                    })) : W("", !0),
+                                    F(n).companyLogo ? (w(), A(B, {
                                       key: 18,
                                       cols: "12",
                                       lg: "12",
                                       md: "12"
                                     }, {
                                       default: c(() => [
-                                        _[35] || (_[35] = v("label", { class: "account_label mb-1" }, "Company Logo", -1)),
+                                        g[35] || (g[35] = v("label", { class: "account_label mb-1" }, "Company Logo", -1)),
                                         l(Ep, {
                                           class: "accouting_field align-center accouting_active_field",
                                           variant: "outlined",
@@ -28112,7 +28142,7 @@ ${_}` : _;
                                               disabled: ""
                                             }, {
                                               default: c(() => [
-                                                (w(), D(ae(F(le)("upload")), { style: { "font-size": "32px" } }))
+                                                (w(), A(te(F(ne)("upload")), { style: { "font-size": "32px" } }))
                                               ]),
                                               _: 1
                                             })
@@ -28122,7 +28152,7 @@ ${_}` : _;
                                       ]),
                                       _: 1,
                                       __: [35]
-                                    })) : q("", !0),
+                                    })) : W("", !0),
                                     l(B, {
                                       cols: "12",
                                       class: "d-flex justify-end"
@@ -28136,10 +28166,10 @@ ${_}` : _;
                                           color: "primary"
                                         }, {
                                           prepend: c(() => [
-                                            (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
+                                            (w(), A(te(F(ne)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
                                           ]),
                                           default: c(() => [
-                                            _[36] || (_[36] = de(" Save Changes ", -1))
+                                            g[36] || (g[36] = ve(" Save Changes ", -1))
                                           ]),
                                           _: 1,
                                           __: [36]
@@ -28156,10 +28186,10 @@ ${_}` : _;
                           }),
                           l(F(Kt), { value: 1 }, {
                             default: c(() => [
-                              _[38] || (_[38] = v("div", null, [
+                              g[38] || (g[38] = v("div", null, [
                                 v("h3", { class: "company-setting-heading m-0" }, "Software Settings")
                               ], -1)),
-                              v("div", Kh, [
+                              v("div", Xh, [
                                 l(me, {
                                   class: "account_vcard_border shadow-none pa-2",
                                   variant: "text",
@@ -28169,17 +28199,17 @@ ${_}` : _;
                                   default: c(() => [
                                     l(Ae, null, {
                                       default: c(() => [
-                                        (w(!0), re(ve, null, ze(s.value, (g) => (w(), D(me, {
-                                          key: g.title,
+                                        (w(!0), re(de, null, Re(s.value, (f) => (w(), A(me, {
+                                          key: f.title,
                                           class: "account_vcard_border account_module_card mt-4 shadow-none",
-                                          title: g.title,
-                                          subtitle: g.description
+                                          title: f.title,
+                                          subtitle: f.description
                                         }, {
                                           append: c(() => [
                                             l(nt, {
                                               density: "compact",
-                                              modelValue: g.active,
-                                              "onUpdate:modelValue": (S) => g.active = S,
+                                              modelValue: f.active,
+                                              "onUpdate:modelValue": (x) => f.active = x,
                                               inset: "",
                                               class: "account_swtich_btn",
                                               color: "primary",
@@ -28194,7 +28224,7 @@ ${_}` : _;
                                   ]),
                                   _: 1
                                 }),
-                                v("div", Xh, [
+                                v("div", Qh, [
                                   l(Z, {
                                     class: "account_v_btn_primary save_btn_height",
                                     variant: "outlined",
@@ -28203,10 +28233,10 @@ ${_}` : _;
                                     color: "primary"
                                   }, {
                                     prepend: c(() => [
-                                      (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
+                                      (w(), A(te(F(ne)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
                                     ]),
                                     default: c(() => [
-                                      _[37] || (_[37] = de(" Save Software Settings ", -1))
+                                      g[37] || (g[37] = ve(" Save Software Settings ", -1))
                                     ]),
                                     _: 1,
                                     __: [37]
@@ -28219,19 +28249,19 @@ ${_}` : _;
                           }),
                           l(F(Kt), { value: 2 }, {
                             default: c(() => [
-                              v("div", Qh, [
-                                _[40] || (_[40] = v("h3", { class: "company-setting-heading m-0" }, "GST Settings", -1)),
+                              v("div", Zh, [
+                                g[40] || (g[40] = v("h3", { class: "company-setting-heading m-0" }, "GST Settings", -1)),
                                 l(Z, {
                                   class: "account_v_btn_primary save_btn_height",
                                   variant: "outlined",
                                   color: "primary",
-                                  onClick: _[1] || (_[1] = (g) => d.value = !0)
+                                  onClick: g[1] || (g[1] = (f) => d.value = !0)
                                 }, {
                                   prepend: c(() => [
-                                    (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "22px", "margin-right": "6px" } }))
+                                    (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "22px", "margin-right": "6px" } }))
                                   ]),
                                   default: c(() => [
-                                    _[39] || (_[39] = de(" Add New GST Rate ", -1))
+                                    g[39] || (g[39] = ve(" Add New GST Rate ", -1))
                                   ]),
                                   _: 1,
                                   __: [39]
@@ -28244,14 +28274,14 @@ ${_}` : _;
                                 subtitle: "Manage the GST rates used across your invoices."
                               }, {
                                 default: c(() => [
-                                  v("div", Zh, [
-                                    v("div", e1, [
+                                  v("div", e1, [
+                                    v("div", t1, [
                                       l(zt, {
                                         headers: u.value,
                                         items: r.value,
                                         class: "account_dynamic_table shadow-none"
                                       }, {
-                                        "item.actions": c(({ item: g }) => [
+                                        "item.actions": c(({ item: f }) => [
                                           l(Z, {
                                             variant: "text",
                                             size: "x-small",
@@ -28259,7 +28289,7 @@ ${_}` : _;
                                             class: "trash_error_color"
                                           }, {
                                             default: c(() => [
-                                              (w(), D(ae(F(le)("trash")), { style: { "font-size": "16px" } }))
+                                              (w(), A(te(F(ne)("trash")), { style: { "font-size": "16px" } }))
                                             ]),
                                             _: 1
                                           })
@@ -28271,32 +28301,32 @@ ${_}` : _;
                                   l(Vt, {
                                     class: "account_add_dialog",
                                     modelValue: d.value,
-                                    "onUpdate:modelValue": _[4] || (_[4] = (g) => d.value = g),
+                                    "onUpdate:modelValue": g[4] || (g[4] = (f) => d.value = f),
                                     "max-width": "400"
                                   }, {
                                     default: c(() => [
                                       l(me, { class: "pa-2" }, {
                                         default: c(() => [
                                           l(na, null, {
-                                            default: c(() => _[41] || (_[41] = [
-                                              de("Add New GST Rate", -1)
+                                            default: c(() => g[41] || (g[41] = [
+                                              ve("Add New GST Rate", -1)
                                             ])),
                                             _: 1,
                                             __: [41]
                                           }),
                                           l(ma, { class: "mb-1" }, {
-                                            default: c(() => _[42] || (_[42] = [
-                                              de("Enter the new GST percentage you want to add.", -1)
+                                            default: c(() => g[42] || (g[42] = [
+                                              ve("Enter the new GST percentage you want to add.", -1)
                                             ])),
                                             _: 1,
                                             __: [42]
                                           }),
                                           l(Ae, null, {
                                             default: c(() => [
-                                              _[43] || (_[43] = v("label", { class: "account_label mb-1" }, "Rate", -1)),
+                                              g[43] || (g[43] = v("label", { class: "account_label mb-1" }, "Rate", -1)),
                                               l(ee, {
                                                 modelValue: y.value,
-                                                "onUpdate:modelValue": _[2] || (_[2] = (g) => y.value = g),
+                                                "onUpdate:modelValue": g[2] || (g[2] = (f) => y.value = f),
                                                 type: "number",
                                                 class: "accouting_field accouting_active_field",
                                                 variant: "outlined",
@@ -28312,10 +28342,10 @@ ${_}` : _;
                                               l(Z, {
                                                 class: "account_v_btn_outlined",
                                                 variant: "outlined",
-                                                onClick: _[3] || (_[3] = (g) => d.value = !1)
+                                                onClick: g[3] || (g[3] = (f) => d.value = !1)
                                               }, {
-                                                default: c(() => _[44] || (_[44] = [
-                                                  de("Cancel", -1)
+                                                default: c(() => g[44] || (g[44] = [
+                                                  ve("Cancel", -1)
                                                 ])),
                                                 _: 1,
                                                 __: [44]
@@ -28327,10 +28357,10 @@ ${_}` : _;
                                                 onClick: b
                                               }, {
                                                 prepend: c(() => [
-                                                  (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                                  (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                                                 ]),
                                                 default: c(() => [
-                                                  _[45] || (_[45] = de(" Add Rate ", -1))
+                                                  g[45] || (g[45] = ve(" Add Rate ", -1))
                                                 ]),
                                                 _: 1,
                                                 __: [45]
@@ -28352,7 +28382,7 @@ ${_}` : _;
                           }),
                           l(F(Kt), { value: 3 }, {
                             default: c(() => [
-                              _[52] || (_[52] = v("div", null, [
+                              g[52] || (g[52] = v("div", null, [
                                 v("h3", { class: "company-setting-heading m-0" }, "Payment Terms")
                               ], -1)),
                               l(me, {
@@ -28364,25 +28394,25 @@ ${_}` : _;
                                 default: c(() => [
                                   l(Ae, { class: "mt-2" }, {
                                     default: c(() => [
-                                      _[50] || (_[50] = v("label", { class: "account_label mb-1" }, "Terms & Conditions", -1)),
-                                      l(Nt, {
-                                        modelValue: f.value,
-                                        "onUpdate:modelValue": _[5] || (_[5] = (g) => f.value = g),
+                                      g[50] || (g[50] = v("label", { class: "account_label mb-1" }, "Terms & Conditions", -1)),
+                                      l(Dt, {
+                                        modelValue: p.value,
+                                        "onUpdate:modelValue": g[5] || (g[5] = (f) => p.value = f),
                                         class: "accounting_v_textarea",
                                         variant: "outlined"
                                       }, null, 8, ["modelValue"]),
-                                      v("div", t1, [
-                                        _[49] || (_[49] = v("label", { class: "account_label mb-1" }, "Insert Template", -1)),
-                                        v("div", a1, [
+                                      v("div", a1, [
+                                        g[49] || (g[49] = v("label", { class: "account_label mb-1" }, "Insert Template", -1)),
+                                        v("div", n1, [
                                           l(Z, {
                                             class: "account_v_btn_outlined",
                                             variant: "outlined",
                                             size: "default",
                                             rounded: "2",
-                                            onClick: _[6] || (_[6] = (g) => p("net30"))
+                                            onClick: g[6] || (g[6] = (f) => _("net30"))
                                           }, {
-                                            default: c(() => _[46] || (_[46] = [
-                                              de(" Net 30 ", -1)
+                                            default: c(() => g[46] || (g[46] = [
+                                              ve(" Net 30 ", -1)
                                             ])),
                                             _: 1,
                                             __: [46]
@@ -28392,10 +28422,10 @@ ${_}` : _;
                                             variant: "outlined",
                                             size: "default",
                                             rounded: "2",
-                                            onClick: _[7] || (_[7] = (g) => p("dueOnReceipt"))
+                                            onClick: g[7] || (g[7] = (f) => _("dueOnReceipt"))
                                           }, {
-                                            default: c(() => _[47] || (_[47] = [
-                                              de(" Due on Receipt ", -1)
+                                            default: c(() => g[47] || (g[47] = [
+                                              ve(" Due on Receipt ", -1)
                                             ])),
                                             _: 1,
                                             __: [47]
@@ -28405,10 +28435,10 @@ ${_}` : _;
                                             variant: "outlined",
                                             size: "default",
                                             rounded: "2",
-                                            onClick: _[8] || (_[8] = (g) => p("upfront50"))
+                                            onClick: g[8] || (g[8] = (f) => _("upfront50"))
                                           }, {
-                                            default: c(() => _[48] || (_[48] = [
-                                              de(" 50% Upfront ", -1)
+                                            default: c(() => g[48] || (g[48] = [
+                                              ve(" 50% Upfront ", -1)
                                             ])),
                                             _: 1,
                                             __: [48]
@@ -28422,7 +28452,7 @@ ${_}` : _;
                                 ]),
                                 _: 1
                               }),
-                              v("div", n1, [
+                              v("div", l1, [
                                 l(Z, {
                                   class: "account_v_btn_primary save_btn_height",
                                   variant: "outlined",
@@ -28431,10 +28461,10 @@ ${_}` : _;
                                   color: "primary"
                                 }, {
                                   prepend: c(() => [
-                                    (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
+                                    (w(), A(te(F(ne)("device-floppy")), { style: { "font-size": "22px", "margin-right": "6px" } }))
                                   ]),
                                   default: c(() => [
-                                    _[51] || (_[51] = de(" Save Terms ", -1))
+                                    g[51] || (g[51] = ve(" Save Terms ", -1))
                                   ]),
                                   _: 1,
                                   __: [51]
@@ -28445,8 +28475,8 @@ ${_}` : _;
                             __: [52]
                           }),
                           l(F(Kt), { value: 4 }, {
-                            default: c(() => _[53] || (_[53] = [
-                              de("Integration Content", -1)
+                            default: c(() => g[53] || (g[53] = [
+                              ve("Integration Content", -1)
                             ])),
                             _: 1,
                             __: [53]
@@ -28468,7 +28498,7 @@ ${_}` : _;
       })
     ]));
   }
-}, o1 = /* @__PURE__ */ Et(i1, [["__scopeId", "data-v-905ffa59"]]), s1 = { class: "d-flex align-center justify-space-between mb-4" }, u1 = { class: "pa-2" }, r1 = { class: "custom-header-cell text-center" }, c1 = { class: "header-col-flex" }, d1 = { class: "header-icon-row mt-2" }, v1 = { class: "custom-header-cell text-center" }, f1 = { class: "header-col-flex" }, m1 = { class: "header-icon-row mt-2" }, g1 = { class: "custom-header-cell text-center" }, y1 = { class: "header-col-flex" }, p1 = { class: "header-icon-row mt-2" }, b1 = { class: "text-center" }, _1 = { class: "text-center" }, h1 = { class: "text-center" }, x1 = { class: "mb-4" }, k1 = { class: "d-flex" }, S1 = {
+}, s1 = /* @__PURE__ */ Et(o1, [["__scopeId", "data-v-905ffa59"]]), u1 = { class: "d-flex align-center justify-space-between mb-4" }, r1 = { class: "pa-2" }, c1 = { class: "custom-header-cell text-center" }, d1 = { class: "header-col-flex" }, v1 = { class: "header-icon-row mt-2" }, f1 = { class: "custom-header-cell text-center" }, m1 = { class: "header-col-flex" }, g1 = { class: "header-icon-row mt-2" }, y1 = { class: "custom-header-cell text-center" }, p1 = { class: "header-col-flex" }, b1 = { class: "header-icon-row mt-2" }, _1 = { class: "text-center" }, h1 = { class: "text-center" }, x1 = { class: "text-center" }, k1 = { class: "mb-4" }, S1 = { class: "d-flex" }, w1 = {
   __name: "AccountUserRolePermission",
   setup(e) {
     const a = [
@@ -28476,7 +28506,7 @@ ${_}` : _;
       { title: "Admin", value: "admin" },
       { title: "Accountant", value: "accountant" },
       { title: "Auditor", value: "auditor" }
-    ], t = A([
+    ], t = T([
       { feature: "Dashboard Access", admin: !0, accountant: !0, auditor: !0 },
       { feature: "Customer Management", admin: !0, accountant: !0, auditor: !1 },
       { feature: "Sales Invoices", admin: !0, accountant: !0, auditor: !1 },
@@ -28486,29 +28516,29 @@ ${_}` : _;
       { feature: "Export Data", admin: !0, accountant: !0, auditor: !0 },
       { feature: "User Management", admin: !0, accountant: !1, auditor: !1 },
       { feature: "Company Settings", admin: !0, accountant: !1, auditor: !1 }
-    ]), n = A(!1), i = A(""), o = [
+    ]), n = T(!1), i = T(""), o = [
       { label: "Dashboard", value: "dashboard" },
       { label: "Reporting", value: "reporting" },
       { label: "Sales", value: "sales" },
       { label: "Purchases", value: "purchases" },
       { label: "Accounting", value: "accounting" },
       { label: "Administration", value: "administration" }
-    ], s = A("dashboard"), u = {
+    ], s = T("dashboard"), u = {
       dashboard: [{ label: "Dashboard Access", value: "dashboard_access" }],
       reporting: [{ label: "View Reports", value: "view_reports" }, { label: "Export Data", value: "export_data" }],
       sales: [{ label: "Sales Invoices", value: "sales_invoices" }, { label: "Customer Management", value: "Customer Management" }],
       purchases: [{ label: "Purchase Bills", value: "purchase_bills" }],
       accounting: [{ label: "Journal Entries", value: "journal_entries" }],
       administration: [{ label: "User Management", value: "user_management" }, { label: "Company Settings", value: "company_settings" }]
-    }, r = A([]);
+    }, r = T([]);
     function d() {
       n.value = !0, i.value = "", s.value = "dashboard", r.value = [];
     }
     function y() {
       n.value = !1;
     }
-    return (b, m) => (w(), re(ve, null, [
-      v("div", s1, [
+    return (b, m) => (w(), re(de, null, [
+      v("div", u1, [
         m[4] || (m[4] = v("h1", { class: "user-title" }, "User Role and Permission", -1)),
         l(Z, {
           class: "account_v_btn_primary",
@@ -28516,7 +28546,7 @@ ${_}` : _;
           onClick: d
         }, {
           default: c(() => m[3] || (m[3] = [
-            de("Add New Role", -1)
+            ve("Add New Role", -1)
           ])),
           _: 1,
           __: [3]
@@ -28528,7 +28558,7 @@ ${_}` : _;
         class: "pa-2 mb-6 account_ui_vcard account_vcard_border"
       }, {
         default: c(() => [
-          v("div", u1, [
+          v("div", r1, [
             l(L0, {
               headers: a,
               items: t.value,
@@ -28538,45 +28568,45 @@ ${_}` : _;
               headers: c(() => [
                 v("tr", null, [
                   m[8] || (m[8] = v("th", { class: "custom-header-cell" }, "Feature / Permission", -1)),
-                  v("th", r1, [
-                    v("div", c1, [
+                  v("th", c1, [
+                    v("div", d1, [
                       m[5] || (m[5] = v("span", { class: "role-label" }, "Admin", -1)),
-                      v("div", d1, [
-                        (w(), D(ae(F(le)("edit")), {
+                      v("div", v1, [
+                        (w(), A(te(F(ne)("edit")), {
                           size: "20",
                           class: "header-action-icon"
                         })),
-                        (w(), D(ae(F(le)("trash")), {
+                        (w(), A(te(F(ne)("trash")), {
                           size: "20",
                           class: "header-action-icon ml-1"
                         }))
                       ])
                     ])
                   ]),
-                  v("th", v1, [
-                    v("div", f1, [
+                  v("th", f1, [
+                    v("div", m1, [
                       m[6] || (m[6] = v("span", { class: "role-label" }, "Accountant", -1)),
-                      v("div", m1, [
-                        (w(), D(ae(F(le)("edit")), {
+                      v("div", g1, [
+                        (w(), A(te(F(ne)("edit")), {
                           size: "20",
                           class: "header-action-icon"
                         })),
-                        (w(), D(ae(F(le)("trash")), {
+                        (w(), A(te(F(ne)("trash")), {
                           size: "20",
                           class: "header-action-icon ml-1"
                         }))
                       ])
                     ])
                   ]),
-                  v("th", g1, [
-                    v("div", y1, [
+                  v("th", y1, [
+                    v("div", p1, [
                       m[7] || (m[7] = v("span", { class: "role-label" }, "Auditor", -1)),
-                      v("div", p1, [
-                        (w(), D(ae(F(le)("edit")), {
+                      v("div", b1, [
+                        (w(), A(te(F(ne)("edit")), {
                           size: "20",
                           class: "header-action-icon"
                         })),
-                        (w(), D(ae(F(le)("trash")), {
+                        (w(), A(te(F(ne)("trash")), {
                           size: "20",
                           class: "header-action-icon ml-1"
                         }))
@@ -28585,22 +28615,22 @@ ${_}` : _;
                   ])
                 ])
               ]),
-              item: c(({ item: f }) => [
+              item: c(({ item: p }) => [
                 v("tr", null, [
-                  v("td", null, ue(f.feature), 1),
-                  v("td", b1, [
-                    (w(), D(ae(F(le)(f.admin ? "check" : "x")), {
-                      style: la(`font-size: 22px; color: ${f.admin ? "#16a34a" : "#ef4444"};`)
-                    }, null, 8, ["style"]))
-                  ]),
+                  v("td", null, ue(p.feature), 1),
                   v("td", _1, [
-                    (w(), D(ae(F(le)(f.accountant ? "check" : "x")), {
-                      style: la(`font-size: 22px; color: ${f.accountant ? "#16a34a" : "#ef4444"};`)
+                    (w(), A(te(F(ne)(p.admin ? "check" : "x")), {
+                      style: la(`font-size: 22px; color: ${p.admin ? "#16a34a" : "#ef4444"};`)
                     }, null, 8, ["style"]))
                   ]),
                   v("td", h1, [
-                    (w(), D(ae(F(le)(f.auditor ? "check" : "x")), {
-                      style: la(`font-size: 22px; color: ${f.auditor ? "#16a34a" : "#ef4444"};`)
+                    (w(), A(te(F(ne)(p.accountant ? "check" : "x")), {
+                      style: la(`font-size: 22px; color: ${p.accountant ? "#16a34a" : "#ef4444"};`)
+                    }, null, 8, ["style"]))
+                  ]),
+                  v("td", x1, [
+                    (w(), A(te(F(ne)(p.auditor ? "check" : "x")), {
+                      style: la(`font-size: 22px; color: ${p.auditor ? "#16a34a" : "#ef4444"};`)
                     }, null, 8, ["style"]))
                   ])
                 ])
@@ -28613,7 +28643,7 @@ ${_}` : _;
       }),
       l(Vt, {
         modelValue: n.value,
-        "onUpdate:modelValue": m[2] || (m[2] = (f) => n.value = f),
+        "onUpdate:modelValue": m[2] || (m[2] = (p) => n.value = p),
         "max-width": "800"
       }, {
         default: c(() => [
@@ -28625,7 +28655,7 @@ ${_}` : _;
             default: c(() => [
               l(Ae, null, {
                 default: c(() => [
-                  v("div", x1, [
+                  v("div", k1, [
                     m[9] || (m[9] = v("label", { class: "account_label mb-2" }, "Role Name", -1)),
                     l(ee, {
                       class: "accouting_field accouting_active_field",
@@ -28639,40 +28669,40 @@ ${_}` : _;
                     m[11] || (m[11] = v("div", { class: "text-caption mb-2" }, "Select the permissions this role should have.", -1)),
                     l(Tg, {
                       modelValue: s.value,
-                      "onUpdate:modelValue": m[0] || (m[0] = (f) => s.value = f),
+                      "onUpdate:modelValue": m[0] || (m[0] = (p) => s.value = p),
                       class: "mb-3 toggle-btn-section",
                       mandatory: ""
                     }, {
                       default: c(() => [
-                        (w(), re(ve, null, ze(o, (f) => l(Z, {
-                          key: f.value,
-                          value: f.value,
+                        (w(), re(de, null, Re(o, (p) => l(Z, {
+                          key: p.value,
+                          value: p.value,
                           size: "small",
-                          class: ye([s.value === f.value ? "account_v_btn_primary" : "account_v_btn_ghost", "mx-1 rounded-sm"]),
+                          class: ye([s.value === p.value ? "account_v_btn_primary" : "account_v_btn_ghost", "mx-1 rounded-sm"]),
                           variant: "elevated"
                         }, {
                           default: c(() => [
-                            de(ue(f.label), 1)
+                            ve(ue(p.label), 1)
                           ]),
                           _: 2
                         }, 1032, ["value", "class"])), 64))
                       ]),
                       _: 1
                     }, 8, ["modelValue"]),
-                    l(_a, { class: "pa-0 border rounded-lg" }, {
+                    l(ha, { class: "pa-0 border rounded-lg" }, {
                       default: c(() => [
-                        v("div", k1, [
-                          (w(!0), re(ve, null, ze(u[s.value], (f) => (w(), D(xt, {
-                            key: f.value,
+                        v("div", S1, [
+                          (w(!0), re(de, null, Re(u[s.value], (p) => (w(), A(xt, {
+                            key: p.value,
                             class: "pa-0 me-3 ms-2"
                           }, {
                             default: c(() => [
-                              l(Dt, {
+                              l(Nt, {
                                 class: "account_v_checkbox",
                                 modelValue: r.value,
-                                "onUpdate:modelValue": m[1] || (m[1] = (x) => r.value = x),
-                                label: f.label,
-                                value: f.value,
+                                "onUpdate:modelValue": m[1] || (m[1] = (k) => r.value = k),
+                                label: p.label,
+                                value: p.value,
                                 "hide-details": "",
                                 density: "compact"
                               }, null, 8, ["modelValue", "label", "value"])
@@ -28694,7 +28724,7 @@ ${_}` : _;
                     onClick: y
                   }, {
                     default: c(() => m[12] || (m[12] = [
-                      de("Cancel", -1)
+                      ve("Cancel", -1)
                     ])),
                     _: 1,
                     __: [12]
@@ -28703,12 +28733,12 @@ ${_}` : _;
                     default: c(() => [
                       l($e, { size: "15" }, {
                         default: c(() => m[13] || (m[13] = [
-                          de("mdi-content-save-settings-outline", -1)
+                          ve("mdi-content-save-settings-outline", -1)
                         ])),
                         _: 1,
                         __: [13]
                       }),
-                      m[14] || (m[14] = de(" Save ", -1))
+                      m[14] || (m[14] = ve(" Save ", -1))
                     ]),
                     _: 1,
                     __: [14]
@@ -28724,123 +28754,148 @@ ${_}` : _;
       }, 8, ["modelValue"])
     ], 64));
   }
-}, w1 = /* @__PURE__ */ Et(S1, [["__scopeId", "data-v-d502ab6d"]]), C1 = { class: "account_vendors_list" }, V1 = { class: "account_ui_vcard" }, I1 = { class: "d-flex align-center gap-2" }, P1 = { class: "account_vcard_menu_items py-1" }, A1 = ["onClick"], T1 = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, N1 = {
+}, C1 = /* @__PURE__ */ Et(w1, [["__scopeId", "data-v-d502ab6d"]]), V1 = { class: "account_vendors_list" }, I1 = { class: "account_ui_vcard" }, P1 = { class: "d-flex align-center gap-2" }, A1 = { class: "account_vcard_menu_items py-1" }, T1 = ["onClick"], D1 = { class: "font-weight-bold" }, N1 = ["onClick"], $1 = {
   __name: "AccountVendorsList",
   setup(e) {
-    const a = A([
-      { label: "First Name", key: "firstName", visible: !0 },
-      { label: "Last Name", key: "lastName", visible: !0 },
-      { label: "Company Name", key: "companyName", visible: !0 },
-      { label: "Email Address", key: "email", visible: !0 },
-      { label: "Phone Number", key: "phone", visible: !0 },
-      { label: "Street Address", key: "streetAddress", visible: !0 },
-      { label: "City", key: "city", visible: !0 },
-      { label: "State", key: "state", visible: !0 },
-      { label: "ZIP Code", key: "zipCode", visible: !0 },
-      { label: "GSTIN (Optional)", key: "gstin", visible: !0 }
-    ]), t = (m) => {
-      var f;
-      return (f = a.value.find((x) => x.key === m)) == null ? void 0 : f.visible;
-    }, n = A([
+    const a = T([
+      { section: "Basic Information", label: "First Name", key: "firstName", visible: !0 },
+      { section: "Basic Information", label: "Last Name", key: "lastName", visible: !0 },
+      { section: "Basic Information", label: "Company Name", key: "companyName", visible: !0 },
+      { section: "Contact Details", label: "Email Address", key: "email", visible: !0 },
+      { section: "Contact Details", label: "Phone Number", key: "phone", visible: !0 },
+      { section: "Address & Tax", label: "Street Address", key: "streetAddress", visible: !0 },
+      { section: "Address & Tax", label: "City", key: "city", visible: !0 },
+      { section: "Address & Tax", label: "State", key: "state", visible: !0 },
+      { section: "Address & Tax", label: "ZIP Code", key: "zipCode", visible: !0 },
+      { section: "Address & Tax", label: "GSTIN (Optional)", key: "gstin", visible: !0 }
+    ]), t = S(() => {
+      const h = {};
+      return a.value.forEach((g) => {
+        h[g.section] || (h[g.section] = []), h[g.section].push(g);
+      }), h;
+    }), n = (h) => t.value[h].every((f) => f.visible), i = (h) => {
+      const g = t.value[h], f = g.every((x) => x.visible);
+      g.forEach((x) => {
+        x.visible = !f;
+      });
+    }, o = (h) => a.value.some((g) => g.section === h && g.visible), s = (h) => {
+      var g;
+      return (g = a.value.find((f) => f.key === h)) == null ? void 0 : g.visible;
+    }, u = T([
       { title: "Vendor Name", align: "start", sortable: !1, value: "vendorName", visible: !0 },
       { title: "Vendor Type", value: "vendorType", visible: !0 },
       { title: "Total Purchases", value: "totalPurchases", visible: !0 },
       { title: "Last Purchase Date", value: "lastPurchaseDate", visible: !0 },
       { title: "Status", value: "status", visible: !0 },
       { title: "Actions", value: "actions", visible: !0 }
-    ]), i = A(Array.from({ length: 100 }, (m, f) => ({
-      vendorName: `Vendor ${f + 1}`,
-      vendorEmail: `vendor${f + 1}@test.com`,
+    ]), r = T(Array.from({ length: 100 }, (h, g) => ({
+      vendorName: `Vendor ${g + 1}`,
+      vendorEmail: `vendor${g + 1}@test.com`,
       vendorType: ["Supplier", "Manufacturer"][Math.floor(Math.random() * 2)],
       totalPurchases: Math.floor(Math.random() * 20),
       lastPurchaseDate: `2025-${String(Math.floor(Math.random() * 6) + 1).padStart(2, "0")}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, "0")}`,
       status: ["Active", "Pending", "Inactive"][Math.floor(Math.random() * 3)]
-    }))), o = A([
+    }))), d = T([
       { title: "Status", checked: !1 },
       { title: "Vendor Type", checked: !1 },
       { title: "Last Purchase From", checked: !1 },
       { title: "Last Purchase To", checked: !1 }
-    ]), s = A([
+    ]), y = T([
       { title: "Active", value: "Active" },
       { title: "Pending", value: "Pending" },
       { title: "Inactive", value: "Inactive" }
-    ]), u = A([
+    ]), b = T([
       { title: "Supplier", value: "Supplier" },
       { title: "Manufacturer", value: "Manufacturer" }
-    ]), r = k(() => ({
-      totalRecords: i.value.length,
-      avgPurchase: i.value.reduce((m, f) => m + f.totalPurchases * 100, 0) / i.value.length,
-      top10AvgPurchase: i.value.sort((m, f) => f.totalPurchases - m.totalPurchases).slice(0, Math.ceil(i.value.length * 0.1)).reduce((m, f) => m + f.totalPurchases * 100, 0) / Math.ceil(i.value.length * 0.1),
+    ]), m = S(() => ({
+      totalRecords: r.value.length,
+      avgPurchase: r.value.reduce((h, g) => h + g.totalPurchases * 100, 0) / r.value.length,
+      top10AvgPurchase: r.value.sort((h, g) => g.totalPurchases - h.totalPurchases).slice(0, Math.ceil(r.value.length * 0.1)).reduce((h, g) => h + g.totalPurchases * 100, 0) / Math.ceil(r.value.length * 0.1),
       avgRating: 4.2
-    })), d = A(!1), y = () => {
-      d.value = !d.value;
+    })), p = T(!1), k = () => {
+      p.value = !p.value;
     };
-    A([
+    T([
       { title: "Credit", value: "credit" },
       { title: "Debit", value: "debit" }
-    ]), A("credit");
-    const b = A(0);
+    ]), T("credit");
+    const _ = T(0);
     return st(() => {
       setInterval(() => {
-        b.value++;
+        _.value++;
       }, 3e3);
-    }), (m, f) => (w(), re("div", C1, [
+    }), (h, g) => (w(), re("div", V1, [
       l(xl, { mode: "in-out" }, {
         default: c(() => [
-          d.value ? (w(), D(xe, {
+          p.value ? (w(), A(xe, {
             key: 0,
             class: "justify-center"
           }, {
             default: c(() => [
               l(B, { cols: "8" }, {
                 default: c(() => [
-                  v("div", V1, [
+                  v("div", I1, [
                     l(me, {
                       title: "Create a New Vendor",
                       class: "pa-2 account_vcard_border",
                       subtitle: "Fill in the details below to add a new vendor to your records."
                     }, {
                       append: c(() => [
-                        v("div", I1, [
+                        v("div", P1, [
                           l(ot, {
                             location: "start",
                             transition: "slide-y-transition",
                             "offset-y": "",
                             "close-on-content-click": !1
                           }, {
-                            activator: c(({ props: x }) => [
-                              l(Z, X(x, {
+                            activator: c(({ props: f }) => [
+                              l(Z, X(f, {
                                 variant: "text",
                                 size: "x-small",
                                 rounded: ""
                               }), {
                                 default: c(() => [
-                                  (w(), D(ae(F(le)("settings")), { style: { "font-size": "20px" } }))
+                                  (w(), A(te(F(ne)("settings")), { style: { "font-size": "20px" } }))
                                 ]),
                                 _: 2
                               }, 1040)
                             ]),
                             default: c(() => [
-                              l(me, { class: "account_vcard_menu account_vcard_border" }, {
+                              l(me, {
+                                class: "account_vcard_menu account_vcard_border",
+                                width: "250px"
+                              }, {
                                 default: c(() => [
-                                  f[0] || (f[0] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
+                                  g[0] || (g[0] = v("div", { class: "account_vcard_menu_hdng" }, "Show/Hide Optional Fields", -1)),
                                   l(ke, { class: "my-1 mt-0" }),
-                                  v("div", P1, [
-                                    (w(!0), re(ve, null, ze(a.value, (x) => (w(), re("div", {
-                                      key: x.key,
-                                      class: "account_vcard_menu_item",
-                                      onClick: (p) => x.visible = !x.visible
-                                    }, [
-                                      v("div", T1, [
-                                        x.visible ? (w(), D(ae(F(le)("check")), {
-                                          key: 0,
-                                          style: { "font-size": "16px" }
-                                        })) : q("", !0),
-                                        v("span", {
-                                          class: ye(x.visible ? "" : "field_list_dynamic_ml")
-                                        }, ue(x.label), 3)
-                                      ])
-                                    ], 8, A1))), 128))
+                                  v("div", A1, [
+                                    (w(!0), re(de, null, Re(t.value, (f, x) => (w(), re("div", { key: x }, [
+                                      v("div", {
+                                        class: "field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
+                                        onClick: (V) => i(x)
+                                      }, [
+                                        (w(), A(te(F(ne)(n(x) ? "check" : "square")), { style: { "font-size": "16px" } })),
+                                        v("span", D1, ue(x), 1)
+                                      ], 8, T1),
+                                      (w(!0), re(de, null, Re(f, (V) => (w(), re("div", {
+                                        key: V.key,
+                                        class: "account_vcard_menu_item",
+                                        style: { "padding-left": "10px" }
+                                      }, [
+                                        v("div", {
+                                          class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2",
+                                          onClick: ba(($) => V.visible = !V.visible, ["stop"])
+                                        }, [
+                                          V.visible ? (w(), A(te(F(ne)("check")), {
+                                            key: 0,
+                                            style: { "font-size": "16px" }
+                                          })) : W("", !0),
+                                          v("span", {
+                                            class: ye(V.visible ? "" : "field_list_dynamic_ml")
+                                          }, ue(V.label), 3)
+                                        ], 8, N1)
+                                      ]))), 128))
+                                    ]))), 128))
                                   ])
                                 ]),
                                 _: 1,
@@ -28850,14 +28905,14 @@ ${_}` : _;
                             _: 1
                           }),
                           l(Z, {
-                            onClick: y,
+                            onClick: k,
                             variant: "text",
                             size: "x-small",
                             rounded: "",
                             class: "account_vcard_close_btn"
                           }, {
                             default: c(() => [
-                              (w(), D(ae(F(le)("x")), { style: { "font-size": "20px" } }))
+                              (w(), A(te(F(ne)("x")), { style: { "font-size": "20px" } }))
                             ]),
                             _: 1
                           })
@@ -28868,25 +28923,26 @@ ${_}` : _;
                           default: c(() => [
                             l(xe, null, {
                               default: c(() => [
-                                l(B, {
+                                o("Basic Information") ? (w(), A(B, {
+                                  key: 0,
                                   cols: "12",
                                   class: "pb-0"
                                 }, {
                                   default: c(() => [
-                                    f[1] || (f[1] = v("h5", { class: "account_form_info_hdng" }, "Basic Information", -1)),
+                                    g[1] || (g[1] = v("h5", { class: "account_form_info_hdng" }, "Basic Information", -1)),
                                     l(ke, { class: "mb-2 mt-1" })
                                   ]),
                                   _: 1,
                                   __: [1]
-                                }),
-                                t("firstName") ? (w(), D(B, {
-                                  key: 0,
+                                })) : W("", !0),
+                                s("firstName") ? (w(), A(B, {
+                                  key: 1,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    f[2] || (f[2] = v("label", { class: "account_label mb-2" }, "First Name", -1)),
+                                    g[2] || (g[2] = v("label", { class: "account_label mb-2" }, "First Name", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -28896,15 +28952,15 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [2]
-                                })) : q("", !0),
-                                t("lastName") ? (w(), D(B, {
-                                  key: 1,
+                                })) : W("", !0),
+                                s("lastName") ? (w(), A(B, {
+                                  key: 2,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    f[3] || (f[3] = v("label", { class: "account_label mb-2" }, "Last Name", -1)),
+                                    g[3] || (g[3] = v("label", { class: "account_label mb-2" }, "Last Name", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -28914,15 +28970,15 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [3]
-                                })) : q("", !0),
-                                t("companyName") ? (w(), D(B, {
-                                  key: 2,
+                                })) : W("", !0),
+                                s("companyName") ? (w(), A(B, {
+                                  key: 3,
                                   cols: "12",
                                   lg: "12",
                                   md: "12"
                                 }, {
                                   default: c(() => [
-                                    f[4] || (f[4] = v("label", { class: "account_label mb-2" }, "Company Name", -1)),
+                                    g[4] || (g[4] = v("label", { class: "account_label mb-2" }, "Company Name", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -28932,26 +28988,27 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [4]
-                                })) : q("", !0),
-                                l(B, {
+                                })) : W("", !0),
+                                o("Contact Details") ? (w(), A(B, {
+                                  key: 4,
                                   cols: "12",
                                   class: "pb-0"
                                 }, {
                                   default: c(() => [
-                                    f[5] || (f[5] = v("h5", { class: "account_form_info_hdng" }, "Contact Details", -1)),
+                                    g[5] || (g[5] = v("h5", { class: "account_form_info_hdng" }, "Contact Details", -1)),
                                     l(ke, { class: "mb-2 mt-1" })
                                   ]),
                                   _: 1,
                                   __: [5]
-                                }),
-                                t("email") ? (w(), D(B, {
-                                  key: 3,
+                                })) : W("", !0),
+                                s("email") ? (w(), A(B, {
+                                  key: 5,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    f[6] || (f[6] = v("label", { class: "account_label mb-2" }, "Email Address", -1)),
+                                    g[6] || (g[6] = v("label", { class: "account_label mb-2" }, "Email Address", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -28961,15 +29018,15 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [6]
-                                })) : q("", !0),
-                                t("phone") ? (w(), D(B, {
-                                  key: 4,
+                                })) : W("", !0),
+                                s("phone") ? (w(), A(B, {
+                                  key: 6,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    f[7] || (f[7] = v("label", { class: "account_label mb-2" }, "Phone Number", -1)),
+                                    g[7] || (g[7] = v("label", { class: "account_label mb-2" }, "Phone Number", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -28979,26 +29036,27 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [7]
-                                })) : q("", !0),
-                                l(B, {
+                                })) : W("", !0),
+                                o("Address & Tax") ? (w(), A(B, {
+                                  key: 7,
                                   cols: "12",
                                   class: "pb-0"
                                 }, {
                                   default: c(() => [
-                                    f[8] || (f[8] = v("h5", { class: "account_form_info_hdng" }, "Address & Tax", -1)),
+                                    g[8] || (g[8] = v("h5", { class: "account_form_info_hdng" }, "Address & Tax", -1)),
                                     l(ke, { class: "mb-2 mt-1" })
                                   ]),
                                   _: 1,
                                   __: [8]
-                                }),
-                                t("streetAddress") ? (w(), D(B, {
-                                  key: 5,
+                                })) : W("", !0),
+                                s("streetAddress") ? (w(), A(B, {
+                                  key: 8,
                                   cols: "12",
                                   lg: "12",
                                   md: "12"
                                 }, {
                                   default: c(() => [
-                                    f[9] || (f[9] = v("label", { class: "account_label mb-2" }, "Street Address", -1)),
+                                    g[9] || (g[9] = v("label", { class: "account_label mb-2" }, "Street Address", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -29008,15 +29066,15 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [9]
-                                })) : q("", !0),
-                                t("city") ? (w(), D(B, {
-                                  key: 6,
+                                })) : W("", !0),
+                                s("city") ? (w(), A(B, {
+                                  key: 9,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    f[10] || (f[10] = v("label", { class: "account_label mb-2" }, "City", -1)),
+                                    g[10] || (g[10] = v("label", { class: "account_label mb-2" }, "City", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -29026,15 +29084,15 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [10]
-                                })) : q("", !0),
-                                t("state") ? (w(), D(B, {
-                                  key: 7,
+                                })) : W("", !0),
+                                s("state") ? (w(), A(B, {
+                                  key: 10,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    f[11] || (f[11] = v("label", { class: "account_label mb-2" }, "State", -1)),
+                                    g[11] || (g[11] = v("label", { class: "account_label mb-2" }, "State", -1)),
                                     l(Ze, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -29044,15 +29102,15 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [11]
-                                })) : q("", !0),
-                                t("zipCode") ? (w(), D(B, {
-                                  key: 8,
+                                })) : W("", !0),
+                                s("zipCode") ? (w(), A(B, {
+                                  key: 11,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    f[12] || (f[12] = v("label", { class: "account_label mb-2" }, "ZIP Code", -1)),
+                                    g[12] || (g[12] = v("label", { class: "account_label mb-2" }, "ZIP Code", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -29062,15 +29120,15 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [12]
-                                })) : q("", !0),
-                                t("gstin") ? (w(), D(B, {
-                                  key: 9,
+                                })) : W("", !0),
+                                s("gstin") ? (w(), A(B, {
+                                  key: 12,
                                   cols: "12",
                                   lg: "6",
                                   md: "6"
                                 }, {
                                   default: c(() => [
-                                    f[13] || (f[13] = v("label", { class: "account_label mb-2" }, "GSTIN (Optional)", -1)),
+                                    g[13] || (g[13] = v("label", { class: "account_label mb-2" }, "GSTIN (Optional)", -1)),
                                     l(ee, {
                                       class: "accouting_field accouting_active_field",
                                       variant: "outlined",
@@ -29080,7 +29138,7 @@ ${_}` : _;
                                   ]),
                                   _: 1,
                                   __: [13]
-                                })) : q("", !0)
+                                })) : W("", !0)
                               ]),
                               _: 1
                             })
@@ -29094,10 +29152,10 @@ ${_}` : _;
                               class: "account_v_btn_primary"
                             }, {
                               prepend: c(() => [
-                                (w(), D(ae(F(le)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+                                (w(), A(te(F(ne)("device-floppy")), { style: { "font-size": "20px", "margin-right": "6px" } }))
                               ]),
                               default: c(() => [
-                                f[14] || (f[14] = de(" Save Vendor ", -1))
+                                g[14] || (g[14] = ve(" Save Vendor ", -1))
                               ]),
                               _: 1,
                               __: [14]
@@ -29114,7 +29172,7 @@ ${_}` : _;
               })
             ]),
             _: 1
-          })) : q("", !0)
+          })) : W("", !0)
         ]),
         _: 1
       }),
@@ -29123,14 +29181,14 @@ ${_}` : _;
           l(B, { cols: "12" }, {
             default: c(() => [
               l($l, {
-                headers: n.value,
-                items: i.value,
-                filters: o.value,
+                headers: u.value,
+                items: r.value,
+                filters: d.value,
                 title: "Vendor",
-                "status-items": s.value,
-                "account-type-items": u.value,
+                "status-items": y.value,
+                "account-type-items": b.value,
                 "currency-items": [],
-                widgets: r.value
+                widgets: m.value
               }, null, 8, ["headers", "items", "filters", "status-items", "account-type-items", "widgets"])
             ]),
             _: 1
@@ -29138,35 +29196,35 @@ ${_}` : _;
         ]),
         _: 1
       }),
-      (w(), D(Z, {
-        onClick: y,
-        key: b.value,
+      (w(), A(Z, {
+        onClick: k,
+        key: _.value,
         class: "account_add_new_btn vibrate"
       }, {
         prepend: c(() => [
-          (w(), D(ae(F(le)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
+          (w(), A(te(F(ne)("circle-plus")), { style: { "font-size": "20px", "margin-right": "6px" } }))
         ]),
         default: c(() => [
-          f[15] || (f[15] = de(" Add Vendor ", -1))
+          g[15] || (g[15] = ve(" Add Vendor ", -1))
         ]),
         _: 1,
         __: [15]
       }))
     ]));
   }
-}, D1 = /* @__PURE__ */ Et(N1, [["__scopeId", "data-v-098cf079"]]), $1 = { class: "invoice-preview-container" }, B1 = { class: "invoice-header d-flex justify-space-between align-center" }, E1 = { class: "d-flex align-center mb-1" }, F1 = { class: "invoice-summary" }, L1 = {
+}, B1 = /* @__PURE__ */ Et($1, [["__scopeId", "data-v-17cdf0a8"]]), E1 = { class: "invoice-preview-container" }, F1 = { class: "invoice-header d-flex justify-space-between align-center" }, L1 = { class: "d-flex align-center mb-1" }, R1 = { class: "invoice-summary" }, O1 = {
   __name: "InvoicePreview",
   setup(e) {
-    return (a, t) => (w(), re("div", $1, [
-      v("div", B1, [
+    return (a, t) => (w(), re("div", E1, [
+      v("div", F1, [
         v("div", null, [
-          v("div", E1, [
+          v("div", L1, [
             l($e, {
               class: "mr-2",
               size: "36"
             }, {
               default: c(() => t[0] || (t[0] = [
-                de("mdi-file-document-outline", -1)
+                ve("mdi-file-document-outline", -1)
               ])),
               _: 1,
               __: [0]
@@ -29178,9 +29236,9 @@ ${_}` : _;
             ], -1))
           ])
         ]),
-        t[2] || (t[2] = Wa('<div class="text-right" data-v-05aaab29><h2 class="invoice-title" data-v-05aaab29>TAX INVOICE</h2><div class="invoice-details" data-v-05aaab29><div data-v-05aaab29><b data-v-05aaab29>Invoice No:</b> INV-2024-07-001</div><div data-v-05aaab29><b data-v-05aaab29>Invoice Date:</b> July 21st, 2024</div><div data-v-05aaab29><b data-v-05aaab29>Place of Supply:</b> Maharashtra</div><div data-v-05aaab29><b data-v-05aaab29>Due Date:</b> August 20th, 2024</div></div></div>', 1))
+        t[2] || (t[2] = qa('<div class="text-right" data-v-05aaab29><h2 class="invoice-title" data-v-05aaab29>TAX INVOICE</h2><div class="invoice-details" data-v-05aaab29><div data-v-05aaab29><b data-v-05aaab29>Invoice No:</b> INV-2024-07-001</div><div data-v-05aaab29><b data-v-05aaab29>Invoice Date:</b> July 21st, 2024</div><div data-v-05aaab29><b data-v-05aaab29>Place of Supply:</b> Maharashtra</div><div data-v-05aaab29><b data-v-05aaab29>Due Date:</b> August 20th, 2024</div></div></div>', 1))
       ]),
-      t[10] || (t[10] = Wa('<div class="d-flex justify-space-between mt-3 mb-4" data-v-05aaab29><div data-v-05aaab29><div class="section-title" data-v-05aaab29>Bill To:</div><div class="section-content" data-v-05aaab29><div style="font-weight:700;" class="account_invoice_content" data-v-05aaab29>Innovate Inc.</div><div data-v-05aaab29>789 Industrial Area, Andheri (E), Mumbai, Maharashtra, 400093</div><div data-v-05aaab29>GSTIN: 27AXYZE9876G1Z3</div></div></div><div data-v-05aaab29><div style="font-weight:700;" class="section-title" data-v-05aaab29>Ship To:</div><div class="section-content" data-v-05aaab29><div data-v-05aaab29>Innovate Inc.</div><div data-v-05aaab29>789 Industrial Area, Andheri (E), Mumbai, Maharashtra, 400093</div></div></div></div><div class="invoice-table-wrapper mb-4" data-v-05aaab29><table class="invoice-table" data-v-05aaab29><thead data-v-05aaab29><tr data-v-05aaab29><th data-v-05aaab29>#</th><th data-v-05aaab29>Item &amp; Description</th><th data-v-05aaab29>HSN</th><th data-v-05aaab29>Qty</th><th data-v-05aaab29>Rate</th><th data-v-05aaab29>GST</th><th data-v-05aaab29>Amount</th></tr></thead><tbody data-v-05aaab29><tr data-v-05aaab29><td data-v-05aaab29>1</td><td data-v-05aaab29>Cloud Hosting Services</td><td data-v-05aaab29>998315</td><td data-v-05aaab29>1 year</td><td data-v-05aaab29>₹50,000.00</td><td data-v-05aaab29>18%</td><td data-v-05aaab29>₹59,000.00</td></tr><tr data-v-05aaab29><td data-v-05aaab29>2</td><td data-v-05aaab29>Domain Name Registration</td><td data-v-05aaab29>998314</td><td data-v-05aaab29>1 item</td><td data-v-05aaab29>₹2,500.00</td><td data-v-05aaab29>18%</td><td data-v-05aaab29>₹2,950.00</td></tr><tr data-v-05aaab29><td data-v-05aaab29>3</td><td data-v-05aaab29>Technical Support Retainer</td><td data-v-05aaab29>998313</td><td data-v-05aaab29>12 months</td><td data-v-05aaab29>₹10,000.00</td><td data-v-05aaab29>18%</td><td data-v-05aaab29>₹1,41,600.00</td></tr></tbody></table></div>', 2)),
+      t[10] || (t[10] = qa('<div class="d-flex justify-space-between mt-3 mb-4" data-v-05aaab29><div data-v-05aaab29><div class="section-title" data-v-05aaab29>Bill To:</div><div class="section-content" data-v-05aaab29><div style="font-weight:700;" class="account_invoice_content" data-v-05aaab29>Innovate Inc.</div><div data-v-05aaab29>789 Industrial Area, Andheri (E), Mumbai, Maharashtra, 400093</div><div data-v-05aaab29>GSTIN: 27AXYZE9876G1Z3</div></div></div><div data-v-05aaab29><div style="font-weight:700;" class="section-title" data-v-05aaab29>Ship To:</div><div class="section-content" data-v-05aaab29><div data-v-05aaab29>Innovate Inc.</div><div data-v-05aaab29>789 Industrial Area, Andheri (E), Mumbai, Maharashtra, 400093</div></div></div></div><div class="invoice-table-wrapper mb-4" data-v-05aaab29><table class="invoice-table" data-v-05aaab29><thead data-v-05aaab29><tr data-v-05aaab29><th data-v-05aaab29>#</th><th data-v-05aaab29>Item &amp; Description</th><th data-v-05aaab29>HSN</th><th data-v-05aaab29>Qty</th><th data-v-05aaab29>Rate</th><th data-v-05aaab29>GST</th><th data-v-05aaab29>Amount</th></tr></thead><tbody data-v-05aaab29><tr data-v-05aaab29><td data-v-05aaab29>1</td><td data-v-05aaab29>Cloud Hosting Services</td><td data-v-05aaab29>998315</td><td data-v-05aaab29>1 year</td><td data-v-05aaab29>₹50,000.00</td><td data-v-05aaab29>18%</td><td data-v-05aaab29>₹59,000.00</td></tr><tr data-v-05aaab29><td data-v-05aaab29>2</td><td data-v-05aaab29>Domain Name Registration</td><td data-v-05aaab29>998314</td><td data-v-05aaab29>1 item</td><td data-v-05aaab29>₹2,500.00</td><td data-v-05aaab29>18%</td><td data-v-05aaab29>₹2,950.00</td></tr><tr data-v-05aaab29><td data-v-05aaab29>3</td><td data-v-05aaab29>Technical Support Retainer</td><td data-v-05aaab29>998313</td><td data-v-05aaab29>12 months</td><td data-v-05aaab29>₹10,000.00</td><td data-v-05aaab29>18%</td><td data-v-05aaab29>₹1,41,600.00</td></tr></tbody></table></div>', 2)),
       l(ke, { class: "my-4" }),
       l(xe, null, {
         default: c(() => [
@@ -29204,7 +29262,7 @@ ${_}` : _;
             md: "6"
           }, {
             default: c(() => [
-              v("div", F1, [
+              v("div", R1, [
                 t[4] || (t[4] = v("div", { class: "d-flex justify-space-between amount-in-words-b align-center mb-2" }, [
                   v("p", { class: "mb-0" }, "Subtotal:"),
                   v("p", { class: "mb-0" }, "₹1,72,500.00")
@@ -29237,21 +29295,21 @@ ${_}` : _;
         ]),
         _: 1
       }),
-      t[11] || (t[11] = Wa('<div class="tax-breakdown-section mb-4" data-v-05aaab29><div class="section-title mb-1" data-v-05aaab29>Tax Breakdown</div><table class="tax-breakdown-table" data-v-05aaab29><thead data-v-05aaab29><tr data-v-05aaab29><th data-v-05aaab29>HSN/SAC</th><th data-v-05aaab29>Taxable Value</th><th data-v-05aaab29>CGST<br data-v-05aaab29>Rate</th><th data-v-05aaab29>CGST<br data-v-05aaab29>Amount</th><th data-v-05aaab29>SGST<br data-v-05aaab29>Rate</th><th data-v-05aaab29>SGST<br data-v-05aaab29>Amount</th><th data-v-05aaab29>Total Tax Amount</th></tr></thead><tbody data-v-05aaab29><tr data-v-05aaab29><td data-v-05aaab29>998313</td><td data-v-05aaab29>₹1,20,000.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹10,800.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹10,800.00</td><td data-v-05aaab29>₹21,600.00</td></tr><tr data-v-05aaab29><td data-v-05aaab29>998314</td><td data-v-05aaab29>₹2,500.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹225.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹225.00</td><td data-v-05aaab29>₹450.00</td></tr><tr data-v-05aaab29><td data-v-05aaab29>998315</td><td data-v-05aaab29>₹50,000.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹4,500.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹4,500.00</td><td data-v-05aaab29>₹9,000.00</td></tr><tr class="tax-breakdown-total" data-v-05aaab29><td data-v-05aaab29>Total</td><td data-v-05aaab29>₹1,72,500.00</td><td data-v-05aaab29></td><td data-v-05aaab29>₹15,525.00</td><td data-v-05aaab29></td><td data-v-05aaab29>₹15,525.00</td><td data-v-05aaab29>₹31,050.00</td></tr></tbody></table></div>', 1)),
+      t[11] || (t[11] = qa('<div class="tax-breakdown-section mb-4" data-v-05aaab29><div class="section-title mb-1" data-v-05aaab29>Tax Breakdown</div><table class="tax-breakdown-table" data-v-05aaab29><thead data-v-05aaab29><tr data-v-05aaab29><th data-v-05aaab29>HSN/SAC</th><th data-v-05aaab29>Taxable Value</th><th data-v-05aaab29>CGST<br data-v-05aaab29>Rate</th><th data-v-05aaab29>CGST<br data-v-05aaab29>Amount</th><th data-v-05aaab29>SGST<br data-v-05aaab29>Rate</th><th data-v-05aaab29>SGST<br data-v-05aaab29>Amount</th><th data-v-05aaab29>Total Tax Amount</th></tr></thead><tbody data-v-05aaab29><tr data-v-05aaab29><td data-v-05aaab29>998313</td><td data-v-05aaab29>₹1,20,000.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹10,800.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹10,800.00</td><td data-v-05aaab29>₹21,600.00</td></tr><tr data-v-05aaab29><td data-v-05aaab29>998314</td><td data-v-05aaab29>₹2,500.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹225.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹225.00</td><td data-v-05aaab29>₹450.00</td></tr><tr data-v-05aaab29><td data-v-05aaab29>998315</td><td data-v-05aaab29>₹50,000.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹4,500.00</td><td data-v-05aaab29>9%</td><td data-v-05aaab29>₹4,500.00</td><td data-v-05aaab29>₹9,000.00</td></tr><tr class="tax-breakdown-total" data-v-05aaab29><td data-v-05aaab29>Total</td><td data-v-05aaab29>₹1,72,500.00</td><td data-v-05aaab29></td><td data-v-05aaab29>₹15,525.00</td><td data-v-05aaab29></td><td data-v-05aaab29>₹15,525.00</td><td data-v-05aaab29>₹31,050.00</td></tr></tbody></table></div>', 1)),
       l(ke, { class: "my-2" }),
-      t[12] || (t[12] = Wa('<div class="d-flex justify-space-between my-4" data-v-05aaab29><div data-v-05aaab29><div class="section-title" data-v-05aaab29>Bank Details:</div><div class="section-content-details" data-v-05aaab29><div data-v-05aaab29>Bank Name: Global Bank of India</div><div data-v-05aaab29>Account Number: 123456789012</div><div data-v-05aaab29>IFSC Code: GBIN0001234</div></div></div><div data-v-05aaab29><div class="section-title" data-v-05aaab29>Terms &amp; Conditions:</div><ul class="section-content-terms" data-v-05aaab29><li data-v-05aaab29>Payment is due within 30 days.</li><li data-v-05aaab29>Please include the invoice number on your payment.</li><li data-v-05aaab29>A late fee of 1.5% per month will be charged on overdue invoices.</li></ul></div></div>', 1)),
+      t[12] || (t[12] = qa('<div class="d-flex justify-space-between my-4" data-v-05aaab29><div data-v-05aaab29><div class="section-title" data-v-05aaab29>Bank Details:</div><div class="section-content-details" data-v-05aaab29><div data-v-05aaab29>Bank Name: Global Bank of India</div><div data-v-05aaab29>Account Number: 123456789012</div><div data-v-05aaab29>IFSC Code: GBIN0001234</div></div></div><div data-v-05aaab29><div class="section-title" data-v-05aaab29>Terms &amp; Conditions:</div><ul class="section-content-terms" data-v-05aaab29><li data-v-05aaab29>Payment is due within 30 days.</li><li data-v-05aaab29>Please include the invoice number on your payment.</li><li data-v-05aaab29>A late fee of 1.5% per month will be charged on overdue invoices.</li></ul></div></div>', 1)),
       l(ke, { class: "my-2" }),
-      t[13] || (t[13] = Wa('<div class="" data-v-05aaab29><div class="invoice-footer text-right mt-4" data-v-05aaab29> For Hicks Inc. </div><div style="min-height:80px;" data-v-05aaab29></div><div class="invoice-footer text-right" data-v-05aaab29><p class="account_invoice_signature" data-v-05aaab29>(Authorized Signatory)</p></div></div>', 1))
+      t[13] || (t[13] = qa('<div class="" data-v-05aaab29><div class="invoice-footer text-right mt-4" data-v-05aaab29> For Hicks Inc. </div><div style="min-height:80px;" data-v-05aaab29></div><div class="invoice-footer text-right" data-v-05aaab29><p class="account_invoice_signature" data-v-05aaab29>(Authorized Signatory)</p></div></div>', 1))
     ]));
   }
-}, R1 = /* @__PURE__ */ Et(L1, [["__scopeId", "data-v-05aaab29"]]), O1 = {};
-function M1(e, a) {
+}, M1 = /* @__PURE__ */ Et(O1, [["__scopeId", "data-v-05aaab29"]]), z1 = {};
+function U1(e, a) {
   return w(), re("div", null, a[0] || (a[0] = [
     v("h2", null, "Products", -1),
     v("p", null, "This is the products page.", -1)
   ]));
 }
-const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
+const G1 = /* @__PURE__ */ Et(z1, [["render", U1]]), j1 = K({
   allDay: Boolean,
   interval: Object,
   intervalDivisions: {
@@ -29269,7 +29327,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
   event: Object
 }, "VCalendarIntervalEvent"), bi = ie()({
   name: "VCalendarIntervalEvent",
-  props: U1(),
+  props: j1(),
   setup(e) {
     const a = Yt(), t = () => {
       var n, i, o, s;
@@ -29285,8 +29343,8 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         } = Array.from({
           length: e.intervalDivisions
         }, (d) => d * (e.intervalDuration / e.intervalDivisions)).reduce((d, y, b) => {
-          var m, f;
-          return a.isBefore(a.addMinutes((m = e.interval) == null ? void 0 : m.start, y), (f = e.event) == null ? void 0 : f.start) ? {
+          var m, p;
+          return a.isBefore(a.addMinutes((m = e.interval) == null ? void 0 : m.start, y), (p = e.event) == null ? void 0 : p.start) ? {
             height: Se(e.intervalHeight / e.intervalDivisions * b),
             margin: Se(e.intervalHeight / e.intervalDivisions * b)
           } : {
@@ -29361,7 +29419,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       emit: t,
       slots: n
     } = a;
-    const i = Yt(), o = k(() => {
+    const i = Yt(), o = S(() => {
       const s = i.addMinutes(i.startOfDay(e.day.date), e.intervalDuration * (e.index + e.intervalStart)), u = i.addMinutes(i.startOfDay(e.day.date), e.intervalDuration * (e.index + e.intervalStart + 1) - 1);
       return {
         ...e.day,
@@ -29428,7 +29486,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
   name: "VCalendarDay",
   props: Ec(),
   setup(e) {
-    const a = Yt(), t = k(() => [...Array.from({
+    const a = Yt(), t = S(() => [...Array.from({
       length: e.intervals
     }, (n, i) => i).filter((n, i) => e.intervalDuration * (i + e.intervalStart) < 1440)]);
     return se(() => {
@@ -29513,13 +29571,13 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       class: "v-calendar-header__title"
     }, [e.title])])), {};
   }
-}), G1 = K({
+}), H1 = K({
   allDay: Boolean,
   day: Object,
   event: Object
 }, "VCalendarEvent"), $s = ie()({
   name: "VCalendarEvent",
-  props: G1(),
+  props: H1(),
   setup(e) {
     return se(() => l(gt, {
       color: e.allDay ? "primary" : void 0,
@@ -29537,7 +29595,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       }
     })), {};
   }
-}), j1 = K({
+}), W1 = K({
   active: Boolean,
   color: String,
   day: Object,
@@ -29546,14 +29604,14 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
   title: [Number, String]
 }, "VCalendarMonthDay"), Lc = ie()({
   name: "VCalendarMonthDay",
-  props: j1(),
+  props: W1(),
   setup(e, a) {
     let {
       emit: t,
       slots: n
     } = a;
     return se(() => {
-      var o, s, u, r, d, y, b, m, f, x, p;
+      var o, s, u, r, d, y, b, m, p, k, _;
       const i = !!(e.title || (o = n.title) != null && o.call(n, {
         title: e.title
       }));
@@ -29588,25 +29646,25 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         allDay: !0
       }, null))]), l("div", {
         class: "v-calendar-weekly__day-events-container"
-      }, [(f = e.events) == null ? void 0 : f.filter((h) => !h.allDay).map((h) => n.event ? n.event({
+      }, [(p = e.events) == null ? void 0 : p.filter((h) => !h.allDay).map((h) => n.event ? n.event({
         day: e.day,
         event: h,
         allDay: !1
       }) : l($s, {
         day: e.day,
         event: h
-      }, null))])])]), !((x = e.day) != null && x.isHidden) && ((p = n.default) == null ? void 0 : p.call(n))]);
+      }, null))])])]), !((k = e.day) != null && k.isHidden) && ((_ = n.default) == null ? void 0 : _.call(n))]);
     }), {};
   }
-}), H1 = K({
+}), q1 = K({
   hideHeader: Boolean,
   hideWeekNumber: Boolean,
   ..._c(),
   ...Ec(),
   ...Fc()
-}, "VCalender"), W1 = ie()({
+}, "VCalender"), Y1 = ie()({
   name: "VCalendar",
-  props: H1(),
+  props: q1(),
   emits: {
     next: null,
     prev: null,
@@ -29626,19 +29684,19 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       weekNumbers: y,
       weekDays: b
     } = hc(e), m = i.getWeekdays();
-    function f() {
+    function p() {
       e.viewMode === "month" && (r.value = [i.addMonths(d.value, 1)]), e.viewMode === "week" && (r.value = [i.addDays(d.value, 7)]), e.viewMode === "day" && (r.value = [i.addDays(d.value, 1)]);
     }
-    function x() {
+    function k() {
       e.viewMode === "month" && (r.value = [i.addMonths(d.value, -1)]), e.viewMode === "week" && (r.value = [i.addDays(d.value, -7)]), e.viewMode === "day" && (r.value = [i.addDays(d.value, -1)]);
     }
-    function p() {
+    function _() {
       r.value = [i.date()];
     }
-    const h = k(() => i.format(d.value, "monthAndYear"));
+    const h = S(() => i.format(d.value, "monthAndYear"));
     return se(() => {
-      var S;
-      const _ = Jn.filterProps(e), g = hi.filterProps(e);
+      var x;
+      const g = Jn.filterProps(e), f = hi.filterProps(e);
       return l("div", {
         class: ["v-calendar", {
           "v-calendar-monthly": e.viewMode === "month",
@@ -29649,11 +29707,11 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         title: h.value
       }) : l(hi, X({
         key: "calendar-header"
-      }, g, {
+      }, f, {
         title: h.value,
-        "onClick:next": f,
-        "onClick:prev": x,
-        "onClick:toToday": p
+        "onClick:next": p,
+        "onClick:prev": k,
+        "onClick:toToday": _
       }), null))]), l("div", {
         class: ["v-calendar__container", `days__${b.value.length}`]
       }, [e.viewMode === "month" && !e.hideDayHeader && l("div", {
@@ -29662,34 +29720,34 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       }, [e.hideWeekNumber ? "" : l("div", {
         key: "weekNumber0",
         class: "v-calendar-weekly__head-weeknumber"
-      }, null), b.value.map((I) => l("div", {
+      }, null), b.value.map((V) => l("div", {
         class: `v-calendar-weekly__head-weekday${e.hideWeekNumber ? "" : "-with-weeknumber"}`
-      }, [m[I]]))]), e.viewMode === "month" && l("div", {
+      }, [m[V]]))]), e.viewMode === "month" && l("div", {
         key: "VCalendarMonth",
         class: ["v-calendar-month__days", `days${e.hideWeekNumber ? "" : "-with-weeknumbers"}__${b.value.length}`, ...e.hideWeekNumber ? [] : ["v-calendar-month__weeknumbers"]]
-      }, [Qv(o.value, b.value.length).map((I, $) => [e.hideWeekNumber ? "" : l("div", {
+      }, [Qv(o.value, b.value.length).map((V, $) => [e.hideWeekNumber ? "" : l("div", {
         class: "v-calendar-month__weeknumber"
-      }, [y.value[$]]), I.map((O) => {
+      }, [y.value[$]]), V.map((L) => {
         var E;
         return l(Lc, {
-          color: i.isSameDay(i.date(), O.date) ? "primary" : void 0,
-          day: O,
-          title: O ? i.format(O.date, "dayOfMonth") : "NaN",
-          events: (E = e.events) == null ? void 0 : E.filter((R) => i.isSameDay(O.date, R.start) || i.isSameDay(O.date, R.end))
+          color: i.isSameDay(i.date(), L.date) ? "primary" : void 0,
+          day: L,
+          title: L ? i.format(L.date, "dayOfMonth") : "NaN",
+          events: (E = e.events) == null ? void 0 : E.filter((O) => i.isSameDay(L.date, O.start) || i.isSameDay(L.date, O.end))
         }, {
           event: n.event
         });
-      })])]), e.viewMode === "week" && s.value.map((I, $) => {
-        var O;
-        return l(Jn, X(_, {
-          day: I,
+      })])]), e.viewMode === "week" && s.value.map((V, $) => {
+        var L;
+        return l(Jn, X(g, {
+          day: V,
           dayIndex: $,
-          events: (O = e.events) == null ? void 0 : O.filter((E) => i.isSameDay(E.start, I.date) || i.isSameDay(E.end, I.date))
+          events: (L = e.events) == null ? void 0 : L.filter((E) => i.isSameDay(E.start, V.date) || i.isSameDay(E.end, V.date))
         }), null);
-      }), e.viewMode === "day" && l(Jn, X(_, {
+      }), e.viewMode === "day" && l(Jn, X(g, {
         day: u([d.value], i.date())[0],
         dayIndex: 0,
-        events: (S = e.events) == null ? void 0 : S.filter((I) => i.isSameDay(I.start, u([d.value], i.date())[0].date) || i.isSameDay(I.end, u([d.value], i.date())[0].date))
+        events: (x = e.events) == null ? void 0 : x.filter((V) => i.isSameDay(V.start, u([d.value], i.date())[0].date) || i.isSameDay(V.end, u([d.value], i.date())[0].date))
       }), null)])]);
     }), {
       daysInMonth: o,
@@ -29697,7 +29755,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       genDays: u
     };
   }
-}), q1 = K({
+}), J1 = K({
   hideActions: Boolean,
   ...Yi(),
   ...pc(),
@@ -29705,13 +29763,13 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     placeholder: "mm/dd/yyyy",
     prependIcon: "$calendar"
   }),
-  ...Me(Cc({
+  ...ze(Cc({
     weeksInMonth: "dynamic",
     hideHeader: !0
   }), ["active"])
-}, "VDateInput"), Y1 = ie()({
+}, "VDateInput"), K1 = ie()({
   name: "VDateInput",
-  props: q1(),
+  props: J1(),
   emits: {
     "update:modelValue": (e) => !0
   },
@@ -29725,35 +29783,35 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       isFocused: o,
       focus: s,
       blur: u
-    } = Sa(e), r = Ve(e, "modelValue", e.multiple ? [] : null), d = _e(!1), y = k(() => {
-      const p = We(r.value);
-      if (!p.length) return null;
+    } = wa(e), r = Ve(e, "modelValue", e.multiple ? [] : null), d = _e(!1), y = S(() => {
+      const _ = We(r.value);
+      if (!_.length) return null;
       if (e.multiple === !0)
-        return n("$vuetify.datePicker.itemsSelected", p.length);
+        return n("$vuetify.datePicker.itemsSelected", _.length);
       if (e.multiple === "range") {
-        const h = p[0], _ = p[p.length - 1];
-        return i.isValid(h) && i.isValid(_) ? `${i.format(h, "keyboardDate")} - ${i.format(_, "keyboardDate")}` : "";
+        const h = _[0], g = _[_.length - 1];
+        return i.isValid(h) && i.isValid(g) ? `${i.format(h, "keyboardDate")} - ${i.format(g, "keyboardDate")}` : "";
       }
       return i.isValid(r.value) ? i.format(r.value, "keyboardDate") : "";
-    }), b = k(() => !e.disabled && !e.readonly);
-    function m(p) {
-      if (p.key !== "Enter") return;
+    }), b = S(() => !e.disabled && !e.readonly);
+    function m(_) {
+      if (_.key !== "Enter") return;
       if (!d.value || !o.value) {
         d.value = !0;
         return;
       }
-      const h = p.target;
+      const h = _.target;
       r.value = i.date(h.value);
     }
-    function f(p) {
-      p.preventDefault(), p.stopPropagation(), d.value = !0;
+    function p(_) {
+      _.preventDefault(), _.stopPropagation(), d.value = !0;
     }
-    function x() {
+    function k() {
       d.value = !1;
     }
     se(() => {
-      const p = xs.filterProps(e), h = Is.filterProps(Me(e, ["active"])), _ = ee.filterProps(e);
-      return l(ee, X(_, {
+      const _ = xs.filterProps(e), h = Is.filterProps(ze(e, ["active"])), g = ee.filterProps(e);
+      return l(ee, X(g, {
         class: e.class,
         style: e.style,
         modelValue: y.value,
@@ -29761,46 +29819,46 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         focused: d.value || o.value,
         onFocus: s,
         onBlur: u,
-        "onClick:control": b.value ? f : void 0,
-        "onClick:prepend": b.value ? f : void 0
+        "onClick:control": b.value ? p : void 0,
+        "onClick:prepend": b.value ? p : void 0
       }), {
         default: () => {
-          var g;
+          var f;
           return [l(ot, {
             modelValue: d.value,
-            "onUpdate:modelValue": (S) => d.value = S,
+            "onUpdate:modelValue": (x) => d.value = x,
             activator: "parent",
             "min-width": "0",
             closeOnContentClick: !1,
             openOnClick: !1
           }, {
-            default: () => [l(xs, X(p, {
+            default: () => [l(xs, X(_, {
               modelValue: r.value,
-              "onUpdate:modelValue": (S) => r.value = S,
-              onSave: x
+              "onUpdate:modelValue": (x) => r.value = x,
+              onSave: k
             }), {
-              default: (S) => {
+              default: (x) => {
                 let {
-                  actions: I,
+                  actions: V,
                   model: $
-                } = S;
+                } = x;
                 return l(Is, X(h, {
                   modelValue: e.hideActions ? r.value : $.value,
-                  "onUpdate:modelValue": (O) => {
-                    e.hideActions ? (r.value = O, e.multiple || (d.value = !1)) : $.value = O;
+                  "onUpdate:modelValue": (L) => {
+                    e.hideActions ? (r.value = L, e.multiple || (d.value = !1)) : $.value = L;
                   },
-                  onMousedown: (O) => O.preventDefault()
+                  onMousedown: (L) => L.preventDefault()
                 }), {
-                  actions: e.hideActions ? void 0 : () => I
+                  actions: e.hideActions ? void 0 : () => V
                 });
               }
             })]
-          }), (g = t.default) == null ? void 0 : g.call(t)];
+          }), (f = t.default) == null ? void 0 : f.call(t)];
         }
       });
     });
   }
-}), J1 = K({
+}), X1 = K({
   controlVariant: {
     type: String,
     default: "default"
@@ -29819,11 +29877,11 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     type: Number,
     default: 1
   },
-  ...Me(Tn(), ["appendInnerIcon", "prependInnerIcon"])
-}, "VNumberInput"), K1 = ie()({
+  ...ze(Tn(), ["appendInnerIcon", "prependInnerIcon"])
+}, "VNumberInput"), Q1 = ie()({
   name: "VNumberInput",
   props: {
-    ...J1()
+    ...X1()
   },
   emits: {
     "update:modelValue": (e) => !0
@@ -29834,117 +29892,117 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       emit: n,
       slots: i
     } = a;
-    const o = Ve(e, "modelValue"), s = k(() => Lo(e.step)), u = k(() => o.value != null ? Lo(o.value) : 0), r = kl(), d = k(() => e.disabled || e.readonly || (r == null ? void 0 : r.isReadonly.value)), y = k(() => d.value ? !1 : o.value == null ? !0 : o.value + e.step <= e.max), b = k(() => d.value ? !1 : o.value == null ? !0 : o.value - e.step >= e.min);
-    Re(() => {
+    const o = Ve(e, "modelValue"), s = S(() => Lo(e.step)), u = S(() => o.value != null ? Lo(o.value) : 0), r = kl(), d = S(() => e.disabled || e.readonly || (r == null ? void 0 : r.isReadonly.value)), y = S(() => d.value ? !1 : o.value == null ? !0 : o.value + e.step <= e.max), b = S(() => d.value ? !1 : o.value == null ? !0 : o.value - e.step >= e.min);
+    Oe(() => {
       d.value || o.value != null && (o.value < e.min || o.value > e.max) && (o.value = ht(o.value, e.min, e.max));
     });
-    const m = k(() => e.hideInput ? "stacked" : e.controlVariant), f = k(() => m.value === "split" ? "$plus" : "$collapse"), x = k(() => m.value === "split" ? "$minus" : "$expand"), p = k(() => m.value === "split" ? "default" : "small"), h = k(() => m.value === "stacked" ? "auto" : "100%"), _ = k(() => ({
-      click: I
-    })), g = k(() => ({
+    const m = S(() => e.hideInput ? "stacked" : e.controlVariant), p = S(() => m.value === "split" ? "$plus" : "$collapse"), k = S(() => m.value === "split" ? "$minus" : "$expand"), _ = S(() => m.value === "split" ? "default" : "small"), h = S(() => m.value === "stacked" ? "auto" : "100%"), g = S(() => ({
+      click: V
+    })), f = S(() => ({
       click: $
     }));
-    function S() {
-      let T = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : !0;
+    function x() {
+      let D = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : !0;
       if (d.value) return;
       if (o.value == null) {
         o.value = 0;
         return;
       }
       const U = Math.max(u.value, s.value);
-      T ? y.value && (o.value = +(o.value + e.step).toFixed(U)) : b.value && (o.value = +(o.value - e.step).toFixed(U));
+      D ? y.value && (o.value = +(o.value + e.step).toFixed(U)) : b.value && (o.value = +(o.value - e.step).toFixed(U));
     }
-    function I(T) {
-      T.stopPropagation(), S();
+    function V(D) {
+      D.stopPropagation(), x();
     }
-    function $(T) {
-      T.stopPropagation(), S(!1);
+    function $(D) {
+      D.stopPropagation(), x(!1);
     }
-    function O(T) {
-      if (!(["Enter", "ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(T.key) || T.ctrlKey)) {
-        if (["ArrowDown"].includes(T.key)) {
-          T.preventDefault(), S(!1);
+    function L(D) {
+      if (!(["Enter", "ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(D.key) || D.ctrlKey)) {
+        if (["ArrowDown"].includes(D.key)) {
+          D.preventDefault(), x(!1);
           return;
         }
-        if (["ArrowUp"].includes(T.key)) {
-          T.preventDefault(), S();
+        if (["ArrowUp"].includes(D.key)) {
+          D.preventDefault(), x();
           return;
         }
-        /^[0-9\-+.]+$/.test(T.key) || T.preventDefault();
+        /^[0-9\-+.]+$/.test(D.key) || D.preventDefault();
       }
     }
-    function E(T) {
-      o.value = T ? +T : void 0;
+    function E(D) {
+      o.value = D ? +D : void 0;
     }
-    function R(T) {
-      T.stopPropagation();
+    function O(D) {
+      D.stopPropagation();
     }
     se(() => {
       const {
-        modelValue: T,
+        modelValue: D,
         ...U
       } = ee.filterProps(e);
       function G() {
-        return i.increment ? l(De, {
+        return i.increment ? l(Ne, {
           key: "increment-defaults",
           defaults: {
             VBtn: {
               disabled: !y.value,
               flat: !0,
               height: h.value,
-              size: p.value,
-              icon: f.value
+              size: _.value,
+              icon: p.value
             }
           }
         }, {
-          default: () => [i.increment(_.value)]
+          default: () => [i.increment(g.value)]
         }) : l(Z, {
           disabled: !y.value,
           flat: !0,
           key: "increment-btn",
           height: h.value,
           name: "increment-btn",
-          icon: f.value,
-          onClick: I,
-          onMousedown: R,
-          size: p.value,
+          icon: p.value,
+          onClick: V,
+          onMousedown: O,
+          size: _.value,
           tabindex: "-1"
         }, null);
       }
       function C() {
-        return i.decrement ? l(De, {
+        return i.decrement ? l(Ne, {
           key: "decrement-defaults",
           defaults: {
             VBtn: {
               disabled: !b.value,
               flat: !0,
               height: h.value,
-              size: p.value,
-              icon: x.value
+              size: _.value,
+              icon: k.value
             }
           }
         }, {
-          default: () => [i.decrement(g.value)]
+          default: () => [i.decrement(f.value)]
         }) : l(Z, {
           disabled: !b.value,
           flat: !0,
           key: "decrement-btn",
           height: h.value,
           name: "decrement-btn",
-          icon: x.value,
-          size: p.value,
+          icon: k.value,
+          size: _.value,
           tabindex: "-1",
           onClick: $,
-          onMousedown: R
+          onMousedown: O
         }, null);
       }
-      function L() {
+      function R() {
         return l("div", {
           class: "v-number-input__control"
         }, [C(), l(ke, {
           vertical: m.value !== "stacked"
         }, null), G()]);
       }
-      function W() {
+      function q() {
         return !e.hideInput && !e.inset ? l(ke, {
           vertical: !0
         }, null) : void 0;
@@ -29953,15 +30011,15 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         class: "v-number-input__control"
       }, [l(ke, {
         vertical: !0
-      }, null), G()]) : e.reverse ? void 0 : l(ve, null, [W(), L()]), J = i["append-inner"] || Y, H = m.value === "split" ? l("div", {
+      }, null), G()]) : e.reverse ? void 0 : l(de, null, [q(), R()]), J = i["append-inner"] || Y, H = m.value === "split" ? l("div", {
         class: "v-number-input__control"
       }, [C(), l(ke, {
         vertical: !0
-      }, null)]) : e.reverse ? l(ve, null, [L(), W()]) : void 0, N = i["prepend-inner"] || H;
+      }, null)]) : e.reverse ? l(de, null, [R(), q()]) : void 0, N = i["prepend-inner"] || H;
       return l(ee, X({
         modelValue: o.value,
         "onUpdate:modelValue": E,
-        onKeydown: O,
+        onKeydown: L,
         class: ["v-number-input", {
           "v-number-input--default": m.value === "default",
           "v-number-input--hide-input": e.hideInput,
@@ -29976,25 +30034,25 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       }), {
         ...i,
         "append-inner": J ? function() {
-          var te;
-          for (var j = arguments.length, V = new Array(j), M = 0; M < j; M++)
-            V[M] = arguments[M];
-          return l(ve, null, [(te = i["append-inner"]) == null ? void 0 : te.call(i, ...V), Y]);
+          var ae;
+          for (var j = arguments.length, I = new Array(j), M = 0; M < j; M++)
+            I[M] = arguments[M];
+          return l(de, null, [(ae = i["append-inner"]) == null ? void 0 : ae.call(i, ...I), Y]);
         } : void 0,
         "prepend-inner": N ? function() {
-          var te;
-          for (var j = arguments.length, V = new Array(j), M = 0; M < j; M++)
-            V[M] = arguments[M];
-          return l(ve, null, [H, (te = i["prepend-inner"]) == null ? void 0 : te.call(i, ...V)]);
+          var ae;
+          for (var j = arguments.length, I = new Array(j), M = 0; M < j; M++)
+            I[M] = arguments[M];
+          return l(de, null, [H, (ae = i["prepend-inner"]) == null ? void 0 : ae.call(i, ...I)]);
         } : void 0
       });
     });
   }
-}), X1 = K({
+}), Z1 = K({
   ...yo()
 }, "VStepperActions"), Rc = ie()({
   name: "VStepperVerticalActions",
-  props: X1(),
+  props: Z1(),
   emits: {
     "click:prev": () => !0,
     "click:next": () => !0
@@ -30020,16 +30078,16 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       }), n);
     }), {};
   }
-}), Q1 = K({
+}), e2 = K({
   hideActions: Boolean,
-  ...Nc(),
-  ...Me(mo({
+  ...Dc(),
+  ...ze(mo({
     expandIcon: "",
     collapseIcon: ""
   }), ["hideActions"])
 }, "VStepperVerticalItem"), Oc = ie()({
   name: "VStepperVerticalItem",
-  props: Q1(),
+  props: e2(),
   emits: {
     "click:next": () => !0,
     "click:prev": () => !0,
@@ -30040,19 +30098,19 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       emit: t,
       slots: n
     } = a;
-    const i = A(), o = k(() => isNaN(parseInt(e.value)) ? e.value : Number(e.value)), s = k(() => {
-      var g;
-      return (g = i.value) == null ? void 0 : g.groupItem;
-    }), u = k(() => {
-      var g;
-      return ((g = s.value) == null ? void 0 : g.isSelected.value) ?? !1;
-    }), r = k(() => u.value ? e.rules.every((g) => g() === !0) : null), d = k(() => !e.disabled && e.editable), y = k(() => e.error || u.value && !r.value), b = k(() => e.complete || e.rules.length > 0 && r.value === !0), m = k(() => {
-      var g;
-      return e.disabled ? e.disabled : (g = s.value) != null && g.isFirst.value ? "prev" : !1;
-    }), f = k(() => {
-      var g;
-      return y.value ? e.errorIcon : b.value ? e.completeIcon : (g = s.value) != null && g.isSelected.value && e.editable ? e.editIcon : e.icon;
-    }), x = k(() => ({
+    const i = T(), o = S(() => isNaN(parseInt(e.value)) ? e.value : Number(e.value)), s = S(() => {
+      var f;
+      return (f = i.value) == null ? void 0 : f.groupItem;
+    }), u = S(() => {
+      var f;
+      return ((f = s.value) == null ? void 0 : f.isSelected.value) ?? !1;
+    }), r = S(() => u.value ? e.rules.every((f) => f() === !0) : null), d = S(() => !e.disabled && e.editable), y = S(() => e.error || u.value && !r.value), b = S(() => e.complete || e.rules.length > 0 && r.value === !0), m = S(() => {
+      var f;
+      return e.disabled ? e.disabled : (f = s.value) != null && f.isFirst.value ? "prev" : !1;
+    }), p = S(() => {
+      var f;
+      return y.value ? e.errorIcon : b.value ? e.completeIcon : (f = s.value) != null && f.isSelected.value && e.editable ? e.editIcon : e.icon;
+    }), k = S(() => ({
       canEdit: d.value,
       hasError: y.value,
       hasCompleted: b.value,
@@ -30060,25 +30118,25 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       subtitle: e.subtitle,
       step: o.value,
       value: e.value
-    })), p = k(() => ({
-      ...x.value,
-      prev: _,
+    })), _ = S(() => ({
+      ...k.value,
+      prev: g,
       next: h
     }));
     function h() {
-      var g;
-      t("click:next"), !((g = s.value) != null && g.isLast.value) && s.value.group.next();
+      var f;
+      t("click:next"), !((f = s.value) != null && f.isLast.value) && s.value.group.next();
     }
-    function _() {
+    function g() {
       t("click:prev"), s.value.group.prev();
     }
     return se(() => {
       var $;
-      const g = (b.value || (($ = s.value) == null ? void 0 : $.isSelected.value)) && !y.value && !e.disabled, S = !e.hideActions || !!n.actions, I = Ts.filterProps(e);
+      const f = (b.value || (($ = s.value) == null ? void 0 : $.isSelected.value)) && !y.value && !e.disabled, x = !e.hideActions || !!n.actions, V = Ts.filterProps(e);
       return l(Ts, X({
         _as: "VStepperVerticalItem",
         ref: i
-      }, I, {
+      }, V, {
         class: ["v-stepper-vertical-item", {
           "v-stepper-vertical-item--complete": b.value,
           "v-stepper-vertical-item--disabled": e.disabled,
@@ -30092,29 +30150,29 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         value: o.value
       }), {
         title: () => {
-          var O, E;
-          return l(ve, null, [l(Mt, {
+          var L, E;
+          return l(de, null, [l(Mt, {
             key: "stepper-avatar",
             class: "v-stepper-vertical-item__avatar",
-            color: g ? e.color : void 0,
+            color: f ? e.color : void 0,
             size: 24,
             start: !0
           }, {
             default: () => {
-              var R;
-              return [((R = n.icon) == null ? void 0 : R.call(n, x.value)) ?? (f.value ? l($e, {
-                icon: f.value
+              var O;
+              return [((O = n.icon) == null ? void 0 : O.call(n, k.value)) ?? (p.value ? l($e, {
+                icon: p.value
               }, null) : o.value)];
             }
           }), l("div", null, [l("div", {
             class: "v-stepper-vertical-item__title"
-          }, [((O = n.title) == null ? void 0 : O.call(n, x.value)) ?? e.title]), l("div", {
+          }, [((L = n.title) == null ? void 0 : L.call(n, k.value)) ?? e.title]), l("div", {
             class: "v-stepper-vertical-item__subtitle"
-          }, [((E = n.subtitle) == null ? void 0 : E.call(n, x.value)) ?? e.subtitle])])]);
+          }, [((E = n.subtitle) == null ? void 0 : E.call(n, k.value)) ?? e.subtitle])])]);
         },
         text: () => {
-          var O, E;
-          return l(ve, null, [((O = n.default) == null ? void 0 : O.call(n, x.value)) ?? e.text, S && l(De, {
+          var L, E;
+          return l(de, null, [((L = n.default) == null ? void 0 : L.call(n, k.value)) ?? e.text, x && l(Ne, {
             defaults: {
               VStepperVerticalActions: {
                 disabled: m.value,
@@ -30123,18 +30181,18 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
             }
           }, {
             default: () => {
-              var R;
-              return [((R = n.actions) == null ? void 0 : R.call(n, p.value)) ?? l(Rc, {
+              var O;
+              return [((O = n.actions) == null ? void 0 : O.call(n, _.value)) ?? l(Rc, {
                 "onClick:next": h,
-                "onClick:prev": _
+                "onClick:prev": g
               }, {
                 prev: n.prev ? () => {
-                  var T;
-                  return (T = n.prev) == null ? void 0 : T.call(n, p.value);
+                  var D;
+                  return (D = n.prev) == null ? void 0 : D.call(n, _.value);
                 } : void 0,
                 next: n.next ? () => {
-                  var T;
-                  return (T = n.next) == null ? void 0 : T.call(n, p.value);
+                  var D;
+                  return (D = n.next) == null ? void 0 : D.call(n, _.value);
                 } : void 0
               })];
             }
@@ -30143,7 +30201,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       });
     }), {};
   }
-}), Z1 = K({
+}), t2 = K({
   prevText: {
     type: String,
     default: "$vuetify.stepper.prev"
@@ -30152,14 +30210,14 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     type: String,
     default: "$vuetify.stepper.next"
   },
-  ...Dc(),
-  ...Me(Pc({
+  ...Nc(),
+  ...ze(Pc({
     mandatory: "force",
     variant: "accordion"
   }), ["static"])
-}, "VStepperVertical"), e2 = ie()({
+}, "VStepperVertical"), a2 = ie()({
   name: "VStepperVertical",
-  props: Z1(),
+  props: t2(),
   emits: {
     "update:modelValue": (e) => !0
   },
@@ -30167,18 +30225,18 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     let {
       slots: t
     } = a;
-    const n = A(), {
+    const n = T(), {
       color: i,
       eager: o,
       editable: s,
       prevText: u,
       nextText: r,
       hideActions: d
-    } = Oa(e), y = Ve(e, "modelValue"), b = k(() => e.items.map((m, f) => {
-      const x = ut(m, e.itemTitle, m), p = ut(m, e.itemValue, f + 1);
+    } = Ma(e), y = Ve(e, "modelValue"), b = S(() => e.items.map((m, p) => {
+      const k = ut(m, e.itemTitle, m), _ = ut(m, e.itemValue, p + 1);
       return {
-        title: x,
-        value: p,
+        title: k,
+        value: _,
         raw: m
       };
     }));
@@ -30196,10 +30254,10 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         color: i
       }
     }), se(() => {
-      const m = Ns.filterProps(e);
-      return l(Ns, X(m, {
+      const m = Ds.filterProps(e);
+      return l(Ds, X(m, {
         modelValue: y.value,
-        "onUpdate:modelValue": (f) => y.value = f,
+        "onUpdate:modelValue": (p) => y.value = p,
         ref: n,
         class: ["v-stepper", {
           "v-stepper--alt-labels": e.altLabels,
@@ -30210,31 +30268,31 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         style: e.style
       }), {
         ...t,
-        default: (f) => {
+        default: (p) => {
           var h;
           let {
-            prev: x,
-            next: p
-          } = f;
-          return l(ve, null, [b.value.map((_) => {
+            prev: k,
+            next: _
+          } = p;
+          return l(de, null, [b.value.map((g) => {
             let {
-              raw: g,
-              ...S
-            } = _;
-            return l(Oc, S, {
+              raw: f,
+              ...x
+            } = g;
+            return l(Oc, x, {
               ...t,
-              default: t[`item.${S.value}`]
+              default: t[`item.${x.value}`]
             });
           }), (h = t.default) == null ? void 0 : h.call(t, {
-            prev: x,
-            next: p,
+            prev: k,
+            next: _,
             step: y.value
           })]);
         }
       });
     }), {};
   }
-}), t2 = ie()({
+}), n2 = ie()({
   name: "VPullToRefresh",
   props: {
     pullDownThreshold: {
@@ -30250,16 +30308,16 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       slots: t,
       emit: n
     } = a, i = 0, o = [];
-    const s = _e(0), u = A(), r = _e(!1), d = _e(!1), y = _e(!1), b = k(() => s.value >= e.pullDownThreshold && !r.value), m = k(() => ht(s.value, 0, e.pullDownThreshold));
-    function f(h) {
+    const s = _e(0), u = T(), r = _e(!1), d = _e(!1), y = _e(!1), b = S(() => s.value >= e.pullDownThreshold && !r.value), m = S(() => ht(s.value, 0, e.pullDownThreshold));
+    function p(h) {
       r.value || (y.value = !0, i = "clientY" in h ? h.clientY : h.touches[0].clientY);
     }
-    function x(h) {
+    function k(h) {
       if (r.value || !y.value) return;
-      const _ = "clientY" in h ? h.clientY : h.touches[0].clientY;
-      o.length && !o[0].scrollTop && (s.value = _ - i);
+      const g = "clientY" in h ? h.clientY : h.touches[0].clientY;
+      o.length && !o[0].scrollTop && (s.value = g - i);
     }
-    function p(h) {
+    function _(h) {
       r.value || (y.value = !1, b.value ? (n("load", {
         done: function() {
           r.value && (s.value = 0, r.value = !1);
@@ -30271,21 +30329,21 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     }), we([m, r], () => {
       if (o.length) {
         const h = m.value && !r.value;
-        o.forEach((_) => _.style.overflow = h ? "hidden" : "auto");
+        o.forEach((g) => g.style.overflow = h ? "hidden" : "auto");
       }
-    }), we(m, (h, _) => {
-      d.value = h < _;
+    }), we(m, (h, g) => {
+      d.value = h < g;
     }), se(() => {
       var h;
       return l("div", {
         class: ["v-pull-to-refresh"],
-        onTouchstart: f,
-        onTouchmove: x,
-        onTouchend: p,
-        onMousedown: f,
-        onMouseup: p,
-        onMouseleave: p,
-        onMousemove: x,
+        onTouchstart: p,
+        onTouchmove: k,
+        onTouchend: _,
+        onMousedown: p,
+        onMouseup: _,
+        onMouseleave: _,
+        onMousemove: k,
         ref: u
       }, [l("div", {
         class: ["v-pull-to-refresh__pull-down", {
@@ -30316,7 +30374,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       }, [(h = t.default) == null ? void 0 : h.call(t)])]);
     });
   }
-}), a2 = K({
+}), l2 = K({
   // TODO: Port this to Snackbar on dev
   closable: [Boolean, String],
   closeText: {
@@ -30327,10 +30385,10 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     type: Array,
     default: () => []
   },
-  ...Me(Tc(), ["modelValue"])
-}, "VSnackbarQueue"), n2 = ie()({
+  ...ze(Tc(), ["modelValue"])
+}, "VSnackbarQueue"), i2 = ie()({
   name: "VSnackbarQueue",
-  props: a2(),
+  props: l2(),
   emits: {
     "update:modelValue": (e) => !0
   },
@@ -30342,8 +30400,8 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     const {
       t: i
     } = Qe(), o = _e(!1), s = _e(!1), u = _e();
-    we(() => e.modelValue.length, (m, f) => {
-      !s.value && m > f && d();
+    we(() => e.modelValue.length, (m, p) => {
+      !s.value && m > p && d();
     }), we(o, (m) => {
       m && (s.value = !0);
     });
@@ -30351,8 +30409,8 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       e.modelValue.length ? d() : (u.value = void 0, s.value = !1);
     }
     function d() {
-      const [m, ...f] = e.modelValue;
-      t("update:modelValue", f), u.value = typeof m == "string" ? {
+      const [m, ...p] = e.modelValue;
+      t("update:modelValue", p), u.value = typeof m == "string" ? {
         text: m
       } : m, Ee(() => {
         o.value = !0;
@@ -30361,16 +30419,16 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     function y() {
       o.value = !1;
     }
-    const b = k(() => ({
+    const b = S(() => ({
       color: typeof e.closable == "string" ? e.closable : void 0,
       text: i(e.closeText)
     }));
     se(() => {
       const m = !!(e.closable || n.actions), {
-        modelValue: f,
-        ...x
-      } = Ds.filterProps(e);
-      return l(ve, null, [s.value && !!u.value && (n.default ? l(De, {
+        modelValue: p,
+        ...k
+      } = Ns.filterProps(e);
+      return l(de, null, [s.value && !!u.value && (n.default ? l(Ne, {
         defaults: {
           VSnackbar: u.value
         }
@@ -30378,18 +30436,18 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         default: () => [n.default({
           item: u.value
         })]
-      }) : l(Ds, X(x, u.value, {
+      }) : l(Ns, X(k, u.value, {
         modelValue: o.value,
-        "onUpdate:modelValue": (p) => o.value = p,
+        "onUpdate:modelValue": (_) => o.value = _,
         onAfterLeave: r
       }), {
         text: n.text ? () => {
-          var p;
-          return (p = n.text) == null ? void 0 : p.call(n, {
+          var _;
+          return (_ = n.text) == null ? void 0 : _.call(n, {
             item: u.value
           });
         } : void 0,
-        actions: m ? () => l(ve, null, [n.actions ? l(De, {
+        actions: m ? () => l(de, null, [n.actions ? l(Ne, {
           defaults: {
             VBtn: b.value
           }
@@ -30406,7 +30464,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       }))]);
     });
   }
-}), l2 = K({
+}), o2 = K({
   allowedValues: Function,
   ampm: Boolean,
   color: String,
@@ -30440,7 +30498,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
   }
 }, "VTimePickerClock"), xi = ie()({
   name: "VTimePickerClock",
-  props: l2(),
+  props: o2(),
   emits: {
     change: (e) => !0,
     input: (e) => !0
@@ -30449,13 +30507,13 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     let {
       emit: t
     } = a;
-    const n = A(null), i = A(null), o = A(void 0), s = A(!1), u = A(null), r = A(null), {
+    const n = T(null), i = T(null), o = T(void 0), s = T(!1), u = T(null), r = T(null), {
       textColorClasses: d,
       textColorStyles: y
     } = kt(oe(e, "color")), {
       backgroundColorClasses: b,
       backgroundColorStyles: m
-    } = dt(oe(e, "color")), f = k(() => e.max - e.min + 1), x = k(() => e.double ? f.value / 2 : f.value), p = k(() => 360 / x.value), h = k(() => p.value * Math.PI / 180), _ = k(() => e.modelValue == null ? e.min : e.modelValue), g = k(() => 0.62), S = k(() => {
+    } = dt(oe(e, "color")), p = S(() => e.max - e.min + 1), k = S(() => e.double ? p.value / 2 : p.value), _ = S(() => 360 / k.value), h = S(() => _.value * Math.PI / 180), g = S(() => e.modelValue == null ? e.min : e.modelValue), f = S(() => 0.62), x = S(() => {
       const N = [];
       for (let j = e.min; j <= e.max; j = j + e.step)
         N.push(j);
@@ -30464,69 +30522,69 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
     we(() => e.modelValue, (N) => {
       o.value = N;
     });
-    function I(N) {
+    function V(N) {
       o.value !== N && (o.value = N), t("input", N);
     }
     function $(N) {
       return !e.allowedValues || e.allowedValues(N);
     }
-    function O(N) {
+    function L(N) {
       if (!e.scrollable || e.disabled) return;
       N.preventDefault();
       const j = Math.sign(-N.deltaY || 1);
-      let V = _.value;
+      let I = g.value;
       do
-        V = V + j, V = (V - e.min + f.value) % f.value + e.min;
-      while (!$(V) && V !== _.value);
-      V !== e.displayedValue && I(V);
+        I = I + j, I = (I - e.min + p.value) % p.value + e.min;
+      while (!$(I) && I !== g.value);
+      I !== e.displayedValue && V(I);
     }
     function E(N) {
-      return e.double && N - e.min >= x.value;
+      return e.double && N - e.min >= k.value;
     }
-    function R(N) {
-      return E(N) ? g.value : 1;
+    function O(N) {
+      return E(N) ? f.value : 1;
     }
-    function T(N) {
+    function D(N) {
       const j = e.rotate * Math.PI / 180;
       return {
-        x: Math.sin((N - e.min) * h.value + j) * R(N),
-        y: -Math.cos((N - e.min) * h.value + j) * R(N)
+        x: Math.sin((N - e.min) * h.value + j) * O(N),
+        y: -Math.cos((N - e.min) * h.value + j) * O(N)
       };
     }
     function U(N, j) {
-      const V = (Math.round(N / p.value) + (j ? x.value : 0)) % f.value + e.min;
-      return N < 360 - p.value / 2 ? V : j ? e.max - x.value + 1 : e.min;
+      const I = (Math.round(N / _.value) + (j ? k.value : 0)) % p.value + e.min;
+      return N < 360 - _.value / 2 ? I : j ? e.max - k.value + 1 : e.min;
     }
     function G(N) {
       const {
         x: j,
-        y: V
-      } = T(N);
+        y: I
+      } = D(N);
       return {
         left: `${50 + j * 50}%`,
-        top: `${50 + V * 50}%`
+        top: `${50 + I * 50}%`
       };
     }
     function C(N, j) {
-      const V = j.x - N.x, M = j.y - N.y;
-      return Math.sqrt(V * V + M * M);
+      const I = j.x - N.x, M = j.y - N.y;
+      return Math.sqrt(I * I + M * M);
     }
-    function L(N, j) {
-      const V = 2 * Math.atan2(j.y - N.y - C(N, j), j.x - N.x);
-      return Math.abs(V * 180 / Math.PI);
+    function R(N, j) {
+      const I = 2 * Math.atan2(j.y - N.y - C(N, j), j.x - N.x);
+      return Math.abs(I * 180 / Math.PI);
     }
-    function W(N) {
-      u.value === null && (u.value = N), r.value = N, I(N);
+    function q(N) {
+      u.value === null && (u.value = N), r.value = N, V(N);
     }
     function Y(N) {
-      var ne, he;
+      var le, he;
       if (N.preventDefault(), !s.value && N.type !== "click" || !n.value) return;
       const {
         width: j,
-        top: V,
+        top: I,
         left: M
-      } = (ne = n.value) == null ? void 0 : ne.getBoundingClientRect(), {
-        width: te
+      } = (le = n.value) == null ? void 0 : le.getBoundingClientRect(), {
+        width: ae
       } = ((he = i.value) == null ? void 0 : he.getBoundingClientRect()) ?? {
         width: 0
       }, {
@@ -30537,11 +30595,11 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         y: -j / 2
       }, pe = {
         x: ge - M,
-        y: V - be
-      }, ce = Math.round(L(fe, pe) - e.rotate + 360) % 360, z = e.double && C(fe, pe) < (te + te * g.value) / 4, Q = Math.ceil(15 / p.value);
+        y: I - be
+      }, ce = Math.round(R(fe, pe) - e.rotate + 360) % 360, z = e.double && C(fe, pe) < (ae + ae * f.value) / 4, Q = Math.ceil(15 / _.value);
       let P;
       for (let Ce = 0; Ce < Q; Ce++)
-        if (P = U(ce + Ce * p.value, z), $(P) || (P = U(ce - Ce * p.value, z), $(P))) return W(P);
+        if (P = U(ce + Ce * _.value, z), $(P) || (P = U(ce - Ce * _.value, z), $(P))) return q(P);
     }
     function J(N) {
       e.disabled || (N.preventDefault(), window.addEventListener("mousemove", Y), window.addEventListener("touchmove", Y), window.addEventListener("mouseup", H), window.addEventListener("touchend", H), u.value = null, r.value = null, s.value = !0, Y(N));
@@ -30557,7 +30615,7 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       }],
       onMousedown: J,
       onTouchstart: J,
-      onWheel: O,
+      onWheel: L,
       ref: n
     }, [l("div", {
       class: "v-time-picker-clock__inner",
@@ -30568,10 +30626,10 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
         "v-time-picker-clock__hand--inner": E(e.modelValue)
       }, d.value],
       style: [{
-        transform: `rotate(${e.rotate + p.value * (_.value - e.min)}deg) scaleY(${R(_.value)})`
+        transform: `rotate(${e.rotate + _.value * (g.value - e.min)}deg) scaleY(${O(g.value)})`
       }, y.value]
-    }, null), S.value.map((N) => {
-      const j = N === _.value;
+    }, null), x.value.map((N) => {
+      const j = N === g.value;
       return l("div", {
         class: [{
           "v-time-picker-clock__item": !0,
@@ -30582,14 +30640,14 @@ const z1 = /* @__PURE__ */ Et(O1, [["render", M1]]), U1 = K({
       }, [l("span", null, [e.format(N)])]);
     })])]));
   }
-}), i2 = (e, a, t) => (a = a >> 0, e = String(e), t = String(t), e.length > a ? String(e) : (a = a - e.length, a > t.length && (t += t.repeat(a / t.length)), t.slice(0, a) + String(e))), ga = function(e) {
+}), s2 = (e, a, t) => (a = a >> 0, e = String(e), t = String(t), e.length > a ? String(e) : (a = a - e.length, a > t.length && (t += t.repeat(a / t.length)), t.slice(0, a) + String(e))), ga = function(e) {
   let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 2;
-  return i2(e, a, "0");
+  return s2(e, a, "0");
 };
 var Je = /* @__PURE__ */ function(e) {
   return e[e.Hour = 1] = "Hour", e[e.Minute = 2] = "Minute", e[e.Second = 3] = "Second", e;
 }(Je || {});
-const o2 = K({
+const u2 = K({
   ampm: Boolean,
   ampmInTitle: Boolean,
   ampmReadonly: Boolean,
@@ -30605,7 +30663,7 @@ const o2 = K({
   value: Number
 }, "VTimePickerControls"), ki = ie()({
   name: "VTimePickerControls",
-  props: o2(),
+  props: u2(),
   emits: {
     "update:period": (e) => !0,
     "update:selecting": (e) => !0
@@ -30643,7 +30701,7 @@ const o2 = K({
         class: ["v-time-picker-controls__time__separator", {
           "v-time-picker-controls--with-seconds__time__separator": e.useSeconds
         }]
-      }, [de(":")]), l(Z, {
+      }, [ve(":")]), l(Z, {
         active: e.selecting === 2,
         color: e.selecting === 2 ? e.color : void 0,
         class: {
@@ -30661,7 +30719,7 @@ const o2 = K({
           "v-time-picker-controls--with-seconds__time__separator": e.useSeconds
         }],
         key: "secondsDivider"
-      }, [de(":")]), e.useSeconds && l(Z, {
+      }, [ve(":")]), e.useSeconds && l(Z, {
         key: "secondsVal",
         variant: "tonal",
         onClick: () => t("update:selecting", Je.Second),
@@ -30703,13 +30761,13 @@ const o2 = K({
       }, null)])])]);
     }), {};
   }
-}), s2 = Xt(24), Mc = Xt(12), u2 = Mc.map((e) => e + 12);
+}), r2 = Xt(24), Mc = Xt(12), c2 = Mc.map((e) => e + 12);
 Xt(60);
-const r2 = {
+const d2 = {
   1: "hour",
   2: "minute",
   3: "second"
-}, c2 = K({
+}, v2 = K({
   allowedHours: [Function, Array],
   allowedMinutes: [Function, Array],
   allowedSeconds: [Function, Array],
@@ -30725,12 +30783,12 @@ const r2 = {
   readonly: Boolean,
   scrollable: Boolean,
   useSeconds: Boolean,
-  ...Me(fo({
+  ...ze(fo({
     title: "$vuetify.timePicker.title"
   }), ["landscape"])
-}, "VTimePicker"), d2 = ie()({
+}, "VTimePicker"), f2 = ie()({
   name: "VTimePicker",
-  props: c2(),
+  props: v2(),
   emits: {
     "update:hour": (e) => !0,
     "update:minute": (e) => !0,
@@ -30745,47 +30803,47 @@ const r2 = {
     } = a;
     const {
       t: i
-    } = Qe(), o = A(null), s = A(null), u = A(null), r = A(null), d = A(null), y = A(null), b = A("am"), m = A(Je.Hour), f = A(null), x = A(null), p = k(() => {
+    } = Qe(), o = T(null), s = T(null), u = T(null), r = T(null), d = T(null), y = T(null), b = T("am"), m = T(Je.Hour), p = T(null), k = T(null), _ = S(() => {
       let C;
       if (e.allowedHours instanceof Array ? C = (Y) => e.allowedHours.includes(Y) : C = e.allowedHours, !e.min && !e.max) return C;
-      const L = e.min ? Number(e.min.split(":")[0]) : 0, W = e.max ? Number(e.max.split(":")[0]) : 23;
-      return (Y) => Y >= L * 1 && Y <= W * 1 && (!C || C(Y));
-    }), h = k(() => {
+      const R = e.min ? Number(e.min.split(":")[0]) : 0, q = e.max ? Number(e.max.split(":")[0]) : 23;
+      return (Y) => Y >= R * 1 && Y <= q * 1 && (!C || C(Y));
+    }), h = S(() => {
       let C;
-      const L = !p.value || o.value === null || p.value(o.value);
-      if (e.allowedMinutes instanceof Array ? C = (V) => e.allowedMinutes.includes(V) : C = e.allowedMinutes, !e.min && !e.max)
-        return L ? C : () => !1;
-      const [W, Y] = e.min ? e.min.split(":").map(Number) : [0, 0], [J, H] = e.max ? e.max.split(":").map(Number) : [23, 59], N = W * 60 + Y * 1, j = J * 60 + H * 1;
-      return (V) => {
-        const M = 60 * o.value + V;
-        return M >= N && M <= j && L && (!C || C(V));
+      const R = !_.value || o.value === null || _.value(o.value);
+      if (e.allowedMinutes instanceof Array ? C = (I) => e.allowedMinutes.includes(I) : C = e.allowedMinutes, !e.min && !e.max)
+        return R ? C : () => !1;
+      const [q, Y] = e.min ? e.min.split(":").map(Number) : [0, 0], [J, H] = e.max ? e.max.split(":").map(Number) : [23, 59], N = q * 60 + Y * 1, j = J * 60 + H * 1;
+      return (I) => {
+        const M = 60 * o.value + I;
+        return M >= N && M <= j && R && (!C || C(I));
       };
-    }), _ = k(() => {
+    }), g = S(() => {
       let C;
-      const W = (!p.value || o.value === null || p.value(o.value)) && (!h.value || s.value === null || h.value(s.value));
+      const q = (!_.value || o.value === null || _.value(o.value)) && (!h.value || s.value === null || h.value(s.value));
       if (e.allowedSeconds instanceof Array ? C = (ge) => e.allowedSeconds.includes(ge) : C = e.allowedSeconds, !e.min && !e.max)
-        return W ? C : () => !1;
-      const [Y, J, H] = e.min ? e.min.split(":").map(Number) : [0, 0, 0], [N, j, V] = e.max ? e.max.split(":").map(Number) : [23, 59, 59], M = Y * 3600 + J * 60 + (H || 0) * 1, te = N * 3600 + j * 60 + (V || 0) * 1;
+        return q ? C : () => !1;
+      const [Y, J, H] = e.min ? e.min.split(":").map(Number) : [0, 0, 0], [N, j, I] = e.max ? e.max.split(":").map(Number) : [23, 59, 59], M = Y * 3600 + J * 60 + (H || 0) * 1, ae = N * 3600 + j * 60 + (I || 0) * 1;
       return (ge) => {
         const be = 3600 * o.value + 60 * s.value + ge;
-        return be >= M && be <= te && W && (!C || C(ge));
+        return be >= M && be <= ae && q && (!C || C(ge));
       };
-    }), g = k(() => e.format === "ampm");
+    }), f = S(() => e.format === "ampm");
     we(() => e.modelValue, (C) => E(C)), st(() => {
       E(e.modelValue);
     });
-    function S() {
+    function x() {
       return o.value != null && s.value != null && (!e.useSeconds || u.value != null) ? `${ga(o.value)}:${ga(s.value)}` + (e.useSeconds ? `:${ga(u.value)}` : "") : null;
     }
-    function I() {
-      const C = S();
+    function V() {
+      const C = x();
       C !== null && t("update:modelValue", C);
     }
     function $(C) {
       return C ? (C - 1) % 12 + 1 : 12;
     }
-    function O(C, L) {
-      return C % 12 + (L === "pm" ? 12 : 0);
+    function L(C, R) {
+      return C % 12 + (R === "pm" ? 12 : 0);
     }
     function E(C) {
       if (C == null || C === "")
@@ -30793,29 +30851,29 @@ const r2 = {
       else if (C instanceof Date)
         o.value = C.getHours(), s.value = C.getMinutes(), u.value = C.getSeconds();
       else {
-        const [L, , W, , Y, J] = C.trim().toLowerCase().match(/^(\d+):(\d+)(:(\d+))?([ap]m)?$/) || new Array(6);
-        o.value = J ? O(parseInt(L, 10), J) : parseInt(L, 10), s.value = parseInt(W, 10), u.value = parseInt(Y || 0, 10);
+        const [R, , q, , Y, J] = C.trim().toLowerCase().match(/^(\d+):(\d+)(:(\d+))?([ap]m)?$/) || new Array(6);
+        o.value = J ? L(parseInt(R, 10), J) : parseInt(R, 10), s.value = parseInt(q, 10), u.value = parseInt(Y || 0, 10);
       }
       b.value = o.value == null || o.value < 12 ? "am" : "pm";
     }
-    function R(C, L) {
-      const W = p.value;
-      if (!W) return L;
-      const Y = g.value ? L < 12 ? Mc : u2 : s2;
-      return ((Y.find((H) => W((H + L) % Y.length + Y[0])) || 0) + L) % Y.length + Y[0];
+    function O(C, R) {
+      const q = _.value;
+      if (!q) return R;
+      const Y = f.value ? R < 12 ? Mc : c2 : r2;
+      return ((Y.find((H) => q((H + R) % Y.length + Y[0])) || 0) + R) % Y.length + Y[0];
     }
-    function T(C) {
+    function D(C) {
       if (b.value = C, o.value != null) {
-        const L = o.value + (b.value === "am" ? -12 : 12);
-        o.value = R("hour", L);
+        const R = o.value + (b.value === "am" ? -12 : 12);
+        o.value = O("hour", R);
       }
-      return t("update:period", C), I(), !0;
+      return t("update:period", C), V(), !0;
     }
     function U(C) {
-      m.value === Je.Hour ? o.value = g.value ? O(C, b.value) : C : m.value === Je.Minute ? s.value = C : u.value = C;
+      m.value === Je.Hour ? o.value = f.value ? L(C, b.value) : C : m.value === Je.Minute ? s.value = C : u.value = C;
     }
     function G(C) {
-      switch (r2[m.value]) {
+      switch (d2[m.value]) {
         case "hour":
           t("update:hour", C);
           break;
@@ -30826,11 +30884,11 @@ const r2 = {
           t("update:second", C);
           break;
       }
-      const L = m.value === (e.useSeconds ? Je.Second : Je.Minute);
-      m.value === Je.Hour ? m.value = Je.Minute : e.useSeconds && m.value === Je.Minute && (m.value = Je.Second), !(o.value === r.value && s.value === d.value && (!e.useSeconds || u.value === y.value) || S() === null) && (r.value = o.value, d.value = s.value, e.useSeconds && (y.value = u.value), L && I());
+      const R = m.value === (e.useSeconds ? Je.Second : Je.Minute);
+      m.value === Je.Hour ? m.value = Je.Minute : e.useSeconds && m.value === Je.Minute && (m.value = Je.Second), !(o.value === r.value && s.value === d.value && (!e.useSeconds || u.value === y.value) || x() === null) && (r.value = o.value, d.value = s.value, e.useSeconds && (y.value = u.value), R && V());
     }
     se(() => {
-      const C = bn.filterProps(e), L = ki.filterProps(e), W = xi.filterProps(Me(e, ["format", "modelValue", "min", "max"]));
+      const C = bn.filterProps(e), R = ki.filterProps(e), q = xi.filterProps(ze(e, ["format", "modelValue", "min", "max"]));
       return l(bn, X(C, {
         color: void 0,
         class: ["v-time-picker", e.class],
@@ -30842,51 +30900,51 @@ const r2 = {
             class: "v-time-picker__title"
           }, [i(e.title)]);
         },
-        header: () => l(ki, X(L, {
-          ampm: g.value || e.ampmInTitle,
-          ampmReadonly: g.value && !e.ampmInTitle,
+        header: () => l(ki, X(R, {
+          ampm: f.value || e.ampmInTitle,
+          ampmReadonly: f.value && !e.ampmInTitle,
           hour: o.value,
           minute: s.value,
           period: b.value,
           second: u.value,
           selecting: m.value,
-          "onUpdate:period": (Y) => T(Y),
+          "onUpdate:period": (Y) => D(Y),
           "onUpdate:selecting": (Y) => m.value = Y,
-          ref: f
+          ref: p
         }), null),
-        default: () => l(xi, X(W, {
-          allowedValues: m.value === Je.Hour ? p.value : m.value === Je.Minute ? h.value : _.value,
-          double: m.value === Je.Hour && !g.value,
-          format: m.value === Je.Hour ? g.value ? $ : (Y) => Y : (Y) => ga(Y, 2),
-          max: m.value === Je.Hour ? g.value && b.value === "am" ? 11 : 23 : 59,
-          min: m.value === Je.Hour && g.value && b.value === "pm" ? 12 : 0,
+        default: () => l(xi, X(q, {
+          allowedValues: m.value === Je.Hour ? _.value : m.value === Je.Minute ? h.value : g.value,
+          double: m.value === Je.Hour && !f.value,
+          format: m.value === Je.Hour ? f.value ? $ : (Y) => Y : (Y) => ga(Y, 2),
+          max: m.value === Je.Hour ? f.value && b.value === "am" ? 11 : 23 : 59,
+          min: m.value === Je.Hour && f.value && b.value === "pm" ? 12 : 0,
           size: 20,
           step: m.value === Je.Hour ? 1 : 5,
           modelValue: m.value === Je.Hour ? o.value : m.value === Je.Minute ? s.value : u.value,
           onChange: G,
           onInput: U,
-          ref: x
+          ref: k
         }), null),
         actions: n.actions
       });
     });
   }
-}), v2 = K({
-  ...Me(Ku({
+}), m2 = K({
+  ...ze(Ku({
     collapseIcon: "$treeviewCollapse",
     expandIcon: "$treeviewExpand"
   }), ["subgroup"])
 }, "VTreeviewGroup"), Si = ie()({
   name: "VTreeviewGroup",
-  props: v2(),
+  props: m2(),
   setup(e, a) {
     let {
       slots: t
     } = a;
-    const n = A(), i = k(() => {
+    const n = T(), i = S(() => {
       var s;
       return (s = n.value) != null && s.isOpen ? e.collapseIcon : e.expandIcon;
-    }), o = k(() => {
+    }), o = S(() => {
       var s;
       return {
         VTreeviewItem: {
@@ -30905,7 +30963,7 @@ const r2 = {
         subgroup: !0
       }), {
         ...t,
-        activator: t.activator ? (u) => l(ve, null, [l(De, {
+        activator: t.activator ? (u) => l(de, null, [l(Ne, {
           defaults: o.value
         }, {
           default: () => {
@@ -30916,7 +30974,7 @@ const r2 = {
       });
     }), {};
   }
-}), zc = Symbol.for("vuetify:v-treeview"), f2 = K({
+}), zc = Symbol.for("vuetify:v-treeview"), g2 = K({
   loading: Boolean,
   toggleIcon: Ie,
   ...Qu({
@@ -30924,53 +30982,53 @@ const r2 = {
   })
 }, "VTreeviewItem"), wi = ie()({
   name: "VTreeviewItem",
-  props: f2(),
+  props: g2(),
   setup(e, a) {
     let {
       attrs: t,
       slots: n,
       emit: i
     } = a;
-    const o = In(e, t), s = k(() => e.value === void 0 ? o.href.value : e.value), u = A(), {
+    const o = In(e, t), s = S(() => e.value === void 0 ? o.href.value : e.value), u = T(), {
       activate: r,
       isActivated: d,
       select: y,
       isSelected: b,
       isIndeterminate: m,
-      isGroupActivator: f,
-      root: x,
-      id: p
-    } = Zi(s, !1), h = k(() => x.activatable.value && f), {
-      densityClasses: _
-    } = Pt(e, "v-list-item"), g = k(() => ({
+      isGroupActivator: p,
+      root: k,
+      id: _
+    } = Zi(s, !1), h = S(() => k.activatable.value && p), {
+      densityClasses: g
+    } = Pt(e, "v-list-item"), f = S(() => ({
       isActive: d.value,
       select: y,
       isSelected: b.value,
       isIndeterminate: m.value
-    })), S = k(() => {
+    })), x = S(() => {
       var E;
       return !e.disabled && e.link !== !1 && (e.link || o.isClickable.value || e.value != null && !!((E = u.value) != null && E.list));
     });
-    function I(E) {
-      var R, T;
-      !S.value || !h.value && f || x.activatable.value && (h.value ? r(!d.value, E) : (T = u.value) == null || T.activate(!((R = u.value) != null && R.isActivated), E));
+    function V(E) {
+      var O, D;
+      !x.value || !h.value && p || k.activatable.value && (h.value ? r(!d.value, E) : (D = u.value) == null || D.activate(!((O = u.value) != null && O.isActivated), E));
     }
     function $(E) {
-      (E.key === "Enter" || E.key === " ") && (E.preventDefault(), I(E));
+      (E.key === "Enter" || E.key === " ") && (E.preventDefault(), V(E));
     }
-    const O = Be(zc, {
-      visibleIds: A()
+    const L = Be(zc, {
+      visibleIds: T()
     }).visibleIds;
     return se(() => {
       var G;
-      const E = n.title || e.title != null, R = n.subtitle || e.subtitle != null, T = xt.filterProps(e), U = n.prepend || e.toggleIcon;
+      const E = n.title || e.title != null, O = n.subtitle || e.subtitle != null, D = xt.filterProps(e), U = n.prepend || e.toggleIcon;
       return h.value ? Ye(l("div", {
         class: ["v-list-item", "v-list-item--one-line", "v-treeview-item", "v-treeview-item--activetable-group-activator", {
           "v-list-item--active": d.value || b.value,
-          "v-treeview-item--filtered": O.value && !O.value.has(p.value)
-        }, _.value, e.class],
-        onClick: I
-      }, [l(ve, null, [ea(d.value || b.value, "v-list-item"), e.toggleIcon && l(cs, {
+          "v-treeview-item--filtered": L.value && !L.value.has(_.value)
+        }, g.value, e.class],
+        onClick: V
+      }, [l(de, null, [ea(d.value || b.value, "v-list-item"), e.toggleIcon && l(cs, {
         start: !1
       }, {
         default: () => [l(Z, {
@@ -31000,7 +31058,7 @@ const r2 = {
             title: e.title
           })) ?? e.title];
         }
-      }), R && l(Xu, {
+      }), O && l(Xu, {
         key: "subtitle"
       }, {
         default: () => {
@@ -31009,20 +31067,20 @@ const r2 = {
             subtitle: e.subtitle
           })) ?? e.subtitle];
         }
-      }), (G = n.default) == null ? void 0 : G.call(n, g.value)])]), [[Bt("ripple"), S.value && e.ripple]]) : l(xt, X({
+      }), (G = n.default) == null ? void 0 : G.call(n, f.value)])]), [[Bt("ripple"), x.value && e.ripple]]) : l(xt, X({
         ref: u
-      }, T, {
+      }, D, {
         class: ["v-treeview-item", {
-          "v-treeview-item--filtered": O.value && !O.value.has(p.value)
+          "v-treeview-item--filtered": L.value && !L.value.has(_.value)
         }, e.class],
-        value: p.value,
-        onClick: I,
-        onKeydown: S.value && $
+        value: _.value,
+        onClick: V,
+        onKeydown: x.value && $
       }), {
         ...n,
         prepend: U ? (C) => {
-          var L;
-          return l(ve, null, [e.toggleIcon && l(cs, {
+          var R;
+          return l(de, null, [e.toggleIcon && l(cs, {
             start: !1
           }, {
             default: () => [l(Z, {
@@ -31039,7 +31097,7 @@ const r2 = {
                 }, null);
               }
             })]
-          }), (L = n.prepend) == null ? void 0 : L.call(n, C)]);
+          }), (R = n.prepend) == null ? void 0 : R.call(n, C)]);
         } : void 0
       });
     }), {};
@@ -31081,67 +31139,67 @@ const r2 = {
     return () => {
       var u, r;
       return ((u = n.default) == null ? void 0 : u.call(n)) ?? ((r = e.items) == null ? void 0 : r.map((d) => {
-        var _;
+        var g;
         let {
           children: y,
           props: b,
           raw: m
         } = d;
-        const f = i.value === m.value, x = {
-          prepend: (g) => {
-            var S;
-            return l(ve, null, [e.selectable && (!y || y && !["leaf", "single-leaf"].includes(e.selectStrategy)) && l("div", null, [l(sa, {
+        const p = i.value === m.value, k = {
+          prepend: (f) => {
+            var x;
+            return l(de, null, [e.selectable && (!y || y && !["leaf", "single-leaf"].includes(e.selectStrategy)) && l("div", null, [l(sa, {
               key: m.value,
-              modelValue: g.isSelected,
-              loading: f,
-              indeterminate: g.isIndeterminate,
-              onClick: en(() => s(g.select, g.isSelected), ["stop"]),
-              onKeydown: (I) => {
-                ["Enter", "Space"].includes(I.key) && (I.stopPropagation(), s(g.select, g.isSelected));
+              modelValue: f.isSelected,
+              loading: p,
+              indeterminate: f.isIndeterminate,
+              onClick: ba(() => s(f.select, f.isSelected), ["stop"]),
+              onKeydown: (V) => {
+                ["Enter", "Space"].includes(V.key) && (V.stopPropagation(), s(f.select, f.isSelected));
               }
-            }, null)]), (S = n.prepend) == null ? void 0 : S.call(n, {
-              ...g,
+            }, null)]), (x = n.prepend) == null ? void 0 : x.call(n, {
+              ...f,
               item: m
             })]);
           },
-          append: n.append ? (g) => {
-            var S;
-            return (S = n.append) == null ? void 0 : S.call(n, {
-              ...g,
+          append: n.append ? (f) => {
+            var x;
+            return (x = n.append) == null ? void 0 : x.call(n, {
+              ...f,
               item: m
             });
           } : void 0,
-          title: n.title ? (g) => {
-            var S;
-            return (S = n.title) == null ? void 0 : S.call(n, {
-              ...g,
+          title: n.title ? (f) => {
+            var x;
+            return (x = n.title) == null ? void 0 : x.call(n, {
+              ...f,
               item: m
             });
           } : void 0
-        }, p = Si.filterProps(b), h = cl.filterProps(e);
+        }, _ = Si.filterProps(b), h = cl.filterProps(e);
         return y ? l(Si, X({
           value: b == null ? void 0 : b.value
-        }, p), {
-          activator: (g) => {
+        }, _), {
+          activator: (f) => {
             let {
-              props: S
-            } = g;
-            const I = {
+              props: x
+            } = f;
+            const V = {
               ...b,
-              ...S,
+              ...x,
               value: b == null ? void 0 : b.value
             };
-            return l(wi, X(I, {
-              loading: f,
+            return l(wi, X(V, {
+              loading: p,
               onClick: () => o(m)
-            }), x);
+            }), k);
           },
           default: () => l(cl, X(h, {
             items: y
           }), n)
-        }) : ((_ = n.item) == null ? void 0 : _.call(n, {
+        }) : ((g = n.item) == null ? void 0 : g.call(n, {
           props: b
-        })) ?? l(wi, b, x);
+        })) ?? l(wi, b, k);
       }));
     };
   }
@@ -31152,21 +31210,21 @@ function Gc(e) {
     a.push(t), t.children && Gc(t.children, a);
   return a;
 }
-const m2 = K({
+const y2 = K({
   openAll: Boolean,
   search: String,
   ...Al({
     filterKeys: ["title"]
   }),
   ...Uc(),
-  ...Me(ir({
+  ...ze(ir({
     collapseIcon: "$treeviewCollapse",
     expandIcon: "$treeviewExpand",
     slim: !0
   }), ["nav"])
-}, "VTreeview"), g2 = ie()({
+}, "VTreeview"), p2 = ie()({
   name: "VTreeview",
-  props: m2(),
+  props: y2(),
   emits: {
     "update:opened": (e) => !0,
     "update:activated": (e) => !0,
@@ -31180,34 +31238,34 @@ const m2 = K({
     } = a;
     const {
       items: n
-    } = lr(e), i = oe(e, "activeColor"), o = oe(e, "baseColor"), s = oe(e, "color"), u = Ve(e, "activated"), r = Ve(e, "selected"), d = A(), y = k(() => e.openAll ? _(n.value) : e.opened), b = k(() => Gc(n.value)), m = oe(e, "search"), {
-      filteredItems: f
-    } = Tl(e, b, m), x = k(() => m.value ? new Set(f.value.flatMap((g) => [...p(g.props.value), ...h(g.props.value)])) : null);
-    function p(g) {
+    } = lr(e), i = oe(e, "activeColor"), o = oe(e, "baseColor"), s = oe(e, "color"), u = Ve(e, "activated"), r = Ve(e, "selected"), d = T(), y = S(() => e.openAll ? g(n.value) : e.opened), b = S(() => Gc(n.value)), m = oe(e, "search"), {
+      filteredItems: p
+    } = Tl(e, b, m), k = S(() => m.value ? new Set(p.value.flatMap((f) => [..._(f.props.value), ...h(f.props.value)])) : null);
+    function _(f) {
       var $;
-      const S = [];
-      let I = g;
-      for (; I != null; )
-        S.unshift(I), I = ($ = d.value) == null ? void 0 : $.parents.get(I);
-      return S;
+      const x = [];
+      let V = f;
+      for (; V != null; )
+        x.unshift(V), V = ($ = d.value) == null ? void 0 : $.parents.get(V);
+      return x;
     }
-    function h(g) {
-      var $, O;
-      const S = [], I = ((($ = d.value) == null ? void 0 : $.children.get(g)) ?? []).slice();
-      for (; I.length; ) {
-        const E = I.shift();
-        E && (S.push(E), I.push(...(((O = d.value) == null ? void 0 : O.children.get(E)) ?? []).slice()));
+    function h(f) {
+      var $, L;
+      const x = [], V = ((($ = d.value) == null ? void 0 : $.children.get(f)) ?? []).slice();
+      for (; V.length; ) {
+        const E = V.shift();
+        E && (x.push(E), V.push(...(((L = d.value) == null ? void 0 : L.children.get(E)) ?? []).slice()));
       }
-      return S;
+      return x;
     }
-    function _(g) {
-      let S = [];
-      for (const I of g)
-        I.children && (S.push(I.value), I.children && (S = S.concat(_(I.children))));
-      return S;
+    function g(f) {
+      let x = [];
+      for (const V of f)
+        V.children && (x.push(V.value), V.children && (x = x.concat(g(V.children))));
+      return x;
     }
     return Ke(zc, {
-      visibleIds: x
+      visibleIds: k
     }), pt({
       VTreeviewGroup: {
         activeColor: i,
@@ -31227,19 +31285,19 @@ const m2 = K({
         variant: oe(e, "variant")
       }
     }), se(() => {
-      const g = _a.filterProps(e), S = cl.filterProps(e);
-      return l(_a, X({
+      const f = ha.filterProps(e), x = cl.filterProps(e);
+      return l(ha, X({
         ref: d
-      }, g, {
+      }, f, {
         class: ["v-treeview", e.class],
         style: e.style,
         opened: y.value,
         activated: u.value,
-        "onUpdate:activated": (I) => u.value = I,
+        "onUpdate:activated": (V) => u.value = V,
         selected: r.value,
-        "onUpdate:selected": (I) => r.value = I
+        "onUpdate:selected": (V) => r.value = V
       }), {
-        default: () => [l(cl, X(S, {
+        default: () => [l(cl, X(x, {
           items: n.value
         }), t)]
       });
@@ -31247,31 +31305,31 @@ const m2 = K({
       open
     };
   }
-}), y2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+}), b2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  VCalendar: W1,
+  VCalendar: Y1,
   VCalendarDay: Jn,
   VCalendarHeader: hi,
   VCalendarInterval: _i,
   VCalendarIntervalEvent: bi,
   VCalendarMonthDay: Lc,
-  VDateInput: Y1,
-  VNumberInput: K1,
+  VDateInput: K1,
+  VNumberInput: Q1,
   VPicker: bn,
   VPickerTitle: wc,
-  VPullToRefresh: t2,
-  VSnackbarQueue: n2,
-  VStepperVertical: e2,
+  VPullToRefresh: n2,
+  VSnackbarQueue: i2,
+  VStepperVertical: a2,
   VStepperVerticalActions: Rc,
   VStepperVerticalItem: Oc,
-  VTimePicker: d2,
+  VTimePicker: f2,
   VTimePickerClock: xi,
   VTimePickerControls: ki,
-  VTreeview: g2,
+  VTreeview: p2,
   VTreeviewGroup: Si,
   VTreeviewItem: wi
 }, Symbol.toStringTag, { value: "Module" }));
-function p2(e, a) {
+function _2(e, a) {
   const t = a.modifiers || {}, n = a.value, {
     once: i,
     immediate: o,
@@ -31299,11 +31357,11 @@ function jc(e, a) {
   var t;
   (t = e._mutate) != null && t[a.instance.$.uid] && (e._mutate[a.instance.$.uid].observer.disconnect(), delete e._mutate[a.instance.$.uid]);
 }
-const b2 = {
-  mounted: p2,
+const h2 = {
+  mounted: _2,
   unmounted: jc
 };
-function _2(e, a) {
+function x2(e, a) {
   var i, o;
   const t = a.value, n = {
     passive: !((i = a.modifiers) != null && i.active)
@@ -31313,7 +31371,7 @@ function _2(e, a) {
     options: n
   }, (o = a.modifiers) != null && o.quiet || t();
 }
-function h2(e, a) {
+function k2(e, a) {
   var i;
   if (!((i = e._onResize) != null && i[a.instance.$.uid])) return;
   const {
@@ -31322,9 +31380,9 @@ function h2(e, a) {
   } = e._onResize[a.instance.$.uid];
   window.removeEventListener("resize", t, n), delete e._onResize[a.instance.$.uid];
 }
-const x2 = {
-  mounted: _2,
-  unmounted: h2
+const S2 = {
+  mounted: x2,
+  unmounted: k2
 };
 function Hc(e, a) {
   const {
@@ -31349,16 +31407,16 @@ function Wc(e, a) {
   } = e._onScroll[a.instance.$.uid];
   i.removeEventListener("scroll", t, n), delete e._onScroll[a.instance.$.uid];
 }
-function k2(e, a) {
+function w2(e, a) {
   a.value !== a.oldValue && (Wc(e, a), Hc(e, a));
 }
-const S2 = {
+const C2 = {
   mounted: Hc,
   unmounted: Wc,
-  updated: k2
+  updated: w2
 };
-function w2(e, a) {
-  const t = typeof e == "string" ? Ti(e) : e, n = C2(t, a);
+function V2(e, a) {
+  const t = typeof e == "string" ? Ti(e) : e, n = I2(t, a);
   return {
     mounted: n,
     updated: n,
@@ -31367,16 +31425,16 @@ function w2(e, a) {
     }
   };
 }
-function C2(e, a) {
+function I2(e, a) {
   return function(t, n, i) {
-    var b, m, f;
-    const o = typeof a == "function" ? a(n) : a, s = ((b = n.value) == null ? void 0 : b.text) ?? n.value ?? (o == null ? void 0 : o.text), u = ln(n.value) ? n.value : {}, r = () => s ?? t.innerHTML, d = (i.ctx === n.instance.$ ? (m = V2(i, n.instance.$)) == null ? void 0 : m.provides : (f = i.ctx) == null ? void 0 : f.provides) ?? n.instance.$.provides, y = mt(e, X(o, u), r);
+    var b, m, p;
+    const o = typeof a == "function" ? a(n) : a, s = ((b = n.value) == null ? void 0 : b.text) ?? n.value ?? (o == null ? void 0 : o.text), u = ln(n.value) ? n.value : {}, r = () => s ?? t.innerHTML, d = (i.ctx === n.instance.$ ? (m = P2(i, n.instance.$)) == null ? void 0 : m.provides : (p = i.ctx) == null ? void 0 : p.provides) ?? n.instance.$.provides, y = mt(e, X(o, u), r);
     y.appContext = Object.assign(/* @__PURE__ */ Object.create(null), n.instance.$.appContext, {
       provides: d
     }), Rs(y, t);
   };
 }
-function V2(e, a) {
+function P2(e, a) {
   const t = /* @__PURE__ */ new Set(), n = (o) => {
     var s, u;
     for (const r of o) {
@@ -31399,28 +31457,28 @@ function V2(e, a) {
       return o.component;
   return a;
 }
-const I2 = w2(oo, (e) => {
+const A2 = V2(oo, (e) => {
   var a;
   return {
     activator: "parent",
     location: ((a = e.arg) == null ? void 0 : a.replace("-", " ")) ?? "top",
     text: typeof e.value == "boolean" ? void 0 : e.value
   };
-}), P2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+}), T2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   ClickOutside: dr,
   Intersect: _l,
-  Mutate: b2,
-  Resize: x2,
+  Mutate: h2,
+  Resize: S2,
   Ripple: ca,
-  Scroll: S2,
-  Tooltip: I2,
+  Scroll: C2,
+  Tooltip: A2,
   Touch: uo
-}, Symbol.toStringTag, { value: "Module" })), B2 = ad({
+}, Symbol.toStringTag, { value: "Module" })), F2 = ad({
   components: {
-    ...y2
+    ...b2
   },
-  directives: P2,
+  directives: T2,
   icons: {
     defaultSet: "mdi",
     // keep mdi as default
@@ -31446,21 +31504,21 @@ const I2 = w2(oo, (e) => {
       }
     }
   }
-}), E2 = {
+}), L2 = {
   install(e) {
-    e.component("AccountAllEntries", i0), e.component("AccountBalanceSheet", bp), e.component("AccountCustomerList", Tb), e.component("AccountGSTReports", Rb), e.component("AccountGroupAndLedger", Kb), e.component("AccountInvoiceReturn", b_), e.component("AccountProfitAndLoss", lh), e.component("AccountPurchaseBill", yh), e.component("AccountSalesInvoice", Gh), e.component("AccountSettings", o1), e.component("AccountUserRolePermission", w1), e.component("AccountVendorsList", D1), e.component("InvoicePreview", R1), e.component("ProductsPage", z1);
+    e.component("AccountAllEntries", i0), e.component("AccountBalanceSheet", bp), e.component("AccountCustomerList", Db), e.component("AccountGSTReports", Ob), e.component("AccountGroupAndLedger", Xb), e.component("AccountInvoiceReturn", __), e.component("AccountProfitAndLoss", ih), e.component("AccountPurchaseBill", ph), e.component("AccountSalesInvoice", jh), e.component("AccountSettings", s1), e.component("AccountUserRolePermission", C1), e.component("AccountVendorsList", B1), e.component("InvoicePreview", M1), e.component("ProductsPage", G1);
   }
 };
 export {
-  R1 as InvoicePreview,
+  M1 as InvoicePreview,
   at as commonValidations,
-  D2 as customerValidations,
-  E2 as default,
-  N2 as formatAmountWithWords,
+  B2 as customerValidations,
+  L2 as default,
+  $2 as formatAmountWithWords,
   Yv as journalEntryValidations,
   Bo as ledgerValidations,
   iu as numberToWords,
   Ll as validateField,
-  $2 as validateForm,
-  B2 as vuetify
+  E2 as validateForm,
+  F2 as vuetify
 };

@@ -6,39 +6,65 @@ import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const formFields = ref([
   // Core Information
-  { label: 'Name', key: 'name', visible: true },
-  { label: 'Mobile', key: 'mobile', visible: true },
-  { label: 'Opening Balance', key: 'openingBalance', visible: true },
+  { section: 'Core Information', label: 'Name', key: 'name', visible: true },
+  { section: 'Core Information', label: 'Mobile', key: 'mobile', visible: true },
+  { section: 'Core Information', label: 'Opening Balance', key: 'openingBalance', visible: true },
 
   // Contact Details
-  { label: 'Mailing Name', key: 'mailingName', visible: true },
-  { label: 'Email', key: 'email', visible: true },
-  { label: 'Address', key: 'address', visible: true },
-  { label: 'State', key: 'state', visible: true },
-  { label: 'Pincode', key: 'pincode', visible: true },
-  { label: 'Country', key: 'country', visible: true },
+  { section: 'Contact Details', label: 'Mailing Name', key: 'mailingName', visible: true },
+  { section: 'Contact Details', label: 'Email', key: 'email', visible: true },
+  { section: 'Contact Details', label: 'Address', key: 'address', visible: true },
+  { section: 'Contact Details', label: 'State', key: 'state', visible: true },
+  { section: 'Contact Details', label: 'Pincode', key: 'pincode', visible: true },
+  { section: 'Contact Details', label: 'Country', key: 'country', visible: true },
 
   // Tax & Compliance
-  { label: 'GSTIN/UIN', key: 'gstin', visible: true },
-  { label: 'PAN', key: 'pan', visible: true },
-  { label: 'Tax Registration Number', key: 'taxReg', visible: true },
-  { label: 'TDS Applicable', key: 'tds', visible: true },
+  { section: 'Tax & Compliance', label: 'GSTIN/UIN', key: 'gstin', visible: true },
+  { section: 'Tax & Compliance', label: 'PAN', key: 'pan', visible: true },
+  { section: 'Tax & Compliance', label: 'Tax Registration Number', key: 'taxReg', visible: true },
+  { section: 'Tax & Compliance', label: 'TDS Applicable', key: 'tds', visible: true },
 
   // Financial Controls
-  { label: 'Credit Limit', key: 'creditLimit', visible: true },
-  { label: 'Credit Period (Days)', key: 'creditPeriod', visible: true },
-  { label: 'Maintain Bill-wise Details', key: 'billWise', visible: true },
+  { section: 'Financial Controls', label: 'Credit Limit', key: 'creditLimit', visible: true },
+  { section: 'Financial Controls', label: 'Credit Period (Days)', key: 'creditPeriod', visible: true },
+  { section: 'Financial Controls', label: 'Maintain Bill-wise Details', key: 'billWise', visible: true },
 
   // Banking Details
-  { label: 'Bank Name', key: 'bankName', visible: true },
-  { label: 'Account Number', key: 'accountNumber', visible: true },
-  { label: 'IFSC Code', key: 'ifscCode', visible: true },
+  { section: 'Banking Details', label: 'Bank Name', key: 'bankName', visible: true },
+  { section: 'Banking Details', label: 'Account Number', key: 'accountNumber', visible: true },
+  { section: 'Banking Details', label: 'IFSC Code', key: 'ifscCode', visible: true },
 
   // Additional Fields
-  { label: 'Additional Country 1', key: 'addCountry1', visible: true },
-  { label: 'Place of Supply', key: 'state', visible: true },
-  { label: 'Ship-to Address', key: 'shipToAddress', visible: true },
+  { section: 'Additional Fields', label: 'Additional Country 1', key: 'addCountry1', visible: true },
+  { section: 'Additional Fields', label: 'Place of Supply', key: 'state', visible: true },
+  { section: 'Additional Fields', label: 'Ship-to Address', key: 'shipToAddress', visible: true },
 ]);
+
+// Group fields by section
+const sectionedFields = computed(() => {
+  const sections = {};
+  formFields.value.forEach(field => {
+    if (!sections[field.section]) sections[field.section] = [];
+    sections[field.section].push(field);
+  });
+  return sections;
+});
+
+// Section toggle helpers
+const isSectionVisible = (section) => {
+  const fields = sectionedFields.value[section];
+  return fields.every(f => f.visible);
+};
+const toggleSection = (section) => {
+  const fields = sectionedFields.value[section];
+  const allVisible = fields.every(f => f.visible);
+  fields.forEach(f => { f.visible = !allVisible; });
+};
+
+// Helper to check if any field in a section is visible
+const isAnyFieldVisible = (section) => {
+  return formFields.value.some(f => f.section === section && f.visible);
+};
 
 const isVisible = (key) => formFields.value.find(f => f.key === key)?.visible;
 
@@ -131,15 +157,22 @@ onMounted(() => {
                         <component :is="renderTablerIcon('settings')" style="font-size: 20px;" />
                       </VBtn>
                     </template>
-                    <VCard class="account_vcard_menu account_vcard_border">
+                    <VCard class="account_vcard_menu account_vcard_border" width="250px">
                       <div class="account_vcard_menu_hdng">Show/Hide Optional Fields</div>
                       <VDivider class="my-1 mt-0" />
                       <div class="account_vcard_menu_items py-1">
-                        <div v-for="field in formFields" :key="field.key" class="account_vcard_menu_item"
-                          @click="field.visible = !field.visible">
-                          <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                            <VIcon v-if="field.visible" size="16" icon="mdi-check" />
-                            <span :class="field.visible ? '' : 'field_list_dynamic_ml'">{{ field.label }}</span>
+                        <div v-for="(fields, section) in sectionedFields" :key="section">
+                          <div class="field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                               @click="toggleSection(section)">
+                            <component :is="renderTablerIcon(isSectionVisible(section) ? 'check' : 'square')" style="font-size: 16px;" />
+                            <span class="font-weight-bold">{{ section }}</span>
+                          </div>
+                          <div v-for="field in fields" :key="field.key" class="account_vcard_menu_item" style="padding-left: 10px;">
+                            <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                                 @click.stop="field.visible = !field.visible">
+                              <component v-if="field.visible" :is="renderTablerIcon('check')" style="font-size: 16px;" />
+                              <span :class="field.visible ? '' : 'field_list_dynamic_ml'">{{ field.label }}</span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -153,7 +186,7 @@ onMounted(() => {
               </template>
               <VCardText>
                 <VRow>
-                  <VCol cols="12" class="pb-0">
+                  <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Core Information')">
                     <h5 class="account_form_info_hdng">Core Information</h5>
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
@@ -184,7 +217,7 @@ onMounted(() => {
                     </v-radio-group>
                   </VCol> -->
 
-                  <VCol cols="12" class="pb-0">
+                  <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Contact Details')">
                     <h5 class="account_form_info_hdng">Contact Details</h5>
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
@@ -220,7 +253,7 @@ onMounted(() => {
                       placeholder="India" />
                   </VCol>
 
-                  <VCol cols="12" class="pb-0">
+                  <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Tax & Compliance')">
                     <h5 class="account_form_info_hdng">Tax & Compliance</h5>
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
@@ -244,7 +277,7 @@ onMounted(() => {
                     <VCheckbox density="compact" class="account_v_checkbox" label="TDS Applicable" />
                   </VCol>
 
-                  <VCol cols="12" class="pb-0">
+                  <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Financial Controls')">
                     <h5 class="account_form_info_hdng">Financial Controls</h5>
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
@@ -263,7 +296,7 @@ onMounted(() => {
                     <VCheckbox density="compact" class="account_v_checkbox" label="Maintain Bill-wise Details" />
                   </VCol>
 
-                  <VCol cols="12" class="pb-0">
+                  <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Banking Details')">
                     <h5 class="account_form_info_hdng">Banking Details</h5>
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
@@ -284,7 +317,7 @@ onMounted(() => {
                       placeholder="e.g. HDFC0000001" />
                   </VCol>
 
-                  <VCol cols="12" class="pb-0">
+                  <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Additional Fields')">
                     <h5 class="account_form_info_hdng">Additional Fields</h5>
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
