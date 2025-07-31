@@ -244,7 +244,7 @@ onMounted(() => {
                   </VCol>
                   <VCol v-if="isVisible('pincode')" cols="12" lg="4" md="4">
                     <label class="account_label mb-2">Pincode</label>
-                    <VSelect class="accouting_field accouting_active_field" variant="outlined"
+                    <VTextField class="accouting_field accouting_active_field" variant="outlined"
                       placeholder="e.g. 400001" />
                   </VCol>
                   <VCol v-if="isVisible('country')" cols="12" lg="4" md="4">

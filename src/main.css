@@ -22,7 +22,7 @@
     --acc-secondary-text-color: #507091;
     --acc-email-font-color: #507091;
     --acc-text-h5-font: 17.6px;
-    --acc-border-color: hsl(210 16% 84%);
+    --acc-border-color: rgba(var(47, 43, 61), 0.12);
     --acc-secondary-section-color: '#3F3F46B2';
     --acc-secondary-listitem-color: rgb(24, 24, 27);
     --acc-icon-dark-color: #506983;
@@ -1323,6 +1323,12 @@ i.account_ledger_icon {
     text-align: center;
 }
 
+.account_entries_table_entry span {
+    font-size: 12px;
+    color: var(--acc-primary-color);
+    cursor: pointer
+}
+
 .account_entry_desc_text {
     font-size: 12px;
     line-height: 16px;
@@ -1332,11 +1338,16 @@ i.account_ledger_icon {
 }
 
 .account_entries_table_row td {
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .account_entries_table tbody td {
     background: transparent;
+}
+
+td.account_entries_table_status,
+.account_entries_table_actions {
+    vertical-align: middle !important;
 }
 
 .account_entries_table tbody tr.account_entries_table_row:hover {

@@ -865,8 +865,7 @@ onMounted(() => {
                       <td class="account_entries_table_entry" :rowspan="entry.particulars.accounts.length + 1"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ entry.entry || "N/A" }}<br />
-                        <span @click="openDetailsDialog(entry)"
-                          style="font-size: 12px; color: #009688; cursor: pointer">View Details</span>
+                        <span @click="openDetailsDialog(entry)">View Details</span>
                       </td>
                       <td class="account_entries_table_voucher" :rowspan="entry.particulars.accounts.length + 1"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
@@ -971,6 +970,7 @@ onMounted(() => {
       </VCard>
     </VDialog>
 
+    <!-- Entry Details Dialog -->
     <VDialog v-model="showDetailsDialog" max-width="600" @click:outside="showDetailsDialog = false">
       <VCard class="account_vcard_border account_details_dialog" title="Journal Voucher"
         :subtitle="selectedEntry?.entry">
@@ -1003,7 +1003,8 @@ onMounted(() => {
               <VChip class="account_chip_primary" size="small" :text="selectedEntry?.status" />
             </div>
           </div>
-          <VDivider />
+
+          <VDivider color="my-2" />
 
           <VCard class="account_vcard_border shadow-none account_entries_table mt-2">
             <VTable class="">
@@ -1096,5 +1097,20 @@ onMounted(() => {
 
 .bounce {
   animation: bounce 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+</style>
+<style scoped>
+/* Custom border color for the HTML table with class account_entries_table */
+.account_entries_table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.account_entries_table th,
+.account_entries_table td {
+  border: 1.5px solid var(--acc-border-color) !important;
+  padding: 8px;
+}
+.account_entries_table tr {
+  border-bottom: 1.5px solid var(--acc-border-color) !important;
 }
 </style>
