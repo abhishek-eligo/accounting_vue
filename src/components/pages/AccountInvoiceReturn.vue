@@ -724,7 +724,8 @@ const previewValue = computed(() => {
                 </VCol>
               </VRow>
 
-              <VDivider />
+              <VDivider class="my-3" />
+
               <VRow>
                 <VCol cols="12" lg="12" md="12">
 
@@ -771,11 +772,12 @@ const previewValue = computed(() => {
                     </template>
 
                     <template #[`item.actions`]="{ index }">
-                      <VIcon icon="mdi-trash-can-outline" class="cursor-pointer table_row_icon" :class="{
+                      <component :is="renderTablerIcon('trash')" class="cursor-pointer table_row_icon" :class="{
                         'opacity-50': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1,
                         'cursor-not-allowed': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1
                       }" :disabled="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1"
-                        @click="removeInvoiceRow(index, activeInvoiceType)" />
+                        @click="removeInvoiceRow(index, activeInvoiceType)"
+                        style="font-size: 20px; margin-right: 6px;" />
                     </template>
                   </VDataTable>
                 </VCol>

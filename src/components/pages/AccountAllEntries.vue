@@ -830,7 +830,7 @@ onMounted(() => {
         </div>
       </div>
       <VCardText class="mt-2">
-        <VCard variant="text" class="shadow-none">
+        <VCard variant="flat" class="shadow-none">
           <div class="gst_summary_table_container">
             <table class="table table-bordered account_entries_table text-center w-100">
               <thead>

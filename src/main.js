@@ -33,7 +33,6 @@ import Aura from "@primeuix/themes/aura";
 
 // Custom Css
 import "@/main.css";
-import "@/style.css";
 
 import { Icon } from '@iconify/vue';
 

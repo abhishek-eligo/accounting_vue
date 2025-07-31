@@ -12968,7 +12968,7 @@ const Jg = J({
           l(Te, { class: "mt-2" }, {
             default: c(() => [
               l(me, {
-                variant: "text",
+                variant: "flat",
                 class: "shadow-none"
               }, {
                 default: c(() => [
@@ -13331,7 +13331,7 @@ const Jg = J({
       }))
     ]));
   }
-}, l0 = /* @__PURE__ */ It(n0, [["__scopeId", "data-v-75beede3"]]), i0 = Symbol.for("vuetify:date-options");
+}, l0 = /* @__PURE__ */ It(n0, [["__scopeId", "data-v-fea82d5e"]]), i0 = Symbol.for("vuetify:date-options");
 function o0(e, a) {
   const t = ot(typeof e.adapter == "function" ? new e.adapter({
     locale: e.locale[a.current.value] ?? a.current.value,
@@ -22387,7 +22387,7 @@ Currency: ${K.value}` : "";
                             ]),
                             _: 1
                           }),
-                          l(ke),
+                          l(ke, { class: "my-3" }),
                           l(he, null, {
                             default: c(() => [
                               l(B, {
@@ -22455,15 +22455,15 @@ Currency: ${K.value}` : "";
                                       v("p", Zb, "₹" + ue((d.value === "item" ? f.value : k.value)[q].total), 1)
                                     ]),
                                     "item.actions": c(({ index: q }) => [
-                                      l($e, {
-                                        icon: "mdi-trash-can-outline",
+                                      (w(), T(ee(E(te)("trash")), {
                                         class: ye(["cursor-pointer table_row_icon", {
                                           "opacity-50": (d.value === "item" ? f.value : k.value).length === 1,
                                           "cursor-not-allowed": (d.value === "item" ? f.value : k.value).length === 1
                                         }]),
                                         disabled: (d.value === "item" ? f.value : k.value).length === 1,
-                                        onClick: (N) => $(q, d.value)
-                                      }, null, 8, ["class", "disabled", "onClick"])
+                                        onClick: (N) => $(q, d.value),
+                                        style: { "font-size": "20px", "margin-right": "6px" }
+                                      }, null, 8, ["class", "disabled", "onClick"]))
                                     ]),
                                     _: 2
                                   }, 1032, ["headers", "items"])
@@ -23560,7 +23560,7 @@ Currency: ${K.value}` : "";
       }))
     ]));
   }
-}, b_ = /* @__PURE__ */ It(p_, [["__scopeId", "data-v-34dc20ba"]]), __ = { class: "account_ui_vcard" }, h_ = { class: "d-flex align-center gap-2" }, x_ = { class: "py-1" }, k_ = { class: "account_vcard_menu_item" }, S_ = { class: "account_vcard_menu_item" }, w_ = { class: "account_vcard_menu_item" }, C_ = { class: "py-1" }, V_ = { class: "account_vcard_menu_item" }, I_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, P_ = {
+}, b_ = /* @__PURE__ */ It(p_, [["__scopeId", "data-v-ac16674f"]]), __ = { class: "account_ui_vcard" }, h_ = { class: "d-flex align-center gap-2" }, x_ = { class: "py-1" }, k_ = { class: "account_vcard_menu_item" }, S_ = { class: "account_vcard_menu_item" }, w_ = { class: "account_vcard_menu_item" }, C_ = { class: "py-1" }, V_ = { class: "account_vcard_menu_item" }, I_ = { class: "my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" }, P_ = {
   key: 0,
   class: "text-end"
 }, A_ = {

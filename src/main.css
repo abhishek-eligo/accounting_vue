@@ -1439,7 +1439,7 @@ td.account_entries_table_status,
     padding-bottom:12px !important;
 }
 
-i.table_row_icon {
+svg.table_row_icon {
     color: var(--acc-error-color);
 }
 
@@ -1537,10 +1537,6 @@ i.table_row_icon {
 
 .account_text_dark {
     color: var(--acc-text-dark);
-}
-
-.gst_summary_table_container{
-    padding: 0px 24px 24px;
 }
 
 .gst_summary_table_header_month{
