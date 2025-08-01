@@ -1774,3 +1774,20 @@ svg.table_row_icon {
 .v-date-picker-month__day-btn.v-btn--variant-outlined {
     border: thin solid var(--acc-primary-color);
 }
+
+.v-picker__actions button:first-child .v-btn__content, .v-picker__actions button:last-child .v-btn__content {
+    visibility:hidden;
+    font-size: 0;
+}
+
+.v-picker__actions button:first-child .v-btn__content:before, .v-picker__actions button:last-child .v-btn__content:before {
+    content: 'Cancel';
+    display: block;
+    visibility:visible;
+    position: absolute;
+    font-size: 13px;
+}
+
+.v-picker__actions button:last-child .v-btn__content:before{
+    content:'Ok'
+}
