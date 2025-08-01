@@ -1763,8 +1763,9 @@ svg.table_row_icon {
     border-radius: 6px !important;
 }
 
-.toggle-btn-section .v-btn-group.v-btn-toggle .v-btn {
+body .toggle-btn-section .v-btn-group.v-btn-toggle .v-btn {
     inline-size: unset !important;
+    block-size: 40px !important;
 }
 
 .v-date-picker-month__day--selected .v-btn__content {
