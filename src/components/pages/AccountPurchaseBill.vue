@@ -220,7 +220,7 @@ const statesList = ref([
                       <component v-if="selectedPurchaseMode === mode.value" :is="renderTablerIcon('check')"
                         style="font-size: 16px;" />
                       <span :class="selectedPurchaseMode === mode.value ? '' : 'field_list_dynamic_ml'">{{ mode.label
-                      }}</span>
+                        }}</span>
                     </div>
                   </div>
                 </div>
@@ -251,18 +251,26 @@ const statesList = ref([
               </VCol>
               <VCol cols="12" md="6">
                 <label class="account_label mb-2">Bill Date</label>
-                <VTextField v-model="billDate" type="date" variant="outlined"
-                  class="accouting_field accouting_active_field" />
+                <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply" >
+                  <template #prepend-inner>
+                    <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                  </template>
+                </v-date-input>
+                <!-- <VTextField v-model="billDate" type="date" variant="outlined"
+                  class="accouting_field accouting_active_field" /> -->
               </VCol>
               <VCol cols="12" md="6">
                 <label class="account_label mb-2">Place of Supply (Vendor's State)</label>
                 <VAutocomplete :items="statesList" v-model="placeOfSupply" variant="outlined" placeholder="Select state"
-                 class="accouting_field accouting_active_field" />
+                  class="accouting_field accouting_active_field" />
               </VCol>
               <VCol cols="12" md="6">
                 <label class="account_label mb-2">Due Date</label>
-                <VTextField v-model="dueDate" type="date" variant="outlined"
-                  class="accouting_field accouting_active_field" />
+                <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply" >
+                  <template #prepend-inner>
+                    <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                  </template>
+                </v-date-input>
               </VCol>
             </VRow>
             <VDivider class="my-4" />
@@ -308,8 +316,8 @@ const statesList = ref([
                 <component :is="renderTablerIcon('trash')" class="text-error cursor-pointer table_row_icon" :class="{
                   'opacity-50': (activeTab === 'inventory' ? inventoryRows : assetRows).length === 1,
                   'cursor-not-allowed': (activeTab === 'inventory' ? inventoryRows : assetRows).length === 1
-                }" :disabled="(activeTab === 'inventory' ? inventoryRows : assetRows).length === 1" @click="removeRow(index)"
-                  style="font-size: 20px;" />
+                }" :disabled="(activeTab === 'inventory' ? inventoryRows : assetRows).length === 1"
+                  @click="removeRow(index)" style="font-size: 20px;" />
               </template>
             </VDataTable>
             <VBtn class="account_v_btn_outlined mt-3" variant="text" @click="addRow">
@@ -333,11 +341,11 @@ const statesList = ref([
                     subtotal.toFixed(2)
                       }}</span></div>
                   <div class="d-flex justify-space-between w-100 mb-1"><span>CGST</span><span>₹{{ cgst.toFixed(2)
-                  }}</span></div>
+                      }}</span></div>
                   <div class="d-flex justify-space-between w-100 mb-1"><span>SGST</span><span>₹{{ sgst.toFixed(2)
-                  }}</span></div>
+                      }}</span></div>
                   <div class="d-flex justify-space-between w-100 mb-1"><span>IGST</span><span>₹{{ igst.toFixed(2)
-                  }}</span></div>
+                      }}</span></div>
                 </div>
                 <VDivider class="my-2" />
                 <div class="d-flex justify-space-between w-100 font-weight-bold"><span>Total Amount</span><span>₹{{

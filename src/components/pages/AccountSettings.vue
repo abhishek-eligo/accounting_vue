@@ -279,14 +279,20 @@ const insertTemplateText = (key) => {
 
                     <v-col v-if="fieldVisibility.fyStart" cols="12" lg="6" md="6">
                       <label class="account_label mb-1">Financial Year Start</label>
-                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        type="date" />
+                      <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply">
+                        <template #prepend-inner>
+                          <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                        </template>
+                      </v-date-input>
                     </v-col>
 
                     <v-col v-if="fieldVisibility.fyEnd" cols="12" lg="6" md="6">
                       <label class="account_label mb-1">Financial Year End</label>
-                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        type="date" />
+                      <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply">
+                        <template #prepend-inner>
+                          <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                        </template>
+                      </v-date-input>
                     </v-col>
 
 
