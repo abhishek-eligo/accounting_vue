@@ -1763,3 +1763,14 @@ svg.table_row_icon {
     border-radius: 6px !important;
 }
 
+.v-date-picker-month__day--selected .v-btn__content {
+    color: var(--acc-text-white);
+}
+
+.v-date-picker-month__day--selected .v-btn {
+    background: var(--acc-primary-color);
+}
+
+.v-date-picker-month__day-btn.v-btn--variant-outlined {
+    border: thin solid var(--acc-primary-color);
+}
