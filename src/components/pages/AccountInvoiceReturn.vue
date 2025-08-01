@@ -847,7 +847,7 @@ const previewValue = computed(() => {
     <div class="account_invoice_list">
       <DynamicDataTable title="Invoices" :headers="invoiceHeaders" :items="invoiceItems" :filters="invoiceFilters"
         :status-items="paymentStatusItems" :account-type-items="[]" :currency-items="currencyItems"
-        :widgets="invoiceWidgets" />
+        :widgets="invoiceWidgets" item-value-key="invoiceNumber" />
     </div>
 
     <v-dialog max-width="900" v-model="addNewCustomerVisible">

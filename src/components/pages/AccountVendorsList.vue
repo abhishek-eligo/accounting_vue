@@ -246,7 +246,7 @@ onMounted(() => {
       <VCol cols="12">
         <DynamicDataTable :headers="vendorHeaders" :items="vendorItems" :filters="vendorFilters" title="Vendor"
           :status-items="vendorStatusItems" :account-type-items="vendorTypeItems" :currency-items="[]"
-          :widgets="vendorWidgetData" />
+          :widgets="vendorWidgetData" item-value-key="vendorName" />
       </VCol>
     </VRow>
     <VBtn @click="showAddVendorForm" :key="bounceKey" class="account_add_new_btn bounce">

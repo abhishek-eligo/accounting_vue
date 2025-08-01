@@ -1351,7 +1351,7 @@ td.account_entries_table_status,
 }
 
 .account_entries_table tbody tr.account_entries_table_row:hover {
-    background: rgba(230, 230, 230, 0.473);
+    background-color: #e6e6e638 !important;
 }
 
 /* .hovered-cell {
@@ -1362,13 +1362,13 @@ td.account_entries_table_status,
 /* Apply background to the entire row for even-indexed entries */
 .account_entries_table_row.even-entry,
 .account_entries_table_row.even-entry-extension {
-  background-color: rgba(230, 230, 230, 0.295) !important; /* Use !important to override any inherited styles */
+  background-color: #e6e6e626 !important; /* Use !important to override any inherited styles */
 }
 
 /* Ensure all cells within the row inherit the background */
 .account_entries_table_row.even-entry td,
 .account_entries_table_row.even-entry-extension td {
-  background-color: rgba(230, 230, 230, 0.295) !important;
+  background-color: #e6e6e626 !important;
 }
 
 /* Reset background for odd-indexed rows to avoid spillover */

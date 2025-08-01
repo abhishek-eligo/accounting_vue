@@ -763,8 +763,12 @@ onMounted(() => {
     <VCard title="All Entries" subtitle="A record of all financial transactions."
       class="account_vcard_border pa-2 account_ui_vcard shadow-none">
       <div class="d-flex align-center px-3 justify-space-between">
-        <VTextField style="max-width: 265px" prepend-inner-icon="mdi-magnify"
-          class="accouting_field accouting_active_field" placeholder="Filter entries" variant="outlined" />
+        <VTextField style="max-width: 265px"
+          class="accouting_field accouting_active_field" placeholder="Filter entries" variant="outlined">
+          <template #prepend-inner>
+            <component :is="renderTablerIcon('search')" style="font-size: 20px;" />
+          </template>
+          </VTextField>
 
         <div class="d-flex align-center gap-2">
           <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details
@@ -829,7 +833,7 @@ onMounted(() => {
           </VMenu>
         </div>
       </div>
-      <VCardText class="mt-2">
+      <VCardText class="mt-2 pa-3">
         <VCard variant="flat" class="shadow-none">
           <div class="gst_summary_table_container">
             <table class="table table-bordered account_entries_table text-center w-100">

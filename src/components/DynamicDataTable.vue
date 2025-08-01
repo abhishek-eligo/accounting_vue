@@ -35,6 +35,10 @@ const props = defineProps({
   widgets: {
     type: Object,
     required: true
+  },
+  itemValueKey: {
+    type: String,
+    default: 'id' // fallback to 'id' if not specified
   }
 })
 
@@ -226,10 +230,10 @@ const totalPages = computed(() => {
               <VDivider class="my-1 mt-0" />
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item" v-for="filter in filters" :key="filter.title">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" @click="toggleFilter(filter.title)">
                     <VCheckbox :model-value="isFilterChecked(filter.title)"
                       @update:model-value="toggleFilter(filter.title)"
-                      class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
+                      class="account_v_checkbox account_filter_menu_checkbox" density="compact" @click.stop />
                     <span>{{ filter.title }}</span>
                   </div>
                 </div>
@@ -343,7 +347,7 @@ const totalPages = computed(() => {
         </VCol>
         <VCol v-if="isFilterChecked('Last Transaction From')" cols="12" lg="3" md="3">
           <div class="d-flex align-center gap-2">
-            <v-date-input class="accounting_date_input" placeholder="Last Transaction From" max-width="368"
+            <v-date-input class="accounting_date_input" placeholder="Last Transaction From" max-width="368" cancel-text="Close" ok-text="Apply"
               multiple="range">
               <template #prepend-inner>
                 <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
@@ -401,9 +405,9 @@ const totalPages = computed(() => {
     </VSlideYTransition>
 
     <VCard class="mt-4 account_vcard_border">
-      <VDataTable :headers="visibleHeaders" :items="paginatedItems" :items-per-page="itemsPerPage" show-select
+      <VDataTable :headers="visibleHeaders" :items="paginatedItems" :items-per-page="itemsPerPage" show-select :item-value="itemValueKey"
         :density="isTableCompact ? 'compact' : 'default'" class="elevation-1 border rounded account_dynamic_table">
-        <template #item.actions="{ item }">
+        <template #item.actions>
           <div class="d-flex align-center gap-2">
             <component :is="renderTablerIcon('eye')" class="account_v_btn_color"
               style="font-size: 20px; cursor: pointer;" />

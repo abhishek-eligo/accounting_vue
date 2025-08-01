@@ -193,6 +193,10 @@ const tableTitle = computed(() => {
   return selectedTopic.value;
 });
 
+const tableItemValueKey = computed(() => {
+  return selectedTopic.value === 'Accounting' ? 'accountName' : 'customerName';
+});
+
 // Functions to switch topics
 const selectAccounting = () => {
   selectedTopic.value = 'Accounting';
@@ -219,7 +223,7 @@ const selectCustomer = () => {
       <VCol cols="12">
         <DynamicDataTable :headers="tableHeaders" :items="tableItems" :filters="tableFilters" :title="tableTitle"
           :status-items="tableStatusItems" :account-type-items="tableTypeItems" :currency-items="tableCurrencyItems"
-          :widgets="tableWidgetData" />
+          :widgets="tableWidgetData" :item-value-key="tableItemValueKey" />
       </VCol>
     </VRow>
   </div>

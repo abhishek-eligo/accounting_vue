@@ -360,7 +360,7 @@ onMounted(() => {
       <VCol cols="12">
         <DynamicDataTable :headers="customerHeaders" :items="customerItems" :filters="customerFilters" title="Customer"
           :status-items="customerStatusItems" :account-type-items="customerTypeItems" :currency-items="[]"
-          :widgets="customerWidgetData" />
+          :widgets="customerWidgetData" item-value-key="customerName" />
       </VCol>
     </VRow>
     <VBtn @click="showAddCustomerForm" :key="bounceKey" class="account_add_new_btn bounce">
