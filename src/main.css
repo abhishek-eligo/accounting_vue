@@ -1755,17 +1755,18 @@ svg.table_row_icon {
   color: #000 !important;
 }
 
-.toggle-btn-section.v-btn-group--density-default.v-btn-group {
+/* .toggle-btn-section.v-btn-group--density-default.v-btn-group {
     height: 31px;
-}
+} */
 
 .toggle-btn-section.v-btn-group--density-default.v-btn-group .v-btn{
     border-radius: 6px !important;
 }
 
-body .toggle-btn-section .v-btn-group.v-btn-toggle .v-btn {
+.toggle-btn-section.v-btn-group.v-btn-toggle .v-btn {
     inline-size: unset !important;
-    block-size: 40px !important;
+    max-height: 40px !important;
+    /* block-size: 40px !important; */
 }
 
 .v-date-picker-month__day--selected .v-btn__content {
