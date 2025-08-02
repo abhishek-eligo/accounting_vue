@@ -11,6 +11,7 @@ declare module 'vue' {
     AccountAllEntries: typeof import('./components/pages/AccountAllEntries.vue')['default']
     AccountBalanceSheet: typeof import('./components/pages/AccountBalanceSheet.vue')['default']
     AccountCustomerList: typeof import('./components/pages/AccountCustomerList.vue')['default']
+    AccountCustomerPortfolio: typeof import('./components/pages/AccountCustomerPortfolio.vue')['default']
     AccountGroupAndLedger: typeof import('./components/pages/AccountGroupAndLedger.vue')['default']
     AccountGSTReports: typeof import('./components/pages/AccountGSTReports.vue')['default']
     AccountInvoiceReturn: typeof import('./components/pages/AccountInvoiceReturn.vue')['default']

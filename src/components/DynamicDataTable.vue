@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { VAutocomplete, VTextField, VSpacer } from 'vuetify/lib/components/index.mjs';
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
@@ -39,11 +40,35 @@ const props = defineProps({
   itemValueKey: {
     type: String,
     default: 'id' // fallback to 'id' if not specified
+  },
+  // Navigation props for view functionality
+  viewRoute: {
+    type: String,
+    default: null // e.g., '/customers/view'
+  },
+  viewIdKey: {
+    type: String,
+    default: 'id' // key to use for the ID in the route
+  },
+  enableViewAction: {
+    type: Boolean,
+    default: true
   }
 })
 
+const router = useRouter()
 const page = ref(1)
 const itemsPerPage = ref(10)
+
+// Navigation function for view action
+const handleViewAction = (item) => {
+  if (props.viewRoute && props.enableViewAction) {
+    const id = item[props.viewIdKey]
+    if (id) {
+      router.push(`${props.viewRoute}/${id}`)
+    }
+  }
+}
 
 const visibleHeaders = computed(() => {
   return props.headers.filter(h => h.visible !== false)
@@ -407,10 +432,10 @@ const totalPages = computed(() => {
     <VCard class="mt-4 account_vcard_border">
       <VDataTable :headers="visibleHeaders" :items="paginatedItems" :items-per-page="itemsPerPage" show-select :item-value="itemValueKey"
         :density="isTableCompact ? 'compact' : 'default'" class="elevation-1 border rounded account_dynamic_table">
-        <template #item.actions>
+        <template #item.actions="{ item }">
           <div class="d-flex align-center gap-2">
             <component :is="renderTablerIcon('eye')" class="account_v_btn_color"
-              style="font-size: 20px; cursor: pointer;" />
+              style="font-size: 20px; cursor: pointer;" @click="handleViewAction(item)" />
             <component :is="renderTablerIcon('edit')" class="account_v_btn_color"
               style="font-size: 20px; cursor: pointer;" />
             <component :is="renderTablerIcon('trash')" class="account_v_btn_color"

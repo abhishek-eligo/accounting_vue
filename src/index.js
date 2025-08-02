@@ -2,6 +2,7 @@ import './main.css';
 import AccountAllEntries from "./components/pages/AccountAllEntries.vue";
 import AccountBalanceSheet from "./components/pages/AccountBalanceSheet.vue";
 import AccountCustomerList from "./components/pages/AccountCustomerList.vue";
+import AccountCustomerPortfolio from "./components/pages/AccountCustomerPortfolio.vue";
 import AccountGSTReports from "./components/pages/AccountGSTReports.vue";
 import AccountGroupAndLedger from "./components/pages/AccountGroupAndLedger.vue";
 import AccountInvoiceReturn from "./components/pages/AccountInvoiceReturn.vue";
@@ -30,6 +31,7 @@ export default {
     app.component('AccountAllEntries', AccountAllEntries);
     app.component('AccountBalanceSheet', AccountBalanceSheet);
     app.component('AccountCustomerList', AccountCustomerList);
+    app.component('AccountCustomerPortfolio', AccountCustomerPortfolio);
     app.component('AccountGSTReports', AccountGSTReports);
     app.component('AccountGroupAndLedger', AccountGroupAndLedger);
     app.component('AccountInvoiceReturn', AccountInvoiceReturn);

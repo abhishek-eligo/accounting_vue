@@ -80,6 +80,7 @@ const customerHeaders = ref([
 
 // Generate 100 Customer Items
 const customerItems = ref(Array.from({ length: 100 }, (_, index) => ({
+  id: index + 1, // Add unique ID for navigation
   customerName: `Customer ${index + 1}`,
   customerEmail: `customer${index + 1}@test.com`,
   customerType: ['Individual', 'Business'][Math.floor(Math.random() * 2)],
@@ -360,7 +361,8 @@ onMounted(() => {
       <VCol cols="12">
         <DynamicDataTable :headers="customerHeaders" :items="customerItems" :filters="customerFilters" title="Customer"
           :status-items="customerStatusItems" :account-type-items="customerTypeItems" :currency-items="[]"
-          :widgets="customerWidgetData" item-value-key="customerName" />
+          :widgets="customerWidgetData" item-value-key="customerName"
+          view-route="/customers/view" view-id-key="id" :enableViewAction="true" />
       </VCol>
     </VRow>
     <VBtn @click="showAddCustomerForm" :key="bounceKey" class="account_add_new_btn bounce">

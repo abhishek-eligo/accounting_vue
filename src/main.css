@@ -181,6 +181,10 @@ p.secondary_email {
     color: var(--acc-text-white);
 }
 
+.account_v_card_dark_icon {
+    color: var(--acc-text-white);
+}
+
 .account_text_color {
     font-size: 16px;
     font-weight: 400;
@@ -361,7 +365,7 @@ p.secondary_email {
     color: var(--acc-icon-dark-color);
 }
 
-.account_info_icon .v-btn__content i.v-icon {
+svg.account_info_icon {    
     color: hsl(210 29% 44%) !important;
 }
 
