@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { VAutocomplete, VTextField, VSpacer } from 'vuetify/lib/components/index.mjs';
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
@@ -41,32 +40,22 @@ const props = defineProps({
     type: String,
     default: 'id' // fallback to 'id' if not specified
   },
-  // Navigation props for view functionality
-  viewRoute: {
-    type: String,
-    default: null // e.g., '/customers/view'
-  },
-  viewIdKey: {
-    type: String,
-    default: 'id' // key to use for the ID in the route
-  },
+  // Event props for view functionality
   enableViewAction: {
     type: Boolean,
     default: true
   }
 })
 
-const router = useRouter()
 const page = ref(1)
 const itemsPerPage = ref(10)
 
-// Navigation function for view action
+// Emit event for view action
+const emit = defineEmits(['view-item'])
+
 const handleViewAction = (item) => {
-  if (props.viewRoute && props.enableViewAction) {
-    const id = item[props.viewIdKey]
-    if (id) {
-      router.push(`${props.viewRoute}/${id}`)
-    }
+  if (props.enableViewAction) {
+    emit('view-item', item)
   }
 }
 
