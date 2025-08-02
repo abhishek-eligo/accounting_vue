@@ -453,7 +453,7 @@ svg.account_info_icon {
 }
 
 .account_v_btn_error.v-btn {
-    background: var(--acc-error-color);
+    background: var(--acc-error-color) !important;
     color: var(--acc-text-white) !important;
     text-transform: capitalize;
     box-shadow: unset;
@@ -1068,7 +1068,7 @@ i.account_ledger_icon {
 
 .account_chip_outline {
     color: var(--acc-text-dark) !important;
-    border: 1px solid var(--acc-border-color);
+    border: 1px solid var(--acc-border-color) !important;
     padding: 3px 6px;
     background: transparent !important;
 }

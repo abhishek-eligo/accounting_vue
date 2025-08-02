@@ -437,9 +437,14 @@ function downloadAs(type) {
           subtitle="For the period of Jan 01, 2025 to Jul 07, 2025">
           <template #append>
             <div class="d-flex align-center gap-2">
-              <VSwitch v-model="showPercent" density="compact" inset label="Show %" class="account_swtich_btn"
+              <VSwitch v-model="showPercent" density="compact" inset label="Show %" class="account_swtich_btn mr-4"
                 style="min-width: 121px;" color="primary" hide-details />
-              <VTextField type="date" density="compact" class="accouting_field accouting_active_field mr-2" />
+              <v-date-input class="accounting_date_input" cancel-text="Close" style="width: 300px" multiple="range"
+                ok-text="Apply">
+                <template #prepend-inner>
+                  <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                </template>
+              </v-date-input>
               <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                 <template #activator="{ props }">
                   <VBtn v-bind="props" class="account_v_btn_outlined" variant="outlined" size="34" rounded="2">
@@ -533,7 +538,7 @@ function downloadAs(type) {
                               {{ item.name }}
                             </p>
 
-                            <VChip v-if="item.percent && showPercent" density="compact"
+                            <VChip v-if="item.percent && showPercent" density="compact" variant="tonal"
                               class="account_income_chip py-1 px-1"
                               :class="item.type === 'ledger' ? 'account_chip_outline' : 'account_chip_secondary'">
                               ({{ item.percent }})
@@ -635,7 +640,7 @@ function downloadAs(type) {
                               {{ item.name }}
                             </p>
 
-                            <VChip v-if="item.percent && showPercent" density="compact"
+                            <VChip v-if="item.percent && showPercent" density="compact" variant="tonal"
                               class="account_income_chip py-1 px-1"
                               :class="item.type === 'ledger' ? 'account_chip_outline' : 'account_chip_secondary'">
                               ({{ item.percent }})
@@ -696,7 +701,7 @@ function downloadAs(type) {
                         <Transition name="slide-fade">
                           <td class="text-end amount_inc_previous_item" v-if="showCompareMode">{{
                             totalExpenses.previousFormatted
-                            }}</td>
+                          }}</td>
                         </Transition>
                         <Transition name="slide-fade">
                           <td class="text-end d-flex align-center justify-end amount_inc_change_item gap-2"
@@ -787,10 +792,9 @@ function downloadAs(type) {
                     <div v-if="showCompareMode" class="d-flex align-center gap-1">
                       <span :class="netProfit.isIncrease ? 'text-success' : 'text-error'">{{
                         netProfit.percent
-                      }}</span>
+                        }}</span>
                       <component :is="renderTablerIcon(netProfit.isIncrease ? 'arrow-up' : 'arrow-down')"
-                        style="font-size: 14px;"
-                        :class="netProfit.isIncrease ? 'text-success' : 'text-error'" />
+                        style="font-size: 14px;" :class="netProfit.isIncrease ? 'text-success' : 'text-error'" />
                     </div>
                   </div>
                 </div>

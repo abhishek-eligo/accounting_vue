@@ -21,7 +21,7 @@ function handleAmountInput(event, rowIndex, type) {
 
 // Journal entry form data
 const journalEntryForm = ref({
-  entryDate: "",
+  entryDate: new Date(),
   description: "",
   voucherType: "",
 });
@@ -589,9 +589,14 @@ onMounted(() => {
                         <label class="account_label">Date *</label>
                       </div>
                       <!-- :rules="[journalEntryRules.entryDate]" -->
-                      <VTextField v-model="journalEntryForm.entryDate" class="accouting_field accouting_active_field"
+                      <!-- <VTextField v-model="journalEntryForm.entryDate" class="accouting_field accouting_active_field"
                         type="date" variant="outlined" placeholder="Select Date" density="compact"
-                        prepend-inner-icon="mdi-calendar" />
+                        prepend-inner-icon="mdi-calendar" /> -->
+                      <v-date-input v-model="journalEntryForm.entryDate" class="accounting_date_input" cancel-text="Close" ok-text="Apply">
+                        <template #prepend-inner>
+                          <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                        </template>
+                      </v-date-input>
                     </div>
                   </VCol>
                 </VRow>
@@ -763,12 +768,12 @@ onMounted(() => {
     <VCard title="All Entries" subtitle="A record of all financial transactions."
       class="account_vcard_border pa-2 account_ui_vcard shadow-none">
       <div class="d-flex align-center px-3 justify-space-between">
-        <VTextField style="max-width: 265px"
-          class="accouting_field accouting_active_field" placeholder="Filter entries" variant="outlined">
+        <VTextField style="max-width: 265px" class="accouting_field accouting_active_field" placeholder="Filter entries"
+          variant="outlined">
           <template #prepend-inner>
             <component :is="renderTablerIcon('search')" style="font-size: 20px;" />
           </template>
-          </VTextField>
+        </VTextField>
 
         <div class="d-flex align-center gap-2">
           <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details
@@ -994,7 +999,7 @@ onMounted(() => {
               <span class="account_label_bold">Type:</span>
               <span class="account_label_light">{{
                 selectedEntry?.voucher_type
-              }}</span>
+                }}</span>
             </div>
           </div>
 
@@ -1059,7 +1064,7 @@ onMounted(() => {
             <span class="account_label_bold abc">Narration:</span>
             <span class="account_label_light font-italic">{{
               selectedEntry?.particulars?.description?.narration || "N/A"
-            }}</span>
+              }}</span>
           </div>
         </VCardText>
       </VCard>
@@ -1109,11 +1114,13 @@ onMounted(() => {
   border-collapse: collapse;
   width: 100%;
 }
+
 .account_entries_table th,
 .account_entries_table td {
   border: 1.5px solid var(--acc-border-color) !important;
   padding: 8px;
 }
+
 .account_entries_table tr {
   border-bottom: 1.5px solid var(--acc-border-color) !important;
 }

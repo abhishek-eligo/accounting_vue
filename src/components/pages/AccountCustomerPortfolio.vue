@@ -186,16 +186,24 @@ const tableItems = computed(() => {
           <template #append>
             <div class="d-flex align-center gap-2">
               <VTextField style="min-inline-size: 250px;" class="accouting_field accouting_active_field"
-                variant="outlined" density="compact" prepend-inner-icon="mdi-magnify"
-                placeholder="Filter description..." />
+                variant="outlined" density="compact" placeholder="Filter description...">
+                <template #prepend-inner>
+                  <component :is="renderTablerIcon('search')" style="font-size: 20px;" />
+                </template>
+              </VTextField>
 
-              <v-date-input class="accounting_date_input" placeholder="Select date range" style="min-inline-size: 300px;"
-                cancel-text="Close" ok-text="Apply" multiple="range">
+              <v-date-input class="accounting_date_input" placeholder="Select date range"
+                style="min-inline-size: 300px;" cancel-text="Close" ok-text="Apply" multiple="range">
                 <template #prepend-inner>
                   <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
                 </template>
               </v-date-input>
-              <VBtn class="account_v_btn_outlined" prepend-icon="mdi-tray-arrow-down">Export</VBtn>
+              <VBtn class="account_v_btn_outlined">
+                <template #prepend>
+                  <component :is="renderTablerIcon('download')" style="font-size: 20px;" />
+                </template>
+                Export
+              </VBtn>
             </div>
           </template>
 

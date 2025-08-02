@@ -535,7 +535,11 @@ function downloadAs(type) {
             <div class="d-flex align-center gap-2">
               <VSwitch v-model="showPercent" density="compact" inset label="Show %" class="account_swtich_btn mr-4"
                 style="min-width: 121px" color="primary" hide-details />
-              <VTextField type="date" density="compact" class="accouting_field accouting_active_field mr-2" />
+              <v-date-input class="accounting_date_input" cancel-text="Close" style="width: 300px" multiple="range" ok-text="Apply">
+                <template #prepend-inner>
+                  <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                </template>
+              </v-date-input>
               <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                 <template #activator="{ props }">
                   <VBtn v-bind="props" class="account_v_btn_outlined" variant="outlined" size="34" rounded="2">
@@ -604,7 +608,8 @@ function downloadAs(type) {
               <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
                 :sm="isFullWidthView ? 12 : 6" class="col-transition"
                 :class="isFullWidthView ? 'col-expand' : 'col-shrink'">
-                <VCard variant="text" class="h-100 account_vcard_border card-content-transition account_income_card shadow-none">
+                <VCard variant="text"
+                  class="h-100 account_vcard_border card-content-transition account_income_card shadow-none">
                   <VDataTable :headers="assetsHeaders" :items="flatAssetsData" class="account_income_table"
                     hide-default-footer item-value="name">
                     <template #item="{ item }">
@@ -630,7 +635,7 @@ function downloadAs(type) {
                               ">
                               {{ item.name }}
                             </p>
-                            <VChip v-if="item.percent && showPercent" density="compact"
+                            <VChip v-if="item.percent && showPercent" density="compact" variant="tonal"
                               class="account_income_chip py-1 px-1" :class="item.type === 'ledger'
                                 ? 'account_chip_outline'
                                 : 'account_chip_secondary'
@@ -729,7 +734,8 @@ function downloadAs(type) {
               <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
                 :sm="isFullWidthView ? 12 : 6" class="col-transition"
                 :class="isFullWidthView ? 'col-expand' : 'col-shrink'">
-                <VCard variant="text" class="h-100 account_vcard_border card-content-transition account_expense_card shadow-none">
+                <VCard variant="text"
+                  class="h-100 account_vcard_border card-content-transition account_expense_card shadow-none">
                   <VDataTable :headers="liabilitiesHeaders" :items="flatLiabilitiesData"
                     class="account_income_table account_expense_table" hide-default-footer item-value="name">
                     <template #item="{ item }">
@@ -753,7 +759,7 @@ function downloadAs(type) {
                               ">
                               {{ item.name }}
                             </p>
-                            <VChip v-if="item.percent && showPercent" density="compact"
+                            <VChip v-if="item.percent && showPercent" density="compact" variant="tonal"
                               class="account_income_chip py-1 px-1" :class="item.type === 'ledger'
                                 ? 'account_chip_outline'
                                 : 'account_chip_secondary'
@@ -853,7 +859,7 @@ function downloadAs(type) {
                   <div>
                     <span class="account_assets_title">{{
                       totalAssets.currentFormatted
-                      }}</span>
+                    }}</span>
                   </div>
                 </div>
               </VCol>
@@ -868,7 +874,7 @@ function downloadAs(type) {
                   <div>
                     <span class="account_liabilities_title">{{
                       totalLiabilities.currentFormatted
-                      }}</span>
+                    }}</span>
                   </div>
                 </div>
               </VCol>

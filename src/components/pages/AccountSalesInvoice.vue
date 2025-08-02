@@ -675,7 +675,7 @@ const customerGSTIN = ref('');
 const billingAddress = ref('');
 const currency = ref('INR');
 const invoiceNumber = ref('');
-const invoiceDate = ref('');
+const invoiceDate = ref(new Date());
 const dueDate = ref('');
 const placeOfSupply = ref('');
 const shippingSameAsBilling = ref(true);
@@ -782,8 +782,11 @@ const previewValue = computed(() => {
                     </VCol>
                     <VCol cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Invoice Date</label>
-                      <VTextField v-model="invoiceDate" type="date" class="accouting_field accouting_active_field"
-                        variant="outlined" density="compact" />
+                      <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply" v-model="invoiceDate">
+                        <template #prepend-inner>
+                          <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                        </template>
+                      </v-date-input>
                     </VCol>
                   </VRow>
                 </VCol>
