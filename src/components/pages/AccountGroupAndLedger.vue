@@ -392,7 +392,7 @@ function handleDelete(node) {
 <template>
   <div class="account_ui_vcard">
     <VRow>
-      <VCol cols="12" lg="8" md="8">
+      <VCol cols="12" lg="9" md="9">
         <VCard class="account_vcard_border shadow-none" title="Chart of Groups and Ledgers"
           subtitle="Create and manage your ledger accounts and groups.">
           <template #append>
@@ -455,10 +455,7 @@ function handleDelete(node) {
           </VForm>
         </VCardText>
         <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click="
-            showLedgerDialog = false;
-          ledgerFormRef?.resetValidation();
-          " />
+          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click=" showLedgerDialog = false; ledgerFormRef?.resetValidation();" />
           <VBtn text="Add Ledger" class="account_v_btn_primary" @click="submitLedgerForm" />
         </VCardActions>
       </VCard>

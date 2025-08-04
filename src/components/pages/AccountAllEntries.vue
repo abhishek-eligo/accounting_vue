@@ -1013,7 +1013,7 @@ onMounted(() => {
             </div>
           </div>
 
-          <VDivider color="my-2" />
+          <VDivider class="my-2" />
 
           <VCard class="account_vcard_border shadow-none account_entries_table mt-2">
             <VTable class="">

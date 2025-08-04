@@ -130,7 +130,7 @@ const tableItems = computed(() => {
                 <p class="mb-0 account_info_text">Jaipur, Maharashtra</p>
               </VCol>
             </VRow>
-            <VDivider v-if="isFullAddressVisible" />
+            <VDivider class="my-3" v-if="isFullAddressVisible" />
             <VExpandTransition>
               <VRow v-if="isFullAddressVisible">
                 <VCol cols="12">

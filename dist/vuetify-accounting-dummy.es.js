@@ -13272,7 +13272,7 @@ const Kg = J({
                             }, null, 8, ["text"])
                           ])
                         ]),
-                        l(he, { color: "my-2" }),
+                        l(he, { class: "my-2" }),
                         l(me, { class: "account_vcard_border shadow-none account_entries_table mt-2" }, {
                           default: u(() => [
                             l(yn, { class: "" }, {
@@ -13340,7 +13340,7 @@ const Kg = J({
       ]);
     };
   }
-}, i0 = /* @__PURE__ */ Pt(l0, [["__scopeId", "data-v-16d8a092"]]), o0 = Symbol.for("vuetify:date-options");
+}, i0 = /* @__PURE__ */ Pt(l0, [["__scopeId", "data-v-a2c009ce"]]), o0 = Symbol.for("vuetify:date-options");
 function s0(e, n) {
   const t = ot(typeof e.adapter == "function" ? new e.adapter({
     locale: e.locale[n.current.value] ?? n.current.value,
@@ -20091,7 +20091,10 @@ const Zp = J({
                           ]),
                           _: 1
                         }),
-                        n.value ? (k(), $(he, { key: 0 })) : j("", !0),
+                        n.value ? (k(), $(he, {
+                          key: 0,
+                          class: "my-3"
+                        })) : j("", !0),
                         l(ca, null, {
                           default: u(() => [
                             n.value ? (k(), $(be, { key: 0 }, {
@@ -21802,8 +21805,8 @@ const Zp = J({
         default: u(() => [
           l(E(F), {
             cols: "12",
-            lg: "8",
-            md: "8"
+            lg: "9",
+            md: "9"
           }, {
             default: u(() => [
               l(E(me), {
