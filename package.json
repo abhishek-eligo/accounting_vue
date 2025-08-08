@@ -4,7 +4,8 @@
   "module": "dist/vuetify-accounting-dummy.es.js",
   "files": [
     "dist",
-    "src"
+    "src",
+    "scripts"
   ],
   "exports": {
     ".": {
@@ -28,7 +29,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "postinstall": "node scripts/postinstall.cjs",
+    "postinstall": "node scripts/postinstall.cjs || node scripts/fallback-postinstall.cjs",
     "test:postinstall": "node scripts/test-postinstall.cjs"
   },
   "dependencies": {

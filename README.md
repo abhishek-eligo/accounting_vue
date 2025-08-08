@@ -218,6 +218,7 @@ npm run test:postinstall
 
 For detailed information about the automatic page generation feature, see:
 - [Automatic Page Generation Guide](docs/AUTOMATIC_PAGE_GENERATION.md)
+- [Installation Troubleshooting](docs/INSTALLATION_TROUBLESHOOTING.md)
 
 ## License
 
