@@ -1,79 +1,224 @@
-# Vuetify (Default)
+# Accounting Vue Plugin
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+A comprehensive Vue.js accounting plugin with Vuetify components for financial management applications.
 
-## ❗️ Important Links
-
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
-
-## 💿 Install
-
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
-
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
-
-After completing the installation, your environment is ready for Vuetify development.
-
-## ✨ Features
-
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts](https://github.com/JohnCampionJr/vite-plugin-vue-layouts)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
-
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
-
-## 💡 Usage
-
-This section covers how to start the development server and build your project for production.
-
-### Starting the Development Server
-
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
+## Installation
 
 ```bash
-yarn dev
+npm install git+https://github.com/abhishek-eligo/accounting_vue.git#dummy
 ```
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+## Features
 
-> Add NODE_OPTIONS='--no-warnings' to suppress the JSON import warnings that happen as part of the Vuetify import mapping. If you are on Node [v21.3.0](https://nodejs.org/en/blog/release/v21.3.0) or higher, you can change this to NODE_OPTIONS='--disable-warning=5401'. If you don't mind the warning, you can remove this from your package.json dev script.
+### 🚀 Automatic Page Generation
+When you install this plugin in your host app, it automatically creates an `accounting` folder at `resources/js/pages/admin/accounting/` containing all the page components. This allows you to:
 
-### Building for Production
+- **Customize components** according to your app's requirements
+- **Use v-model** and other Vue.js features
+- **Modify styling** and functionality
+- **Add custom logic** to each component
 
-To build your project for production, use:
+### 📁 Generated Structure
+After installation, you'll find this structure in your host app:
+```
+resources/js/pages/admin/accounting/
+├── allentries/
+│   └── index.vue
+├── balancesheet/
+│   └── index.vue
+├── customers/
+│   └── index.vue
+├── dashboard/
+│   └── index.vue
+├── groups&ledgers/
+│   └── index.vue
+├── gstreports/
+│   └── index.vue
+├── gstsummary/
+│   └── index.vue
+├── invoicepreview/
+│   ├── fc/
+│   │   └── index.vue
+│   └── index.vue
+├── invoicereturn/
+│   └── index.vue
+├── ledgers/
+│   └── index.vue
+├── profit&loss/
+│   └── index.vue
+├── purchasebills/
+│   └── index.vue
+├── role&permission/
+│   └── index.vue
+├── salesinvoice/
+│   └── index.vue
+├── settings/
+│   └── index.vue
+├── table/
+│   └── index.vue
+├── ui/
+│   └── index.vue
+└── vendors/
+    └── index.vue
+```
+
+## Usage
+
+### 1. Install the Plugin
+```bash
+npm install git+https://github.com/abhishek-eligo/accounting_vue.git#dummy
+```
+
+### 2. Register in Your App
+In your host app's `main.js`:
+```javascript
+import AccountingModule from '@abhishek_eligo/accounting_ecs';
+import '@abhishek_eligo/accounting_ecs/dist/accounting_ecs.css';
+
+app.use(AccountingModule);
+```
+
+### 3. Use Components
+You can now use the components in two ways:
+
+#### Option A: Use as Plugin Components (Static)
+```vue
+<template>
+  <div>
+    <AccountAllEntries />
+  </div>
+</template>
+```
+
+#### Option B: Use Generated Pages (Dynamic/Customizable)
+Navigate to `resources/js/pages/admin/accounting/` and modify the generated `.vue` files according to your needs:
+
+```vue
+<template>
+  <div>
+    <!-- You can now customize this component -->
+    <AccountAllEntries 
+      v-model="customData"
+      :custom-prop="value"
+      @custom-event="handleEvent"
+    />
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      customData: {},
+      value: ''
+    }
+  },
+  methods: {
+    handleEvent(data) {
+      // Custom event handling
+    }
+  }
+}
+</script>
+```
+
+## Customization
+
+### Modifying Components
+1. Navigate to `resources/js/pages/admin/accounting/`
+2. Open any `.vue` file you want to customize
+3. Add your custom logic, props, events, or styling
+4. The changes will be reflected in your app
+
+### Example Customization
+```vue
+<template>
+  <div class="custom-accounting-page">
+    <AccountAllEntries 
+      v-model="entriesData"
+      :show-export="true"
+      :custom-filters="filters"
+      @entry-selected="handleEntrySelection"
+    />
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      entriesData: [],
+      filters: {
+        dateRange: null,
+        category: 'all'
+      }
+    }
+  },
+  methods: {
+    handleEntrySelection(entry) {
+      console.log('Selected entry:', entry);
+      // Your custom logic here
+    }
+  }
+}
+</script>
+
+<style scoped>
+.custom-accounting-page {
+  padding: 20px;
+  background: #f5f5f5;
+}
+</style>
+```
+
+## Available Components
+
+- `AccountAllEntries` - All accounting entries view
+- `AccountBalanceSheet` - Balance sheet component
+- `AccountCustomerList` - Customer management
+- `AccountCustomerPortfolio` - Customer portfolio view
+- `AccountGSTReports` - GST reporting
+- `AccountGroupAndLedger` - Group and ledger management
+- `AccountInvoiceReturn` - Invoice return handling
+- `AccountProfitAndLoss` - Profit and loss statement
+- `AccountPurchaseBill` - Purchase bill management
+- `AccountSalesInvoice` - Sales invoice management
+- `AccountSettings` - Application settings
+- `AccountUserRolePermission` - User role and permissions
+- `AccountVendorsList` - Vendor management
+- `InvoicePreview` - Invoice preview component
+- `ProductsPage` - Product management
+
+## Dependencies
+
+- Vue 3.x
+- Vuetify 3.x
+- Vue Router 4.x
+
+## Development
 
 ```bash
-yarn build
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview build
+npm run preview
+
+# Test postinstall script
+npm run test:postinstall
 ```
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+## Documentation
 
-Once the build process is completed, your application will be ready for deployment in a production environment.
+For detailed information about the automatic page generation feature, see:
+- [Automatic Page Generation Guide](docs/AUTOMATIC_PAGE_GENERATION.md)
 
-## 💪 Support Vuetify Development
+## License
 
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
-
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
-
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
-
-Copyright (c) 2016-present Vuetify, LLC
+This project is licensed under the MIT License.
