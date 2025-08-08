@@ -32,8 +32,24 @@ The scripts directory might not be included in the package. Try these steps:
 
 ### 2. Manual Installation
 
-If the automatic postinstall script fails, you can manually copy the files:
+If the automatic postinstall script fails, you can use the manual test script or copy files manually:
 
+#### Option A: Use Manual Test Script
+```bash
+# Navigate to your project root
+cd /path/to/your/project
+
+# Run the manual test script (recommended)
+npm run manual-copy --prefix node_modules/@abhishek_eligo/accounting_ecs
+
+# Or run directly
+node node_modules/@abhishek_eligo/accounting_ecs/scripts/manual-test.cjs
+
+# Or with force flag to overwrite existing files
+node node_modules/@abhishek_eligo/accounting_ecs/scripts/manual-test.cjs --force
+```
+
+#### Option B: Manual Copy
 ```bash
 # Navigate to your project root
 cd /path/to/your/project

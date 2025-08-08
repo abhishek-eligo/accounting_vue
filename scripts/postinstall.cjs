@@ -25,21 +25,37 @@ function copyDirectory(source, destination) {
 
 // Function to check if we're in a host app (not in the package development)
 function isHostApp() {
-  // Check if we're in a typical Laravel/Vue.js project structure
   const cwd = process.cwd();
+  console.log('🔍 Checking if we\'re in a host app...');
+  console.log('📁 Current working directory:', cwd);
+  
+  // Check if we're in node_modules (which means we're in a host app)
+  if (cwd.includes('node_modules')) {
+    console.log('✅ Detected: Running inside node_modules (host app)');
+    return true;
+  }
+  
+  // Check if we're in a typical Laravel/Vue.js project structure
   const hasResourcesDir = fs.existsSync(path.join(cwd, 'resources'));
   const hasPackageJson = fs.existsSync(path.join(cwd, 'package.json'));
+  
+  console.log('📂 Has resources directory:', hasResourcesDir);
+  console.log('📄 Has package.json:', hasPackageJson);
   
   if (hasResourcesDir && hasPackageJson) {
     // Read package.json to check if this is the host app
     try {
       const packageJson = JSON.parse(fs.readFileSync(path.join(cwd, 'package.json'), 'utf8'));
-      return packageJson.dependencies && packageJson.dependencies['@abhishek_eligo/accounting_ecs'];
+      const hasAccountingDependency = packageJson.dependencies && packageJson.dependencies['@abhishek_eligo/accounting_ecs'];
+      console.log('📦 Has accounting dependency:', hasAccountingDependency);
+      return hasAccountingDependency;
     } catch (error) {
+      console.log('❌ Error reading package.json:', error.message);
       return false;
     }
   }
   
+  console.log('❌ Not a host app environment');
   return false;
 }
 
@@ -49,14 +65,25 @@ function getPackageRoot() {
   let currentDir = process.cwd();
   let packageRoot = null;
   
+  console.log('🔍 Looking for package root...');
+  
   // Look for node_modules in current directory or parent directories
   while (currentDir !== path.dirname(currentDir)) {
     const nodeModulesPath = path.join(currentDir, 'node_modules', '@abhishek_eligo', 'accounting_ecs');
+    console.log('🔍 Checking:', nodeModulesPath);
+    
     if (fs.existsSync(nodeModulesPath)) {
       packageRoot = nodeModulesPath;
+      console.log('✅ Found package root:', packageRoot);
       break;
     }
     currentDir = path.dirname(currentDir);
+  }
+  
+  // If we're already inside the package directory, use current directory
+  if (!packageRoot && process.cwd().includes('@abhishek_eligo/accounting_ecs')) {
+    packageRoot = process.cwd();
+    console.log('✅ Using current directory as package root:', packageRoot);
   }
   
   return packageRoot;
@@ -144,6 +171,7 @@ For more information, visit: https://github.com/abhishek-eligo/accounting_vue
 function main() {
   console.log('🚀 Starting accounting_vue postinstall script...');
   console.log('📁 Current working directory:', process.cwd());
+  console.log('📦 Script location:', __dirname);
   
   // Only run if we're in a host app
   if (!isHostApp()) {

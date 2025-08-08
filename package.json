@@ -30,7 +30,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "postinstall": "node scripts/postinstall.cjs || node scripts/fallback-postinstall.cjs",
-    "test:postinstall": "node scripts/test-postinstall.cjs"
+    "test:postinstall": "node scripts/test-postinstall.cjs",
+    "manual-copy": "node scripts/manual-test.cjs"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.6",

@@ -212,6 +212,9 @@ npm run preview
 
 # Test postinstall script
 npm run test:postinstall
+
+# Manual copy script (for troubleshooting)
+npm run manual-copy
 ```
 
 ## Documentation
