@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const isFullAddressVisible = ref(false)
 const isPaymentDialogVisible = ref(false)
@@ -95,13 +94,13 @@ const tableItems = computed(() => {
             <div class="d-flex align-center gap-2">
               <VBtn @click="paymentType = 'in'; isPaymentDialogVisible = true" class="account_v_btn_primary">
                 <template #prepend>
-                  <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px;" />
+                  <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px;" />
                 </template>
                 Payment In
               </VBtn>
               <VBtn @click="paymentType = 'out'; isPaymentDialogVisible = true" class="account_v_btn_error">
                 <template #prepend>
-                  <component :is="renderTablerIcon('circle-plus')" style="font-size: 20px;" />
+                  <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px;" />
                 </template>
                 Payment Out
               </VBtn>
@@ -109,7 +108,7 @@ const tableItems = computed(() => {
               <VBtn @click="isFullAddressVisible = !isFullAddressVisible" variant="text" size="x-small" rounded=""
                 class="account_vcard_close_btn">
                 <template #prepend>
-                  <component :is="renderTablerIcon(isFullAddressVisible ? 'chevron-up' : 'chevron-down')"
+                  <component :is="$renderTablerIcon(isFullAddressVisible ? 'chevron-up' : 'chevron-down')"
                     style="font-size: 15px;" />
                 </template>
               </VBtn>
@@ -118,15 +117,15 @@ const tableItems = computed(() => {
           <VCardText class="mt-2">
             <VRow>
               <VCol class="d-flex align-center gap-2" cols="12" lg="4" md="4">
-                <component class="account_info_icon" :is="renderTablerIcon('file-text')" style="font-size: 20px;" />
+                <component class="account_info_icon" :is="$renderTablerIcon('file-text')" style="font-size: 20px;" />
                 <p class="mb-0 account_info_text">GSTIN: 27ABCDE1000F1Z1</p>
               </VCol>
               <VCol class="d-flex align-center gap-2" cols="12" lg="4" md="4">
-                <component class="account_info_icon" :is="renderTablerIcon('phone')" style="font-size: 20px;" />
+                <component class="account_info_icon" :is="$renderTablerIcon('phone')" style="font-size: 20px;" />
                 <p class="mb-0 account_info_text">(628) 527-7859</p>
               </VCol>
               <VCol class="d-flex align-center gap-2" cols="12" lg="4" md="4">
-                <component class="account_info_icon" :is="renderTablerIcon('map-pin')" style="font-size: 20px;" />
+                <component class="account_info_icon" :is="$renderTablerIcon('map-pin')" style="font-size: 20px;" />
                 <p class="mb-0 account_info_text">Jaipur, Maharashtra</p>
               </VCol>
             </VRow>
@@ -167,7 +166,7 @@ const tableItems = computed(() => {
         <VCard :subtitle="widget.title" class="account_widget_vcard account_vcard_border"
           :class="index === 0 ? 'account_v_card_dark' : ''">
           <template #append>
-            <component :is="renderTablerIcon(widget.icon)" style="font-size: 16px;"
+            <component :is="$renderTablerIcon(widget.icon)" style="font-size: 16px;"
               :class="index === 0 ? 'account_v_card_dark_icon' : ''" />
           </template>
           <VCardText>
@@ -188,19 +187,19 @@ const tableItems = computed(() => {
               <VTextField style="min-inline-size: 250px;" class="accouting_field accouting_active_field"
                 variant="outlined" density="compact" placeholder="Filter description...">
                 <template #prepend-inner>
-                  <component :is="renderTablerIcon('search')" style="font-size: 20px;" />
+                  <component :is="$renderTablerIcon('search')" style="font-size: 20px;" />
                 </template>
               </VTextField>
 
               <v-date-input class="accounting_date_input" placeholder="Select date range"
                 style="min-inline-size: 300px;" cancel-text="Close" ok-text="Apply" multiple="range">
                 <template #prepend-inner>
-                  <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                  <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
                 </template>
               </v-date-input>
               <VBtn class="account_v_btn_outlined">
                 <template #prepend>
-                  <component :is="renderTablerIcon('download')" style="font-size: 20px;" />
+                  <component :is="$renderTablerIcon('download')" style="font-size: 20px;" />
                 </template>
                 Export
               </VBtn>

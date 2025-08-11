@@ -1495,7 +1495,8 @@ svg.table_row_icon {
 }
 
 .account_swtich_btn .v-input__control .v-selection-control {
-    justify-content: end;
+    /* justify-content: end; */
+    justify-content: start;
 }
 
 .active_border {

@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import DynamicDataTable from '@/components/DynamicDataTable.vue'
-import AccountCustomerPortfolio from './AccountCustomerPortfolio.vue'
-import '../../main.css';
+// import DynamicDataTable from '@/components/DynamicDataTable.vue'
+// import AccountCustomerPortfolio from './AccountCustomerPortfolio.vue'
+// import '../../main.css';
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const formFields = ref([

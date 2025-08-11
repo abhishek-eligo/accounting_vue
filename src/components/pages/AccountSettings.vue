@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
-import { VWindow, VWindowItem } from 'vuetify/components'
 
 const currentTab = ref("")
 const stateOptions = ref([])

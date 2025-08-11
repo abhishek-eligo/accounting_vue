@@ -8,7 +8,8 @@ import '../../main.css';
     <div class="invoice-header d-flex justify-space-between align-center">
       <div>
         <div class="d-flex align-center mb-1">
-          <v-icon class="mr-2" size="36">mdi-file-document-outline</v-icon>
+          <component :is="$renderTablerIcon('report-money')" style="font-size: 54px" />
+          <!-- <v-icon class="mr-2" size="36">mdi-file-document-outline</v-icon> -->
           <div>
             <h2 class="invoice-company">Hicks Inc.</h2>
             <div class="invoice-address">123 Business Rd, Financial District, Mumbai, Maharashtra, 400001</div>

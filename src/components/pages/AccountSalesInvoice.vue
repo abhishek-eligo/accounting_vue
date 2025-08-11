@@ -1,7 +1,5 @@
 <script setup>
 import { ref, computed, onMounted, watchEffect } from 'vue'
-import DynamicDataTable from '@/components/DynamicDataTable.vue'
-import { title } from '@primeuix/themes/aura/card';
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 // Headers from screenshots

@@ -16,7 +16,7 @@ import {
   VCardSubtitle,
   VCardActions,
 } from "vuetify/components";
-import TreeItem from "@/components/core/TreeItem.vue";
+// import TreeItem from "@/components/core/TreeItem.vue";
 import { toast } from "vue3-toastify";
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 

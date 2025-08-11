@@ -228,3 +228,21 @@ cd accounting_vue
 git checkout dummy
 # Then manually copy the src/pages and src/components directories
 ``` 
+
+
+
+
+
+# Step 1: Install the package
+npm install git+https://github.com/abhishek-eligo/accounting_vue.git#dummy --force
+
+# Step 2: Run the manual copy script
+node node_modules/@abhishek_eligo/accounting_ecs/scripts/manual-test.cjs
+
+# Create directories manually
+mkdir -p resources/js/pages/admin/accounting/pages
+mkdir -p resources/js/pages/admin/accounting/components
+
+# Copy files manually
+cp -r node_modules/@abhishek_eligo/accounting_ecs/src/pages/* resources/js/pages/admin/accounting/pages/
+cp -r node_modules/@abhishek_eligo/accounting_ecs/src/components/* resources/js/pages/admin/accounting/components/

@@ -21,6 +21,10 @@ export default defineConfig({
       dirs: [
         "src/helpers", // Auto import from helpers
         "src/validations", // Auto import from validations
+        "src/pages", // Auto import from pages,
+        "src/components", // Auto import from components,
+        "src/plugins", // Auto import from plugins,
+        "src/router", // Auto import from router,
       ],
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme

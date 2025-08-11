@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import IncomeRow from '@/components/core/IncomeRow.vue';
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 const incomeData = ref([

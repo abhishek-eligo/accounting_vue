@@ -10,6 +10,7 @@ import { registerPlugins } from "@/plugins";
 
 import Vue3Toastify, { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 // Components
 import App from "./App.vue";
@@ -42,6 +43,9 @@ const app = createApp(App);
 app.component('Icon', Icon);
 
 app.use(router);
+
+// make the helper globally available
+app.config.globalProperties.$renderTablerIcon = renderTablerIcon;
 
 // Use Primevue
 app.use(PrimeVue, {

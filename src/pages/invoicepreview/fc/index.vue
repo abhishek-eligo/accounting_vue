@@ -6,7 +6,8 @@
     <div class="invoice-header d-flex justify-space-between align-center">
       <div>
         <div class="d-flex align-center mb-1">
-          <v-icon class="mr-2" size="36">mdi-file-document-outline</v-icon>
+          <!-- <v-icon class="mr-2" size="36">mdi-file-document-outline</v-icon> -->
+          <component :is="$renderTablerIcon('report-money')" style="font-size: 52px" />
           <div>
             <h2 class="invoice-company">Hicks Inc.</h2>
             <div class="invoice-address">123 Business Rd, Financial District, Mumbai, Maharashtra, 400001, India</div>
@@ -150,7 +151,7 @@
     <!-- Amount in Words & Summary -->
     <!-- Removed old VRow summary block -->
 
- 
+
 
     <VDivider class="my-2" />
 
@@ -188,7 +189,7 @@
           <li>A late fee of 1.5% per month will be charged on overdue invoices.</li>
         </ul>
       </div>
-      
+
     </div>
 
     <VDivider class="my-2" />

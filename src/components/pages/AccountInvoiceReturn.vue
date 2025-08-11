@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, watchEffect } from 'vue'
-import DynamicDataTable from '@/components/DynamicDataTable.vue'
+// import DynamicDataTable from '@/components/DynamicDataTable.vue'
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 // Headers from screenshots

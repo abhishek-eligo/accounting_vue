@@ -31,9 +31,14 @@ function addItem() {
               <VBtn class="account_v_btn_primary">Default Button</VBtn>
               <VBtn size="small" class="account_v_btn_primary">Small Button</VBtn>
               <VBtn icon class="account_v_btn_primary" size="x-small" rounded="">
-                <VIcon>mdi-email-outline</VIcon>
+                <component :is="$renderTablerIcon('mail')" size="20px" />
               </VBtn>
-              <VBtn disabled class="account_v_btn_primary" prepend-icon="mdi-refresh">Disabled</VBtn>
+              <VBtn disabled class="account_v_btn_primary" variant="plain" color="primary">
+                <template #prepend>
+                  <component :is="$renderTablerIcon('reload')" size="20px" />
+                </template>
+                Disabled
+              </VBtn>
             </div>
           </VCol>
         </VRow>
@@ -48,9 +53,12 @@ function addItem() {
               <VBtn class="account_v_btn_error">Default Button</VBtn>
               <VBtn size="small" class="account_v_btn_error">Small Button</VBtn>
               <VBtn icon class="account_v_btn_error" size="x-small" rounded="">
-                <VIcon>mdi-email-outline</VIcon>
+                <component :is="$renderTablerIcon('mail')" size="20px" />
               </VBtn>
-              <VBtn disabled class="text-capitalize account_v_btn_error" color="error" prepend-icon="mdi-refresh">
+              <VBtn disabled class="account_v_btn_error" variant="plain" color="primary">
+                <template #prepend>
+                  <component :is="$renderTablerIcon('reload')" size="20px" />
+                </template>
                 Disabled
               </VBtn>
             </div>
@@ -67,9 +75,14 @@ function addItem() {
               <VBtn class="account_v_btn_outlined">Default Button</VBtn>
               <VBtn size="small" class="account_v_btn_outlined">Small Button</VBtn>
               <VBtn icon class="account_v_btn_outlined" rounded="" size="x-small">
-                <VIcon>mdi-email</VIcon>
+                <component :is="$renderTablerIcon('mail')" size="20px" />
               </VBtn>
-              <VBtn disabled class="account_v_btn_outlined" prepend-icon="mdi-refresh">Disabled</VBtn>
+              <VBtn disabled class="account_v_btn_outlined" variant="plain" color="primary">
+                <template #prepend>
+                  <component :is="$renderTablerIcon('reload')" size="20px" />
+                </template>
+                Disabled
+              </VBtn>
             </div>
           </VCol>
         </VRow>
@@ -84,9 +97,14 @@ function addItem() {
               <VBtn class="account_v_btn_secondary">Default Button</VBtn>
               <VBtn size="small" class="account_v_btn_secondary">Small Button</VBtn>
               <VBtn icon class="account_v_btn_secondary" rounded="" size="x-small">
-                <VIcon>mdi-email</VIcon>
+                <component :is="$renderTablerIcon('mail')" size="20px" />
               </VBtn>
-              <VBtn disabled class="account_v_btn_secondary" prepend-icon="mdi-refresh">Disabled</VBtn>
+              <VBtn disabled class="account_v_btn_secondary" variant="plain" color="primary">
+                <template #prepend>
+                  <component :is="$renderTablerIcon('reload')" size="20px" />
+                </template>
+                Disabled
+              </VBtn>
             </div>
           </VCol>
         </VRow>
@@ -101,9 +119,14 @@ function addItem() {
               <VBtn class="account_v_btn_ghost" variant="text">Default Button</VBtn>
               <VBtn size="small" class="account_v_btn_ghost" variant="text">Small Button</VBtn>
               <VBtn icon class="account_v_btn_ghost" rounded="" size="x-small" variant="text">
-                <VIcon>mdi-email-outline</VIcon>
+                <component :is="$renderTablerIcon('mail')" size="20px" />
               </VBtn>
-              <VBtn disabled class="account_v_btn_ghost" variant="text" prepend-icon="mdi-refresh">Disabled</VBtn>
+              <VBtn disabled class="account_v_btn_ghost" variant="plain" color="primary">
+                <template #prepend>
+                  <component :is="$renderTablerIcon('reload')" size="20px" />
+                </template>
+                Disabled
+              </VBtn>
             </div>
           </VCol>
         </VRow>
@@ -118,9 +141,12 @@ function addItem() {
               <VBtn class="account_v_btn_link" variant="plain">Default Button</VBtn>
               <VBtn variant="plain" class="account_v_btn_link" size="small">Small Button</VBtn>
               <VBtn icon class="account_v_btn_link" variant="plain" rounded="" size="x-small">
-                <VIcon>mdi-email</VIcon>
+                <component :is="$renderTablerIcon('mail')" size="20px" />
               </VBtn>
-              <VBtn disabled class="account_v_btn_link" variant="plain" color="primary" prepend-icon="mdi-refresh">
+              <VBtn disabled class="account_v_btn_link" variant="plain" color="primary">
+                <template #prepend>
+                  <component :is="$renderTablerIcon('reload')" size="20px" />
+                </template>
                 Disabled
               </VBtn>
             </div>
@@ -203,8 +229,14 @@ function addItem() {
           </VCol>
           <VCol cols="12" lg="6" md="6">
             <label class="account_label mb-2">Date Picker</label>
-            <VTextField class="accouting_field accouting_active_field" type="date" variant="outlined" density="compact"
-              placeholder="July 1, 2025" />
+            <!-- <VTextField class="accouting_field accouting_active_field" type="date" variant="outlined" density="compact"
+              placeholder="July 1, 2025" /> -->
+            <v-date-input class="accounting_date_input" placeholder="July 1, 2025"
+              cancel-text="Close" ok-text="Apply">
+              <template #prepend-inner>
+                <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+              </template>
+            </v-date-input>
           </VCol>
           <VCol cols="12" lg="6" md="6">
             <label class="account_label mb-2">Select</label>
@@ -221,7 +253,9 @@ function addItem() {
             <VSelect class="accouting_field accouting_active_field" variant="outlined" placeholder="Select an item">
               <template #append>
                 <VBtn @click="dialog = true" class="account_v_btn_outlined" rounded="" icon="mdi-plus-circle-outline"
-                  size="x-small" />
+                  size="x-small">
+                  <component :is="$renderTablerIcon('')" size="20px" />
+                </VBtn>
               </template>
             </VSelect>
 

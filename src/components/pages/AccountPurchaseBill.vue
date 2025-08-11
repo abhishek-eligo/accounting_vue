@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed, watchEffect } from 'vue'
 import { onMounted } from 'vue'
-import DynamicDataTable from '@/components/DynamicDataTable.vue'
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 
 // Vendor select and Add Vendor dialog
