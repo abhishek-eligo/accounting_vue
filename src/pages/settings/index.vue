@@ -167,7 +167,7 @@ const insertTemplateText = (key) => {
                     <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                       <template #activator="{ props }">
                         <VBtn v-bind="props" variant="text" size="x-small" rounded="">
-                          <component :is="$renderTablerIcon('settings')" style="font-size: 20px;" />
+                          <IconSettings size="20" />
                         </VBtn>
                       </template>
                       <VCard class="account_vcard_menu account_vcard_border">
@@ -176,8 +176,7 @@ const insertTemplateText = (key) => {
                         <div class="account_vcard_menu_items py-1">
                           <div v-for="(label, key) in fieldLabels" :key="key" @click="toggleField(key)">
                             <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                              <component v-if="fieldVisibility[key]" :is="$renderTablerIcon('check')"
-                                style="font-size: 16px;" />
+                              <IconCheck v-if="fieldVisibility[key]" size="16" />
                               <span :class="fieldVisibility[key] ? '' : 'field_list_dynamic_ml'">{{ label }}</span>
                             </div>
                           </div>
@@ -210,15 +209,14 @@ const insertTemplateText = (key) => {
                     <v-col v-if="fieldVisibility.businessType" cols="12" lg="6" md="6">
                       <label class="account_label mb-1">Business Type</label>
                       <VAutocomplete class="accouting_field accouting_active_field" variant="outlined"
-                        placeholder="Select Business Type " :items="[
-                          'Proprietriship',
+                        placeholder="Select Business Type" :items="[
+                          'Proprietorship',
                           'Partnership',
                           'Private Limited Company',
-                          'Public Limited Company ',
+                          'Public Limited Company',
                           'Limited Liability Partnership (LLP)',
                           'Other',
-                        ]">
-                      </VAutocomplete>
+                        ]" />
                     </v-col>
 
                     <v-col v-if="fieldVisibility.state" cols="12" lg="6" md="6">
@@ -272,14 +270,14 @@ const insertTemplateText = (key) => {
                     <v-col v-if="fieldVisibility.pan" cols="12" lg="6" md="6">
                       <label class="account_label mb-1">PAN</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="15-digit PAN" />
+                        placeholder="10-digit PAN" />
                     </v-col>
 
                     <v-col v-if="fieldVisibility.fyStart" cols="12" lg="6" md="6">
                       <label class="account_label mb-1">Financial Year Start</label>
                       <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply">
                         <template #prepend-inner>
-                          <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                          <IconCalendar size="20" />
                         </template>
                       </v-date-input>
                     </v-col>
@@ -288,22 +286,20 @@ const insertTemplateText = (key) => {
                       <label class="account_label mb-1">Financial Year End</label>
                       <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply">
                         <template #prepend-inner>
-                          <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                          <IconCalendar size="20" />
                         </template>
                       </v-date-input>
                     </v-col>
 
-
                     <v-col v-if="fieldVisibility.baseCurrency" cols="12" lg="6" md="6">
                       <label class="account_label mb-1">Base Currency</label>
                       <VAutocomplete class="accouting_field accouting_active_field" variant="outlined"
-                        placeholder="Select Business Type " :items="[
+                        placeholder="Select Currency" :items="[
                           'INR',
                           'USD',
                           'EUR',
                           'GBP',
-                        ]">
-                      </VAutocomplete>
+                        ]" />
                     </v-col>
 
                     <v-col v-if="fieldVisibility.decimalPlaces" cols="12" lg="6" md="6">
@@ -314,21 +310,18 @@ const insertTemplateText = (key) => {
 
                     <v-col v-if="fieldVisibility.thousandSeparator" cols="12" lg="6" md="6">
                       <label class="account_label mb-1">Thousand Separator</label>
-                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact" />
+                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                        placeholder="," />
                     </v-col>
-
 
                     <v-col v-if="fieldVisibility.companyLogo" cols="12" lg="12" md="12">
                       <label class="account_label mb-1">Company Logo</label>
                       <v-file-input class="accouting_field align-center accouting_active_field" variant="outlined"
-                        density="compact" prepend-icon="" placeholder="Upload PAN card file">
+                        density="compact" prepend-icon="" placeholder="Upload company logo">
                         <template #prepend>
-                          <VBtn class="account_v_btn_outlined" variant="outlined" size="64" rounded="" disabled>
-                            <component :is="$renderTablerIcon('upload')" style="font-size: 32px;" />
+                          <VBtn class="account_v_btn_outlined" variant="outlined" size="64" rounded="">
+                            <IconUpload size="32" />
                           </VBtn>
-                          <!-- <v-avatar size="64" class="me-2" color="secondary" rounded="">
-                          <v-icon icon="mdi-tray-arrow-up" color="white" size="18" />
-                        </v-avatar> -->
                         </template>
                       </v-file-input>
                     </v-col>
@@ -337,8 +330,7 @@ const insertTemplateText = (key) => {
                       <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="large" rounded="3"
                         color="primary">
                         <template #prepend>
-                          <component :is="$renderTablerIcon('device-floppy')"
-                            style="font-size: 22px; margin-right: 6px;" />
+                          <IconDeviceFloppy size="22" style="margin-right: 6px;" />
                         </template>
                         Save Changes
                       </VBtn>
@@ -368,8 +360,7 @@ const insertTemplateText = (key) => {
                     <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="3"
                       color="primary">
                       <template #prepend>
-                        <component :is="$renderTablerIcon('device-floppy')"
-                          style="font-size: 22px; margin-right: 6px;" />
+                        <IconDeviceFloppy size="22" style="margin-right: 6px;" />
                       </template>
                       Save Software Settings
                     </VBtn>
@@ -382,7 +373,7 @@ const insertTemplateText = (key) => {
                   <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" color="primary"
                     @click="gstDialog = true">
                     <template #prepend>
-                      <component :is="$renderTablerIcon('circle-plus')" style="font-size: 22px; margin-right: 6px;" />
+                      <IconCirclePlus size="22" style="margin-right: 6px;" />
                     </template>
                     Add New GST Rate
                   </VBtn>
@@ -395,7 +386,7 @@ const insertTemplateText = (key) => {
                       <VDataTable :headers="gstRateHeaders" :items="gstRates" class="account_dynamic_table shadow-none">
                         <template #item.actions="{ item }">
                           <VBtn variant="text" size="x-small" color="error" class="trash_error_color">
-                            <component :is="$renderTablerIcon('trash')" style="font-size: 16px;" />
+                            <IconTrash size="16" />
                           </VBtn>
                         </template>
                       </VDataTable>
@@ -417,8 +408,7 @@ const insertTemplateText = (key) => {
                         <VBtn class="account_v_btn_outlined" variant="outlined" @click="gstDialog = false">Cancel</VBtn>
                         <VBtn color="primary" variant="outlined" class="account_v_btn_primary" @click="addGstRate">
                           <template #prepend>
-                            <component :is="$renderTablerIcon('circle-plus')"
-                              style="font-size: 20px; margin-right: 6px;" />
+                            <IconCirclePlus size="20" style="margin-right: 6px;" />
                           </template>
                           Add Rate
                         </VBtn>
@@ -462,13 +452,41 @@ const insertTemplateText = (key) => {
                   <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="3"
                     color="primary">
                     <template #prepend>
-                      <component :is="$renderTablerIcon('device-floppy')" style="font-size: 22px; margin-right: 6px;" />
+                      <IconDeviceFloppy size="22" style="margin-right: 6px;" />
                     </template>
                     Save Terms
                   </VBtn>
                 </div>
               </VWindowItem>
-              <VWindowItem :value="4">Integration Content</VWindowItem>
+              <VWindowItem :value="4">
+                <div>
+                  <h3 class="company-setting-heading m-0">Integration Settings</h3>
+                </div>
+                <div class="mt-8">
+                  <VCard class="account_vcard_border shadow-none pa-2" variant="text" title="Integration Management"
+                    subtitle="Manage integrations with third-party services.">
+                    <VCardText>
+                      <VCard v-for="integration in integrations" :key="integration.title"
+                        class="account_vcard_border account_module_card mt-4 shadow-none" :title="integration.title"
+                        :subtitle="integration.description">
+                        <template #append>
+                          <VSwitch density="compact" v-model="integration.active" inset class="account_swtich_btn"
+                            color="primary" hide-details />
+                        </template>
+                      </VCard>
+                    </VCardText>
+                  </VCard>
+                  <div class="pa-4 d-flex align-center justify-end">
+                    <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="3"
+                      color="primary">
+                      <template #prepend>
+                        <IconDeviceFloppy size="22" style="margin-right: 6px;" />
+                      </template>
+                      Save Integration Settings
+                    </VBtn>
+                  </div>
+                </div>
+              </VWindowItem>
             </VWindow>
           </VCol>
         </VRow>

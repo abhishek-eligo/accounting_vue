@@ -664,16 +664,15 @@ const previewValue = computed(() => {
             <template #append>
               <div class="d-flex align-center gap-2">
                 <VBtn @click="isInvoiceSettingsVisible = true" variant="text" size="x-small" rounded="">
-                  <component :is="$renderTablerIcon('settings')" style="font-size: 20px;" />
+                  <IconSettings size="20" />
                 </VBtn>
                 <VBtn @click="isCreatingNewInvoice = false" variant="text" size="x-small" rounded=""
                   class="account_vcard_close_btn">
-                  <component :is="$renderTablerIcon('x')" style="font-size: 20px;" />
+                  <IconX size="20" />
                 </VBtn>
               </div>
             </template>
             <VCardText>
-
               <VRow>
                 <VCol cols="12" lg="6" md="6">
                   <label class="account_label mb-2">Customer</label>
@@ -681,7 +680,7 @@ const previewValue = computed(() => {
                     class="accouting_field accouting_active_field" :items="customersList" variant="outlined">
                     <template #append>
                       <VBtn class="account_v_btn_outlined" @click="addNewCustomerVisible = true" rounded="2">
-                        <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px;" />
+                        <IconCirclePlus size="20" />
                       </VBtn>
                     </template>
                   </VAutocomplete>
@@ -697,12 +696,10 @@ const previewValue = computed(() => {
                 </VCol>
                 <VCol cols="12" lg="6" md="6">
                   <label class="account_label mb-2">Credit Note Date</label>
-                  <!-- <VTextField type="date" class="accouting_field accouting_active_field" variant="outlined"
-                    density="compact" v-model="creditNoteDate" /> -->
                   <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply"
                     v-model="creditNoteDate">
                     <template #prepend-inner>
-                      <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                      <IconCalendar size="20" />
                     </template>
                   </v-date-input>
                 </VCol>
@@ -718,16 +715,13 @@ const previewValue = computed(() => {
                     </VCol>
                     <VCol cols="12" lg="6" md="6" sm="12">
                       <label class="account_label mb-2">Original Invoice Date</label>
-                      <!-- <VTextField v-model="placeOfSupply" class="accouting_field accouting_active_field"
-                        variant="outlined" density="compact" /> -->
                       <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply"
                         v-model="invoiceDate">
                         <template #prepend-inner>
-                          <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                          <IconCalendar size="20" />
                         </template>
                       </v-date-input>
                     </VCol>
-
                   </VRow>
                 </VCol>
               </VRow>
@@ -736,7 +730,6 @@ const previewValue = computed(() => {
 
               <VRow>
                 <VCol cols="12" lg="12" md="12">
-
                   <VDataTable :headers="activeInvoiceType === 'item' ? itemInvoiceHeaders : serviceInvoiceHeaders"
                     :items="activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData"
                     class="account_dynamic_table account_invoice_table">
@@ -780,19 +773,18 @@ const previewValue = computed(() => {
                     </template>
 
                     <template #[`item.actions`]="{ index }">
-                      <component :is="$renderTablerIcon('trash')" class="cursor-pointer table_row_icon" :class="{
+                      <IconTrash class="cursor-pointer table_row_icon" :class="{
                         'opacity-50': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1,
                         'cursor-not-allowed': (activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1
                       }" :disabled="(activeInvoiceType === 'item' ? itemInvoiceData : serviceInvoiceData).length === 1"
-                        @click="removeInvoiceRow(index, activeInvoiceType)"
-                        style="font-size: 20px; margin-right: 6px;" />
+                        @click="removeInvoiceRow(index, activeInvoiceType)" size="20" />
                     </template>
                   </VDataTable>
                 </VCol>
                 <VCol cols="12">
                   <VBtn class="account_v_btn_outlined mt-3" variant="text" @click="addInvoiceRow(activeInvoiceType)">
                     <template #prepend>
-                      <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+                      <IconCirclePlus size="20" />
                     </template>
                     Add Another Line
                   </VBtn>
@@ -840,12 +832,11 @@ const previewValue = computed(() => {
               <div class="d-flex align-center gap-2 justify-end mt-3">
                 <VBtn class="account_v_btn_primary">
                   <template #prepend>
-                    <component :is="$renderTablerIcon('device-floppy')" style="font-size: 20px; margin-right: 6px;" />
+                    <IconDeviceFloppy size="20" />
                   </template>
                   Save Credit Note
                 </VBtn>
               </div>
-
             </VCardText>
           </VCard>
         </VCol>
@@ -866,7 +857,9 @@ const previewValue = computed(() => {
             <div class="d-flex align-center gap-2">
               <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                 <template #activator="{ props }">
-                  <VBtn v-bind="props" icon="mdi-cog-outline" variant="text" size="x-small" rounded="" />
+                  <VBtn v-bind="props" variant="text" size="x-small" rounded="">
+                    <IconSettings size="20" />
+                  </VBtn>
                 </template>
                 <VCard class="account_vcard_menu account_vcard_border">
                   <div class="account_vcard_menu_hdng">Show/Hide Optional Fields</div>
@@ -875,16 +868,17 @@ const previewValue = computed(() => {
                     <div v-for="field in formFields" :key="field.key" class="account_vcard_menu_item"
                       @click="field.visible = !field.visible">
                       <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                        <VIcon v-if="field.visible" size="16" icon="mdi-check" />
-                        <span :class="field.visible ? '' : 'field_list_dynamic_ml'">{{
-                          field.label }}</span>
+                        <IconCheck v-if="field.visible" size="16" />
+                        <span :class="field.visible ? '' : 'field_list_dynamic_ml'">{{ field.label }}</span>
                       </div>
                     </div>
                   </div>
                 </VCard>
               </VMenu>
-              <VBtn @click="showAddCustomerForm" icon="mdi-close" variant="text" size="x-small" rounded=""
-                class="account_vcard_close_btn" />
+              <VBtn @click="showAddCustomerForm" variant="text" size="x-small" rounded=""
+                class="account_vcard_close_btn">
+                <IconX size="20" />
+              </VBtn>
             </div>
           </template>
           <VCardText class="add_customer_dialog">
@@ -909,7 +903,7 @@ const previewValue = computed(() => {
                   <VTextField class="custom_option_field accouting_field accouting_active_field" type="number"
                     variant="outlined" density="compact" placeholder="0" />
                   <VSelect class="custom_option_select accouting_field accouting_active_field"
-                    v-model="selectedBalanceType" :items="balanceTypeList" variant="outlined" density="comapct" />
+                    v-model="selectedBalanceType" :items="balanceTypeList" variant="outlined" density="compact" />
                 </div>
               </VCol>
 
@@ -1032,10 +1026,13 @@ const previewValue = computed(() => {
               <VCol v-if="isVisible('shipToAddress')" cols="12" lg="12" md="12">
                 <label class="account_label mb-2">Ship-to Address</label>
                 <VTextarea class="accounting_v_textarea" placeholder="Optional delivery address" variant="outlined" />
-
                 <div class="d-flex align-center justify-end mt-4">
-                  <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save
-                    Customer</VBtn>
+                  <VBtn class="account_v_btn_primary">
+                    <template #prepend>
+                      <IconContentSaveOutline size="20" />
+                    </template>
+                    Save Customer
+                  </VBtn>
                 </div>
               </VCol>
             </VRow>
@@ -1049,8 +1046,10 @@ const previewValue = computed(() => {
         <VCard title="Invoice Settings" class="pa-2 account_vcard_border shadow-none"
           subtitle="Customize your invoice creation experience.">
           <template #append>
-            <VBtn @click="isInvoiceSettingsVisible = false" icon="mdi-close" variant="text" size="x-small" rounded=""
-              class="account_vcard_close_btn" />
+            <VBtn @click="isInvoiceSettingsVisible = false" variant="text" size="x-small" rounded=""
+              class="account_vcard_close_btn">
+              <IconX size="20" />
+            </VBtn>
           </template>
           <VCardText>
             <VRow class="acc_invoice_settings_row mx-1">
@@ -1067,7 +1066,6 @@ const previewValue = computed(() => {
               <VCol cols="12">
                 <VCard class="account_vcard_border shadow-none pa-4" v-if="activeSettingsTab === 'Numbering'">
                   <h6 class="mb-4">Invoice Numbering</h6>
-
                   <VRow>
                     <VCol cols="12">
                       <VCard class="account_vcard_border shadow-none">
@@ -1079,7 +1077,6 @@ const previewValue = computed(() => {
                         </VCardText>
                       </VCard>
                     </VCol>
-
                     <VCol cols="12">
                       <label class="account_label mb-2">Prefix Mode</label>
                       <VRow>
@@ -1099,19 +1096,16 @@ const previewValue = computed(() => {
                         </VCol>
                       </VRow>
                     </VCol>
-
                     <VCol cols="12" lg="8" md="8">
                       <label class="account_label mb-2">Prefix Type</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                         v-model="prefixType" :readonly="activePrefixMode === 'Financial Year'" />
                     </VCol>
-
                     <VCol cols="12" lg="4" md="4">
                       <label class="account_label mb-2">Starting Number</label>
                       <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
                         density="compact" v-model="startingNumber" />
                     </VCol>
-
                     <VCol cols="12">
                       <label class="account_label mb-2">Preview</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
@@ -1120,7 +1114,6 @@ const previewValue = computed(() => {
                   </VRow>
                 </VCard>
 
-                <!-- Dummy Cards -->
                 <VCard v-if="activeSettingsTab === 'Columns'" class="account_vcard_border shadow-none pa-4">
                   <h6 class="mb-4">Column Visibility</h6>
                   <VRow>
@@ -1134,7 +1127,6 @@ const previewValue = computed(() => {
                         </VCardText>
                       </VCard>
                     </VCol>
-
                     <VCol cols="12">
                       <VCard class="account_vcard_border shadow-none">
                         <VCardText class="py-1 px-2">
@@ -1195,14 +1187,13 @@ const previewValue = computed(() => {
               </VCol>
             </VRow>
           </VCardText>
-
         </VCard>
       </div>
     </v-dialog>
 
     <VBtn @click="isCreatingNewInvoice = !isCreatingNewInvoice" :key="bounceKey" class="account_add_new_btn bounce">
       <template #prepend>
-        <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+        <IconCirclePlus size="20" />
       </template>
       Create Invoice
     </VBtn>

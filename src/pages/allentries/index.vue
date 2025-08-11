@@ -570,10 +570,8 @@ onMounted(() => {
               <VBtn @click="showLedgerDialog = true" class="account_v_btn_outlined save_btn_height" variant="outlined"
                 size="default" rounded="2" color="primary">
                 <template #prepend>
-                  <!-- Use Tabler plus icon -->
                   <span style="display: flex; align-items: center;">
-                    <!-- Use the helper to render the icon -->
-                    <component :is="$renderTablerIcon('plus')" style="font-size: 22px;" />
+                    <IconPlus size="22" />
                   </span>
                 </template>
                 Add Ledger
@@ -587,13 +585,10 @@ onMounted(() => {
                       <div class="account_entry_form_label">
                         <label class="account_label">Date *</label>
                       </div>
-                      <!-- :rules="[journalEntryRules.entryDate]" -->
-                      <!-- <VTextField v-model="journalEntryForm.entryDate" class="accouting_field accouting_active_field"
-                        type="date" variant="outlined" placeholder="Select Date" density="compact"
-                        prepend-inner-icon="mdi-calendar" /> -->
-                      <v-date-input v-model="journalEntryForm.entryDate" class="accounting_date_input" cancel-text="Close" ok-text="Apply">
+                      <v-date-input v-model="journalEntryForm.entryDate" class="accounting_date_input"
+                        cancel-text="Close" ok-text="Apply">
                         <template #prepend-inner>
-                          <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                          <IconCalendar size="20" />
                         </template>
                       </v-date-input>
                     </div>
@@ -611,10 +606,6 @@ onMounted(() => {
                       <VAutocomplete class="accouting_field accouting_active_field" variant="outlined"
                         placeholder="Select Account" density="compact" :items="allLedgers" item-title="title"
                         item-value="value" v-model="debit.account" />
-                      <!-- :rules="[
-                          (v) =>
-                            validateField(v, journalEntryValidations.account),
-                        ]" -->
                     </div>
                   </VCol>
                   <!-- Amount -->
@@ -623,14 +614,10 @@ onMounted(() => {
                       variant="outlined" density="compact" v-model="debit.amount" @input="
                         (event) => handleAmountInput(event, index, 'debit')
                       ">
-                      <!-- :rules="[
-                        (v) =>
-                          validateField(v, journalEntryValidations.entryAmount),
-                      ]" -->
                       <template #append>
                         <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="x-small"
                           rounded="3" @click="removeDebitRow(index)">
-                          <component :is="$renderTablerIcon('trash')" style="font-size: 18px;" />
+                          <IconTrash size="18" />
                         </VBtn>
                       </template>
                     </VTextField>
@@ -648,7 +635,7 @@ onMounted(() => {
                   <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="small" rounded=""
                     @click="addDebitRow">
                     <template #prepend>
-                      <component :is="$renderTablerIcon('plus')" style="font-size: 18px;" />
+                      <IconPlus size="18" />
                     </template>
                     Add Debit Amount
                   </VBtn>
@@ -661,14 +648,9 @@ onMounted(() => {
                       <div class="account_entry_form_label">
                         <label v-if="index === 0" class="account_label">Credit *</label>
                       </div>
-                      <!-- <div v-else style="width: 48px"></div> -->
                       <VAutocomplete class="accouting_field accouting_active_field" variant="outlined"
                         placeholder="Select Account" density="compact" :items="allLedgers" item-title="title"
                         item-value="value" v-model="credit.account" />
-                      <!-- :rules="[
-                          (v) =>
-                            validateField(v, journalEntryValidations.account),
-                        ]" -->
                     </div>
                   </VCol>
                   <VCol cols="12" lg="4" md="4">
@@ -676,14 +658,10 @@ onMounted(() => {
                       variant="outlined" density="compact" v-model="credit.amount" @input="
                         (event) => handleAmountInput(event, index, 'credit')
                       ">
-                      <!-- :rules="[
-                        (v) =>
-                          validateField(v, journalEntryValidations.entryAmount),
-                      ]" -->
                       <template #append>
                         <VBtn @click="removeCreditRow(index)" class="account_v_btn_ghost account_btn_primary_text"
                           variant="text" size="x-small" rounded="1">
-                          <component :is="$renderTablerIcon('trash')" style="font-size: 18px;" />
+                          <IconTrash size="18" />
                         </VBtn>
                       </template>
                     </VTextField>
@@ -700,7 +678,7 @@ onMounted(() => {
                   <VBtn @click="addCreditRow" class="account_v_btn_ghost account_btn_primary_text" variant="text"
                     size="small" rounded="">
                     <template #prepend>
-                      <component :is="$renderTablerIcon('plus')" style="font-size: 18px;" />
+                      <IconPlus size="18" />
                     </template>
                     Add Credit Amount
                   </VBtn>
@@ -725,7 +703,6 @@ onMounted(() => {
                     <VAutocomplete v-model="journalEntryForm.voucherType" class="accouting_field accouting_active_field"
                       variant="outlined" density="compact" :items="voucherTypes" item-title="title" item-value="value"
                       placeholder="Select Voucher Type" />
-                    <!-- :rules="[journalEntryRules.voucherType]" -->
                   </VCol>
                 </VRow>
 
@@ -748,11 +725,9 @@ onMounted(() => {
                       <VBtn @click="submitJournalEntryForm" class="account_v_btn_primary save_btn_height"
                         variant="outlined" size="default" rounded="2" color="primary">
                         <template #prepend>
-                          <component :is="$renderTablerIcon('device-floppy')" style="font-size: 18px;" />
+                          <IconDeviceFloppy size="18" />
                         </template>
-
-                        Save
-                        Voucher
+                        Save Voucher
                       </VBtn>
                     </div>
                   </VCol>
@@ -770,7 +745,7 @@ onMounted(() => {
         <VTextField style="max-width: 265px" class="accouting_field accouting_active_field" placeholder="Filter entries"
           variant="outlined">
           <template #prepend-inner>
-            <component :is="$renderTablerIcon('search')" style="font-size: 20px;" />
+            <IconSearch size="20" />
           </template>
         </VTextField>
 
@@ -783,7 +758,7 @@ onMounted(() => {
                 <template #activator="{ props: tooltipProps }">
                   <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color"
                     rounded="1" size="36">
-                    <component :is="$renderTablerIcon('filter')" style="font-size: 24px;" />
+                    <IconFilter size="24" />
                   </VBtn>
                 </template>
               </v-tooltip>
@@ -817,13 +792,13 @@ onMounted(() => {
           <VMenu width="110px" location="bottom" :close-on-content-click="false">
             <template v-slot:activator="{ props }">
               <VBtn v-bind="props" class="account_filter_btn_color" variant="text" rounded="1" size="36">
-                <component :is="$renderTablerIcon('download')" style="font-size: 24px;" />
+                <IconDownload size="24" />
               </VBtn>
             </template>
             <VCard class="account_vcard_border">
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                  ninthree <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
                     <span>PDF</span>
                   </div>
                 </div>
@@ -900,13 +875,13 @@ onMounted(() => {
                       <td class="account_entries_table_actions" :rowspan="entry.particulars.accounts.length + 1">
                         <div class="d-flex align-center justify-center gap-2">
                           <VBtn size="small" class="account_v_btn_ghost" variant="text">
-                            <component :is="$renderTablerIcon('pencil')" style="font-size: 20px;" />
+                            <IconPencil size="20" />
                           </VBtn>
                           <VBtn size="small" class="account_v_btn_ghost" variant="text">
-                            <component :is="$renderTablerIcon('arrow-back-up')" style="font-size: 20px;" />
+                            <IconArrowBackUp size="20" />
                           </VBtn>
                           <VBtn size="small" class="account_v_btn_ghost" variant="text">
-                            <component :is="$renderTablerIcon('trash')" style="font-size: 20px;" />
+                            <IconTrash size="20" />
                           </VBtn>
                         </div>
                       </td>
@@ -985,7 +960,7 @@ onMounted(() => {
         <template #append>
           <VBtn variant="text" size="x-small" rounded="" @click="showDetailsDialog = false"
             class="account_vcard_close_btn">
-            <component :is="$renderTablerIcon('x')" style="font-size: 20px;" />
+            <IconX size="20" />
           </VBtn>
         </template>
         <VCardText>
@@ -998,7 +973,7 @@ onMounted(() => {
               <span class="account_label_bold">Type:</span>
               <span class="account_label_light">{{
                 selectedEntry?.voucher_type
-                }}</span>
+              }}</span>
             </div>
           </div>
 
@@ -1048,13 +1023,6 @@ onMounted(() => {
                     }}
                   </td>
                 </tr>
-                <!-- <tr>
-                  <td colspan="3">
-                    <span class="account_entry_desc_text text-caption text-grey-darken-1">
-                      (Narration: {{ selectedEntry?.particulars?.description?.narration || 'N/A' }})
-                    </span>
-                  </td>
-                </tr> -->
               </tbody>
             </VTable>
           </VCard>
@@ -1063,7 +1031,7 @@ onMounted(() => {
             <span class="account_label_bold abc">Narration:</span>
             <span class="account_label_light font-italic">{{
               selectedEntry?.particulars?.description?.narration || "N/A"
-              }}</span>
+            }}</span>
           </div>
         </VCardText>
       </VCard>
@@ -1071,7 +1039,7 @@ onMounted(() => {
 
     <VBtn @click="showJournalEntryCard = !showJournalEntryCard" :key="bounceKey" class="account_add_new_btn bounce">
       <template #prepend>
-        <component :is="$renderTablerIcon('circle-plus')" style="font-size: 18px;" />
+        <IconCirclePlus size="18" />
       </template>
       New Journal Entry
     </VBtn>

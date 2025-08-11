@@ -139,9 +139,7 @@ function handleGenerate() {
       <v-col cols="12">
         <VCard class="account_vcard_border shadow-none gst_reports_vcard pa-6">
           <div class="d-flex align-center gap-3">
-            <!-- <v-icon size="32" class="account_icon_color">mdi-file-document-outline</v-icon> -->
-            <component class="account_icon_color" :is="renderTablerIcon('file-analytics')"
-              style="font-size: 38px; margin-right: 6px;" />
+            <IconFileAnalytics class="account_icon_color" size="38" style="margin-right: 6px;" />
             <div>
               <h5 class="gst_reports_title mb-0">GST Report Generator</h5>
               <p class="account_text_subtitle mb-0">Select a report type and date range to generate your GST compliance
@@ -160,14 +158,15 @@ function handleGenerate() {
               <v-date-input class="accounting_date_input w-100" placeholder="Pick a date range" v-model="dates"
                 multiple="range">
                 <template #prepend-inner>
-                  <component :is="renderTablerIcon('calendar')" style="font-size: 20px;" />
+                  <IconCalendar size="20" />
                 </template>
               </v-date-input>
-              <!-- <DatePicker class="account_date_range" v-model="dates" selectionMode="range" :manualInput="false" /> -->
             </v-col>
             <v-col cols="12" class="d-flex justify-end">
-              <VBtn class="account_v_btn_primary" prepend-icon="mdi-tray-arrow-down" rounded="1"
-                @click="handleGenerate">
+              <VBtn class="account_v_btn_primary" rounded="1" @click="handleGenerate">
+                <template #prepend>
+                  <IconDownload size="18" />
+                </template>
                 Generate Reports
               </VBtn>
             </v-col>

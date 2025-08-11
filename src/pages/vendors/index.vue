@@ -129,7 +129,7 @@ onMounted(() => {
                   <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                     <template #activator="{ props }">
                       <VBtn v-bind="props" variant="text" size="x-small" rounded="">
-                        <component :is="$renderTablerIcon('settings')" style="font-size: 20px;" />
+                        <IconSettings size="20" />
                       </VBtn>
                     </template>
                     <VCard class="account_vcard_menu account_vcard_border" width="250px">
@@ -138,14 +138,16 @@ onMounted(() => {
                       <div class="account_vcard_menu_items py-1">
                         <div v-for="(fields, section) in sectionedFields" :key="section">
                           <div class="field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                               @click="toggleSection(section)">
-                            <component :is="$renderTablerIcon(isSectionVisible(section) ? 'check' : 'square')" style="font-size: 16px;" />
+                            @click="toggleSection(section)">
+                            <IconCheck v-if="isSectionVisible(section)" size="16" />
+                            <IconSquare v-else size="16" />
                             <span class="font-weight-bold">{{ section }}</span>
                           </div>
-                          <div v-for="field in fields" :key="field.key" class="account_vcard_menu_item" style="padding-left: 10px;">
+                          <div v-for="field in fields" :key="field.key" class="account_vcard_menu_item"
+                            style="padding-left: 10px;">
                             <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
-                                 @click.stop="field.visible = !field.visible">
-                              <component v-if="field.visible" :is="$renderTablerIcon('check')" style="font-size: 16px;" />
+                              @click.stop="field.visible = !field.visible">
+                              <IconCheck v-if="field.visible" size="16" />
                               <span :class="field.visible ? '' : 'field_list_dynamic_ml'">{{ field.label }}</span>
                             </div>
                           </div>
@@ -155,7 +157,7 @@ onMounted(() => {
                   </VMenu>
                   <VBtn @click="showAddVendorForm" variant="text" size="x-small" rounded=""
                     class="account_vcard_close_btn">
-                    <component :is="$renderTablerIcon('x')" style="font-size: 20px;" />
+                    <IconX size="20" />
                   </VBtn>
                 </div>
               </template>
@@ -230,7 +232,7 @@ onMounted(() => {
               <VCardActions class="justify-end">
                 <VBtn color="success" class="account_v_btn_primary">
                   <template #prepend>
-                    <component :is="$renderTablerIcon('device-floppy')" style="font-size: 20px; margin-right: 6px;" />
+                    <IconDeviceFloppy size="20" />
                   </template>
                   Save Vendor
                 </VBtn>
@@ -249,7 +251,7 @@ onMounted(() => {
     </VRow>
     <VBtn @click="showAddVendorForm" :key="bounceKey" class="account_add_new_btn bounce">
       <template #prepend>
-        <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+        <IconCirclePlus size="20" />
       </template>
       Add Vendor
     </VBtn>
@@ -258,18 +260,24 @@ onMounted(() => {
 
 <style scoped>
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   20% {
     transform: translateY(-12px);
   }
+
   40% {
     transform: translateY(0);
   }
+
   60% {
     transform: translateY(-6px);
   }
+
   80% {
     transform: translateY(0);
   }

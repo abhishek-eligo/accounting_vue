@@ -398,13 +398,13 @@ function handleDelete(node) {
             <div class="d-flex align-center gap-2">
               <VBtn @click="showGroupDialog = true" class="account_v_btn_outlined" variant="outlined">
                 <template #prepend>
-                  <component :is="$renderTablerIcon('plus')" style="font-size: 18px;" />
+                  <IconPlus size="18" />
                 </template>
                 Add Group
               </VBtn>
               <VBtn @click="showLedgerDialog = true" class="account_v_btn_primary" variant="tonal">
                 <template #prepend>
-                  <component :is="$renderTablerIcon('plus')" style="font-size: 18px;" />
+                  <IconPlus size="18" />
                 </template>
                 Add Ledger
               </VBtn>
@@ -415,13 +415,11 @@ function handleDelete(node) {
             <!-- Parent -->
             <div class="d-flex align-center gap-2 mb-2">
               <div class="d-flex align-center gap-1">
-                <component class="account_folder_icon" :is="$renderTablerIcon('folder')" style="font-size: 16px;" />
-                <!-- <VIcon icon="mdi-folder-outline" class="account_folder_icon" size="16" /> -->
+                <IconFolder class="account_folder_icon" size="16" />
                 <p class="mb-0 account_info_title">Group</p>
               </div>
               <div class="d-flex align-center gap-1">
-                <component class="account_ledger_icon" :is="$renderTablerIcon('file-text')" style="font-size: 16px;" />
-                <!-- <VIcon icon="mdi-file-document-outline" class="account_ledger_icon" size="16" /> -->
+                <IconFileText class="account_ledger_icon" size="16" />
                 <p class="mb-0 account_info_title">Ledger</p>
               </div>
             </div>
@@ -454,7 +452,8 @@ function handleDelete(node) {
           </VForm>
         </VCardText>
         <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click=" showLedgerDialog = false; ledgerFormRef?.resetValidation();" />
+          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
+            @click=" showLedgerDialog = false; ledgerFormRef?.resetValidation();" />
           <VBtn text="Add Ledger" class="account_v_btn_primary" @click="submitLedgerForm" />
         </VCardActions>
       </VCard>

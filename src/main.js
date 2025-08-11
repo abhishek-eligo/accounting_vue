@@ -36,6 +36,7 @@ import Aura from "@primeuix/themes/aura";
 import "@/main.css";
 
 import { Icon } from '@iconify/vue';
+import * as TablerIcons from '@tabler/icons-vue'
 
 
 const app = createApp(App);
@@ -46,6 +47,11 @@ app.use(router);
 
 // make the helper globally available
 app.config.globalProperties.$renderTablerIcon = renderTablerIcon;
+
+// Register all Tabler icons globally
+for (const [key, component] of Object.entries(TablerIcons)) {
+  app.component(key, component)
+}
 
 // Use Primevue
 app.use(PrimeVue, {

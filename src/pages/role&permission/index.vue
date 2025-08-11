@@ -82,8 +82,8 @@ onMounted(() => {
               <div class="header-col-flex">
                 <span class="role-label">Admin</span>
                 <div class="header-icon-row mt-2">
-                  <component :is="$renderTablerIcon('edit')" style="font-size: 20px;" class="header-action-icon" />
-                  <component :is="$renderTablerIcon('trash')" style="font-size: 20px;" class="header-action-icon ml-1" />
+                  <IconEdit size="20" class="header-action-icon" />
+                  <IconTrash size="20" class="header-action-icon ml-1" />
                 </div>
               </div>
             </th>
@@ -91,8 +91,8 @@ onMounted(() => {
               <div class="header-col-flex">
                 <span class="role-label">Accountant</span>
                 <div class="header-icon-row mt-2">
-                  <component :is="$renderTablerIcon('edit')" style="font-size: 20px;" class="header-action-icon" />
-                  <component :is="$renderTablerIcon('trash')" style="font-size: 20px;" class="header-action-icon ml-1" />
+                  <IconEdit size="20" class="header-action-icon" />
+                  <IconTrash size="20" class="header-action-icon ml-1" />
                 </div>
               </div>
             </th>
@@ -100,8 +100,8 @@ onMounted(() => {
               <div class="header-col-flex">
                 <span class="role-label">Auditor</span>
                 <div class="header-icon-row mt-2">
-                  <component :is="$renderTablerIcon('edit')" style="font-size: 20px;" class="header-action-icon" />
-                  <component :is="$renderTablerIcon('trash')" style="font-size: 20px;" class="header-action-icon ml-1" />
+                  <IconEdit size="20" class="header-action-icon" />
+                  <IconTrash size="20" class="header-action-icon ml-1" />
                 </div>
               </div>
             </th>
@@ -111,23 +111,22 @@ onMounted(() => {
           <tr>
             <td>{{ item.feature }}</td>
             <td class="text-center">
-              <component :is="$renderTablerIcon(item.admin ? 'check' : 'x')"
-                :style="`font-size: 22px; color: ${item.admin ? '#16a34a' : '#ef4444'};`" />
+              <IconCheck v-if="item.admin" size="22" style="color: #16a34a;" />
+              <IconX v-else size="22" style="color: #ef4444;" />
             </td>
             <td class="text-center">
-              <component :is="$renderTablerIcon(item.accountant ? 'check' : 'x')"
-                :style="`font-size: 22px; color: ${item.accountant ? '#16a34a' : '#ef4444'};`" />
+              <IconCheck v-if="item.accountant" size="22" style="color: #16a34a;" />
+              <IconX v-else size="22" style="color: #ef4444;" />
             </td>
             <td class="text-center">
-              <component :is="$renderTablerIcon(item.auditor ? 'check' : 'x')"
-                :style="`font-size: 22px; color: ${item.auditor ? '#16a34a' : '#ef4444'};`" />
+              <IconCheck v-if="item.auditor" size="22" style="color: #16a34a;" />
+              <IconX v-else size="22" style="color: #ef4444;" />
             </td>
           </tr>
         </template>
       </v-data-table-virtual>
     </div>
   </VCard>
-
 
   <!-- Add New Role Dialog -->
   <v-dialog v-model="dialog" max-width="800">
@@ -159,7 +158,11 @@ onMounted(() => {
       </v-card-text>
       <v-card-actions class="justify-end">
         <v-btn class="account_v_btn_outlined" @click="closeAddRoleDialog">Cancel</v-btn>
-        <VBtn class="account_v_btn_primary"> <v-icon size="15">mdi-content-save-settings-outline</v-icon> Save
+        <VBtn class="account_v_btn_primary">
+          <template #prepend>
+            <IconDeviceFloppy size="15" />
+          </template>
+          Save
         </VBtn>
       </v-card-actions>
     </v-card>
@@ -167,15 +170,11 @@ onMounted(() => {
 
   <VBtn @click="openAddRoleDialog" :key="bounceKey" class="account_add_new_btn bounce">
     <template #prepend>
-      <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+      <IconCirclePlus size="20" style="margin-right: 6px;" />
     </template>
     Add New Role
   </VBtn>
-
 </template>
-
-
-
 
 <style scoped>
 .custom-permission-table {

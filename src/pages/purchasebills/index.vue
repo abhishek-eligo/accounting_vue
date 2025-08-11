@@ -1,4 +1,5 @@
 <script setup>
+import { IconSettings } from '@tabler/icons-vue'
 import { ref, computed, watchEffect } from 'vue'
 import { onMounted } from 'vue'
 
@@ -205,7 +206,7 @@ const statesList = ref([
               :close-on-content-click="false">
               <template #activator="{ props }">
                 <VBtn v-bind="props" variant="text" size="x-small" rounded="">
-                  <component :is="$renderTablerIcon('settings')" style="font-size: 20px;" />
+                  <IconSettings size="20" />
                 </VBtn>
               </template>
               <VCard class="account_vcard_menu account_vcard_border">
@@ -215,10 +216,9 @@ const statesList = ref([
                   <div v-for="mode in purchaseModes" :key="mode.value" class="account_vcard_menu_item"
                     @click="selectedPurchaseMode = mode.value">
                     <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                      <component v-if="selectedPurchaseMode === mode.value" :is="$renderTablerIcon('check')"
-                        style="font-size: 16px;" />
+                      <IconCheck v-if="selectedPurchaseMode === mode.value" size="16" />
                       <span :class="selectedPurchaseMode === mode.value ? '' : 'field_list_dynamic_ml'">{{ mode.label
-                        }}</span>
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -233,7 +233,7 @@ const statesList = ref([
                   variant="outlined" class="accouting_field accouting_active_field">
                   <template #append>
                     <VBtn class="account_v_btn_outlined" @click="addVendorDialog = true" rounded="2">
-                      <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px;" />
+                      <IconCirclePlus size="20" />
                     </VBtn>
                   </template>
                 </VAutocomplete>
@@ -249,9 +249,9 @@ const statesList = ref([
               </VCol>
               <VCol cols="12" md="6">
                 <label class="account_label mb-2">Bill Date</label>
-                <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply" >
+                <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply">
                   <template #prepend-inner>
-                    <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                    <IconCalendar size="20" />
                   </template>
                 </v-date-input>
                 <!-- <VTextField v-model="billDate" type="date" variant="outlined"
@@ -264,9 +264,9 @@ const statesList = ref([
               </VCol>
               <VCol cols="12" md="6">
                 <label class="account_label mb-2">Due Date</label>
-                <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply" >
+                <v-date-input class="accounting_date_input" cancel-text="Close" ok-text="Apply">
                   <template #prepend-inner>
-                    <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                    <IconCalendar size="20" />
                   </template>
                 </v-date-input>
               </VCol>
@@ -311,16 +311,16 @@ const statesList = ref([
                 <span>₹{{ (activeTab === 'inventory' ? inventoryRows : assetRows)[index].amount }}</span>
               </template>
               <template v-slot:[`item.actions`]="{ index }">
-                <component :is="$renderTablerIcon('trash')" class="text-error cursor-pointer table_row_icon" :class="{
+                <IconTrash class="text-error cursor-pointer table_row_icon" :class="{
                   'opacity-50': (activeTab === 'inventory' ? inventoryRows : assetRows).length === 1,
                   'cursor-not-allowed': (activeTab === 'inventory' ? inventoryRows : assetRows).length === 1
                 }" :disabled="(activeTab === 'inventory' ? inventoryRows : assetRows).length === 1"
-                  @click="removeRow(index)" style="font-size: 20px;" />
+                  @click="removeRow(index)" size="20" />
               </template>
             </VDataTable>
             <VBtn class="account_v_btn_outlined mt-3" variant="text" @click="addRow">
               <template #prepend>
-                <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px; margin-right: 6px;" />
+                <IconCirclePlus size="20" style="margin-right: 6px;" />
               </template>
               Add Item
             </VBtn>
@@ -339,11 +339,11 @@ const statesList = ref([
                     subtotal.toFixed(2)
                       }}</span></div>
                   <div class="d-flex justify-space-between w-100 mb-1"><span>CGST</span><span>₹{{ cgst.toFixed(2)
-                      }}</span></div>
+                  }}</span></div>
                   <div class="d-flex justify-space-between w-100 mb-1"><span>SGST</span><span>₹{{ sgst.toFixed(2)
-                      }}</span></div>
+                  }}</span></div>
                   <div class="d-flex justify-space-between w-100 mb-1"><span>IGST</span><span>₹{{ igst.toFixed(2)
-                      }}</span></div>
+                  }}</span></div>
                 </div>
                 <VDivider class="my-2" />
                 <div class="d-flex justify-space-between w-100 font-weight-bold"><span>Total Amount</span><span>₹{{
@@ -360,7 +360,7 @@ const statesList = ref([
               <VCol cols="12" class="d-flex align-center justify-end">
                 <VBtn class="account_v_btn_primary">
                   <template #prepend>
-                    <component :is="$renderTablerIcon('device-floppy')" style="font-size: 20px; margin-right: 6px;" />
+                    <IconDeviceFloppy size="20" style="margin-right: 6px;" />
                   </template>
                   Save Purchase Bill
                 </VBtn>
@@ -376,8 +376,10 @@ const statesList = ref([
         <VCard title="Create a New Vendor" class="pa-2 account_vcard_border shadow-none"
           subtitle="Fill in the details below to add a new vendor to your records.">
           <template #append>
-            <VBtn @click="addVendorDialog = false" icon="mdi-close" variant="text" size="x-small" rounded=""
-              class="account_vcard_close_btn" />
+            <VBtn @click="addVendorDialog = false" variant="text" size="x-small" rounded=""
+              class="account_vcard_close_btn">
+              <IconX size="20" />
+            </VBtn>
           </template>
           <VCardText>
             <VRow>
@@ -434,8 +436,12 @@ const statesList = ref([
             </VRow>
           </VCardText>
           <VCardActions class="justify-end">
-            <VBtn color="success" class="account_v_btn_primary" prepend-icon="mdi-content-save" @click="saveVendor">Save
-              Vendor</VBtn>
+            <VBtn color="success" class="account_v_btn_primary">
+              <template #prepend>
+                <IconDeviceFloppy size="20" style="margin-right: 6px;" />
+              </template>
+              Save Vendor
+            </VBtn>
           </VCardActions>
         </VCard>
       </div>

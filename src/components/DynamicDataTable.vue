@@ -156,7 +156,7 @@ const totalPages = computed(() => {
       <VCol cols="12" md="3">
         <VCard subtitle="Total Records" class="account_v_card_dark account_widget_vcard account_vcard_border">
           <template #append>
-            <component :is="$renderTablerIcon('users')" style="color: white; font-size: 16px;" />
+            <IconUsers style="color: white;" size="20" />
           </template>
           <VCardText>
             <!-- <div class="text-h5 font-weight-bold">{{ props.widgets.totalRecords.toLocaleString() }}</div> -->
@@ -169,7 +169,7 @@ const totalPages = computed(() => {
       <VCol cols="12" md="3">
         <VCard subtitle="Average Purchase" class="account_vcard_border account_widget_vcard">
           <template #append>
-            <component :is="$renderTablerIcon('currency-rupee')" style="font-size: 16px;" />
+            <IconCurrencyRupee size="20" />
           </template>
           <VCardText>
             <h5 class="account_texth5 mb-0 font-weight-bold">${{ props.widgets.avgPurchase ?
@@ -182,7 +182,7 @@ const totalPages = computed(() => {
       <VCol cols="12" md="3">
         <VCard subtitle="Top 10% Avg. Purchase" class="account_vcard_border account_widget_vcard">
           <template #append>
-            <component :is="$renderTablerIcon('trending-up')" style="font-size: 16px;" />
+            <IconTrendingUp size="20" />
           </template>
           <VCardText>
             <h5 class="account_texth5 mb-0 font-weight-bold">
@@ -197,7 +197,7 @@ const totalPages = computed(() => {
       <VCol cols="12" md="3">
         <VCard subtitle="Average Rating" class="account_vcard_border account_widget_vcard">
           <template #append>
-            <component :is="$renderTablerIcon('star')" style="font-size: 16px;" />
+            <IconStar size="20" />
           </template>
           <VCardText>
             <h5 class="account_texth5 mb-0 font-weight-bold">
@@ -214,12 +214,12 @@ const totalPages = computed(() => {
           style="max-inline-size: 377px;"
           :placeholder="title === 'Accounting' ? 'Search by Name' : 'Search by Customer Name'">
           <template #prepend-inner>
-            <component :is="$renderTablerIcon('search')" style="font-size: 20px;" />
+            <IconSearch size="20" />
           </template>
         </VTextField>
         <!-- <v-date-input class="accounting_date_input" placeholder="Select range" max-width="368" multiple="range">
           <template #prepend-inner>
-            <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+            <IconCalendar style="font-size: 20px;" />
           </template>
         </v-date-input> -->
         <VSpacer />
@@ -232,7 +232,7 @@ const totalPages = computed(() => {
                 <template #activator="{ props: tooltipProps }">
                   <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color"
                     rounded="1" size="36">
-                    <component :is="$renderTablerIcon('filter')" style="font-size: 22px;" />
+                    <IconFilter size="20" />
                   </VBtn>
                 </template>
               </v-tooltip>
@@ -242,7 +242,8 @@ const totalPages = computed(() => {
               <VDivider class="my-1 mt-0" />
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item" v-for="filter in filters" :key="filter.title">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2" @click="toggleFilter(filter.title)">
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
+                    @click="toggleFilter(filter.title)">
                     <VCheckbox :model-value="isFilterChecked(filter.title)"
                       @update:model-value="toggleFilter(filter.title)"
                       class="account_v_checkbox account_filter_menu_checkbox" density="compact" @click.stop />
@@ -266,7 +267,7 @@ const totalPages = computed(() => {
           <VMenu width="300px" location="bottom" :close-on-content-click="false">
             <template v-slot:activator="{ props }">
               <VBtn v-bind="props" class="account_filter_btn_color" variant="text" rounded="1" size="36">
-                <component :is="$renderTablerIcon('columns-3')" style="font-size: 22px;" />
+                <IconColumns3 size="20" />
               </VBtn>
             </template>
             <VCard>
@@ -277,9 +278,9 @@ const totalPages = computed(() => {
                   :key="header.value" draggable="true" @dragstart="onDragStart($event, index)" @dragover.prevent
                   @drop="onDrop($event, index)">
                   <div class="d-flex align-center justify-space-between">
-                    <div class="d-flex align-center w-100 gap-1 cursor-grab" @mousedown="dragIconActive = true" @mouseup="dragIconActive = false">
-                      <component  :is="$renderTablerIcon('grip-vertical')" style="font-size: 18px;"
-                      class="drag-icon" />
+                    <div class="d-flex align-center w-100 gap-1 cursor-grab" @mousedown="dragIconActive = true"
+                      @mouseup="dragIconActive = false">
+                      <IconGripVertical style="font-size: 18px;" class="drag-icon" />
                       <!-- <v-icon icon="mdi-drag" class="drag-icon" @mousedown="dragIconActive = true"
                         @mouseup="dragIconActive = false" /> -->
                       <p class="mb-0">{{ header.title }}</p>
@@ -295,7 +296,7 @@ const totalPages = computed(() => {
           <VMenu width="110px" location="bottom" :close-on-content-click="false">
             <template v-slot:activator="{ props }">
               <VBtn v-bind="props" class="account_filter_btn_color" variant="text" rounded="1" size="36">
-                <component :is="$renderTablerIcon('download')" style="font-size: 22px;" />
+                <IconDownload size="20" />
               </VBtn>
             </template>
             <VCard class="account_vcard_border">
@@ -322,7 +323,7 @@ const totalPages = computed(() => {
             :items="statusItems" item-title="title" density="compact" item-value="value">
             <template #append>
               <VBtn variant="text" size="small" @click="cancelFilter('Status')">
-                <component :is="$renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+                <IconCircleDashedX style="font-size: 20px;" />
               </VBtn>
             </template>
           </VAutocomplete>
@@ -332,7 +333,7 @@ const totalPages = computed(() => {
             :items="accountTypeItems" item-title="title" density="compact" item-value="value">
             <template #append>
               <VBtn variant="text" size="small" @click="cancelFilter('Account Type')">
-                <component :is="$renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+                <IconCircleDashedX style="font-size: 20px;" />
               </VBtn>
             </template>
           </VAutocomplete>
@@ -342,7 +343,7 @@ const totalPages = computed(() => {
             :items="accountTypeItems" item-title="title" density="compact" item-value="value">
             <template #append>
               <VBtn variant="text" size="small" @click="cancelFilter('Customer Type')">
-                <component :is="$renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+                <IconCircleDashedX style="font-size: 20px;" />
               </VBtn>
             </template>
           </VAutocomplete>
@@ -352,21 +353,21 @@ const totalPages = computed(() => {
             :items="currencyItems" item-title="title" density="compact" item-value="value">
             <template #append>
               <VBtn variant="text" size="small" @click="cancelFilter('Currency')">
-                <component :is="$renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+                <IconCircleDashedX style="font-size: 20px;" />
               </VBtn>
             </template>
           </VAutocomplete>
         </VCol>
         <VCol v-if="isFilterChecked('Last Transaction From')" cols="12" lg="3" md="3">
           <div class="d-flex align-center gap-2">
-            <v-date-input class="accounting_date_input" placeholder="Last Transaction From" max-width="368" cancel-text="Close" ok-text="Apply"
-              multiple="range">
+            <v-date-input class="accounting_date_input" placeholder="Last Transaction From" max-width="368"
+              cancel-text="Close" ok-text="Apply" multiple="range">
               <template #prepend-inner>
-                <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                <IconCalendar style="font-size: 20px;" />
               </template>
             </v-date-input>
             <VBtn variant="text" size="small" @click="cancelFilter('Last Transaction From')">
-              <component :is="$renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+              <IconCircleDashedX style="font-size: 20px;" />
             </VBtn>
           </div>
         </VCol>
@@ -374,31 +375,30 @@ const totalPages = computed(() => {
           <div class="d-flex align-center gap-2">
             <v-date-input class="accounting_date_input" placeholder="Last Transaction To" max-width="368" multiple="range">
             <template #prepend-inner>
-              <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+              <IconCalendar style="font-size: 20px;" />
             </template>
           </v-date-input>
           <VBtn variant="text" size="small" @click="cancelFilter('Last Transaction To')">
-                <component :is="$renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+                <IconCircleDashedX style="font-size: 20px;" />
               </VBtn>
           </div>
         </VCol> -->
         <VCol v-if="isFilterChecked('Last Order From')" cols="12" lg="3" md="3">
           <div class="d-flex align-center gap-2">
-            <v-date-input class="accounting_date_input" placeholder="Last Order From" max-width="368"
-              multiple="range">
+            <v-date-input class="accounting_date_input" placeholder="Last Order From" max-width="368" multiple="range">
               <template #prepend-inner>
-                <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                <IconCalendar style="font-size: 20px;" />
               </template>
             </v-date-input>
             <VBtn variant="text" size="small" @click="cancelFilter('Last Order From')">
-              <component :is="$renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+              <IconCircleDashedX style="font-size: 20px;" />
             </VBtn>
           </div>
           <!-- <VTextField class="accouting_field accouting_active_field" variant="outlined" placeholder="Last Order From"
             type="date" density="compact">
             <template #append>
               <VBtn variant="text" size="small" @click="cancelFilter('Last Order From')">
-                <component :is="$renderTablerIcon('circle-dashed-x')" style="font-size: 20px;" />
+                <IconCircleDashedX style="font-size: 20px;" />
               </VBtn>
             </template>
           </VTextField> -->
@@ -408,7 +408,7 @@ const totalPages = computed(() => {
             type="date" density="compact">
             <template #append>
               <VBtn variant="text" size="small" @click="cancelFilter('Last Order To')">
-                <component :is="$renderTablerIcon('x-circle')" style="font-size: 20px;" />
+                <IconXCircle style="font-size: 20px;" />
               </VBtn>
             </template>
           </VTextField>
@@ -417,16 +417,15 @@ const totalPages = computed(() => {
     </VSlideYTransition>
 
     <VCard class="mt-4 account_vcard_border">
-      <VDataTable :headers="visibleHeaders" :items="paginatedItems" :items-per-page="itemsPerPage" show-select :item-value="itemValueKey"
-        :density="isTableCompact ? 'compact' : 'default'" class="elevation-1 border rounded account_dynamic_table">
+      <VDataTable :headers="visibleHeaders" :items="paginatedItems" :items-per-page="itemsPerPage" show-select
+        :item-value="itemValueKey" :density="isTableCompact ? 'compact' : 'default'"
+        class="elevation-1 border rounded account_dynamic_table">
         <template #item.actions="{ item }">
           <div class="d-flex align-center gap-2">
-            <component :is="$renderTablerIcon('eye')" class="account_v_btn_color"
-              style="font-size: 20px; cursor: pointer;" @click="handleViewAction(item)" />
-            <component :is="$renderTablerIcon('edit')" class="account_v_btn_color"
-              style="font-size: 20px; cursor: pointer;" />
-            <component :is="$renderTablerIcon('trash')" class="account_v_btn_color"
-              style="font-size: 20px; cursor: pointer; color: red;" />
+            <IconEye class="account_v_btn_color" size="20" style="cursor: pointer;"
+              @click="handleViewAction(item)" />
+            <IconEdit class="account_v_btn_color" size="20" style="cursor: pointer;" />
+            <IconTrash class="account_v_btn_color" style="cursor: pointer; color: red;" size="20" />
           </div>
         </template>
         <template #item.status="{ item }">

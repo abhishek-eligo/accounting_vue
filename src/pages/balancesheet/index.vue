@@ -534,15 +534,16 @@ function downloadAs(type) {
             <div class="d-flex align-center gap-2">
               <VSwitch v-model="showPercent" density="compact" inset label="Show %" class="account_swtich_btn mr-4"
                 style="min-width: 121px" color="primary" hide-details />
-              <v-date-input class="accounting_date_input" cancel-text="Close" style="width: 300px" multiple="range" ok-text="Apply">
+              <v-date-input class="accounting_date_input" cancel-text="Close" style="width: 300px" multiple="range"
+                ok-text="Apply">
                 <template #prepend-inner>
-                  <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                  <IconCalendar size="20" />
                 </template>
               </v-date-input>
               <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                 <template #activator="{ props }">
                   <VBtn v-bind="props" class="account_v_btn_outlined" variant="outlined" size="34" rounded="2">
-                    <component :is="$renderTablerIcon('settings')" style="font-size: 22px;" />
+                    <IconSettings size="22" />
                   </VBtn>
                 </template>
                 <VCard class="account_vcard_menu account_vcard_border">
@@ -550,14 +551,14 @@ function downloadAs(type) {
                     <div class="account_vcard_menu_item">
                       <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
                         @click="isFullWidthView = !isFullWidthView">
-                        <component v-if="isFullWidthView" :is="$renderTablerIcon('check')" style="font-size: 16px;" />
+                        <IconCheck v-if="isFullWidthView" size="16" />
                         <span :class="isFullWidthView ? '' : 'ml-6'">Full Width View</span>
                       </div>
                     </div>
                     <div class="account_vcard_menu_item">
                       <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
                         @click="showCompareMode = !showCompareMode">
-                        <component v-if="showCompareMode" :is="$renderTablerIcon('check')" style="font-size: 16px;" />
+                        <IconCheck v-if="showCompareMode" size="16" />
                         <span :class="showCompareMode ? '' : 'ml-6'">Compare Periods</span>
                       </div>
                     </div>
@@ -570,10 +571,9 @@ function downloadAs(type) {
                         <template #activator="{ props: downloadProps }">
                           <div v-bind="downloadProps"
                             class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                            <component :is="$renderTablerIcon('download')" style="font-size: 16px;" />
+                            <IconDownload size="16" />
                             <span>Download</span>
-                            <component :is="$renderTablerIcon('chevron-right')" style="font-size: 14px;"
-                              class="ml-auto" />
+                            <IconChevronRight size="14" class="ml-auto" />
                           </div>
                         </template>
                         <VCard class="account_vcard_menu account_vcard_border" width="120">
@@ -592,7 +592,7 @@ function downloadAs(type) {
                     </div>
                     <div class="account_vcard_menu_item">
                       <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                        <component :is="$renderTablerIcon('printer')" style="font-size: 16px;" />
+                        <IconPrinter size="16" />
                         <span>Print</span>
                       </div>
                     </div>
@@ -621,9 +621,8 @@ function downloadAs(type) {
                         <!-- Name / tree column -->
                         <td>
                           <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
-                            <component v-if="item.type === 'group'" :is="$renderTablerIcon('folder')"
-                              style="font-size: 16px;" />
-                            <component v-else :is="$renderTablerIcon('file-text')" style="font-size: 16px;" />
+                            <IconFolder v-if="item.type === 'group'" size="16" />
+                            <IconFileText v-else size="16" />
                             <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
                               ? 'account_ledger_secondary'
                               : item.name
@@ -679,12 +678,10 @@ function downloadAs(type) {
                               ]">
                                 {{ item.change }}
                               </p>
-                              <component v-if="item.new" :is="$renderTablerIcon('star')" style="font-size: 12px;"
-                                class="text-info" />
+                              <IconStar v-if="item.new" size="12" class="text-info" />
                               <component v-else
                                 :is="$renderTablerIcon(parseFloat(item.change) < 0 ? 'arrow-down' : 'arrow-up')"
-                                style="font-size: 12px;"
-                                :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
+                                size="12" :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
                             </div>
                           </td>
                         </Transition>
@@ -711,16 +708,8 @@ function downloadAs(type) {
                           <td class="text-end d-flex align-center amount_inc_change_item justify-end gap-2"
                             v-if="showCompareMode">
                             {{ totalAssets.changeFormatted }}
-                            <component :is="$renderTablerIcon(totalAssets.isIncrease ? 'arrow-up' : 'arrow-down')"
-                              style="font-size: 12px;"
-                              :class="totalAssets.isIncrease ? 'text-success' : 'text-error'" />
-                            <!-- <VIcon :icon="totalAssets.isIncrease
-                              ? 'mdi-chevron-up'
-                              : 'mdi-chevron-down'
-                              " size="12" :class="totalAssets.isIncrease
-                                ? 'text-success'
-                                : 'text-error'
-                                " /> -->
+                            <IconArrowUp v-if="totalAssets.isIncrease" size="12" class="text-success" />
+                            <IconArrowDown v-else size="12" class="text-error" />
                           </td>
                         </Transition>
                       </tr>
@@ -728,7 +717,6 @@ function downloadAs(type) {
                   </div>
                 </VCard>
               </VCol>
-
               <!-- Liabilities Data Table -->
               <VCol :cols="12" :lg="isFullWidthView ? 12 : 6" :md="isFullWidthView ? 12 : 6"
                 :sm="isFullWidthView ? 12 : 6" class="col-transition"
@@ -747,9 +735,8 @@ function downloadAs(type) {
                         <!-- Name / tree column -->
                         <td>
                           <div class="d-flex align-center gap-2" :style="{ paddingLeft: `${item.level * 24}px` }">
-                            <component v-if="item.type === 'group'" :is="$renderTablerIcon('folder')"
-                              style="font-size: 16px;" />
-                            <component v-else :is="$renderTablerIcon('file-text')" style="font-size: 16px;" />
+                            <IconFolder v-if="item.type === 'group'" size="16" />
+                            <IconFileText v-else size="16" />
                             <p class="mb-0 amount_income_group_item" :class="item.type === 'ledger'
                               ? 'account_ledger_secondary'
                               : item.name?.toLowerCase().includes('asset')
@@ -803,13 +790,10 @@ function downloadAs(type) {
                               ]">
                                 {{ item.change }}
                               </p>
-                              <!-- <VIcon v-if="item.new" icon="mdi-star" size="12" class="text-info" /> -->
-                              <component v-if="item.new" :is="$renderTablerIcon('star')" style="font-size: 12px;"
-                                class="text-info" />
+                              <IconStar v-if="item.new" size="12" class="text-info" />
                               <component v-else
                                 :is="$renderTablerIcon(parseFloat(item.change) < 0 ? 'arrow-down' : 'arrow-up')"
-                                style="font-size: 12px;"
-                                :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
+                                size="12" :class="parseFloat(item.change) < 0 ? 'text-error' : 'text-success'" />
                             </div>
                           </td>
                         </Transition>
@@ -825,12 +809,10 @@ function downloadAs(type) {
                           Total Liabilities
                         </td>
                         <td class="text-end amount_inc_current_item">
-                          <!-- {{ totalLiabilities.currentFormatted }} -->
                           ₹12,37,500.00
                         </td>
                         <Transition name="slide-fade">
                           <td class="text-end amount_inc_previous_item" v-if="showCompareMode">
-                            <!-- {{ totalLiabilities.previousFormatted }} -->
                             ₹11,39,000.00
                           </td>
                         </Transition>
@@ -838,9 +820,8 @@ function downloadAs(type) {
                           <td class="text-end d-flex align-center justify-end amount_inc_change_item gap-2"
                             v-if="showCompareMode">
                             {{ totalLiabilities.changeFormatted }}
-                            <component :is="$renderTablerIcon(totalLiabilities.isIncrease ? 'arrow-up' : 'arrow-down')"
-                              style="font-size: 12px;"
-                              :class="totalLiabilities.isIncrease ? 'text-success' : 'text-error'" />
+                            <IconArrowUp v-if="totalLiabilities.isIncrease" size="12" class="text-success" />
+                            <IconArrowDown v-else size="12" class="text-error" />
                           </td>
                         </Transition>
                       </tr>
@@ -860,7 +841,7 @@ function downloadAs(type) {
                   <div>
                     <span class="account_assets_title">{{
                       totalAssets.currentFormatted
-                    }}</span>
+                      }}</span>
                   </div>
                 </div>
               </VCol>
@@ -873,9 +854,6 @@ function downloadAs(type) {
                     </h5>
                   </div>
                   <div>
-                    <!-- <span class="account_liabilities_title">{{
-                      totalLiabilities.currentFormatted
-                    }}</span> -->
                     <span class="account_liabilities_title">₹12,37,500.00</span>
                   </div>
                 </div>
