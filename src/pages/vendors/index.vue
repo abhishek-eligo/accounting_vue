@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 
 const formFields = ref([
+  { section: 'Basic Information', label: 'GSTIN (Optional)', key: 'gstin', visible: true },
   { section: 'Basic Information', label: 'First Name', key: 'firstName', visible: true },
   { section: 'Basic Information', label: 'Last Name', key: 'lastName', visible: true },
   { section: 'Basic Information', label: 'Company Name', key: 'companyName', visible: true },
@@ -11,8 +12,46 @@ const formFields = ref([
   { section: 'Address & Tax', label: 'City', key: 'city', visible: true },
   { section: 'Address & Tax', label: 'State', key: 'state', visible: true },
   { section: 'Address & Tax', label: 'ZIP Code', key: 'zipCode', visible: true },
-  { section: 'Address & Tax', label: 'GSTIN (Optional)', key: 'gstin', visible: true },
 ]);
+
+const statesList = ref([
+  { title: 'Andhra Pradesh', value: 'Andhra Pradesh' },
+  { title: 'Arunachal Pradesh', value: 'Arunachal Pradesh' },
+  { title: 'Assam', value: 'Assam' },
+  { title: 'Bihar', value: 'Bihar' },
+  { title: 'Chhattisgarh', value: 'Chhattisgarh' },
+  { title: 'Goa', value: 'Goa' },
+  { title: 'Gujarat', value: 'Gujarat' },
+  { title: 'Haryana', value: 'Haryana' },
+  { title: 'Himachal Pradesh', value: 'Himachal Pradesh' },
+  { title: 'Jharkhand', value: 'Jharkhand' },
+  { title: 'Karnataka', value: 'Karnataka' },
+  { title: 'Kerala', value: 'Kerala' },
+  { title: 'Madhya Pradesh', value: 'Madhya Pradesh' },
+  { title: 'Maharashtra', value: 'Maharashtra' },
+  { title: 'Manipur', value: 'Manipur' },
+  { title: 'Meghalaya', value: 'Meghalaya' },
+  { title: 'Mizoram', value: 'Mizoram' },
+  { title: 'Nagaland', value: 'Nagaland' },
+  { title: 'Odisha', value: 'Odisha' },
+  { title: 'Punjab', value: 'Punjab' },
+  { title: 'Rajasthan', value: 'Rajasthan' },
+  { title: 'Sikkim', value: 'Sikkim' },
+  { title: 'Tamil Nadu', value: 'Tamil Nadu' },
+  { title: 'Telangana', value: 'Telangana' },
+  { title: 'Tripura', value: 'Tripura' },
+  { title: 'Uttar Pradesh', value: 'Uttar Pradesh' },
+  { title: 'Uttarakhand', value: 'Uttarakhand' },
+  { title: 'West Bengal', value: 'West Bengal' },
+  { title: 'Andaman and Nicobar Islands', value: 'Andaman and Nicobar Islands' },
+  { title: 'Chandigarh', value: 'Chandigarh' },
+  { title: 'Dadra and Nagar Haveli and Daman and Diu', value: 'Dadra and Nagar Haveli and Daman and Diu' },
+  { title: 'Delhi', value: 'Delhi' },
+  { title: 'Jammu and Kashmir', value: 'Jammu and Kashmir' },
+  { title: 'Ladakh', value: 'Ladakh' },
+  { title: 'Lakshadweep', value: 'Lakshadweep' },
+  { title: 'Puducherry', value: 'Puducherry' }
+])
 
 // Group fields by section
 const sectionedFields = computed(() => {
@@ -114,6 +153,66 @@ onMounted(() => {
     bounceKey.value++ // force key change to retrigger animation
   }, 3000)
 })
+
+const dummyData = {
+  gstin: '02ABCDE1234F1Z5',
+  name: 'Dummy Company Ltd',
+  mobile: '9876543210',
+  openingBalance: '1000',
+  mailingName: 'Dummy Mailing',
+  email: 'dummy@example.com',
+  address: '123 Dummy Street, Dummy City',
+  state: 'Delhi',
+  pincode: '110001',
+  country: 'India',
+  pan: 'ABCDE1234F',
+  taxReg: '123456789',
+  tds: true,
+  creditLimit: '50000',
+  creditPeriod: '30',
+  billWise: true,
+  bankName: 'Dummy Bank',
+  accountNumber: '123456789012',
+  ifscCode: 'DUMY0000001',
+  addCountry1: 'India',
+  shipToAddress: '456 Ship Street, Dummy City',
+  selectedBalanceType: 'credit'
+}
+
+const dynamicHint = ref('02ABCDE1234F1Z5')
+const gstinLoading = ref(false)
+const gstinSuccess = ref(false)
+const appendBtnVisible = ref(true)
+const isGstinFocused = ref(false)
+
+const fetchGstinData = () => {
+  if (!formData.value.gstin) return
+  gstinLoading.value = true
+  setTimeout(() => {
+    gstinLoading.value = false
+    if (formData.value.gstin === '02ABCDE1234F1Z5') {
+      gstinSuccess.value = true
+      Object.keys(dummyData).forEach(key => {
+        if (key !== 'gstin' && key !== 'selectedBalanceType') {
+          formData.value[key] = dummyData[key]
+        }
+      })
+      selectedBalanceType.value = dummyData.selectedBalanceType
+    } else {
+      appendBtnVisible.value = false
+      dynamicHint.value = 'No data found for this GSTIN/UIN'
+    }
+  }, 1000)
+}
+
+const resetGstinSearch = () => {
+  gstinSuccess.value = false
+  if (!appendBtnVisible.value) {
+    appendBtnVisible.value = true
+    dynamicHint.value = '02ABCDE1234F1Z5'
+  }
+}
+
 </script>
 
 <template>
@@ -167,17 +266,22 @@ onMounted(() => {
                     <h5 class="account_form_info_hdng">Basic Information</h5>
                     <VDivider class="mb-2 mt-1" />
                   </VCol>
-                  <VCol v-if="isVisible('firstName')" cols="12" lg="4" md="4">
+                  <VCol v-if="isVisible('gstin')" cols="12" lg="6" md="6">
+                    <label class="account_label mb-2">GSTIN (Optional)</label>
+                    <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                      placeholder="15-digit GST Identification Number" />
+                  </VCol>
+                  <VCol v-if="isVisible('firstName')" cols="12" lg="6" md="6">
                     <label class="account_label mb-2">First Name</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="John" />
                   </VCol>
-                  <VCol v-if="isVisible('lastName')" cols="12" lg="4" md="4">
+                  <VCol v-if="isVisible('lastName')" cols="12" lg="6" md="6">
                     <label class="account_label mb-2">Last Name</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="Doe" />
                   </VCol>
-                  <VCol v-if="isVisible('companyName')" cols="12" lg="4" md="4">
+                  <VCol v-if="isVisible('companyName')" cols="12" lg="6" md="6">
                     <label class="account_label mb-2">Company Name</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="Innovate Inc." />
@@ -221,11 +325,6 @@ onMounted(() => {
                     <label class="account_label mb-2">ZIP Code</label>
                     <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       placeholder="400001" />
-                  </VCol>
-                  <VCol v-if="isVisible('gstin')" cols="12" lg="3" md="3">
-                    <label class="account_label mb-2">GSTIN (Optional)</label>
-                    <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                      placeholder="15-digit GST Identification Number" />
                   </VCol>
                 </VRow>
               </VCardText>
