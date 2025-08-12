@@ -7,6 +7,7 @@ import { ref, computed, onMounted } from 'vue'
 
 const formFields = ref([
   // Core Information
+  { section: 'Core Information', label: 'GSTIN/UIN', key: 'gstin', visible: true },
   { section: 'Core Information', label: 'Name', key: 'name', visible: true },
   { section: 'Core Information', label: 'Mobile', key: 'mobile', visible: true },
   { section: 'Core Information', label: 'Opening Balance', key: 'openingBalance', visible: true },
@@ -20,7 +21,6 @@ const formFields = ref([
   { section: 'Contact Details', label: 'Country', key: 'country', visible: true },
 
   // Tax & Compliance
-  { section: 'Tax & Compliance', label: 'GSTIN/UIN', key: 'gstin', visible: true },
   { section: 'Tax & Compliance', label: 'PAN', key: 'pan', visible: true },
   { section: 'Tax & Compliance', label: 'Tax Registration Number', key: 'taxReg', visible: true },
   { section: 'Tax & Compliance', label: 'TDS Applicable', key: 'tds', visible: true },
@@ -40,6 +40,45 @@ const formFields = ref([
   { section: 'Additional Fields', label: 'Place of Supply', key: 'state', visible: true },
   { section: 'Additional Fields', label: 'Ship-to Address', key: 'shipToAddress', visible: true },
 ]);
+
+const statesList = ref([
+  { title: 'Andhra Pradesh', value: 'Andhra Pradesh' },
+  { title: 'Arunachal Pradesh', value: 'Arunachal Pradesh' },
+  { title: 'Assam', value: 'Assam' },
+  { title: 'Bihar', value: 'Bihar' },
+  { title: 'Chhattisgarh', value: 'Chhattisgarh' },
+  { title: 'Goa', value: 'Goa' },
+  { title: 'Gujarat', value: 'Gujarat' },
+  { title: 'Haryana', value: 'Haryana' },
+  { title: 'Himachal Pradesh', value: 'Himachal Pradesh' },
+  { title: 'Jharkhand', value: 'Jharkhand' },
+  { title: 'Karnataka', value: 'Karnataka' },
+  { title: 'Kerala', value: 'Kerala' },
+  { title: 'Madhya Pradesh', value: 'Madhya Pradesh' },
+  { title: 'Maharashtra', value: 'Maharashtra' },
+  { title: 'Manipur', value: 'Manipur' },
+  { title: 'Meghalaya', value: 'Meghalaya' },
+  { title: 'Mizoram', value: 'Mizoram' },
+  { title: 'Nagaland', value: 'Nagaland' },
+  { title: 'Odisha', value: 'Odisha' },
+  { title: 'Punjab', value: 'Punjab' },
+  { title: 'Rajasthan', value: 'Rajasthan' },
+  { title: 'Sikkim', value: 'Sikkim' },
+  { title: 'Tamil Nadu', value: 'Tamil Nadu' },
+  { title: 'Telangana', value: 'Telangana' },
+  { title: 'Tripura', value: 'Tripura' },
+  { title: 'Uttar Pradesh', value: 'Uttar Pradesh' },
+  { title: 'Uttarakhand', value: 'Uttarakhand' },
+  { title: 'West Bengal', value: 'West Bengal' },
+  { title: 'Andaman and Nicobar Islands', value: 'Andaman and Nicobar Islands' },
+  { title: 'Chandigarh', value: 'Chandigarh' },
+  { title: 'Dadra and Nagar Haveli and Daman and Diu', value: 'Dadra and Nagar Haveli and Daman and Diu' },
+  { title: 'Delhi', value: 'Delhi' },
+  { title: 'Jammu and Kashmir', value: 'Jammu and Kashmir' },
+  { title: 'Ladakh', value: 'Ladakh' },
+  { title: 'Lakshadweep', value: 'Lakshadweep' },
+  { title: 'Puducherry', value: 'Puducherry' }
+])
 
 // Group fields by section
 const sectionedFields = computed(() => {
@@ -151,6 +190,89 @@ const handleBackToList = () => {
   selectedCustomer.value = null
 }
 
+const formData = ref({
+  gstin: '',
+  name: '',
+  mobile: '',
+  openingBalance: '',
+  mailingName: '',
+  email: '',
+  address: '',
+  state: '',
+  pincode: '',
+  country: '',
+  pan: '',
+  taxReg: '',
+  tds: false,
+  creditLimit: '',
+  creditPeriod: '',
+  billWise: false,
+  bankName: '',
+  accountNumber: '',
+  ifscCode: '',
+  addCountry1: '',
+  shipToAddress: '',
+})
+
+const dummyData = {
+  gstin: '02ABCDE1234F1Z5',
+  name: 'Dummy Company Ltd',
+  mobile: '9876543210',
+  openingBalance: '1000',
+  mailingName: 'Dummy Mailing',
+  email: 'dummy@example.com',
+  address: '123 Dummy Street, Dummy City',
+  state: 'Delhi',
+  pincode: '110001',
+  country: 'India',
+  pan: 'ABCDE1234F',
+  taxReg: '123456789',
+  tds: true,
+  creditLimit: '50000',
+  creditPeriod: '30',
+  billWise: true,
+  bankName: 'Dummy Bank',
+  accountNumber: '123456789012',
+  ifscCode: 'DUMY0000001',
+  addCountry1: 'India',
+  shipToAddress: '456 Ship Street, Dummy City',
+  selectedBalanceType: 'credit'
+}
+
+const dynamicHint = ref('02ABCDE1234F1Z5')
+const gstinLoading = ref(false)
+const gstinSuccess = ref(false)
+const appendBtnVisible = ref(true)
+const isGstinFocused = ref(false)
+
+const fetchGstinData = () => {
+  if (!formData.value.gstin) return
+  gstinLoading.value = true
+  setTimeout(() => {
+    gstinLoading.value = false
+    if (formData.value.gstin === '02ABCDE1234F1Z5') {
+      gstinSuccess.value = true
+      Object.keys(dummyData).forEach(key => {
+        if (key !== 'gstin' && key !== 'selectedBalanceType') {
+          formData.value[key] = dummyData[key]
+        }
+      })
+      selectedBalanceType.value = dummyData.selectedBalanceType
+    } else {
+      appendBtnVisible.value = false
+      dynamicHint.value = 'No data found for this GSTIN/UIN'
+    }
+  }, 1000)
+}
+
+const resetGstinSearch = () => {
+  gstinSuccess.value = false
+  if (!appendBtnVisible.value) {
+    appendBtnVisible.value = true
+    dynamicHint.value = '02ABCDE1234F1Z5'
+  }
+}
+
 onMounted(() => {
   setInterval(() => {
     bounceKey.value++ // force key change to retrigger animation
@@ -167,7 +289,7 @@ onMounted(() => {
             <div class="d-flex align-center gap-2 mb-4">
               <VBtn @click="handleBackToList" variant="text" class="account_v_btn_outlined">
                 <template #prepend>
-                  <IconArrowLeft style="font-size: 20px;" />
+                  <IconArrowLeft size="20" />
                 </template>
                 Back to Customer List
               </VBtn>
@@ -191,7 +313,7 @@ onMounted(() => {
                     <VMenu location="start" transition="slide-y-transition" offset-y :close-on-content-click="false">
                       <template #activator="{ props }">
                         <VBtn v-bind="props" variant="text" size="x-small" rounded="">
-                          <IconSettings style="font-size: 20px;" />
+                          <IconSettings size="20" />
                         </VBtn>
                       </template>
                       <VCard class="account_vcard_menu account_vcard_border" width="250px">
@@ -201,15 +323,15 @@ onMounted(() => {
                           <div v-for="(fields, section) in sectionedFields" :key="section">
                             <div class="field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
                               @click="toggleSection(section)">
-                              <IconCheck v-if="isSectionVisible(section)" style="font-size: 16px;" />
-                              <IconSquare v-else style="font-size: 16px;" />
+                              <IconCheck v-if="isSectionVisible(section)" size="20" />
+                              <IconSquare v-else size="20" />
                               <span class="font-weight-bold">{{ section }}</span>
                             </div>
                             <div v-for="field in fields" :key="field.key" class="account_vcard_menu_item"
                               style="padding-left: 10px;">
                               <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2"
                                 @click.stop="field.visible = !field.visible">
-                                <IconCheck v-if="field.visible" style="font-size: 16px;" />
+                                <IconCheck v-if="field.visible" size="20" />
                                 <span :class="field.visible ? '' : 'field_list_dynamic_ml'">{{ field.label }}</span>
                               </div>
                             </div>
@@ -219,7 +341,7 @@ onMounted(() => {
                     </VMenu>
                     <VBtn @click="showAddCustomerForm" variant="text" size="x-small" rounded=""
                       class="account_vcard_close_btn">
-                      <IconX style="font-size: 20px;" />
+                      <IconX size="20" />
                     </VBtn>
                   </div>
                 </template>
@@ -229,21 +351,41 @@ onMounted(() => {
                       <h5 class="account_form_info_hdng">Core Information</h5>
                       <VDivider class="mb-2 mt-1" />
                     </VCol>
-                    <VCol v-if="isVisible('name')" cols="12" lg="4" md="4">
+                    <VCol v-if="isVisible('gstin')" cols="12" lg="6" md="6">
+                      <label class="account_label mb-2">GSTIN/UIN</label>
+                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                        @focus="isGstinFocused = true" @blur="isGstinFocused = false" placeholder="15-digit GSTIN" v-model="formData.gstin"
+                        @input="resetGstinSearch">
+                        <template #append>
+                          <VSlideXReverseTransition mode="out-in">
+                            <VBtn v-if="appendBtnVisible" class="account_v_btn_outlined" rounded="1" size="default"
+                              :loading="gstinLoading" @click="fetchGstinData">
+                              <IconCircleArrowRight v-if="!gstinSuccess" size="20" />
+                              <IconCircleDashedCheck v-else size="20" />
+                            </VBtn>
+                          </VSlideXReverseTransition>
+                        </template>
+                      </VTextField>
+                      <VSlideYReverseTransition mode="out-in">
+                        <small v-if="isGstinFocused || !appendBtnVisible" class="account_primary_color">{{ dynamicHint }}</small>
+                      </VSlideYReverseTransition>
+                    </VCol>
+                    <VCol v-if="isVisible('name')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Name (Mandatory)</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="Customer's Full Name or Company Name" />
+                        hint="02ABCDE1234F1Z5" placeholder="Customer's Full Name or Company Name"
+                        v-model="formData.name" />
                     </VCol>
-                    <VCol v-if="isVisible('mobile')" cols="12" lg="4" md="4">
+                    <VCol v-if="isVisible('mobile')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Mobile</label>
                       <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
-                        density="compact" placeholder="9876543210" />
+                        density="compact" placeholder="9876543210" v-model="formData.mobile" />
                     </VCol>
-                    <VCol v-if="isVisible('openingBalance')" cols="12" lg="4" md="4">
+                    <VCol v-if="isVisible('openingBalance')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Opening Balance</label>
                       <div class="custom_option align-center">
                         <VTextField class="custom_option_field accouting_field accouting_active_field" type="number"
-                          variant="outlined" density="compact" placeholder="0" />
+                          variant="outlined" density="compact" placeholder="0" v-model="formData.openingBalance" />
                         <VSelect class="custom_option_select accouting_field accouting_active_field"
                           v-model="selectedBalanceType" :items="balanceTypeList" variant="outlined" density="compact" />
                       </div>
@@ -257,32 +399,33 @@ onMounted(() => {
                     <VCol v-if="isVisible('mailingName')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Mailing Name</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="Name for correspondence" />
+                        placeholder="Name for correspondence" v-model="formData.mailingName" />
                     </VCol>
                     <VCol v-if="isVisible('email')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Email</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="customer@example.com" />
+                        placeholder="customer@example.com" v-model="formData.email" />
                     </VCol>
 
                     <VCol v-if="isVisible('address')" cols="12" lg="12" md="12">
                       <label class="account_label mb-2">Address</label>
-                      <VTextarea class="accounting_v_textarea" placeholder="Full address" variant="outlined" />
+                      <VTextarea class="accounting_v_textarea" placeholder="Full address" variant="outlined"
+                        v-model="formData.address" />
                     </VCol>
                     <VCol v-if="isVisible('state')" cols="12" lg="4" md="4">
                       <label class="account_label mb-2">State</label>
-                      <VSelect class="accouting_field accouting_active_field" variant="outlined"
-                        placeholder="Select an item" />
+                      <VSelect class="accouting_field accouting_active_field" variant="outlined" :items="statesList"
+                        placeholder="Select State" v-model="formData.state" />
                     </VCol>
                     <VCol v-if="isVisible('pincode')" cols="12" lg="4" md="4">
                       <label class="account_label mb-2">Pincode</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined"
-                        placeholder="e.g. 400001" />
+                        placeholder="e.g. 400001" v-model="formData.pincode" />
                     </VCol>
                     <VCol v-if="isVisible('country')" cols="12" lg="4" md="4">
                       <label class="account_label mb-2">Country</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="India" />
+                        placeholder="India" v-model="formData.country" />
                     </VCol>
 
                     <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Tax & Compliance')">
@@ -290,23 +433,19 @@ onMounted(() => {
                       <VDivider class="mb-2 mt-1" />
                     </VCol>
 
-                    <VCol v-if="isVisible('gstin')" cols="12" lg="4" md="4">
-                      <label class="account_label mb-2">GSTIN/UIN</label>
-                      <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="15-digit GSTIN" />
-                    </VCol>
                     <VCol v-if="isVisible('pan')" cols="12" lg="4" md="4">
                       <label class="account_label mb-2">PAN</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="15-digit PAN" />
+                        placeholder="15-digit PAN" v-model="formData.pan" />
                     </VCol>
                     <VCol v-if="isVisible('taxReg')" cols="12" lg="4" md="4">
                       <label class="account_label mb-2">Tax Registration Number</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="If applicable" />
+                        placeholder="If applicable" v-model="formData.taxReg" />
                     </VCol>
                     <VCol v-if="isVisible('tds')" class="d-flex align-center" cols="12" lg="12" md="12">
-                      <VCheckbox density="compact" class="account_v_checkbox" label="TDS Applicable" />
+                      <VCheckbox density="compact" class="account_v_checkbox" label="TDS Applicable"
+                        v-model="formData.tds" />
                     </VCol>
 
                     <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Financial Controls')">
@@ -317,15 +456,16 @@ onMounted(() => {
                     <VCol v-if="isVisible('creditLimit')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Credit Limit</label>
                       <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
-                        density="compact" placeholder="0" />
+                        density="compact" placeholder="0" v-model="formData.creditLimit" />
                     </VCol>
                     <VCol v-if="isVisible('creditPeriod')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Credit Period (Days)</label>
                       <VTextField class="accouting_field accouting_active_field" type="number" variant="outlined"
-                        density="compact" placeholder="0" />
+                        density="compact" placeholder="0" v-model="formData.creditPeriod" />
                     </VCol>
                     <VCol v-if="isVisible('billWise')" class="d-flex align-center" cols="12" lg="6" md="6">
-                      <VCheckbox density="compact" class="account_v_checkbox" label="Maintain Bill-wise Details" />
+                      <VCheckbox density="compact" class="account_v_checkbox" label="Maintain Bill-wise Details"
+                        v-model="formData.billWise" />
                     </VCol>
 
                     <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Banking Details')">
@@ -336,17 +476,17 @@ onMounted(() => {
                     <VCol v-if="isVisible('bankName')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Bank Name</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="e.g. HDFC Bank" />
+                        placeholder="e.g. HDFC Bank" v-model="formData.bankName" />
                     </VCol>
                     <VCol v-if="isVisible('accountNumber')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Account Number</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="Bank Account Number" />
+                        placeholder="Bank Account Number" v-model="formData.accountNumber" />
                     </VCol>
                     <VCol v-if="isVisible('ifscCode')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">IFSC Code</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="e.g. HDFC0000001" />
+                        placeholder="e.g. HDFC0000001" v-model="formData.ifscCode" />
                     </VCol>
 
                     <VCol cols="12" class="pb-0" v-if="isAnyFieldVisible('Additional Fields')">
@@ -357,19 +497,19 @@ onMounted(() => {
                     <VCol v-if="isVisible('addCountry1')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Country</label>
                       <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="India" />
+                        placeholder="India" v-model="formData.addCountry1" />
                     </VCol>
 
                     <VCol v-if="isVisible('state')" cols="12" lg="6" md="6">
                       <label class="account_label mb-2">Place of Supply</label>
                       <VSelect class="accouting_field accouting_active_field" variant="outlined" density="compact"
-                        placeholder="State" />
+                        :items="statesList" placeholder="Select State" v-model="formData.state" />
                     </VCol>
 
                     <VCol v-if="isVisible('shipToAddress')" cols="12" lg="12" md="12">
                       <label class="account_label mb-2">Ship-to Address</label>
                       <VTextarea class="accounting_v_textarea" placeholder="Optional delivery address"
-                        variant="outlined" />
+                        variant="outlined" v-model="formData.shipToAddress" />
                       <div class="d-flex align-center justify-end mt-4">
                         <VBtn class="account_v_btn_primary">
                           <template #prepend>
@@ -395,7 +535,7 @@ onMounted(() => {
         </VRow>
         <VBtn @click="showAddCustomerForm" :key="bounceKey" class="account_add_new_btn bounce">
           <template #prepend>
-            <IconCirclePlus style="font-size: 20px; margin-right: 6px;" />
+            <IconCirclePlus size="20" />
           </template>
           Add Customer
         </VBtn>

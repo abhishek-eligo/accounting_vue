@@ -21,14 +21,14 @@ const dialogSubtitle = computed(() =>
 const widgetData = computed(() => {
   return activeTab.value === 'ledger'
     ? [
-      { title: 'TOTAL DEBITS', value: '₹1,22,249.00', icon: 'trending-up' },
-      { title: 'TOTAL CREDITS', value: '₹1,13,808.00', icon: 'coin' },
-      { title: 'CLOSING BALANCE', value: '₹8,441.00', extra: 'Dr', icon: 'scale' }
+      { title: 'TOTAL DEBITS', value: '₹1,22,249.00', icon: 'IconTrendingUp' },
+      { title: 'TOTAL CREDITS', value: '₹1,13,808.00', icon: 'IconCoin' },
+      { title: 'CLOSING BALANCE', value: '₹8,441.00', extra: 'Dr', icon: 'IconScale' }
     ]
     : [
-      { title: 'TOTAL BILLED', value: '₹17,98,275.00', icon: 'file-text' },
-      { title: 'TOTAL RECEIVED', value: '₹5,43,419.24', icon: 'credit-card' },
-      { title: 'TOTAL DUE', value: '₹12,54,855.76', icon: 'file-alert' }
+      { title: 'TOTAL BILLED', value: '₹17,98,275.00', icon: 'IconFileText' },
+      { title: 'TOTAL RECEIVED', value: '₹5,43,419.24', icon: 'IconCreditCard' },
+      { title: 'TOTAL DUE', value: '₹12,54,855.76', icon: 'IconFileAlert' }
     ]
 })
 
@@ -94,22 +94,21 @@ const tableItems = computed(() => {
             <div class="d-flex align-center gap-2">
               <VBtn @click="paymentType = 'in'; isPaymentDialogVisible = true" class="account_v_btn_primary">
                 <template #prepend>
-                  <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px;" />
+                  <IconCirclePlus size="20" />
                 </template>
                 Payment In
               </VBtn>
               <VBtn @click="paymentType = 'out'; isPaymentDialogVisible = true" class="account_v_btn_error">
                 <template #prepend>
-                  <component :is="$renderTablerIcon('circle-plus')" style="font-size: 20px;" />
+                  <IconCirclePlus size="20" />
                 </template>
                 Payment Out
               </VBtn>
-
               <VBtn @click="isFullAddressVisible = !isFullAddressVisible" variant="text" size="x-small" rounded=""
                 class="account_vcard_close_btn">
                 <template #prepend>
-                  <component :is="$renderTablerIcon(isFullAddressVisible ? 'chevron-up' : 'chevron-down')"
-                    style="font-size: 15px;" />
+                  <IconChevronUp v-if="isFullAddressVisible" size="15" />
+                  <IconChevronDown v-else size="15" />
                 </template>
               </VBtn>
             </div>
@@ -117,15 +116,15 @@ const tableItems = computed(() => {
           <VCardText class="mt-2">
             <VRow>
               <VCol class="d-flex align-center gap-2" cols="12" lg="4" md="4">
-                <component class="account_info_icon" :is="$renderTablerIcon('file-text')" style="font-size: 20px;" />
+                <IconFileText class="account_info_icon" size="20" />
                 <p class="mb-0 account_info_text">GSTIN: 27ABCDE1000F1Z1</p>
               </VCol>
               <VCol class="d-flex align-center gap-2" cols="12" lg="4" md="4">
-                <component class="account_info_icon" :is="$renderTablerIcon('phone')" style="font-size: 20px;" />
+                <IconPhone class="account_info_icon" size="20" />
                 <p class="mb-0 account_info_text">(628) 527-7859</p>
               </VCol>
               <VCol class="d-flex align-center gap-2" cols="12" lg="4" md="4">
-                <component class="account_info_icon" :is="$renderTablerIcon('map-pin')" style="font-size: 20px;" />
+                <IconMapPin class="account_info_icon" size="20" />
                 <p class="mb-0 account_info_text">Jaipur, Maharashtra</p>
               </VCol>
             </VRow>
@@ -137,12 +136,10 @@ const tableItems = computed(() => {
                     <p class="mb-0 account_info_label">Full Address</p>
                     <p class="mb-0 account_info_subLabel">537 River Rd, Jaipur, Maharashtra - 37679</p>
                   </div>
-
-                  <div class="">
+                  <div>
                     <p class="mb-0 account_info_label">Bio</p>
                     <p style="font-style:italic;" class="mb-0 account_info_subLabel">Experienced in client relations and
-                      project
-                      management, always aiming for excellence.</p>
+                      project management, always aiming for excellence.</p>
                   </div>
                 </VCol>
               </VRow>
@@ -166,13 +163,12 @@ const tableItems = computed(() => {
         <VCard :subtitle="widget.title" class="account_widget_vcard account_vcard_border"
           :class="index === 0 ? 'account_v_card_dark' : ''">
           <template #append>
-            <component :is="$renderTablerIcon(widget.icon)" style="font-size: 16px;"
+            <component :is="widget.icon" size="16"
               :class="index === 0 ? 'account_v_card_dark_icon' : ''" />
           </template>
           <VCardText>
             <h5 :class="index === 0 ? 'account_text_white' : 'account_text_dark'"
-              class="account_texth5 mb-0 font-weight-bold">{{ widget.value }} {{ widget.extra || ''
-              }}</h5>
+              class="account_texth5 mb-0 font-weight-bold">{{ widget.value }} {{ widget.extra || '' }}</h5>
           </VCardText>
         </VCard>
       </VCol>
@@ -187,19 +183,18 @@ const tableItems = computed(() => {
               <VTextField style="min-inline-size: 250px;" class="accouting_field accouting_active_field"
                 variant="outlined" density="compact" placeholder="Filter description...">
                 <template #prepend-inner>
-                  <component :is="$renderTablerIcon('search')" style="font-size: 20px;" />
+                  <IconSearch size="20" />
                 </template>
               </VTextField>
-
               <v-date-input class="accounting_date_input" placeholder="Select date range"
                 style="min-inline-size: 300px;" cancel-text="Close" ok-text="Apply" multiple="range">
                 <template #prepend-inner>
-                  <component :is="$renderTablerIcon('calendar')" style="font-size: 20px;" />
+                  <IconCalendar size="20" />
                 </template>
               </v-date-input>
               <VBtn class="account_v_btn_outlined">
                 <template #prepend>
-                  <component :is="$renderTablerIcon('download')" style="font-size: 20px;" />
+                  <IconDownload size="20" />
                 </template>
                 Export
               </VBtn>
@@ -217,7 +212,6 @@ const tableItems = computed(() => {
                 }" size="small" class="account_table_chip" :text="item.status" />
               </template>
             </VDataTable>
-
           </div>
         </VCard>
       </VCol>
@@ -258,6 +252,5 @@ const tableItems = computed(() => {
         </VCardActions>
       </VCard>
     </VDialog>
-
   </div>
 </template>
