@@ -72,7 +72,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: "src/index.js",
+      entry: "src/main.js",
       name: "VuetifyAccountingDummy",
       fileName: (format) => `vuetify-accounting-dummy.${format}.js`,
     },
