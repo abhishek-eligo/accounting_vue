@@ -509,7 +509,7 @@ svg.account_info_icon {
     opacity: 0.5;
 }
 
-.account_v_btn_secondary.v-btn--disabled svg {
+.account_v_btn_secondary.v-btn--disabled i {
     color: var(--acc-text-white) !important;
 }
 

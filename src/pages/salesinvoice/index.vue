@@ -1055,7 +1055,7 @@ const previewValue = computed(() => {
               <VBtn @click="showAddCustomerForm" icon="mdi-close" variant="text" size="x-small" rounded=""
                 class="account_vcard_close_btn">
                 <IconX size="20" />
-                </VBtn>
+              </VBtn>
             </div>
           </template>
           <VCardText class="add_customer_dialog">
@@ -1205,7 +1205,12 @@ const previewValue = computed(() => {
                 <VTextarea class="accounting_v_textarea" placeholder="Optional delivery address" variant="outlined" />
 
                 <div class="d-flex align-center justify-end mt-4">
-                  <VBtn class="account_v_btn_primary" prepend-icon="mdi-content-save-outline">Save Customer</VBtn>
+                  <VBtn class="account_v_btn_primary">
+                    <template #prepend>
+                      <IconDeviceFloppy size="20" />
+                    </template>
+                    Save Customer
+                  </VBtn>
                 </div>
               </VCol>
             </VRow>

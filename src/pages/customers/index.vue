@@ -373,7 +373,7 @@ onMounted(() => {
                       <div class="d-flex align-center justify-end mt-4">
                         <VBtn class="account_v_btn_primary">
                           <template #prepend>
-                            <IconDeviceFloppy style="font-size: 20px; margin-right: 6px;" />
+                            <IconDeviceFloppy size="20" />
                           </template>
                           Save Customer
                         </VBtn>

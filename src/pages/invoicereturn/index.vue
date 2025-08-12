@@ -1029,7 +1029,7 @@ const previewValue = computed(() => {
                 <div class="d-flex align-center justify-end mt-4">
                   <VBtn class="account_v_btn_primary">
                     <template #prepend>
-                      <IconContentSaveOutline size="20" />
+                      <IconDeviceFloppy size="20" />
                     </template>
                     Save Customer
                   </VBtn>
