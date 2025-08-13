@@ -833,8 +833,7 @@ function downloadAs(type) {
             <VDivider class="mt-3 mb-0" />
             <VRow class="justify-end mt-2">
               <VCol cols="12" lg="6" md="6">
-                <div class="d-flex justify-space-between align-center px-4 py-3 rounded"
-                  style="background-color: #e0f7fa; border: 1px solid #4dd0e1">
+                <div class="d-flex justify-space-between align-center px-4 py-3 rounded total_assets_card">
                   <div class="d-flex align-center gap-2">
                     <h5 class="mb-0 account_assets_title">Total Assets</h5>
                   </div>
@@ -846,8 +845,7 @@ function downloadAs(type) {
                 </div>
               </VCol>
               <VCol cols="12" lg="6" md="6">
-                <div class="d-flex justify-space-between align-center px-4 py-3 rounded"
-                  style="background-color: #ffebee; border: 1px solid #ef5350">
+                <div class="d-flex justify-space-between align-center px-4 py-3 rounded total_liabilities_card">
                   <div>
                     <h5 class="mb-0 account_liabilities_title">
                       Total Liabilities

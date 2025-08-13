@@ -1,11 +1,11 @@
 :root {
     --acc-border-color: #dee2e6;
     --acc-primary-color: hsl(178 96% 33%);
-    --acc-primary-color-tonal: rgba(3, 165, 160, 0.747);
+    --acc-primary-color-tonal: rgba(3, 165, 160, 0.16);
     --acc-primary-color-disabled: rgba(106, 255, 250, 0.438);
     --acc-primary-color-hover: rgb(1, 157, 152, 0.38);
     --acc-error-color: hsl(0 84.2% 60.2%);
-    --acc-error-color-tonal: hsla(0, 85%, 68%, 0.884);
+    --acc-error-color-tonal: hsla(0, 84%, 60%, 0.16);
     --acc-outlined-color: hsl(204, 13%, 94%);
     --acc-secondary-color: #0a538a;
     --acc-default-surface-bg: #EDF0F2;
@@ -45,6 +45,16 @@ h1, h2, h3, h4, h5, h6, p, span {
     color: var(--acc-primary-text-color);
     font-size: 18px;
     font-weight: 600;
+}
+
+.total_assets_card {
+    background-color: var(--acc-primary-color-tonal) !important;
+    border: 1px solid var(--acc-primary-color);
+}
+
+.total_liabilities_card {
+    background-color: var(--acc-error-color-tonal) !important;
+    border: 1px solid var(--acc-error-color);
 }
 
 .account_table_chip.active {

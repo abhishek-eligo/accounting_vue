@@ -14,7 +14,7 @@
         <!-- Active Route Title -->
         <v-toolbar-title class="d-flex account_toolbar_title align-center">
           <!-- <v-icon start class="mr-2">{{ activeItem?.icon || 'mdi-help-circle-outline' }}</v-icon> -->
-          {{ activeItem?.title || 'Dashboard' }}
+          {{ activeItem?.title || 'Customers' }}
         </v-toolbar-title>
       </v-container>
     </v-app-bar>
