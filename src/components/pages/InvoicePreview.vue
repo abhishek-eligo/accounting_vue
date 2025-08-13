@@ -1,5 +1,5 @@
 <script setup>
-import '../../main.css';
+// import '../../main.css';
 </script>
 
 <template>

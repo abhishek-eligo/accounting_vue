@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
 import { toast } from 'vue3-toastify';
 
 const dates = ref()
