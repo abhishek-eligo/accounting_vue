@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import DynamicDataTable from '@/components/DynamicDataTable.vue'
+// import DynamicDataTable from '@/components/DynamicDataTable.vue'
 // Track the selected topic
 const selectedTopic = ref('Accounting');
 

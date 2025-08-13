@@ -1,14 +1,14 @@
 export default [
-  {
-    section: "",
-    items: [
-      {
-        title: "Dashboard",
-        icon: "mdi-view-dashboard-outline",
-        slug: "dashboard",
-      },
-    ],
-  },
+  // {
+  //   section: "",
+  //   items: [
+  //     {
+  //       title: "Dashboard",
+  //       icon: "mdi-view-dashboard-outline",
+  //       slug: "dashboard",
+  //     },
+  //   ],
+  // },
   // {
   //   section: "Component",
   //   items: [
