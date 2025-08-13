@@ -33,10 +33,10 @@ function main() {
   
   // Check source directories
   const sourcePagesDir = path.join(packagePath, 'src', 'pages');
-  const sourceComponentsDir = path.join(packagePath, 'src', 'components');
+  // const sourceComponentsDir = path.join(packagePath, 'src', 'components');
   
   console.log('📂 Source pages directory:', sourcePagesDir);
-  console.log('📂 Source components directory:', sourceComponentsDir);
+  // console.log('📂 Source components directory:', sourceComponentsDir);
   
   if (!fs.existsSync(sourcePagesDir)) {
     console.log('❌ Source pages directory not found');
@@ -91,13 +91,13 @@ function main() {
     console.log('✅ Pages copied successfully');
     
     // Copy components
-    if (fs.existsSync(sourceComponentsDir)) {
-      console.log('📋 Copying components directory...');
-      copyDir(sourceComponentsDir, path.join(targetDir, 'components'));
-      console.log('✅ Components copied successfully');
-    } else {
-      console.log('⚠️  Source components directory not found');
-    }
+    // if (fs.existsSync(sourceComponentsDir)) {
+    //   console.log('📋 Copying components directory...');
+    //   copyDir(sourceComponentsDir, path.join(targetDir, 'components'));
+    //   console.log('✅ Components copied successfully');
+    // } else {
+    //   console.log('⚠️  Source components directory not found');
+    // }
     
     // Create README
     const readme = `# Accounting Components

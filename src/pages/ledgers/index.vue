@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { VBtn, VCard, VCardText, VCol, VIcon, VRow, VChip } from 'vuetify/components'
-import TreeItem from '@/components/core/TreeItem.vue'
+// import TreeItem from '@/components/core/TreeItem.vue'
 const expanded = ref(false)
 
 function toggleExpand() {
