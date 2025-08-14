@@ -8,7 +8,7 @@
     <div class="invoice-header d-flex justify-space-between align-center">
       <div>
         <div class="d-flex align-center mb-1">
-          <component :is="$renderTablerIcon('report-money')" style="font-size: 54px" />
+          <IconReportMoney size="54" />
           <!-- <v-icon class="mr-2" size="36">mdi-file-document-outline</v-icon> -->
           <div>
             <h2 class="invoice-company">Hicks Inc.</h2>

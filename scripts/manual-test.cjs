@@ -164,7 +164,7 @@ async function main() {
   let targetDir;
 
   if (projectType.toLowerCase() === 'standalone') {
-    targetDir = path.join(process.cwd(), 'resources', 'js', 'pages', 'admin', 'accounting');
+    targetDir = path.join(process.cwd(), 'resources', 'js', 'pages', 'pages', 'accounting');
   } else if (projectType.toLowerCase() === 'module') {
     // Find the base folder starting with 'Modules'
     function findModulesDir(baseDir) {
