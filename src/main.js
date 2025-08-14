@@ -28,10 +28,6 @@ import "unfonts.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-// PrimeVue
-import PrimeVue from "primevue/config";
-import Aura from "@primeuix/themes/aura";
-
 // Custom Css
 import "@/main.css";
 
@@ -52,13 +48,6 @@ app.config.globalProperties.$renderTablerIcon = renderTablerIcon;
 for (const [key, component] of Object.entries(TablerIcons)) {
   app.component(key, component)
 }
-
-// Use Primevue
-app.use(PrimeVue, {
-  theme: {
-    preset: Aura,
-  },
-});
 
 // Use Tostify
 app.use(Vue3Toastify, {

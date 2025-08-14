@@ -4,6 +4,107 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
+// CSS variables to inject into host app's styles.css
+const CSS_VARIABLES_OVERRIDE = `
+/* Accounting Vue Plugin CSS Variable Overrides */
+:root {
+  --acc-primary-color: rgba(var(--v-theme-primary));
+  --acc-border-color: rgba(var(--v-border-color), var(--v-border-opacity));
+  --acc-error-color: rgba(var(--v-theme-error));
+  --acc-secondary-color: rgba(var(--v-theme-secondary));
+  --acc-text-dark: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
+  --acc-primary-text-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
+  --acc-primary-color-hover: rgba(var(--v-theme-primary), 0.38);
+  --acc-default-font-family: Public Sans, sans-serif;
+  --acc-input-bg-color: transparent;
+  --acc-outlined-color: transparent;
+  --acc-primary-color-tonal: rgba(var(--v-theme-primary), 0.16);
+  --acc-error-color-tonal: rgba(var(--v-theme-error), 0.16);
+}
+/* End Accounting Vue Plugin CSS Variable Overrides */
+`;
+
+// Function to inject CSS variables into host app's styles.css
+async function injectCSSVariables() {
+  console.log('🎨 Injecting CSS variable overrides...');
+  
+  // Common paths where styles.css might be located (in order of preference)
+  const possibleStylesPaths = [
+    'resources/styles/styles.scss',
+    'resources/css/app.css',
+    'resources/sass/app.scss',
+    'resources/css/styles.css',
+    'src/assets/css/styles.css',
+    'src/assets/scss/styles.scss',
+    'src/styles.css',
+    'public/css/styles.css',
+    'assets/css/styles.css',
+    'resources/css/main.css',
+    'src/main.css',
+    'src/assets/main.css'
+  ];
+  
+  let stylesPath = null;
+  
+  // Find the styles file
+  for (const possiblePath of possibleStylesPaths) {
+    const fullPath = path.join(process.cwd(), possiblePath);
+    if (fs.existsSync(fullPath)) {
+      stylesPath = fullPath;
+      break;
+    }
+  }
+  
+  // If no existing styles file found, create one
+  if (!stylesPath) {
+    stylesPath = path.join(process.cwd(), 'resources', 'css', 'app.css');
+    
+    // Create the directory if it doesn't exist
+    const stylesDir = path.dirname(stylesPath);
+    if (!fs.existsSync(stylesDir)) {
+      fs.mkdirSync(stylesDir, { recursive: true });
+    }
+    
+    console.log('📄 Creating new styles file:', stylesPath);
+  } else {
+    console.log('📄 Found styles file:', stylesPath);
+  }
+  
+  // Read existing content
+  let existingContent = '';
+  if (fs.existsSync(stylesPath)) {
+    existingContent = fs.readFileSync(stylesPath, 'utf8');
+  }
+  
+  // Check if our CSS variables are already injected
+  const markerStart = '/* Accounting Vue Plugin CSS Variable Overrides */';
+  const markerEnd = '/* End Accounting Vue Plugin CSS Variable Overrides */';
+  
+  if (existingContent.includes(markerStart)) {
+    console.log('🔄 CSS variables already exist, updating...');
+    
+    // Remove existing injection and add new one
+    const startIndex = existingContent.indexOf(markerStart);
+    const endIndex = existingContent.indexOf(markerEnd);
+    
+    if (startIndex !== -1 && endIndex !== -1) {
+      const beforeInjection = existingContent.substring(0, startIndex);
+      const afterInjection = existingContent.substring(endIndex + markerEnd.length);
+      existingContent = beforeInjection + afterInjection;
+    }
+  }
+  
+  // Add our CSS variables at the end
+  const updatedContent = existingContent + '\n' + CSS_VARIABLES_OVERRIDE;
+  
+  // Write the updated content
+  fs.writeFileSync(stylesPath, updatedContent);
+  console.log('✅ CSS variable overrides injected successfully!');
+  console.log('📁 Updated file:', stylesPath);
+  
+  return stylesPath;
+}
+
 // Manual test script to verify installation and copy files if needed
 async function main() {
   const rl = readline.createInterface({
@@ -177,6 +278,9 @@ async function main() {
       console.log('⚠️  Source components directory not found');
     }
 
+    // Inject CSS variables into host app's styles.css
+    await injectCSSVariables();
+
     // Create README
     const readme = `# Accounting Components
 
@@ -229,7 +333,7 @@ For more information, visit: https://github.com/abhishek-eligo/accounting_vue
     fs.writeFileSync(path.join(targetDir, 'README.md'), readme);
     console.log('✅ README created');
 
-    console.log('\n🎉 Manual copy completed successfully!');
+    console.log('\n🎉 Installation completed successfully!');
     console.log('📁 Files copied to:', targetDir);
 
     // List copied directories
@@ -238,7 +342,9 @@ For more information, visit: https://github.com/abhishek-eligo/accounting_vue
       console.log('📝 Available pages:', pages.join(', '));
     }
 
-    console.log('\n💡 You can now customize the components in the pages/ directory!');
+    console.log('\n💡 Setup complete! The accounting components are ready to use.');
+    console.log('🎨 CSS variable overrides have been automatically configured.');
+    console.log('📝 You can now customize the components in the pages/ directory!');
 
   } catch (error) {
     console.error('❌ Error during manual copy:', error.message);
