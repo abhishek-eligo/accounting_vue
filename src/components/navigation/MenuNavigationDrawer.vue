@@ -18,13 +18,13 @@ const drawerModel = computed({
 const settingsItems = computed(() => {
   return navigationListItems
     .flatMap(section => section.items)
-    .filter(item => ['company-settings', 'user-roles'].includes(item.slug));
+    .filter(item => ['company-settings', 'role-and-permission'].includes(item.slug));
 })
 
 const navigationItems = computed(() => {
   return navigationListItems.map(section => {
     const filteredItems = section.items.filter(item =>
-      !['company-settings', 'user-roles'].includes(item.slug)
+      !['company-settings', 'role-and-permission'].includes(item.slug)
     );
     return { ...section, items: filteredItems };
   }).filter(section => section.items.length > 0); // remove empty sections
