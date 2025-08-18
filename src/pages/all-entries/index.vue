@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { toast } from "vue3-toastify";
+import axios from "axios";
 
 // Function to handle amount input and show words
 function handleAmountInput(event, rowIndex, type) {
@@ -18,12 +19,99 @@ function handleAmountInput(event, rowIndex, type) {
   }
 }
 
+const journalEntryFormRef = ref(null)
+
 // Journal entry form data
 const journalEntryForm = ref({
   entryDate: new Date(),
-  description: "",
+  narration: "",
   voucherType: "",
+  voucherNumber: "",
+  entryType: "",
+
 });
+
+const debitRows = ref([
+  { account: null, amount: null, amountInWords: "" }
+]);
+const creditRows = ref([
+  { account: null, amount: null, amountInWords: "" }
+]);
+
+const narrationError = ref(null);
+const showJournalEntryCard = ref(true);
+
+
+const validateForm = () => {
+  narrationError.value = null
+
+  if (!journalEntryForm.value.entryDate) return "Please select an entry date"
+  if (!journalEntryForm.value.entryType) return "Please select an entry type"
+  if (!journalEntryForm.value.narration) {
+    narrationError.value = "Narration is required"
+    return "Please enter narration"
+  }
+  if (!journalEntryForm.value.voucherType) return "Please select voucher type"
+  if (!debitRows.value.length || debitRows.value.some(d => !d.account || !d.amount)) {
+    return "Please add valid debit entries"
+  }
+  if (!creditRows.value.length || creditRows.value.some(c => !c.account || !c.amount)) {
+    return "Please add valid credit entries"
+  }
+
+  const totalDebit = debitRows.value.reduce((sum, d) => sum + Number(d.amount || 0), 0)
+  const totalCredit = creditRows.value.reduce((sum, c) => sum + Number(c.amount || 0), 0)
+
+  if (totalDebit !== totalCredit) return "Debit and Credit amounts must be equal"
+
+  return null
+}
+
+const submitJournalEntryForm = async () => {
+  const error = validateForm()
+  if (error) {
+    alert(error) // you can use Snackbar/Toast instead of alert
+    return
+  }
+
+  try {
+    const payload = {
+      ...journalEntryForm.value,
+      debitRows: debitRows.value,
+      creditRows: creditRows.value,
+    }
+
+    const response = await axios.post("account-history",
+    payload,
+      {
+        headers: {
+      "Authorization": `Bearer 2|XVkW9zNO0IlrkaDLZHF7iR4KXOgg6ajSqSzRuj3D1143fc81`, // 👈 replace with your auth token
+      "Content-Type": "application/json",
+      "Accept" : "application/json",
+     },
+      }
+    );
+
+    if (response.status === 201 || response.status === 200) {
+      alert("Journal Entry saved successfully!")
+      // Reset form after success
+      journalEntryForm.value = {
+        entryDate: null,
+        entryType: null,
+        narration: "",
+        voucherType: null,
+        voucherNumber: null,
+      }
+      debitRows.value = [{ account: null, amount: null, amountInWords: "" }]
+      creditRows.value = [{ account: null, amount: null, amountInWords: "" }]
+      showJournalEntryCard.value = false
+    }
+  } catch (err) {
+    console.error(err)
+    alert("Failed to save journal entry")
+  }
+}
+
 
 // Validation rules for journal entry form
 // const journalEntryRules = {
@@ -36,48 +124,50 @@ const journalEntryForm = ref({
 // };
 // console.log(journalEntryRules.description);
 
-const descriptionError = ref("");
-const checkValidation = (value) => {
-  descriptionError.value = validateField(
-    value,
-    journalEntryValidations.description
-  );
-  console.log(descriptionError.value);
-  // return result === true ? true : result;
-};
+// const descriptionError = ref("");
+// const checkValidation = (value) => {
+//   descriptionError.value = validateField(
+//     value,
+//     journalEntryValidations.description
+//   );
+//   console.log(descriptionError.value);
+//   // return result === true ? true : result;
+// };
 
 // Form reference
-const journalEntryFormRef = ref();
+// const journalEntryFormRef = ref();
 
 // Submit journal entry form
-async function submitJournalEntryForm() {
-  checkValidation(journalEntryForm.value.description);
-  // checkValidation(journalEntryForm.value.description);
-  const { valid } = await journalEntryFormRef.value?.validate();
-  if (!valid) {
-    return false;
-  }
+// async function submitJournalEntryForm() {
 
-  // Form is valid, proceed with submission
-  toast.success("Journal entry saved successfully!");
+// const payload = { ...journalEntryForm.value };
 
-  // Reset form
-  journalEntryForm.value = {
-    entryDate: "",
-    description: "",
-    voucherType: "",
-  };
+// const response = await axios.post(
+//   "/api/v1/account-history",
+//   payload // 👈 data goes directly here
+// );
 
-  // Reset debit and credit rows
-  debitRows.value = [{ account: null, amount: 0, amountInWords: "" }];
-  creditRows.value = [{ account: null, amount: 0, amountInWords: "" }];
+// console.log(response.data);
 
-  // Hide the form
-  showJournalEntryCard.value = false;
+//   // Reset form
+//   journalEntryForm.value = {
+//     entryDate: "",
+//     narration: "",
+//     voucherType: "",
+//     voucherNumber: "",
+//     entryType: "",
+//   };
 
-  // Reset validation
-  journalEntryFormRef.value?.resetValidation();
-}
+//   // Reset debit and credit rows
+//   debitRows.value = [{ account: null, amount: 0, amountInWords: "" }];
+//   creditRows.value = [{ account: null, amount: 0, amountInWords: "" }];
+
+//   // Hide the form
+//   showJournalEntryCard.value = false;
+
+//   // Reset validation
+//   journalEntryFormRef.value?.resetValidation();
+// }
 
 const chartData = reactive([
   {
@@ -171,7 +261,7 @@ const chartData = reactive([
   },
 ]);
 
-const showJournalEntryCard = ref(false);
+// const showJournalEntryCard = ref(false);
 const showLedgerDialog = ref(false);
 const showDetailsDialog = ref(false);
 const selectedEntry = ref(null);
@@ -417,8 +507,23 @@ const voucherTypes = ref([
   { title: "Reciept Voucher", value: "reciept_voucher" },
 ]);
 
-const debitRows = ref([{ account: null, amount: 0, amountInWords: "" }]);
-const creditRows = ref([{ account: null, amount: 0, amountInWords: "" }]);
+const voucherNo = ref([
+  { title: "VOC-0001", value: "VOC-0001" },
+  { title: "VOC-0002", value: "VOC-0002" },
+  { title: "VOC-0003", value: "VOC-0003" },
+  { title: "VOC-0004", value: "VOC-0004" },
+  { title: "VOC-0005", value: "VOC-0005" },
+]);
+
+const entryTypes = ref([
+  { title: "Journal", value: "Journal" },
+  { title: "Deposit", value: "Deposit" },
+  { title: "Expenses", value: "Expenses" },
+  { title: "Invoices", value: "Invoices" },
+]);
+
+// const debitRows = ref([{ account: null, amount: 0, amountInWords: "" }]);
+// const creditRows = ref([{ account: null, amount: 0, amountInWords: "" }]);
 
 // Ledger form
 const ledgerForm = reactive({
@@ -578,9 +683,9 @@ onMounted(() => {
               </VBtn>
             </template>
             <VCardText class="mt-4">
-              <VForm ref="journalEntryFormRef">
+              <VForm ref="journalEntryFormRef" @submit.prevent="submitJournalEntryForm">
                 <VRow>
-                  <VCol cols="12" lg="6" md="6">
+                  <VCol cols="6">
                     <div class="d-flex align-center gap-3">
                       <div class="account_entry_form_label">
                         <label class="account_label">Date *</label>
@@ -593,6 +698,16 @@ onMounted(() => {
                       </v-date-input>
                     </div>
                   </VCol>
+
+                  <VCol cols="6">
+                    <div class="d-flex align-center gap-3">
+                      <label class="account_label">Type* </label>
+                      <VAutocomplete v-model="journalEntryForm.entryType" class="accouting_field accouting_active_field"
+                        variant="outlined" density="compact" :items="entryTypes" item-title="title" item-value="value"
+                        placeholder="Select Entry Type" />
+                    </div>
+                  </VCol>
+
                 </VRow>
 
                 <!-- Debit -->
@@ -690,11 +805,11 @@ onMounted(() => {
                       <div class="account_entry_form_label">
                         <label class="account_label mt-3">Description *</label>
                       </div>
-                      <VTextarea v-model="journalEntryForm.description" class="accounting_v_textarea"
+                      <VTextarea v-model="journalEntryForm.narration" class="accounting_v_textarea"
                         placeholder="e.g. Inventory purchased on credit. XYZ Capital Introduce. Max length 254 characters"
                         variant="outlined" />
-                      <small class="text-error" v-if="descriptionError">
-                        {{ descriptionError }}
+                      <small class="text-error" v-if="narrationError">
+                        {{ narrationError }}
                       </small>
                     </div>
                   </VCol>
@@ -703,6 +818,12 @@ onMounted(() => {
                     <VAutocomplete v-model="journalEntryForm.voucherType" class="accouting_field accouting_active_field"
                       variant="outlined" density="compact" :items="voucherTypes" item-title="title" item-value="value"
                       placeholder="Select Voucher Type" />
+
+                      <label class="account_label">Voucher Number</label>
+                      <VAutocomplete v-model="journalEntryForm.voucherNumber" class="accouting_field accouting_active_field"
+                      variant="outlined" density="compact" :items="voucherNo" item-title="title" item-value="value"
+                      placeholder="Select Voucher Number" />
+
                   </VCol>
                 </VRow>
 
@@ -722,8 +843,8 @@ onMounted(() => {
                     <div class="d-flex align-center justify-end gap-2">
                       <VBtn @click="showJournalEntryCard = false" class="account_v_btn_outlined" variant="outlined"
                         rounded="2" size="default">Cancel</VBtn>
-                      <VBtn @click="submitJournalEntryForm" class="account_v_btn_primary save_btn_height"
-                        variant="outlined" size="default" rounded="2" color="primary">
+                      <VBtn class="account_v_btn_primary save_btn_height"
+                        variant="outlined" size="default" rounded="2" color="primary" type="submit">
                         <template #prepend>
                           <IconDeviceFloppy size="18" />
                         </template>
