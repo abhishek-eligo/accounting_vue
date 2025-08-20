@@ -347,6 +347,8 @@ async function submitEditForm() {
 
 // === Edit Handler ===
 function handleEdit(node) {
+  console.log("handleEdit");
+  console.log(node);
   selectedNode.value = node;
   editForm.name = node.name;
   editForm.position = getPositionInParent(node); // 🟢 Position (1-based index)
@@ -493,6 +495,10 @@ watch(
                 <p class="mb-0 account_info_title">Group</p>
               </div>
               <div class="d-flex align-center gap-1">
+                <IconFolder class="account_folder_icon" size="16" />
+                <p class="mb-0 account_info_title">Sub-Group</p>
+              </div>
+              <div class="d-flex align-center gap-1">
                 <IconFileText class="account_ledger_icon" size="16" />
                 <p class="mb-0 account_info_title">Ledger</p>
               </div>
@@ -524,7 +530,8 @@ watch(
               :items="ledgerGroupOptions.length ? ledgerGroupOptions : ledgerGroupOptions" :rules="parentGroupRules"
               class="accouting_field accouting_active_field" placeholder="Ledger Group" item-title="title"
               item-value="value" variant="outlined" hide-details="auto" />
-            <VAutocomplete v-show="ledgerSubGroupOptions.length" v-model="ledgerForm.ledgerSubgroup" :items="ledgerSubGroupOptions.length ? ledgerSubGroupOptions : ledgerSubGroupOptions"
+            <VAutocomplete v-show="ledgerSubGroupOptions.length" v-model="ledgerForm.ledgerSubgroup"
+              :items="ledgerSubGroupOptions.length ? ledgerSubGroupOptions : ledgerSubGroupOptions"
               class="mt-2 accouting_field accouting_active_field" placeholder="Ledger Sub-Group" item-title="title"
               item-value="value" variant="outlined" hide-details="auto" />
           </VForm>
@@ -562,7 +569,6 @@ watch(
         </VCardActions>
       </VCard>
     </VDialog>
-
 
     <!-- Add Group dialog -->
     <VDialog v-model="showSubgroupDialog" max-width="400" @click:outside="subGroupFormRef?.resetValidation()">
