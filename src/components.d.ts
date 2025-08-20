@@ -23,6 +23,7 @@ declare module 'vue' {
     AccountVendorsList: typeof import('./components/pages/AccountVendorsList.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     DynamicDataTable: typeof import('./components/DynamicDataTable.vue')['default']
+    ExampleApiUsage: typeof import('./components/ExampleApiUsage.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     IncomeRow: typeof import('./components/core/IncomeRow.vue')['default']
     InvoicePreview: typeof import('./components/pages/InvoicePreview.vue')['default']
@@ -30,6 +31,7 @@ declare module 'vue' {
     ProductsPage: typeof import('./components/pages/ProductsPage.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TokenInput: typeof import('./components/TokenInput.vue')['default']
     TreeItem: typeof import('./components/core/TreeItem.vue')['default']
   }
 }
