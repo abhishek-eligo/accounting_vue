@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 import {
   VBtn,
   VCard,
@@ -17,105 +17,20 @@ import {
   VCardActions,
 } from "vuetify/components";
 // import TreeItem from "@/components/core/TreeItem.vue";
-import { toast } from "vue3-toastify";
+import { toast } from "vue3-toastify";// === API Setup ===
+import { apiService } from "../../services/api.js";
+
 
 // === Data Structure ===
 const expanded = ref(false);
-const chartData = reactive([
-  {
-    id: "1",
-    name: "Assets",
-    type: "Balance Sheet",
-    children: [
-      {
-        id: "1.1",
-        name: "Current Assets",
-        type: "Balance Sheet",
-        children: [
-          { id: "1.1.1", name: "Cash", type: "Balance Sheet" },
-          { id: "1.1.2", name: "Bank Accounts", type: "Balance Sheet" },
-          { id: "1.1.3", name: "Accounts Receivable", type: "Balance Sheet" },
-        ],
-      },
-      {
-        id: "1.2",
-        name: "Fixed Assets",
-        type: "Balance Sheet",
-        children: [
-          { id: "1.2.1", name: "Property & Equipment", type: "Balance Sheet" },
-          { id: "1.2.2", name: "Vehicles", type: "Balance Sheet" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "2",
-    name: "Liabilities",
-    type: "Balance Sheet",
-    children: [
-      {
-        id: "2.1",
-        name: "Current Liabilities",
-        type: "Balance Sheet",
-        children: [
-          { id: "2.1.1", name: "Accounts Payable", type: "Balance Sheet" },
-          { id: "2.1.2", name: "Credit Card Payable", type: "Balance Sheet" },
-        ],
-      },
-      {
-        id: "2.2",
-        name: "Long-Term Liabilities",
-        type: "Balance Sheet",
-        children: [{ id: "2.2.1", name: "Bank Loan", type: "Balance Sheet" }],
-      },
-    ],
-  },
-  {
-    id: "3",
-    name: "Equity",
-    type: "Balance Sheet",
-    children: [
-      { id: "3.1", name: "Owner's Equity", type: "Balance Sheet" },
-      { id: "3.2", name: "Retained Earnings", type: "Balance Sheet" },
-    ],
-  },
-  {
-    id: "4",
-    name: "Income",
-    type: "Profit & Loss",
-    children: [
-      { id: "4.1", name: "Sales Revenue", type: "Profit & Loss" },
-      { id: "4.2", name: "Interest Income", type: "Profit & Loss" },
-    ],
-  },
-  {
-    id: "5",
-    name: "Expenses",
-    type: "Profit & Loss",
-    children: [
-      {
-        id: "5.1",
-        name: "Cost of Goods Sold",
-        type: "Profit & Loss",
-        children: [{ id: "5.1.1", name: "Purchases", type: "Profit & Loss" }],
-      },
-      {
-        id: "5.2",
-        name: "Operating Expenses",
-        type: "Profit & Loss",
-        children: [
-          { id: "5.2.1", name: "Rent Expense", type: "Profit & Loss" },
-          { id: "5.2.2", name: "Salaries & Wages", type: "Profit & Loss" },
-          { id: "5.2.3", name: "Utilities Expense", type: "Profit & Loss" },
-        ],
-      },
-    ],
-  },
-]);
+const chartData = reactive([]);
 
 // === Dialog States ===
 const showLedgerDialog = ref(false);
 const showGroupDialog = ref(false);
+
+const showSubgroupDialog = ref(false);
+
 const showEditDialog = ref(false);
 const showDeleteDialog = ref(false);
 
@@ -126,15 +41,25 @@ const selectedNodeToDelete = ref(null);
 // === Form Refs ===
 const ledgerFormRef = ref();
 const groupFormRef = ref();
+
+const subGroupFormRef = ref();
+
 const editFormRef = ref();
 
 // === Forms ===
 const ledgerForm = reactive({
   name: "",
+  ledgerGroup: null,
+  ledgerSubgroup: null,
   parentGroup: null,
 });
 
 const groupForm = reactive({
+  name: "",
+  mainCategory: null,
+});
+
+const subGroupForm = reactive({
   name: "",
   parentGroup: null,
 });
@@ -166,6 +91,85 @@ function buildParentGroupOptions(data, level = 0) {
   });
 }
 const parentGroups = ref(buildParentGroupOptions(chartData));
+// Options for Add Group modal sourced from API main categories
+const mainCategoryOptions = ref([]);
+const ledgerGroupOptions = ref([]);
+const ledgerSubGroupOptions = ref([]);
+const isLoadingMainCategories = ref(false);
+const isLoadingLedgerGroups = ref(false);
+
+async function loadMainCategories() {
+  try {
+    isLoadingMainCategories.value = true;
+    const response = await apiService.get(API_CONFIG.ENDPOINTS.LEDGER_MAIN_CATEGORY);
+    const mainCategories = response?.data ?? response;
+    mainCategoryOptions.value = mapMainCategoriesToOptions(mainCategories);
+  } catch (error) {
+    console.error('Failed to fetch ledgers main categories:', error);
+    toast.error('Failed to load ledgers main categories');
+  } finally {
+    isLoadingMainCategories.value = false;
+  }
+}
+
+async function loadLedgerGroups() {
+  try {
+    isLoadingLedgerGroups.value = true;
+    const response = await apiService.get(API_CONFIG.ENDPOINTS.LEDGER_GROUPS);
+    const ledgerGroups = response?.data;
+    ledgerGroupOptions.value = mapLedgerGroupsToOptions(ledgerGroups);
+  } catch (error) {
+    console.error('Failed to fetch ledgers groups:', error);
+    toast.error('Failed to load ledgers groups');
+  } finally {
+    isLoadingLedgerGroups.value = false;
+  }
+}
+
+async function fetchLedgerHierarchy() {
+  try {
+    console.log("Fetching ledgers hierarchy...");
+    const response = await apiService.get(API_CONFIG.ENDPOINTS.LEDGER_HIERARCHY);
+    const hierarchy = response?.data ?? response;
+    console.log("Ledgers hierarchy response:", hierarchy);
+
+    if (Array.isArray(hierarchy)) {
+      // Replace existing chartData with hierarchy from API
+      chartData.splice(0, chartData.length, ...hierarchy);
+
+      // Rebuild parent groups for selectors
+      parentGroups.value = buildParentGroupOptions(chartData);
+    }
+  } catch (error) {
+    console.error("Failed to fetch ledgers hierarchy:", error);
+    toast.error("Failed to load ledgers hierarchy");
+  }
+}
+
+function mapMainCategoriesToOptions(data) {
+  if (!Array.isArray(data)) return [];
+  return data.map(item => ({
+    title: item?.name,
+    value: item?.id
+  }));
+}
+
+function mapLedgerGroupsToOptions(data) {
+  if (!Array.isArray(data)) return [];
+  return data.map(item => ({
+    title: item?.name,
+    value: item?.id
+  }));
+}
+
+function mapLedgerSubGroupsToOptions(data) {
+  if (!Array.isArray(data)) return [];
+  return data.map(item => ({
+    title: item?.name,
+    value: item?.id
+  }));
+}
+
 
 function findNodeById(data, id) {
   for (const node of data) {
@@ -186,37 +190,31 @@ async function submitLedgerForm() {
     return;
   }
 
-  const parentNode = findNodeById(chartData, ledgerForm.parentGroup);
-  if (!parentNode) {
-    toast.error("Parent group not found.");
-    return;
+  try {
+    // Call your backend API to create the new group
+    const response = await apiService.post(
+      API_CONFIG.ENDPOINTS.LEDGERS,
+      {
+        name: ledgerForm.name,
+        ledger_group_id: ledgerForm.ledgerGroup, // send main ledger group id
+        ledger_sub_group_id: ledgerForm.ledgerSubgroup, // send main ledger subgroup id
+      }
+    );
+    if (response.status === 201) {
+      fetchLedgerHierarchy();
+      toast.success("Ledger created successfully.");
+    }
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to create ledger.");
   }
-
-  if (!parentNode.children) {
-    parentNode.children = [];
-  }
-
-  const parentParts = ledgerForm.parentGroup.split(".");
-  const newIndex = parentNode.children.length
-    ? Math.max(...parentNode.children.map((c) => parseInt(c.id.split(".").pop()))) + 1
-    : 1;
-  const newId = `${ledgerForm.parentGroup}.${newIndex}`;
-
-  const newLedger = {
-    id: newId,
-    name: ledgerForm.name,
-    type: parentNode.type,
-    children: null,
-  };
-
-  parentNode.children.push(newLedger);
-  parentGroups.value = buildParentGroupOptions(chartData);
-  toast.success("Ledger created successfully.");
 
   // Reset
   showLedgerDialog.value = false;
   ledgerForm.name = "";
-  ledgerForm.parentGroup = null;
+  ledgerForm.ledgerGroup = null;
+  ledgerForm.ledgerSubgroup = null;
   ledgerFormRef.value?.resetValidation();
 }
 
@@ -227,38 +225,67 @@ async function submitGroupForm() {
     return;
   }
 
-  const parentNode = findNodeById(chartData, groupForm.parentGroup);
-  if (!parentNode) {
-    toast.error("Parent group not found.");
-    return;
+  try {
+    // Call your backend API to create the new group
+    const response = await apiService.post(
+      API_CONFIG.ENDPOINTS.LEDGER_GROUPS,
+      {
+        name: groupForm.name,
+        ledger_main_category_id: groupForm.mainCategory, // send main ledger category id
+        parent_ledger_group_id: null
+      }
+    );
+    if (response.status === 201) {
+      await loadLedgerGroups();
+      await fetchLedgerHierarchy();
+      toast.success("Ledger Group created successfully.");
+    }
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to create group.");
   }
-
-  if (!parentNode.children) {
-    parentNode.children = [];
-  }
-
-  const parentParts = groupForm.parentGroup.split(".");
-  const newIndex = parentNode.children.length
-    ? Math.max(...parentNode.children.map((c) => parseInt(c.id.split(".").pop()))) + 1
-    : 1;
-  const newId = `${groupForm.parentGroup}.${newIndex}`;
-
-  const newGroup = {
-    id: newId,
-    name: groupForm.name,
-    type: parentNode.type,
-    children: [],
-  };
-
-  parentNode.children.push(newGroup);
-  parentGroups.value = buildParentGroupOptions(chartData);
-  toast.success("Group created successfully.");
+  //toast.success("Ledger Group created successfully.");
 
   // Reset
   showGroupDialog.value = false;
   groupForm.name = "";
-  groupForm.parentGroup = null;
+  groupForm.mainCategory = null;
   groupFormRef.value?.resetValidation();
+}
+
+async function submitSubgroupForm() {
+  const { valid } = await subGroupFormRef.value?.validate();
+  if (!valid) {
+    toast.error("Please fill all required fields for Sub-Group.");
+    return;
+  }
+
+  try {
+    // Call your backend API to create the new group
+    const response = await apiService.post(
+      API_CONFIG.ENDPOINTS.LEDGER_SUB_GROUPS,
+      {
+        name: subGroupForm.name,
+        ledger_group_id: subGroupForm.parentGroup, // send main ledger group id
+      }
+    );
+    if (response.status === 201) {
+      fetchLedgerHierarchy();
+      toast.success("Ledger Sub-Group created successfully.");
+    }
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to create sub-group.");
+  }
+
+  // Reset
+  showSubgroupDialog.value = false;
+  subGroupForm.name = "";
+  subGroupForm.parentGroup = null;
+  subGroupFormRef.value?.resetValidation();
+ 
 }
 
 async function submitEditForm() {
@@ -383,9 +410,54 @@ async function confirmDelete() {
 }
 
 function handleDelete(node) {
+  console.log("handleDelete", node);
   selectedNodeToDelete.value = node;
   showDeleteDialog.value = true;
 }
+
+// === API Calls ===
+onMounted(async () => {
+  await loadMainCategories();
+  await loadLedgerGroups();
+  await fetchLedgerHierarchy();
+});
+
+watch(showGroupDialog, async (val) => {
+  if (val && mainCategoryOptions.value.length === 0 && !isLoadingMainCategories.value) {
+    await loadMainCategories();
+  }
+});
+
+watch(showSubgroupDialog, async (val) => {
+  if (val && ledgerGroupOptions.value.length === 0 && !isLoadingLedgerGroups.value) {
+    await loadLedgerGroups();
+  }
+});
+
+watch(
+  () => ledgerForm.ledgerGroup, // getter
+  async (newGroupId, oldGroupId) => {
+    console.log("Parent group changed:", oldGroupId, "→", newGroupId);
+
+    if (newGroupId) {
+      ledgerForm.ledgerSubgroup = null;
+      ledgerSubGroupOptions.value = [];
+      try {
+        const response = await apiService.get(
+          API_CONFIG.ENDPOINTS.LEDGER_SUB_GROUPS_BY_LEDGER_GROUP(newGroupId)
+        );
+        const ledgerSubGroups = response?.data;
+        ledgerSubGroupOptions.value = mapLedgerSubGroupsToOptions(ledgerSubGroups);
+      } catch (error) {
+        console.error("Failed to fetch sub-groups:", error);
+        toast.error("Could not load sub-groups");
+      }
+    } else {
+      ledgerSubGroupOptions.value = [];
+    }
+  }
+);
+ 
 </script>
 
 <template>
@@ -401,6 +473,12 @@ function handleDelete(node) {
                   <IconPlus size="18" />
                 </template>
                 Add Group
+              </VBtn>
+              <VBtn @click="showSubgroupDialog = true" class="account_v_btn_outlined" variant="outlined">
+                <template #prepend>
+                  <IconPlus size="18" />
+                </template>
+                Add Sub-Group
               </VBtn>
               <VBtn @click="showLedgerDialog = true" class="account_v_btn_primary" variant="tonal">
                 <template #prepend>
@@ -446,8 +524,13 @@ function handleDelete(node) {
           <VForm ref="ledgerFormRef">
             <VTextField v-model="ledgerForm.name" :rules="nameRules" class="accouting_field accouting_active_field mb-2"
               placeholder="Name" variant="outlined" hide-details="auto" />
-            <VAutocomplete v-model="ledgerForm.parentGroup" :items="parentGroups" :rules="parentGroupRules"
-              class="accouting_field accouting_active_field" placeholder="Parent Group" item-title="title"
+            <VAutocomplete v-model="ledgerForm.ledgerGroup"
+              :items="ledgerGroupOptions.length ? ledgerGroupOptions : ledgerGroupOptions" :rules="parentGroupRules"
+              class="accouting_field accouting_active_field" placeholder="Ledger Group" item-title="title"
+              item-value="value" variant="outlined" hide-details="auto" />
+            <VAutocomplete v-show="ledgerSubGroupOptions.length" v-model="ledgerForm.ledgerSubgroup" :items="ledgerSubGroupOptions.length ? ledgerSubGroupOptions : ledgerSubGroupOptions"
+              class="mt-2 accouting_field accouting_active_field" placeholder="Ledger Sub-Group" item-title="title"
+ 
               item-value="value" variant="outlined" hide-details="auto" />
           </VForm>
         </VCardText>
@@ -469,8 +552,10 @@ function handleDelete(node) {
           <VForm ref="groupFormRef">
             <VTextField v-model="groupForm.name" :rules="nameRules" class="accouting_field accouting_active_field mb-2"
               placeholder="Name" variant="outlined" hide-details="auto" />
-            <VAutocomplete v-model="groupForm.parentGroup" :items="parentGroups" :rules="parentGroupRules"
-              class="accouting_field accouting_active_field" placeholder="Parent Group" item-title="title"
+            <VAutocomplete v-model="groupForm.mainCategory"
+              :items="mainCategoryOptions.length ? mainCategoryOptions : mainCategoryOptions" :rules="parentGroupRules"
+              class="accouting_field accouting_active_field" placeholder="Ledger Main Category" item-title="title"
+ 
               item-value="value" variant="outlined" hide-details="auto" />
           </VForm>
         </VCardText>
@@ -484,6 +569,34 @@ function handleDelete(node) {
       </VCard>
     </VDialog>
 
+
+    <!-- Add Group dialog -->
+    <VDialog v-model="showSubgroupDialog" max-width="400" @click:outside="subGroupFormRef?.resetValidation()">
+      <VCard>
+        <VCardTitle class="account_ui_swtich_title" pb-0>Add New Sub-Group</VCardTitle>
+        <VCardSubtitle class="account_ui_swtich_subtitle px-3">Add a new sub-group to your chart of accounts.
+        </VCardSubtitle>
+        <VCardText>
+          <VForm ref="subGroupFormRef">
+            <VTextField v-model="subGroupForm.name" :rules="nameRules"
+              class="accouting_field accouting_active_field mb-2" placeholder="Name" variant="outlined"
+              hide-details="auto" />
+            <VAutocomplete v-model="subGroupForm.parentGroup"
+              :items="ledgerGroupOptions.length ? ledgerGroupOptions : ledgerGroupOptions" :rules="parentGroupRules"
+              class="accouting_field accouting_active_field" placeholder="Parent Group" item-title="title"
+              item-value="value" variant="outlined" hide-details="auto" />
+          </VForm>
+        </VCardText>
+        <VCardActions class="justify-end mr-4 mb-2">
+          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click="
+            showSubgroupDialog = false;
+          subGroupFormRef?.resetValidation();
+          " />
+          <VBtn text="Add Sub-Group" class="account_v_btn_primary" @click="submitSubgroupForm" />
+        </VCardActions>
+      </VCard>
+    </VDialog>
+ 
     <!-- Edit Dialog -->
     <VDialog v-model="showEditDialog" max-width="400" @click:outside="editFormRef?.resetValidation()">
       <VCard>
