@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { toast } from "vue3-toastify";
+import axios from "axios";
+import { computed } from "vue"
+import dayjs from "dayjs"
 
 // Function to handle amount input and show words
 function handleAmountInput(event, rowIndex, type) {
@@ -18,65 +21,96 @@ function handleAmountInput(event, rowIndex, type) {
   }
 }
 
+const journalEntryFormRef = ref(null)
+
 // Journal entry form data
 const journalEntryForm = ref({
   entryDate: new Date(),
-  description: "",
+  narration: "",
   voucherType: "",
+  voucherNumber: "",
 });
 
-// Validation rules for journal entry form
-// const journalEntryRules = {
-// entryDate: (value) => validateField(value, journalEntryValidations.entryDate),
-// description: (value) =>
-//   validateField(value, journalEntryValidations.description),
+const debitRows = ref([
+  { account: null, amount: null, amountInWords: "" }
+]);
+const creditRows = ref([
+  { account: null, amount: null, amountInWords: "" }
+]);
 
-// voucherType: (value) =>
-// validateField(value, journalEntryValidations.voucherType),
-// };
-// console.log(journalEntryRules.description);
+const narrationError = ref(null);
 
-const descriptionError = ref("");
-const checkValidation = (value) => {
-  descriptionError.value = validateField(
-    value,
-    journalEntryValidations.description
-  );
-  console.log(descriptionError.value);
-  // return result === true ? true : result;
-};
 
-// Form reference
-const journalEntryFormRef = ref();
 
-// Submit journal entry form
-async function submitJournalEntryForm() {
-  checkValidation(journalEntryForm.value.description);
-  // checkValidation(journalEntryForm.value.description);
-  const { valid } = await journalEntryFormRef.value?.validate();
-  if (!valid) {
-    return false;
+const validateForm = () => {
+  narrationError.value = null
+
+  if (!journalEntryForm.value.entryDate) return "Please select an entry date"
+  if (!journalEntryForm.value.narration) {
+    narrationError.value = "Narration is required"
+    return "Please enter narration"
+  }
+  if (!journalEntryForm.value.voucherType) return "Please select voucher type"
+  if (!debitRows.value.length || debitRows.value.some(d => !d.account || !d.amount)) {
+    return "Please add valid debit entries"
+  }
+  if (!creditRows.value.length || creditRows.value.some(c => !c.account || !c.amount)) {
+    return "Please add valid credit entries"
   }
 
-  // Form is valid, proceed with submission
-  toast.success("Journal entry saved successfully!");
+  const totalDebit = debitRows.value.reduce((sum, d) => sum + Number(d.amount || 0), 0)
+  const totalCredit = creditRows.value.reduce((sum, c) => sum + Number(c.amount || 0), 0)
 
-  // Reset form
-  journalEntryForm.value = {
-    entryDate: "",
-    description: "",
-    voucherType: "",
-  };
+  if (totalDebit !== totalCredit) return "Debit and Credit amounts must be equal"
 
-  // Reset debit and credit rows
-  debitRows.value = [{ account: null, amount: 0, amountInWords: "" }];
-  creditRows.value = [{ account: null, amount: 0, amountInWords: "" }];
+  return null
+}
 
-  // Hide the form
-  showJournalEntryCard.value = false;
+const submitJournalEntryForm = async () => {
+  const error = validateForm()
+  if (error) {
+    alert(error) // you can use Snackbar/Toast instead of alert
+    return
+  }
 
-  // Reset validation
-  journalEntryFormRef.value?.resetValidation();
+
+  try {
+    const payload = {
+      ...journalEntryForm.value,
+      debitRows: debitRows.value,
+      creditRows: creditRows.value,
+      createdBy: '83fd1e60-a10c-4c2a-9826-58ec72559578',
+    }
+
+    const response = await axios.post("account-history",
+      payload,
+      {
+        headers: {
+          "Authorization": `Bearer 1|zv7uphznL6fA9EMAkHTGAFaVEm6wpDZxLpM1cZp7a4e8379e`, // 👈 replace with your auth token
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+      }
+    );
+
+    if (response.status === 201 || response.status === 200) {
+      alert("Journal Entry saved successfully!")
+      // Reset form after success
+      journalEntryForm.value = {
+        entryDate: null,
+        narration: "",
+        voucherType: null,
+        voucherNumber: null,
+      }
+      debitRows.value = [{ account: null, amount: null, amountInWords: "" }]
+      creditRows.value = [{ account: null, amount: null, amountInWords: "" }]
+      showJournalEntryCard.value = false;
+      fetchData();
+    }
+  } catch (err) {
+    console.error(err)
+    alert("Failed to save journal entry")
+  }
 }
 
 const chartData = reactive([
@@ -176,215 +210,6 @@ const showLedgerDialog = ref(false);
 const showDetailsDialog = ref(false);
 const selectedEntry = ref(null);
 
-const allEntries = ref([
-  {
-    date: "29-Apr-25",
-    entry: "JRNL-2025-1001",
-    voucher_type: "Journal",
-    particulars: {
-      accounts: [
-        {
-          title: "Prepaid Insurance",
-          debit: "₹14,589.00",
-          credit: "",
-        },
-        {
-          title: "Accumulated Depreciation",
-          debit: "",
-          credit: "₹10,293.00",
-        },
-        {
-          title: "Accounts Payable",
-          debit: "",
-          credit: "₹4,296.00",
-        },
-      ],
-      description: {
-        // "to": "Accumulated Depreciation, Accounts Payable",
-        narration: "Received cash from various customers on account",
-      },
-    },
-    status: "Pending",
-  },
-  {
-    date: "14-Apr-25",
-    entry: "JRNL-2025-1002",
-    voucher_type: "Sales",
-    particulars: {
-      accounts: [
-        {
-          title: "Service Revenue",
-          debit: "₹12,727.00",
-          credit: "",
-        },
-        {
-          title: "Equipment",
-          debit: "",
-          credit: "₹2,727.00",
-        },
-        {
-          title: "Utilities Expense",
-          debit: "",
-          credit: "₹10,000.00",
-        },
-      ],
-      description: {
-        // to: 'Equipment, Utilities Expense',
-        narration: "Utility bill payments and other miscellaneous expenses",
-      },
-    },
-    status: "Pending",
-  },
-  {
-    date: "04-May-25",
-    entry: "JRNL-2025-1003",
-    voucher_type: "Sales",
-    particulars: {
-      accounts: [
-        {
-          title: "Salaries",
-          debit: "₹9,166.00",
-          credit: "",
-        },
-        {
-          title: "Wages Payable",
-          debit: "",
-          credit: "₹9,166.00",
-        },
-      ],
-      description: {
-        to: "Wages Payable",
-        narration: "Utility bill payments and other miscellaneous expenses",
-      },
-    },
-    status: "Pending",
-  },
-  {
-    date: "09-Jun-25",
-    entry: "JRNL-2025-1004",
-    voucher_type: "Purchase",
-    particulars: {
-      accounts: [
-        {
-          title: "Wages Payable",
-          debit: "₹8,215.00",
-          credit: "",
-        },
-        {
-          title: "Utilities Expense",
-          debit: "",
-          credit: "₹8,215.00",
-        },
-      ],
-      description: {
-        to: "Utilities Expense",
-        narration: "Initial capital contribution and office setup",
-      },
-    },
-    status: "Pending",
-  },
-  {
-    date: "08-May-25",
-    entry: "JRNL-2025-1005",
-    voucher_type: "Journal",
-    particulars: {
-      accounts: [
-        {
-          title: "Unearned Revenue",
-          debit: "₹22,759.00",
-          credit: "",
-        },
-        {
-          title: "Equipment",
-          debit: "",
-          credit: "₹22,759.00",
-        },
-      ],
-      description: {
-        to: "Equipment",
-        narration: "Payment of rent and utilities for the month",
-      },
-    },
-    status: "Pending",
-  },
-  {
-    date: "29-Jun-25",
-    entry: "JRNL-2025-1006",
-    voucher_type: "Payment",
-    particulars: {
-      accounts: [
-        {
-          title: "Office Supplies",
-          debit: "₹20,521.00",
-          credit: "",
-        },
-        {
-          title: "Accounts Payable",
-          debit: "",
-          credit: "₹20,521.00",
-        },
-      ],
-      description: {
-        to: "Accounts Payable",
-        narration: "Sold goods for cash and reduced COGS",
-      },
-    },
-    status: "Approved",
-  },
-  {
-    date: "01-May-25",
-    entry: "JRNL-2025-1007",
-    voucher_type: "Journal",
-    particulars: {
-      accounts: [
-        {
-          title: "Accounts Receivable",
-          debit: "₹32,540.00",
-          credit: "",
-        },
-        {
-          title: "Wages Payable",
-          debit: "",
-          credit: "₹13,846.00",
-        },
-        {
-          title: "Accounts Payable",
-          debit: "",
-          credit: "₹18,694.00",
-        },
-      ],
-      description: {
-        to: "Wages Payable, Accounts Payable",
-        narration: "Paid for multiple insurance policies",
-      },
-    },
-    status: "Pending",
-  },
-  {
-    date: "27-Jun-25",
-    entry: "JRNL-2025-1008",
-    voucher_type: "Receipt",
-    particulars: {
-      accounts: [
-        {
-          title: "Utilities Expense",
-          debit: "₹19,566.00",
-          credit: "",
-        },
-        {
-          title: "Equipment",
-          debit: "",
-          credit: "₹19,566.00",
-        },
-      ],
-      description: {
-        to: "Equipment",
-        narration: "Received cash from various customers on account",
-      },
-    },
-    status: "Pending",
-  },
-]);
 
 const entriesTableHeaders = ref([
   { title: "Date", value: "date", visible: true },
@@ -398,27 +223,53 @@ const entriesTableHeaders = ref([
 ]);
 
 const allLedgers = ref([
-  { title: "HDFC Bank", value: "1.1.2.1", groupId: "1.1.2" },
-  { title: "ICICI Bank", value: "1.1.2.2", groupId: "1.1.2" },
-  { title: "Cash", value: "1.1.1.1", groupId: "1.1.1" },
-  { title: "Innovate Inc.", value: "1.1.3.1", groupId: "1.1.3" },
-  { title: "Solutions Corp.", value: "1.1.3.2", groupId: "1.1.3" },
-  { title: "Furniture & Fixtures", value: "1.2.1.1", groupId: "1.2.1" },
-  { title: "Computers", value: "1.2.1.2", groupId: "1.2.1" },
-  { title: "GST Payable", value: "2.1.1.1", groupId: "2.1" },
-  { title: "Cloud Services LLC", value: "1.1.3.3", groupId: "1.1.3" },
+  { title: "HDFC Bank", value: "9bf5d943-bc32-4323-b884-60854cf5cc97", groupId: "1.1.2" },
+  { title: "ICICI Bank", value: "5c1a2b4d-3e6f-4b21-a9c8-7d2e8a9f3e45", groupId: "1.1.2" },
+  { title: "Cash", value: "7a9d3c2f-18b6-4f4a-9e22-6c1d0f8a7b32", groupId: "1.1.1" },
+  { title: "Innovate Inc.", value: "e2b3d9f4-6a1c-4b0e-b7a8-9c3f5e2d7a10", groupId: "1.1.3" },
+  { title: "Solutions Corp.", value: "c4f6a2d8-2b9e-4e1d-8c7a-1d5e9f6b2c34", groupId: "1.1.3" },
+  { title: "Furniture & Fixtures", value: "a6b2f9d1-4e5c-46a8-8b3a-2f9c1e7d5b90", groupId: "1.2.1" },
+  { title: "Computers", value: "f1e7c3a2-6b8d-44f0-91a2-8c9e5b7d3f21", groupId: "1.2.1" },
+  { title: "GST Payable", value: "d9c1b7e3-2f4a-4b5c-8e7d-1a9f2c3e4b56", groupId: "2.1" },
+  { title: "Cloud Services LLC", value: "b2e7a1d9-3f5c-4e8a-9d7b-6c2f1a8e5b43", groupId: "1.1.3" },
 ]);
+
 
 const voucherTypes = ref([
-  { title: "Sales Voucher", value: "sales_voucher" },
-  { title: "Purchase Voucher", value: "purchase_voucher" },
-  { title: "Journal Voucher", value: "journal_voucher" },
-  { title: "Payment Voucher", value: "payment_voucher" },
-  { title: "Reciept Voucher", value: "reciept_voucher" },
+  { title: "Sales Voucher", value: "1" },
+  { title: "Purchase Voucher", value: "2" },
+  { title: "Journal Voucher", value: "3" },
+  { title: "Payment Voucher", value: "4" },
+  { title: "Reciept Voucher", value: "5" },
 ]);
 
-const debitRows = ref([{ account: null, amount: 0, amountInWords: "" }]);
-const creditRows = ref([{ account: null, amount: 0, amountInWords: "" }]);
+const voucherNo = ref([
+  { title: "VOC-0001", value: "9cf23710-8cf3-4c87-93e8-fe03f45e7e7d" },
+  { title: "VOC-0002", value: "6821f93a-1b39-4d76-a68c-a7a0f1ad92b1" },
+  { title: "VOC-0003", value: "983c90fd-1a62-4ceb-8bc1-fd34b82e227a" },
+  { title: "VOC-0004", value: "3992f6a2-224c-433b-9ff0-90790c56ad7b" },
+  { title: "VOC-0005", value: "07b848e3-3dcd-4ec6-8c39-c29145d8300c" },
+]);
+
+const allEntries = ref([])
+
+
+
+const getVoucherNumberTitle = (value) => {
+  const found = voucherNo.value.find(v => v.value === value)
+  return found ? found.title : value
+}
+
+const getVoucherTypeTitle = (value) => {
+  const found = voucherTypes.value.find(v => v.value == value) // int compare
+  return found ? found.title : value
+}
+
+const getLedgerTitle = (value) => {
+  const found = allLedgers.value.find(l => l.value === value)
+  return found ? found.title : value
+}
+
 
 // Ledger form
 const ledgerForm = reactive({
@@ -551,13 +402,53 @@ function getToAccounts(entry) {
 }
 
 const hoveredRowIndex = ref(null);
-const bounceKey = ref(0)
+const bounceKey = ref(0);
 
-onMounted(() => {
+const fetchData = async () => {
+  try {
+    const response = await axios.get("account-history", {
+      headers: {
+        Authorization: `Bearer 1|zv7uphznL6fA9EMAkHTGAFaVEm6wpDZxLpM1cZp7a4e8379e`,
+        Accept: "application/json",
+      },
+    })
+
+
+    console.log("API Response:", response.data.data)
+
+
+
+    allEntries.value = response.data.data.map(entry => {
+      return {
+        id: entry.id,
+        entry_date: entry.entry_date,
+        voucher_number: entry.voucher_number,
+        voucher_type: entry.voucher_type,
+        narration: entry.narration,
+        status: "Approved", // you can adjust based on backend if status exists
+        particulars: {
+          description: { narration: entry.narration },
+          accounts: entry.acc_account_history_entry_line.map(line => ({
+            title: line.ledger_account_id, // later you can replace with ledger name lookup
+            debit: line.entry_type === 1 ? line.amount : "",
+            credit: line.entry_type === 2 ? line.amount : "",
+          })),
+        },
+      };
+    });
+  } catch (err) {
+    console.error("Error fetching account history:", err);
+  }
+};
+
+onMounted(async () => {
   setInterval(() => {
     bounceKey.value++ // force key change to retrigger animation
   }, 3000)
-})
+  await fetchData();
+});
+
+
 </script>
 
 <template>
@@ -578,9 +469,9 @@ onMounted(() => {
               </VBtn>
             </template>
             <VCardText class="mt-4">
-              <VForm ref="journalEntryFormRef">
+              <VForm ref="journalEntryFormRef" @submit.prevent="submitJournalEntryForm">
                 <VRow>
-                  <VCol cols="12" lg="6" md="6">
+                  <VCol cols="6">
                     <div class="d-flex align-center gap-3">
                       <div class="account_entry_form_label">
                         <label class="account_label">Date *</label>
@@ -593,6 +484,9 @@ onMounted(() => {
                       </v-date-input>
                     </div>
                   </VCol>
+
+
+
                 </VRow>
 
                 <!-- Debit -->
@@ -628,6 +522,9 @@ onMounted(() => {
                       </small>
                     </div>
                   </VCol>
+
+
+
                 </VRow>
 
                 <!-- Add Button -->
@@ -672,6 +569,7 @@ onMounted(() => {
                       </small>
                     </div>
                   </VCol>
+
                 </VRow>
 
                 <div class="d-flex align-center pr-9 mb-4 justify-end">
@@ -688,13 +586,13 @@ onMounted(() => {
                   <VCol cols="12" lg="7" md="7">
                     <div class="d-flex align-start gap-3">
                       <div class="account_entry_form_label">
-                        <label class="account_label mt-3">Description *</label>
+                        <label class="account_label mt-3">Narration *</label>
                       </div>
-                      <VTextarea v-model="journalEntryForm.description" class="accounting_v_textarea"
+                      <VTextarea v-model="journalEntryForm.narration" class="accounting_v_textarea"
                         placeholder="e.g. Inventory purchased on credit. XYZ Capital Introduce. Max length 254 characters"
                         variant="outlined" />
-                      <small class="text-error" v-if="descriptionError">
-                        {{ descriptionError }}
+                      <small class="text-error" v-if="narrationError">
+                        {{ narrationError }}
                       </small>
                     </div>
                   </VCol>
@@ -703,6 +601,12 @@ onMounted(() => {
                     <VAutocomplete v-model="journalEntryForm.voucherType" class="accouting_field accouting_active_field"
                       variant="outlined" density="compact" :items="voucherTypes" item-title="title" item-value="value"
                       placeholder="Select Voucher Type" />
+
+                    <label class="account_label mt-3">Voucher Number</label>
+                    <VAutocomplete v-model="journalEntryForm.voucherNumber"
+                      class="accouting_field accouting_active_field" variant="outlined" density="compact"
+                      :items="voucherNo" item-title="title" item-value="value" placeholder="Select Voucher Number" />
+
                   </VCol>
                 </VRow>
 
@@ -722,8 +626,8 @@ onMounted(() => {
                     <div class="d-flex align-center justify-end gap-2">
                       <VBtn @click="showJournalEntryCard = false" class="account_v_btn_outlined" variant="outlined"
                         rounded="2" size="default">Cancel</VBtn>
-                      <VBtn @click="submitJournalEntryForm" class="account_v_btn_primary save_btn_height"
-                        variant="outlined" size="default" rounded="2" color="primary">
+                      <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="2"
+                        color="primary" type="submit">
                         <template #prepend>
                           <IconDeviceFloppy size="18" />
                         </template>
@@ -833,7 +737,9 @@ onMounted(() => {
                 </tr>
               </thead>
               <tbody>
+
                 <template v-for="(entry, index) in allEntries" :key="index">
+
                   <template
                     v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0">
                     <tr :class="[
@@ -843,21 +749,21 @@ onMounted(() => {
                       <!-- Date, Entry #, Voucher Type, Status, and Actions span all account rows and description -->
                       <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                        {{ entry.date || "N/A" }}
+                        {{ dayjs(entry.entry_date).format("DD-MM-YYYY") }}
                       </td>
                       <td class="account_entries_table_entry" :rowspan="entry.particulars.accounts.length + 1"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                        {{ entry.entry || "N/A" }}<br />
+                        {{ getVoucherNumberTitle(entry.voucher_number) }}<br />
                         <span @click="openDetailsDialog(entry)">View Details</span>
                       </td>
                       <td class="account_entries_table_voucher" :rowspan="entry.particulars.accounts.length + 1"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                        {{ entry.voucher_type || "N/A" }}
+                        {{ getVoucherTypeTitle(entry.voucher_type) }}
                       </td>
                       <!-- First account row -->
                       <td class="account_entries_table_particulars"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                        {{ entry.particulars.accounts[0]?.title || "N/A" }}
+                        {{ getLedgerTitle(entry.particulars.accounts[0]?.title) || "N/A" }}
                       </td>
                       <td class="account_entries_table_debit account_primary_color">
                         {{ entry.particulars.accounts[0]?.debit || "" }}
@@ -892,7 +798,7 @@ onMounted(() => {
                       @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
                       <td class="account_entries_table_particulars"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                        {{ account.title || "N/A" }}
+                        {{ getLedgerTitle(account.title) || "N/A" }}
                       </td>
                       <td class="account_entries_table_debit account_primary_color"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
@@ -967,12 +873,12 @@ onMounted(() => {
           <div class="d-flex align-center justify-space-between mb-2">
             <div class="d-flex align-center gap-1">
               <span class="account_label_bold">Date:</span>
-              <span class="account_label_light">{{ selectedEntry?.date }}</span>
+              <span class="account_label_light">{{ dayjs(selectedEntry?.entry_date).format("DD-MM-YYYY") }}</span>
             </div>
             <div class="d-flex align-center gap-1">
               <span class="account_label_bold">Type:</span>
               <span class="account_label_light">{{
-                selectedEntry?.voucher_type
+                getVoucherTypeTitle(selectedEntry?.voucher_type)
               }}</span>
             </div>
           </div>
@@ -1001,7 +907,7 @@ onMounted(() => {
               <tbody>
                 <template v-for="(acc, i) in selectedEntry?.particulars?.accounts" :key="i">
                   <tr>
-                    <td :class="{ 'pl-9': i !== 0 }">{{ acc.title }}</td>
+                    <td :class="{ 'pl-9': i !== 0 }">{{ getLedgerTitle(acc.title) }}</td>
                     <td class="text-success text-right">
                       {{ acc.debit || "" }}
                     </td>
