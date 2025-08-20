@@ -7,6 +7,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const axios: typeof import('./plugins/axios.js')['default']
   const commonValidations: typeof import('./validations/index.js')['commonValidations']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
