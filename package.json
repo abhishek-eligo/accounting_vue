@@ -39,6 +39,7 @@
     "@mdi/font": "7.4.47",
     "@popperjs/core": "^2.11.8",
     "@tabler/icons-vue": "3.34.1",
+    "axios": "^1.6.0",
     "bootstrap": "^5.3.7",
     "vue": "^3.0.0",
     "vue-router": "^4.5.1",
