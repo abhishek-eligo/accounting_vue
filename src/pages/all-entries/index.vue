@@ -1,9 +1,11 @@
 <script setup>
-import { ref } from "vue";
+import { ref, reactive, watch } from "vue";
 import { toast } from "vue3-toastify";
 import axios from "axios";
 import { computed } from "vue"
 import dayjs from "dayjs"
+import { apiService } from "../../services/api.js";
+import { API_CONFIG } from "../../config/api.js";
 
 // Function to handle amount input and show words
 function handleAmountInput(event, rowIndex, type) {
@@ -21,7 +23,21 @@ function handleAmountInput(event, rowIndex, type) {
   }
 }
 
+const ledgerFormRef = ref();
+
+const ledgerForm = reactive({
+  name: "",
+  ledgerGroup: null,
+  ledgerSubgroup: null,
+});
+const isLoadingLedgerGroups = ref(false);
+const showLedgerDialog = ref(false);
+
 const journalEntryFormRef = ref(null)
+
+const ledgerGroupOptions = ref([]);
+
+const ledgerSubGroupOptions = ref([]);
 
 // Journal entry form data
 const journalEntryForm = ref({
@@ -69,7 +85,7 @@ const validateForm = () => {
 const submitJournalEntryForm = async () => {
   const error = validateForm()
   if (error) {
-    alert(error) // you can use Snackbar/Toast instead of alert
+    toast.error(error) // you can use Snackbar/Toast instead of alert
     return
   }
 
@@ -86,7 +102,7 @@ const submitJournalEntryForm = async () => {
       payload,
       {
         headers: {
-          "Authorization": `Bearer 1|zv7uphznL6fA9EMAkHTGAFaVEm6wpDZxLpM1cZp7a4e8379e`, // 👈 replace with your auth token
+          "Authorization": `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`, // 👈 replace with your auth token
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
@@ -94,7 +110,7 @@ const submitJournalEntryForm = async () => {
     );
 
     if (response.status === 201 || response.status === 200) {
-      alert("Journal Entry saved successfully!")
+      toast.success("Journal Entry saved successfully!")
       // Reset form after success
       journalEntryForm.value = {
         entryDate: null,
@@ -113,126 +129,11 @@ const submitJournalEntryForm = async () => {
   }
 }
 
-const chartData = reactive([
-  {
-    id: "1",
-    name: "Assets",
-    type: "Balance Sheet",
-    children: [
-      {
-        id: "1.1",
-        name: "Current Assets",
-        type: "Balance Sheet",
-        children: [
-          { id: "1.1.1", name: "Cash", type: "Balance Sheet" },
-          { id: "1.1.2", name: "Bank Accounts", type: "Balance Sheet" },
-          { id: "1.1.3", name: "Accounts Receivable", type: "Balance Sheet" },
-        ],
-      },
-      {
-        id: "1.2",
-        name: "Fixed Assets",
-        type: "Balance Sheet",
-        children: [
-          { id: "1.2.1", name: "Property & Equipment", type: "Balance Sheet" },
-          { id: "1.2.2", name: "Vehicles", type: "Balance Sheet" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "2",
-    name: "Liabilities",
-    type: "Balance Sheet",
-    children: [
-      {
-        id: "2.1",
-        name: "Current Liabilities",
-        type: "Balance Sheet",
-        children: [
-          { id: "2.1.1", name: "Accounts Payable", type: "Balance Sheet" },
-          { id: "2.1.2", name: "Credit Card Payable", type: "Balance Sheet" },
-        ],
-      },
-      {
-        id: "2.2",
-        name: "Long-Term Liabilities",
-        type: "Balance Sheet",
-        children: [{ id: "2.2.1", name: "Bank Loan", type: "Balance Sheet" }],
-      },
-    ],
-  },
-  {
-    id: "3",
-    name: "Equity",
-    type: "Balance Sheet",
-    children: [
-      { id: "3.1", name: "Owner's Equity", type: "Balance Sheet" },
-      { id: "3.2", name: "Retained Earnings", type: "Balance Sheet" },
-    ],
-  },
-  {
-    id: "4",
-    name: "Income",
-    type: "Profit & Loss",
-    children: [
-      { id: "4.1", name: "Sales Revenue", type: "Profit & Loss" },
-      { id: "4.2", name: "Interest Income", type: "Profit & Loss" },
-    ],
-  },
-  {
-    id: "5",
-    name: "Expenses",
-    type: "Profit & Loss",
-    children: [
-      {
-        id: "5.1",
-        name: "Cost of Goods Sold",
-        type: "Profit & Loss",
-        children: [{ id: "5.1.1", name: "Purchases", type: "Profit & Loss" }],
-      },
-      {
-        id: "5.2",
-        name: "Operating Expenses",
-        type: "Profit & Loss",
-        children: [
-          { id: "5.2.1", name: "Rent Expense", type: "Profit & Loss" },
-          { id: "5.2.2", name: "Salaries & Wages", type: "Profit & Loss" },
-          { id: "5.2.3", name: "Utilities Expense", type: "Profit & Loss" },
-        ],
-      },
-    ],
-  },
-]);
-
 const showJournalEntryCard = ref(false);
-const showLedgerDialog = ref(false);
 const showDetailsDialog = ref(false);
 const selectedEntry = ref(null);
 
 
-const entriesTableHeaders = ref([
-  { title: "Date", value: "date", visible: true },
-  { title: "Entry #", value: "entry", visible: true },
-  { title: "Voucher Type", value: "voucher_type", visible: true },
-  { title: "Particulars", value: "particulars", visible: true },
-  { title: "Debit", value: "debit", visible: true },
-  { title: "Credit", value: "credit", visible: true },
-  { title: "Status", value: "status", visible: true },
-  { title: "Actions", value: "actions", visible: true },
-]);
-
-const allLedgers = ref([
-  { title: "HDFC Bank", value: "9bf5d943-bc32-4323-b884-60854cf5cc97", groupId: "1.1.2" },
-  { title: "ICICI Bank", value: "5c1a2b4d-3e6f-4b21-a9c8-7d2e8a9f3e45", groupId: "1.1.2" },
-  { title: "Cash", value: "7a9d3c2f-18b6-4f4a-9e22-6c1d0f8a7b32", groupId: "1.1.1" },
-  { title: "Innovate Inc.", value: "e2b3d9f4-6a1c-4b0e-b7a8-9c3f5e2d7a10", groupId: "1.1.3" },
-  { title: "Solutions Corp.", value: "c4f6a2d8-2b9e-4e1d-8c7a-1d5e9f6b2c34", groupId: "1.1.3" },
-  { title: "Furniture & Fixtures", value: "a6b2f9d1-4e5c-46a8-8b3a-2f9c1e7d5b90", groupId: "1.2.1" },
-  { title: "Computers", value: "f1e7c3a2-6b8d-44f0-91a2-8c9e5b7d3f21", groupId: "1.2.1" },
-  { title: "GST Payable", value: "d9c1b7e3-2f4a-4b5c-8e7d-1a9f2c3e4b56", groupId: "2.1" },
-  { title: "Cloud Services LLC", value: "b2e7a1d9-3f5c-4e8a-9d7b-6c2f1a8e5b43", groupId: "1.1.3" },
-]);
 
 
 const voucherTypes = ref([
@@ -253,6 +154,8 @@ const voucherNo = ref([
 
 const allEntries = ref([])
 
+const loading = ref(true)
+
 
 
 const getVoucherNumberTitle = (value) => {
@@ -265,19 +168,20 @@ const getVoucherTypeTitle = (value) => {
   return found ? found.title : value
 }
 
-const getLedgerTitle = (value) => {
-  const found = allLedgers.value.find(l => l.value === value)
-  return found ? found.title : value
+// const getLedgerTitle = (value) => {
+//   const found = allLedgers.value.find(l => l.value === value)
+//   return found ? found.title : value
+// }
+
+const getLedgerTitle = (id) => {
+  const found = allLedgers.value.find(l => l.value === id)
+  return found ? found.title : id
 }
 
 
-// Ledger form
-const ledgerForm = reactive({
-  name: "",
-  parentGroup: null,
-});
 
-const ledgerFormRef = ref();
+
+
 
 // Import ledger validations
 
@@ -286,78 +190,7 @@ const parentGroupRules = [
   (v) => validateField(v, ledgerValidations.parentGroup),
 ];
 
-// Build parent group options
-function buildParentGroupOptions(data, level = 0) {
-  return data.flatMap((node) => {
-    if (!node.children && node.children !== undefined) return [];
-    const indent = "— ".repeat(level);
-    const current = {
-      title: `${indent}${node.name}`,
-      value: node.id,
-    };
-    const children = node.children
-      ? buildParentGroupOptions(node.children, level + 1)
-      : [];
-    return [current, ...children];
-  });
-}
-const parentGroups = ref(buildParentGroupOptions(chartData));
 
-// Find node by ID
-function findNodeById(data, id) {
-  for (const node of data) {
-    if (node.id === id) return node;
-    if (node.children) {
-      const found = findNodeById(node.children, id);
-      if (found) return found;
-    }
-  }
-  return null;
-}
-
-// Submit ledger form
-async function submitLedgerForm() {
-  const { valid } = await ledgerFormRef.value?.validate();
-  if (!valid) {
-    toast.error("Please fill all required fields for Ledger.");
-    return;
-  }
-
-  const parentNode = findNodeById(chartData, ledgerForm.parentGroup);
-  if (!parentNode) {
-    toast.error("Parent group not found.");
-    return;
-  }
-
-  if (!parentNode.children) {
-    parentNode.children = [];
-  }
-
-  const parentParts = ledgerForm.parentGroup.split(".");
-  const newIndex = parentNode.children.length
-    ? Math.max(
-      ...parentNode.children.map((c) => parseInt(c.id.split(".").pop()))
-    ) + 1
-    : 1;
-  const newId = `${ledgerForm.parentGroup}.${newIndex}`;
-
-  const newLedger = {
-    id: newId,
-    name: ledgerForm.name,
-    type: parentNode.type,
-    children: null,
-  };
-
-  parentNode.children.push(newLedger);
-  parentGroups.value = buildParentGroupOptions(chartData);
-  toast.success("Ledger created successfully.");
-
-  // Reset
-  showLedgerDialog.value = false;
-  ledgerForm.name = "";
-  ledgerForm.parentGroup = null;
-  ledgerFormRef.value?.resetValidation();
-}
 
 const addDebitRow = () => {
   debitRows.value.push({ account: null, amount: 0, amountInWords: "" });
@@ -396,19 +229,20 @@ function totalAmount(accounts, type) {
   return `₹${sum.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
 }
 
-function getToAccounts(entry) {
-  if (!entry?.particulars?.description?.to) return [];
-  return entry.particulars.description.to.split(",").map((a) => a.trim());
-}
+// function getToAccounts(entry) {
+//   if (!entry?.particulars?.description?.to) return [];
+//   return entry.particulars.description.to.split(",").map((a) => a.trim());
+// }
 
 const hoveredRowIndex = ref(null);
 const bounceKey = ref(0);
 
 const fetchData = async () => {
+  loading.value = true
   try {
     const response = await axios.get("account-history", {
       headers: {
-        Authorization: `Bearer 1|zv7uphznL6fA9EMAkHTGAFaVEm6wpDZxLpM1cZp7a4e8379e`,
+        Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
         Accept: "application/json",
       },
     })
@@ -438,14 +272,132 @@ const fetchData = async () => {
     });
   } catch (err) {
     console.error("Error fetching account history:", err);
+  } finally {
+    loading.value = false;
   }
 };
+
+const allLedgers = ref([])
+
+const fetchledger = async () => {
+  try {
+    const response = await axios.get('ledgers', {
+      headers: {
+        Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
+        Accept: "application/json",
+      },
+    })
+
+    console.log('Api Ledger Response', response.data);
+    allLedgers.value = response.data.data.map(l => ({
+      title: l.name,            // what user sees
+      value: l.id,              // what gets saved in v-model
+      groupId: l.ledger_group_id,
+      subGroupId: l.ledger_sub_group_id,
+    }))
+  } catch (error) {
+    console.error("Error fetching ledger:", error)
+  }
+}
+
+async function submitLedgerForm() {
+  const { valid } = await ledgerFormRef.value?.validate();
+  if (!valid) {
+    toast.error("Please fill all required fields for Ledger.");
+    return;
+  }
+
+  try {
+    // Call your backend API to create the new group
+    const response = await apiService.post(
+      API_CONFIG.ENDPOINTS.LEDGERS,
+      {
+        name: ledgerForm.name,
+        ledger_group_id: ledgerForm.ledgerGroup, // send main ledger group id
+        ledger_sub_group_id: ledgerForm.ledgerSubgroup, // send main ledger subgroup id
+      }
+    );
+    if (response.status === 201) {
+      // fetchLedgerHierarchy();
+      fetchledger();
+      toast.success("Ledger created successfully.");
+    }
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to create ledger.");
+  }
+
+  // Reset
+  showLedgerDialog.value = false;
+  ledgerForm.name = "";
+  ledgerForm.ledgerGroup = null;
+  ledgerForm.ledgerSubgroup = null;
+  ledgerFormRef.value?.resetValidation();
+}
+
+async function loadLedgerGroups() {
+  try {
+    isLoadingLedgerGroups.value = true;
+    const response = await apiService.get(API_CONFIG.ENDPOINTS.LEDGER_GROUPS);
+    const ledgerGroups = response?.data;
+    console.log(response);
+    ledgerGroupOptions.value = mapLedgerGroupsToOptions(ledgerGroups);
+  } catch (error) {
+    console.error('Failed to fetch ledgers groups:', error);
+    toast.error('Failed to load ledgers groups');
+  } finally {
+    isLoadingLedgerGroups.value = false;
+  }
+}
+
+function mapLedgerSubGroupsToOptions(data) {
+  if (!Array.isArray(data)) return [];
+  return data.map(item => ({
+    title: item?.name,
+    value: item?.id
+  }));
+}
+
+
+function mapLedgerGroupsToOptions(data) {
+  if (!Array.isArray(data)) return [];
+  return data.map(item => ({
+    title: item?.name,
+    value: item?.id
+  }));
+}
+
+watch(
+  () => ledgerForm.ledgerGroup, // getter
+  async (newGroupId, oldGroupId) => {
+    console.log("Parent group changed:", oldGroupId, "→", newGroupId);
+    if (newGroupId) {
+      ledgerForm.ledgerSubgroup = null;
+      ledgerSubGroupOptions.value = [];
+      try {
+        const response = await apiService.get(
+          API_CONFIG.ENDPOINTS.LEDGER_SUB_GROUPS_BY_LEDGER_GROUP(newGroupId)
+        );
+        const ledgerSubGroups = response?.data;
+        ledgerSubGroupOptions.value = mapLedgerSubGroupsToOptions(ledgerSubGroups);
+      } catch (error) {
+        console.error("Failed to fetch sub-groups:", error);
+        toast.error("Could not load sub-groups");
+      }
+    } else {
+      ledgerSubGroupOptions.value = [];
+    }
+  }
+);
 
 onMounted(async () => {
   setInterval(() => {
     bounceKey.value++ // force key change to retrigger animation
   }, 3000)
   await fetchData();
+  await loadLedgerGroups();
+  await fetchledger();
 });
 
 
@@ -643,7 +595,7 @@ onMounted(async () => {
       </VRow>
     </VExpandTransition>
 
-    <VCard title="All Entries" subtitle="A record of all financial transactions."
+    <VCard title="All Entries" subtitle="A record of all financial transactions, with all amounts expressed in Rupees."
       class="account_vcard_border pa-2 account_ui_vcard shadow-none">
       <div class="d-flex align-center px-3 justify-space-between">
         <VTextField style="max-width: 265px" class="accouting_field accouting_active_field" placeholder="Filter entries"
@@ -702,7 +654,7 @@ onMounted(async () => {
             <VCard class="account_vcard_border">
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item">
-                  ninthree <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
                     <span>PDF</span>
                   </div>
                 </div>
@@ -719,7 +671,9 @@ onMounted(async () => {
       <VCardText class="mt-2 pa-3">
         <VCard variant="flat" class="shadow-none">
           <div class="gst_summary_table_container">
+
             <table class="table table-bordered account_entries_table text-center w-100">
+
               <thead>
                 <tr>
                   <th class="account_entries_table_header_date">Date</th>
@@ -736,8 +690,11 @@ onMounted(async () => {
                   <th class="account_entries_table_header_actions">Actions</th>
                 </tr>
               </thead>
-              <tbody>
-
+              <!-- Loader overlay -->
+              <div v-if="loading" class="loader-overlay d-flex align-center justify-center">
+                <v-progress-circular indeterminate size="48" color="primary" />
+              </div>
+              <tbody v-else>
                 <template v-for="(entry, index) in allEntries" :key="index">
 
                   <template
@@ -746,7 +703,6 @@ onMounted(async () => {
                       'account_entries_table_row',
                       { 'even-entry': index % 2 === 0 },
                     ]" @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
-                      <!-- Date, Entry #, Voucher Type, Status, and Actions span all account rows and description -->
                       <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ dayjs(entry.entry_date).format("DD-MM-YYYY") }}
@@ -831,29 +787,27 @@ onMounted(async () => {
     <VDialog v-model="showLedgerDialog" max-width="400" @click:outside="ledgerFormRef?.resetValidation()">
       <VCard>
         <VCardTitle class="account_ui_swtich_title pb-0">Add New Ledger</VCardTitle>
-        <VCardSubtitle class="account_ui_swtich_subtitle text-wrap px-3">
-          Create a new ledger account under a specified group.
-        </VCardSubtitle>
+        <VCardSubtitle class="account_ui_swtich_subtitle text-wrap px-3">Add a new ledger to an existing group in your
+          chart
+          of
+          accounts.</VCardSubtitle>
         <VCardText>
           <VForm ref="ledgerFormRef">
-            <div class="mb-3">
-              <label class="account_label">Ledger Name</label>
-              <VTextField v-model="ledgerForm.name" :rules="nameRules" class="accouting_field accouting_active_field"
-                placeholder="Enter ledger name" variant="outlined" hide-details="auto" />
-            </div>
-            <div class="mb-3">
-              <label class="account_label">Parent Group</label>
-              <VAutocomplete v-model="ledgerForm.parentGroup" :items="parentGroups" :rules="parentGroupRules"
-                class="accouting_field accouting_active_field" placeholder="Select parent group" item-title="title"
-                item-value="value" variant="outlined" hide-details="auto" />
-            </div>
+            <VTextField v-model="ledgerForm.name" :rules="nameRules" class="accouting_field accouting_active_field mb-2"
+              placeholder="Name" variant="outlined" hide-details="auto" />
+            <VAutocomplete v-model="ledgerForm.ledgerGroup"
+              :items="ledgerGroupOptions.length ? ledgerGroupOptions : ledgerGroupOptions" :rules="parentGroupRules"
+              class="accouting_field accouting_active_field" placeholder="Ledger Group" item-title="title"
+              item-value="value" variant="outlined" hide-details="auto" />
+            <VAutocomplete v-show="ledgerSubGroupOptions.length" v-model="ledgerForm.ledgerSubgroup"
+              :items="ledgerSubGroupOptions.length ? ledgerSubGroupOptions : ledgerSubGroupOptions"
+              class="mt-2 accouting_field accouting_active_field" placeholder="Ledger Sub-Group" item-title="title"
+              item-value="value" variant="outlined" hide-details="auto" />
           </VForm>
         </VCardText>
         <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click="
-            showLedgerDialog = false;
-          ledgerFormRef?.resetValidation();
-          " />
+          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
+            @click=" showLedgerDialog = false; ledgerFormRef?.resetValidation();" />
           <VBtn text="Add Ledger" class="account_v_btn_primary" @click="submitLedgerForm" />
         </VCardActions>
       </VCard>

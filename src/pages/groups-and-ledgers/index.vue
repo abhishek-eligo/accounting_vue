@@ -17,9 +17,11 @@ import {
   VCardActions,
 } from "vuetify/components";
 // import TreeItem from "@/components/core/TreeItem.vue";
-import { toast } from "vue3-toastify";// === API Setup ===
-import { apiService } from "../../services/api.js";
+import { toast } from "vue3-toastify";
+import { API_CONFIG } from "../../config/api.js";
 
+// === API Setup ===
+import { apiService } from "../../services/api.js";
 
 // === Data Structure ===
 const expanded = ref(false);
@@ -285,7 +287,7 @@ async function submitSubgroupForm() {
   subGroupForm.name = "";
   subGroupForm.parentGroup = null;
   subGroupFormRef.value?.resetValidation();
- 
+
 }
 
 async function submitEditForm() {
@@ -457,7 +459,7 @@ watch(
     }
   }
 );
- 
+
 </script>
 
 <template>
@@ -530,7 +532,7 @@ watch(
               item-value="value" variant="outlined" hide-details="auto" />
             <VAutocomplete v-show="ledgerSubGroupOptions.length" v-model="ledgerForm.ledgerSubgroup" :items="ledgerSubGroupOptions.length ? ledgerSubGroupOptions : ledgerSubGroupOptions"
               class="mt-2 accouting_field accouting_active_field" placeholder="Ledger Sub-Group" item-title="title"
- 
+
               item-value="value" variant="outlined" hide-details="auto" />
           </VForm>
         </VCardText>
@@ -555,7 +557,7 @@ watch(
             <VAutocomplete v-model="groupForm.mainCategory"
               :items="mainCategoryOptions.length ? mainCategoryOptions : mainCategoryOptions" :rules="parentGroupRules"
               class="accouting_field accouting_active_field" placeholder="Ledger Main Category" item-title="title"
- 
+
               item-value="value" variant="outlined" hide-details="auto" />
           </VForm>
         </VCardText>
@@ -596,7 +598,7 @@ watch(
         </VCardActions>
       </VCard>
     </VDialog>
- 
+
     <!-- Edit Dialog -->
     <VDialog v-model="showEditDialog" max-width="400" @click:outside="editFormRef?.resetValidation()">
       <VCard>
