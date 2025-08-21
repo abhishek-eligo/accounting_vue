@@ -63,6 +63,7 @@ const ledgerForm = reactive({
 const editLedgerForm = reactive({
   id: null,
   name: "",
+  position: null,
   ledgerGroup: null,
   ledgerSubgroup: null
 })
@@ -75,6 +76,7 @@ const groupForm = reactive({
 const editGroupForm = reactive({
   id: null, // keep id for editing
   name: '',
+  position: null,
   mainCategory: null
 })
 
@@ -86,6 +88,7 @@ const subGroupForm = reactive({
 const editSubGroupForm = reactive({
   id: null, // keep the id for editing
   name: "",
+  position: null,
   parentGroup: null
 })
 
@@ -101,6 +104,8 @@ const nameRules = [(v) => !!v || "This field is required"];
 const parentGroupRules = [(v) => !!v || "This field is required"];
 
 const showDeleteGroupDialog = ref(false)
+const showSoftDeleteGroupDialog = ref(false)
+const showRestoreGroupDialog = ref(false)
 const showDeleteSubgroupDialog = ref(false)
 const showDeleteLedgerDialog = ref(false)
 const groupToDelete = ref(null)
@@ -110,7 +115,7 @@ const ledgerToDelete = ref(null)
 async function submitDeleteGroup() {
   try {
     const response = await apiService.delete(
-      `${API_CONFIG.ENDPOINTS.LEDGER_GROUPS}/${groupToDelete.value}`
+      `${API_CONFIG.ENDPOINTS.LEDGER_GROUPS}/${groupToDelete.value}/force`
     )
     if (response.status === 200) {
       await loadLedgerGroups()
@@ -122,6 +127,42 @@ async function submitDeleteGroup() {
     toast.error("Failed to delete ledger group.")
   }
   showDeleteGroupDialog.value = false
+  groupToDelete.value = null
+}
+
+async function submitSoftDeleteGroup() {
+  try {
+    const response = await apiService.delete(
+      `${API_CONFIG.ENDPOINTS.LEDGER_GROUPS}/${groupToDelete.value}`
+    )
+    if (response.status === 200) {
+      await loadLedgerGroups()
+      await fetchLedgerHierarchy()
+      toast.success("Ledger Group soft-deleted successfully.")
+    }
+  } catch (error) {
+    console.error(error)
+    toast.error("Failed to soft-delete ledger group.")
+  }
+  showSoftDeleteGroupDialog.value = false
+  groupToDelete.value = null
+}
+
+async function submitRestoreGroup() {
+  try {
+    const response = await apiService.post(
+      `${API_CONFIG.ENDPOINTS.LEDGER_GROUPS}/${groupToDelete.value}/restore`
+    )
+    if (response.status === 200) {
+      await loadLedgerGroups()
+      await fetchLedgerHierarchy()
+      toast.success("Ledger Group restore successfully.")
+    }
+  } catch (error) {
+    console.error(error)
+    toast.error("Failed to restore ledger group.")
+  }
+  showRestoreGroupDialog.value = false
   groupToDelete.value = null
 }
 
@@ -316,7 +357,8 @@ async function submitEditLedgerForm() {
       {
         name: editLedgerForm.name,
         ledger_group_id: editLedgerForm.ledgerGroup,
-        ledger_sub_group_id: editLedgerForm.ledgerSubgroup
+        ledger_sub_group_id: editLedgerForm.ledgerSubgroup,
+        position: editLedgerForm.position
       }
     )
 
@@ -390,7 +432,8 @@ async function submitEditGroupForm() {
       {
         name: editGroupForm.name,
         ledger_main_category_id: editGroupForm.mainCategory, // send main ledger category id
-        parent_ledger_group_id: null
+        parent_ledger_group_id: null,
+        position: editGroupForm.position
       }
     );
 
@@ -425,7 +468,8 @@ async function submitEditSubgroupForm() {
       `${API_CONFIG.ENDPOINTS.LEDGER_SUB_GROUPS}/${editSubGroupForm.id}`,
       {
         name: editSubGroupForm.name,
-        ledger_group_id: editSubGroupForm.parentGroup
+        ledger_group_id: editSubGroupForm.parentGroup,
+        position: editSubGroupForm.position
       }
     )
 
@@ -554,6 +598,7 @@ function handleEdit(node) {
     showEditGroupDialog.value = true;
     editGroupForm.id = node.id;
     editGroupForm.name = node.name;
+    editGroupForm.position = node.position;
     editGroupForm.mainCategory = node.ledger_main_category_id;
   }
 
@@ -561,6 +606,7 @@ function handleEdit(node) {
     showEditSubgroupDialog.value = true;
     editSubGroupForm.id = node.id;
     editSubGroupForm.name = node.name;
+    editSubGroupForm.position = node.position;
     editSubGroupForm.parentGroup = node.ledger_group_id;
   }
 
@@ -568,6 +614,7 @@ function handleEdit(node) {
     showEditLedgerDialog.value = true;
     editLedgerForm.id = node.id;
     editLedgerForm.name = node.name;
+    editLedgerForm.position = node.position;
     editLedgerForm.ledgerGroup = node.ledger_group_id;
     editLedgerForm.ledgerSubgroup = node.ledger_sub_group_id;
   }
@@ -646,6 +693,52 @@ function handleDelete(node) {
     ledgerToDelete.value = node.id;
     selectedNodeToDelete.value = node.name;
   }
+}
+
+function handleSoft(node) {
+  console.log("handleSoft");
+  console.log(node);
+
+  if (node.type === 'ledger-group') {
+    showSoftDeleteGroupDialog.value = true;
+    groupToDelete.value = node.id;
+    selectedNodeToDelete.value = node.name;
+  }
+
+  // if (node.type === 'ledger-sub-group') {
+  //   showDeleteSubgroupDialog.value = true;
+  //   subGroupToDelete.value = node.id;
+  //   selectedNodeToDelete.value = node.name;
+  // }
+
+  // if (node.type === 'ledger') {
+  //   showDeleteLedgerDialog.value = true;
+  //   ledgerToDelete.value = node.id;
+  //   selectedNodeToDelete.value = node.name;
+  // }
+}
+
+function handleRestore(node) {
+  console.log("handleRestore");
+  console.log(node);
+
+  if (node.type === 'ledger-group') {
+    showRestoreGroupDialog.value = true;
+    groupToDelete.value = node.id;
+    selectedNodeToDelete.value = node.name;
+  }
+
+  // if (node.type === 'ledger-sub-group') {
+  //   showDeleteSubgroupDialog.value = true;
+  //   subGroupToDelete.value = node.id;
+  //   selectedNodeToDelete.value = node.name;
+  // }
+
+  // if (node.type === 'ledger') {
+  //   showDeleteLedgerDialog.value = true;
+  //   ledgerToDelete.value = node.id;
+  //   selectedNodeToDelete.value = node.name;
+  // }
 }
 
 // === API Calls ===
@@ -764,7 +857,7 @@ watch(
             <VCard class="py-2 pr-2 account_vcard_border shadow-none" variant="text">
               <div class="custom_expansion_item">
                 <TreeItem v-for="item in chartData" :key="item.id" :node="item" :level="0" @edit="handleEdit"
-                  @delete="handleDelete" />
+                  @delete="handleDelete" @restore="handleRestore" @soft="handleSoft" />
               </div>
             </VCard>
           </VCardText>
@@ -816,10 +909,13 @@ watch(
               class="accouting_field accouting_active_field mb-2" placeholder="Name" variant="outlined"
               hide-details="auto" />
 
+            <VTextField v-model="editLedgerForm.position" class="accouting_field accouting_active_field mb-2"
+              placeholder="Position" variant="outlined" hide-details="auto" />
+
             <VAutocomplete v-model="editLedgerForm.ledgerGroup" :items="ledgerGroupOptions" :rules="parentGroupRules"
-              class="accouting_field accouting_active_field" placeholder="Ledger Group" item-title="title"
+              class="mt-2 accouting_field accouting_active_field" placeholder="Ledger Group" item-title="title"
               item-value="value" variant="outlined" hide-details="auto" />
-            {{ editLedgerForm.ledgerSubgroup }}
+
             <VAutocomplete v-show="ledgerSubGroupOptions.length" v-model="editLedgerForm.ledgerSubgroup"
               :items="ledgerSubGroupOptions" class="mt-2 accouting_field accouting_active_field"
               placeholder="Ledger Sub-Group" item-title="title" item-value="value" variant="outlined"
@@ -876,6 +972,8 @@ watch(
             <VTextField v-model="editGroupForm.name" :rules="nameRules"
               class="accouting_field accouting_active_field mb-2" placeholder="Name" variant="outlined"
               hide-details="auto" />
+            <VTextField v-model="editGroupForm.position" class="accouting_field accouting_active_field mb-2"
+              placeholder="Position" variant="outlined" hide-details="auto" />
             <VAutocomplete v-model="editGroupForm.mainCategory" :items="mainCategoryOptions" :rules="parentGroupRules"
               class="accouting_field accouting_active_field" placeholder="Ledger Main Category" item-title="title"
               item-value="value" variant="outlined" hide-details="auto" />
@@ -932,6 +1030,8 @@ watch(
             <VTextField v-model="editSubGroupForm.name" :rules="nameRules"
               class="accouting_field accouting_active_field mb-2" placeholder="Name" variant="outlined"
               hide-details="auto" />
+            <VTextField v-model="editSubGroupForm.position" class="accouting_field accouting_active_field mb-2"
+              placeholder="Position" variant="outlined" hide-details="auto" />
             <VAutocomplete v-model="editSubGroupForm.parentGroup" :items="ledgerGroupOptions" :rules="parentGroupRules"
               class="accouting_field accouting_active_field" placeholder="Parent Group" item-title="title"
               item-value="value" variant="outlined" hide-details="auto" />
@@ -951,7 +1051,7 @@ watch(
     <!-- Delete Group Dialog -->
     <VDialog v-model="showDeleteGroupDialog" max-width="600">
       <VCard>
-        <VCardTitle class="account_ui_swtich_title pb-0">Delete Ledger Group</VCardTitle>
+        <VCardTitle class="account_ui_swtich_title pb-0">Permanent Delete Ledger Group</VCardTitle>
         <VCardSubtitle class="account_ui_swtich_subtitle px-3">
           Are you sure you want to delete this <strong>{{ selectedNodeToDelete }}</strong> group.?
           <h6 class="text-error text-center">This action cannot be undone.</h6>
@@ -964,6 +1064,41 @@ watch(
         </VCardActions>
       </VCard>
     </VDialog>
+
+    <VDialog v-model="showSoftDeleteGroupDialog" max-width="600">
+      <VCard>
+        <VCardTitle class="account_ui_swtich_title pb-0">Soft Delete Ledger Group</VCardTitle>
+        <VCardSubtitle class="account_ui_swtich_subtitle px-3">
+          Are you sure you want to delete this <strong>{{ selectedNodeToDelete }}</strong> group.?
+        </VCardSubtitle>
+
+        <VCardActions class="justify-end mr-4 mb-2">
+          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
+            @click="showSoftDeleteGroupDialog = false" />
+          <VBtn text="Delete" class="account_v_btn_primary" color="error" @click="submitSoftDeleteGroup" />
+        </VCardActions>
+      </VCard>
+    </VDialog>
+
+    <VDialog v-model="showRestoreGroupDialog" max-width="600">
+      <VCard>
+        <VCardTitle class="account_ui_swtich_title pb-0">
+          Restore Ledger Group
+        </VCardTitle>
+
+        <VCardSubtitle class="account_ui_swtich_subtitle px-3">
+          Are you sure you want to restore the
+          <strong>{{ selectedNodeToDelete }}</strong> group?
+        </VCardSubtitle>
+
+        <VCardActions class="justify-end mr-4 mb-2">
+          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
+            @click="showRestoreGroupDialog = false" />
+          <VBtn text="Restore" class="account_v_btn_primary" color="success" @click="submitRestoreGroup" />
+        </VCardActions>
+      </VCard>
+    </VDialog>
+
 
     <VDialog v-model="showDeleteSubgroupDialog" max-width="600">
       <VCard>

@@ -33,6 +33,18 @@ function onDelete() {
   emit("delete", props.node);
 }
 
+function onRestore() {
+  console.log("Restore:", props.node);
+  menu.value = false;
+  emit("restore", props.node);
+}
+
+function onSoft() {
+  console.log("Soft:", props.node);
+  menu.value = false;
+  emit("soft", props.node);
+}
+
 // Dynamic class for chip
 const typeClass = computed(() => {
   return props.node.type === "Balance Sheet"
@@ -61,6 +73,10 @@ const isMainCategory = computed(() => {
   }
 });
 
+const isDeleted = computed(() => {
+  return props.node.deleted_at !== null;
+});
+
 function formattedType(value) {
   if (!value) return ''
   return value
@@ -75,7 +91,7 @@ onMounted(() => {
   }
 });
 
-const emit = defineEmits(["edit", "delete"]);
+const emit = defineEmits(["edit", "delete", "restore", "soft"]);
 </script>
 
 <template>
@@ -104,7 +120,7 @@ const emit = defineEmits(["edit", "delete"]);
           {{ props.node.type }}
         </VChip> -->
         <VChip :class="typeClass" size="small">
-          {{ formattedType(props.node.type) }}
+          {{ formattedType(props.node.heading) }}
         </VChip>
         <div class="more_options_w">
           <VMenu v-if="!isMainCategory" v-model="menu" :close-on-content-click="false" class="account_vmenu_border"
@@ -113,7 +129,7 @@ const emit = defineEmits(["edit", "delete"]);
               <IconDots v-if="isHovered || menu" size="16" v-bind="menuProps" />
             </template>
             <VList class="account_expansion_list">
-              <VListItem @click="onEdit">
+              <VListItem v-if="!isDeleted" @click="onEdit">
                 <VListItemTitle class="d-flex align-center gap-3">
                   <IconPencil size="18" />
                   <p class="mb-0">Edit</p>
@@ -125,6 +141,18 @@ const emit = defineEmits(["edit", "delete"]);
                   <p class="mb-0">Delete</p>
                 </VListItemTitle>
               </VListItem>
+              <VListItem v-if="isDeleted" @click="onRestore">
+                <VListItemTitle class="d-flex trash align-center gap-3">
+                  <IconRestore size="18" />
+                  <p class="mb-0">Restore</p>
+                </VListItemTitle>
+              </VListItem>
+              <VListItem v-if="!isDeleted" @click="onSoft">
+                <VListItemTitle class="d-flex trash align-center gap-3">
+                  <IconTrash size="18" />
+                  <p class="mb-0">Soft Delete</p>
+                </VListItemTitle>
+              </VListItem>
             </VList>
           </VMenu>
         </div>
@@ -134,7 +162,7 @@ const emit = defineEmits(["edit", "delete"]);
     <!-- Recursive Children with incremented level -->
     <div v-if="expanded">
       <TreeItem v-for="child in props.node.children" :key="child.id" :node="child" :level="props.level + 1"
-        @edit="emit('edit', $event)" @delete="emit('delete', $event)" />
+        @edit="emit('edit', $event)" @delete="emit('delete', $event)" @soft="emit('soft', $event)" @restore="emit('restore', $event)" />
     </div>
   </div>
 </template>
