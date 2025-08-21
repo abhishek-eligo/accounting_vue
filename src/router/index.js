@@ -13,6 +13,7 @@ const dynamicRoutes = navigationListItems
 
 const routes = [
   { path: '/', redirect: '/table' },
+  { path: '/api-demo', component: () => import('@/pages/api-demo/index.vue') },
   ...dynamicRoutes
 ]
 

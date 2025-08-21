@@ -11,6 +11,10 @@ import { registerPlugins } from "@/plugins";
 import Vue3Toastify, { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { renderTablerIcon } from '@/helpers/tablerIconHelper.js';
+import axios from "axios";
+axios.defaults.baseURL = "http://127.0.0.1:8000/api/v1/";
+// axios
+import axiosPlugin from "./plugins/axios";
 
 // Components
 import App from "./App.vue";
@@ -40,6 +44,8 @@ const app = createApp(App);
 app.component('Icon', Icon);
 
 app.use(router);
+
+app.use(axiosPlugin);
 
 // make the helper globally available
 app.config.globalProperties.$renderTablerIcon = renderTablerIcon;

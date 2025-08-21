@@ -42,11 +42,32 @@ const typeClass = computed(() => {
 
 // Determine if node is a ledger (no children)
 const isLedger = computed(() => {
-  return (
-    props.node.children === null ||
-    (props.node.children && props.node.children.length === 0 && !props.node.children)
-  );
+  if ('children' in props.node) {
+    if (Array.isArray(props.node.children) && props.node.children.length === 0) {
+      return false;
+    } else {
+      return false;
+    }
+  } else {
+    return true;
+  }
 });
+
+const isMainCategory = computed(() => {
+  if (props.node.type === 'ledger-main-category') {
+    return true;
+  } else {
+    return false;
+  }
+});
+
+function formattedType(value) {
+  if (!value) return ''
+  return value
+    .split('-') // split by "-"
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
 
 onMounted(() => {
   if (props.node.children && props.node.children.length > 0) {
@@ -79,11 +100,15 @@ const emit = defineEmits(["edit", "delete"]);
         </div>
       </div>
       <div class="d-flex align-center gap-2" @click.stop>
-        <VChip v-if="!isLedger" :class="typeClass" size="small">
+        <!-- <VChip v-if="!isLedger" :class="typeClass" size="small">
           {{ props.node.type }}
+        </VChip> -->
+        <VChip :class="typeClass" size="small">
+          {{ formattedType(props.node.type) }}
         </VChip>
         <div class="more_options_w">
-          <VMenu v-model="menu" :close-on-content-click="false" class="account_vmenu_border" location="bottom end">
+          <VMenu v-if="!isMainCategory" v-model="menu" :close-on-content-click="false" class="account_vmenu_border"
+            location="bottom end">
             <template #activator="{ props: menuProps }">
               <IconDots v-if="isHovered || menu" size="16" v-bind="menuProps" />
             </template>
