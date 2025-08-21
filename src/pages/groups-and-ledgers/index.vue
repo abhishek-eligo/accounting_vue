@@ -637,13 +637,13 @@ function handleDelete(node) {
 
   if (node.type === 'ledger-sub-group') {
     showDeleteSubgroupDialog.value = true;
-    groupToDelete.value = node.id;
+    subGroupToDelete.value = node.id;
     selectedNodeToDelete.value = node.name;
   }
 
   if (node.type === 'ledger') {
     showDeleteLedgerDialog.value = true;
-    groupToDelete.value = node.id;
+    ledgerToDelete.value = node.id;
     selectedNodeToDelete.value = node.name;
   }
 }
