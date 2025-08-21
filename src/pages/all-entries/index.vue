@@ -2,10 +2,12 @@
 import { ref, reactive, watch } from "vue";
 import { toast } from "vue3-toastify";
 import axios from "axios";
-import { computed } from "vue"
-import dayjs from "dayjs"
+import { computed } from "vue";
+import dayjs from "dayjs";
 import { apiService } from "../../services/api.js";
 import { API_CONFIG } from "../../config/api.js";
+import DeleteDailog from "../../components/DeleteDailog.vue";
+import RevertDialog from "../../components/RevertDialog.vue"
 
 // Function to handle amount input and show words
 function handleAmountInput(event, rowIndex, type) {
@@ -31,6 +33,7 @@ const ledgerForm = reactive({
   ledgerSubgroup: null,
 });
 const isLoadingLedgerGroups = ref(false);
+
 const showLedgerDialog = ref(false);
 
 const journalEntryFormRef = ref(null)
@@ -38,6 +41,9 @@ const journalEntryFormRef = ref(null)
 const ledgerGroupOptions = ref([]);
 
 const ledgerSubGroupOptions = ref([]);
+
+const isEdit = ref(false)
+const editId = ref(null)
 
 // Journal entry form data
 const journalEntryForm = ref({
@@ -82,52 +88,95 @@ const validateForm = () => {
   return null
 }
 
+
+
 const submitJournalEntryForm = async () => {
   const error = validateForm()
   if (error) {
-    toast.error(error) // you can use Snackbar/Toast instead of alert
+    toast.error(error)
     return
   }
-
 
   try {
     const payload = {
       ...journalEntryForm.value,
       debitRows: debitRows.value,
       creditRows: creditRows.value,
-      createdBy: '83fd1e60-a10c-4c2a-9826-58ec72559578',
+      createdBy: "83fd1e60-a10c-4c2a-9826-58ec72559578",
+      updatedBy: "83fd1e60-a10c-4c2a-9826-58ec72559578"
     }
 
-    const response = await axios.post("account-history",
-      payload,
-      {
+    let response
+    if (isEdit.value) {
+      response = await axios.put(`account-history/${editId.value}`, payload, {
         headers: {
-          "Authorization": `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`, // 👈 replace with your auth token
+          Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
-      }
-    );
+      })
+    } else {
+      response = await axios.post("account-history", payload, {
+        headers: {
+          Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+      })
+    }
 
-    if (response.status === 201 || response.status === 200) {
-      toast.success("Journal Entry saved successfully!")
-      // Reset form after success
-      journalEntryForm.value = {
-        entryDate: null,
-        narration: "",
-        voucherType: null,
-        voucherNumber: null,
-      }
-      debitRows.value = [{ account: null, amount: null, amountInWords: "" }]
-      creditRows.value = [{ account: null, amount: null, amountInWords: "" }]
-      showJournalEntryCard.value = false;
-      fetchData();
+    if (response.status === 200 || response.status === 201) {
+      toast.success(isEdit.value ? "Journal Entry updated!" : "Journal Entry saved!")
+      resetForm()
+      showJournalEntryCard.value = false
+      fetchData()
     }
   } catch (err) {
     console.error(err)
-    alert("Failed to save journal entry")
+    toast.error("Failed to submit journal entry")
   }
 }
+
+
+const resetForm = () => {
+  journalEntryForm.value = { entryDate: null, narration: "", voucherType: null, voucherNumber: null }
+  debitRows.value = [{ account: null, amount: null, amountInWords: "" }]
+  creditRows.value = [{ account: null, amount: null, amountInWords: "" }]
+  isEdit.value = false
+  editId.value = null
+}
+
+
+const openEditForm = (entry) => {
+  showJournalEntryCard.value = true
+  isEdit.value = true
+  editId.value = entry.id
+  console.log("Editing entry:", entry)
+
+  // Map backend snake_case → frontend camelCase
+  journalEntryForm.value = {
+    entryDate: entry.entry_date,
+    narration: entry.narration,
+    voucherType: entry.voucher_type,
+    voucherNumber: entry.voucher_number,
+  }
+
+  // particulars = lines (you had debitRows/creditRows separately in create form)
+  debitRows.value = entry.particulars.accounts
+    ?.filter(line => line.debit != '') // 1 = Debit
+    .map(line => ({
+      account: line.title,
+      amount: line.debit,
+    })) || []
+
+  creditRows.value = entry.particulars.accounts
+    ?.filter(line => line.credit != '') // 2 = Credit
+    .map(line => ({
+      account: line.title,
+      amount: line.credit,
+    })) || []
+}
+
 
 const showJournalEntryCard = ref(false);
 const showDetailsDialog = ref(false);
@@ -154,7 +203,32 @@ const voucherNo = ref([
 
 const allEntries = ref([])
 
+const searchQuery = ref("")
+
 const loading = ref(true)
+
+const filteredEntries = computed(() => {
+  if (!searchQuery.value) return allEntries.value
+
+  return allEntries.value.filter(entry => {
+    const query = searchQuery.value.toLowerCase()
+
+    const voucherType = (getVoucherTypeTitle(entry.voucher_type) || "").toLowerCase()
+    const voucherNumber = (getVoucherNumberTitle(entry.voucher_number) || "").toLowerCase()
+
+    // account names inside particulars.accounts[]
+    const accountNames = (entry.particulars?.accounts || [])
+      .map(acc => (getLedgerTitle(acc.title) || "").toLowerCase())
+      .join(" ")
+
+    return (
+      voucherType.includes(query) ||
+      voucherNumber.includes(query) ||
+      accountNames.includes(query)
+    )
+  })
+})
+
 
 
 
@@ -259,7 +333,7 @@ const fetchData = async () => {
         voucher_number: entry.voucher_number,
         voucher_type: entry.voucher_type,
         narration: entry.narration,
-        status: "Approved", // you can adjust based on backend if status exists
+        status: "Pending", // you can adjust based on backend if status exists
         particulars: {
           description: { narration: entry.narration },
           accounts: entry.acc_account_history_entry_line.map(line => ({
@@ -276,6 +350,33 @@ const fetchData = async () => {
     loading.value = false;
   }
 };
+
+const showDeleteDialog = ref(false)
+const selectedEntryId = ref(null)
+
+
+const openDeleteDialog = (id) => {
+  selectedEntryId.value = id
+  showDeleteDialog.value = true
+}
+
+const refreshTable = async () => {
+  await fetchData();
+  console.log("Entry deleted, refresh table...");
+}
+
+const showRevertDialog = ref(false)
+
+
+const openRevert = (id) => {
+  selectedEntryId.value = id
+  showRevertDialog.value = true
+}
+
+const fetchEntries = async () => {
+  await fetchData();
+  console.log("Entry reverted");
+}
 
 const allLedgers = ref([])
 
@@ -405,10 +506,12 @@ onMounted(async () => {
 
 <template>
   <div class="account">
+    <!-- <template> -->
     <VExpandTransition>
       <VRow v-show="showJournalEntryCard" class="justify-center">
-        <VCol cols="8" class="">
-          <VCard title="New Journal Entry" class="account_vcard_border account_ui_vcard pa-2 shadow-none mb-6">
+        <VCol cols="8">
+          <VCard :title="isEdit ? 'Edit Journal Entry' : 'New Journal Entry'"
+            class="account_vcard_border account_ui_vcard pa-2 shadow-none mb-6">
             <template #append>
               <VBtn @click="showLedgerDialog = true" class="account_v_btn_outlined save_btn_height" variant="outlined"
                 size="default" rounded="2" color="primary">
@@ -420,8 +523,10 @@ onMounted(async () => {
                 Add Ledger
               </VBtn>
             </template>
+
             <VCardText class="mt-4">
               <VForm ref="journalEntryFormRef" @submit.prevent="submitJournalEntryForm">
+                <!-- Date -->
                 <VRow>
                   <VCol cols="6">
                     <div class="d-flex align-center gap-3">
@@ -436,14 +541,10 @@ onMounted(async () => {
                       </v-date-input>
                     </div>
                   </VCol>
-
-
-
                 </VRow>
 
-                <!-- Debit -->
+                <!-- Debit Rows -->
                 <VRow v-for="(debit, index) in debitRows" :key="index" class="mb-1">
-                  <!-- Account -->
                   <VCol cols="12" lg="8" md="8">
                     <div class="d-flex align-center gap-3">
                       <div class="account_entry_form_label">
@@ -454,12 +555,11 @@ onMounted(async () => {
                         item-value="value" v-model="debit.account" />
                     </div>
                   </VCol>
-                  <!-- Amount -->
+
                   <VCol cols="12" lg="4" md="4">
                     <VTextField type="number" class="accouting_field accouting_active_field" placeholder="0"
-                      variant="outlined" density="compact" v-model="debit.amount" @input="
-                        (event) => handleAmountInput(event, index, 'debit')
-                      ">
+                      variant="outlined" density="compact" v-model="debit.amount"
+                      @input="(event) => handleAmountInput(event, index, 'debit')">
                       <template #append>
                         <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="x-small"
                           rounded="3" @click="removeDebitRow(index)">
@@ -467,21 +567,17 @@ onMounted(async () => {
                         </VBtn>
                       </template>
                     </VTextField>
-                    <!-- Amount in words display -->
                     <div v-if="debit.amountInWords" class="mt-1">
                       <small class="font-italic amountInWords">
                         {{ debit.amountInWords }} rupees only
                       </small>
                     </div>
                   </VCol>
-
-
-
                 </VRow>
 
-                <!-- Add Button -->
+                <!-- Add Debit -->
                 <div class="d-flex align-center pr-9 mb-4 justify-end">
-                  <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="small" rounded=""
+                  <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="small"
                     @click="addDebitRow">
                     <template #prepend>
                       <IconPlus size="18" />
@@ -490,7 +586,7 @@ onMounted(async () => {
                   </VBtn>
                 </div>
 
-                <!-- Credit -->
+                <!-- Credit Rows -->
                 <VRow v-for="(credit, index) in creditRows" :key="index" class="mb-1">
                   <VCol cols="12" lg="8" md="8">
                     <div class="d-flex align-center gap-3">
@@ -502,11 +598,11 @@ onMounted(async () => {
                         item-value="value" v-model="credit.account" />
                     </div>
                   </VCol>
+
                   <VCol cols="12" lg="4" md="4">
                     <VTextField type="number" class="accouting_field accouting_active_field" placeholder="0"
-                      variant="outlined" density="compact" v-model="credit.amount" @input="
-                        (event) => handleAmountInput(event, index, 'credit')
-                      ">
+                      variant="outlined" density="compact" v-model="credit.amount"
+                      @input="(event) => handleAmountInput(event, index, 'credit')">
                       <template #append>
                         <VBtn @click="removeCreditRow(index)" class="account_v_btn_ghost account_btn_primary_text"
                           variant="text" size="x-small" rounded="1">
@@ -514,19 +610,18 @@ onMounted(async () => {
                         </VBtn>
                       </template>
                     </VTextField>
-                    <!-- Amount in words display -->
                     <div v-if="credit.amountInWords" class="mt-1">
                       <small class="font-italic amountInWords">
                         {{ credit.amountInWords }} rupees only
                       </small>
                     </div>
                   </VCol>
-
                 </VRow>
 
+                <!-- Add Credit -->
                 <div class="d-flex align-center pr-9 mb-4 justify-end">
                   <VBtn @click="addCreditRow" class="account_v_btn_ghost account_btn_primary_text" variant="text"
-                    size="small" rounded="">
+                    size="small">
                     <template #prepend>
                       <IconPlus size="18" />
                     </template>
@@ -534,6 +629,7 @@ onMounted(async () => {
                   </VBtn>
                 </div>
 
+                <!-- Narration & Voucher -->
                 <VRow>
                   <VCol cols="12" lg="7" md="7">
                     <div class="d-flex align-start gap-3">
@@ -541,8 +637,7 @@ onMounted(async () => {
                         <label class="account_label mt-3">Narration *</label>
                       </div>
                       <VTextarea v-model="journalEntryForm.narration" class="accounting_v_textarea"
-                        placeholder="e.g. Inventory purchased on credit. XYZ Capital Introduce. Max length 254 characters"
-                        variant="outlined" />
+                        placeholder="e.g. Inventory purchased on credit" variant="outlined" />
                       <small class="text-error" v-if="narrationError">
                         {{ narrationError }}
                       </small>
@@ -558,12 +653,12 @@ onMounted(async () => {
                     <VAutocomplete v-model="journalEntryForm.voucherNumber"
                       class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       :items="voucherNo" item-title="title" item-value="value" placeholder="Select Voucher Number" />
-
                   </VCol>
                 </VRow>
 
+                <!-- Auto Approve -->
                 <VRow>
-                  <VCol cols="12" lg="12" md="12">
+                  <VCol cols="12">
                     <VCard class="account_vcard_border mt-2 account_module_card shadow-none" title="Auto-Approve Entry"
                       subtitle="This entry will be approved automatically and will immediately affect your books.">
                       <template #append>
@@ -573,17 +668,20 @@ onMounted(async () => {
                   </VCol>
                 </VRow>
 
+                <!-- Actions -->
                 <VRow>
                   <VCol cols="12">
                     <div class="d-flex align-center justify-end gap-2">
                       <VBtn @click="showJournalEntryCard = false" class="account_v_btn_outlined" variant="outlined"
-                        rounded="2" size="default">Cancel</VBtn>
+                        rounded="2" size="default">
+                        Cancel
+                      </VBtn>
                       <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="2"
                         color="primary" type="submit">
                         <template #prepend>
                           <IconDeviceFloppy size="18" />
                         </template>
-                        Save Voucher
+                        {{ isEdit ? "Update Voucher" : "Save Voucher" }}
                       </VBtn>
                     </div>
                   </VCol>
@@ -594,12 +692,13 @@ onMounted(async () => {
         </VCol>
       </VRow>
     </VExpandTransition>
+    <!-- </template> -->
 
     <VCard title="All Entries" subtitle="A record of all financial transactions, with all amounts expressed in Rupees."
       class="account_vcard_border pa-2 account_ui_vcard shadow-none">
       <div class="d-flex align-center px-3 justify-space-between">
-        <VTextField style="max-width: 265px" class="accouting_field accouting_active_field" placeholder="Filter entries"
-          variant="outlined">
+        <VTextField v-model="searchQuery" style="max-width: 450px" class="accouting_field accouting_active_field"
+          placeholder="Filter by voucher type, number, or account" variant="outlined">
           <template #prepend-inner>
             <IconSearch size="20" />
           </template>
@@ -672,7 +771,13 @@ onMounted(async () => {
         <VCard variant="flat" class="shadow-none">
           <div class="gst_summary_table_container">
 
+            <!-- Loader overlay -->
+            <div v-if="loading" class="loader-overlay d-flex align-center justify-center">
+              <v-progress-circular indeterminate size="48" color="primary" />
+            </div>
+
             <table class="table table-bordered account_entries_table text-center w-100">
+
 
               <thead>
                 <tr>
@@ -690,12 +795,9 @@ onMounted(async () => {
                   <th class="account_entries_table_header_actions">Actions</th>
                 </tr>
               </thead>
-              <!-- Loader overlay -->
-              <div v-if="loading" class="loader-overlay d-flex align-center justify-center">
-                <v-progress-circular indeterminate size="48" color="primary" />
-              </div>
-              <tbody v-else>
-                <template v-for="(entry, index) in allEntries" :key="index">
+
+              <tbody>
+                <template v-for="(entry, index) in filteredEntries" :key="index">
 
                   <template
                     v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0">
@@ -736,13 +838,14 @@ onMounted(async () => {
                       </td>
                       <td class="account_entries_table_actions" :rowspan="entry.particulars.accounts.length + 1">
                         <div class="d-flex align-center justify-center gap-2">
-                          <VBtn size="small" class="account_v_btn_ghost" variant="text">
+                          <VBtn size="small" class="account_v_btn_ghost" variant="text" @click="openEditForm(entry)">
                             <IconPencil size="20" />
                           </VBtn>
-                          <VBtn size="small" class="account_v_btn_ghost" variant="text">
+                          <VBtn size="small" class="account_v_btn_ghost" variant="text" @click="openRevert(entry.id)">
                             <IconArrowBackUp size="20" />
                           </VBtn>
-                          <VBtn size="small" class="account_v_btn_ghost" variant="text">
+                          <VBtn size="small" class="account_v_btn_ghost" variant="text" color="error"
+                            @click="openDeleteDialog(entry.id)">
                             <IconTrash size="20" />
                           </VBtn>
                         </div>
@@ -896,7 +999,8 @@ onMounted(async () => {
         </VCardText>
       </VCard>
     </VDialog>
-
+    <DeleteDailog v-model="showDeleteDialog" :entryId="selectedEntryId" @deleted="refreshTable" />
+    <RevertDialog v-model="showRevertDialog" :entryId="selectedEntryId" @reverted="fetchEntries" />
     <VBtn @click="showJournalEntryCard = !showJournalEntryCard" :key="bounceKey" class="account_add_new_btn bounce">
       <template #prepend>
         <IconCirclePlus size="18" />
@@ -945,7 +1049,7 @@ onMounted(async () => {
 .account_entries_table th,
 .account_entries_table td {
   border: 1.5px solid var(--acc-border-color) !important;
-  padding: 8px;
+  padding: 8px 12px;
 }
 
 .account_entries_table tr {
