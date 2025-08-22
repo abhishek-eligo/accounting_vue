@@ -1,14 +1,17 @@
 <script setup>
-import { ref, reactive, watch } from "vue";
+import { ref, reactive, computed, watch } from "vue";
 import { toast } from "vue3-toastify";
 import axios from "axios";
-import { computed } from "vue";
 import dayjs from "dayjs";
 import { apiService } from "../../services/api.js";
 import { API_CONFIG } from "../../config/api.js";
 import DeleteDailog from "../../components/DeleteDailog.vue";
 import RevertDialog from "../../components/RevertDialog.vue"
 
+const props = defineProps({
+  filters: { type: Array, required: true },
+  title: { type: String, required: true },
+})
 // Function to handle amount input and show words
 function handleAmountInput(event, rowIndex, type) {
   const amount = event.target.value;
@@ -110,7 +113,7 @@ const submitJournalEntryForm = async () => {
     if (isEdit.value) {
       response = await axios.put(`account-history/${editId.value}`, payload, {
         headers: {
-          Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
+          Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
@@ -118,7 +121,7 @@ const submitJournalEntryForm = async () => {
     } else {
       response = await axios.post("account-history", payload, {
         headers: {
-          Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
+          Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
@@ -182,6 +185,36 @@ const showJournalEntryCard = ref(false);
 const showDetailsDialog = ref(false);
 const selectedEntry = ref(null);
 
+const visibleHeaders = computed(() => {
+  return props.headers.filter(h => h.visible !== false)
+})
+
+const filters = ref([
+  { title: 'Date', checked: false },
+]);
+
+const isFilterSectionVisible = ref(false);
+const openFilterSection = () => {
+  isFilterSectionVisible.value = !isFilterSectionVisible.value;
+}
+
+const hasActiveFilters = computed(() => filters.value.some(f => f.checked))
+
+const isFilterChecked = (title) => {
+  return filters.value.find(f => f.title === title)?.checked || false
+}
+
+const toggleFilter = (title) => {
+  const filter = filters.value.find(f => f.title === title)
+  if (filter) filter.checked = !filter.checked
+}
+
+const cancelFilter = (title) => {
+  const filter = filters.value.find(f => f.title === title)
+  if (filter) filter.checked = false
+}
+
+const isTableCompact = ref(false);
 
 
 
@@ -191,6 +224,7 @@ const voucherTypes = ref([
   { title: "Journal Voucher", value: "3" },
   { title: "Payment Voucher", value: "4" },
   { title: "Reciept Voucher", value: "5" },
+  { title: "Reverse Entry Voucher", value: "6" }
 ]);
 
 const voucherNo = ref([
@@ -209,7 +243,7 @@ const loading = ref(true)
 
 const filteredEntries = computed(() => {
   if (!searchQuery.value) return allEntries.value
-
+  // console.log('jhjhjh', allEntries.value);
   return allEntries.value.filter(entry => {
     const query = searchQuery.value.toLowerCase()
 
@@ -242,15 +276,15 @@ const getVoucherTypeTitle = (value) => {
   return found ? found.title : value
 }
 
-// const getLedgerTitle = (value) => {
-//   const found = allLedgers.value.find(l => l.value === value)
-//   return found ? found.title : value
-// }
-
-const getLedgerTitle = (id) => {
-  const found = allLedgers.value.find(l => l.value === id)
-  return found ? found.title : id
+const getLedgerTitle = (value) => {
+  const found = allLedgers.value.find(l => l.value === value)
+  return found ? found.title : value
 }
+
+// const getLedgerTitle = (id) => {
+//   const found = allLedgers.value.find(l => l.value === id)
+//   return found ? found.title : id
+// }
 
 
 
@@ -316,8 +350,12 @@ const fetchData = async () => {
   try {
     const response = await axios.get("account-history", {
       headers: {
-        Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
+        Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
         Accept: "application/json",
+      },
+      params: {
+        show: "withTrashed", // 👈 options: "active", "withTrashed", "onlyTrashed"
+        per_page: 15,
       },
     })
 
@@ -334,6 +372,7 @@ const fetchData = async () => {
         voucher_type: entry.voucher_type,
         narration: entry.narration,
         status: "Pending", // you can adjust based on backend if status exists
+        deleted_at: entry.deleted_at,
         particulars: {
           description: { narration: entry.narration },
           accounts: entry.acc_account_history_entry_line.map(line => ({
@@ -353,10 +392,12 @@ const fetchData = async () => {
 
 const showDeleteDialog = ref(false)
 const selectedEntryId = ref(null)
+const deleteMode = ref("soft");
 
 
-const openDeleteDialog = (id) => {
+const openDeleteDialog = (id, mode) => {
   selectedEntryId.value = id
+  deleteMode.value = mode
   showDeleteDialog.value = true
 }
 
@@ -364,6 +405,17 @@ const refreshTable = async () => {
   await fetchData();
   console.log("Entry deleted, refresh table...");
 }
+
+const restoreEntry = async (id) => {
+  await axios.post(`/account-history/${id}/restore`, {}, {
+
+    headers: {
+      Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+    },
+  }
+  );
+  fetchData(); // refresh table
+};
 
 const showRevertDialog = ref(false)
 
@@ -384,7 +436,7 @@ const fetchledger = async () => {
   try {
     const response = await axios.get('ledgers', {
       headers: {
-        Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
+        Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
         Accept: "application/json",
       },
     })
@@ -705,8 +757,8 @@ onMounted(async () => {
         </VTextField>
 
         <div class="d-flex align-center gap-2">
-          <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details
-            label="Compact" />
+          <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details label="Compact"
+            v-model="isTableCompact" />
           <VMenu width="200px" location="start" :close-on-content-click="false">
             <template #activator="{ props }">
               <v-tooltip text="Filters" location="top">
@@ -718,28 +770,15 @@ onMounted(async () => {
                 </template>
               </v-tooltip>
             </template>
-            <VCard class="account_vcard_menu account_vcard_border">
+
+            <VCard>
               <div class="account_vcard_menu_hdng px-4">Add Filters</div>
               <VDivider class="my-1 mt-0" />
-              <div class="account_table_filter_menu py-1">
-                <div class="account_vcard_menu_item">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
-                    <span>Date</span>
-                  </div>
-                </div>
-                <div class="account_vcard_menu_item">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
-                    <span>Created By</span>
-                  </div>
-                </div>
-                <div class="account_vcard_menu_item">
-                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
-                    <span>Account</span>
-                  </div>
-                </div>
+
+              <div v-for="filter in props.filters" :key="filter.title" class="px-3 py-1 d-flex align-center gap-2">
+                <VCheckbox :model-value="filter.checked" @update:model-value="toggleFilter(filter.title)"
+                  density="compact" />
+                <span>{{ filter.title }}</span>
               </div>
             </VCard>
           </VMenu>
@@ -767,6 +806,31 @@ onMounted(async () => {
           </VMenu>
         </div>
       </div>
+      <!-- <VSlideYTransition mode="in-out">
+        <VRow>
+          <VCol v-if="!hasActiveFilters" cols="12">
+            <VAlert type="info" variant="tonal">
+              No filters selected. Please select a filter to apply.
+            </VAlert>
+          </VCol>
+
+         <VCol v-if="isFilterChecked('Date')" cols="12" lg="3" md="3">
+            <div class="d-flex align-center gap-2">
+              <v-date-input class="accounting_date_input" placeholder="Entry Date Filter" max-width="368"
+                multiple="range">
+                <template>
+                  <IconCalendar style="font-size: 20px;" />
+                </template>
+              </v-date-input>
+
+              <VBtn variant="text" size="small" @click="cancelFilter('Date')">
+                <IconCircleDashedX style="font-size: 20px;" />
+              </VBtn>
+            </div>
+          </VCol>
+        </VRow>
+      </VSlideYTransition> -->
+
       <VCardText class="mt-2 pa-3">
         <VCard variant="flat" class="shadow-none">
           <div class="gst_summary_table_container">
@@ -776,7 +840,8 @@ onMounted(async () => {
               <v-progress-circular indeterminate size="48" color="primary" />
             </div>
 
-            <table class="table table-bordered account_entries_table text-center w-100">
+            <table class="table table-bordered account_entries_table text-center w-100" :filter="filters"
+              :class="{ 'compact-table': isTableCompact }">
 
 
               <thead>
@@ -798,9 +863,8 @@ onMounted(async () => {
 
               <tbody>
                 <template v-for="(entry, index) in filteredEntries" :key="index">
-
-                  <template
-                    v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0">
+                  <!-- {{ filteredEntries }} -->
+                  <template v-if="entry">
                     <tr :class="[
                       'account_entries_table_row',
                       { 'even-entry': index % 2 === 0 },
@@ -829,6 +893,7 @@ onMounted(async () => {
                       <td class="account_entries_table_credit account_error_color">
                         {{ entry.particulars.accounts[0]?.credit || "" }}
                       </td>
+
                       <td class="account_entries_table_status" :rowspan="entry.particulars.accounts.length + 1">
                         <VChip class="account_v_chip"
                           :class="entry.status === 'Pending' ? 'account_chip_error' : 'account_chip_primary'"
@@ -836,6 +901,7 @@ onMounted(async () => {
                           {{ entry.status || "N/A" }}
                         </VChip>
                       </td>
+
                       <td class="account_entries_table_actions" :rowspan="entry.particulars.accounts.length + 1">
                         <div class="d-flex align-center justify-center gap-2">
                           <VBtn size="small" class="account_v_btn_ghost" variant="text" @click="openEditForm(entry)">
@@ -844,13 +910,32 @@ onMounted(async () => {
                           <VBtn size="small" class="account_v_btn_ghost" variant="text" @click="openRevert(entry.id)">
                             <IconArrowBackUp size="20" />
                           </VBtn>
-                          <VBtn size="small" class="account_v_btn_ghost" variant="text" color="error"
-                            @click="openDeleteDialog(entry.id)">
+
+                          <!-- If NOT deleted → show soft delete -->
+                          <VBtn v-if="entry.deleted_at == null" size="small" class="account_v_btn_ghost" variant="text"
+                            color="error" @click="openDeleteDialog(entry.id, 'soft')">
+
                             <IconTrash size="20" />
                           </VBtn>
+
+                          <!-- If soft deleted → show restore + permanent delete -->
+                          <template v-else>
+                            <VBtn size="small" class="account_v_btn_ghost" variant="text" color="success"
+                              @click="restoreEntry(entry.id)">
+                              <IconRestore size="20" />
+                            </VBtn>
+
+                            <VBtn size="small" class="account_v_btn_ghost" variant="text" color="error"
+                              @click="openDeleteDialog(entry.id, 'force')">
+                              <IconTrash size="20" />
+                            </VBtn>
+                          </template>
                         </div>
                       </td>
                     </tr>
+
+
+
                     <!-- Additional account rows (if any) -->
                     <tr v-for="(account, accIndex) in entry.particulars.accounts.slice(1)" :key="`${index}-${accIndex}`"
                       :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 },]"
@@ -872,7 +957,8 @@ onMounted(async () => {
                     <tr :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 },]">
                       <td colspan="3" :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         <div class="d-flex flex-column align-start justify-center">
-                          <span class="account_entry_desc_text">(Narration: {{ entry.particulars.description?.narration
+                          <span class="account_entry_desc_text">(Narration: {{
+                            entry.particulars.description?.narration
                             || "N/A" }})</span>
                         </div>
                       </td>
@@ -999,7 +1085,7 @@ onMounted(async () => {
         </VCardText>
       </VCard>
     </VDialog>
-    <DeleteDailog v-model="showDeleteDialog" :entryId="selectedEntryId" @deleted="refreshTable" />
+    <DeleteDailog v-model="showDeleteDialog" :entryId="selectedEntryId" :mode="deleteMode" @deleted="refreshTable" />
     <RevertDialog v-model="showRevertDialog" :entryId="selectedEntryId" @reverted="fetchEntries" />
     <VBtn @click="showJournalEntryCard = !showJournalEntryCard" :key="bounceKey" class="account_add_new_btn bounce">
       <template #prepend>
@@ -1054,5 +1140,11 @@ onMounted(async () => {
 
 .account_entries_table tr {
   border-bottom: 1.5px solid var(--acc-border-color) !important;
+}
+
+.compact-table td,
+.compact-table th {
+  padding: 4px 6px;
+  font-size: 0.85rem;
 }
 </style>

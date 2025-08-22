@@ -362,9 +362,6 @@ const totalPages = computed(() => {
           <div class="d-flex align-center gap-2">
             <v-date-input class="accounting_date_input" placeholder="Last Transaction From" max-width="368"
               cancel-text="Close" ok-text="Apply" multiple="range">
-              <template #prepend-inner>
-                <IconCalendar style="font-size: 20px;" />
-              </template>
             </v-date-input>
             <VBtn variant="text" size="small" @click="cancelFilter('Last Transaction From')">
               <IconCircleDashedX style="font-size: 20px;" />
@@ -386,7 +383,7 @@ const totalPages = computed(() => {
         <VCol v-if="isFilterChecked('Last Order From')" cols="12" lg="3" md="3">
           <div class="d-flex align-center gap-2">
             <v-date-input class="accounting_date_input" placeholder="Last Order From" max-width="368" multiple="range">
-              <template #prepend-inner>
+              <template>
                 <IconCalendar style="font-size: 20px;" />
               </template>
             </v-date-input>

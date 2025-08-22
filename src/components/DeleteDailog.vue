@@ -1,8 +1,6 @@
 <template>
   <VDialog v-model="showDeleteDialog" max-width="440" transition="scale-transition">
-    <VCard
-      class="rounded-2xl text-center py-8 px-6 shadow-2xl bg-white overflow-hidden"
-    >
+    <VCard class="rounded-2xl text-center py-8 px-6 shadow-2xl bg-white overflow-hidden">
       <!-- Warning Icon -->
       <div class="flex justify-center mb-6">
         <div
@@ -20,12 +18,19 @@
 
       <!-- Subtitle -->
       <VCardText class="text-gray-600 text-base">
-        This action will permanently delete the journal entry. <br />
-        Type <strong class="text-red-500">"DELETE"</strong> below to confirm.
+        <span v-if="deleteMode === 'soft'">
+          This action will <strong class="text-orange-500">soft delete</strong> the journal entry.<br />
+          You can restore it later.
+        </span>
+        <span v-else>
+          This action will <strong class="text-red-500">permanently delete</strong> the journal entry.
+          <br /> Type <strong class="text-red-500">"DELETE"</strong> below to confirm.
+        </span>
       </VCardText>
 
-      <!-- Input -->
+      <!-- Input only for permanent delete -->
       <VTextField
+        v-if="deleteMode === 'force'"
         v-model="deleteConfirmation"
         placeholder="Type 'DELETE' to confirm"
         variant="outlined"
@@ -39,8 +44,8 @@
       <VCardActions class="justify-center mt-8 gap-4">
         <VBtn
           class="px-8 py-2 rounded-lg font-semibold text-white shadow-md transition-all"
-          :style="{ backgroundColor: deleteConfirmation === 'DELETE' ? '#00A9A5' : '#cbd5e1' }"
-          :disabled="deleteConfirmation !== 'DELETE'"
+          :style="{ backgroundColor: canConfirm ? '#00A9A5' : '#cbd5e1' }"
+          :disabled="!canConfirm"
           @click="confirmDelete"
         >
           Confirm
@@ -59,32 +64,31 @@
 </template>
 
 <script setup>
-import { ref, watch, defineEmits, defineProps } from "vue"
+import { ref, watch, defineEmits, defineProps, computed } from "vue"
 import axios from "axios"
 
-// Props passed from parent (table row click)
 const props = defineProps({
-  modelValue: { type: Boolean, required: true },   // for v-model
-  entryId: { type: String, default: null }         // journal entry id
+  modelValue: { type: Boolean, required: true },   // v-model
+  entryId: { type: String, default: null },        // journal entry id
+  mode: { type: String, default: "soft" }          // "soft" or "force"
 })
 
 const emit = defineEmits(["update:modelValue", "deleted"])
 
-// State
 const showDeleteDialog = ref(props.modelValue)
 const deleteConfirmation = ref("")
 
 // Sync with parent v-model
-watch(
-  () => props.modelValue,
-  (val) => (showDeleteDialog.value = val)
-)
+watch(() => props.modelValue, (val) => (showDeleteDialog.value = val))
+watch(showDeleteDialog, (val) => emit("update:modelValue", val))
 
-watch(showDeleteDialog, (val) => {
-  emit("update:modelValue", val)
+const deleteMode = computed(() => props.mode)
+
+// ✅ Only allow confirm if correct input is typed
+const canConfirm = computed(() => {
+  return deleteMode.value === "soft" || deleteConfirmation.value.trim() === "DELETE"
 })
 
-// Methods
 const closeDeleteDialog = () => {
   showDeleteDialog.value = false
   deleteConfirmation.value = ""
@@ -92,16 +96,27 @@ const closeDeleteDialog = () => {
 
 const confirmDelete = async () => {
   try {
-    await axios.delete(`account-history/${props.entryId}`, {
-      headers: {
-        Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
-      },
+    // double check safeguard
+    if (deleteMode.value === "force" && deleteConfirmation.value.trim() !== "DELETE") {
+      return
     }
-    );
-    emit("deleted", props.entryId) // notify parent to refresh table
+
+    const url =
+      deleteMode.value === "soft"
+        ? `/account-history/${props.entryId}`
+        : `/account-history/${props.entryId}/force-delete`
+
+    await axios.delete(url, {
+      headers: {
+        Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+        Accept: "application/json"
+      }
+    })
+
+    emit("deleted", props.entryId) // notify parent
     closeDeleteDialog()
   } catch (error) {
-    console.error("Delete failed:", error)
+    console.error("Delete failed:", error.response?.data || error.message)
   }
 }
 </script>

@@ -67,9 +67,9 @@ const dialogVisible = computed({
 
 const confirmRevert = async () => {
   try {
-    await axios.post(`account-history/${props.entryId}/reverse`,{
+    await axios.post(`account-history/${props.entryId}/reverse`,{}, {
       headers: {
-        Authorization: `Bearer 1|Eq5z4wPCkJ0nUW2AIRJ8q5GVgMS0cn7LWkTZM9y7ef1c07de`,
+        Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
@@ -77,7 +77,7 @@ const confirmRevert = async () => {
     emit("reverted")
     dialogVisible.value = false
   } catch (error) {
-    console.error(error)
+    console.error("Reverse failed:", error.response?.data || error.message);
   }
 }
 </script>
