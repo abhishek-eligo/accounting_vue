@@ -8,10 +8,7 @@ import { API_CONFIG } from "../../config/api.js";
 import DeleteDailog from "../../components/DeleteDailog.vue";
 import RevertDialog from "../../components/RevertDialog.vue"
 
-const props = defineProps({
-  filters: { type: Array, required: true },
-  title: { type: String, required: true },
-})
+
 // Function to handle amount input and show words
 function handleAmountInput(event, rowIndex, type) {
   const amount = event.target.value;
@@ -185,34 +182,17 @@ const showJournalEntryCard = ref(false);
 const showDetailsDialog = ref(false);
 const selectedEntry = ref(null);
 
-const visibleHeaders = computed(() => {
-  return props.headers.filter(h => h.visible !== false)
-})
 
-const filters = ref([
-  { title: 'Date', checked: false },
-]);
+const menu = ref(false)
+const selectedDate = ref(null)
+const showDateFilter = ref(false)
 
-const isFilterSectionVisible = ref(false);
-const openFilterSection = () => {
-  isFilterSectionVisible.value = !isFilterSectionVisible.value;
+
+function format(date) {
+  return date ? dayjs(date).format("DD-MM-YYYY") : ""
 }
 
-const hasActiveFilters = computed(() => filters.value.some(f => f.checked))
 
-const isFilterChecked = (title) => {
-  return filters.value.find(f => f.title === title)?.checked || false
-}
-
-const toggleFilter = (title) => {
-  const filter = filters.value.find(f => f.title === title)
-  if (filter) filter.checked = !filter.checked
-}
-
-const cancelFilter = (title) => {
-  const filter = filters.value.find(f => f.title === title)
-  if (filter) filter.checked = false
-}
 
 const isTableCompact = ref(false);
 
@@ -242,25 +222,37 @@ const searchQuery = ref("")
 const loading = ref(true)
 
 const filteredEntries = computed(() => {
-  if (!searchQuery.value) return allEntries.value
-  // console.log('jhjhjh', allEntries.value);
-  return allEntries.value.filter(entry => {
+  let data = allEntries.value
+
+  // 🔎 First apply text search filter
+  if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
 
-    const voucherType = (getVoucherTypeTitle(entry.voucher_type) || "").toLowerCase()
-    const voucherNumber = (getVoucherNumberTitle(entry.voucher_number) || "").toLowerCase()
+    data = data.filter(entry => {
+      const voucherType = (getVoucherTypeTitle(entry.voucher_type) || "").toLowerCase()
+      const voucherNumber = (getVoucherNumberTitle(entry.voucher_number) || "").toLowerCase()
 
-    // account names inside particulars.accounts[]
-    const accountNames = (entry.particulars?.accounts || [])
-      .map(acc => (getLedgerTitle(acc.title) || "").toLowerCase())
-      .join(" ")
+      const accountNames = (entry.particulars?.accounts || [])
+        .map(acc => (getLedgerTitle(acc.title) || "").toLowerCase())
+        .join(" ")
 
-    return (
-      voucherType.includes(query) ||
-      voucherNumber.includes(query) ||
-      accountNames.includes(query)
+      return (
+        voucherType.includes(query) ||
+        voucherNumber.includes(query) ||
+        accountNames.includes(query)
+      )
+    })
+  }
+
+// 📅 Date filter
+  if (showDateFilter.value && selectedDate.value) {
+    const picked = dayjs(selectedDate.value).format("DD-MM-YYYY") // normalize picker date
+    data = data.filter(entry =>
+      dayjs(entry.entry_date).format("DD-MM-YYYY") === picked // normalize backend date
     )
-  })
+  }
+
+  return data
 })
 
 
@@ -385,6 +377,7 @@ const fetchData = async () => {
     });
   } catch (err) {
     console.error("Error fetching account history:", err);
+    toast.error("Error fetching account history");
   } finally {
     loading.value = false;
   }
@@ -414,6 +407,7 @@ const restoreEntry = async (id) => {
     },
   }
   );
+   toast.success("Entry Restored successfully.");
   fetchData(); // refresh table
 };
 
@@ -756,6 +750,17 @@ onMounted(async () => {
           </template>
         </VTextField>
 
+
+        <VMenu v-if="showDateFilter" v-model="menu" :close-on-content-click="false" transition="scale-transition"
+          offset-y max-width="290" min-width="auto">
+          <template #activator="{ props }">
+            <v-date-input v-model="selectedDate" @update:model-value="menu = false"  :display-format="format" v-bind="props"
+              class="accouting_field accouting_active_field" placeholder="Pick Entry Date" variant="outlined"
+              cancel-text="Close" ok-text="Apply" style="max-width: 300px" />
+          </template>
+        </VMenu>
+
+
         <div class="d-flex align-center gap-2">
           <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details label="Compact"
             v-model="isTableCompact" />
@@ -764,24 +769,37 @@ onMounted(async () => {
               <v-tooltip text="Filters" location="top">
                 <template #activator="{ props: tooltipProps }">
                   <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color"
-                    rounded="1" size="36">
-                    <IconFilter size="24" />
-                  </VBtn>
+                    icon="mdi-filter-cog-outline" rounded size="36" />
                 </template>
               </v-tooltip>
             </template>
-
-            <VCard>
+            <VCard class="account_vcard_menu account_vcard_border">
               <div class="account_vcard_menu_hdng px-4">Add Filters</div>
               <VDivider class="my-1 mt-0" />
-
-              <div v-for="filter in props.filters" :key="filter.title" class="px-3 py-1 d-flex align-center gap-2">
-                <VCheckbox :model-value="filter.checked" @update:model-value="toggleFilter(filter.title)"
-                  density="compact" />
-                <span>{{ filter.title }}</span>
+              <div class="account_table_filter_menu py-1">
+                <div class="account_vcard_menu_item">
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                    <VCheckbox v-model="showDateFilter" class="account_v_checkbox account_filter_menu_checkbox"
+                      density="compact" />
+                    <span>Date</span>
+                  </div>
+                </div>
+                <div class="account_vcard_menu_item">
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
+                    <span>Created By</span>
+                  </div>
+                </div>
+                <div class="account_vcard_menu_item">
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
+                    <span>Account</span>
+                  </div>
+                </div>
               </div>
             </VCard>
           </VMenu>
+
 
           <VMenu width="110px" location="bottom" :close-on-content-click="false">
             <template v-slot:activator="{ props }">
@@ -806,30 +824,6 @@ onMounted(async () => {
           </VMenu>
         </div>
       </div>
-      <!-- <VSlideYTransition mode="in-out">
-        <VRow>
-          <VCol v-if="!hasActiveFilters" cols="12">
-            <VAlert type="info" variant="tonal">
-              No filters selected. Please select a filter to apply.
-            </VAlert>
-          </VCol>
-
-         <VCol v-if="isFilterChecked('Date')" cols="12" lg="3" md="3">
-            <div class="d-flex align-center gap-2">
-              <v-date-input class="accounting_date_input" placeholder="Entry Date Filter" max-width="368"
-                multiple="range">
-                <template>
-                  <IconCalendar style="font-size: 20px;" />
-                </template>
-              </v-date-input>
-
-              <VBtn variant="text" size="small" @click="cancelFilter('Date')">
-                <IconCircleDashedX style="font-size: 20px;" />
-              </VBtn>
-            </div>
-          </VCol>
-        </VRow>
-      </VSlideYTransition> -->
 
       <VCardText class="mt-2 pa-3">
         <VCard variant="flat" class="shadow-none">
@@ -840,7 +834,7 @@ onMounted(async () => {
               <v-progress-circular indeterminate size="48" color="primary" />
             </div>
 
-            <table class="table table-bordered account_entries_table text-center w-100" :filter="filters"
+            <table class="table table-bordered account_entries_table text-center w-100"
               :class="{ 'compact-table': isTableCompact }">
 
 
