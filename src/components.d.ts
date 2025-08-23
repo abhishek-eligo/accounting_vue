@@ -22,6 +22,7 @@ declare module 'vue' {
     AccountUserRolePermission: typeof import('./components/pages/AccountUserRolePermission.vue')['default']
     AccountVendorsList: typeof import('./components/pages/AccountVendorsList.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
+    ConfirmDialog: typeof import('./components/ConfirmDialog.vue')['default']
     DynamicDataTable: typeof import('./components/DynamicDataTable.vue')['default']
     ExampleApiUsage: typeof import('./components/ExampleApiUsage.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']

@@ -106,8 +106,15 @@ const parentGroupRules = [(v) => !!v || "This field is required"];
 const showDeleteGroupDialog = ref(false)
 const showSoftDeleteGroupDialog = ref(false)
 const showRestoreGroupDialog = ref(false)
+
 const showDeleteSubgroupDialog = ref(false)
+const showSoftDeleteSubgroupDialog = ref(false)
+const showRestoreSubgroupDialog = ref(false)
+
 const showDeleteLedgerDialog = ref(false)
+const showSoftDeleteLedgerDialog = ref(false)
+const showRestoreLedgerDialog = ref(false)
+
 const groupToDelete = ref(null)
 const subGroupToDelete = ref(null)
 const ledgerToDelete = ref(null)
@@ -166,10 +173,10 @@ async function submitRestoreGroup() {
   groupToDelete.value = null
 }
 
-async function submitDeleteSubgroup() {
+async function submitDeleteSubGroup() {
   try {
     const response = await apiService.delete(
-      `${API_CONFIG.ENDPOINTS.LEDGER_SUB_GROUPS}/${subGroupToDelete.value}`
+      `${API_CONFIG.ENDPOINTS.LEDGER_SUB_GROUPS}/${subGroupToDelete.value}/force`
     )
     if (response.status === 200) {
       await loadLedgerGroups()
@@ -184,10 +191,46 @@ async function submitDeleteSubgroup() {
   subGroupToDelete.value = null
 }
 
+async function submitSoftDeleteSubGroup() {
+  try {
+    const response = await apiService.delete(
+      `${API_CONFIG.ENDPOINTS.LEDGER_SUB_GROUPS}/${subGroupToDelete.value}`
+    )
+    if (response.status === 200) {
+      await loadLedgerGroups()
+      await fetchLedgerHierarchy()
+      toast.success("Ledger Sub-Group soft-deleted successfully.")
+    }
+  } catch (error) {
+    console.error(error)
+    toast.error("Failed to soft-delete ledger sub-group.")
+  }
+  showSoftDeleteSubgroupDialog.value = false
+  subGroupToDelete.value = null
+}
+
+async function submitRestoreSubGroup() {
+  try {
+    const response = await apiService.post(
+      `${API_CONFIG.ENDPOINTS.LEDGER_SUB_GROUPS}/${subGroupToDelete.value}/restore`
+    )
+    if (response.status === 200) {
+      await loadLedgerGroups()
+      await fetchLedgerHierarchy()
+      toast.success("Ledger Sub-Group restore successfully.")
+    }
+  } catch (error) {
+    console.error(error)
+    toast.error("Failed to restore ledger sub-group.")
+  }
+  showRestoreSubgroupDialog.value = false
+  subGroupToDelete.value = null
+}
+
 async function submitDeleteLedger() {
   try {
     const response = await apiService.delete(
-      `${API_CONFIG.ENDPOINTS.LEDGERS}/${ledgerToDelete.value}`
+      `${API_CONFIG.ENDPOINTS.LEDGERS}/${ledgerToDelete.value}/force`
     )
     if (response.status === 200) {
       await loadLedgerGroups()
@@ -199,6 +242,42 @@ async function submitDeleteLedger() {
     toast.error("Failed to delete ledger.")
   }
   showDeleteLedgerDialog.value = false
+  ledgerToDelete.value = null
+}
+
+async function submitSoftDeleteLedger() {
+  try {
+    const response = await apiService.delete(
+      `${API_CONFIG.ENDPOINTS.LEDGERS}/${ledgerToDelete.value}`
+    )
+    if (response.status === 200) {
+      await loadLedgerGroups()
+      await fetchLedgerHierarchy()
+      toast.success("Ledger soft-deleted successfully.")
+    }
+  } catch (error) {
+    console.error(error)
+    toast.error("Failed to soft-delete ledger.")
+  }
+  showSoftDeleteLedgerDialog.value = false
+  ledgerToDelete.value = null
+}
+
+async function submitRestoreLedger() {
+  try {
+    const response = await apiService.post(
+      `${API_CONFIG.ENDPOINTS.LEDGERS}/${ledgerToDelete.value}/restore`
+    )
+    if (response.status === 200) {
+      await loadLedgerGroups()
+      await fetchLedgerHierarchy()
+      toast.success("Ledger restore successfully.")
+    }
+  } catch (error) {
+    console.error(error)
+    toast.error("Failed to restore ledger.")
+  }
+  showRestoreLedgerDialog.value = false
   ledgerToDelete.value = null
 }
 
@@ -407,7 +486,16 @@ async function submitGroupForm() {
     console.log(response);
   } catch (error) {
     console.error(error);
-    toast.error("Failed to create group.");
+
+    if (error.response && error.response.status === 422) {
+      // Loop through all validation errors
+      const errors = error.response.data.errors;
+      Object.values(errors).forEach((messages) => {
+        messages.forEach((msg) => toast.error(msg)); // show each message in toast
+      });
+    } else {
+      toast.error("Failed to create group.");
+    }
   }
   //toast.success("Ledger Group created successfully.");
 
@@ -705,17 +793,17 @@ function handleSoft(node) {
     selectedNodeToDelete.value = node.name;
   }
 
-  // if (node.type === 'ledger-sub-group') {
-  //   showDeleteSubgroupDialog.value = true;
-  //   subGroupToDelete.value = node.id;
-  //   selectedNodeToDelete.value = node.name;
-  // }
+  if (node.type === 'ledger-sub-group') {
+    showSoftDeleteSubgroupDialog.value = true;
+    subGroupToDelete.value = node.id;
+    selectedNodeToDelete.value = node.name;
+  }
 
-  // if (node.type === 'ledger') {
-  //   showDeleteLedgerDialog.value = true;
-  //   ledgerToDelete.value = node.id;
-  //   selectedNodeToDelete.value = node.name;
-  // }
+  if (node.type === 'ledger') {
+    showSoftDeleteLedgerDialog.value = true;
+    ledgerToDelete.value = node.id;
+    selectedNodeToDelete.value = node.name;
+  }
 }
 
 function handleRestore(node) {
@@ -728,17 +816,17 @@ function handleRestore(node) {
     selectedNodeToDelete.value = node.name;
   }
 
-  // if (node.type === 'ledger-sub-group') {
-  //   showDeleteSubgroupDialog.value = true;
-  //   subGroupToDelete.value = node.id;
-  //   selectedNodeToDelete.value = node.name;
-  // }
+  if (node.type === 'ledger-sub-group') {
+    showRestoreSubgroupDialog.value = true;
+    subGroupToDelete.value = node.id;
+    selectedNodeToDelete.value = node.name;
+  }
 
-  // if (node.type === 'ledger') {
-  //   showDeleteLedgerDialog.value = true;
-  //   ledgerToDelete.value = node.id;
-  //   selectedNodeToDelete.value = node.name;
-  // }
+  if (node.type === 'ledger') {
+    showRestoreLedgerDialog.value = true;
+    ledgerToDelete.value = node.id;
+    selectedNodeToDelete.value = node.name;
+  }
 }
 
 // === API Calls ===
@@ -1048,90 +1136,43 @@ watch(
       </VCard>
     </VDialog>
 
-    <!-- Delete Group Dialog -->
-    <VDialog v-model="showDeleteGroupDialog" max-width="600">
-      <VCard>
-        <VCardTitle class="account_ui_swtich_title pb-0">Permanent Delete Ledger Group</VCardTitle>
-        <VCardSubtitle class="account_ui_swtich_subtitle px-3">
-          Are you sure you want to delete this <strong>{{ selectedNodeToDelete }}</strong> group.?
-          <h6 class="text-error text-center">This action cannot be undone.</h6>
-        </VCardSubtitle>
+    <!-- Ledger Group Permanent Delete -->
+    <ConfirmDialog v-model="showDeleteGroupDialog" type="Ledger Group" action="delete" :itemName="selectedNodeToDelete"
+      @confirm="submitDeleteGroup" />
 
-        <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
-            @click="showDeleteGroupDialog = false" />
-          <VBtn text="Delete" class="account_v_btn_primary" color="error" @click="submitDeleteGroup" />
-        </VCardActions>
-      </VCard>
-    </VDialog>
+    <!-- Ledger Group Soft Delete -->
+    <ConfirmDialog v-model="showSoftDeleteGroupDialog" type="Ledger Group" action="soft"
+      :itemName="selectedNodeToDelete" @confirm="submitSoftDeleteGroup" />
 
-    <VDialog v-model="showSoftDeleteGroupDialog" max-width="600">
-      <VCard>
-        <VCardTitle class="account_ui_swtich_title pb-0">Soft Delete Ledger Group</VCardTitle>
-        <VCardSubtitle class="account_ui_swtich_subtitle px-3">
-          Are you sure you want to delete this <strong>{{ selectedNodeToDelete }}</strong> group.?
-        </VCardSubtitle>
-
-        <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
-            @click="showSoftDeleteGroupDialog = false" />
-          <VBtn text="Delete" class="account_v_btn_primary" color="error" @click="submitSoftDeleteGroup" />
-        </VCardActions>
-      </VCard>
-    </VDialog>
-
-    <VDialog v-model="showRestoreGroupDialog" max-width="600">
-      <VCard>
-        <VCardTitle class="account_ui_swtich_title pb-0">
-          Restore Ledger Group
-        </VCardTitle>
-
-        <VCardSubtitle class="account_ui_swtich_subtitle px-3">
-          Are you sure you want to restore the
-          <strong>{{ selectedNodeToDelete }}</strong> group?
-        </VCardSubtitle>
-
-        <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
-            @click="showRestoreGroupDialog = false" />
-          <VBtn text="Restore" class="account_v_btn_primary" color="success" @click="submitRestoreGroup" />
-        </VCardActions>
-      </VCard>
-    </VDialog>
+    <!-- Ledger Group Restore -->
+    <ConfirmDialog v-model="showRestoreGroupDialog" type="Ledger Group" action="restore"
+      :itemName="selectedNodeToDelete" @confirm="submitRestoreGroup" />
 
 
-    <VDialog v-model="showDeleteSubgroupDialog" max-width="600">
-      <VCard>
-        <VCardTitle class="account_ui_swtich_title pb-0">Delete Ledger Sub-Group</VCardTitle>
-        <VCardSubtitle class="account_ui_swtich_subtitle px-3">
-          Are you sure you want to delete this <strong>{{ selectedNodeToDelete }}</strong> sub-group.?
-          <h6 class="text-error text-center">This action cannot be undone.</h6>
-        </VCardSubtitle>
+    <!-- Ledger SubGroup Permanent Delete -->
+    <ConfirmDialog v-model="showDeleteSubgroupDialog" type="Ledger Sub-Group" action="delete"
+      :itemName="selectedNodeToDelete" @confirm="submitDeleteSubGroup" />
 
-        <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
-            @click="showDeleteSubgroupDialog = false" />
-          <VBtn text="Delete" class="account_v_btn_primary" color="error" @click="submitDeleteSubgroup" />
-        </VCardActions>
-      </VCard>
-    </VDialog>
+    <!-- Ledger SubGroup Soft Delete -->
+    <ConfirmDialog v-model="showSoftDeleteSubgroupDialog" type="Ledger Sub-Group" action="soft"
+      :itemName="selectedNodeToDelete" @confirm="submitSoftDeleteSubGroup" />
 
-    <VDialog v-model="showDeleteLedgerDialog" max-width="600">
-      <VCard>
-        <VCardTitle class="account_ui_swtich_title pb-0">Delete Ledger</VCardTitle>
-        <VCardSubtitle class="account_ui_swtich_subtitle px-3">
-          Are you sure you want to delete this <strong>{{ selectedNodeToDelete }}</strong> ledger.?
-          <h6 class="text-error text-center">This action cannot be undone.</h6>
-        </VCardSubtitle>
+    <!-- Ledger SubGroup Restore -->
+    <ConfirmDialog v-model="showRestoreSubgroupDialog" type="Ledger Sub-Group" action="restore"
+      :itemName="selectedNodeToDelete" @confirm="submitRestoreSubGroup" />
 
-        <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
-            @click="showDeleteLedgerDialog = false" />
-          <VBtn text="Delete" class="account_v_btn_primary" color="error" @click="submitDeleteLedger" />
-        </VCardActions>
-      </VCard>
-    </VDialog>
 
+    <!-- Ledger Permanent Delete -->
+    <ConfirmDialog v-model="showDeleteLedgerDialog" type="Ledger" action="delete" :itemName="selectedNodeToDelete"
+      @confirm="submitDeleteLedger" />
+
+    <!-- Ledger Soft Delete -->
+    <ConfirmDialog v-model="showSoftDeleteLedgerDialog" type="Ledger" action="soft" :itemName="selectedNodeToDelete"
+      @confirm="submitSoftDeleteLedger" />
+
+    <!-- Ledger Restore -->
+    <ConfirmDialog v-model="showRestoreLedgerDialog" type="Ledger" action="restore" :itemName="selectedNodeToDelete"
+      @confirm="submitRestoreLedger" />
 
     <!-- Edit Dialog -->
     <VDialog v-model="showEditDialog" max-width="400" @click:outside="editFormRef?.resetValidation()">

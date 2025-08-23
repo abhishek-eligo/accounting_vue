@@ -137,7 +137,7 @@ const emit = defineEmits(["edit", "delete", "restore", "soft"]);
               </VListItem>
               <VListItem @click="onDelete">
                 <VListItemTitle class="d-flex trash align-center gap-3">
-                  <IconTrash size="18" />
+                  <IconX size="18" />
                   <p class="mb-0">Delete</p>
                 </VListItemTitle>
               </VListItem>
@@ -150,7 +150,7 @@ const emit = defineEmits(["edit", "delete", "restore", "soft"]);
               <VListItem v-if="!isDeleted" @click="onSoft">
                 <VListItemTitle class="d-flex trash align-center gap-3">
                   <IconTrash size="18" />
-                  <p class="mb-0">Soft Delete</p>
+                  <p class="mb-0">SoftDelete</p>
                 </VListItemTitle>
               </VListItem>
             </VList>
