@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { VIcon, VChip } from "vuetify/components";
+import { useRouter } from "vue-router";
 import TreeItem from "./TreeItem.vue";
 
 const props = defineProps({
@@ -14,6 +15,7 @@ const props = defineProps({
 const expanded = ref(false);
 const menu = ref(false);
 const isHovered = ref(false);
+const router = useRouter();
 
 function toggle() {
   if (props.node.children) {
@@ -43,6 +45,23 @@ function onSoft() {
   console.log("Soft:", props.node);
   menu.value = false;
   emit("soft", props.node);
+}
+
+// Generate UUID for ledger navigation
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+// Handle ledger icon click
+function onLedgerClick(event) {
+  event.stopPropagation(); // Prevent tree toggle
+  const ledgerUuid = generateUUID();
+  console.log('Navigating to ledger:', props.node.name, 'with UUID:', ledgerUuid);
+  router.push(`/ledger/${ledgerUuid}`);
 }
 
 // Dynamic class for chip
@@ -104,7 +123,7 @@ const emit = defineEmits(["edit", "delete", "restore", "soft"]);
           <IconChevronDown v-if="props.node.children && expanded" size="16" />
           <IconChevronRight v-else-if="props.node.children" size="16" />
         </div>
-        <IconFileText v-if="isLedger" class="account_ledger_icon" size="16" />
+        <IconFileText v-if="isLedger" class="account_ledger_icon" size="16" @click="onLedgerClick" style="cursor: pointer;" />
         <IconFolder v-else class="account_folder_icon" size="16" />
         <div class="">
           <h6 :class="[

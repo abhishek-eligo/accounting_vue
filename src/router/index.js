@@ -14,6 +14,7 @@ const dynamicRoutes = navigationListItems
 const routes = [
   { path: '/', redirect: '/table' },
   { path: '/api-demo', component: () => import('@/pages/api-demo/index.vue') },
+  { path: '/ledger/:id', component: () => import('@/pages/ledgers/[id].vue') },
   ...dynamicRoutes
 ]
 

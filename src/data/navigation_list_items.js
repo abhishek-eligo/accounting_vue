@@ -117,6 +117,13 @@ export default [
         component: () => import("@/pages/all-entries"),
       },
       // { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers', path: '/ledgers', component: () => import('@/pages/ledgers') },
+      {
+        title : "Trial Balance",
+        icon : "mdi-account-balance-outline",
+        slug : "trial-balance",
+        path : "/trial-balance",
+        component : () => import('@/pages/trial-balance')
+      },
     ],
   },
   {
