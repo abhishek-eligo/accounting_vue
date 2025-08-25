@@ -29,6 +29,7 @@ export const API_CONFIG = {
     LEDGER_SUB_GROUPS: '/ledgers_sub_groups',
     LEDGERS: '/ledgers',
     LEDGER_HIERARCHY: '/ledger-hierarchy',
+    LEDGER_GROUPS_CATEGORY: '/ledger_groups_category',
     LEDGER_SUB_GROUPS_BY_LEDGER_GROUP: (ledgerGroupId) =>
       `/ledgers_sub_groups/by_group/${ledgerGroupId}`,
     REPORTS: {
