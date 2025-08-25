@@ -22,7 +22,11 @@ declare module 'vue' {
     AccountUserRolePermission: typeof import('./components/pages/AccountUserRolePermission.vue')['default']
     AccountVendorsList: typeof import('./components/pages/AccountVendorsList.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
+
+    DeleteDailog: typeof import('./components/DeleteDailog.vue')['default']
+
     ConfirmDialog: typeof import('./components/ConfirmDialog.vue')['default']
+
     DynamicDataTable: typeof import('./components/DynamicDataTable.vue')['default']
     ExampleApiUsage: typeof import('./components/ExampleApiUsage.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
@@ -30,6 +34,7 @@ declare module 'vue' {
     InvoicePreview: typeof import('./components/pages/InvoicePreview.vue')['default']
     MenuNavigationDrawer: typeof import('./components/navigation/MenuNavigationDrawer.vue')['default']
     ProductsPage: typeof import('./components/pages/ProductsPage.vue')['default']
+    RevertDialog: typeof import('./components/RevertDialog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TokenInput: typeof import('./components/TokenInput.vue')['default']
