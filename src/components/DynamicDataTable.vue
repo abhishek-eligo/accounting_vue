@@ -34,6 +34,14 @@ const props = defineProps({
     type: Object,
     required: true
   },
+  hideWidgets: {
+    type: Boolean,
+    default: false
+  },
+  showSelect: {
+    type: Boolean,
+    default: true
+  },
   itemValueKey: {
     type: String,
     default: 'id' // fallback to 'id' if not specified
@@ -50,6 +58,9 @@ const itemsPerPage = ref(10)
 
 // Emit event for view action
 const emit = defineEmits(['view-item'])
+
+// Search functionality
+const searchValue = ref('')
 
 const handleViewAction = (item) => {
   if (props.enableViewAction) {
@@ -135,15 +146,31 @@ const getStatusClass = (status) => {
   }
 }
 
+// Filter items based on search
+const filteredItems = computed(() => {
+  if (!searchValue.value) {
+    return props.items;
+  }
+  
+  return props.items.filter(item => {
+    const searchTerm = searchValue.value.toLowerCase();
+    return (
+      (item.particulars && item.particulars.toLowerCase().includes(searchTerm)) ||
+      (item.voucherNo && item.voucherNo.toLowerCase().includes(searchTerm)) ||
+      (item.date && item.date.toLowerCase().includes(searchTerm))
+    );
+  });
+});
+
 // Pagination calculations
 const paginatedItems = computed(() => {
   const start = (page.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
-  return props.items.slice(start, end);
+  return filteredItems.value.slice(start, end);
 })
 
 const totalPages = computed(() => {
-  return Math.ceil(props.items.length / itemsPerPage.value);
+  return Math.ceil(filteredItems.value.length / itemsPerPage.value);
 })
 
 </script>
@@ -151,7 +178,7 @@ const totalPages = computed(() => {
 
 <template>
   <div class="account">
-    <VRow class="">
+    <VRow v-if="!hideWidgets" class="">
       <!-- Total Records -->
       <VCol cols="12" md="3">
         <VCard subtitle="Total Records" class="account_v_card_dark account_widget_vcard account_vcard_border">
@@ -212,7 +239,8 @@ const totalPages = computed(() => {
       <VCol cols="12" class="d-flex align-center">
         <VTextField class="accouting_field accouting_active_field" variant="outlined" density="compact"
           style="max-inline-size: 377px;"
-          :placeholder="title === 'Accounting' ? 'Search by Name' : 'Search by Customer Name'">
+          :placeholder="title === 'Accounting' ? 'Search by Name' : 'Search by particulars'"
+          v-model="searchValue">
           <template #prepend-inner>
             <IconSearch size="20" />
           </template>
@@ -414,7 +442,7 @@ const totalPages = computed(() => {
     </VSlideYTransition>
 
     <VCard class="mt-4 account_vcard_border">
-      <VDataTable :headers="visibleHeaders" :items="paginatedItems" :items-per-page="itemsPerPage" show-select
+      <VDataTable :headers="visibleHeaders" :items="paginatedItems" :items-per-page="itemsPerPage" :show-select="showSelect"
         :item-value="itemValueKey" :density="isTableCompact ? 'compact' : 'default'"
         class="elevation-1 border rounded account_dynamic_table">
         <template #item.actions="{ item }">
