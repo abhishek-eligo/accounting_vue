@@ -111,12 +111,26 @@ export default [
       },
       {
         title: "All Entries",
-        icon: "mdi-book-open-outline",
+        icon: "tabler-book-open",
         slug: "all-entries",
         path: "/all-entries",
         component: () => import("@/pages/all-entries"),
       },
       // { title: 'Ledgers', icon: 'mdi-wallet-outline', slug: 'ledgers', path: '/ledgers', component: () => import('@/pages/ledgers') },
+      {
+        title : "Trial Balance",
+        icon : "mdi-account-balance-outline",
+        slug : "trial-balance",
+        path : "/trial-balance",
+        component : () => import('@/pages/trial-balance')
+      },
+      {
+        title : "Ledger Table",
+        icon : "mdi-account-balance-outline",
+        slug : "ledger-table",
+        path : "/ledger-table",
+        component : () => import('@/pages/ledger-table')
+      }
     ],
   },
   {
