@@ -110,7 +110,7 @@ const submitJournalEntryForm = async () => {
     if (isEdit.value) {
       response = await axios.put(`account-history/${editId.value}`, payload, {
         headers: {
-          Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+          Authorization: `Bearer 1|Fjdga5HXzWPbqjESI5ti2wlod1xO1kkQZb1ZdDwM99b012c4`,
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
@@ -118,7 +118,7 @@ const submitJournalEntryForm = async () => {
     } else {
       response = await axios.post("account-history", payload, {
         headers: {
-          Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+          Authorization: `Bearer 1|Fjdga5HXzWPbqjESI5ti2wlod1xO1kkQZb1ZdDwM99b012c4`,
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
@@ -244,13 +244,35 @@ const filteredEntries = computed(() => {
     })
   }
 
-// 📅 Date filter
   if (showDateFilter.value && selectedDate.value) {
-    const picked = dayjs(selectedDate.value).format("DD-MM-YYYY") // normalize picker date
-    data = data.filter(entry =>
-      dayjs(entry.entry_date).format("DD-MM-YYYY") === picked // normalize backend date
-    )
+    if (Array.isArray(selectedDate.value)) {
+      if (selectedDate.value.length === 2) {
+        // Range mode
+        const [start, end] = selectedDate.value
+        const startDate = dayjs(start).startOf("day")
+        const endDate = dayjs(end).endOf("day")
+
+        data = data.filter(entry => {
+          const entryDate = dayjs(entry.entry_date)
+          return entryDate.isBetween(startDate, endDate, "day", "[]")
+        })
+      } else {
+        // Multiple discrete dates
+        const pickedDates = selectedDate.value.map(d => dayjs(d).format("DD-MM-YYYY"))
+
+        data = data.filter(entry =>
+          pickedDates.includes(dayjs(entry.entry_date).format("DD-MM-YYYY"))
+        )
+      }
+    } else {
+      // Single date
+      const picked = dayjs(selectedDate.value).format("DD-MM-YYYY")
+      data = data.filter(entry =>
+        dayjs(entry.entry_date).format("DD-MM-YYYY") === picked
+      )
+    }
   }
+
 
   return data
 })
@@ -342,7 +364,7 @@ const fetchData = async () => {
   try {
     const response = await axios.get("account-history", {
       headers: {
-        Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+        Authorization: `Bearer 1|Fjdga5HXzWPbqjESI5ti2wlod1xO1kkQZb1ZdDwM99b012c4`,
         Accept: "application/json",
       },
       params: {
@@ -403,11 +425,11 @@ const restoreEntry = async (id) => {
   await axios.post(`/account-history/${id}/restore`, {}, {
 
     headers: {
-      Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+      Authorization: `Bearer 1|Fjdga5HXzWPbqjESI5ti2wlod1xO1kkQZb1ZdDwM99b012c4`,
     },
   }
   );
-   toast.success("Entry Restored successfully.");
+  toast.success("Entry Restored successfully.");
   fetchData(); // refresh table
 };
 
@@ -430,7 +452,7 @@ const fetchledger = async () => {
   try {
     const response = await axios.get('ledgers', {
       headers: {
-        Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+        Authorization: `Bearer 1|Fjdga5HXzWPbqjESI5ti2wlod1xO1kkQZb1ZdDwM99b012c4`,
         Accept: "application/json",
       },
     })
@@ -483,12 +505,38 @@ async function submitLedgerForm() {
   ledgerFormRef.value?.resetValidation();
 }
 
+// const mainCategoryOptions = ref([]);
+// const isLoadingMainCategories = ref(false);
+
+// function mapMainCategoriesToOptions(data) {
+//   if (!Array.isArray(data)) return [];
+//   return data.map(item => ({
+//     title: item?.name,
+//     value: item?.id
+//   }));
+// }
+
+// async function loadMainCategories() {
+//   try {
+//     isLoadingMainCategories.value = true;
+//     const response = await apiService.get(API_CONFIG.ENDPOINTS.LEDGER_MAIN_CATEGORY);
+//     const mainCategories = response?.data ?? response;
+//     console.log('Api response for categories', mainCategories);
+//     mainCategoryOptions.value = mapMainCategoriesToOptions(mainCategories);
+//   } catch (error) {
+//     console.error('Failed to fetch ledgers main categories:', error);
+//     toast.error('Failed to load ledgers main categories');
+//   } finally {
+//     isLoadingMainCategories.value = false;
+//   }
+// }
+
 async function loadLedgerGroups() {
   try {
     isLoadingLedgerGroups.value = true;
-    const response = await apiService.get(API_CONFIG.ENDPOINTS.LEDGER_GROUPS);
+    const response = await apiService.get(API_CONFIG.ENDPOINTS.LEDGER_GROUPS_CATEGORY);
     const ledgerGroups = response?.data;
-    console.log(response);
+    console.log('LEDGER WITH CATEGORY', response);
     ledgerGroupOptions.value = mapLedgerGroupsToOptions(ledgerGroups);
   } catch (error) {
     console.error('Failed to fetch ledgers groups:', error);
@@ -511,7 +559,8 @@ function mapLedgerGroupsToOptions(data) {
   if (!Array.isArray(data)) return [];
   return data.map(item => ({
     title: item?.name,
-    value: item?.id
+    value: item?.id,
+    categoryTitle: item?.main_category?.name
   }));
 }
 
@@ -754,9 +803,10 @@ onMounted(async () => {
         <VMenu v-if="showDateFilter" v-model="menu" :close-on-content-click="false" transition="scale-transition"
           offset-y max-width="290" min-width="auto">
           <template #activator="{ props }">
-            <v-date-input v-model="selectedDate" @update:model-value="menu = false"  :display-format="format" v-bind="props"
-              class="accouting_field accouting_active_field" placeholder="Pick Entry Date" variant="outlined"
-              cancel-text="Close" ok-text="Apply" style="max-width: 300px" />
+            <v-date-input v-model="selectedDate" @update:model-value="menu = false" multiple="range"
+              :display-format="format" v-bind="props" class="accouting_field accouting_active_field"
+              placeholder="Pick Entry Date" variant="outlined" cancel-text="Close" ok-text="Apply"
+              style="max-width: 300px" />
           </template>
         </VMenu>
 
@@ -882,7 +932,7 @@ onMounted(async () => {
                         {{ getLedgerTitle(entry.particulars.accounts[0]?.title) || "N/A" }}
                       </td>
                       <td class="account_entries_table_debit account_primary_color">
-                        {{ entry.particulars.accounts[0]?.debit || "" }}
+                        ₹{{ entry.particulars.accounts[0]?.debit || "" }}
                       </td>
                       <td class="account_entries_table_credit account_error_color">
                         {{ entry.particulars.accounts[0]?.credit || "" }}
@@ -944,7 +994,7 @@ onMounted(async () => {
                       </td>
                       <td class="account_entries_table_credit account_error_color"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
-                        {{ account.credit || "" }}
+                        ₹{{ account.credit || "" }}
                       </td>
                     </tr>
                     <!-- Description and Narration row -->
@@ -978,10 +1028,25 @@ onMounted(async () => {
           <VForm ref="ledgerFormRef">
             <VTextField v-model="ledgerForm.name" :rules="nameRules" class="accouting_field accouting_active_field mb-2"
               placeholder="Name" variant="outlined" hide-details="auto" />
-            <VAutocomplete v-model="ledgerForm.ledgerGroup"
-              :items="ledgerGroupOptions.length ? ledgerGroupOptions : ledgerGroupOptions" :rules="parentGroupRules"
-              class="accouting_field accouting_active_field" placeholder="Ledger Group" item-title="title"
-              item-value="value" variant="outlined" hide-details="auto" />
+            <VAutocomplete v-model="ledgerForm.ledgerGroup" :items="ledgerGroupOptions" :rules="parentGroupRules"
+              class="accouting_field accouting_active_field" placeholder="Ledger Group" item-value="value"
+              variant="outlined" hide-details="auto">
+              <!-- Customize dropdown items -->
+              <template v-slot:item="{ props, item }">
+                <v-list-item v-bind="props">
+                  <!-- <v-list-item-title>{{ item.raw.title }}</v-list-item-title> -->
+                  <v-list-item-subtitle>{{ item.raw.categoryTitle }}</v-list-item-subtitle>
+                </v-list-item>
+              </template>
+
+              <!-- Customize selected item display -->
+              <template v-slot:selection="{ item }">
+                <div>
+                  {{ item.raw.title }}
+                  <span class="text-grey text-caption"> ({{ item.raw.categoryTitle }})</span>
+                </div>
+              </template>
+            </VAutocomplete>
             <VAutocomplete v-show="ledgerSubGroupOptions.length" v-model="ledgerForm.ledgerSubgroup"
               :items="ledgerSubGroupOptions.length ? ledgerSubGroupOptions : ledgerSubGroupOptions"
               class="mt-2 accouting_field accouting_active_field" placeholder="Ledger Sub-Group" item-title="title"
