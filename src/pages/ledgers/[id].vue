@@ -321,8 +321,8 @@ const filters = ref([
                     <!-- Top Summary Cards -->
                     <VRow class="mb-4">
                         <VCol cols="12" md="4">
-                            <VCard subtitle="TOTAL DEBITS"
-                                class="account_v_card_dark account_widget_vcard account_vcard_border">
+                            <VCard subtitle="Total Debits"
+                                class="account_v_card_dark  account_widget_vcard account_vcard_border">
                                 <template #append>
                                     <IconTrendingUp style="color: white;" size="20" />
                                 </template>
@@ -335,7 +335,7 @@ const filters = ref([
                         </VCol>
 
                         <VCol cols="12" md="4">
-                            <VCard subtitle="TOTAL CREDITS" class="account_vcard_border account_widget_vcard">
+                            <VCard subtitle="Total Credits" class="account_vcard_border account_widget_vcard">
                                 <template #append>
                                     <IconTrendingDown size="20" />
                                 </template>
@@ -348,7 +348,7 @@ const filters = ref([
                         </VCol>
 
                         <VCol cols="12" md="4">
-                            <VCard subtitle="CLOSING BALANCE" class="account_vcard_border account_widget_vcard">
+                            <VCard subtitle="Closing Balance" class="account_vcard_border account_widget_vcard">
                                 <template #append>
                                     <IconWallet size="20" />
                                 </template>
