@@ -111,7 +111,7 @@ export default [
       },
       {
         title: "All Entries",
-        icon: "tabler-book-open",
+        icon: "mdi-book-open-outline",
         slug: "all-entries",
         path: "/all-entries",
         component: () => import("@/pages/all-entries"),
@@ -124,13 +124,6 @@ export default [
         path : "/trial-balance",
         component : () => import('@/pages/trial-balance')
       },
-      {
-        title : "Ledger Table",
-        icon : "mdi-account-balance-outline",
-        slug : "ledger-table",
-        path : "/ledger-table",
-        component : () => import('@/pages/ledger-table')
-      }
     ],
   },
   {
