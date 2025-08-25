@@ -611,6 +611,7 @@ async function submitSubgroupForm() {
   subGroupForm.name = "";
   subGroupForm.parentGroup = null;
   subGroupFormRef.value?.resetValidation();
+
 }
 
 async function submitEditForm() {
@@ -872,6 +873,7 @@ watch(
   }
 );
 
+
 watch(
   () => editLedgerForm.ledgerGroup, // getter
   async (newGroupId, oldGroupId) => {
@@ -895,6 +897,7 @@ watch(
     }
   }
 );
+
 </script>
 
 <template>
@@ -1105,6 +1108,7 @@ watch(
       </VCard>
     </VDialog>
 
+ 
     <!-- Edit Sub-Group Dialog -->
     <VDialog v-model="showEditSubgroupDialog" max-width="400" @click:outside="editSubGroupFormRef?.resetValidation()">
       <VCard>

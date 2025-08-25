@@ -1,9 +1,13 @@
 <script setup>
-import { ref } from "vue";
+import { ref, reactive, computed, watch } from "vue";
 import { toast } from "vue3-toastify";
 import axios from "axios";
-import { computed } from "vue"
-import dayjs from "dayjs"
+import dayjs from "dayjs";
+import { apiService } from "../../services/api.js";
+import { API_CONFIG } from "../../config/api.js";
+import DeleteDailog from "../../components/DeleteDailog.vue";
+import RevertDialog from "../../components/RevertDialog.vue"
+
 
 // Function to handle amount input and show words
 function handleAmountInput(event, rowIndex, type) {
@@ -21,7 +25,25 @@ function handleAmountInput(event, rowIndex, type) {
   }
 }
 
+const ledgerFormRef = ref();
+
+const ledgerForm = reactive({
+  name: "",
+  ledgerGroup: null,
+  ledgerSubgroup: null,
+});
+const isLoadingLedgerGroups = ref(false);
+
+const showLedgerDialog = ref(false);
+
 const journalEntryFormRef = ref(null)
+
+const ledgerGroupOptions = ref([]);
+
+const ledgerSubGroupOptions = ref([]);
+
+const isEdit = ref(false)
+const editId = ref(null)
 
 // Journal entry form data
 const journalEntryForm = ref({
@@ -66,173 +88,114 @@ const validateForm = () => {
   return null
 }
 
+
+
 const submitJournalEntryForm = async () => {
   const error = validateForm()
   if (error) {
-    alert(error) // you can use Snackbar/Toast instead of alert
+    toast.error(error)
     return
   }
-
 
   try {
     const payload = {
       ...journalEntryForm.value,
       debitRows: debitRows.value,
       creditRows: creditRows.value,
-      createdBy: '83fd1e60-a10c-4c2a-9826-58ec72559578',
+      createdBy: "83fd1e60-a10c-4c2a-9826-58ec72559578",
+      updatedBy: "83fd1e60-a10c-4c2a-9826-58ec72559578"
     }
 
-    const response = await axios.post("account-history",
-      payload,
-      {
+    let response
+    if (isEdit.value) {
+      response = await axios.put(`account-history/${editId.value}`, payload, {
         headers: {
-          "Authorization": `Bearer 1|zv7uphznL6fA9EMAkHTGAFaVEm6wpDZxLpM1cZp7a4e8379e`, // 👈 replace with your auth token
+          Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
-      }
-    );
+      })
+    } else {
+      response = await axios.post("account-history", payload, {
+        headers: {
+          Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+      })
+    }
 
-    if (response.status === 201 || response.status === 200) {
-      alert("Journal Entry saved successfully!")
-      // Reset form after success
-      journalEntryForm.value = {
-        entryDate: null,
-        narration: "",
-        voucherType: null,
-        voucherNumber: null,
-      }
-      debitRows.value = [{ account: null, amount: null, amountInWords: "" }]
-      creditRows.value = [{ account: null, amount: null, amountInWords: "" }]
-      showJournalEntryCard.value = false;
-      fetchData();
+    if (response.status === 200 || response.status === 201) {
+      toast.success(isEdit.value ? "Journal Entry updated!" : "Journal Entry saved!")
+      resetForm()
+      showJournalEntryCard.value = false
+      fetchData()
     }
   } catch (err) {
     console.error(err)
-    alert("Failed to save journal entry")
+    toast.error("Failed to submit journal entry")
   }
 }
 
-const chartData = reactive([
-  {
-    id: "1",
-    name: "Assets",
-    type: "Balance Sheet",
-    children: [
-      {
-        id: "1.1",
-        name: "Current Assets",
-        type: "Balance Sheet",
-        children: [
-          { id: "1.1.1", name: "Cash", type: "Balance Sheet" },
-          { id: "1.1.2", name: "Bank Accounts", type: "Balance Sheet" },
-          { id: "1.1.3", name: "Accounts Receivable", type: "Balance Sheet" },
-        ],
-      },
-      {
-        id: "1.2",
-        name: "Fixed Assets",
-        type: "Balance Sheet",
-        children: [
-          { id: "1.2.1", name: "Property & Equipment", type: "Balance Sheet" },
-          { id: "1.2.2", name: "Vehicles", type: "Balance Sheet" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "2",
-    name: "Liabilities",
-    type: "Balance Sheet",
-    children: [
-      {
-        id: "2.1",
-        name: "Current Liabilities",
-        type: "Balance Sheet",
-        children: [
-          { id: "2.1.1", name: "Accounts Payable", type: "Balance Sheet" },
-          { id: "2.1.2", name: "Credit Card Payable", type: "Balance Sheet" },
-        ],
-      },
-      {
-        id: "2.2",
-        name: "Long-Term Liabilities",
-        type: "Balance Sheet",
-        children: [{ id: "2.2.1", name: "Bank Loan", type: "Balance Sheet" }],
-      },
-    ],
-  },
-  {
-    id: "3",
-    name: "Equity",
-    type: "Balance Sheet",
-    children: [
-      { id: "3.1", name: "Owner's Equity", type: "Balance Sheet" },
-      { id: "3.2", name: "Retained Earnings", type: "Balance Sheet" },
-    ],
-  },
-  {
-    id: "4",
-    name: "Income",
-    type: "Profit & Loss",
-    children: [
-      { id: "4.1", name: "Sales Revenue", type: "Profit & Loss" },
-      { id: "4.2", name: "Interest Income", type: "Profit & Loss" },
-    ],
-  },
-  {
-    id: "5",
-    name: "Expenses",
-    type: "Profit & Loss",
-    children: [
-      {
-        id: "5.1",
-        name: "Cost of Goods Sold",
-        type: "Profit & Loss",
-        children: [{ id: "5.1.1", name: "Purchases", type: "Profit & Loss" }],
-      },
-      {
-        id: "5.2",
-        name: "Operating Expenses",
-        type: "Profit & Loss",
-        children: [
-          { id: "5.2.1", name: "Rent Expense", type: "Profit & Loss" },
-          { id: "5.2.2", name: "Salaries & Wages", type: "Profit & Loss" },
-          { id: "5.2.3", name: "Utilities Expense", type: "Profit & Loss" },
-        ],
-      },
-    ],
-  },
-]);
+
+const resetForm = () => {
+  journalEntryForm.value = { entryDate: null, narration: "", voucherType: null, voucherNumber: null }
+  debitRows.value = [{ account: null, amount: null, amountInWords: "" }]
+  creditRows.value = [{ account: null, amount: null, amountInWords: "" }]
+  isEdit.value = false
+  editId.value = null
+}
+
+
+const openEditForm = (entry) => {
+  showJournalEntryCard.value = true
+  isEdit.value = true
+  editId.value = entry.id
+  console.log("Editing entry:", entry)
+
+  // Map backend snake_case → frontend camelCase
+  journalEntryForm.value = {
+    entryDate: entry.entry_date,
+    narration: entry.narration,
+    voucherType: entry.voucher_type,
+    voucherNumber: entry.voucher_number,
+  }
+
+  // particulars = lines (you had debitRows/creditRows separately in create form)
+  debitRows.value = entry.particulars.accounts
+    ?.filter(line => line.debit != '') // 1 = Debit
+    .map(line => ({
+      account: line.title,
+      amount: line.debit,
+    })) || []
+
+  creditRows.value = entry.particulars.accounts
+    ?.filter(line => line.credit != '') // 2 = Credit
+    .map(line => ({
+      account: line.title,
+      amount: line.credit,
+    })) || []
+}
+
 
 const showJournalEntryCard = ref(false);
-const showLedgerDialog = ref(false);
 const showDetailsDialog = ref(false);
 const selectedEntry = ref(null);
 
 
-const entriesTableHeaders = ref([
-  { title: "Date", value: "date", visible: true },
-  { title: "Entry #", value: "entry", visible: true },
-  { title: "Voucher Type", value: "voucher_type", visible: true },
-  { title: "Particulars", value: "particulars", visible: true },
-  { title: "Debit", value: "debit", visible: true },
-  { title: "Credit", value: "credit", visible: true },
-  { title: "Status", value: "status", visible: true },
-  { title: "Actions", value: "actions", visible: true },
-]);
+const menu = ref(false)
+const selectedDate = ref(null)
+const showDateFilter = ref(false)
 
-const allLedgers = ref([
-  { title: "HDFC Bank", value: "9bf5d943-bc32-4323-b884-60854cf5cc97", groupId: "1.1.2" },
-  { title: "ICICI Bank", value: "5c1a2b4d-3e6f-4b21-a9c8-7d2e8a9f3e45", groupId: "1.1.2" },
-  { title: "Cash", value: "7a9d3c2f-18b6-4f4a-9e22-6c1d0f8a7b32", groupId: "1.1.1" },
-  { title: "Innovate Inc.", value: "e2b3d9f4-6a1c-4b0e-b7a8-9c3f5e2d7a10", groupId: "1.1.3" },
-  { title: "Solutions Corp.", value: "c4f6a2d8-2b9e-4e1d-8c7a-1d5e9f6b2c34", groupId: "1.1.3" },
-  { title: "Furniture & Fixtures", value: "a6b2f9d1-4e5c-46a8-8b3a-2f9c1e7d5b90", groupId: "1.2.1" },
-  { title: "Computers", value: "f1e7c3a2-6b8d-44f0-91a2-8c9e5b7d3f21", groupId: "1.2.1" },
-  { title: "GST Payable", value: "d9c1b7e3-2f4a-4b5c-8e7d-1a9f2c3e4b56", groupId: "2.1" },
-  { title: "Cloud Services LLC", value: "b2e7a1d9-3f5c-4e8a-9d7b-6c2f1a8e5b43", groupId: "1.1.3" },
-]);
+
+function format(date) {
+  return date ? dayjs(date).format("DD-MM-YYYY") : ""
+}
+
+
+
+const isTableCompact = ref(false);
+
 
 
 const voucherTypes = ref([
@@ -241,6 +204,7 @@ const voucherTypes = ref([
   { title: "Journal Voucher", value: "3" },
   { title: "Payment Voucher", value: "4" },
   { title: "Reciept Voucher", value: "5" },
+  { title: "Reverse Entry Voucher", value: "6" }
 ]);
 
 const voucherNo = ref([
@@ -252,6 +216,45 @@ const voucherNo = ref([
 ]);
 
 const allEntries = ref([])
+
+const searchQuery = ref("")
+
+const loading = ref(true)
+
+const filteredEntries = computed(() => {
+  let data = allEntries.value
+
+  // 🔎 First apply text search filter
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase()
+
+    data = data.filter(entry => {
+      const voucherType = (getVoucherTypeTitle(entry.voucher_type) || "").toLowerCase()
+      const voucherNumber = (getVoucherNumberTitle(entry.voucher_number) || "").toLowerCase()
+
+      const accountNames = (entry.particulars?.accounts || [])
+        .map(acc => (getLedgerTitle(acc.title) || "").toLowerCase())
+        .join(" ")
+
+      return (
+        voucherType.includes(query) ||
+        voucherNumber.includes(query) ||
+        accountNames.includes(query)
+      )
+    })
+  }
+
+// 📅 Date filter
+  if (showDateFilter.value && selectedDate.value) {
+    const picked = dayjs(selectedDate.value).format("DD-MM-YYYY") // normalize picker date
+    data = data.filter(entry =>
+      dayjs(entry.entry_date).format("DD-MM-YYYY") === picked // normalize backend date
+    )
+  }
+
+  return data
+})
+
 
 
 
@@ -270,14 +273,15 @@ const getLedgerTitle = (value) => {
   return found ? found.title : value
 }
 
+// const getLedgerTitle = (id) => {
+//   const found = allLedgers.value.find(l => l.value === id)
+//   return found ? found.title : id
+// }
 
-// Ledger form
-const ledgerForm = reactive({
-  name: "",
-  parentGroup: null,
-});
 
-const ledgerFormRef = ref();
+
+
+
 
 // Import ledger validations
 
@@ -286,78 +290,7 @@ const parentGroupRules = [
   (v) => validateField(v, ledgerValidations.parentGroup),
 ];
 
-// Build parent group options
-function buildParentGroupOptions(data, level = 0) {
-  return data.flatMap((node) => {
-    if (!node.children && node.children !== undefined) return [];
-    const indent = "— ".repeat(level);
-    const current = {
-      title: `${indent}${node.name}`,
-      value: node.id,
-    };
-    const children = node.children
-      ? buildParentGroupOptions(node.children, level + 1)
-      : [];
-    return [current, ...children];
-  });
-}
-const parentGroups = ref(buildParentGroupOptions(chartData));
 
-// Find node by ID
-function findNodeById(data, id) {
-  for (const node of data) {
-    if (node.id === id) return node;
-    if (node.children) {
-      const found = findNodeById(node.children, id);
-      if (found) return found;
-    }
-  }
-  return null;
-}
-
-// Submit ledger form
-async function submitLedgerForm() {
-  const { valid } = await ledgerFormRef.value?.validate();
-  if (!valid) {
-    toast.error("Please fill all required fields for Ledger.");
-    return;
-  }
-
-  const parentNode = findNodeById(chartData, ledgerForm.parentGroup);
-  if (!parentNode) {
-    toast.error("Parent group not found.");
-    return;
-  }
-
-  if (!parentNode.children) {
-    parentNode.children = [];
-  }
-
-  const parentParts = ledgerForm.parentGroup.split(".");
-  const newIndex = parentNode.children.length
-    ? Math.max(
-      ...parentNode.children.map((c) => parseInt(c.id.split(".").pop()))
-    ) + 1
-    : 1;
-  const newId = `${ledgerForm.parentGroup}.${newIndex}`;
-
-  const newLedger = {
-    id: newId,
-    name: ledgerForm.name,
-    type: parentNode.type,
-    children: null,
-  };
-
-  parentNode.children.push(newLedger);
-  parentGroups.value = buildParentGroupOptions(chartData);
-  toast.success("Ledger created successfully.");
-
-  // Reset
-  showLedgerDialog.value = false;
-  ledgerForm.name = "";
-  ledgerForm.parentGroup = null;
-  ledgerFormRef.value?.resetValidation();
-}
 
 const addDebitRow = () => {
   debitRows.value.push({ account: null, amount: 0, amountInWords: "" });
@@ -396,20 +329,25 @@ function totalAmount(accounts, type) {
   return `₹${sum.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
 }
 
-function getToAccounts(entry) {
-  if (!entry?.particulars?.description?.to) return [];
-  return entry.particulars.description.to.split(",").map((a) => a.trim());
-}
+// function getToAccounts(entry) {
+//   if (!entry?.particulars?.description?.to) return [];
+//   return entry.particulars.description.to.split(",").map((a) => a.trim());
+// }
 
 const hoveredRowIndex = ref(null);
 const bounceKey = ref(0);
 
 const fetchData = async () => {
+  loading.value = true
   try {
     const response = await axios.get("account-history", {
       headers: {
-        Authorization: `Bearer 1|zv7uphznL6fA9EMAkHTGAFaVEm6wpDZxLpM1cZp7a4e8379e`,
+        Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
         Accept: "application/json",
+      },
+      params: {
+        show: "withTrashed", // 👈 options: "active", "withTrashed", "onlyTrashed"
+        per_page: 15,
       },
     })
 
@@ -425,7 +363,8 @@ const fetchData = async () => {
         voucher_number: entry.voucher_number,
         voucher_type: entry.voucher_type,
         narration: entry.narration,
-        status: "Approved", // you can adjust based on backend if status exists
+        status: "Pending", // you can adjust based on backend if status exists
+        deleted_at: entry.deleted_at,
         particulars: {
           description: { narration: entry.narration },
           accounts: entry.acc_account_history_entry_line.map(line => ({
@@ -438,14 +377,174 @@ const fetchData = async () => {
     });
   } catch (err) {
     console.error("Error fetching account history:", err);
+    toast.error("Error fetching account history");
+  } finally {
+    loading.value = false;
   }
 };
+
+const showDeleteDialog = ref(false)
+const selectedEntryId = ref(null)
+const deleteMode = ref("soft");
+
+
+const openDeleteDialog = (id, mode) => {
+  selectedEntryId.value = id
+  deleteMode.value = mode
+  showDeleteDialog.value = true
+}
+
+const refreshTable = async () => {
+  await fetchData();
+  console.log("Entry deleted, refresh table...");
+}
+
+const restoreEntry = async (id) => {
+  await axios.post(`/account-history/${id}/restore`, {}, {
+
+    headers: {
+      Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+    },
+  }
+  );
+   toast.success("Entry Restored successfully.");
+  fetchData(); // refresh table
+};
+
+const showRevertDialog = ref(false)
+
+
+const openRevert = (id) => {
+  selectedEntryId.value = id
+  showRevertDialog.value = true
+}
+
+const fetchEntries = async () => {
+  await fetchData();
+  console.log("Entry reverted");
+}
+
+const allLedgers = ref([])
+
+const fetchledger = async () => {
+  try {
+    const response = await axios.get('ledgers', {
+      headers: {
+        Authorization: `Bearer 1|Hj73Nc2i2LIuddwGjBpypo6RL2SF57x5gHakZo3ue431ac8c`,
+        Accept: "application/json",
+      },
+    })
+
+    console.log('Api Ledger Response', response.data);
+    allLedgers.value = response.data.data.map(l => ({
+      title: l.name,            // what user sees
+      value: l.id,              // what gets saved in v-model
+      groupId: l.ledger_group_id,
+      subGroupId: l.ledger_sub_group_id,
+    }))
+  } catch (error) {
+    console.error("Error fetching ledger:", error)
+  }
+}
+
+async function submitLedgerForm() {
+  const { valid } = await ledgerFormRef.value?.validate();
+  if (!valid) {
+    toast.error("Please fill all required fields for Ledger.");
+    return;
+  }
+
+  try {
+    // Call your backend API to create the new group
+    const response = await apiService.post(
+      API_CONFIG.ENDPOINTS.LEDGERS,
+      {
+        name: ledgerForm.name,
+        ledger_group_id: ledgerForm.ledgerGroup, // send main ledger group id
+        ledger_sub_group_id: ledgerForm.ledgerSubgroup, // send main ledger subgroup id
+      }
+    );
+    if (response.status === 201) {
+      // fetchLedgerHierarchy();
+      fetchledger();
+      toast.success("Ledger created successfully.");
+    }
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to create ledger.");
+  }
+
+  // Reset
+  showLedgerDialog.value = false;
+  ledgerForm.name = "";
+  ledgerForm.ledgerGroup = null;
+  ledgerForm.ledgerSubgroup = null;
+  ledgerFormRef.value?.resetValidation();
+}
+
+async function loadLedgerGroups() {
+  try {
+    isLoadingLedgerGroups.value = true;
+    const response = await apiService.get(API_CONFIG.ENDPOINTS.LEDGER_GROUPS);
+    const ledgerGroups = response?.data;
+    console.log(response);
+    ledgerGroupOptions.value = mapLedgerGroupsToOptions(ledgerGroups);
+  } catch (error) {
+    console.error('Failed to fetch ledgers groups:', error);
+    toast.error('Failed to load ledgers groups');
+  } finally {
+    isLoadingLedgerGroups.value = false;
+  }
+}
+
+function mapLedgerSubGroupsToOptions(data) {
+  if (!Array.isArray(data)) return [];
+  return data.map(item => ({
+    title: item?.name,
+    value: item?.id
+  }));
+}
+
+
+function mapLedgerGroupsToOptions(data) {
+  if (!Array.isArray(data)) return [];
+  return data.map(item => ({
+    title: item?.name,
+    value: item?.id
+  }));
+}
+
+watch(
+  () => ledgerForm.ledgerGroup, // getter
+  async (newGroupId, oldGroupId) => {
+    console.log("Parent group changed:", oldGroupId, "→", newGroupId);
+    if (newGroupId) {
+      ledgerForm.ledgerSubgroup = null;
+      ledgerSubGroupOptions.value = [];
+      try {
+        const response = await apiService.get(
+          API_CONFIG.ENDPOINTS.LEDGER_SUB_GROUPS_BY_LEDGER_GROUP(newGroupId)
+        );
+        const ledgerSubGroups = response?.data;
+        ledgerSubGroupOptions.value = mapLedgerSubGroupsToOptions(ledgerSubGroups);
+      } catch (error) {
+        console.error("Failed to fetch sub-groups:", error);
+        toast.error("Could not load sub-groups");
+      }
+    } else {
+      ledgerSubGroupOptions.value = [];
+    }
+  }
+);
 
 onMounted(async () => {
   setInterval(() => {
     bounceKey.value++ // force key change to retrigger animation
   }, 3000)
   await fetchData();
+  await loadLedgerGroups();
+  await fetchledger();
 });
 
 
@@ -453,10 +552,12 @@ onMounted(async () => {
 
 <template>
   <div class="account">
+    <!-- <template> -->
     <VExpandTransition>
       <VRow v-show="showJournalEntryCard" class="justify-center">
-        <VCol cols="8" class="">
-          <VCard title="New Journal Entry" class="account_vcard_border account_ui_vcard pa-2 shadow-none mb-6">
+        <VCol cols="8">
+          <VCard :title="isEdit ? 'Edit Journal Entry' : 'New Journal Entry'"
+            class="account_vcard_border account_ui_vcard pa-2 shadow-none mb-6">
             <template #append>
               <VBtn @click="showLedgerDialog = true" class="account_v_btn_outlined save_btn_height" variant="outlined"
                 size="default" rounded="2" color="primary">
@@ -468,8 +569,10 @@ onMounted(async () => {
                 Add Ledger
               </VBtn>
             </template>
+
             <VCardText class="mt-4">
               <VForm ref="journalEntryFormRef" @submit.prevent="submitJournalEntryForm">
+                <!-- Date -->
                 <VRow>
                   <VCol cols="6">
                     <div class="d-flex align-center gap-3">
@@ -484,14 +587,10 @@ onMounted(async () => {
                       </v-date-input>
                     </div>
                   </VCol>
-
-
-
                 </VRow>
 
-                <!-- Debit -->
+                <!-- Debit Rows -->
                 <VRow v-for="(debit, index) in debitRows" :key="index" class="mb-1">
-                  <!-- Account -->
                   <VCol cols="12" lg="8" md="8">
                     <div class="d-flex align-center gap-3">
                       <div class="account_entry_form_label">
@@ -502,12 +601,11 @@ onMounted(async () => {
                         item-value="value" v-model="debit.account" />
                     </div>
                   </VCol>
-                  <!-- Amount -->
+
                   <VCol cols="12" lg="4" md="4">
                     <VTextField type="number" class="accouting_field accouting_active_field" placeholder="0"
-                      variant="outlined" density="compact" v-model="debit.amount" @input="
-                        (event) => handleAmountInput(event, index, 'debit')
-                      ">
+                      variant="outlined" density="compact" v-model="debit.amount"
+                      @input="(event) => handleAmountInput(event, index, 'debit')">
                       <template #append>
                         <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="x-small"
                           rounded="3" @click="removeDebitRow(index)">
@@ -515,21 +613,17 @@ onMounted(async () => {
                         </VBtn>
                       </template>
                     </VTextField>
-                    <!-- Amount in words display -->
                     <div v-if="debit.amountInWords" class="mt-1">
                       <small class="font-italic amountInWords">
                         {{ debit.amountInWords }} rupees only
                       </small>
                     </div>
                   </VCol>
-
-
-
                 </VRow>
 
-                <!-- Add Button -->
+                <!-- Add Debit -->
                 <div class="d-flex align-center pr-9 mb-4 justify-end">
-                  <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="small" rounded=""
+                  <VBtn class="account_v_btn_ghost account_btn_primary_text" variant="text" size="small"
                     @click="addDebitRow">
                     <template #prepend>
                       <IconPlus size="18" />
@@ -538,7 +632,7 @@ onMounted(async () => {
                   </VBtn>
                 </div>
 
-                <!-- Credit -->
+                <!-- Credit Rows -->
                 <VRow v-for="(credit, index) in creditRows" :key="index" class="mb-1">
                   <VCol cols="12" lg="8" md="8">
                     <div class="d-flex align-center gap-3">
@@ -550,11 +644,11 @@ onMounted(async () => {
                         item-value="value" v-model="credit.account" />
                     </div>
                   </VCol>
+
                   <VCol cols="12" lg="4" md="4">
                     <VTextField type="number" class="accouting_field accouting_active_field" placeholder="0"
-                      variant="outlined" density="compact" v-model="credit.amount" @input="
-                        (event) => handleAmountInput(event, index, 'credit')
-                      ">
+                      variant="outlined" density="compact" v-model="credit.amount"
+                      @input="(event) => handleAmountInput(event, index, 'credit')">
                       <template #append>
                         <VBtn @click="removeCreditRow(index)" class="account_v_btn_ghost account_btn_primary_text"
                           variant="text" size="x-small" rounded="1">
@@ -562,19 +656,18 @@ onMounted(async () => {
                         </VBtn>
                       </template>
                     </VTextField>
-                    <!-- Amount in words display -->
                     <div v-if="credit.amountInWords" class="mt-1">
                       <small class="font-italic amountInWords">
                         {{ credit.amountInWords }} rupees only
                       </small>
                     </div>
                   </VCol>
-
                 </VRow>
 
+                <!-- Add Credit -->
                 <div class="d-flex align-center pr-9 mb-4 justify-end">
                   <VBtn @click="addCreditRow" class="account_v_btn_ghost account_btn_primary_text" variant="text"
-                    size="small" rounded="">
+                    size="small">
                     <template #prepend>
                       <IconPlus size="18" />
                     </template>
@@ -582,6 +675,7 @@ onMounted(async () => {
                   </VBtn>
                 </div>
 
+                <!-- Narration & Voucher -->
                 <VRow>
                   <VCol cols="12" lg="7" md="7">
                     <div class="d-flex align-start gap-3">
@@ -589,8 +683,7 @@ onMounted(async () => {
                         <label class="account_label mt-3">Narration *</label>
                       </div>
                       <VTextarea v-model="journalEntryForm.narration" class="accounting_v_textarea"
-                        placeholder="e.g. Inventory purchased on credit. XYZ Capital Introduce. Max length 254 characters"
-                        variant="outlined" />
+                        placeholder="e.g. Inventory purchased on credit" variant="outlined" />
                       <small class="text-error" v-if="narrationError">
                         {{ narrationError }}
                       </small>
@@ -606,12 +699,12 @@ onMounted(async () => {
                     <VAutocomplete v-model="journalEntryForm.voucherNumber"
                       class="accouting_field accouting_active_field" variant="outlined" density="compact"
                       :items="voucherNo" item-title="title" item-value="value" placeholder="Select Voucher Number" />
-
                   </VCol>
                 </VRow>
 
+                <!-- Auto Approve -->
                 <VRow>
-                  <VCol cols="12" lg="12" md="12">
+                  <VCol cols="12">
                     <VCard class="account_vcard_border mt-2 account_module_card shadow-none" title="Auto-Approve Entry"
                       subtitle="This entry will be approved automatically and will immediately affect your books.">
                       <template #append>
@@ -621,17 +714,20 @@ onMounted(async () => {
                   </VCol>
                 </VRow>
 
+                <!-- Actions -->
                 <VRow>
                   <VCol cols="12">
                     <div class="d-flex align-center justify-end gap-2">
                       <VBtn @click="showJournalEntryCard = false" class="account_v_btn_outlined" variant="outlined"
-                        rounded="2" size="default">Cancel</VBtn>
+                        rounded="2" size="default">
+                        Cancel
+                      </VBtn>
                       <VBtn class="account_v_btn_primary save_btn_height" variant="outlined" size="default" rounded="2"
                         color="primary" type="submit">
                         <template #prepend>
                           <IconDeviceFloppy size="18" />
                         </template>
-                        Save Voucher
+                        {{ isEdit ? "Update Voucher" : "Save Voucher" }}
                       </VBtn>
                     </div>
                   </VCol>
@@ -642,28 +738,38 @@ onMounted(async () => {
         </VCol>
       </VRow>
     </VExpandTransition>
+    <!-- </template> -->
 
-    <VCard title="All Entries" subtitle="A record of all financial transactions."
+    <VCard title="All Entries" subtitle="A record of all financial transactions, with all amounts expressed in Rupees."
       class="account_vcard_border pa-2 account_ui_vcard shadow-none">
       <div class="d-flex align-center px-3 justify-space-between">
-        <VTextField style="max-width: 265px" class="accouting_field accouting_active_field" placeholder="Filter entries"
-          variant="outlined">
+        <VTextField v-model="searchQuery" style="max-width: 450px" class="accouting_field accouting_active_field"
+          placeholder="Filter by voucher type, number, or account" variant="outlined">
           <template #prepend-inner>
             <IconSearch size="20" />
           </template>
         </VTextField>
 
+
+        <VMenu v-if="showDateFilter" v-model="menu" :close-on-content-click="false" transition="scale-transition"
+          offset-y max-width="290" min-width="auto">
+          <template #activator="{ props }">
+            <v-date-input v-model="selectedDate" @update:model-value="menu = false"  :display-format="format" v-bind="props"
+              class="accouting_field accouting_active_field" placeholder="Pick Entry Date" variant="outlined"
+              cancel-text="Close" ok-text="Apply" style="max-width: 300px" />
+          </template>
+        </VMenu>
+
+
         <div class="d-flex align-center gap-2">
-          <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details
-            label="Compact" />
+          <VSwitch density="compact" inset class="account_swtich_btn mr-3" color="primary" hide-details label="Compact"
+            v-model="isTableCompact" />
           <VMenu width="200px" location="start" :close-on-content-click="false">
             <template #activator="{ props }">
               <v-tooltip text="Filters" location="top">
                 <template #activator="{ props: tooltipProps }">
                   <VBtn v-bind="{ ...props, ...tooltipProps }" variant="text" class="account_filter_btn_color"
-                    rounded="1" size="36">
-                    <IconFilter size="24" />
-                  </VBtn>
+                    icon="mdi-filter-cog-outline" rounded size="36" />
                 </template>
               </v-tooltip>
             </template>
@@ -673,7 +779,8 @@ onMounted(async () => {
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item">
                   <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
-                    <VCheckbox class="account_v_checkbox account_filter_menu_checkbox" density="compact" />
+                    <VCheckbox v-model="showDateFilter" class="account_v_checkbox account_filter_menu_checkbox"
+                      density="compact" />
                     <span>Date</span>
                   </div>
                 </div>
@@ -693,6 +800,7 @@ onMounted(async () => {
             </VCard>
           </VMenu>
 
+
           <VMenu width="110px" location="bottom" :close-on-content-click="false">
             <template v-slot:activator="{ props }">
               <VBtn v-bind="props" class="account_filter_btn_color" variant="text" rounded="1" size="36">
@@ -702,7 +810,7 @@ onMounted(async () => {
             <VCard class="account_vcard_border">
               <div class="account_table_filter_menu py-1">
                 <div class="account_vcard_menu_item">
-                  ninthree <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
+                  <div class="my-1 field_list_title cursor-pointer px-3 py-1 d-flex align-center gap-2">
                     <span>PDF</span>
                   </div>
                 </div>
@@ -716,10 +824,20 @@ onMounted(async () => {
           </VMenu>
         </div>
       </div>
+
       <VCardText class="mt-2 pa-3">
         <VCard variant="flat" class="shadow-none">
           <div class="gst_summary_table_container">
-            <table class="table table-bordered account_entries_table text-center w-100">
+
+            <!-- Loader overlay -->
+            <div v-if="loading" class="loader-overlay d-flex align-center justify-center">
+              <v-progress-circular indeterminate size="48" color="primary" />
+            </div>
+
+            <table class="table table-bordered account_entries_table text-center w-100"
+              :class="{ 'compact-table': isTableCompact }">
+
+
               <thead>
                 <tr>
                   <th class="account_entries_table_header_date">Date</th>
@@ -736,17 +854,15 @@ onMounted(async () => {
                   <th class="account_entries_table_header_actions">Actions</th>
                 </tr>
               </thead>
+
               <tbody>
-
-                <template v-for="(entry, index) in allEntries" :key="index">
-
-                  <template
-                    v-if="entry && entry.particulars && entry.particulars.accounts && Array.isArray(entry.particulars.accounts) && entry.particulars.accounts.length > 0">
+                <template v-for="(entry, index) in filteredEntries" :key="index">
+                  <!-- {{ filteredEntries }} -->
+                  <template v-if="entry">
                     <tr :class="[
                       'account_entries_table_row',
                       { 'even-entry': index % 2 === 0 },
                     ]" @mouseover="hoveredRowIndex = index" @mouseleave="hoveredRowIndex = null">
-                      <!-- Date, Entry #, Voucher Type, Status, and Actions span all account rows and description -->
                       <td class="account_entries_table_date" :rowspan="entry.particulars.accounts.length + 1"
                         :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         {{ dayjs(entry.entry_date).format("DD-MM-YYYY") }}
@@ -771,6 +887,7 @@ onMounted(async () => {
                       <td class="account_entries_table_credit account_error_color">
                         {{ entry.particulars.accounts[0]?.credit || "" }}
                       </td>
+
                       <td class="account_entries_table_status" :rowspan="entry.particulars.accounts.length + 1">
                         <VChip class="account_v_chip"
                           :class="entry.status === 'Pending' ? 'account_chip_error' : 'account_chip_primary'"
@@ -778,20 +895,41 @@ onMounted(async () => {
                           {{ entry.status || "N/A" }}
                         </VChip>
                       </td>
+
                       <td class="account_entries_table_actions" :rowspan="entry.particulars.accounts.length + 1">
                         <div class="d-flex align-center justify-center gap-2">
-                          <VBtn size="small" class="account_v_btn_ghost" variant="text">
+                          <VBtn size="small" class="account_v_btn_ghost" variant="text" @click="openEditForm(entry)">
                             <IconPencil size="20" />
                           </VBtn>
-                          <VBtn size="small" class="account_v_btn_ghost" variant="text">
+                          <VBtn size="small" class="account_v_btn_ghost" variant="text" @click="openRevert(entry.id)">
                             <IconArrowBackUp size="20" />
                           </VBtn>
-                          <VBtn size="small" class="account_v_btn_ghost" variant="text">
+
+                          <!-- If NOT deleted → show soft delete -->
+                          <VBtn v-if="entry.deleted_at == null" size="small" class="account_v_btn_ghost" variant="text"
+                            color="error" @click="openDeleteDialog(entry.id, 'soft')">
+
                             <IconTrash size="20" />
                           </VBtn>
+
+                          <!-- If soft deleted → show restore + permanent delete -->
+                          <template v-else>
+                            <VBtn size="small" class="account_v_btn_ghost" variant="text" color="success"
+                              @click="restoreEntry(entry.id)">
+                              <IconRestore size="20" />
+                            </VBtn>
+
+                            <VBtn size="small" class="account_v_btn_ghost" variant="text" color="error"
+                              @click="openDeleteDialog(entry.id, 'force')">
+                              <IconTrash size="20" />
+                            </VBtn>
+                          </template>
                         </div>
                       </td>
                     </tr>
+
+
+
                     <!-- Additional account rows (if any) -->
                     <tr v-for="(account, accIndex) in entry.particulars.accounts.slice(1)" :key="`${index}-${accIndex}`"
                       :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 },]"
@@ -813,7 +951,8 @@ onMounted(async () => {
                     <tr :class="['account_entries_table_row', { 'even-entry-extension': index % 2 === 0 },]">
                       <td colspan="3" :class="{ 'hovered-cell': hoveredRowIndex === index }">
                         <div class="d-flex flex-column align-start justify-center">
-                          <span class="account_entry_desc_text">(Narration: {{ entry.particulars.description?.narration
+                          <span class="account_entry_desc_text">(Narration: {{
+                            entry.particulars.description?.narration
                             || "N/A" }})</span>
                         </div>
                       </td>
@@ -831,29 +970,27 @@ onMounted(async () => {
     <VDialog v-model="showLedgerDialog" max-width="400" @click:outside="ledgerFormRef?.resetValidation()">
       <VCard>
         <VCardTitle class="account_ui_swtich_title pb-0">Add New Ledger</VCardTitle>
-        <VCardSubtitle class="account_ui_swtich_subtitle text-wrap px-3">
-          Create a new ledger account under a specified group.
-        </VCardSubtitle>
+        <VCardSubtitle class="account_ui_swtich_subtitle text-wrap px-3">Add a new ledger to an existing group in your
+          chart
+          of
+          accounts.</VCardSubtitle>
         <VCardText>
           <VForm ref="ledgerFormRef">
-            <div class="mb-3">
-              <label class="account_label">Ledger Name</label>
-              <VTextField v-model="ledgerForm.name" :rules="nameRules" class="accouting_field accouting_active_field"
-                placeholder="Enter ledger name" variant="outlined" hide-details="auto" />
-            </div>
-            <div class="mb-3">
-              <label class="account_label">Parent Group</label>
-              <VAutocomplete v-model="ledgerForm.parentGroup" :items="parentGroups" :rules="parentGroupRules"
-                class="accouting_field accouting_active_field" placeholder="Select parent group" item-title="title"
-                item-value="value" variant="outlined" hide-details="auto" />
-            </div>
+            <VTextField v-model="ledgerForm.name" :rules="nameRules" class="accouting_field accouting_active_field mb-2"
+              placeholder="Name" variant="outlined" hide-details="auto" />
+            <VAutocomplete v-model="ledgerForm.ledgerGroup"
+              :items="ledgerGroupOptions.length ? ledgerGroupOptions : ledgerGroupOptions" :rules="parentGroupRules"
+              class="accouting_field accouting_active_field" placeholder="Ledger Group" item-title="title"
+              item-value="value" variant="outlined" hide-details="auto" />
+            <VAutocomplete v-show="ledgerSubGroupOptions.length" v-model="ledgerForm.ledgerSubgroup"
+              :items="ledgerSubGroupOptions.length ? ledgerSubGroupOptions : ledgerSubGroupOptions"
+              class="mt-2 accouting_field accouting_active_field" placeholder="Ledger Sub-Group" item-title="title"
+              item-value="value" variant="outlined" hide-details="auto" />
           </VForm>
         </VCardText>
         <VCardActions class="justify-end mr-4 mb-2">
-          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined" @click="
-            showLedgerDialog = false;
-          ledgerFormRef?.resetValidation();
-          " />
+          <VBtn text="Cancel" class="account_v_btn_outlined" variant="outlined"
+            @click=" showLedgerDialog = false; ledgerFormRef?.resetValidation();" />
           <VBtn text="Add Ledger" class="account_v_btn_primary" @click="submitLedgerForm" />
         </VCardActions>
       </VCard>
@@ -942,7 +1079,8 @@ onMounted(async () => {
         </VCardText>
       </VCard>
     </VDialog>
-
+    <DeleteDailog v-model="showDeleteDialog" :entryId="selectedEntryId" :mode="deleteMode" @deleted="refreshTable" />
+    <RevertDialog v-model="showRevertDialog" :entryId="selectedEntryId" @reverted="fetchEntries" />
     <VBtn @click="showJournalEntryCard = !showJournalEntryCard" :key="bounceKey" class="account_add_new_btn bounce">
       <template #prepend>
         <IconCirclePlus size="18" />
@@ -991,10 +1129,16 @@ onMounted(async () => {
 .account_entries_table th,
 .account_entries_table td {
   border: 1.5px solid var(--acc-border-color) !important;
-  padding: 8px;
+  padding: 8px 12px;
 }
 
 .account_entries_table tr {
   border-bottom: 1.5px solid var(--acc-border-color) !important;
+}
+
+.compact-table td,
+.compact-table th {
+  padding: 4px 6px;
+  font-size: 0.85rem;
 }
 </style>
